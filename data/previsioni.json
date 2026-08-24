@@ -1,0 +1,11 @@
+{
+  "_leggimi": "Un oggetto per squadra. 'immagine' e' il percorso del file dentro assets/previsioni/ (metti li' lo screenshot di tiermaker.com e scrivi qui il nome file). Se preferisci un link esterno invece di un file caricato, lascia 'immagine' vuoto e compila 'linkEsterno'.",
+
+  "previsioni": [
+    {
+      "squadraId": "sq-01",
+      "immagine": "",
+      "linkEsterno": ""
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Rose — Herta Vernello</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="gate" class="gate">
+    <img src="assets/logo.png" class="gate-logo" alt="Herta Vernello">
+    <h1>Herta Vernello</h1>
+    <p>Solo per fantallenatori. Inserisci la password.</p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn">Entra</button>
+    <p id="gate-error" class="gate-error"></p>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="site-header">
+      <img src="assets/logo.png" class="logo" alt="">
+      <div>
+        <h1 id="lega-nome">Herta Vernello</h1>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="rose.html" class="active">Rose</a>
+      </nav>
+    </header>
+
+    <section class="section" style="margin-top: 10px;">
+      <div id="tabs" class="tabs"></div>
+      <div id="roster-content" class="roster-groups"></div>
+    </section>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/rose.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'passwordHash' si genera dalla pagina admin.html (sezione Password). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose.",
+
+  "lega": {
+    "nome": "Herta Vernello",
+    "stagione": "2026/2027",
+    "dataAsta": "2026-09-15T19:00:00",
+    "passwordHash": "8f9b2f2c07b24acef3e50aa4a3539d28f5d3bef24b8602b1d86dca5d54172976"
+  },
+
+  "squadre": [
+    { "id": "sq-01", "nomeReale": "Manu", "nomeFantasquadra": "Nome Squadra Fantacalcio 1" },
+    { "id": "sq-02", "nomeReale": "Ale Av", "nomeFantasquadra": "Nome Squadra Fantacalcio 2" },
+    { "id": "sq-03", "nomeReale": "Fillo", "nomeFantasquadra": "Nome Squadra Fantacalcio 3" },
+    { "id": "sq-04", "nomeReale": "Riky", "nomeFantasquadra": "Nome Squadra Fantacalcio 4" },
+    { "id": "sq-05", "nomeReale": "Dario", "nomeFantasquadra": "Nome Squadra Fantacalcio 5" },
+    { "id": "sq-06", "nomeReale": "Lelio", "nomeFantasquadra": "Nome Squadra Fantacalcio 6" },
+    { "id": "sq-07", "nomeReale": "Diego", "nomeFantasquadra": "Nome Squadra Fantacalcio 7" },
+    { "id": "sq-08", "nomeReale": "Peppe", "nomeFantasquadra": "Nome Squadra Fantacalcio 8" },
+    { "id": "sq-09", "nomeReale": "Raffy", "nomeFantasquadra": "Nome Squadra Fantacalcio 9" },
+    { "id": "sq-10", "nomeReale": "Andrea", "nomeFantasquadra": "Nome Squadra Fantacalcio 10" },
+    { "id": "sq-11", "nomeReale": "Antony", "nomeFantasquadra": "Nome Squadra Fantacalcio 11" },
+    { "id": "sq-12", "nomeReale": "Ale Na", "nomeFantasquadra": "Nome Squadra Fantacalcio 12" }
+  ]
+}

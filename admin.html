@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Herta Vernello</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 80px; }
+    .admin-box { background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: 12px; padding: 22px; margin-bottom: 28px; }
+    .admin-box h2 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: 18px; margin: 0 0 6px; }
+    .admin-box p.desc { color: var(--text-muted); font-size: 13.5px; margin: 0 0 16px; }
+    .admin-box input[type="text"], .admin-box input[type="file"] {
+      background: var(--bg-void); border: 1px solid var(--border-hairline); color: var(--text-primary);
+      padding: 10px 12px; border-radius: 6px; width: 100%; font-size: 14px; margin-bottom: 10px;
+    }
+    .admin-box button {
+      background: var(--verde-prato); color: #06210a; border: none; padding: 10px 20px;
+      border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px;
+    }
+    .admin-box textarea {
+      width: 100%; min-height: 160px; background: var(--bg-void); color: var(--text-primary);
+      border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px; font-family: var(--font-mono); font-size: 12.5px;
+    }
+    .assoc-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-hairline); flex-wrap: wrap; font-size: 13.5px; }
+    .assoc-csv { min-width: 160px; font-weight: 600; }
+    .assoc-select { background: var(--bg-void); color: var(--text-primary); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 6px 8px; flex: 1; min-width: 220px; }
+    .assoc-count { font-size: 12px; }
+    #csv-download { display: inline-block; margin-top: 12px; background: var(--giallo-neon); color: var(--bg-void); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .csv-avviso { color: var(--wine-bright); font-size: 13px; margin-top: 6px; }
+    .warn-box { border-color: var(--wine); }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <header class="site-header" style="padding-bottom: 10px;">
+      <img src="assets/logo.png" class="logo" alt="">
+      <h1 style="font-size: 22px;">Strumenti admin</h1>
+    </header>
+    <div class="admin-box warn-box">
+      <p class="desc" style="margin:0;">Questa pagina è solo per te (l'amministratore della lega). Non è collegata al menu del sito e non serve agli altri fantallenatori: usala in locale o comunque non condividerne il link in giro.</p>
+    </div>
+
+    <div class="admin-box">
+      <h2>1. Genera password lega</h2>
+      <p class="desc">Scrivi qui la password che vuoi far usare al gruppo, genera l'hash e incollalo in <code>data/config.json</code> alla voce <code>passwordHash</code>. La password di default nel template è <strong>vernello26</strong>.</p>
+      <input type="text" id="pw-input" placeholder="Nuova password in chiaro">
+      <button id="pw-genera">Genera hash</button>
+      <textarea id="pw-output" readonly placeholder="L'hash da incollare nel config comparirà qui" style="min-height: 50px; margin-top: 10px;"></textarea>
+    </div>
+
+    <div class="admin-box">
+      <h2>2. Importa rose da CSV</h2>
+      <p class="desc">
+        Dopo l'asta: su leghe.fantacalcio.it vai in "Gestione rose" → "Esporta rose" e scarica il CSV. Caricalo qui sotto.
+        Lo strumento riconosce le colonne Fantasquadra/Squadra, Calciatore/Giocatore, Ruolo, Prezzo/Costo e prova ad
+        associare ogni fantasquadra del CSV al fantallenatore giusto in config.json — controlla e correggi le
+        associazioni prima di scaricare. Funziona con i ruoli classici (P/D/C/A); se giocate al Mantra andranno
+        corretti a mano nel JSON finale.
+      </p>
+      <input type="file" id="csv-file" accept=".csv">
+      <p id="csv-avviso" class="csv-avviso"></p>
+
+      <div id="csv-associazioni" class="hidden" style="margin-top: 14px;"></div>
+      <button id="csv-conferma" class="hidden" style="margin-top: 14px;">Genera rose.json</button>
+
+      <div id="csv-output-wrap" class="hidden" style="margin-top: 16px;">
+        <p class="desc" style="margin-bottom: 6px;">Copia il contenuto oppure scarica il file e sostituisci <code>data/rose.json</code>:</p>
+        <textarea id="csv-output" readonly></textarea>
+        <a id="csv-download" class="hidden" download="rose.json">Scarica rose.json</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="js/importer.js"></script>
+</body>
+</html>

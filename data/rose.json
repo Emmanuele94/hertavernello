@@ -1,0 +1,12 @@
+{
+  "_leggimi": "Non serve editare questo file a mano: usa admin.html dopo l'asta, carica il CSV esportato da leghe.fantacalcio.it e questo file si genera da solo. Se proprio vuoi editarlo a mano, 'ruolo' accetta POR, DIF, CEN, ATT.",
+
+  "rose": [
+    {
+      "squadraId": "sq-01",
+      "giocatori": [
+        { "ruolo": "POR", "nome": "Nome Cognome", "squadraReale": "XXX", "costo": 1 }
+      ]
+    }
+  ]
+}
