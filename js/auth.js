@@ -61,3 +61,13 @@ async function hv_checkGate() {
 
   return null;
 }
+
+function hv_logout() {
+  sessionStorage.removeItem("hv_role");
+  window.location.reload();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const link = document.getElementById("hv-esci");
+  if (link) link.addEventListener("click", (e) => { e.preventDefault(); hv_logout(); });
+});
