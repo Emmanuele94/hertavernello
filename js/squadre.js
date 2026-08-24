@@ -13,7 +13,7 @@ function hv_apriLightbox(src) {
   overlay.classList.remove("hidden");
 }
 
-function hv_renderRoster(giocatori) {
+function hv_renderRoster(giocatori, squadreRef) {
   const wrap = document.getElementById("roster-content");
   wrap.innerHTML = "";
 
@@ -29,14 +29,18 @@ function hv_renderRoster(giocatori) {
     const group = document.createElement("div");
     group.className = "roster-group";
     const righe = lista
-      .map(
-        (g) => `
+      .map((g) => {
+        const codice = squadreRef ? hv_trovaCodice(g.squadraReale, squadreRef) : null;
+        const cellaSquadra = codice
+          ? `<img src="assets/loghi/${codice}.png" alt="${codice}" title="${codice}" class="logo-squadra-mini"><span>${codice}</span>`
+          : `${g.squadraReale || ""}`;
+        return `
         <tr>
           <td>${g.nome}</td>
-          <td class="squadra-reale">${g.squadraReale || ""}</td>
+          <td class="squadra-reale">${cellaSquadra}</td>
           <td class="costo">${g.costo ?? ""}</td>
-        </tr>`
-      )
+        </tr>`;
+      })
       .join("");
 
     group.innerHTML = `<h3>${HV_NOME_RUOLI[ruolo]}</h3><table class="roster-table"><tbody>${righe}</tbody></table>`;
@@ -103,10 +107,11 @@ function hv_renderPrevisione(previsione) {
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes] = await Promise.all([
+  const [roseRes, pagelleRes, previsioniRes, squadreRef] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
+    hv_caricaSquadreRef(),
   ]);
   const { rose } = await roseRes.json();
   const { pagelle } = await pagelleRes.json();
@@ -116,7 +121,7 @@ async function hv_initSquadre(config) {
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
     const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
-    hv_renderRoster(roster ? roster.giocatori : []);
+    hv_renderRoster(roster ? roster.giocatori : [], squadreRef);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
   }

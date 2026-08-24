@@ -20,6 +20,7 @@ data/rose.json               Rose (si genera da admin.html dopo l'asta)
 data/calendario.json      Calendario di lega, chi affronta chi ogni giornata (si compila da admin.html)
 data/squadre-serie-a.json Anagrafica delle 20 squadre di Serie A e delle 10 fasce — non serve toccarlo
 assets/logo.png             Il vostro logo
+assets/loghi/                  Stemmi ufficiali delle 20 squadre di Serie A (già inclusi)
 assets/previsioni/           Metti qui gli screenshot da tiermaker.com
 ```
 

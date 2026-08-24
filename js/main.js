@@ -85,7 +85,11 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
   div.className = "incrocio-match";
   div.innerHTML = `
     <div class="incrocio-testata">
-      <span>${match.casaNome} — ${match.trasfertaNome}</span>
+      <span class="incrocio-squadre">
+        <img src="assets/loghi/${match.casaCodice}.png" alt="${match.casaCodice}" class="logo-squadra-mini">
+        ${match.casaNome} — ${match.trasfertaNome}
+        <img src="assets/loghi/${match.trasfertaCodice}.png" alt="${match.trasfertaCodice}" class="logo-squadra-mini">
+      </span>
       ${etichetta}
     </div>
     <div class="incrocio-body">
