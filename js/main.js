@@ -1,9 +1,3 @@
-function hv_statoVoto(voto) {
-  if (voto >= 7) return "promosso";
-  if (voto >= 5.5) return "medio";
-  return "bocciato";
-}
-
 function hv_countdown(dataAstaISO) {
   const el = document.getElementById("countdown");
   if (!el) return;
@@ -25,76 +19,152 @@ function hv_countdown(dataAstaISO) {
   const timer = setInterval(aggiorna, 60000);
 }
 
-function hv_applyTilt(card) {
-  card.addEventListener("mousemove", (e) => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    card.style.transform = `perspective(600px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) scale(1.02)`;
+// ===== Incrocio: chi ha giocatori nelle squadre che stanno per scendere in campo =====
+function hv_giocatoriPerSquadraReale(codice, roseData, config, squadreRef) {
+  const risultati = [];
+  (roseData.rose || []).forEach((entry) => {
+    const squadra = config.squadre.find((s) => s.id === entry.squadraId);
+    if (!squadra) return;
+    const giocatori = (entry.giocatori || []).filter(
+      (g) => hv_trovaCodice(g.squadraReale, squadreRef) === codice
+    );
+    if (giocatori.length > 0) {
+      risultati.push({ nomeReale: squadra.nomeReale, giocatori: giocatori.map((g) => g.nome) });
+    }
   });
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "perspective(600px) rotateX(0) rotateY(0) scale(1)";
-  });
+  return risultati;
 }
 
-async function hv_renderPagelle(config) {
-  const [pagelleRes] = await Promise.all([fetch("data/pagelle.json")]);
-  const { pagelle } = await pagelleRes.json();
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef) {
+  const casa = hv_giocatoriPerSquadraReale(match.casaCodice, roseData, config, squadreRef);
+  const trasferta = hv_giocatoriPerSquadraReale(match.trasfertaCodice, roseData, config, squadreRef);
 
-  const grid = document.getElementById("pagelle-grid");
-  grid.innerHTML = "";
+  const col = (nome, lista) => `
+    <div class="incrocio-col">
+      <h4>${nome}</h4>
+      ${
+        lista.length === 0
+          ? '<p class="muted" style="font-size:12.5px;">Nessuno in lega ha giocatori qui</p>'
+          : lista.map((r) => `<p class="incrocio-riga"><strong>${r.nomeReale}</strong>: ${r.giocatori.join(", ")}</p>`).join("")
+      }
+    </div>`;
 
-  if (!pagelle || pagelle.length === 0) {
-    grid.innerHTML = '<p class="empty-state">Le pagelle compariranno qui dopo l\'asta.</p>';
+  const etichetta = match.live
+    ? '<span class="incrocio-live">● LIVE</span>'
+    : `Giornata ${match.matchday}`;
+
+  const div = document.createElement("div");
+  div.className = "incrocio-match";
+  div.innerHTML = `
+    <div class="incrocio-testata">
+      <span>${match.casaNome} — ${match.trasfertaNome}</span>
+      ${etichetta}
+    </div>
+    <div class="incrocio-body">
+      ${col(match.casaNome, casa)}
+      ${col(match.trasfertaNome, trasferta)}
+    </div>
+  `;
+  return div;
+}
+
+async function hv_renderIncrocio(config) {
+  const wrap = document.getElementById("incrocio-wrap");
+  const apiKey = config.lega.footballDataApiKey;
+
+  if (!apiKey) {
+    wrap.innerHTML = '<p class="empty-state">Aggiungi una chiave gratuita di football-data.org in config.json (campo footballDataApiKey) per attivare questa sezione.</p>';
     return;
   }
 
-  pagelle
-    .slice()
-    .sort((a, b) => b.voto - a.voto)
-    .forEach((p) => {
-      const squadra = config.squadre.find((s) => s.id === p.squadraId);
-      if (!squadra) return;
+  wrap.innerHTML = '<p class="empty-state">Carico le partite...</p>';
 
-      const stato = hv_statoVoto(p.voto);
-      const card = document.createElement("div");
-      card.className = `pagella-card ${stato}`;
-      card.innerHTML = `
-        <span class="pagella-badge">${p.badge || ""}</span>
-        <p class="pagella-squadra">${squadra.nomeFantasquadra}</p>
-        <p class="pagella-nome">${squadra.nomeReale}</p>
-        <p class="pagella-voto">${p.voto}</p>
-        <p class="pagella-commento">${p.commento || ""}</p>
-      `;
-      grid.appendChild(card);
-      hv_applyTilt(card);
-    });
-}
+  try {
+    const [squadreRef, roseRes] = await Promise.all([hv_caricaSquadreRef(), fetch("data/rose.json")]);
+    const roseData = await roseRes.json();
+    const { live, prossimoTurno } = await hv_getPartite(apiKey, squadreRef);
 
-async function hv_renderPrevisioni(config) {
-  const res = await fetch("data/previsioni.json");
-  const { previsioni } = await res.json();
+    wrap.innerHTML = "";
+    const daMostrare = live.length > 0 ? live : prossimoTurno;
 
-  const grid = document.getElementById("previsioni-grid");
-  grid.innerHTML = "";
-
-  config.squadre.forEach((squadra) => {
-    const p = (previsioni || []).find((x) => x.squadraId === squadra.id);
-    const card = document.createElement("div");
-    card.className = "previsione-card";
-
-    let corpo;
-    if (p && p.immagine) {
-      corpo = `<img src="assets/previsioni/${p.immagine}" alt="Previsione ${squadra.nomeReale}">`;
-    } else if (p && p.linkEsterno) {
-      corpo = `<a href="${p.linkEsterno}" target="_blank" rel="noopener" class="placeholder">Vedi previsione ↗</a>`;
-    } else {
-      corpo = '<div class="placeholder">Nessuna previsione caricata</div>';
+    if (daMostrare.length === 0) {
+      wrap.innerHTML = '<p class="empty-state">Nessuna partita trovata nei prossimi giorni.</p>';
+      return;
     }
 
-    card.innerHTML = corpo + `<div class="previsione-nome">${squadra.nomeReale}</div>`;
-    grid.appendChild(card);
-  });
+    daMostrare.forEach((match) => {
+      if (!match.casaCodice || !match.trasfertaCodice) return;
+      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef));
+    });
+  } catch (err) {
+    wrap.innerHTML = '<p class="empty-state">Non riesco a contattare l\'API in questo momento (chiave non valida o limite richieste raggiunto).</p>';
+  }
+}
+
+// ===== Classifica generale previsioni =====
+async function hv_renderLeaderboard(config) {
+  const wrap = document.getElementById("leaderboard-wrap");
+  const apiKey = config.lega.footballDataApiKey;
+
+  if (!apiKey) {
+    wrap.innerHTML = '<p class="empty-state">Aggiungi una chiave gratuita di football-data.org in config.json per attivare la classifica.</p>';
+    return;
+  }
+
+  wrap.innerHTML = '<p class="empty-state">Calcolo la classifica...</p>';
+
+  try {
+    const [squadreRef, previsioniRes] = await Promise.all([hv_caricaSquadreRef(), fetch("data/previsioni.json")]);
+    const { previsioni } = await previsioniRes.json();
+    const classificaReale = await hv_getClassificaReale(apiKey, squadreRef);
+
+    const righe = [];
+    (previsioni || []).forEach((p) => {
+      const squadra = config.squadre.find((s) => s.id === p.squadraId);
+      if (!squadra || !p.fasce || Object.keys(p.fasce).length === 0) return;
+
+      let punteggio = 0;
+      let conteggiate = 0;
+      Object.entries(p.fasce).forEach(([codice, fasciaPrevista]) => {
+        const posReale = classificaReale[codice];
+        if (!posReale) return;
+        const fasciaReale = hv_fasciaDaPosizione(posReale, squadreRef.fasce);
+        if (fasciaReale) {
+          punteggio += Math.abs(fasciaPrevista - fasciaReale);
+          conteggiate++;
+        }
+      });
+
+      if (conteggiate > 0) righe.push({ nomeReale: squadra.nomeReale, punteggio });
+    });
+
+    righe.sort((a, b) => a.punteggio - b.punteggio);
+
+    if (righe.length === 0) {
+      wrap.innerHTML = '<p class="empty-state">Nessuna previsione ancora compilata (usa admin.html).</p>';
+      return;
+    }
+
+    wrap.innerHTML = `
+      <table class="roster-table">
+        <tbody>
+          ${righe
+            .map(
+              (r, i) => `
+            <tr>
+              <td style="width:30px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
+              <td>${r.nomeReale}</td>
+              <td class="costo">${r.punteggio} pt</td>
+            </tr>`
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <p class="muted" style="font-size:12px; margin-top:8px;">Punteggio più basso = previsione più azzeccata (somma delle distanze tra fascia prevista e fascia reale attuale).</p>
+    `;
+  } catch (err) {
+    wrap.innerHTML = '<p class="empty-state">Non riesco a contattare l\'API in questo momento (chiave non valida o limite richieste raggiunto).</p>';
+  }
 }
 
 async function hv_initHome(config) {
@@ -102,8 +172,8 @@ async function hv_initHome(config) {
   document.getElementById("lega-stagione").textContent = "Stagione " + config.lega.stagione;
   window.hv_stagione = config.lega.stagione;
   hv_countdown(config.lega.dataAsta);
-  await hv_renderPagelle(config);
-  await hv_renderPrevisioni(config);
+  await hv_renderIncrocio(config);
+  await hv_renderLeaderboard(config);
 }
 
 hv_checkGate().then((data) => {

@@ -10,29 +10,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .admin-wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 80px; }
+    .admin-wrap { max-width: 820px; margin: 0 auto; padding: 30px 20px 80px; }
     .admin-box { background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: 12px; padding: 22px; margin-bottom: 28px; }
     .admin-box h2 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: 18px; margin: 0 0 6px; }
     .admin-box p.desc { color: var(--text-muted); font-size: 13.5px; margin: 0 0 16px; }
-    .admin-box input[type="text"], .admin-box input[type="file"] {
+    .admin-box input[type="text"], .admin-box input[type="number"], .admin-box input[type="file"] {
       background: var(--bg-void); border: 1px solid var(--border-hairline); color: var(--text-primary);
       padding: 10px 12px; border-radius: 6px; width: 100%; font-size: 14px; margin-bottom: 10px;
     }
+    .admin-box textarea {
+      width: 100%; min-height: 70px; background: var(--bg-void); color: var(--text-primary);
+      border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px; font-family: var(--font-body); font-size: 13.5px;
+    }
+    #pagelle-output, #previsioni-output, #csv-output { font-family: var(--font-mono); font-size: 12px; min-height: 160px; }
     .admin-box button {
       background: var(--verde-prato); color: #06210a; border: none; padding: 10px 20px;
       border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px;
-    }
-    .admin-box textarea {
-      width: 100%; min-height: 160px; background: var(--bg-void); color: var(--text-primary);
-      border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px; font-family: var(--font-mono); font-size: 12.5px;
     }
     .assoc-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-hairline); flex-wrap: wrap; font-size: 13.5px; }
     .assoc-csv { min-width: 160px; font-weight: 600; }
     .assoc-select { background: var(--bg-void); color: var(--text-primary); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 6px 8px; flex: 1; min-width: 220px; }
     .assoc-count { font-size: 12px; }
-    #csv-download { display: inline-block; margin-top: 12px; background: var(--giallo-neon); color: var(--bg-void); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    a.output-download { display: inline-block; margin-top: 12px; background: var(--giallo-neon); color: var(--bg-void); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
     .csv-avviso { color: var(--wine-bright); font-size: 13px; margin-top: 6px; }
     .warn-box { border-color: var(--wine); }
+
+    .pagella-field, .previsione-field { border-top: 1px solid var(--border-hairline); padding: 14px 0; }
+    .pagella-field:first-child, .previsione-field:first-child { border-top: none; padding-top: 0; }
+    .campo-titolo { font-weight: 600; font-size: 14px; margin: 0 0 8px; }
+    .campo-riga { display: flex; gap: 10px; }
+    .campo-riga input { flex: 1; }
+    .pf-voto { max-width: 100px; }
+
+    .previsione-dettagli { margin-top: 6px; }
+    .previsione-dettagli summary { cursor: pointer; color: var(--verde-prato); font-size: 13px; margin-bottom: 8px; }
+    .previsione-griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 14px; margin-top: 8px; }
+    .previsione-riga { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; }
+    .previsione-riga select { background: var(--bg-void); color: var(--text-primary); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 5px 6px; flex: 1; }
   </style>
 </head>
 <body>
@@ -41,13 +55,19 @@
       <img src="assets/logo.png" class="logo" alt="">
       <h1 style="font-size: 22px;">Strumenti admin</h1>
     </header>
+
     <div class="admin-box warn-box">
-      <p class="desc" style="margin:0;">Questa pagina è solo per te (l'amministratore della lega). Non è collegata al menu del sito e non serve agli altri fantallenatori: usala in locale o comunque non condividerne il link in giro.</p>
+      <p class="desc" style="margin:0;">
+        Questa pagina è solo per te. Importante: apri sempre <code>admin.html</code> tramite un server
+        (il sito pubblicato su GitHub Pages va benissimo, oppure in locale con <code>python3 -m http.server</code>
+        dentro la cartella del progetto) — se lo apri con un doppio click diretto dal computer, il browser blocca
+        la lettura dei file dentro <code>data/</code> e i pannelli qui sotto restano vuoti.
+      </p>
     </div>
 
     <div class="admin-box">
-      <h2>1. Genera password lega</h2>
-      <p class="desc">Scrivi qui la password che vuoi far usare al gruppo, genera l'hash e incollalo in <code>data/config.json</code> alla voce <code>passwordHash</code>. La password di default nel template è <strong>vernello26</strong>.</p>
+      <h2>1. Password lega</h2>
+      <p class="desc">Scrivi la password che vuoi far usare al gruppo, genera l'hash e incollalo in <code>data/config.json</code> alla voce <code>passwordHash</code>. Default nel template: <strong>vernello26</strong>.</p>
       <input type="text" id="pw-input" placeholder="Nuova password in chiaro">
       <button id="pw-genera">Genera hash</button>
       <textarea id="pw-output" readonly placeholder="L'hash da incollare nel config comparirà qui" style="min-height: 50px; margin-top: 10px;"></textarea>
@@ -56,27 +76,53 @@
     <div class="admin-box">
       <h2>2. Importa rose da CSV</h2>
       <p class="desc">
-        Dopo l'asta: su leghe.fantacalcio.it vai in "Gestione rose" → "Esporta rose" e scarica il CSV. Caricalo qui sotto.
-        Lo strumento riconosce le colonne Fantasquadra/Squadra, Calciatore/Giocatore, Ruolo, Prezzo/Costo e prova ad
-        associare ogni fantasquadra del CSV al fantallenatore giusto in config.json — controlla e correggi le
-        associazioni prima di scaricare. Funziona con i ruoli classici (P/D/C/A); se giocate al Mantra andranno
-        corretti a mano nel JSON finale.
+        Dopo l'asta: su leghe.fantacalcio.it vai in "Gestione rose" → "Esporta rose" e scarica il CSV, poi caricalo qui.
+        Riconosce le colonne Fantasquadra/Squadra, Calciatore/Giocatore, Ruolo, Prezzo/Costo. Controlla le associazioni
+        proposte prima di generare il file — funziona con i ruoli classici P/D/C/A.
       </p>
       <input type="file" id="csv-file" accept=".csv">
       <p id="csv-avviso" class="csv-avviso"></p>
-
       <div id="csv-associazioni" class="hidden" style="margin-top: 14px;"></div>
       <button id="csv-conferma" class="hidden" style="margin-top: 14px;">Genera rose.json</button>
-
       <div id="csv-output-wrap" class="hidden" style="margin-top: 16px;">
-        <p class="desc" style="margin-bottom: 6px;">Copia il contenuto oppure scarica il file e sostituisci <code>data/rose.json</code>:</p>
+        <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/rose.json</code>:</p>
         <textarea id="csv-output" readonly></textarea>
-        <a id="csv-download" class="hidden" download="rose.json">Scarica rose.json</a>
+        <a id="csv-download" class="output-download hidden" download="rose.json">Scarica rose.json</a>
+      </div>
+    </div>
+
+    <div class="admin-box">
+      <h2>3. Pagelle</h2>
+      <p class="desc">Un campo per squadra: voto, badge (emoji) e commento. Il colore della card sul sito si calcola sempre da solo in base al voto — non serve scriverlo.</p>
+      <div id="pagelle-form"></div>
+      <button id="pagelle-genera" style="margin-top: 10px;">Genera pagelle.json</button>
+      <div id="pagelle-output-wrap" class="hidden" style="margin-top: 16px;">
+        <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/pagelle.json</code>:</p>
+        <textarea id="pagelle-output" readonly></textarea>
+        <a id="pagelle-download" class="output-download hidden" download="pagelle.json">Scarica pagelle.json</a>
+      </div>
+    </div>
+
+    <div class="admin-box">
+      <h2>4. Previsioni</h2>
+      <p class="desc">
+        Per ogni fantallenatore: carica prima lo screenshot dentro <code>assets/previsioni/</code> via GitHub e scrivi
+        qui il nome del file (oppure incolla un link esterno). Apri "Fasce previste" per indicare, guardando il
+        tiermaker, in che fascia ha messo ciascuna delle 20 squadre — serve per la classifica generale in Home.
+      </p>
+      <div id="previsioni-form"></div>
+      <button id="previsioni-genera" style="margin-top: 10px;">Genera previsioni.json</button>
+      <div id="previsioni-output-wrap" class="hidden" style="margin-top: 16px;">
+        <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/previsioni.json</code>:</p>
+        <textarea id="previsioni-output" readonly></textarea>
+        <a id="previsioni-download" class="output-download hidden" download="previsioni.json">Scarica previsioni.json</a>
       </div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="js/importer.js"></script>
+  <script src="js/admin-pagelle.js"></script>
+  <script src="js/admin-previsioni.js"></script>
 </body>
 </html>

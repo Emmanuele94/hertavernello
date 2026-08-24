@@ -1,11 +1,12 @@
 {
-  "_leggimi": "Un oggetto per squadra. 'immagine' e' il percorso del file dentro assets/previsioni/ (metti li' lo screenshot di tiermaker.com e scrivi qui il nome file). Se preferisci un link esterno invece di un file caricato, lascia 'immagine' vuoto e compila 'linkEsterno'.",
+  "_leggimi": "Un oggetto per squadra (fantallenatore). 'immagine' e' il nome del file dentro assets/previsioni/ (carica tu il file su GitHub, qui scrivi solo il nome). 'fasce' e' un oggetto con le 20 squadre reali (codici in data/squadre-serie-a.json) e il numero di fascia 1-10 in cui quel fantallenatore le ha messe sul suo tiermaker. Si compila molto piu' comodamente da admin.html (sezione Previsioni) invece che a mano qui.",
 
   "previsioni": [
     {
       "squadraId": "sq-01",
       "immagine": "",
-      "linkEsterno": ""
+      "linkEsterno": "",
+      "fasce": {}
     }
   ]
 }

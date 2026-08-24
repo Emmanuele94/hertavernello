@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Herta Vernello — Fantalega</title>
+  <title>Squadre — Herta Vernello</title>
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,35 +27,38 @@
       <img src="assets/logo.png" class="logo" alt="">
       <div>
         <h1 id="lega-nome">Herta Vernello</h1>
-        <p id="lega-stagione" class="muted"></p>
       </div>
       <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="squadre.html">Squadre</a>
+        <a href="index.html">Home</a>
+        <a href="squadre.html" class="active">Squadre</a>
       </nav>
     </header>
 
-    <section class="hero">
-      <p id="countdown" class="countdown"></p>
-    </section>
+    <section class="section" style="margin-top: 10px;">
+      <div id="tabs" class="tabs"></div>
 
-    <section class="section">
-      <h2>Chi gioca contro chi</h2>
-      <div id="incrocio-wrap" class="incrocio-wrap"></div>
-    </section>
+      <div class="squadra-block">
+        <h3 class="squadra-block-title">Rosa</h3>
+        <div id="roster-content" class="roster-groups"></div>
+      </div>
 
-    <section class="section">
-      <h2>Classifica generale previsioni</h2>
-      <div id="leaderboard-wrap"></div>
-    </section>
+      <div class="squadra-block">
+        <h3 class="squadra-block-title">Pagella</h3>
+        <div id="pagella-content"></div>
+      </div>
 
-    <footer class="site-footer">
-      Herta Vernello · aggiornato a mano da chi ha perso l'asta peggio degli altri
-    </footer>
+      <div class="squadra-block">
+        <h3 class="squadra-block-title">Previsione Serie A</h3>
+        <div id="previsione-content"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="lightbox" class="lightbox-overlay hidden" onclick="this.classList.add('hidden')">
+    <img id="lightbox-img" src="" alt="Previsione ingrandita">
   </div>
 
   <script src="js/auth.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/squadre.js"></script>
 </body>
 </html>

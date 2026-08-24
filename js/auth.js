@@ -12,12 +12,25 @@ async function hv_sha256(testo) {
 }
 
 async function hv_checkGate() {
-  const res = await fetch("data/config.json");
-  const data = await res.json();
-  const hashAtteso = data.lega.passwordHash;
-
   const gate = document.getElementById("gate");
   const app = document.getElementById("app");
+
+  let data;
+  try {
+    const res = await fetch("data/config.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    data = await res.json();
+  } catch (err) {
+    const errore = document.getElementById("gate-error");
+    if (errore) {
+      errore.textContent =
+        "Impossibile caricare data/config.json. Se hai aperto il file con doppio click, apri il sito con un server locale (es. 'python3 -m http.server') o pubblicalo su GitHub Pages: i browser bloccano la lettura di file locali per sicurezza.";
+    }
+    console.error("Errore caricamento config.json:", err);
+    return null;
+  }
+
+  const hashAtteso = data.lega.passwordHash;
 
   const giaSbloccato = sessionStorage.getItem("hv_auth") === hashAtteso;
   if (giaSbloccato) {
