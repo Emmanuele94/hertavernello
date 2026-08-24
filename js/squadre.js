@@ -36,7 +36,7 @@ function hv_renderRoster(giocatori, squadreRef) {
           : `${g.squadraReale || ""}`;
         return `
         <tr>
-          <td>${g.nome}</td>
+          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${g.nome}</td>
           <td class="squadra-reale">${cellaSquadra}</td>
           <td class="costo">${g.costo ?? ""}</td>
         </tr>`;
@@ -75,8 +75,10 @@ function hv_renderPagella(pagella) {
   const card = document.createElement("div");
   card.className = `pagella-card ${stato}`;
   card.innerHTML = `
-    <div class="pagella-medaglia">
-      <span class="pagella-medaglia-voto">${pagella.voto}</span>
+    <div class="pagella-medaglia-wrap">
+      <div class="pagella-medaglia">
+        <span class="pagella-medaglia-voto">${pagella.voto}</span>
+      </div>
       ${pagella.badge ? `<span class="pagella-medaglia-charm">${pagella.badge}</span>` : ""}
     </div>
     <p class="pagella-commento">${pagella.commento || ""}</p>

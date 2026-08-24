@@ -126,8 +126,8 @@ a { color: inherit; }
 }
 
 .site-header .logo {
-  width: 76px;
-  height: 76px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   box-shadow: 0 0 0 2px var(--wine);
 }
@@ -200,27 +200,7 @@ a { color: inherit; }
   border-radius: 16px;
   padding: 22px 18px;
   border: 1px solid var(--border-hairline);
-  transform-style: preserve-3d;
-  transition: transform 0.15s ease, box-shadow 0.25s ease;
-  overflow: hidden;
-}
-
-.pagella-card::before {
-  content: "";
-  position: absolute;
-  top: -40%;
-  left: 20%;
-  width: 3px;
-  height: 45%;
-  background: currentColor;
-  opacity: 0;
-  border-radius: 2px;
-  transition: opacity 0.2s ease, top 0.6s ease;
-}
-
-.pagella-card:hover::before {
-  opacity: 0.55;
-  top: 0%;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
 }
 
 .pagella-card.promosso {
@@ -242,14 +222,20 @@ a { color: inherit; }
 }
 
 .pagella-card:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.pagella-medaglia-wrap {
+  position: relative;
+  width: 88px;
+  margin: 0 auto 16px;
 }
 
 .pagella-medaglia {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  margin: 0 auto 16px;
   position: relative;
   display: flex;
   align-items: center;
@@ -285,18 +271,19 @@ a { color: inherit; }
 
 .pagella-medaglia-charm {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 30px;
-  height: 30px;
+  bottom: -2px;
+  right: -2px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--bg-card-2);
   border: 2px solid var(--bg-void);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  z-index: 2;
+  font-size: 17px;
+  line-height: 1;
+  z-index: 3;
 }
 
 .pagella-card.promosso .pagella-medaglia { --medal-light: #8dff5e; --medal-dark: #1f9e00; --medal-testo: #06210a; }
@@ -475,6 +462,26 @@ a { color: inherit; }
   vertical-align: middle;
 }
 
+.badge-ruolo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 11px;
+  margin-right: 9px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.badge-ruolo.por { background: #f5941f; }
+.badge-ruolo.dif { background: #3fa34d; }
+.badge-ruolo.cen { background: #2e86de; }
+.badge-ruolo.att { background: #e14640; }
+
 .incrocio-live {
   color: var(--wine-bright);
   font-family: var(--font-mono);
@@ -597,6 +604,7 @@ a { color: inherit; }
 @media (max-width: 480px) {
   .site-header { gap: 10px; }
   .site-header h1 { font-size: 21px; }
+  .pagella-medaglia-wrap { width: 72px; }
   .pagella-medaglia { width: 72px; height: 72px; }
   .pagella-medaglia-voto { font-size: 24px; }
 }
