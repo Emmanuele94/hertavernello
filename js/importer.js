@@ -1,17 +1,3 @@
-// ===== Generatore hash password =====
-async function hv_sha256_admin(testo) {
-  const enc = new TextEncoder().encode(testo);
-  const buf = await crypto.subtle.digest("SHA-256", enc);
-  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-document.getElementById("pw-genera").addEventListener("click", async () => {
-  const val = document.getElementById("pw-input").value.trim();
-  if (!val) return;
-  const hash = await hv_sha256_admin(val);
-  document.getElementById("pw-output").value = hash;
-});
-
 // ===== Importazione rose da CSV =====
 const HV_ALIAS = {
   fantasquadra: ["fantasquadra", "squadra"],

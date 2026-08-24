@@ -1,4 +1,4 @@
-# Herta Vernello — Fantalega
+# Hertavernello — Fantalega
 
 Template pronto all'uso. Non serve toccare HTML/CSS/JS: tutto quello che
 cambia stagione per stagione sta nella cartella `data/`, e le parti più

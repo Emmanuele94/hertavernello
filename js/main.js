@@ -1,3 +1,14 @@
+const HV_MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+
+function hv_formattaDataAsta(dataAstaISO) {
+  const d = new Date(dataAstaISO);
+  const giorno = d.getDate();
+  const mese = HV_MESI[d.getMonth()];
+  const ore = String(d.getHours()).padStart(2, "0");
+  const minuti = String(d.getMinutes()).padStart(2, "0");
+  return `${giorno} ${mese} alle ore ${ore}:${minuti}`;
+}
+
 function hv_countdown(dataAstaISO) {
   const el = document.getElementById("countdown");
   if (!el) return;
@@ -5,18 +16,19 @@ function hv_countdown(dataAstaISO) {
   function aggiorna() {
     const diff = new Date(dataAstaISO).getTime() - Date.now();
     if (diff <= 0) {
-      el.textContent = "Asta conclusa — stagione " + (window.hv_stagione || "") + " in corso";
+      el.textContent = `Asta fatta il ${hv_formattaDataAsta(dataAstaISO)} ora italiana`;
       clearInterval(timer);
       return;
     }
     const g = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
-    el.textContent = `Asta tra ${g}g ${h}h ${m}m`;
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = `Asta tra ${g}g ${h}h ${m}m ${s}s`;
   }
 
   aggiorna();
-  const timer = setInterval(aggiorna, 60000);
+  const timer = setInterval(aggiorna, 1000);
 }
 
 // ===== Incrocio: chi ha giocatori nelle squadre che stanno per scendere in campo =====
@@ -207,7 +219,6 @@ async function hv_renderLeaderboard(config) {
 async function hv_initHome(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
   document.getElementById("lega-stagione").textContent = "Stagione " + config.lega.stagione;
-  window.hv_stagione = config.lega.stagione;
   hv_countdown(config.lega.dataAsta);
   await hv_renderIncrocio(config);
   await hv_renderLeaderboard(config);

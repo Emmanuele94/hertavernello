@@ -74,7 +74,6 @@ function hv_renderPagella(pagella) {
   const stato = hv_statoVoto(pagella.voto);
   const card = document.createElement("div");
   card.className = `pagella-card ${stato}`;
-  card.style.maxWidth = "320px";
   card.innerHTML = `
     <div class="pagella-medaglia">
       <span class="pagella-medaglia-voto">${pagella.voto}</span>

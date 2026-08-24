@@ -1,4 +1,4 @@
-/* ===== Herta Vernello — design tokens ===== */
+/* ===== Hertavernello — design tokens ===== */
 :root {
   --bg-void: #0b0a0c;
   --bg-card: #17151a;
@@ -126,8 +126,8 @@ a { color: inherit; }
 }
 
 .site-header .logo {
-  width: 52px;
-  height: 52px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   box-shadow: 0 0 0 2px var(--wine);
 }
@@ -526,6 +526,21 @@ a { color: inherit; }
 }
 
 /* ===== Blocchi squadra (pagina Squadre) ===== */
+.squadre-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 860px) {
+  .squadre-layout {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+  }
+}
+
+.squadre-sidebar { display: flex; flex-direction: column; }
+
 .squadra-block { margin: 26px 0; }
 
 .squadra-block-title {
@@ -582,7 +597,8 @@ a { color: inherit; }
 @media (max-width: 480px) {
   .site-header { gap: 10px; }
   .site-header h1 { font-size: 21px; }
-  .pagella-voto { font-size: 42px; }
+  .pagella-medaglia { width: 72px; height: 72px; }
+  .pagella-medaglia-voto { font-size: 24px; }
 }
 
 /* ===== Motion ===== */

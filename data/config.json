@@ -2,11 +2,11 @@
   "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'passwordHash' si genera dalla pagina admin.html (sezione Password). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso.",
 
   "lega": {
-    "nome": "Herta Vernello",
+    "nome": "Hertavernello",
     "stagione": "2026/2027",
-    "dataAsta": "2026-09-15T18:00:00",
+    "dataAsta": "2026-09-15T19:00:00",
     "passwordHash": "3f95c1c2fcb3a21c31f6a93a34426a6f38a64b33dd6df4f2cfdda8ded3b5d646",
-    "footballDataApiKey": ""
+    "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47"
   },
 
   "squadre": [

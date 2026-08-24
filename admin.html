@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Admin — Herta Vernello</title>
+  <title>Admin — Hertavernello</title>
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -51,6 +51,10 @@
     .cal-coppia select { flex: 1; }
     .calendario-riga { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-hairline); font-size: 13px; }
     .calendario-riga button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+
+    .cfg-squadra-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .cfg-squadra-row input { margin-bottom: 0; }
+    .cfg-squadra-row button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 8px 12px; border-radius: 6px; cursor: pointer; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -70,11 +74,34 @@
     </div>
 
     <div class="admin-box">
-      <h2>1. Password lega</h2>
-      <p class="desc">Scrivi la password che vuoi far usare al gruppo, genera l'hash e incollalo in <code>data/config.json</code> alla voce <code>passwordHash</code>. Default nel template: <strong>vernello26</strong>.</p>
-      <input type="text" id="pw-input" placeholder="Nuova password in chiaro">
-      <button id="pw-genera">Genera hash</button>
-      <textarea id="pw-output" readonly placeholder="L'hash da incollare nel config comparirà qui" style="min-height: 50px; margin-top: 10px;"></textarea>
+      <h2>1. Impostazioni lega</h2>
+      <p class="desc">
+        Nome, stagione, data asta, password e chiave API — e qui sotto i nomi dei fantallenatori,
+        modificabili senza toccare <code>config.json</code> a mano. Lascia vuoto il campo password se
+        non vuoi cambiarla. Puoi aggiungere o togliere fantallenatori con i pulsanti.
+      </p>
+
+      <div class="campo-riga">
+        <input type="text" id="cfg-nome-lega" placeholder="Nome lega">
+        <input type="text" id="cfg-stagione" placeholder="Stagione (es. 2026/2027)">
+      </div>
+      <div class="campo-riga">
+        <input type="datetime-local" id="cfg-data-asta">
+        <input type="text" id="cfg-api-key" placeholder="Chiave API football-data.org (opzionale)">
+      </div>
+      <input type="text" id="cfg-nuova-password" placeholder="Nuova password (lascia vuoto per non cambiarla)">
+
+      <p class="campo-titolo" style="margin-top: 18px;">Fantallenatori</p>
+      <div id="cfg-squadre"></div>
+      <button id="cfg-aggiungi-squadra" type="button" style="margin-top: 10px; background: var(--bg-void); color: var(--text-primary); border: 1px solid var(--border-hairline);">+ Aggiungi fantallenatore</button>
+
+      <br>
+      <button id="cfg-genera" style="margin-top: 18px;">Genera config.json</button>
+      <div id="cfg-output-wrap" class="hidden" style="margin-top: 16px;">
+        <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/config.json</code>:</p>
+        <textarea id="cfg-output" readonly></textarea>
+        <a id="cfg-download" class="output-download hidden" download="config.json">Scarica config.json</a>
+      </div>
     </div>
 
     <div class="admin-box">
@@ -153,6 +180,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="js/admin-config.js"></script>
   <script src="js/importer.js"></script>
   <script src="js/admin-pagelle.js"></script>
   <script src="js/admin-previsioni.js"></script>
