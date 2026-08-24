@@ -50,5 +50,3 @@ document.getElementById("pagelle-genera").addEventListener("click", () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
-
-hv_initPagelleForm();

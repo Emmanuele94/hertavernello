@@ -1,12 +1,16 @@
 {
-  "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'passwordHash' si genera dalla pagina admin.html (sezione Password). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso.",
+  "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'guestPasswordHash' e' la password che dai agli amici per vedere il sito. 'adminPasswordHash' e' la TUA password: fa vedere il sito come agli amici MA sblocca anche admin.html. Entrambe si generano dalla pagina admin.html (sezione 1). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso. 'githubToken' serve SOLO per l'upload delle previsioni direttamente dalla pagina Squadre (facoltativo): un token fine-grained limitato al solo repository, permesso Contents: Read and write. Senza, l'upload da sito semplicemente non compare e continui a caricare gli screenshot a mano su GitHub come per tutto il resto.",
 
   "lega": {
     "nome": "Hertavernello",
     "stagione": "2026/2027",
     "dataAsta": "2026-09-15T19:00:00",
-    "passwordHash": "3f95c1c2fcb3a21c31f6a93a34426a6f38a64b33dd6df4f2cfdda8ded3b5d646",
-    "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47"
+    "guestPasswordHash": "8f9b2f2c07b24acef3e50aa4a3539d28f5d3bef24b8602b1d86dca5d54172976",
+    "adminPasswordHash": "c5f36b5973ec982e5d5218765842d2eb886b5030a37fbcb9b01006987c0f775d",
+    "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47",
+    "githubOwner": "Emmanuele94",
+    "githubRepo": "hertavernello",
+    "githubToken": ""
   },
 
   "squadre": [

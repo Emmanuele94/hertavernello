@@ -164,5 +164,3 @@ document.getElementById("calendario-genera").addEventListener("click", () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
-
-hv_initCalendarioForm();

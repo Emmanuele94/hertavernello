@@ -58,6 +58,20 @@
   </style>
 </head>
 <body>
+  <div id="gate" class="gate">
+    <img src="assets/logo.png" class="gate-logo" alt="Hertavernello">
+    <h1>Hertavernello</h1>
+    <p>Pagina riservata. Inserisci la password.</p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn">Entra</button>
+    <p id="gate-error" class="gate-error"></p>
+  </div>
+
+  <div id="admin-negato" class="hidden" style="max-width: 520px; margin: 80px auto; text-align: center; padding: 0 20px;">
+    <p style="font-size: 15px;">Questa pagina è riservata all'amministratore della lega — la password che hai usato ti fa vedere il sito ma non sblocca questa sezione.</p>
+  </div>
+
+  <div id="app" class="app hidden">
   <div class="admin-wrap">
     <header class="site-header" style="padding-bottom: 10px;">
       <img src="assets/logo.png" class="logo" alt="">
@@ -76,9 +90,10 @@
     <div class="admin-box">
       <h2>1. Impostazioni lega</h2>
       <p class="desc">
-        Nome, stagione, data asta, password e chiave API — e qui sotto i nomi dei fantallenatori,
-        modificabili senza toccare <code>config.json</code> a mano. Lascia vuoto il campo password se
-        non vuoi cambiarla. Puoi aggiungere o togliere fantallenatori con i pulsanti.
+        Nome, stagione, data asta, le due password (guest = vede solo il sito, admin = vede il sito E questa
+        pagina) e la chiave API — e qui sotto i nomi dei fantallenatori, modificabili senza toccare
+        <code>config.json</code> a mano. Lascia vuoto un campo password se non vuoi cambiarla. Puoi aggiungere
+        o togliere fantallenatori con i pulsanti.
       </p>
 
       <div class="campo-riga">
@@ -89,7 +104,11 @@
         <input type="datetime-local" id="cfg-data-asta">
         <input type="text" id="cfg-api-key" placeholder="Chiave API football-data.org (opzionale)">
       </div>
-      <input type="text" id="cfg-nuova-password" placeholder="Nuova password (lascia vuoto per non cambiarla)">
+      <div class="campo-riga">
+        <input type="text" id="cfg-nuova-password-guest" placeholder="Nuova password GUEST (lascia vuoto per non cambiarla)">
+        <input type="text" id="cfg-nuova-password-admin" placeholder="Nuova password ADMIN (lascia vuoto per non cambiarla)">
+      </div>
+      <input type="text" id="cfg-github-token" placeholder="Token GitHub per upload previsioni (opzionale, github_pat_...)">
 
       <p class="campo-titolo" style="margin-top: 18px;">Fantallenatori</p>
       <div id="cfg-squadre"></div>
@@ -178,7 +197,9 @@
       </div>
     </div>
   </div>
+  </div>
 
+  <script src="js/auth.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="js/admin-config.js"></script>
   <script src="js/importer.js"></script>
@@ -186,5 +207,21 @@
   <script src="js/admin-previsioni.js"></script>
   <script src="js/api.js"></script>
   <script src="js/admin-calendario.js"></script>
+  <script>
+    function hv_applicaRuoloAdmin() {
+      if (window.hv_role !== "admin") {
+        document.getElementById("app").classList.add("hidden");
+        document.getElementById("admin-negato").classList.remove("hidden");
+        return;
+      }
+      hv_initConfigForm();
+      hv_initPagelleForm();
+      hv_initPrevisioniForm();
+      hv_initCalendarioForm();
+    }
+
+    hv_checkGate().then((data) => { if (data) hv_applicaRuoloAdmin(); });
+    document.addEventListener("hv:unlocked", hv_applicaRuoloAdmin);
+  </script>
 </body>
 </html>

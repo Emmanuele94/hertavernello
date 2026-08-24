@@ -92,10 +92,35 @@ così, e i pannelli restano vuoti. Due modi:
    `https://tuonomeutente.github.io/nome-repository/`.
 5. Ogni push successivo aggiorna il sito da solo in circa un minuto.
 
-## Nota sulla password
+## Password: due livelli
 
-Protezione lato client: tiene fuori i curiosi e i motori di ricerca, ma
-non è sicurezza vera — non caricateci dati sensibili veri.
+Da oggi ci sono due password separate in `config.json`:
+- `guestPasswordHash` — quella che dai agli amici, fa vedere Home e Squadre.
+- `adminPasswordHash` — la tua: fa vedere il sito come agli amici MA sblocca
+  anche `admin.html`, che ora è protetta (prima non lo era).
+
+Password guest di default nel template: **herta2026**. Password admin di
+default: **cambiami-admin** — cambiala subito dalla sezione 1 di
+`admin.html` prima di condividere il link con chiunque.
+
+## Upload previsioni direttamente dal sito (facoltativo)
+
+Se hai creato un token GitHub fine-grained (limitato al solo repository,
+permesso Contents: Read and write), incollalo tu stesso direttamente in
+`data/config.json` → `lega.githubToken` (via l'icona matita su GitHub,
+oppure dalla sezione 1 di admin.html) — meglio non farlo passare da
+altre chat per un token che può scrivere sul repository.
+
+Con quel token impostato, quando sei loggato come admin, nella pagina
+Squadre di ogni fantallenatore compare un pulsante "Carica/aggiorna
+screenshot": carichi l'immagine dal telefono o dal pc e il sito la salva
+da solo su GitHub (sia il file immagine che l'aggiornamento di
+`previsioni.json`) — niente più passaggio manuale per questa parte. Il
+sito pubblico si aggiorna con un minuto di ritardo (il tempo del
+redeploy di GitHub Pages), ma tu vedi subito l'anteprima nella pagina.
+
+Senza token impostato, quel pulsante semplicemente non compare e
+continui a caricare gli screenshot a mano come per il resto dei dati.
 
 ## Nota sulla chiave API
 

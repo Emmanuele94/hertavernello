@@ -39,6 +39,7 @@ async function hv_initConfigForm() {
   document.getElementById("cfg-stagione").value = hv_configBozza.lega.stagione;
   document.getElementById("cfg-data-asta").value = (hv_configBozza.lega.dataAsta || "").slice(0, 16);
   document.getElementById("cfg-api-key").value = hv_configBozza.lega.footballDataApiKey || "";
+  document.getElementById("cfg-github-token").value = hv_configBozza.lega.githubToken || "";
 
   hv_renderSquadreRows();
 }
@@ -54,15 +55,20 @@ document.getElementById("cfg-aggiungi-squadra").addEventListener("click", () => 
 });
 
 document.getElementById("cfg-genera").addEventListener("click", async () => {
-  const nuovaPassword = document.getElementById("cfg-nuova-password").value.trim();
+  const nuovaGuest = document.getElementById("cfg-nuova-password-guest").value.trim();
+  const nuovaAdmin = document.getElementById("cfg-nuova-password-admin").value.trim();
 
   hv_configBozza.lega.nome = document.getElementById("cfg-nome-lega").value.trim();
   hv_configBozza.lega.stagione = document.getElementById("cfg-stagione").value.trim();
   hv_configBozza.lega.dataAsta = document.getElementById("cfg-data-asta").value;
   hv_configBozza.lega.footballDataApiKey = document.getElementById("cfg-api-key").value.trim();
+  hv_configBozza.lega.githubToken = document.getElementById("cfg-github-token").value.trim();
 
-  if (nuovaPassword) {
-    hv_configBozza.lega.passwordHash = await hv_sha256_cfg(nuovaPassword);
+  if (nuovaGuest) {
+    hv_configBozza.lega.guestPasswordHash = await hv_sha256_cfg(nuovaGuest);
+  }
+  if (nuovaAdmin) {
+    hv_configBozza.lega.adminPasswordHash = await hv_sha256_cfg(nuovaAdmin);
   }
 
   document.querySelectorAll(".cfg-squadra-row").forEach((row) => {
@@ -82,5 +88,3 @@ document.getElementById("cfg-genera").addEventListener("click", async () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
-
-hv_initConfigForm();

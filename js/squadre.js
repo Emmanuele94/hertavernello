@@ -105,6 +105,54 @@ function hv_renderPrevisione(previsione) {
   }
 }
 
+function hv_renderUploadAdmin(squadraId, config) {
+  const wrap = document.getElementById("previsione-upload-admin");
+  if (window.hv_role !== "admin") {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  const abilitato = config.lega.githubToken && config.lega.githubOwner && config.lega.githubRepo;
+  if (!abilitato) {
+    wrap.innerHTML = '<p class="muted" style="font-size:12px; margin-top:10px;">Upload da sito non attivo: manca githubToken in config.json.</p>';
+    return;
+  }
+
+  wrap.innerHTML = `
+    <label class="upload-admin-btn">
+      Carica/aggiorna screenshot
+      <input type="file" accept="image/*" id="previsione-file-input" style="display:none;">
+    </label>
+    <p id="previsione-upload-stato" class="muted" style="font-size:12px; margin-top:8px;"></p>
+  `;
+
+  document.getElementById("previsione-file-input").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const stato = document.getElementById("previsione-upload-stato");
+    stato.textContent = "Caricamento in corso...";
+    stato.style.color = "var(--text-muted)";
+
+    try {
+      const percorso = await hv_caricaPrevisioneViaGitHub(squadraId, file, config);
+      stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+      stato.style.color = "var(--verde-prato)";
+
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
+      img.alt = "Previsione Serie A";
+      img.className = "previsione-clickable";
+      img.addEventListener("click", () => hv_apriLightbox(img.src));
+      const contentWrap = document.getElementById("previsione-content");
+      contentWrap.innerHTML = "";
+      contentWrap.appendChild(img);
+    } catch (err) {
+      stato.textContent = "Errore: " + err.message;
+      stato.style.color = "var(--wine-bright)";
+    }
+  });
+}
+
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
@@ -125,6 +173,7 @@ async function hv_initSquadre(config) {
     hv_renderRoster(roster ? roster.giocatori : [], squadreRef);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
+    hv_renderUploadAdmin(squadra.id, config);
   }
 
   const tabsEl = document.getElementById("tabs");

@@ -79,5 +79,3 @@ document.getElementById("previsioni-genera").addEventListener("click", () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
-
-hv_initPrevisioniForm();
