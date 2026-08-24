@@ -29,15 +29,36 @@ function hv_giocatoriPerSquadraReale(codice, roseData, config, squadreRef) {
       (g) => hv_trovaCodice(g.squadraReale, squadreRef) === codice
     );
     if (giocatori.length > 0) {
-      risultati.push({ nomeReale: squadra.nomeReale, giocatori: giocatori.map((g) => g.nome) });
+      risultati.push({ squadraId: squadra.id, nomeReale: squadra.nomeReale, giocatori: giocatori.map((g) => g.nome) });
     }
   });
   return risultati;
 }
 
-function hv_renderIncrocioMatch(match, roseData, config, squadreRef) {
+function hv_trovaAvversarioGiornata(squadraId, giornata, calendarioData) {
+  const g = (calendarioData.giornate || []).find((x) => x.giornata === giornata);
+  if (!g) return null;
+  const coppia = g.incontri.find((c) => c.includes(squadraId));
+  if (!coppia || coppia.length < 2) return null;
+  return coppia[0] === squadraId ? coppia[1] : coppia[0];
+}
+
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData) {
   const casa = hv_giocatoriPerSquadraReale(match.casaCodice, roseData, config, squadreRef);
   const trasferta = hv_giocatoriPerSquadraReale(match.trasfertaCodice, roseData, config, squadreRef);
+
+  if (match.matchday) {
+    const idTrasferta = trasferta.map((t) => t.squadraId);
+    const idCasa = casa.map((c) => c.squadraId);
+    casa.forEach((c) => {
+      const avv = hv_trovaAvversarioGiornata(c.squadraId, match.matchday, calendarioData);
+      c.avversarioDiretto = avv && idTrasferta.includes(avv);
+    });
+    trasferta.forEach((t) => {
+      const avv = hv_trovaAvversarioGiornata(t.squadraId, match.matchday, calendarioData);
+      t.avversarioDiretto = avv && idCasa.includes(avv);
+    });
+  }
 
   const col = (nome, lista) => `
     <div class="incrocio-col">
@@ -45,7 +66,14 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef) {
       ${
         lista.length === 0
           ? '<p class="muted" style="font-size:12.5px;">Nessuno in lega ha giocatori qui</p>'
-          : lista.map((r) => `<p class="incrocio-riga"><strong>${r.nomeReale}</strong>: ${r.giocatori.join(", ")}</p>`).join("")
+          : lista
+              .map(
+                (r) => `
+        <p class="incrocio-riga">
+          <strong>${r.nomeReale}</strong>${r.avversarioDiretto ? ' <span class="incrocio-avversario">⚔️ avversari di giornata</span>' : ""}: ${r.giocatori.join(", ")}
+        </p>`
+              )
+              .join("")
       }
     </div>`;
 
@@ -80,8 +108,13 @@ async function hv_renderIncrocio(config) {
   wrap.innerHTML = '<p class="empty-state">Carico le partite...</p>';
 
   try {
-    const [squadreRef, roseRes] = await Promise.all([hv_caricaSquadreRef(), fetch("data/rose.json")]);
+    const [squadreRef, roseRes, calendarioRes] = await Promise.all([
+      hv_caricaSquadreRef(),
+      fetch("data/rose.json"),
+      fetch("data/calendario.json"),
+    ]);
     const roseData = await roseRes.json();
+    const calendarioData = await calendarioRes.json();
     const { live, prossimoTurno } = await hv_getPartite(apiKey, squadreRef);
 
     wrap.innerHTML = "";
@@ -94,7 +127,7 @@ async function hv_renderIncrocio(config) {
 
     daMostrare.forEach((match) => {
       if (!match.casaCodice || !match.trasfertaCodice) return;
-      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef));
+      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData));
     });
   } catch (err) {
     wrap.innerHTML = '<p class="empty-state">Non riesco a contattare l\'API in questo momento (chiave non valida o limite richieste raggiunto).</p>';

@@ -44,6 +44,20 @@ function hv_renderRoster(giocatori) {
   });
 }
 
+function hv_medagliaShine(el) {
+  el.addEventListener("mousemove", (e) => {
+    const r = el.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    el.style.setProperty("--sx", x + "%");
+    el.style.setProperty("--sy", y + "%");
+  });
+  el.addEventListener("mouseleave", () => {
+    el.style.setProperty("--sx", "35%");
+    el.style.setProperty("--sy", "28%");
+  });
+}
+
 function hv_renderPagella(pagella) {
   const wrap = document.getElementById("pagella-content");
   wrap.innerHTML = "";
@@ -56,13 +70,16 @@ function hv_renderPagella(pagella) {
   const stato = hv_statoVoto(pagella.voto);
   const card = document.createElement("div");
   card.className = `pagella-card ${stato}`;
-  card.style.maxWidth = "360px";
+  card.style.maxWidth = "320px";
   card.innerHTML = `
-    <span class="pagella-badge">${pagella.badge || ""}</span>
-    <p class="pagella-voto">${pagella.voto}</p>
+    <div class="pagella-medaglia">
+      <span class="pagella-medaglia-voto">${pagella.voto}</span>
+      ${pagella.badge ? `<span class="pagella-medaglia-charm">${pagella.badge}</span>` : ""}
+    </div>
     <p class="pagella-commento">${pagella.commento || ""}</p>
   `;
   wrap.appendChild(card);
+  hv_medagliaShine(card.querySelector(".pagella-medaglia"));
 }
 
 function hv_renderPrevisione(previsione) {

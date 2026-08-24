@@ -4,9 +4,9 @@
   "lega": {
     "nome": "Herta Vernello",
     "stagione": "2026/2027",
-    "dataAsta": "2026-09-15T19:00:00:00",
-    "passwordHash": "8f9b2f2c07b24acef3e50aa4a3539d28f5d3bef24b8602b1d86dca5d54172976",
-    "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47"
+    "dataAsta": "2026-09-15T18:00:00",
+    "passwordHash": "3f95c1c2fcb3a21c31f6a93a34426a6f38a64b33dd6df4f2cfdda8ded3b5d646",
+    "footballDataApiKey": ""
   },
 
   "squadre": [

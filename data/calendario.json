@@ -1,0 +1,4 @@
+{
+  "_leggimi": "Il calendario di lega (chi affronta chi ogni giornata nella VOSTRA lega, non le partite reali di Serie A). Si compila da admin.html, sezione 5. 'giornata' e' il numero di giornata (corrisponde alla giornata di Serie A). 'incontri' e' un elenco di coppie [squadraIdA, squadraIdB]; se un fantallenatore riposa quella giornata, la sua coppia ha solo un id (es. [\"sq-05\"]).",
+  "giornate": []
+}

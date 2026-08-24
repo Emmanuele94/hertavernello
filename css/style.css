@@ -245,34 +245,63 @@ a { color: inherit; }
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
-.pagella-badge {
+.pagella-medaglia {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid var(--medal-rim);
+  background: linear-gradient(145deg, var(--medal-light), var(--medal-dark));
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.4),
+    0 6px 14px rgba(0, 0, 0, 0.45);
+  --sx: 35%;
+  --sy: 28%;
+}
+
+.pagella-medaglia::after {
+  content: "";
   position: absolute;
-  top: 14px;
-  right: 16px;
-  font-size: 22px;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at var(--sx) var(--sy), rgba(255, 255, 255, 0.65), transparent 45%);
+  pointer-events: none;
 }
 
-.pagella-squadra {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0 0 2px;
-}
-
-.pagella-nome {
-  font-weight: 600;
-  font-size: 16px;
-  margin: 0 0 14px;
-  color: var(--text-primary);
-  padding-right: 30px;
-}
-
-.pagella-voto {
+.pagella-medaglia-voto {
   font-family: var(--font-display);
-  font-size: 52px;
-  line-height: 1;
-  margin: 0 0 12px;
-  color: currentColor;
+  font-size: 30px;
+  color: var(--medal-testo);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
+
+.pagella-medaglia-charm {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-card-2);
+  border: 2px solid var(--bg-void);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  z-index: 2;
+}
+
+.pagella-card.promosso .pagella-medaglia { --medal-light: #8dff5e; --medal-dark: #1f9e00; --medal-testo: #06210a; }
+.pagella-card.medio .pagella-medaglia { --medal-light: #fff98f; --medal-dark: #c9be00; --medal-testo: #362f00; }
+.pagella-card.bocciato .pagella-medaglia { --medal-light: #c65064; --medal-dark: #5a0e1a; --medal-testo: #f2efe9; }
 
 .pagella-commento {
   font-size: 13.5px;
@@ -280,6 +309,7 @@ a { color: inherit; }
   color: var(--text-primary);
   opacity: 0.92;
   margin: 0;
+  text-align: center;
 }
 
 /* ===== Previsioni ===== */
@@ -457,6 +487,13 @@ a { color: inherit; }
   font-size: 13px;
   margin: 0 0 6px;
   line-height: 1.4;
+}
+
+.incrocio-avversario {
+  color: var(--giallo-neon);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 @media (max-width: 560px) {

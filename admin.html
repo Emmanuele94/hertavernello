@@ -47,6 +47,10 @@
     .previsione-griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 14px; margin-top: 8px; }
     .previsione-riga { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; }
     .previsione-riga select { background: var(--bg-void); color: var(--text-primary); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 5px 6px; flex: 1; }
+
+    .cal-coppia select { flex: 1; }
+    .calendario-riga { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-hairline); font-size: 13px; }
+    .calendario-riga button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -118,11 +122,41 @@
         <a id="previsioni-download" class="output-download hidden" download="previsioni.json">Scarica previsioni.json</a>
       </div>
     </div>
+    <div class="admin-box">
+      <h2>5. Calendario di lega</h2>
+      <p class="desc">
+        Chi affronta chi ogni giornata nella VOSTRA lega (non le partite reali di Serie A). Importante:
+        il numero di giornata deve corrispondere a quello REALE del campionato di Serie A, non a un vostro
+        contatore che parte da 1 — nel vostro caso, facendo l'asta il 15 settembre e saltando le prime 4
+        giornate, la vostra prima giornata di lega corrisponderà a una giornata reale già in corso (la
+        5ª circa), non alla "giornata 1". Se hai già inserito la chiave API in config.json, qui sotto
+        te lo suggerisco in automatico.
+      </p>
+      <p id="cal-suggerimento" class="desc" style="color: var(--verde-prato);"></p>
+
+      <div class="campo-riga" style="max-width: 220px; margin-bottom: 14px;">
+        <input type="number" id="cal-giornata" min="1" placeholder="Giornata">
+      </div>
+      <div id="calendario-form-coppie"></div>
+      <p id="cal-avviso" class="csv-avviso"></p>
+      <button id="cal-aggiungi" style="margin-top: 6px;">Aggiungi/aggiorna questa giornata</button>
+
+      <div id="calendario-lista" style="margin-top: 18px;"></div>
+
+      <button id="calendario-genera" style="margin-top: 16px;">Genera calendario.json</button>
+      <div id="calendario-output-wrap" class="hidden" style="margin-top: 16px;">
+        <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/calendario.json</code>:</p>
+        <textarea id="calendario-output" readonly></textarea>
+        <a id="calendario-download" class="output-download hidden" download="calendario.json">Scarica calendario.json</a>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="js/importer.js"></script>
   <script src="js/admin-pagelle.js"></script>
   <script src="js/admin-previsioni.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-calendario.js"></script>
 </body>
 </html>

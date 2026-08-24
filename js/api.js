@@ -84,3 +84,9 @@ function hv_fasciaDaPosizione(posizione, fasce) {
   const f = fasce.find((f) => posizione >= f.posMin && posizione <= f.posMax);
   return f ? f.id : null;
 }
+
+// Numero di giornata reale di Serie A attualmente in corso/prossima
+async function hv_getGiornataCorrente(apiKey) {
+  const data = await hv_fetchAPI("/competitions/SA", apiKey);
+  return data.currentSeason ? data.currentSeason.currentMatchday : null;
+}

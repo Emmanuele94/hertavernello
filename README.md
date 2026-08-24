@@ -17,6 +17,7 @@ data/config.json           Nome lega, data asta, password, chiave API, elenco sq
 data/pagelle.json          Voti e commenti (compilabile da admin.html)
 data/previsioni.json      Screenshot + fasce previste (compilabile da admin.html)
 data/rose.json               Rose (si genera da admin.html dopo l'asta)
+data/calendario.json      Calendario di lega, chi affronta chi ogni giornata (si compila da admin.html)
 data/squadre-serie-a.json Anagrafica delle 20 squadre di Serie A e delle 10 fasce — non serve toccarlo
 assets/logo.png             Il vostro logo
 assets/previsioni/           Metti qui gli screenshot da tiermaker.com
@@ -70,8 +71,10 @@ così, e i pannelli restano vuoti. Due modi:
 
 - **Home**: countdown/stato asta, "Chi gioca contro chi" (incrocio tra le
   partite di Serie A — live se ce ne sono, altrimenti il prossimo turno —
-  e i fantallenatori che hanno giocatori in quelle squadre), e la
-  classifica generale di chi si sta avvicinando di più alla propria
+  e i fantallenatori che hanno giocatori in quelle squadre, con
+  un'etichetta "⚔️ avversari di giornata" quando due di loro si affrontano
+  anche nella vostra lega quella giornata — vedi sezione 5 di admin.html),
+  e la classifica generale di chi si sta avvicinando di più alla propria
   previsione, calcolata sulla classifica reale aggiornata.
 - **Squadre**: un tab per ogni fantallenatore. Selezionandolo vedi la sua
   rosa, la sua pagella, e la sua previsione (clicca sullo screenshot per
