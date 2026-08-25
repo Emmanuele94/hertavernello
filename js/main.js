@@ -31,70 +31,63 @@ function hv_countdown(dataAstaISO) {
   const timer = setInterval(aggiorna, 1000);
 }
 
-// ===== Incrocio: chi ha giocatori nelle squadre che stanno per scendere in campo =====
-// Lista PIATTA: un elemento per ogni singolo giocatore (non raggruppati per proprietario)
-function hv_giocatoriPerSquadraRealeFlat(codice, roseData, config, squadreRef) {
-  const risultati = [];
-  (roseData.rose || []).forEach((entry) => {
-    const squadra = config.squadre.find((s) => s.id === entry.squadraId);
-    if (!squadra) return;
-    (entry.giocatori || []).forEach((g) => {
-      if (hv_trovaCodice(g.squadraReale, squadreRef) === codice) {
-        risultati.push({ squadraId: squadra.id, nomeReale: squadra.nomeReale, nomeGiocatore: g.nome });
-      }
-    });
-  });
-  return risultati;
+// ===== Incrocio: schede sfida per ogni scontro di fantalega coinvolto nella partita reale =====
+function hv_giocatoriRilevanti(squadraId, match, roseData, squadreRef) {
+  const entry = (roseData.rose || []).find((r) => r.squadraId === squadraId);
+  if (!entry) return [];
+  return (entry.giocatori || [])
+    .map((g) => ({ nome: g.nome, codice: hv_trovaCodice(g.squadraReale, squadreRef) }))
+    .filter((g) => g.codice === match.casaCodice || g.codice === match.trasfertaCodice);
 }
 
-function hv_trovaAvversarioGiornata(squadraId, giornata, calendarioData) {
-  const g = (calendarioData.giornate || []).find((x) => x.giornata === giornata);
-  if (!g) return null;
-  const coppia = g.incontri.find((c) => c.includes(squadraId));
-  if (!coppia || coppia.length < 2) return null;
-  return coppia[0] === squadraId ? coppia[1] : coppia[0];
+function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData) {
+  if (!match.matchday) return [];
+  const giornataCal = (calendarioData.giornate || []).find((g) => g.giornata === match.matchday);
+  if (!giornataCal) return [];
+
+  const schede = [];
+  giornataCal.incontri.forEach((coppia) => {
+    if (coppia.length < 2) return;
+    const [idA, idB] = coppia;
+    const squadraA = config.squadre.find((s) => s.id === idA);
+    const squadraB = config.squadre.find((s) => s.id === idB);
+    if (!squadraA || !squadraB) return;
+
+    const giocatoriA = hv_giocatoriRilevanti(idA, match, roseData, squadreRef);
+    const giocatoriB = hv_giocatoriRilevanti(idB, match, roseData, squadreRef);
+    if (giocatoriA.length === 0 && giocatoriB.length === 0) return;
+
+    schede.push({ nomeA: squadraA.nomeReale, nomeB: squadraB.nomeReale, giocatoriA, giocatoriB });
+  });
+  return schede;
 }
 
 function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData) {
-  const listaCasa = hv_giocatoriPerSquadraRealeFlat(match.casaCodice, roseData, config, squadreRef);
-  const listaTrasferta = hv_giocatoriPerSquadraRealeFlat(match.trasfertaCodice, roseData, config, squadreRef);
+  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData);
 
-  if (match.matchday) {
-    const idTrasferta = listaTrasferta.map((t) => t.squadraId);
-    const idCasa = listaCasa.map((c) => c.squadraId);
-    listaCasa.forEach((c) => {
-      const avv = hv_trovaAvversarioGiornata(c.squadraId, match.matchday, calendarioData);
-      c.avversarioDiretto = avv && idTrasferta.includes(avv);
-    });
-    listaTrasferta.forEach((t) => {
-      const avv = hv_trovaAvversarioGiornata(t.squadraId, match.matchday, calendarioData);
-      t.avversarioDiretto = avv && idCasa.includes(avv);
-    });
-  }
+  const listaGiocatori = (giocatori) =>
+    giocatori.length === 0
+      ? '<p class="sfida-vuoto">Nessun giocatore qui</p>'
+      : giocatori.map((g) => `<p><img src="assets/loghi/${g.codice}.png" class="logo-squadra-mini" alt="">${g.nome}</p>`).join("");
 
-  const cella = (entry, codiceSquadra) => {
-    if (!entry) return '<span class="incrocio-vuoto">—</span>';
-    const avv = entry.avversarioDiretto ? ' <span class="incrocio-avversario">⚔️</span>' : "";
-    return `<img src="assets/loghi/${codiceSquadra}.png" class="logo-squadra-mini" alt="">
-      <strong>${entry.nomeReale}</strong>: ${entry.nomeGiocatore}${avv}`;
-  };
-
-  const maxRighe = Math.max(listaCasa.length, listaTrasferta.length);
   let corpo;
-
-  if (maxRighe === 0) {
-    corpo = '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno in lega ha giocatori in questa partita</p>';
+  if (schede.length === 0) {
+    corpo = match.matchday
+      ? '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre — o il calendario di lega non è ancora stato caricato (admin.html, sezione 5).</p>'
+      : '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Calendario di lega non disponibile per questa partita.</p>';
   } else {
-    const righe = [];
-    for (let i = 0; i < maxRighe; i++) {
-      righe.push(`
-        <div class="incrocio-riga-vs">
-          <span class="incrocio-lato">${cella(listaCasa[i], match.casaCodice)}</span>
-          <span class="incrocio-vs-sep">vs</span>
-          <span class="incrocio-lato">${cella(listaTrasferta[i], match.trasfertaCodice)}</span>
-        </div>`);
-    }
-    corpo = `<div class="incrocio-vs-list">${righe.join("")}</div>`;
+    corpo = `<div class="sfide-lista">${schede
+      .map(
+        (s) => `
+      <div class="sfida-card">
+        <div class="sfida-testata">${s.nomeA} <span class="sfida-vs">vs</span> ${s.nomeB}</div>
+        <div class="sfida-body">
+          <div class="sfida-lato">${listaGiocatori(s.giocatoriA)}</div>
+          <div class="sfida-lato">${listaGiocatori(s.giocatoriB)}</div>
+        </div>
+      </div>`
+      )
+      .join("")}</div>`;
   }
 
   const etichetta = match.live
