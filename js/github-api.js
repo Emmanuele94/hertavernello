@@ -49,6 +49,17 @@ async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sh
   return res.json();
 }
 
+// Salva un oggetto JS come file JSON nel repository (crea o aggiorna).
+async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
+  const { githubOwner: owner, githubRepo: repo, githubToken: token } = config.lega;
+  if (!token || !owner || !repo) {
+    throw new Error("Manca githubToken/githubOwner/githubRepo in config.json.");
+  }
+  const esistente = await hv_ghGetFile(owner, repo, percorso, token);
+  const contenuto = hv_utf8ToBase64(JSON.stringify(oggetto, null, 2));
+  await hv_ghPutFile(owner, repo, percorso, token, contenuto, messaggio, esistente ? esistente.sha : null);
+}
+
 // Carica/aggiorna lo screenshot previsione di una squadra e aggiorna previsioni.json di conseguenza.
 async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
   const { githubOwner: owner, githubRepo: repo, githubToken: token } = config.lega;

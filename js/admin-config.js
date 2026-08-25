@@ -88,3 +88,17 @@ document.getElementById("cfg-genera").addEventListener("click", async () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
+
+document.getElementById("cfg-salva-github").addEventListener("click", async () => {
+  const stato = document.getElementById("cfg-stato-github");
+  stato.textContent = "Salvataggio in corso...";
+  stato.style.color = "var(--text-muted)";
+  try {
+    await hv_ghSalvaJSON("data/config.json", hv_configBozza, "Aggiorna config.json da admin.html", hv_configBozza);
+    stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+    stato.style.color = "var(--verde-prato)";
+  } catch (err) {
+    stato.textContent = "Errore: " + err.message;
+    stato.style.color = "var(--wine-bright)";
+  }
+});

@@ -164,3 +164,19 @@ document.getElementById("calendario-genera").addEventListener("click", () => {
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
 });
+
+document.getElementById("calendario-salva-github").addEventListener("click", async () => {
+  const stato = document.getElementById("calendario-stato-github");
+  stato.textContent = "Salvataggio in corso...";
+  stato.style.color = "var(--text-muted)";
+  try {
+    const ordinate = [...hv_calendarioBozza].sort((a, b) => a.giornata - b.giornata);
+    const output = { _leggimi: "Generato da admin.html — sostituisci data/calendario.json", giornate: ordinate };
+    await hv_ghSalvaJSON("data/calendario.json", output, "Aggiorna calendario.json da admin.html", hv_configCalendario);
+    stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+    stato.style.color = "var(--verde-prato)";
+  } catch (err) {
+    stato.textContent = "Errore: " + err.message;
+    stato.style.color = "var(--wine-bright)";
+  }
+});

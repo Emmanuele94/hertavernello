@@ -1,17 +1,19 @@
+let hv_configPrevisioni = null;
+
 async function hv_initPrevisioniForm() {
   const [configRes, previsioniRes, squadreRefRes] = await Promise.all([
     fetch("data/config.json"),
     fetch("data/previsioni.json"),
     fetch("data/squadre-serie-a.json"),
   ]);
-  const config = await configRes.json();
+  hv_configPrevisioni = await configRes.json();
   const { previsioni } = await previsioniRes.json();
   const squadreRef = await squadreRefRes.json();
 
   const wrap = document.getElementById("previsioni-form");
   wrap.innerHTML = "";
 
-  config.squadre.forEach((squadra) => {
+  hv_configPrevisioni.squadre.forEach((squadra) => {
     const esistente = (previsioni || []).find((p) => p.squadraId === squadra.id) || {};
     const fasceEsistenti = esistente.fasce || {};
 
@@ -52,7 +54,7 @@ async function hv_initPrevisioniForm() {
   });
 }
 
-document.getElementById("previsioni-genera").addEventListener("click", () => {
+function hv_costruisciPrevisioniOutput() {
   const campi = document.querySelectorAll(".previsione-field");
   const previsioni = [];
 
@@ -69,7 +71,11 @@ document.getElementById("previsioni-genera").addEventListener("click", () => {
     });
   });
 
-  const output = { _leggimi: "Generato da admin.html — sostituisci data/previsioni.json", previsioni };
+  return { _leggimi: "Generato da admin.html — sostituisci data/previsioni.json", previsioni };
+}
+
+document.getElementById("previsioni-genera").addEventListener("click", () => {
+  const output = hv_costruisciPrevisioniOutput();
   const testo = JSON.stringify(output, null, 2);
   document.getElementById("previsioni-output").value = testo;
   document.getElementById("previsioni-output-wrap").classList.remove("hidden");
@@ -78,4 +84,47 @@ document.getElementById("previsioni-genera").addEventListener("click", () => {
   const link = document.getElementById("previsioni-download");
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
+});
+
+document.getElementById("previsioni-salva-github").addEventListener("click", async () => {
+  const stato = document.getElementById("previsioni-stato-github");
+  stato.textContent = "Salvataggio in corso...";
+  stato.style.color = "var(--text-muted)";
+  try {
+    const { githubOwner: owner, githubRepo: repo, githubToken: token } = hv_configPrevisioni.lega;
+    if (!token || !owner || !repo) throw new Error("Manca githubToken/githubOwner/githubRepo in config.json.");
+
+    // rileggo sempre la versione più recente: così non sovrascrivo un eventuale
+    // screenshot caricato nel frattempo dalla pagina Squadre, tocco solo le fasce.
+    const fileLive = await hv_ghGetFile(owner, repo, "data/previsioni.json", token);
+    const liveObj = fileLive ? JSON.parse(hv_base64ToUtf8(fileLive.content)) : { previsioni: [] };
+    if (!liveObj.previsioni) liveObj.previsioni = [];
+
+    document.querySelectorAll(".previsione-field").forEach((c) => {
+      const squadraId = c.dataset.squadraId;
+      const fasce = {};
+      c.querySelectorAll(".pv-fascia").forEach((sel) => {
+        if (sel.value) fasce[sel.dataset.codice] = Number(sel.value);
+      });
+      const linkEsterno = c.querySelector(".pv-link").value.trim();
+
+      let entry = liveObj.previsioni.find((p) => p.squadraId === squadraId);
+      if (!entry) {
+        entry = { squadraId, immagine: "", linkEsterno: "", fasce: {} };
+        liveObj.previsioni.push(entry);
+      }
+      entry.fasce = fasce;
+      if (linkEsterno) entry.linkEsterno = linkEsterno;
+    });
+
+    liveObj._leggimi = "Generato da admin.html — sostituisci data/previsioni.json";
+    const contenuto = hv_utf8ToBase64(JSON.stringify(liveObj, null, 2));
+    await hv_ghPutFile(owner, repo, "data/previsioni.json", token, contenuto, "Aggiorna fasce previsioni da admin.html", fileLive ? fileLive.sha : null);
+
+    stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+    stato.style.color = "var(--verde-prato)";
+  } catch (err) {
+    stato.textContent = "Errore: " + err.message;
+    stato.style.color = "var(--wine-bright)";
+  }
 });

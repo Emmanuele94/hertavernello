@@ -117,6 +117,8 @@
 
       <br>
       <button id="cfg-genera" style="margin-top: 18px;">Genera config.json</button>
+      <button id="cfg-salva-github" type="button" style="margin-top: 18px; margin-left: 8px; background: var(--giallo-neon); color: var(--bg-void);">Salva direttamente su GitHub</button>
+      <p id="cfg-stato-github" style="font-size: 12px; margin-top: 8px;"></p>
       <div id="cfg-output-wrap" class="hidden" style="margin-top: 16px;">
         <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/config.json</code>:</p>
         <textarea id="cfg-output" readonly></textarea>
@@ -135,6 +137,9 @@
       <p id="csv-avviso" class="csv-avviso"></p>
       <div id="csv-associazioni" class="hidden" style="margin-top: 14px;"></div>
       <button id="csv-conferma" class="hidden" style="margin-top: 14px;">Genera rose.json</button>
+      <button id="csv-salva-github" type="button" class="hidden" style="margin-top: 14px; margin-left: 8px; background: var(--giallo-neon); color: var(--bg-void);">Salva direttamente su GitHub</button>
+      <p id="csv-stato-github" style="font-size: 12px; margin-top: 8px;"></p>
+
       <div id="csv-output-wrap" class="hidden" style="margin-top: 16px;">
         <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/rose.json</code>:</p>
         <textarea id="csv-output" readonly></textarea>
@@ -147,6 +152,8 @@
       <p class="desc">Un campo per squadra: voto, badge (emoji) e commento. Il colore della card sul sito si calcola sempre da solo in base al voto — non serve scriverlo.</p>
       <div id="pagelle-form"></div>
       <button id="pagelle-genera" style="margin-top: 10px;">Genera pagelle.json</button>
+      <button id="pagelle-salva-github" type="button" style="margin-top: 10px; margin-left: 8px; background: var(--giallo-neon); color: var(--bg-void);">Salva direttamente su GitHub</button>
+      <p id="pagelle-stato-github" style="font-size: 12px; margin-top: 8px;"></p>
       <div id="pagelle-output-wrap" class="hidden" style="margin-top: 16px;">
         <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/pagelle.json</code>:</p>
         <textarea id="pagelle-output" readonly></textarea>
@@ -163,6 +170,8 @@
       </p>
       <div id="previsioni-form"></div>
       <button id="previsioni-genera" style="margin-top: 10px;">Genera previsioni.json</button>
+      <button id="previsioni-salva-github" type="button" style="margin-top: 10px; margin-left: 8px; background: var(--giallo-neon); color: var(--bg-void);">Salva direttamente su GitHub</button>
+      <p id="previsioni-stato-github" style="font-size: 12px; margin-top: 8px;"></p>
       <div id="previsioni-output-wrap" class="hidden" style="margin-top: 16px;">
         <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/previsioni.json</code>:</p>
         <textarea id="previsioni-output" readonly></textarea>
@@ -191,6 +200,8 @@
       <div id="calendario-lista" style="margin-top: 18px;"></div>
 
       <button id="calendario-genera" style="margin-top: 16px;">Genera calendario.json</button>
+      <button id="calendario-salva-github" type="button" style="margin-top: 16px; margin-left: 8px; background: var(--giallo-neon); color: var(--bg-void);">Salva direttamente su GitHub</button>
+      <p id="calendario-stato-github" style="font-size: 12px; margin-top: 8px;"></p>
       <div id="calendario-output-wrap" class="hidden" style="margin-top: 16px;">
         <p class="desc" style="margin-bottom: 6px;">Copia o scarica, poi sostituisci <code>data/calendario.json</code>:</p>
         <textarea id="calendario-output" readonly></textarea>
@@ -201,6 +212,7 @@
   </div>
 
   <script src="js/auth.js"></script>
+  <script src="js/github-api.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="js/admin-config.js"></script>
   <script src="js/importer.js"></script>

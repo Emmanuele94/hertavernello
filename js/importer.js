@@ -25,6 +25,7 @@ function hv_trovaColonna(headers, alias) {
 
 let hv_configCorrente = null;
 let hv_gruppiRilevati = null;
+let hv_ultimoRoseOutput = null;
 
 async function hv_caricaConfig() {
   const res = await fetch("data/config.json");
@@ -119,6 +120,7 @@ function hv_mostraAssociazioni(gruppi) {
   });
 
   document.getElementById("csv-conferma").classList.remove("hidden");
+  document.getElementById("csv-salva-github").classList.remove("hidden");
 }
 
 document.getElementById("csv-conferma").addEventListener("click", () => {
@@ -143,4 +145,25 @@ document.getElementById("csv-conferma").addEventListener("click", () => {
   const link = document.getElementById("csv-download");
   link.href = url;
   link.classList.remove("hidden");
+
+  hv_ultimoRoseOutput = output;
+});
+
+document.getElementById("csv-salva-github").addEventListener("click", async () => {
+  const stato = document.getElementById("csv-stato-github");
+  if (!hv_ultimoRoseOutput) {
+    stato.textContent = "Genera prima le associazioni qui sopra.";
+    stato.style.color = "var(--wine-bright)";
+    return;
+  }
+  stato.textContent = "Salvataggio in corso...";
+  stato.style.color = "var(--text-muted)";
+  try {
+    await hv_ghSalvaJSON("data/rose.json", hv_ultimoRoseOutput, "Aggiorna rose.json da admin.html (import CSV)", hv_configCorrente);
+    stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+    stato.style.color = "var(--verde-prato)";
+  } catch (err) {
+    stato.textContent = "Errore: " + err.message;
+    stato.style.color = "var(--wine-bright)";
+  }
 });
