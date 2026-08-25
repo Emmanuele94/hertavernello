@@ -12,13 +12,26 @@ async function hv_sha256(testo) {
 }
 
 async function hv_checkGate() {
-  const res = await fetch("data/config.json");
-  const data = await res.json();
-  const hashGuest = data.lega.guestPasswordHash;
-  const hashAdmin = data.lega.adminPasswordHash;
-
   const gate = document.getElementById("gate");
   const app = document.getElementById("app");
+  const erroreIniziale = document.getElementById("gate-error");
+
+  let data;
+  try {
+    const res = await fetch("data/config.json");
+    data = await res.json();
+  } catch (err) {
+    gate.classList.remove("hidden");
+    app.classList.add("hidden");
+    if (erroreIniziale) {
+      erroreIniziale.textContent =
+        "Impossibile leggere i dati del sito. Se hai aperto questo file con doppio click dal computer, apri invece il sito online oppure usa un server locale (vedi README).";
+    }
+    return null;
+  }
+
+  const hashGuest = data.lega.guestPasswordHash;
+  const hashAdmin = data.lega.adminPasswordHash;
 
   const ruoloSalvato = sessionStorage.getItem("hv_role");
   if (ruoloSalvato === "guest" || ruoloSalvato === "admin") {
