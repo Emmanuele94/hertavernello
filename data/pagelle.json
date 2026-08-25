@@ -1,17 +1,12 @@
 {
-  "_leggimi": "Generato da admin.html — sostituisci data/pagelle.json",
+  "_leggimi": "Un oggetto per ogni squadra. 'squadraId' deve corrispondere a un id in config.json. 'voto' da 0 a 10 (decimali ok, es 6.5) determina il colore della card: >=7 verde fluo, tra 5.5 e 7 giallo neon, <5.5 rosso vino spento. 'badge' e' un'emoji libera. 'commento' e' il testo della pagella ignorante.",
+
   "pagelle": [
     {
       "squadraId": "sq-01",
       "voto": 7,
-      "badge": "🔥",
+      "badge": "\ud83d\udd25",
       "commento": "Scrivi qui la pagella dopo l'asta. Esempio di tono: 'Difesa da urlo, ma l'unica cosa che urli tu e' quando ti scippano un giocatore all'asta.'"
-    },
-    {
-      "squadraId": "sq-02",
-      "voto": 2,
-      "badge": "🤦🏻‍♂️",
-      "commento": "Ma che spacchio fai"
     }
   ]
 }

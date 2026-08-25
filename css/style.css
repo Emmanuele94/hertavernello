@@ -494,30 +494,42 @@ a { color: inherit; }
   50% { opacity: 0.4; }
 }
 
-.incrocio-body {
+.incrocio-vs-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 16px 12px;
+}
+
+.incrocio-riga-vs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
-
-.incrocio-col {
-  padding: 14px 16px;
-}
-
-.incrocio-col:first-child { border-right: 1px solid var(--border-hairline); }
-
-.incrocio-col h4 {
-  margin: 0 0 8px;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-hairline);
   font-size: 13px;
-  color: var(--giallo-neon);
+}
+
+.incrocio-riga-vs:last-child { border-bottom: none; }
+
+.incrocio-lato {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.incrocio-vs-sep {
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-family: var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
 }
 
-.incrocio-riga {
-  font-size: 13px;
-  margin: 0 0 6px;
-  line-height: 1.4;
+.incrocio-vuoto {
+  color: var(--text-muted);
+  opacity: 0.5;
 }
 
 .incrocio-avversario {
@@ -528,8 +540,11 @@ a { color: inherit; }
 }
 
 @media (max-width: 560px) {
-  .incrocio-body { grid-template-columns: 1fr; }
-  .incrocio-col:first-child { border-right: none; border-bottom: 1px solid var(--border-hairline); }
+  .incrocio-riga-vs {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+    text-align: left;
+  }
 }
 
 /* ===== Blocchi squadra (pagina Squadre) ===== */

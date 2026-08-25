@@ -32,17 +32,17 @@ function hv_countdown(dataAstaISO) {
 }
 
 // ===== Incrocio: chi ha giocatori nelle squadre che stanno per scendere in campo =====
-function hv_giocatoriPerSquadraReale(codice, roseData, config, squadreRef) {
+// Lista PIATTA: un elemento per ogni singolo giocatore (non raggruppati per proprietario)
+function hv_giocatoriPerSquadraRealeFlat(codice, roseData, config, squadreRef) {
   const risultati = [];
   (roseData.rose || []).forEach((entry) => {
     const squadra = config.squadre.find((s) => s.id === entry.squadraId);
     if (!squadra) return;
-    const giocatori = (entry.giocatori || []).filter(
-      (g) => hv_trovaCodice(g.squadraReale, squadreRef) === codice
-    );
-    if (giocatori.length > 0) {
-      risultati.push({ squadraId: squadra.id, nomeReale: squadra.nomeReale, giocatori: giocatori.map((g) => g.nome) });
-    }
+    (entry.giocatori || []).forEach((g) => {
+      if (hv_trovaCodice(g.squadraReale, squadreRef) === codice) {
+        risultati.push({ squadraId: squadra.id, nomeReale: squadra.nomeReale, nomeGiocatore: g.nome });
+      }
+    });
   });
   return risultati;
 }
@@ -56,38 +56,46 @@ function hv_trovaAvversarioGiornata(squadraId, giornata, calendarioData) {
 }
 
 function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData) {
-  const casa = hv_giocatoriPerSquadraReale(match.casaCodice, roseData, config, squadreRef);
-  const trasferta = hv_giocatoriPerSquadraReale(match.trasfertaCodice, roseData, config, squadreRef);
+  const listaCasa = hv_giocatoriPerSquadraRealeFlat(match.casaCodice, roseData, config, squadreRef);
+  const listaTrasferta = hv_giocatoriPerSquadraRealeFlat(match.trasfertaCodice, roseData, config, squadreRef);
 
   if (match.matchday) {
-    const idTrasferta = trasferta.map((t) => t.squadraId);
-    const idCasa = casa.map((c) => c.squadraId);
-    casa.forEach((c) => {
+    const idTrasferta = listaTrasferta.map((t) => t.squadraId);
+    const idCasa = listaCasa.map((c) => c.squadraId);
+    listaCasa.forEach((c) => {
       const avv = hv_trovaAvversarioGiornata(c.squadraId, match.matchday, calendarioData);
       c.avversarioDiretto = avv && idTrasferta.includes(avv);
     });
-    trasferta.forEach((t) => {
+    listaTrasferta.forEach((t) => {
       const avv = hv_trovaAvversarioGiornata(t.squadraId, match.matchday, calendarioData);
       t.avversarioDiretto = avv && idCasa.includes(avv);
     });
   }
 
-  const col = (nome, lista) => `
-    <div class="incrocio-col">
-      <h4>${nome}</h4>
-      ${
-        lista.length === 0
-          ? '<p class="muted" style="font-size:12.5px;">Nessuno in lega ha giocatori qui</p>'
-          : lista
-              .map(
-                (r) => `
-        <p class="incrocio-riga">
-          <strong>${r.nomeReale}</strong>${r.avversarioDiretto ? ' <span class="incrocio-avversario">⚔️ avversari di giornata</span>' : ""}: ${r.giocatori.join(", ")}
-        </p>`
-              )
-              .join("")
-      }
-    </div>`;
+  const cella = (entry, codiceSquadra) => {
+    if (!entry) return '<span class="incrocio-vuoto">—</span>';
+    const avv = entry.avversarioDiretto ? ' <span class="incrocio-avversario">⚔️</span>' : "";
+    return `<img src="assets/loghi/${codiceSquadra}.png" class="logo-squadra-mini" alt="">
+      <strong>${entry.nomeReale}</strong>: ${entry.nomeGiocatore}${avv}`;
+  };
+
+  const maxRighe = Math.max(listaCasa.length, listaTrasferta.length);
+  let corpo;
+
+  if (maxRighe === 0) {
+    corpo = '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno in lega ha giocatori in questa partita</p>';
+  } else {
+    const righe = [];
+    for (let i = 0; i < maxRighe; i++) {
+      righe.push(`
+        <div class="incrocio-riga-vs">
+          <span class="incrocio-lato">${cella(listaCasa[i], match.casaCodice)}</span>
+          <span class="incrocio-vs-sep">vs</span>
+          <span class="incrocio-lato">${cella(listaTrasferta[i], match.trasfertaCodice)}</span>
+        </div>`);
+    }
+    corpo = `<div class="incrocio-vs-list">${righe.join("")}</div>`;
+  }
 
   const etichetta = match.live
     ? '<span class="incrocio-live">● LIVE</span>'
@@ -104,10 +112,7 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       </span>
       ${etichetta}
     </div>
-    <div class="incrocio-body">
-      ${col(match.casaNome, casa)}
-      ${col(match.trasfertaNome, trasferta)}
-    </div>
+    ${corpo}
   `;
   return div;
 }
@@ -321,6 +326,7 @@ async function hv_renderTopScorers(config) {
   }
 
   wrap.innerHTML = `
+    <div style="overflow-x: auto;">
     <table class="roster-table">
       <tbody>
         ${marcatori
@@ -328,13 +334,14 @@ async function hv_renderTopScorers(config) {
             (m, i) => `
           <tr>
             <td style="width:26px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
-            <td>${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}${m.nome}</td>
-            <td class="costo">${m.gol} gol${m.assist ? " · " + m.assist + " ast" : ""}</td>
+            <td style="white-space: nowrap;">${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}${m.nome}</td>
+            <td class="costo" style="white-space: nowrap;">${m.gol} gol${m.assist ? " · " + m.assist + " ast" : ""}</td>
           </tr>`
           )
           .join("")}
       </tbody>
     </table>
+    </div>
     <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${aggiornatoAlle ? hv_orarioBreve(aggiornatoAlle.t) : "—"} — copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
   `;
 }

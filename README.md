@@ -70,13 +70,19 @@ così, e i pannelli restano vuoti. Due modi:
 
 ## Le due pagine pubbliche
 
-- **Home**: countdown/stato asta, "Chi gioca contro chi" (incrocio tra le
-  partite di Serie A — live se ce ne sono, altrimenti il prossimo turno —
-  e i fantallenatori che hanno giocatori in quelle squadre, con
-  un'etichetta "⚔️ avversari di giornata" quando due di loro si affrontano
-  anche nella vostra lega quella giornata — vedi sezione 5 di admin.html),
-  e la classifica generale di chi si sta avvicinando di più alla propria
-  previsione, calcolata sulla classifica reale aggiornata.
+- **Home**: countdown/stato asta, "Chi gioca contro chi", classifica generale
+  previsioni, e ora anche **Classifica Serie A completa** e **Top marcatori**
+  — entrambe si aggiornano al massimo ogni 4 ore (non a ogni apertura pagina)
+  per non consumare le chiamate gratuite dell'API.
+
+## Previsioni: ordine esatto, non solo fascia
+
+Da oggi `admin.html` non chiede più solo "in che fascia hai messo questa
+squadra" ma la posizione esatta (1°-20°), dentro ogni fascia, letta da
+sinistra a destra sul tiermaker — perché "2°-3°-4°" nella stessa fascia
+non sono equivalenti, e la classifica generale delle previsioni ora
+calcola la distanza dalla posizione reale invece che dalla sola fascia.
+Le previsioni caricate con il vecchio sistema vanno ricompilate.
 - **Squadre**: un tab per ogni fantallenatore. Selezionandolo vedi la sua
   rosa, la sua pagella, e la sua previsione (clicca sullo screenshot per
   ingrandirlo).
@@ -103,24 +109,29 @@ Password guest di default nel template: **herta2026**. Password admin di
 default: **cambiami-admin** — cambiala subito dalla sezione 1 di
 `admin.html` prima di condividere il link con chiunque.
 
-## Upload previsioni direttamente dal sito (facoltativo)
+## Upload previsioni e salvataggio diretto da admin.html (facoltativo)
 
-Se hai creato un token GitHub fine-grained (limitato al solo repository,
-permesso Contents: Read and write), incollalo tu stesso direttamente in
-`data/config.json` → `lega.githubToken` (via l'icona matita su GitHub,
-oppure dalla sezione 1 di admin.html) — meglio non farlo passare da
-altre chat per un token che può scrivere sul repository.
+**Importante**: il token GitHub non va mai incollato in `config.json` —
+il repository è pubblico (necessario per GitHub Pages gratis), e GitHub
+scansiona i repository pubblici alla ricerca di propri token esposti:
+appena ne trova uno dentro un file lo revoca automaticamente, anche se
+hai bypassato l'avviso "secret scanning" al momento del commit. Per
+questo il token vive solo nel browser (sessionStorage), mai nel
+repository: si incolla una volta a sessione (pulsante "Imposta/cambia
+token GitHub" nella sezione 1 di admin.html, oppure il sito te lo chiede
+da solo alla prima azione che ne ha bisogno) e sparisce chiudendo la
+scheda o il browser — a quel punto va reincollato.
 
-Con quel token impostato, quando sei loggato come admin, nella pagina
-Squadre di ogni fantallenatore compare un pulsante "Carica/aggiorna
-screenshot": carichi l'immagine dal telefono o dal pc e il sito la salva
-da solo su GitHub (sia il file immagine che l'aggiornamento di
-`previsioni.json`) — niente più passaggio manuale per questa parte. Il
+Con il token impostato in sessione, sia il pulsante "Salva direttamente
+su GitHub" in ogni sezione di admin.html, sia il pulsante
+"Carica/aggiorna screenshot" nella pagina Squadre, scrivono i file
+direttamente sul repository — niente più download/upload manuale. Il
 sito pubblico si aggiorna con un minuto di ritardo (il tempo del
-redeploy di GitHub Pages), ma tu vedi subito l'anteprima nella pagina.
+redeploy di GitHub Pages).
 
-Senza token impostato, quel pulsante semplicemente non compare e
-continui a caricare gli screenshot a mano come per il resto dei dati.
+Senza token impostato in sessione, il sito te lo chiede al momento
+giusto; se preferisci non inserirlo mai, restano sempre disponibili i
+pulsanti di download/upload manuale in ogni sezione.
 
 ## Nota sulla chiave API
 
