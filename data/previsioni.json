@@ -1,77 +1,12 @@
 {
-  "_leggimi": "Generato da admin.html — sostituisci data/previsioni.json",
+  "_leggimi": "Un oggetto per squadra (fantallenatore). 'immagine' e' il nome del file dentro assets/previsioni/. 'ordine' e' un array di 20 posizioni (indice 0 = 1 posto, indice 19 = 20 posto): il valore in ogni indice e' il codice della squadra reale che il fantallenatore ha previsto in quella posizione ESATTA, letta da sinistra a destra dentro ogni fascia del tiermaker. Si compila comodamente da admin.html (sezione Previsioni), che ti chiede posizione per posizione dentro ogni fascia invece di farti scegliere solo la fascia.",
+
   "previsioni": [
     {
       "squadraId": "sq-01",
-      "immagine": "sq-01.png",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-02",
       "immagine": "",
       "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-03",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-04",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-05",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-06",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-07",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-08",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-09",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-10",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-11",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
-    },
-    {
-      "squadraId": "sq-12",
-      "immagine": "",
-      "linkEsterno": "",
-      "fasce": {}
+      "ordine": []
     }
   ]
 }

@@ -1,4 +1,5 @@
 let hv_configPrevisioni = null;
+let hv_squadreRefPrevisioni = null;
 
 async function hv_initPrevisioniForm() {
   const [configRes, previsioniRes, squadreRefRes] = await Promise.all([
@@ -8,31 +9,35 @@ async function hv_initPrevisioniForm() {
   ]);
   hv_configPrevisioni = await configRes.json();
   const { previsioni } = await previsioniRes.json();
-  const squadreRef = await squadreRefRes.json();
+  hv_squadreRefPrevisioni = await squadreRefRes.json();
 
   const wrap = document.getElementById("previsioni-form");
   wrap.innerHTML = "";
 
   hv_configPrevisioni.squadre.forEach((squadra) => {
     const esistente = (previsioni || []).find((p) => p.squadraId === squadra.id) || {};
-    const fasceEsistenti = esistente.fasce || {};
+    const ordineEsistente = esistente.ordine || [];
 
-    const selects = squadreRef.squadre
-      .map((s) => {
-        const opzioni = squadreRef.fasce
+    const opzioniSquadre = (selezionata) =>
+      `<option value="">—</option>` +
+      hv_squadreRefPrevisioni.squadre
+        .map((s) => `<option value="${s.codice}" ${s.codice === selezionata ? "selected" : ""}>${s.nome}</option>`)
+        .join("");
+
+    const gruppiFasce = hv_squadreRefPrevisioni.fasce
+      .map((f) => {
+        const posizioni = [];
+        for (let p = f.posMin; p <= f.posMax; p++) posizioni.push(p);
+        const righe = posizioni
           .map(
-            (f) =>
-              `<option value="${f.id}" ${fasceEsistenti[s.codice] === f.id ? "selected" : ""}>${f.label}</option>`
+            (pos) => `
+            <div class="previsione-riga">
+              <label>${pos}°</label>
+              <select class="pv-posizione" data-pos="${pos}">${opzioniSquadre(ordineEsistente[pos - 1] || "")}</select>
+            </div>`
           )
           .join("");
-        return `
-          <div class="previsione-riga">
-            <label>${s.nome}</label>
-            <select class="pv-fascia" data-codice="${s.codice}">
-              <option value="">—</option>
-              ${opzioni}
-            </select>
-          </div>`;
+        return `<div class="fascia-gruppo"><h5>${f.label}</h5>${righe}</div>`;
       })
       .join("");
 
@@ -46,36 +51,51 @@ async function hv_initPrevisioniForm() {
         <input type="text" class="pv-link" placeholder="oppure link esterno" value="${esistente.linkEsterno ?? ""}">
       </div>
       <details class="previsione-dettagli">
-        <summary>Fasce previste (20 squadre)</summary>
-        <div class="previsione-griglia">${selects}</div>
+        <summary>Ordine previsto, posizione per posizione (20 squadre)</summary>
+        <p class="muted" style="font-size:12px; margin: 8px 0;">Per ogni fascia, indica quale squadra hai messo in quale posizione ESATTA guardando l'ordine sinistra→destra nel tuo tiermaker.</p>
+        ${gruppiFasce}
       </details>
     `;
     wrap.appendChild(div);
   });
 }
 
+function hv_costruisciOrdine(campo) {
+  const ordine = new Array(20).fill(null);
+  campo.querySelectorAll(".pv-posizione").forEach((sel) => {
+    const pos = Number(sel.dataset.pos);
+    if (sel.value) ordine[pos - 1] = sel.value;
+  });
+  return ordine;
+}
+
+function hv_avvisoDuplicati(ordine) {
+  const presenti = ordine.filter(Boolean);
+  const unici = new Set(presenti);
+  return presenti.length !== unici.size;
+}
+
 function hv_costruisciPrevisioniOutput() {
   const campi = document.querySelectorAll(".previsione-field");
   const previsioni = [];
+  let duplicatiTrovati = false;
 
   campi.forEach((c) => {
-    const fasce = {};
-    c.querySelectorAll(".pv-fascia").forEach((sel) => {
-      if (sel.value) fasce[sel.dataset.codice] = Number(sel.value);
-    });
+    const ordine = hv_costruisciOrdine(c);
+    if (hv_avvisoDuplicati(ordine)) duplicatiTrovati = true;
     previsioni.push({
       squadraId: c.dataset.squadraId,
       immagine: c.querySelector(".pv-immagine").value.trim(),
       linkEsterno: c.querySelector(".pv-link").value.trim(),
-      fasce,
+      ordine,
     });
   });
 
-  return { _leggimi: "Generato da admin.html — sostituisci data/previsioni.json", previsioni };
+  return { output: { _leggimi: "Generato da admin.html — sostituisci data/previsioni.json", previsioni }, duplicatiTrovati };
 }
 
 document.getElementById("previsioni-genera").addEventListener("click", () => {
-  const output = hv_costruisciPrevisioniOutput();
+  const { output, duplicatiTrovati } = hv_costruisciPrevisioniOutput();
   const testo = JSON.stringify(output, null, 2);
   document.getElementById("previsioni-output").value = testo;
   document.getElementById("previsioni-output-wrap").classList.remove("hidden");
@@ -84,6 +104,10 @@ document.getElementById("previsioni-genera").addEventListener("click", () => {
   const link = document.getElementById("previsioni-download");
   link.href = URL.createObjectURL(blob);
   link.classList.remove("hidden");
+
+  if (duplicatiTrovati) {
+    alert("Attenzione: alcune squadre reali risultano assegnate a più di una posizione. Controlla prima di caricare il file.");
+  }
 });
 
 document.getElementById("previsioni-salva-github").addEventListener("click", async () => {
@@ -96,34 +120,35 @@ document.getElementById("previsioni-salva-github").addEventListener("click", asy
     if (!token || !owner || !repo) throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
 
     // rileggo sempre la versione più recente: così non sovrascrivo un eventuale
-    // screenshot caricato nel frattempo dalla pagina Squadre, tocco solo le fasce.
+    // screenshot caricato nel frattempo dalla pagina Squadre, tocco solo l'ordine.
     const fileLive = await hv_ghGetFile(owner, repo, "data/previsioni.json", token);
     const liveObj = fileLive ? JSON.parse(hv_base64ToUtf8(fileLive.content)) : { previsioni: [] };
     if (!liveObj.previsioni) liveObj.previsioni = [];
 
+    let duplicatiTrovati = false;
     document.querySelectorAll(".previsione-field").forEach((c) => {
       const squadraId = c.dataset.squadraId;
-      const fasce = {};
-      c.querySelectorAll(".pv-fascia").forEach((sel) => {
-        if (sel.value) fasce[sel.dataset.codice] = Number(sel.value);
-      });
+      const ordine = hv_costruisciOrdine(c);
+      if (hv_avvisoDuplicati(ordine)) duplicatiTrovati = true;
       const linkEsterno = c.querySelector(".pv-link").value.trim();
 
       let entry = liveObj.previsioni.find((p) => p.squadraId === squadraId);
       if (!entry) {
-        entry = { squadraId, immagine: "", linkEsterno: "", fasce: {} };
+        entry = { squadraId, immagine: "", linkEsterno: "", ordine: [] };
         liveObj.previsioni.push(entry);
       }
-      entry.fasce = fasce;
+      entry.ordine = ordine;
       if (linkEsterno) entry.linkEsterno = linkEsterno;
     });
 
     liveObj._leggimi = "Generato da admin.html — sostituisci data/previsioni.json";
     const contenuto = hv_utf8ToBase64(JSON.stringify(liveObj, null, 2));
-    await hv_ghPutFile(owner, repo, "data/previsioni.json", token, contenuto, "Aggiorna fasce previsioni da admin.html", fileLive ? fileLive.sha : null);
+    await hv_ghPutFile(owner, repo, "data/previsioni.json", token, contenuto, "Aggiorna ordine previsioni da admin.html", fileLive ? fileLive.sha : null);
 
-    stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-    stato.style.color = "var(--verde-prato)";
+    stato.textContent = duplicatiTrovati
+      ? "Salvato ✓ ma occhio: alcune squadre risultano in più posizioni contemporaneamente."
+      : "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+    stato.style.color = duplicatiTrovati ? "var(--giallo-neon)" : "var(--verde-prato)";
   } catch (err) {
     stato.textContent = "Errore: " + err.message;
     stato.style.color = "var(--wine-bright)";

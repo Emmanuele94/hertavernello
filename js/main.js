@@ -146,7 +146,7 @@ async function hv_renderIncrocio(config) {
       wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData));
     });
   } catch (err) {
-    wrap.innerHTML = '<p class="empty-state">Non riesco a contattare l\'API in questo momento (chiave non valida o limite richieste raggiunto).</p>';
+    wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
 }
 
@@ -170,16 +170,16 @@ async function hv_renderLeaderboard(config) {
     const righe = [];
     (previsioni || []).forEach((p) => {
       const squadra = config.squadre.find((s) => s.id === p.squadraId);
-      if (!squadra || !p.fasce || Object.keys(p.fasce).length === 0) return;
+      if (!squadra || !p.ordine || p.ordine.every((x) => !x)) return;
 
       let punteggio = 0;
       let conteggiate = 0;
-      Object.entries(p.fasce).forEach(([codice, fasciaPrevista]) => {
-        const posReale = classificaReale[codice];
-        if (!posReale) return;
-        const fasciaReale = hv_fasciaDaPosizione(posReale, squadreRef.fasce);
-        if (fasciaReale) {
-          punteggio += Math.abs(fasciaPrevista - fasciaReale);
+      p.ordine.forEach((codice, idx) => {
+        if (!codice) return;
+        const posizionePrevista = idx + 1;
+        const posizioneReale = classificaReale[codice];
+        if (posizioneReale) {
+          punteggio += Math.abs(posizionePrevista - posizioneReale);
           conteggiate++;
         }
       });
@@ -209,11 +209,134 @@ async function hv_renderLeaderboard(config) {
             .join("")}
         </tbody>
       </table>
-      <p class="muted" style="font-size:12px; margin-top:8px;">Punteggio più basso = previsione più azzeccata (somma delle distanze tra fascia prevista e fascia reale attuale).</p>
+      <p class="muted" style="font-size:12px; margin-top:8px;">Punteggio più basso = previsione più azzeccata (somma delle distanze tra posizione prevista e posizione reale attuale, squadra per squadra).</p>
+      <p class="muted" style="font-size:11px; margin-top:4px;">Le previsioni caricate prima di oggi vanno ricompilate da admin.html con l'ordine esatto — quelle vecchie (solo per fascia) non vengono più conteggiate.</p>
     `;
   } catch (err) {
-    wrap.innerHTML = '<p class="empty-state">Non riesco a contattare l\'API in questo momento (chiave non valida o limite richieste raggiunto).</p>';
+    wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
+}
+
+// ===== Cache locale: evita di interrogare l'API a ogni apertura della pagina =====
+const HV_CACHE_DURATA = 4 * 60 * 60 * 1000; // 4 ore — abbondantemente entro i limiti gratuiti
+
+function hv_cacheGet(chiave, maxAgeMs) {
+  try {
+    const raw = localStorage.getItem(chiave);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (Date.now() - parsed.t > maxAgeMs) return null;
+    return parsed;
+  } catch (e) {
+    return null;
+  }
+}
+
+function hv_cacheSet(chiave, valore) {
+  try {
+    localStorage.setItem(chiave, JSON.stringify({ t: Date.now(), v: valore }));
+  } catch (e) {}
+}
+
+function hv_orarioBreve(timestamp) {
+  const d = new Date(timestamp);
+  return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+}
+
+// ===== Classifica Serie A completa =====
+async function hv_renderClassificaSerieA(config) {
+  const wrap = document.getElementById("classifica-wrap");
+  const apiKey = config.lega.footballDataApiKey;
+
+  if (!apiKey) {
+    wrap.innerHTML = '<p class="empty-state">Aggiungi una chiave gratuita di football-data.org in config.json per attivare questa sezione.</p>';
+    return;
+  }
+
+  const cache = hv_cacheGet("hv_cache_classifica", HV_CACHE_DURATA);
+  let righe = cache ? cache.v : null;
+
+  if (!righe) {
+    wrap.innerHTML = '<p class="empty-state">Carico la classifica...</p>';
+    try {
+      const squadreRef = await hv_caricaSquadreRef();
+      righe = await hv_getClassificaCompleta(apiKey, squadreRef);
+      hv_cacheSet("hv_cache_classifica", righe);
+    } catch (err) {
+      wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
+      return;
+    }
+  }
+
+  const aggiornatoAlle = hv_cacheGet("hv_cache_classifica", HV_CACHE_DURATA);
+  wrap.innerHTML = `
+    <table class="roster-table">
+      <tbody>
+        ${righe
+          .map(
+            (r) => `
+          <tr>
+            <td style="width:26px; font-family:var(--font-mono); color:var(--text-muted);">${r.posizione}</td>
+            <td>${r.codice ? `<img src="assets/loghi/${r.codice}.png" class="logo-squadra-mini" alt="">` : ""}${r.nome}</td>
+            <td class="costo">${r.punti} pt</td>
+          </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${aggiornatoAlle ? hv_orarioBreve(aggiornatoAlle.t) : "—"} — si aggiorna al massimo ogni 4 ore per non consumare troppe chiamate gratuite.</p>
+  `;
+}
+
+// ===== Top marcatori =====
+async function hv_renderTopScorers(config) {
+  const wrap = document.getElementById("marcatori-wrap");
+  const apiKey = config.lega.footballDataApiKey;
+
+  if (!apiKey) {
+    wrap.innerHTML = '<p class="empty-state">Aggiungi una chiave gratuita di football-data.org in config.json per attivare questa sezione.</p>';
+    return;
+  }
+
+  const cache = hv_cacheGet("hv_cache_marcatori", HV_CACHE_DURATA);
+  let marcatori = cache ? cache.v : null;
+
+  if (!marcatori) {
+    wrap.innerHTML = '<p class="empty-state">Carico i marcatori...</p>';
+    try {
+      const squadreRef = await hv_caricaSquadreRef();
+      marcatori = await hv_getTopScorers(apiKey, squadreRef);
+      hv_cacheSet("hv_cache_marcatori", marcatori);
+    } catch (err) {
+      wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
+      return;
+    }
+  }
+
+  const aggiornatoAlle = hv_cacheGet("hv_cache_marcatori", HV_CACHE_DURATA);
+
+  if (marcatori.length === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessun dato disponibile al momento.</p>';
+    return;
+  }
+
+  wrap.innerHTML = `
+    <table class="roster-table">
+      <tbody>
+        ${marcatori
+          .map(
+            (m, i) => `
+          <tr>
+            <td style="width:26px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
+            <td>${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}${m.nome}</td>
+            <td class="costo">${m.gol} gol${m.assist ? " · " + m.assist + " ast" : ""}</td>
+          </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${aggiornatoAlle ? hv_orarioBreve(aggiornatoAlle.t) : "—"} — copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
+  `;
 }
 
 async function hv_initHome(config) {
@@ -222,6 +345,8 @@ async function hv_initHome(config) {
   hv_countdown(config.lega.dataAsta);
   await hv_renderIncrocio(config);
   await hv_renderLeaderboard(config);
+  await hv_renderClassificaSerieA(config);
+  await hv_renderTopScorers(config);
 }
 
 hv_checkGate().then((data) => {

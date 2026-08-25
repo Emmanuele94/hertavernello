@@ -34,7 +34,14 @@ function hv_trovaCodice(nomeGrezzo, squadreRef) {
 
 async function hv_fetchAPI(path, apiKey) {
   const res = await fetch(HV_API_BASE + path, { headers: { "X-Auth-Token": apiKey } });
-  if (!res.ok) throw new Error("Risposta API non valida (" + res.status + ")");
+  if (!res.ok) {
+    let dettaglio = "";
+    try {
+      const corpo = await res.json();
+      dettaglio = corpo.message || "";
+    } catch (e) {}
+    throw new Error(`${res.status}${dettaglio ? " — " + dettaglio : ""}`);
+  }
   return res.json();
 }
 
@@ -89,4 +96,29 @@ function hv_fasciaDaPosizione(posizione, fasce) {
 async function hv_getGiornataCorrente(apiKey) {
   const data = await hv_fetchAPI("/competitions/SA", apiKey);
   return data.currentSeason ? data.currentSeason.currentMatchday : null;
+}
+
+// Classifica completa (posizione, nome, punti, ecc.) per la tabella in Home
+async function hv_getClassificaCompleta(apiKey, squadreRef) {
+  const data = await hv_fetchAPI("/competitions/SA/standings", apiKey);
+  const tabella = data.standings.find((s) => s.type === "TOTAL") || data.standings[0];
+  return tabella.table.map((riga) => ({
+    posizione: riga.position,
+    codice: hv_trovaCodice(riga.team.shortName || riga.team.name, squadreRef),
+    nome: riga.team.shortName || riga.team.name,
+    punti: riga.points,
+    giocate: riga.playedGames,
+  }));
+}
+
+// Classifica marcatori (gratis: solo i migliori del campionato, non tutti i giocatori)
+async function hv_getTopScorers(apiKey, squadreRef) {
+  const data = await hv_fetchAPI("/competitions/SA/scorers", apiKey);
+  return (data.scorers || []).map((s) => ({
+    nome: s.player.name,
+    squadraCodice: hv_trovaCodice(s.team.shortName || s.team.name, squadreRef),
+    squadraNome: s.team.shortName || s.team.name,
+    gol: s.goals || 0,
+    assist: s.assists || 0,
+  }));
 }
