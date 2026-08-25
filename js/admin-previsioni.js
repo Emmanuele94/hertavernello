@@ -91,8 +91,9 @@ document.getElementById("previsioni-salva-github").addEventListener("click", asy
   stato.textContent = "Salvataggio in corso...";
   stato.style.color = "var(--text-muted)";
   try {
-    const { githubOwner: owner, githubRepo: repo, githubToken: token } = hv_configPrevisioni.lega;
-    if (!token || !owner || !repo) throw new Error("Manca githubToken/githubOwner/githubRepo in config.json.");
+    const { githubOwner: owner, githubRepo: repo } = hv_configPrevisioni.lega;
+    const token = hv_getGithubToken();
+    if (!token || !owner || !repo) throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
 
     // rileggo sempre la versione più recente: così non sovrascrivo un eventuale
     // screenshot caricato nel frattempo dalla pagina Squadre, tocco solo le fasce.

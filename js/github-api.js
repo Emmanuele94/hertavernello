@@ -17,6 +17,29 @@ function hv_base64ToUtf8(b64) {
   return new TextDecoder().decode(bytes);
 }
 
+// Il token GitHub non viene MAI salvato nel repository: GitHub lo revocherebbe
+// in automatico appena lo trovasse in un commit di un repository pubblico.
+// Vive solo in sessionStorage di questa scheda del browser: si incolla una
+// volta, sparisce chiudendo la scheda o il browser.
+function hv_getGithubToken() {
+  let token = sessionStorage.getItem("hv_gh_token");
+  if (token) return token;
+
+  token = prompt(
+    "Incolla il token GitHub (github_pat_...).\n\nResta solo in questa scheda del browser, non viene MAI salvato nel repository — dovrai reincollarlo se chiudi e riapri il browser."
+  );
+  if (token) {
+    token = token.trim();
+    sessionStorage.setItem("hv_gh_token", token);
+  }
+  return token;
+}
+
+function hv_cambiaGithubToken() {
+  sessionStorage.removeItem("hv_gh_token");
+  return hv_getGithubToken();
+}
+
 async function hv_ghGetFile(owner, repo, path, token, branch = "main") {
   const res = await fetch(`${HV_GH_API}/repos/${owner}/${repo}/contents/${path}?ref=${branch}`, {
     headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
@@ -51,9 +74,10 @@ async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sh
 
 // Salva un oggetto JS come file JSON nel repository (crea o aggiorna).
 async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
-  const { githubOwner: owner, githubRepo: repo, githubToken: token } = config.lega;
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
-    throw new Error("Manca githubToken/githubOwner/githubRepo in config.json.");
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
   }
   const esistente = await hv_ghGetFile(owner, repo, percorso, token);
   const contenuto = hv_utf8ToBase64(JSON.stringify(oggetto, null, 2));
@@ -62,9 +86,10 @@ async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
 
 // Carica/aggiorna lo screenshot previsione di una squadra e aggiorna previsioni.json di conseguenza.
 async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
-  const { githubOwner: owner, githubRepo: repo, githubToken: token } = config.lega;
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
-    throw new Error("Manca githubToken/githubOwner/githubRepo in config.json.");
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
   }
 
   const ext = (file.name.split(".").pop() || "png").toLowerCase();

@@ -112,9 +112,9 @@ function hv_renderUploadAdmin(squadraId, config) {
     return;
   }
 
-  const abilitato = config.lega.githubToken && config.lega.githubOwner && config.lega.githubRepo;
+  const abilitato = config.lega.githubOwner && config.lega.githubRepo;
   if (!abilitato) {
-    wrap.innerHTML = '<p class="muted" style="font-size:12px; margin-top:10px;">Upload da sito non attivo: manca githubToken in config.json.</p>';
+    wrap.innerHTML = '<p class="muted" style="font-size:12px; margin-top:10px;">Upload da sito non attivo: manca githubOwner/githubRepo in config.json.</p>';
     return;
   }
 

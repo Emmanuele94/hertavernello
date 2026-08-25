@@ -1,5 +1,5 @@
 {
-  "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'guestPasswordHash' e' la password che dai agli amici per vedere il sito. 'adminPasswordHash' e' la TUA password: fa vedere il sito come agli amici MA sblocca anche admin.html. Entrambe si generano dalla pagina admin.html (sezione 1). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso. 'githubToken' serve SOLO per l'upload delle previsioni direttamente dalla pagina Squadre (facoltativo): un token fine-grained limitato al solo repository, permesso Contents: Read and write. Senza, l'upload da sito semplicemente non compare e continui a caricare gli screenshot a mano su GitHub come per tutto il resto.",
+  "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'guestPasswordHash' e' la password che dai agli amici per vedere il sito. 'adminPasswordHash' e' la TUA password: fa vedere il sito come agli amici MA sblocca anche admin.html. Entrambe si generano dalla pagina admin.html (sezione 1). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso. Il token GitHub per il salvataggio diretto NON va MAI messo qui (repository pubblico: GitHub lo revocherebbe subito) — si incolla direttamente nel browser quando serve, admin.html te lo chiede da solo.",
 
   "lega": {
     "nome": "Hertavernello",
@@ -9,8 +9,7 @@
     "adminPasswordHash": "c5f36b5973ec982e5d5218765842d2eb886b5030a37fbcb9b01006987c0f775d",
     "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47",
     "githubOwner": "Emmanuele94",
-    "githubRepo": "hertavernello",
-    "githubToken": "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"
+    "githubRepo": "hertavernello"
   },
 
   "squadre": [

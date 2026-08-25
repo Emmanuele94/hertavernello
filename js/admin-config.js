@@ -39,7 +39,6 @@ async function hv_initConfigForm() {
   document.getElementById("cfg-stagione").value = hv_configBozza.lega.stagione;
   document.getElementById("cfg-data-asta").value = (hv_configBozza.lega.dataAsta || "").slice(0, 16);
   document.getElementById("cfg-api-key").value = hv_configBozza.lega.footballDataApiKey || "";
-  document.getElementById("cfg-github-token").value = hv_configBozza.lega.githubToken || "";
 
   hv_renderSquadreRows();
 }
@@ -62,7 +61,6 @@ async function hv_applicaCampiConfig() {
   hv_configBozza.lega.stagione = document.getElementById("cfg-stagione").value.trim();
   hv_configBozza.lega.dataAsta = document.getElementById("cfg-data-asta").value;
   hv_configBozza.lega.footballDataApiKey = document.getElementById("cfg-api-key").value.trim();
-  hv_configBozza.lega.githubToken = document.getElementById("cfg-github-token").value.trim();
 
   if (nuovaGuest) {
     hv_configBozza.lega.guestPasswordHash = await hv_sha256_cfg(nuovaGuest);
@@ -106,4 +104,11 @@ document.getElementById("cfg-salva-github").addEventListener("click", async () =
     stato.textContent = "Errore: " + err.message;
     stato.style.color = "var(--wine-bright)";
   }
+});
+
+document.getElementById("cfg-cambia-token").addEventListener("click", () => {
+  const ok = hv_cambiaGithubToken();
+  const stato = document.getElementById("cfg-stato-token");
+  stato.textContent = ok ? "Token impostato per questa sessione ✓" : "Nessun token inserito.";
+  stato.style.color = ok ? "var(--verde-prato)" : "var(--wine-bright)";
 });

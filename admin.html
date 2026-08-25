@@ -109,7 +109,16 @@
         <input type="text" id="cfg-nuova-password-guest" placeholder="Nuova password GUEST (lascia vuoto per non cambiarla)">
         <input type="text" id="cfg-nuova-password-admin" placeholder="Nuova password ADMIN (lascia vuoto per non cambiarla)">
       </div>
-      <input type="text" id="cfg-github-token" placeholder="Token GitHub per upload previsioni (opzionale, github_pat_...)">
+
+      <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; margin-bottom: 0; padding: 14px 16px;">
+        <p class="desc" style="margin: 0 0 10px;">
+          Il token GitHub per il salvataggio diretto <strong>non va mai messo qui</strong> (repository pubblico:
+          GitHub lo revocherebbe da solo appena lo trovasse in un file). Si incolla direttamente nel browser,
+          resta solo per questa sessione della scheda.
+        </p>
+        <button id="cfg-cambia-token" type="button" style="background: var(--bg-card-2); color: var(--text-primary); border: 1px solid var(--border-hairline);">Imposta/cambia token GitHub (solo sessione)</button>
+        <p id="cfg-stato-token" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
 
       <p class="campo-titolo" style="margin-top: 18px;">Fantallenatori</p>
       <div id="cfg-squadre"></div>
