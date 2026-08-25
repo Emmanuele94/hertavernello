@@ -1,29 +1,75 @@
 {
   "_leggimi": "Questo e' l'unico file che devi capire per personalizzare la lega. 'guestPasswordHash' e' la password che dai agli amici per vedere il sito. 'adminPasswordHash' e' la TUA password: fa vedere il sito come agli amici MA sblocca anche admin.html. Entrambe si generano dalla pagina admin.html (sezione 1). L'array 'squadre' puo' avere quante voci vuoi: per farne una versione con meno amici, cancella le righe in piu'. 'nomeFantasquadra' deve essere IDENTICO al nome della squadra come esce dall'export CSV di fantacalcio.it, serve per l'importazione automatica delle rose. 'footballDataApiKey' e' opzionale e gratuita (registrati su football-data.org): serve solo per l'incrocio partite e la classifica previsioni in Home; senza, il sito funziona lo stesso ma quelle due sezioni restano vuote con un avviso. Il token GitHub per il salvataggio diretto NON va MAI messo qui (repository pubblico: GitHub lo revocherebbe subito) — si incolla direttamente nel browser quando serve, admin.html te lo chiede da solo.",
-
   "lega": {
     "nome": "Hertavernello",
     "stagione": "2026/2027",
-    "dataAsta": "2026-09-15T19:00:00",
+    "dataAsta": "2026-09-15T19:00",
     "guestPasswordHash": "8f9b2f2c07b24acef3e50aa4a3539d28f5d3bef24b8602b1d86dca5d54172976",
     "adminPasswordHash": "c5f36b5973ec982e5d5218765842d2eb886b5030a37fbcb9b01006987c0f775d",
     "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47",
     "githubOwner": "Emmanuele94",
     "githubRepo": "hertavernello"
   },
-
   "squadre": [
-    { "id": "sq-01", "nomeReale": "Fantallenatore 1", "nomeFantasquadra": "Nome Squadra Fantacalcio 1" },
-    { "id": "sq-02", "nomeReale": "Fantallenatore 2", "nomeFantasquadra": "Nome Squadra Fantacalcio 2" },
-    { "id": "sq-03", "nomeReale": "Fantallenatore 3", "nomeFantasquadra": "Nome Squadra Fantacalcio 3" },
-    { "id": "sq-04", "nomeReale": "Fantallenatore 4", "nomeFantasquadra": "Nome Squadra Fantacalcio 4" },
-    { "id": "sq-05", "nomeReale": "Fantallenatore 5", "nomeFantasquadra": "Nome Squadra Fantacalcio 5" },
-    { "id": "sq-06", "nomeReale": "Fantallenatore 6", "nomeFantasquadra": "Nome Squadra Fantacalcio 6" },
-    { "id": "sq-07", "nomeReale": "Fantallenatore 7", "nomeFantasquadra": "Nome Squadra Fantacalcio 7" },
-    { "id": "sq-08", "nomeReale": "Fantallenatore 8", "nomeFantasquadra": "Nome Squadra Fantacalcio 8" },
-    { "id": "sq-09", "nomeReale": "Fantallenatore 9", "nomeFantasquadra": "Nome Squadra Fantacalcio 9" },
-    { "id": "sq-10", "nomeReale": "Fantallenatore 10", "nomeFantasquadra": "Nome Squadra Fantacalcio 10" },
-    { "id": "sq-11", "nomeReale": "Fantallenatore 11", "nomeFantasquadra": "Nome Squadra Fantacalcio 11" },
-    { "id": "sq-12", "nomeReale": "Fantallenatore 12", "nomeFantasquadra": "Nome Squadra Fantacalcio 12" }
+    {
+      "id": "sq-01",
+      "nomeReale": "Emmanuele",
+      "nomeFantasquadra": "Zodiac FC"
+    },
+    {
+      "id": "sq-02",
+      "nomeReale": "Filippo Cardi",
+      "nomeFantasquadra": "Pabliti FC"
+    },
+    {
+      "id": "sq-03",
+      "nomeReale": "Taleon89",
+      "nomeFantasquadra": "ADP10"
+    },
+    {
+      "id": "sq-04",
+      "nomeReale": "Davy D Jones",
+      "nomeFantasquadra": "Spiaze Calcio"
+    },
+    {
+      "id": "sq-05",
+      "nomeReale": "MagicStorm",
+      "nomeFantasquadra": "The Avengers"
+    },
+    {
+      "id": "sq-06",
+      "nomeReale": "L'elio",
+      "nomeFantasquadra": "Forest"
+    },
+    {
+      "id": "sq-07",
+      "nomeReale": "Alejandro1295",
+      "nomeFantasquadra": "Napoles95"
+    },
+    {
+      "id": "sq-08",
+      "nomeReale": "Antony98",
+      "nomeFantasquadra": "INTERINSTINCT"
+    },
+    {
+      "id": "sq-09",
+      "nomeReale": "RaffaeleDvinaccia",
+      "nomeFantasquadra": "Napoli 1011"
+    },
+    {
+      "id": "sq-10",
+      "nomeReale": "Dario",
+      "nomeFantasquadra": "Fulmicotone"
+    },
+    {
+      "id": "sq-11",
+      "nomeReale": "Giuseppe",
+      "nomeFantasquadra": "Fc4Mori"
+    },
+    {
+      "id": "sq-12",
+      "nomeReale": "Andrea",
+      "nomeFantasquadra": "TantoGiaHoPerso"
+    }
   ]
 }
