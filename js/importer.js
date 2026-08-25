@@ -25,7 +25,6 @@ function hv_trovaColonna(headers, alias) {
 
 let hv_configCorrente = null;
 let hv_gruppiRilevati = null;
-let hv_ultimoRoseOutput = null;
 
 async function hv_caricaConfig() {
   const res = await fetch("data/config.json");
@@ -123,18 +122,20 @@ function hv_mostraAssociazioni(gruppi) {
   document.getElementById("csv-salva-github").classList.remove("hidden");
 }
 
-document.getElementById("csv-conferma").addEventListener("click", () => {
+function hv_costruisciRoseOutput() {
   const selects = document.querySelectorAll(".assoc-select");
   const rose = [];
-
   selects.forEach((sel) => {
     const squadraId = sel.value;
     if (!squadraId) return;
     const nomeCSV = sel.dataset.csv;
     rose.push({ squadraId, giocatori: hv_gruppiRilevati[nomeCSV] });
   });
+  return { _leggimi: "Generato da admin.html — carica questo file al posto di data/rose.json", rose };
+}
 
-  const output = { _leggimi: "Generato da admin.html — carica questo file al posto di data/rose.json", rose };
+document.getElementById("csv-conferma").addEventListener("click", () => {
+  const output = hv_costruisciRoseOutput();
   const testo = JSON.stringify(output, null, 2);
 
   document.getElementById("csv-output").value = testo;
@@ -145,21 +146,15 @@ document.getElementById("csv-conferma").addEventListener("click", () => {
   const link = document.getElementById("csv-download");
   link.href = url;
   link.classList.remove("hidden");
-
-  hv_ultimoRoseOutput = output;
 });
 
 document.getElementById("csv-salva-github").addEventListener("click", async () => {
   const stato = document.getElementById("csv-stato-github");
-  if (!hv_ultimoRoseOutput) {
-    stato.textContent = "Genera prima le associazioni qui sopra.";
-    stato.style.color = "var(--wine-bright)";
-    return;
-  }
   stato.textContent = "Salvataggio in corso...";
   stato.style.color = "var(--text-muted)";
   try {
-    await hv_ghSalvaJSON("data/rose.json", hv_ultimoRoseOutput, "Aggiorna rose.json da admin.html (import CSV)", hv_configCorrente);
+    const output = hv_costruisciRoseOutput();
+    await hv_ghSalvaJSON("data/rose.json", output, "Aggiorna rose.json da admin.html (import CSV)", hv_configCorrente);
     stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
     stato.style.color = "var(--verde-prato)";
   } catch (err) {

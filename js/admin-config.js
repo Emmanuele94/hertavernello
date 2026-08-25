@@ -54,7 +54,7 @@ document.getElementById("cfg-aggiungi-squadra").addEventListener("click", () => 
   hv_renderSquadreRows();
 });
 
-document.getElementById("cfg-genera").addEventListener("click", async () => {
+async function hv_applicaCampiConfig() {
   const nuovaGuest = document.getElementById("cfg-nuova-password-guest").value.trim();
   const nuovaAdmin = document.getElementById("cfg-nuova-password-admin").value.trim();
 
@@ -78,6 +78,10 @@ document.getElementById("cfg-genera").addEventListener("click", async () => {
       s.nomeFantasquadra = row.querySelector(".cfg-nome-fanta").value.trim();
     }
   });
+}
+
+document.getElementById("cfg-genera").addEventListener("click", async () => {
+  await hv_applicaCampiConfig();
 
   const testo = JSON.stringify(hv_configBozza, null, 2);
   document.getElementById("cfg-output").value = testo;
@@ -94,6 +98,7 @@ document.getElementById("cfg-salva-github").addEventListener("click", async () =
   stato.textContent = "Salvataggio in corso...";
   stato.style.color = "var(--text-muted)";
   try {
+    await hv_applicaCampiConfig();
     await hv_ghSalvaJSON("data/config.json", hv_configBozza, "Aggiorna config.json da admin.html", hv_configBozza);
     stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
     stato.style.color = "var(--verde-prato)";
