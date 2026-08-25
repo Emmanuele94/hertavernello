@@ -203,6 +203,20 @@
       </p>
       <p id="cal-suggerimento" class="desc" style="color: var(--verde-prato);"></p>
 
+      <div class="admin-box" style="background: var(--bg-void); margin: 14px 0; padding: 14px 16px;">
+        <p class="campo-titolo" style="margin: 0 0 8px;">Import automatico da Excel (consigliato)</p>
+        <p class="desc" style="margin: 0 0 10px;">
+          Carica direttamente il file scaricato da leghe.fantacalcio.it (pagina export calendario/buste chiuse).
+          Il file riporta già la giornata reale di Serie A corrispondente a ogni giornata di lega, quindi non
+          serve calcolare nulla a mano. I nomi devono corrispondere a "nomeFantasquadra" in config.json.
+        </p>
+        <input type="file" id="cal-excel-file" accept=".xlsx,.xls">
+        <div id="cal-excel-anteprima"></div>
+        <button id="cal-excel-conferma" class="hidden" type="button" style="margin-top: 10px;">Aggiungi queste giornate alla lista qui sotto</button>
+      </div>
+
+      <p class="desc" style="margin: 18px 0 6px;">In alternativa, o per correggere/aggiungere singole giornate a mano:</p>
+
       <div class="campo-riga" style="max-width: 220px; margin-bottom: 14px;">
         <input type="number" id="cal-giornata" min="1" placeholder="Giornata">
       </div>
@@ -227,12 +241,14 @@
   <script src="js/auth.js"></script>
   <script src="js/github-api.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="js/admin-config.js"></script>
   <script src="js/importer.js"></script>
   <script src="js/admin-pagelle.js"></script>
   <script src="js/admin-previsioni.js"></script>
   <script src="js/api.js"></script>
   <script src="js/admin-calendario.js"></script>
+  <script src="js/admin-calendario-excel.js"></script>
   <script>
     function hv_applicaRuoloAdmin() {
       if (window.hv_role !== "admin") {
