@@ -639,29 +639,31 @@ a { color: inherit; }
 }
 
 .squadra-intestazione {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 26px;
   margin: 22px 0 34px;
+  text-align: left;
 }
+
+.squadra-intestazione-testo { flex: 1; min-width: 0; }
 
 .squadra-intestazione h2 {
   font-family: var(--font-display);
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: clamp(26px, 5vw, 40px);
-  margin: 0 0 18px;
+  font-size: clamp(24px, 4vw, 38px);
+  margin: 0 0 10px;
   color: var(--giallo-neon);
   text-shadow: 0 0 18px rgba(245, 255, 0, 0.25);
 }
 
-.squadra-logo-wrap {
-  display: flex;
-  justify-content: center;
-}
+.squadra-logo-wrap { flex-shrink: 0; }
 
 .squadra-logo-img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
   border-radius: 12px;
   background: var(--bg-card);
@@ -674,8 +676,8 @@ a { color: inherit; }
 .squadra-logo-img:hover { transform: scale(1.03); }
 
 .squadra-logo-placeholder {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -688,7 +690,7 @@ a { color: inherit; }
 }
 
 #squadra-logo-upload-admin {
-  text-align: center;
+  text-align: left;
   margin-top: 12px;
 }
 
@@ -757,6 +759,11 @@ a { color: inherit; }
   .pagella-medaglia-wrap { width: 72px; }
   .pagella-medaglia { width: 72px; height: 72px; }
   .pagella-medaglia-voto { font-size: 24px; }
+
+  .squadra-intestazione { flex-direction: column; text-align: center; gap: 14px; }
+  .squadra-intestazione h2 { margin: 0 0 6px; }
+  .squadra-logo-img, .squadra-logo-placeholder { width: 140px; height: 140px; }
+  #squadra-logo-upload-admin { text-align: center; }
 }
 
 /* ===== Motion ===== */
