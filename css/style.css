@@ -130,7 +130,10 @@ a { color: inherit; }
   height: 92px;
   border-radius: 50%;
   box-shadow: 0 0 0 2px var(--wine);
+  flex-shrink: 0;
 }
+
+.site-header-testo { min-width: 0; }
 
 .site-header h1 {
   font-family: var(--font-display);
@@ -141,13 +144,41 @@ a { color: inherit; }
   margin: 0;
 }
 
+.quiz-badge-link {
+  flex-shrink: 0;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.quiz-badge-icona {
+  width: 62px;
+  height: auto;
+  display: block;
+}
+
+.quiz-badge-link:hover .quiz-badge-icona,
+.quiz-badge-link:active .quiz-badge-icona {
+  animation: hv-scatto-icona 0.45s ease;
+}
+
+.quiz-badge-link.active .quiz-badge-icona {
+  filter: drop-shadow(0 0 8px var(--giallo-neon)) drop-shadow(0 0 3px var(--giallo-neon));
+}
+
 .site-header nav {
   margin-left: auto;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
 }
 
-.site-header nav a {
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   text-decoration: none;
   color: var(--text-muted);
   font-weight: 500;
@@ -155,13 +186,39 @@ a { color: inherit; }
   border-radius: 6px;
   border: 1px solid var(--border-hairline);
   font-size: 14px;
+  cursor: pointer;
 }
 
-.site-header nav a.active,
-.site-header nav a:hover {
+.nav-btn .icona-nav {
+  margin-right: 0;
+  vertical-align: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.nav-btn.active,
+.nav-btn:hover {
   color: var(--bg-void);
   background: var(--giallo-neon);
   border-color: var(--giallo-neon);
+}
+
+.nav-exit-link {
+  flex-shrink: 0;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.nav-exit-icona {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.nav-exit-link:hover .nav-exit-icona,
+.nav-exit-link:active .nav-exit-icona {
+  animation: hv-scatto-icona 0.45s ease;
 }
 
 .hero { padding: 8px 0 28px; }
@@ -661,8 +718,8 @@ a { color: inherit; }
   65% { transform: translateY(0) rotate(8deg) scale(1.1); }
 }
 
-.site-header nav a:hover .icona-nav,
-.site-header nav a:active .icona-nav {
+.nav-btn:hover .icona-nav,
+.nav-btn:active .icona-nav {
   animation: hv-scatto-icona 0.45s ease;
 }
 
