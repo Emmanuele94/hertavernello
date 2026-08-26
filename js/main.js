@@ -1,5 +1,56 @@
 const HV_MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
 
+// ===== Cache locale: evita di interrogare l'API troppo spesso (limite gratuito:
+// 10 richieste/minuto), ed evita pagine vuote se l'API non risponde =====
+const HV_CACHE_DURATA = 4 * 60 * 60 * 1000; // 4 ore
+
+function hv_cacheLeggiGrezzo(chiave) {
+  try {
+    const raw = localStorage.getItem(chiave);
+    return raw ? JSON.parse(raw) : null; // { t: timestamp, v: valore } oppure null
+  } catch (e) {
+    return null;
+  }
+}
+
+function hv_cacheSet(chiave, valore) {
+  try {
+    localStorage.setItem(chiave, JSON.stringify({ t: Date.now(), v: valore }));
+  } catch (e) {}
+}
+
+function hv_orarioBreve(timestamp) {
+  const d = new Date(timestamp);
+  return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+}
+
+// Recupera dati con cache: se in cache da meno di maxAgeMs la usa senza chiamare
+// l'API. Se scaduta o assente, prova a richiamare l'API; se la chiamata fallisce
+// (limite di richieste raggiunto, rete, ecc.) ripiega sui dati vecchi in cache —
+// pur di non lasciare la pagina vuota ai tuoi amici — e lo segnala nel risultato.
+// Solo se non c'è proprio nessun dato salvato, propaga l'errore.
+async function hv_cacheOFetch(chiave, maxAgeMs, fetcherAsync) {
+  const cache = hv_cacheLeggiGrezzo(chiave);
+  const fresca = cache && Date.now() - cache.t <= maxAgeMs;
+
+  if (fresca) return { dati: cache.v, orario: cache.t, scaduta: false };
+
+  try {
+    const dati = await fetcherAsync();
+    hv_cacheSet(chiave, dati);
+    return { dati, orario: Date.now(), scaduta: false };
+  } catch (err) {
+    if (cache) return { dati: cache.v, orario: cache.t, scaduta: true, errore: err };
+    throw err;
+  }
+}
+
+function hv_avvisoDatiVecchi(scaduta) {
+  return scaduta
+    ? '<p class="muted" style="font-size:11px; color: var(--giallo-neon); margin-top:6px;">⚠ L\'API non risponde al momento — questi sono gli ultimi dati salvati, potrebbero non essere aggiornatissimi.</p>'
+    : "";
+}
+
 function hv_formattaDataAsta(dataAstaISO) {
   const d = new Date(dataAstaISO);
   const giorno = d.getDate();
@@ -129,7 +180,11 @@ async function hv_renderIncrocio(config) {
     ]);
     const roseData = await roseRes.json();
     const calendarioData = await calendarioRes.json();
-    const { live, prossimoTurno } = await hv_getPartite(apiKey, squadreRef);
+
+    const { dati: partite, scaduta } = await hv_cacheOFetch("hv_cache_partite", HV_CACHE_DURATA, () =>
+      hv_getPartite(apiKey, squadreRef)
+    );
+    const { live, prossimoTurno } = partite;
 
     wrap.innerHTML = "";
     const daMostrare = live.length > 0 ? live : prossimoTurno;
@@ -143,6 +198,8 @@ async function hv_renderIncrocio(config) {
       if (!match.casaCodice || !match.trasfertaCodice) return;
       wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData));
     });
+
+    if (scaduta) wrap.insertAdjacentHTML("beforeend", hv_avvisoDatiVecchi(true));
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
@@ -163,7 +220,10 @@ async function hv_renderLeaderboard(config) {
   try {
     const [squadreRef, previsioniRes] = await Promise.all([hv_caricaSquadreRef(), fetch("data/previsioni.json")]);
     const { previsioni } = await previsioniRes.json();
-    const classificaReale = await hv_getClassificaReale(apiKey, squadreRef);
+
+    const { dati: classificaReale, scaduta } = await hv_cacheOFetch("hv_cache_classifica_reale", HV_CACHE_DURATA, () =>
+      hv_getClassificaReale(apiKey, squadreRef)
+    );
 
     const righe = [];
     (previsioni || []).forEach((p) => {
@@ -209,36 +269,11 @@ async function hv_renderLeaderboard(config) {
       </table>
       <p class="muted" style="font-size:12px; margin-top:8px;">Punteggio più basso = previsione più azzeccata (somma delle distanze tra posizione prevista e posizione reale attuale, squadra per squadra).</p>
       <p class="muted" style="font-size:11px; margin-top:4px;">Le previsioni caricate prima di oggi vanno ricompilate da admin.html con l'ordine esatto — quelle vecchie (solo per fascia) non vengono più conteggiate.</p>
+      ${hv_avvisoDatiVecchi(scaduta)}
     `;
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
-}
-
-// ===== Cache locale: evita di interrogare l'API a ogni apertura della pagina =====
-const HV_CACHE_DURATA = 4 * 60 * 60 * 1000; // 4 ore — abbondantemente entro i limiti gratuiti
-
-function hv_cacheGet(chiave, maxAgeMs) {
-  try {
-    const raw = localStorage.getItem(chiave);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (Date.now() - parsed.t > maxAgeMs) return null;
-    return parsed;
-  } catch (e) {
-    return null;
-  }
-}
-
-function hv_cacheSet(chiave, valore) {
-  try {
-    localStorage.setItem(chiave, JSON.stringify({ t: Date.now(), v: valore }));
-  } catch (e) {}
-}
-
-function hv_orarioBreve(timestamp) {
-  const d = new Date(timestamp);
-  return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
 }
 
 // ===== Classifica Serie A completa =====
@@ -251,22 +286,20 @@ async function hv_renderClassificaSerieA(config) {
     return;
   }
 
-  const cache = hv_cacheGet("hv_cache_classifica", HV_CACHE_DURATA);
-  let righe = cache ? cache.v : null;
+  wrap.innerHTML = '<p class="empty-state">Carico la classifica...</p>';
 
-  if (!righe) {
-    wrap.innerHTML = '<p class="empty-state">Carico la classifica...</p>';
-    try {
+  let risultato;
+  try {
+    risultato = await hv_cacheOFetch("hv_cache_classifica", HV_CACHE_DURATA, async () => {
       const squadreRef = await hv_caricaSquadreRef();
-      righe = await hv_getClassificaCompleta(apiKey, squadreRef);
-      hv_cacheSet("hv_cache_classifica", righe);
-    } catch (err) {
-      wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
-      return;
-    }
+      return hv_getClassificaCompleta(apiKey, squadreRef);
+    });
+  } catch (err) {
+    wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
+    return;
   }
 
-  const aggiornatoAlle = hv_cacheGet("hv_cache_classifica", HV_CACHE_DURATA);
+  const { dati: righe, orario, scaduta } = risultato;
   wrap.innerHTML = `
     <table class="roster-table">
       <tbody>
@@ -282,7 +315,8 @@ async function hv_renderClassificaSerieA(config) {
           .join("")}
       </tbody>
     </table>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${aggiornatoAlle ? hv_orarioBreve(aggiornatoAlle.t) : "—"} — si aggiorna al massimo ogni 4 ore per non consumare troppe chiamate gratuite.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — si aggiorna al massimo ogni 4 ore per non consumare troppe chiamate gratuite.</p>
+    ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }
 
@@ -296,22 +330,20 @@ async function hv_renderTopScorers(config) {
     return;
   }
 
-  const cache = hv_cacheGet("hv_cache_marcatori", HV_CACHE_DURATA);
-  let marcatori = cache ? cache.v : null;
+  wrap.innerHTML = '<p class="empty-state">Carico i marcatori...</p>';
 
-  if (!marcatori) {
-    wrap.innerHTML = '<p class="empty-state">Carico i marcatori...</p>';
-    try {
+  let risultato;
+  try {
+    risultato = await hv_cacheOFetch("hv_cache_marcatori", HV_CACHE_DURATA, async () => {
       const squadreRef = await hv_caricaSquadreRef();
-      marcatori = await hv_getTopScorers(apiKey, squadreRef);
-      hv_cacheSet("hv_cache_marcatori", marcatori);
-    } catch (err) {
-      wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
-      return;
-    }
+      return hv_getTopScorers(apiKey, squadreRef);
+    });
+  } catch (err) {
+    wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
+    return;
   }
 
-  const aggiornatoAlle = hv_cacheGet("hv_cache_marcatori", HV_CACHE_DURATA);
+  const { dati: marcatori, orario, scaduta } = risultato;
 
   if (marcatori.length === 0) {
     wrap.innerHTML = '<p class="empty-state">Nessun dato disponibile al momento.</p>';
@@ -335,7 +367,8 @@ async function hv_renderTopScorers(config) {
       </tbody>
     </table>
     </div>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${aggiornatoAlle ? hv_orarioBreve(aggiornatoAlle.t) : "—"} — copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
+    ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }
 
