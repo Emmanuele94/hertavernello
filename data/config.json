@@ -13,62 +13,62 @@
   "squadre": [
     {
       "id": "sq-01",
-      "nomeReale": "Emmanuele",
-      "nomeFantasquadra": "Zodiac Fc"
+      "nomeReale": "1- Emmanuele",
+      "nomeFantasquadra": "Zodiac FC"
     },
     {
       "id": "sq-02",
-      "nomeReale": "Filippo Cardi",
+      "nomeReale": "2- Filippo Cardi",
       "nomeFantasquadra": "Pabliti FC"
     },
     {
       "id": "sq-03",
-      "nomeReale": "Riky",
-      "nomeFantasquadra": "RikyONE"
+      "nomeReale": "3- Taleon89",
+      "nomeFantasquadra": "ADP10"
     },
     {
       "id": "sq-04",
-      "nomeReale": "L'elio",
+      "nomeReale": "4 - L'elio",
       "nomeFantasquadra": "Forest"
     },
     {
       "id": "sq-05",
-      "nomeReale": "MagicStorm",
+      "nomeReale": "5- MagicStorm",
       "nomeFantasquadra": "The Avengers"
     },
     {
       "id": "sq-06",
-      "nomeReale": "Davy D Jones",
+      "nomeReale": "6 - Davy D Jones",
       "nomeFantasquadra": "Spiaze Calcio"
     },
     {
       "id": "sq-07",
-      "nomeReale": "Alejandro1295",
+      "nomeReale": "7 - Alejandro1295",
       "nomeFantasquadra": "Napoles95"
     },
     {
       "id": "sq-08",
-      "nomeReale": "RaffaeleDvinaccia",
+      "nomeReale": "8 - RaffaeleDvinaccia",
       "nomeFantasquadra": "Napoli 1011"
     },
     {
       "id": "sq-09",
-      "nomeReale": "Antony98",
+      "nomeReale": "9 - Antony98",
       "nomeFantasquadra": "INTERINSTINCT"
     },
     {
       "id": "sq-10",
-      "nomeReale": "Dario",
+      "nomeReale": "10 - Dario",
       "nomeFantasquadra": "Fulmicotone"
     },
     {
       "id": "sq-11",
-      "nomeReale": "Giuseppe",
+      "nomeReale": "11 - Giuseppe",
       "nomeFantasquadra": "Fc4Mori"
     },
     {
       "id": "sq-12",
-      "nomeReale": "Andrea",
+      "nomeReale": "12 - Andrea",
       "nomeFantasquadra": "TantoGiaHoPerso"
     }
   ]
