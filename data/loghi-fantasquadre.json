@@ -4,6 +4,10 @@
     {
       "squadraId": "sq-01",
       "immagine": "sq-01.png"
+    },
+    {
+      "squadraId": "sq-04",
+      "immagine": "sq-04.png"
     }
   ]
 }
