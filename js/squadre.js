@@ -93,7 +93,7 @@ function hv_renderPrevisione(previsione) {
 
   if (previsione && previsione.immagine) {
     const img = document.createElement("img");
-    img.src = "assets/previsioni/" + previsione.immagine;
+    img.src = "assets/previsioni/" + previsione.immagine + "?v=" + Date.now();
     img.alt = "Previsione Serie A";
     img.className = "previsione-clickable";
     img.addEventListener("click", () => hv_apriLightbox(img.src));
