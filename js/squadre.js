@@ -13,6 +13,123 @@ function hv_apriLightbox(src) {
   overlay.classList.remove("hidden");
 }
 
+// ===== Torta "da dove arriva la rosa" — distribuzione per squadra reale, CSS puro =====
+const HV_PALETTE_TORTA = [
+  "#FF6B6B", "#4ECDC4", "#FFD93D", "#6C5CE7", "#00B8A9", "#FF9F1C",
+  "#2E86DE", "#E84393", "#00CEC9", "#FAB1A0", "#A29BFE", "#55EFC4",
+  "#FD79A8", "#74B9FF", "#FFA502",
+];
+
+const HV_DERBY = [
+  ["MIL", "INT"], // Derby della Madonnina
+  ["ROM", "LAZ"], // Derby della Capitale
+  ["TOR", "JUV"], // Derby della Mole
+];
+
+function hv_distribuzioneSquadreReali(giocatori, squadreRef) {
+  const conteggio = {};
+  giocatori.forEach((g) => {
+    const cod = hv_trovaCodice(g.squadraReale, squadreRef);
+    if (!cod) return;
+    conteggio[cod] = (conteggio[cod] || 0) + 1;
+  });
+  const totale = Object.values(conteggio).reduce((a, b) => a + b, 0);
+  const fette = Object.entries(conteggio)
+    .map(([codice, n]) => ({ codice, n, percentuale: totale ? (n / totale) * 100 : 0 }))
+    .sort((a, b) => b.n - a.n);
+  return { fette, totale };
+}
+
+function hv_costruisciConicGradient(fette) {
+  let cursore = 0;
+  const segmenti = fette.map((f, i) => {
+    const inizio = cursore;
+    const fine = cursore + f.percentuale;
+    cursore = fine;
+    const colore = HV_PALETTE_TORTA[i % HV_PALETTE_TORTA.length];
+    return `${colore} ${inizio}% ${fine}%`;
+  });
+  return `conic-gradient(${segmenti.join(", ")})`;
+}
+
+function hv_nomeSquadraReale(codice, squadreRef) {
+  const s = squadreRef.squadre.find((x) => x.codice === codice);
+  return s ? s.nome : codice;
+}
+
+function hv_soprannomeRosa(fette, squadreRef) {
+  if (fette.length === 0) return null;
+  const top = fette[0];
+  const nome = (cod) => hv_nomeSquadraReale(cod, squadreRef);
+
+  if (top.percentuale >= 50) {
+    return { titolo: `Il Fedelissimo del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da una squadra sola` };
+  }
+
+  for (const [a, b] of HV_DERBY) {
+    const fa = fette.find((f) => f.codice === a);
+    const fb = fette.find((f) => f.codice === b);
+    if (fa && fb && fa.percentuale + fb.percentuale >= 35) {
+      return { titolo: "Lo Sfascia-derby", sotto: `${nome(a)} + ${nome(b)} insieme fanno ${Math.round(fa.percentuale + fb.percentuale)}% della rosa` };
+    }
+  }
+
+  if (fette.length >= 12) {
+    return { titolo: "Il Turista", sotto: `Giocatori pescati da ${fette.length} squadre diverse` };
+  }
+
+  if (top.percentuale >= 35) {
+    return { titolo: `Il Tifoso del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  }
+
+  return { titolo: "Il Generalista", sotto: "Rosa equilibrata, senza preferenze evidenti" };
+}
+
+function hv_renderTortaSquadre(giocatori, squadreRef) {
+  const wrap = document.getElementById("torta-squadre-content");
+  if (!giocatori || giocatori.length === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessuna rosa caricata ancora.</p>';
+    return;
+  }
+
+  const { fette, totale } = hv_distribuzioneSquadreReali(giocatori, squadreRef);
+  if (totale === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessun giocatore abbinato a una squadra reale riconosciuta.</p>';
+    return;
+  }
+
+  const gradiente = hv_costruisciConicGradient(fette);
+  const soprannome = hv_soprannomeRosa(fette, squadreRef);
+
+  const legenda = fette
+    .map((f, i) => {
+      const colore = HV_PALETTE_TORTA[i % HV_PALETTE_TORTA.length];
+      return `
+      <li>
+        <span class="torta-pallino" style="background:${colore};"></span>
+        <img src="assets/loghi/${f.codice}.png" class="logo-squadra-mini" alt="">
+        <span class="torta-legenda-nome">${hv_nomeSquadraReale(f.codice, squadreRef)}</span>
+        <span class="torta-legenda-perc">${Math.round(f.percentuale)}% (${f.n})</span>
+      </li>`;
+    })
+    .join("");
+
+  wrap.innerHTML = `
+    <div class="torta-wrap">
+      <div class="torta-grafico" style="background:${gradiente};"></div>
+      <ul class="torta-legenda">${legenda}</ul>
+    </div>
+    ${
+      soprannome
+        ? `<div class="torta-soprannome">
+             <p class="torta-soprannome-titolo">${soprannome.titolo}</p>
+             <p class="torta-soprannome-sotto">${soprannome.sotto}</p>
+           </div>`
+        : ""
+    }
+  `;
+}
+
 function hv_renderRoster(giocatori, squadreRef) {
   const wrap = document.getElementById("roster-content");
   wrap.innerHTML = "";
@@ -244,6 +361,7 @@ async function hv_initSquadre(config) {
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
+    hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
   }
 
   const tabsEl = document.getElementById("tabs");
