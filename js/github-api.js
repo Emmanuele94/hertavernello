@@ -101,6 +101,57 @@ async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
   await hv_ghPutFile(owner, repo, percorso, token, contenuto, messaggio, esistente ? esistente.sha : null);
 }
 
+// Carica/aggiorna il logo personalizzato di una fantasquadra e aggiorna loghi-fantasquadre.json.
+async function hv_caricaLogoSquadraViaGitHub(squadraId, file, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const ext = (file.name.split(".").pop() || "png").toLowerCase();
+  const nomeFile = `${squadraId}.${ext}`;
+  const percorsoImmagine = `assets/stemmi/${nomeFile}`;
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+
+  const esistenteImg = await hv_ghGetFile(owner, repo, percorsoImmagine, token);
+  await hv_ghPutFile(owner, repo, percorsoImmagine, token, contentBase64, `Aggiorna logo ${squadraId}`, esistenteImg ? esistenteImg.sha : null);
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
+  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+
+  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  if (!loghiObj.loghi) loghiObj.loghi = [];
+  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
+  if (!entry) {
+    entry = { squadraId, immagine: "" };
+    loghiObj.loghi.push(entry);
+  }
+
+  const vecchioNomeFile = entry.immagine;
+  if (vecchioNomeFile && vecchioNomeFile !== nomeFile) {
+    try {
+      const vecchioFile = await hv_ghGetFile(owner, repo, `assets/stemmi/${vecchioNomeFile}`, token);
+      if (vecchioFile) {
+        await hv_ghDeleteFile(owner, repo, `assets/stemmi/${vecchioNomeFile}`, token, vecchioFile.sha, `Rimuovi vecchio logo ${squadraId}`);
+      }
+    } catch (e) {}
+  }
+
+  entry.immagine = nomeFile;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna loghi-fantasquadre.json (${squadraId})`, fileJson.sha);
+
+  return percorsoImmagine;
+}
+
 // Carica/aggiorna lo screenshot previsione di una squadra e aggiorna previsioni.json di conseguenza.
 async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;

@@ -353,3 +353,12 @@ hv_checkGate().then((data) => {
   if (data) hv_initHome(data);
 });
 document.addEventListener("hv:unlocked", (e) => hv_initHome(e.detail));
+
+document.querySelectorAll(".sezione-toggle").forEach((titolo) => {
+  titolo.addEventListener("click", () => {
+    const contenuto = document.getElementById(titolo.dataset.target);
+    if (!contenuto) return;
+    titolo.classList.toggle("collassato");
+    contenuto.classList.toggle("collassato");
+  });
+});

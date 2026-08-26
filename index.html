@@ -30,8 +30,8 @@
         <p id="lega-stagione" class="muted"></p>
       </div>
       <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="squadre.html">Squadre</a>
+        <a href="index.html" class="active"><img src="assets/icone/icon-house.png" class="icona-nav" alt="">Home</a>
+        <a href="squadre.html"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
         <a href="#" id="hv-esci" title="Esci e cambia utente">Esci</a>
       </nav>
     </header>
@@ -41,23 +41,35 @@
     </section>
 
     <section class="section">
-      <h2>Chi gioca contro chi</h2>
-      <div id="incrocio-wrap" class="incrocio-wrap"></div>
+      <h2 class="sezione-toggle" data-target="incrocio-wrap">
+        <img src="assets/icone/icon-vs.png" class="icona-titolo" alt="">Chi gioca contro chi
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="incrocio-wrap" class="incrocio-wrap sezione-contenuto"></div>
     </section>
 
     <section class="section">
-      <h2>Classifica generale previsioni</h2>
-      <div id="leaderboard-wrap"></div>
+      <h2 class="sezione-toggle" data-target="leaderboard-wrap">
+        <img src="assets/icone/icon-win-classifica-generale.png" class="icona-titolo" alt="">Classifica generale previsioni
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="leaderboard-wrap" class="sezione-contenuto"></div>
     </section>
 
     <section class="section">
-      <h2>Classifica Serie A</h2>
-      <div id="classifica-wrap"></div>
+      <h2 class="sezione-toggle" data-target="classifica-wrap">
+        <img src="assets/icone/icon-raking.png" class="icona-titolo" alt="">Classifica Serie A
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="classifica-wrap" class="sezione-contenuto"></div>
     </section>
 
     <section class="section">
-      <h2>Top marcatori</h2>
-      <div id="marcatori-wrap"></div>
+      <h2 class="sezione-toggle" data-target="marcatori-wrap">
+        <img src="assets/icone/icon-player.png" class="icona-titolo" alt="">Top marcatori
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="marcatori-wrap" class="sezione-contenuto"></div>
     </section>
 
     <footer class="site-footer">

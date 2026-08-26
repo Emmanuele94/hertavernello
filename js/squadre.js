@@ -153,23 +153,91 @@ function hv_renderUploadAdmin(squadraId, config) {
   });
 }
 
+function hv_renderIntestazioneSquadra(squadra, logo) {
+  document.getElementById("squadra-nome-grande").textContent = squadra.nomeFantasquadra || squadra.nomeReale;
+
+  const wrapLogo = document.getElementById("squadra-logo-wrap");
+  wrapLogo.innerHTML = "";
+
+  if (logo && logo.immagine) {
+    const img = document.createElement("img");
+    img.src = "assets/stemmi/" + logo.immagine + "?v=" + Date.now();
+    img.alt = "Logo " + squadra.nomeFantasquadra;
+    img.className = "squadra-logo-img";
+    wrapLogo.appendChild(img);
+  } else {
+    wrapLogo.innerHTML = '<div class="squadra-logo-placeholder">Logo da caricare</div>';
+  }
+}
+
+function hv_renderLogoUploadAdmin(squadraId, config) {
+  const wrap = document.getElementById("squadra-logo-upload-admin");
+  if (window.hv_role !== "admin") {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  const abilitato = config.lega.githubOwner && config.lega.githubRepo;
+  if (!abilitato) {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  wrap.innerHTML = `
+    <label class="upload-admin-btn">
+      Carica/aggiorna logo
+      <input type="file" accept="image/*" id="squadra-logo-file-input" style="display:none;">
+    </label>
+    <p id="squadra-logo-upload-stato" class="muted" style="font-size:12px; margin-top:8px;"></p>
+  `;
+
+  document.getElementById("squadra-logo-file-input").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const stato = document.getElementById("squadra-logo-upload-stato");
+    stato.textContent = "Caricamento in corso...";
+    stato.style.color = "var(--text-muted)";
+
+    try {
+      await hv_caricaLogoSquadraViaGitHub(squadraId, file, config);
+      stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+      stato.style.color = "var(--verde-prato)";
+
+      const wrapLogo = document.getElementById("squadra-logo-wrap");
+      wrapLogo.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
+      img.className = "squadra-logo-img";
+      wrapLogo.appendChild(img);
+    } catch (err) {
+      stato.textContent = "Errore: " + err.message;
+      stato.style.color = "var(--wine-bright)";
+    }
+  });
+}
+
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes, squadreRef] = await Promise.all([
+  const [roseRes, pagelleRes, previsioniRes, loghiRes, squadreRef] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
+    fetch("data/loghi-fantasquadre.json"),
     hv_caricaSquadreRef(),
   ]);
   const { rose } = await roseRes.json();
   const { pagelle } = await pagelleRes.json();
   const { previsioni } = await previsioniRes.json();
+  const { loghi } = await loghiRes.json();
 
   function mostraSquadra(squadra) {
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
     const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
+    const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
+    hv_renderIntestazioneSquadra(squadra, logo);
+    hv_renderLogoUploadAdmin(squadra.id, config);
     hv_renderRoster(roster ? roster.giocatori : [], squadreRef);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
