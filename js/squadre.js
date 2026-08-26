@@ -164,6 +164,7 @@ function hv_renderIntestazioneSquadra(squadra, logo) {
     img.src = "assets/stemmi/" + logo.immagine + "?v=" + Date.now();
     img.alt = "Logo " + squadra.nomeFantasquadra;
     img.className = "squadra-logo-img";
+    img.addEventListener("click", () => hv_apriLightbox(img.src));
     wrapLogo.appendChild(img);
   } else {
     wrapLogo.innerHTML = '<div class="squadra-logo-placeholder">Logo da caricare</div>';
@@ -208,6 +209,7 @@ function hv_renderLogoUploadAdmin(squadraId, config) {
       const img = document.createElement("img");
       img.src = URL.createObjectURL(file);
       img.className = "squadra-logo-img";
+      img.addEventListener("click", () => hv_apriLightbox(img.src));
       wrapLogo.appendChild(img);
     } catch (err) {
       stato.textContent = "Errore: " + err.message;

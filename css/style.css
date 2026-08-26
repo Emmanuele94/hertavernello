@@ -196,8 +196,8 @@ a { color: inherit; }
 }
 
 .sezione-toggle .icona-titolo {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }
 
 .toggle-chevron {
@@ -625,17 +625,17 @@ a { color: inherit; }
 }
 
 .icona-titolo {
-  width: 22px;
-  height: 22px;
+  width: 27px;
+  height: 27px;
   object-fit: contain;
 }
 
 .icona-nav {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
-  vertical-align: -2px;
-  margin-right: 5px;
+  vertical-align: -4px;
+  margin-right: 6px;
 }
 
 .squadra-intestazione {
@@ -660,18 +660,22 @@ a { color: inherit; }
 }
 
 .squadra-logo-img {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   border-radius: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-hairline);
   padding: 10px;
+  cursor: zoom-in;
+  transition: transform 0.15s ease;
 }
 
+.squadra-logo-img:hover { transform: scale(1.03); }
+
 .squadra-logo-placeholder {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -690,13 +694,16 @@ a { color: inherit; }
 
 /* ===== Previsione + lightbox ===== */
 .previsione-clickable {
-  max-width: 320px;
+  max-width: 460px;
   width: 100%;
   border-radius: 10px;
   border: 1px solid var(--border-hairline);
   cursor: zoom-in;
   display: block;
+  transition: transform 0.15s ease;
 }
+
+.previsione-clickable:hover { transform: scale(1.015); }
 
 .upload-admin-btn {
   display: inline-block;
