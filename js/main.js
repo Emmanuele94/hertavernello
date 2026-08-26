@@ -73,7 +73,7 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
   let corpo;
   if (schede.length === 0) {
     corpo = match.matchday
-      ? '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre — o il calendario di lega non è ancora stato caricato (admin.html, sezione 5).</p>'
+      ? '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre</p>'
       : '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Calendario di lega non disponibile per questa partita.</p>';
   } else {
     corpo = `<div class="sfide-lista">${schede
@@ -217,7 +217,6 @@ async function hv_renderLeaderboard(config) {
         </tbody>
       </table>
       <p class="muted" style="font-size:12px; margin-top:8px;">Punteggio più basso = previsione più azzeccata (somma delle distanze tra posizione prevista e posizione reale attuale, squadra per squadra).</p>
-      <p class="muted" style="font-size:11px; margin-top:4px;">Le previsioni caricate prima di oggi vanno ricompilate da admin.html con l'ordine esatto — quelle vecchie (solo per fascia) non vengono più conteggiate.</p>
       ${hv_avvisoDatiVecchi(scaduta)}
     `;
   } catch (err) {
@@ -264,7 +263,7 @@ async function hv_renderClassificaSerieA(config) {
           .join("")}
       </tbody>
     </table>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — si aggiorna al massimo ogni 4 ore per non consumare troppe chiamate gratuite.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — Si aggiornerà alle ore ${hv_orarioBreve(orario + HV_CACHE_DURATA)}.</p>
     ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }
@@ -316,7 +315,7 @@ async function hv_renderTopScorers(config) {
       </tbody>
     </table>
     </div>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — Si aggiornerà alle ore ${hv_orarioBreve(orario + HV_CACHE_DURATA)}. Copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
     ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }

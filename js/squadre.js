@@ -101,24 +101,47 @@ function hv_renderTortaSquadre(giocatori, squadreRef) {
   const gradiente = hv_costruisciConicGradient(fette);
   const soprannome = hv_soprannomeRosa(fette, squadreRef);
 
-  const legenda = fette
-    .map((f, i) => {
-      const colore = HV_PALETTE_TORTA[i % HV_PALETTE_TORTA.length];
-      return `
-      <li>
-        <span class="torta-pallino" style="background:${colore};"></span>
-        <img src="assets/loghi/${f.codice}.png" class="logo-squadra-mini" alt="">
-        <span class="torta-legenda-nome">${hv_nomeSquadraReale(f.codice, squadreRef)}</span>
-        <span class="torta-legenda-perc">${Math.round(f.percentuale)}% (${f.n})</span>
-      </li>`;
-    })
-    .join("");
+  const DIAMETRO = 240;
+  const RAGGIO_LABEL = DIAMETRO * 0.33;
+  const SOGLIA_ETICHETTA = 5; // % minima per meritare un'etichetta dentro la fetta
+
+  let cursore = 0;
+  const etichette = [];
+  const piccole = [];
+
+  fette.forEach((f) => {
+    const inizio = cursore;
+    const fine = cursore + f.percentuale;
+    const metaAngolo = ((inizio + fine) / 2 / 100) * 360; // gradi, 0° = ore 12, orario
+    cursore = fine;
+
+    if (f.percentuale < SOGLIA_ETICHETTA) {
+      piccole.push(f);
+      return;
+    }
+
+    const rad = (metaAngolo * Math.PI) / 180;
+    const x = DIAMETRO / 2 + RAGGIO_LABEL * Math.sin(rad);
+    const y = DIAMETRO / 2 - RAGGIO_LABEL * Math.cos(rad);
+
+    etichette.push(`
+      <div class="torta-fetta-label" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;">
+        <img src="assets/loghi/${f.codice}.png" alt="" class="torta-fetta-logo">
+        <span class="torta-fetta-testo">${Math.round(f.percentuale)}%<br>${f.n}</span>
+      </div>`);
+  });
+
+  const notaPiccole =
+    piccole.length > 0
+      ? `<p class="torta-piccole-nota">+ ${piccole.map((f) => `${hv_nomeSquadraReale(f.codice, squadreRef)} ${Math.round(f.percentuale)}%`).join(", ")}</p>`
+      : "";
 
   wrap.innerHTML = `
-    <div class="torta-wrap">
-      <div class="torta-grafico" style="background:${gradiente};"></div>
-      <ul class="torta-legenda">${legenda}</ul>
+    <div class="torta-grafico-wrap" style="width:${DIAMETRO}px; height:${DIAMETRO}px;">
+      <div class="torta-grafico" style="background:${gradiente}; width:${DIAMETRO}px; height:${DIAMETRO}px;"></div>
+      ${etichette.join("")}
     </div>
+    ${notaPiccole}
     ${
       soprannome
         ? `<div class="torta-soprannome">
