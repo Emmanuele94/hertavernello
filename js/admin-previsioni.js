@@ -1,5 +1,6 @@
 let hv_configPrevisioni = null;
 let hv_squadreRefPrevisioni = null;
+let hv_previsioniCaricate = [];
 
 async function hv_initPrevisioniForm() {
   const [configRes, previsioniRes, squadreRefRes] = await Promise.all([
@@ -9,6 +10,7 @@ async function hv_initPrevisioniForm() {
   ]);
   hv_configPrevisioni = await configRes.json();
   const { previsioni } = await previsioniRes.json();
+  hv_previsioniCaricate = previsioni || [];
   hv_squadreRefPrevisioni = await squadreRefRes.json();
 
   const wrap = document.getElementById("previsioni-form");
@@ -47,8 +49,7 @@ async function hv_initPrevisioniForm() {
     div.innerHTML = `
       <p class="campo-titolo">${squadra.nomeReale}</p>
       <div class="campo-riga">
-        <input type="text" class="pv-immagine" placeholder="nome-file.png (dentro assets/previsioni/)" value="${esistente.immagine ?? ""}">
-        <input type="text" class="pv-link" placeholder="oppure link esterno" value="${esistente.linkEsterno ?? ""}">
+        <input type="text" class="pv-link" placeholder="Link esterno (facoltativo, es. tweet/post con lo screenshot)" value="${esistente.linkEsterno ?? ""}" style="flex: 1;">
       </div>
       <details class="previsione-dettagli">
         <summary>Ordine previsto, posizione per posizione (20 squadre)</summary>
@@ -83,9 +84,10 @@ function hv_costruisciPrevisioniOutput() {
   campi.forEach((c) => {
     const ordine = hv_costruisciOrdine(c);
     if (hv_avvisoDuplicati(ordine)) duplicatiTrovati = true;
+    const esistente = hv_previsioniCaricate.find((p) => p.squadraId === c.dataset.squadraId) || {};
     previsioni.push({
       squadraId: c.dataset.squadraId,
-      immagine: c.querySelector(".pv-immagine").value.trim(),
+      immagine: esistente.immagine ?? "",
       linkEsterno: c.querySelector(".pv-link").value.trim(),
       ordine,
     });
