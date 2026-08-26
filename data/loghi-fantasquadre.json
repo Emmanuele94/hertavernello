@@ -1,6 +1,9 @@
 {
   "_leggimi": "Loghi/stemmi personalizzati delle fantasquadre (diversi dagli stemmi ufficiali di Serie A in assets/loghi/). Si caricano dal pulsante nella pagina Squadre, non serve editare questo file a mano.",
   "loghi": [
-    { "squadraId": "sq-01", "immagine": "" }
+    {
+      "squadraId": "sq-01",
+      "immagine": "sq-01.png"
+    }
   ]
 }
