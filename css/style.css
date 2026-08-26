@@ -636,6 +636,18 @@ a { color: inherit; }
   object-fit: contain;
   vertical-align: -4px;
   margin-right: 6px;
+  transition: transform 0.15s ease;
+}
+
+@keyframes hv-scatto-icona {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  35% { transform: translateY(-3px) rotate(-10deg) scale(1.15); }
+  65% { transform: translateY(0) rotate(8deg) scale(1.1); }
+}
+
+.site-header nav a:hover .icona-nav,
+.site-header nav a:active .icona-nav {
+  animation: hv-scatto-icona 0.45s ease;
 }
 
 .squadra-intestazione {
@@ -1006,4 +1018,5 @@ a { color: inherit; }
 /* ===== Motion ===== */
 @media (prefers-reduced-motion: reduce) {
   .pagella-card, .pagella-card::before { transition: none !important; }
+  .icona-nav { animation: none !important; }
 }
