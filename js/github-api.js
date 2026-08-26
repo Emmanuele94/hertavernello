@@ -72,6 +72,23 @@ async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sh
   return res.json();
 }
 
+async function hv_ghDeleteFile(owner, repo, path, token, sha, message, branch = "main") {
+  const res = await fetch(`${HV_GH_API}/repos/${owner}/${repo}/contents/${path}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message, sha, branch }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `GitHub DELETE ${path} → ${res.status}`);
+  }
+  return res.json();
+}
+
 // Salva un oggetto JS come file JSON nel repository (crea o aggiorna).
 async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
@@ -115,6 +132,21 @@ async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
     entry = { squadraId, immagine: "", linkEsterno: "", fasce: {} };
     previsioniObj.previsioni.push(entry);
   }
+
+  // se esisteva già un'immagine con nome diverso (es. estensione diversa), la cancello
+  // per non lasciare file orfani in giro nella cartella.
+  const vecchioNomeFile = entry.immagine;
+  if (vecchioNomeFile && vecchioNomeFile !== nomeFile) {
+    try {
+      const vecchioFile = await hv_ghGetFile(owner, repo, `assets/previsioni/${vecchioNomeFile}`, token);
+      if (vecchioFile) {
+        await hv_ghDeleteFile(owner, repo, `assets/previsioni/${vecchioNomeFile}`, token, vecchioFile.sha, `Rimuovi vecchia previsione ${squadraId}`);
+      }
+    } catch (e) {
+      // non blocco l'upload principale se la pulizia del vecchio file fallisce
+    }
+  }
+
   entry.immagine = nomeFile;
   entry.linkEsterno = "";
 
