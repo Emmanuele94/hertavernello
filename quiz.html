@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mini-Quiz — Hertavernello</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="gate" class="gate">
+    <img src="assets/logo.png" class="gate-logo" alt="Hertavernello">
+    <h1>Hertavernello</h1>
+    <p>Solo per fantallenatori. Inserisci la password.</p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn">Entra</button>
+    <p id="gate-error" class="gate-error"></p>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="site-header">
+      <img src="assets/logo.png" class="logo" alt="">
+      <div>
+        <h1 id="lega-nome">Hertavernello</h1>
+      </div>
+      <nav>
+        <a href="index.html"><img src="assets/icone/icon-house.png" class="icona-nav" alt="">Home</a>
+        <a href="squadre.html"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
+        <a href="quiz.html" class="active"><img src="assets/icone/icon-predict.png" class="icona-nav" alt="">Quiz</a>
+        <a href="#" id="hv-esci" title="Esci e cambia utente">Esci</a>
+      </nav>
+    </header>
+
+    <section class="section" style="margin-top: 10px;">
+      <h2>Mini-Quiz di giornata</h2>
+      <p class="muted" style="font-size:13px; margin: -10px 0 20px;">
+        Una giornata si sblocca appena tutte le sue partite reali sono concluse. 10 domande basate sui risultati
+        veri e sulle vostre rose — il punteggio resta salvato solo in questo browser.
+      </p>
+      <div id="quiz-griglia" class="quiz-griglia"></div>
+      <div id="quiz-gioco" class="hidden"></div>
+    </section>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/cache.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

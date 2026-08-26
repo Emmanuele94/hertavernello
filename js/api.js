@@ -93,7 +93,22 @@ async function hv_getPartite(apiKey, squadreRef) {
   return { live, prossimoTurno };
 }
 
-// Data una posizione reale (1-20), restituisce l'id fascia corrispondente (1-10)
+// Tutte le partite della stagione (tutte le giornate, con risultato se giocate).
+// Un'unica chiamata invece di una per giornata — pensata per essere messa in
+// cache a lungo, dato che le partite concluse non cambiano più risultato.
+async function hv_getTutteLePartiteStagione(apiKey, squadreRef) {
+  const data = await hv_fetchAPI("/competitions/SA/matches", apiKey);
+  return data.matches.map((m) => ({
+    matchday: m.matchday,
+    status: m.status,
+    casaCodice: hv_trovaCodice(m.homeTeam.shortName || m.homeTeam.name, squadreRef),
+    trasfertaCodice: hv_trovaCodice(m.awayTeam.shortName || m.awayTeam.name, squadreRef),
+    casaNome: m.homeTeam.shortName || m.homeTeam.name,
+    trasfertaNome: m.awayTeam.shortName || m.awayTeam.name,
+    golCasa: m.score && m.score.fullTime ? m.score.fullTime.home : null,
+    golTrasferta: m.score && m.score.fullTime ? m.score.fullTime.away : null,
+  }));
+}
 function hv_fasciaDaPosizione(posizione, fasce) {
   const f = fasce.find((f) => posizione >= f.posMin && posizione <= f.posMax);
   return f ? f.id : null;
