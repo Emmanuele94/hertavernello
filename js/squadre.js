@@ -153,7 +153,51 @@ function hv_renderTortaSquadre(giocatori, squadreRef) {
   `;
 }
 
-function hv_renderRoster(giocatori, squadreRef) {
+// ===== Info partita accanto a ogni giocatore (giorno/ora, avversario, già giocata o no) =====
+const HV_GIORNI_ABBR = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+
+function hv_formattaGiornoOra(utcDateStr) {
+  const d = new Date(utcDateStr);
+  const giorno = HV_GIORNI_ABBR[d.getDay()];
+  const ore = String(d.getHours()).padStart(2, "0");
+  const minuti = String(d.getMinutes()).padStart(2, "0");
+  return `${giorno} ${ore}:${minuti}`;
+}
+
+function hv_determinaGiornataCorrente(partiteStagione) {
+  const inCorso = partiteStagione.find((p) => p.status === "IN_PLAY" || p.status === "PAUSED");
+  if (inCorso) return inCorso.matchday;
+
+  const nonConcluse = partiteStagione.filter(
+    (p) => p.status !== "FINISHED" && p.status !== "POSTPONED" && p.status !== "CANCELLED" && p.matchday
+  );
+  if (nonConcluse.length === 0) return null;
+  return Math.min(...nonConcluse.map((p) => p.matchday));
+}
+
+function hv_partitaGiaIniziata(match) {
+  if (match.status === "FINISHED" || match.status === "IN_PLAY" || match.status === "PAUSED") return true;
+  return match.data ? new Date(match.data).getTime() <= Date.now() : false;
+}
+
+function hv_infoPartitaGiocatore(codiceSquadra, giornataCorrente, partiteStagione) {
+  if (!codiceSquadra || giornataCorrente == null) return null;
+  const match = partiteStagione.find(
+    (p) => p.matchday === giornataCorrente && (p.casaCodice === codiceSquadra || p.trasfertaCodice === codiceSquadra)
+  );
+  if (!match || !match.data) return null;
+
+  const avversario = match.casaCodice === codiceSquadra ? match.trasfertaNome : match.casaNome;
+  const giaGiocata = hv_partitaGiaIniziata(match);
+  const oraTesto = hv_formattaGiornoOra(match.data);
+
+  return {
+    testo: giaGiocata ? `Giocato ${oraTesto} vs ${avversario}` : `${oraTesto} vs ${avversario}`,
+    classe: giaGiocata ? "info-match-giocato" : "info-match-daGiocare",
+  };
+}
+
+function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagione) {
   const wrap = document.getElementById("roster-content");
   wrap.innerHTML = "";
 
@@ -174,9 +218,11 @@ function hv_renderRoster(giocatori, squadreRef) {
         const cellaSquadra = codice
           ? `<img src="assets/loghi/${codice}.png" alt="${codice}" title="${codice}" class="logo-squadra-mini"><span>${codice}</span>`
           : `${g.squadraReale || ""}`;
+        const info = codice && partiteStagione ? hv_infoPartitaGiocatore(codice, giornataCorrente, partiteStagione) : null;
+        const infoHtml = info ? ` <span class="info-match ${info.classe}">${info.testo}</span>` : "";
         return `
         <tr>
-          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${g.nome}</td>
+          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${g.nome}${infoHtml}</td>
           <td class="squadra-reale">${cellaSquadra}</td>
           <td class="costo">${g.costo ?? ""}</td>
         </tr>`;
@@ -373,6 +419,21 @@ async function hv_initSquadre(config) {
   const { previsioni } = await previsioniRes.json();
   const { loghi } = await loghiRes.json();
 
+  let partiteStagione = [];
+  let giornataCorrente = null;
+  const apiKey = config.lega.footballDataApiKey;
+  if (apiKey) {
+    try {
+      const { dati } = await hv_cacheOFetch("hv_cache_partite_stagione_v2", HV_CACHE_DURATA, () =>
+        hv_getTutteLePartiteStagione(apiKey, squadreRef)
+      );
+      partiteStagione = dati;
+      giornataCorrente = hv_determinaGiornataCorrente(partiteStagione);
+    } catch (e) {
+      // niente orari partite se l'API non risponde: la rosa resta comunque visibile
+    }
+  }
+
   function mostraSquadra(squadra) {
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
     const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
@@ -380,7 +441,7 @@ async function hv_initSquadre(config) {
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
     hv_renderIntestazioneSquadra(squadra, logo);
     hv_renderLogoUploadAdmin(squadra.id, config);
-    hv_renderRoster(roster ? roster.giocatori : [], squadreRef);
+    hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteStagione);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
@@ -409,3 +470,10 @@ hv_checkGate().then((data) => {
   if (data) hv_initSquadre(data);
 });
 document.addEventListener("hv:unlocked", (e) => hv_initSquadre(e.detail));
+
+const hv_toggleInfoBtn = document.getElementById("toggle-info-match");
+if (hv_toggleInfoBtn) {
+  hv_toggleInfoBtn.addEventListener("click", () => {
+    document.body.classList.toggle("mostra-info-match");
+  });
+}

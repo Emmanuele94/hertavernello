@@ -53,7 +53,12 @@
 
       <div class="squadre-layout">
         <div class="squadra-block" style="margin: 0;">
-          <h3 class="squadra-block-title">Rosa</h3>
+          <h3 class="squadra-block-title">
+            Rosa
+            <button type="button" id="toggle-info-match" class="toggle-info-btn" title="Mostra/nascondi orari e avversari">
+              <img src="assets/icone/icon-info.png" class="icona-info-toggle" alt="Info">
+            </button>
+          </h3>
           <div id="roster-content" class="roster-groups"></div>
         </div>
 
@@ -84,6 +89,7 @@
 
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/cache.js"></script>
   <script src="js/github-api.js"></script>
   <script src="js/squadre.js"></script>
 </body>
