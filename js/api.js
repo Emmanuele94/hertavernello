@@ -101,6 +101,7 @@ async function hv_getTutteLePartiteStagione(apiKey, squadreRef) {
   return data.matches.map((m) => ({
     matchday: m.matchday,
     status: m.status,
+    data: m.utcDate,
     casaCodice: hv_trovaCodice(m.homeTeam.shortName || m.homeTeam.name, squadreRef),
     trasfertaCodice: hv_trovaCodice(m.awayTeam.shortName || m.awayTeam.name, squadreRef),
     casaNome: m.homeTeam.shortName || m.homeTeam.name,
@@ -109,6 +110,7 @@ async function hv_getTutteLePartiteStagione(apiKey, squadreRef) {
     golTrasferta: m.score && m.score.fullTime ? m.score.fullTime.away : null,
   }));
 }
+
 function hv_fasciaDaPosizione(posizione, fasce) {
   const f = fasce.find((f) => posizione >= f.posMin && posizione <= f.posMax);
   return f ? f.id : null;

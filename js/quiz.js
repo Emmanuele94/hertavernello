@@ -417,7 +417,7 @@ async function hv_initQuiz(config) {
   hv_quizCalendario = await calendarioRes.json();
 
   try {
-    const { dati, scaduta } = await hv_cacheOFetch("hv_cache_partite_stagione", HV_CACHE_DURATA, () =>
+    const { dati, scaduta } = await hv_cacheOFetch("hv_cache_partite_stagione_v2", HV_CACHE_DURATA, () =>
       hv_getTutteLePartiteStagione(apiKey, squadreRef)
     );
     hv_quizPartiteStagione = dati;
