@@ -459,7 +459,12 @@ async function hv_initSquadre(config) {
     if (statoInfo && giornataCorrente) {
       const trovati = document.querySelectorAll("#roster-content .info-match").length;
       const totaliGiocatori = roster ? roster.giocatori.length : 0;
-      statoInfo.textContent = `Giornata rilevata: ${giornataCorrente} — orario trovato per ${trovati} su ${totaliGiocatori} giocatori di questa rosa.`;
+      const campione = partiteStagione
+        .filter((p) => p.matchday === giornataCorrente)
+        .slice(0, 3)
+        .map((p) => `${p.casaCodice ?? "NULL"}(${p.casaNome})-${p.trasfertaCodice ?? "NULL"}(${p.trasfertaNome})`)
+        .join(" · ");
+      statoInfo.textContent = `Giornata rilevata: ${giornataCorrente} — orario trovato per ${trovati} su ${totaliGiocatori} giocatori. Codici partite: ${campione}`;
     }
   }
 
