@@ -6,6 +6,9 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Admin — Hertavernello</title>
   <link rel="icon" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icone-app/icon-180.png">
+  <meta name="theme-color" content="#7A0E1F">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -264,6 +267,13 @@
 
     hv_checkGate().then((data) => { if (data) hv_applicaRuoloAdmin(); });
     document.addEventListener("hv:unlocked", hv_applicaRuoloAdmin);
+  </script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
   </script>
 </body>
 </html>
