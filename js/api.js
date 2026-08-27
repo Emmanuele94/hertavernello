@@ -1,8 +1,7 @@
-const HV_API_BASE = "https://api.football-data.org/v4";
-// La connessione diretta dal browser a football-data.org risulta bloccata in modo
-// persistente (confermato anche in incognito con tutte le estensioni disattivate),
-// quindi le richieste passano da un intermediario invece che dirette.
-const HV_CORS_PROXY = "https://corsproxy.io/?url=";
+// Il Worker personale su Cloudflare fa da tramite verso football-data.org: la
+// chiave API resta nascosta lì (mai visibile nel codice del sito), e risolve
+// anche il problema del vecchio proxy pubblico (corsproxy.io) inaffidabile.
+const HV_API_BASE = "https://hertavernello-api-proxy.emmanueletufano.workers.dev";
 
 function hv_normalizza(str) {
   return (str || "")
@@ -37,10 +36,7 @@ function hv_trovaCodice(nomeGrezzo, squadreRef) {
 }
 
 async function hv_fetchAPI(path, apiKey) {
-  const urlDiretto = HV_API_BASE + path;
-  const res = await fetch(HV_CORS_PROXY + encodeURIComponent(urlDiretto), {
-    headers: { "X-Auth-Token": apiKey },
-  });
+  const res = await fetch(HV_API_BASE + path);
   if (!res.ok) {
     let dettaglio = "";
     try {
