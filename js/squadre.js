@@ -422,15 +422,24 @@ async function hv_initSquadre(config) {
   let partiteStagione = [];
   let giornataCorrente = null;
   const apiKey = config.lega.footballDataApiKey;
-  if (apiKey) {
+  const statoInfo = document.getElementById("info-match-stato");
+
+  if (!apiKey) {
+    if (statoInfo) statoInfo.textContent = "Orari partite non disponibili: manca la chiave API in config.json.";
+  } else {
     try {
       const { dati } = await hv_cacheOFetch("hv_cache_partite_stagione_v2", HV_CACHE_DURATA, () =>
         hv_getTutteLePartiteStagione(apiKey, squadreRef)
       );
       partiteStagione = dati;
       giornataCorrente = hv_determinaGiornataCorrente(partiteStagione);
+      if (statoInfo) {
+        statoInfo.textContent = giornataCorrente
+          ? `Giornata rilevata: ${giornataCorrente} (${partiteStagione.filter((p) => p.matchday === giornataCorrente).length} partite)`
+          : "Nessuna giornata corrente rilevata nei dati ricevuti.";
+      }
     } catch (e) {
-      // niente orari partite se l'API non risponde: la rosa resta comunque visibile
+      if (statoInfo) statoInfo.textContent = `Orari partite non disponibili: ${e.message}`;
     }
   }
 
