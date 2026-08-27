@@ -462,9 +462,11 @@ async function hv_initSquadre(config) {
       const campione = partiteStagione
         .filter((p) => p.matchday === giornataCorrente)
         .slice(0, 3)
-        .map((p) => `${p.casaCodice ?? "NULL"}(${p.casaNome})-${p.trasfertaCodice ?? "NULL"}(${p.trasfertaNome})`)
+        .map((p) => `${p.casaCodice ?? "NULL"}-${p.trasfertaCodice ?? "NULL"} [data:${p.data ?? "MANCANTE"}] [status:${p.status}]`)
         .join(" · ");
-      statoInfo.textContent = `Giornata rilevata: ${giornataCorrente} — orario trovato per ${trovati} su ${totaliGiocatori} giocatori. Codici partite: ${campione}`;
+      const testDiretto = hv_infoPartitaGiocatore("MON", giornataCorrente, partiteStagione);
+      const testoTest = testDiretto ? JSON.stringify(testDiretto) : "NULL";
+      statoInfo.textContent = `Giornata: ${giornataCorrente} — trovati ${trovati}/${totaliGiocatori}. Test MON: ${testoTest}. Campione: ${campione}`;
     }
   }
 
