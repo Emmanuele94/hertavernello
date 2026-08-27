@@ -455,6 +455,12 @@ async function hv_initSquadre(config) {
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
     hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
+
+    if (statoInfo && giornataCorrente) {
+      const trovati = document.querySelectorAll("#roster-content .info-match").length;
+      const totaliGiocatori = roster ? roster.giocatori.length : 0;
+      statoInfo.textContent = `Giornata rilevata: ${giornataCorrente} — orario trovato per ${trovati} su ${totaliGiocatori} giocatori di questa rosa.`;
+    }
   }
 
   const tabsEl = document.getElementById("tabs");
@@ -484,5 +490,6 @@ const hv_toggleInfoBtn = document.getElementById("toggle-info-match");
 if (hv_toggleInfoBtn) {
   hv_toggleInfoBtn.addEventListener("click", () => {
     document.body.classList.toggle("mostra-info-match");
+    hv_toggleInfoBtn.classList.toggle("attivo");
   });
 }
