@@ -1,142 +1,62 @@
-# Hertavernello — Fantalega
+# 🐂 Hertavernello — Stagione 2026/2027
 
-Template pronto all'uso. Non serve toccare HTML/CSS/JS: tutto quello che
-cambia stagione per stagione sta nella cartella `data/`, e le parti più
-noiose (pagelle, previsioni, import rose) si compilano da `admin.html`
-invece che scrivendo JSON a mano.
+Il sito ufficiale (non ufficiale) della lega di fantacalcio più temuta del web. Statico, gratuito, ospitato su GitHub Pages, e aggiornato a mano da chi ha già perso il fanta.
 
-## Struttura
+---
 
-```
-index.html               Home: incrocio partite + classifica generale previsioni
-squadre.html              Tab per fantallenatore: rosa + pagella + previsione
-admin.html                 Solo per te: import CSV rose, editor pagelle, editor previsioni
-css/style.css               Stile del sito
-js/                          Logica (non serve toccarla)
-data/config.json           Nome lega, data asta, password, chiave API, elenco squadre
-data/pagelle.json          Voti e commenti (compilabile da admin.html)
-data/previsioni.json      Screenshot + fasce previste (compilabile da admin.html)
-data/rose.json               Rose (si genera da admin.html dopo l'asta)
-data/calendario.json      Calendario di lega, chi affronta chi ogni giornata (si compila da admin.html)
-data/squadre-serie-a.json Anagrafica delle 20 squadre di Serie A e delle 10 fasce — non serve toccarlo
-assets/logo.png             Il vostro logo
-assets/loghi/                  Stemmi ufficiali delle 20 squadre di Serie A (già inclusi)
-assets/previsioni/           Metti qui gli screenshot da tiermaker.com
-```
+## ⚽ Cosa fa questo sito
 
-## Importante: come aprire admin.html
+### 🏠 Home
+- **⚔️ Chi gioca contro chi** — per ogni partita reale di Serie A, le schede sfida tra i fantallenatori che si affrontano in quella giornata di lega, con i rispettivi giocatori coinvolti
+- **🏆 Classifica generale previsioni** — chi ha indovinato meglio l'ordine finale della Serie A, aggiornata da sola col procedere del campionato
+- **📊 Classifica Serie A** — la classifica reale, sempre aggiornata
+- **🥅 Top marcatori** — i migliori marcatori del campionato
+- Tutte le sezioni sono **espandibili/comprimibili** con un click sul titolo
+- Aggiornamento automatico ogni 4 ore (per non sforare i limiti gratuiti dell'API), con l'orario del prossimo aggiornamento sempre visibile
 
-Apri sempre `admin.html` tramite un server, mai con doppio click diretto sul
-file — il browser blocca la lettura dei file in `data/` se apri il file
-così, e i pannelli restano vuoti. Due modi:
+### 👕 Squadre
+Una scheda per ogni fantallenatore, con:
+- **Nome fantasquadra e logo personalizzato**, caricabile direttamente dalla pagina
+- **Rosa completa** divisa per ruolo, con lo stemma della squadra reale di ogni giocatore
+- **ℹ️ Orari partite** — icona a comparsa che mostra quando gioca ciascun calciatore in questa giornata (🟡 da giocare, ⚪ già giocata), con avversario e orario in italiano
+- **📝 Pagella** — il voto e il commento (rigorosamente ironico) dopo l'asta
+- **🔮 Previsione Serie A** — lo screenshot del tiermaker con l'ordine previsto delle 20 squadre
+- **🥧 Composizione rosa** — grafico a torta di quali squadre reali compongono la rosa, con soprannome goliardico automatico ("Il Fedelissimo del Napoli", "Lo Sfascia-derby", "Il Turista"...)
+- **🌍 Da dove arriva la tua squadra** — stessa idea ma per nazionalità dei giocatori *(in arrivo dopo il calciomercato)*
 
-- **Il sito già online** (la strada più comoda): vai su
-  `https://tuonomeutente.github.io/hertavernello/admin.html`.
-- **In locale**: apri un terminale nella cartella del progetto e lancia
-  `python3 -m http.server 8000`, poi apri `http://localhost:8000/admin.html`
-  nel browser.
+### 🧠 Mini-Quiz
+- 38 giornate, una scheda per ciascuna
+- Ogni giornata si sblocca da sola appena le partite reali sono concluse
+- 10 domande generate automaticamente dai risultati veri e dalle vostre rose (mai scritte a mano)
+- Punteggio salvato nel browser di chi gioca, con possibilità di reset
 
-## Prima di pubblicare
+### 🔐 Accesso
+- Password unica per gli ospiti, password separata per l'amministratore
+- Le sezioni riservate (pannello admin) restano invisibili a chi non ha le credenziali giuste
 
-1. Apri `data/config.json` e modifica `lega.nome`, `lega.stagione`,
-   `lega.dataAsta`, e l'elenco `squadre` (`nomeReale` e `nomeFantasquadra`
-   per ognuna — quest'ultimo deve essere identico al nome su
-   fantacalcio.it). Per meno di 12 partecipanti cancella le righe in
-   eccesso; per farne di più copia una riga e usa un id nuovo (`sq-13`...).
-2. Cambia la password da `admin.html` → sezione 1, incolla l'hash in
-   `config.json`. Default nel template: `vernello26`.
-3. (Facoltativo ma consigliato) Registrati gratis su football-data.org,
-   prendi la chiave API e incollala in `config.json` → `footballDataApiKey`.
-   Senza questa chiave il sito funziona lo stesso, ma "Chi gioca contro chi"
-   e la "Classifica generale previsioni" restano vuote con un avviso.
+### 🛠️ Pannello Admin (riservato)
+- Impostazioni lega (nomi, password, date, chiave API)
+- Import rose da CSV (esportazione diretta da fantacalcio.it)
+- Scrittura pagelle
+- Previsioni esatte posizione-per-posizione
+- Calendario di lega, con import automatico dal file Excel di leghe.fantacalcio.it
+- Salvataggio diretto su GitHub da ogni sezione, senza dover scaricare/ricaricare file a mano
 
-## Il 15 settembre, dopo l'asta
+---
 
-1. Su leghe.fantacalcio.it: **Gestione rose → Esporta rose**, scarica il CSV.
-2. Apri `admin.html` → sezione 2, carica il CSV, controlla le associazioni
-   proposte (nome squadra CSV → fantallenatore) e correggile se serve.
-   Scarica `rose.json` e sostituiscilo in `data/`.
-3. Mandami le tue bozze/idee per le pagelle: te le rifinisco nel tono
-   giusto. Poi apri `admin.html` → sezione 3 e compila voto, badge (emoji)
-   e commento per ogni squadra — il colore della card lo calcola sempre da
-   solo il sito in base al voto. Scarica `pagelle.json` e sostituiscilo.
-4. Per le previsioni: fai lo screenshot da tiermaker.com, caricalo su
-   GitHub dentro `assets/previsioni/` (es. `sq-01.png`). Poi in
-   `admin.html` → sezione 4 scrivi il nome del file per quella squadra e,
-   aprendo "Fasce previste", indica in che fascia ha messo ciascuna delle
-   20 squadre reali (guardando il tiermaker) — serve per la classifica
-   generale automatica in Home. Scarica `previsioni.json` e sostituiscilo.
-5. Fai commit e push: il sito si aggiorna da solo in circa un minuto.
+## ⚙️ Come funziona sotto il cofano
 
-## Le due pagine pubbliche
+- **Zero backend, zero database** — solo file statici HTML/CSS/JavaScript
+- **Dati Serie A** in tempo reale da [football-data.org](https://www.football-data.org) (piano gratuito), con cache intelligente per restare sotto il limite di richieste
+- **Ospitato gratis** su GitHub Pages
+- Tutti i dati della lega (rose, pagelle, previsioni, calendario) vivono in semplici file `.json` dentro `data/`
 
-- **Home**: countdown/stato asta, "Chi gioca contro chi", classifica generale
-  previsioni, e ora anche **Classifica Serie A completa** e **Top marcatori**
-  — entrambe si aggiornano al massimo ogni 4 ore (non a ogni apertura pagina)
-  per non consumare le chiamate gratuite dell'API.
+---
 
-## Previsioni: ordine esatto, non solo fascia
+## 🚧 In lavorazione
 
-Da oggi `admin.html` non chiede più solo "in che fascia hai messo questa
-squadra" ma la posizione esatta (1°-20°), dentro ogni fascia, letta da
-sinistra a destra sul tiermaker — perché "2°-3°-4°" nella stessa fascia
-non sono equivalenti, e la classifica generale delle previsioni ora
-calcola la distanza dalla posizione reale invece che dalla sola fascia.
-Le previsioni caricate con il vecchio sistema vanno ricompilate.
-- **Squadre**: un tab per ogni fantallenatore. Selezionandolo vedi la sua
-  rosa, la sua pagella, e la sua previsione (clicca sullo screenshot per
-  ingrandirlo).
+- Grafico a torta per nazionalità dei giocatori (in attesa dei dati aggiornati dopo il calciomercato)
 
-## Pubblicazione online — GitHub Pages
+---
 
-1. Repository nuovo, pubblico (su piano gratuito Pages funziona solo così
-   — il contenuto resta comunque protetto dalla password del sito).
-2. Carica TUTTO il contenuto di questa cartella (non la cartella stessa,
-   il suo contenuto) tramite "Add file → Upload files".
-3. Settings → Pages → Source: "Deploy from a branch" → main, `/ (root)` → Save.
-4. Dopo un paio di minuti il sito è su
-   `https://tuonomeutente.github.io/nome-repository/`.
-5. Ogni push successivo aggiorna il sito da solo in circa un minuto.
-
-## Password: due livelli
-
-Da oggi ci sono due password separate in `config.json`:
-- `guestPasswordHash` — quella che dai agli amici, fa vedere Home e Squadre.
-- `adminPasswordHash` — la tua: fa vedere il sito come agli amici MA sblocca
-  anche `admin.html`, che ora è protetta (prima non lo era).
-
-Password guest di default nel template: **herta2026**. Password admin di
-default: **cambiami-admin** — cambiala subito dalla sezione 1 di
-`admin.html` prima di condividere il link con chiunque.
-
-## Upload previsioni e salvataggio diretto da admin.html (facoltativo)
-
-**Importante**: il token GitHub non va mai incollato in `config.json` —
-il repository è pubblico (necessario per GitHub Pages gratis), e GitHub
-scansiona i repository pubblici alla ricerca di propri token esposti:
-appena ne trova uno dentro un file lo revoca automaticamente, anche se
-hai bypassato l'avviso "secret scanning" al momento del commit. Per
-questo il token vive solo nel browser (sessionStorage), mai nel
-repository: si incolla una volta a sessione (pulsante "Imposta/cambia
-token GitHub" nella sezione 1 di admin.html, oppure il sito te lo chiede
-da solo alla prima azione che ne ha bisogno) e sparisce chiudendo la
-scheda o il browser — a quel punto va reincollato.
-
-Con il token impostato in sessione, sia il pulsante "Salva direttamente
-su GitHub" in ogni sezione di admin.html, sia il pulsante
-"Carica/aggiorna screenshot" nella pagina Squadre, scrivono i file
-direttamente sul repository — niente più download/upload manuale. Il
-sito pubblico si aggiorna con un minuto di ritardo (il tempo del
-redeploy di GitHub Pages).
-
-Senza token impostato in sessione, il sito te lo chiede al momento
-giusto; se preferisci non inserirlo mai, restano sempre disponibili i
-pulsanti di download/upload manuale in ogni sezione.
-
-## Nota sulla chiave API
-
-`footballDataApiKey` in `config.json` resta visibile a chiunque guardi il
-codice sorgente della pagina (è un sito statico, non c'è un server che la
-nasconda). Per un progetto gratuito tra amici va bene, ma è bene sapere
-che non è una chiave segreta al 100%: se un giorno preferisci revocarla e
-generarne una nuova, si fa dal tuo account football-data.org in un minuto.
+*Aggiornato al 27/08/2026 — questo file cresce insieme al sito, quindi se leggi questo elenco tra qualche mese potrebbe già essere superato.*
