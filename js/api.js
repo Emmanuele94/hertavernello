@@ -96,6 +96,29 @@ async function hv_getPartite(apiKey, squadreRef) {
 // Tutte le partite della stagione (tutte le giornate, con risultato se giocate).
 // Un'unica chiamata invece di una per giornata — pensata per essere messa in
 // cache a lungo, dato che le partite concluse non cambiano più risultato.
+// Partite dei prossimi giorni CON orario incluso (stesso endpoint filtrato per
+// data già usato da hv_getPartite, che a differenza dell'elenco stagionale
+// completo include sempre utcDate). Usata per l'orario preciso di ogni partita,
+// mentre l'elenco stagionale resta usato solo per capire quale giornata è quella attuale.
+async function hv_getPartiteConOrario(apiKey, squadreRef) {
+  const oggi = new Date();
+  const indietro3gg = new Date(oggi.getTime() - 3 * 86400000);
+  const avanti8gg = new Date(oggi.getTime() + 8 * 86400000);
+  const fmt = (d) => d.toISOString().slice(0, 10);
+
+  const data = await hv_fetchAPI(`/competitions/SA/matches?dateFrom=${fmt(indietro3gg)}&dateTo=${fmt(avanti8gg)}`, apiKey);
+
+  return data.matches.map((m) => ({
+    matchday: m.matchday,
+    status: m.status,
+    data: m.utcDate,
+    casaCodice: hv_trovaCodice(m.homeTeam.shortName || m.homeTeam.name, squadreRef),
+    trasfertaCodice: hv_trovaCodice(m.awayTeam.shortName || m.awayTeam.name, squadreRef),
+    casaNome: m.homeTeam.shortName || m.homeTeam.name,
+    trasfertaNome: m.awayTeam.shortName || m.awayTeam.name,
+  }));
+}
+
 async function hv_getTutteLePartiteStagione(apiKey, squadreRef) {
   const data = await hv_fetchAPI("/competitions/SA/matches", apiKey);
   return data.matches.map((m) => ({

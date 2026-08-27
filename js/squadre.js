@@ -420,6 +420,7 @@ async function hv_initSquadre(config) {
   const { loghi } = await loghiRes.json();
 
   let partiteStagione = [];
+  let partiteConOrario = [];
   let giornataCorrente = null;
   const apiKey = config.lega.footballDataApiKey;
   const statoInfo = document.getElementById("info-match-stato");
@@ -428,14 +429,16 @@ async function hv_initSquadre(config) {
     if (statoInfo) statoInfo.textContent = "Orari partite non disponibili: manca la chiave API in config.json.";
   } else {
     try {
-      const { dati } = await hv_cacheOFetch("hv_cache_partite_stagione_v2", HV_CACHE_DURATA, () =>
-        hv_getTutteLePartiteStagione(apiKey, squadreRef)
-      );
-      partiteStagione = dati;
+      const [rispStagione, rispOrario] = await Promise.all([
+        hv_cacheOFetch("hv_cache_partite_stagione_v2", HV_CACHE_DURATA, () => hv_getTutteLePartiteStagione(apiKey, squadreRef)),
+        hv_cacheOFetch("hv_cache_partite_con_orario", HV_CACHE_DURATA, () => hv_getPartiteConOrario(apiKey, squadreRef)),
+      ]);
+      partiteStagione = rispStagione.dati;
+      partiteConOrario = rispOrario.dati;
       giornataCorrente = hv_determinaGiornataCorrente(partiteStagione);
       if (statoInfo) {
         statoInfo.textContent = giornataCorrente
-          ? `Giornata rilevata: ${giornataCorrente} (${partiteStagione.filter((p) => p.matchday === giornataCorrente).length} partite)`
+          ? `Giornata rilevata: ${giornataCorrente}`
           : "Nessuna giornata corrente rilevata nei dati ricevuti.";
       }
     } catch (e) {
@@ -450,7 +453,7 @@ async function hv_initSquadre(config) {
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
     hv_renderIntestazioneSquadra(squadra, logo);
     hv_renderLogoUploadAdmin(squadra.id, config);
-    hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteStagione);
+    hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
@@ -459,14 +462,7 @@ async function hv_initSquadre(config) {
     if (statoInfo && giornataCorrente) {
       const trovati = document.querySelectorAll("#roster-content .info-match").length;
       const totaliGiocatori = roster ? roster.giocatori.length : 0;
-      const campione = partiteStagione
-        .filter((p) => p.matchday === giornataCorrente)
-        .slice(0, 3)
-        .map((p) => `${p.casaCodice ?? "NULL"}-${p.trasfertaCodice ?? "NULL"} [data:${p.data ?? "MANCANTE"}] [status:${p.status}]`)
-        .join(" · ");
-      const testDiretto = hv_infoPartitaGiocatore("MON", giornataCorrente, partiteStagione);
-      const testoTest = testDiretto ? JSON.stringify(testDiretto) : "NULL";
-      statoInfo.textContent = `Giornata: ${giornataCorrente} — trovati ${trovati}/${totaliGiocatori}. Test MON: ${testoTest}. Campione: ${campione}`;
+      statoInfo.textContent = `Giornata ${giornataCorrente} — orario disponibile per ${trovati} su ${totaliGiocatori} giocatori.`;
     }
   }
 
