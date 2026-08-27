@@ -963,6 +963,31 @@ body.mostra-info-match .info-match {
   margin: 0;
 }
 
+.torta-wip {
+  text-align: center;
+  padding: 20px 14px;
+  background: var(--bg-void);
+  border: 1px dashed var(--border-hairline);
+  border-radius: 10px;
+}
+
+.torta-wip-icona {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  margin: 0 0 12px;
+  opacity: 0.9;
+}
+
+.torta-wip-testo {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 480px) {
   .torta-grafico-wrap { transform: scale(0.85); }
 }
