@@ -46,17 +46,44 @@
 
     <section class="section" style="margin-top: 10px;">
       <h2>Archivio stagioni</h2>
-      <div class="torta-wip" style="max-width: 420px;">
-        <img src="assets/icone/icon-workinprogress.png" class="torta-wip-icona" alt="">
-        <p class="torta-wip-testo">In arrivo: l'albo d'oro di Hertavernello — rose, pagelle e previsioni di ogni stagione passata, con la classifica di chi ha vinto di più.</p>
+
+      <div class="archivio-layout">
+        <div class="archivio-sidebar">
+          <button type="button" class="archivio-nav-item active" data-vista="albo">
+            <img src="assets/icone/icon-albodoro.png" class="icona-titolo" alt="">Albo d'oro
+          </button>
+          <button type="button" class="archivio-nav-item" data-vista="lista">
+            <img src="assets/icone/icon-lista.png" class="icona-titolo" alt="">Lista
+          </button>
+        </div>
+
+        <div class="archivio-contenuto">
+          <div id="vista-albo">
+            <div class="squadra-block" style="margin: 0 0 20px;">
+              <h3 class="squadra-block-title"><img src="assets/icone/icon-campionato.png" class="icona-titolo" alt="">Campionato</h3>
+              <div id="albo-campionato"></div>
+            </div>
+            <div class="squadra-block" style="margin: 0 0 20px;">
+              <h3 class="squadra-block-title"><img src="assets/icone/icon-coppa.png" class="icona-titolo" alt="">Coppa</h3>
+              <div id="albo-coppa"></div>
+            </div>
+            <div class="squadra-block" style="margin: 0;">
+              <h3 class="squadra-block-title"><img src="assets/icone/icon-albodoro.png" class="icona-titolo" alt="">Classifica generale</h3>
+              <div id="albo-generale"></div>
+            </div>
+          </div>
+
+          <div id="vista-lista" class="hidden">
+            <div id="lista-anni-tabs" class="tabs" style="margin-bottom: 22px;"></div>
+            <div id="lista-dettaglio"></div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 
   <script src="js/auth.js"></script>
-  <script>
-    hv_checkGate();
-  </script>
+  <script src="js/archivio.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

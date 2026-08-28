@@ -1,0 +1,1435 @@
+{
+  "_leggimi": "Storico stagioni del fantacalcio Hertavernello. Generato a mano, un blocco per stagione.",
+  "stagioni": [
+    {
+      "anno": "2018/19",
+      "annoInizio": 2018,
+      "campionato": [
+        "Emmanuele"
+      ],
+      "coppa": [
+        "Alessandro L."
+      ],
+      "classificaSerieA": [
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 90
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 79
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 69
+        },
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 69
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 68
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 66
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 63
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 59
+        },
+        {
+          "nome": "Sampdoria",
+          "codice": "SAM",
+          "punti": 53
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 44
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 43
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 43
+        },
+        {
+          "nome": "Spal",
+          "codice": "SPA",
+          "punti": 42
+        },
+        {
+          "nome": "Parma",
+          "codice": "PAR",
+          "punti": 41
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 41
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 41
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 38
+        },
+        {
+          "nome": "Empoli",
+          "codice": "EMP",
+          "punti": 38
+        },
+        {
+          "nome": "Frosinone",
+          "codice": "FRO",
+          "punti": 25
+        },
+        {
+          "nome": "Chievo Verona",
+          "codice": "CHI",
+          "punti": 21
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Fabio Quagliarella",
+          "squadra": "Sampdoria",
+          "gol": 26
+        },
+        {
+          "nome": "Duvan Zapata",
+          "squadra": "Atalanta",
+          "gol": 23
+        },
+        {
+          "nome": "Krzysztof Piątek",
+          "squadra": "Genoa/Milan",
+          "gol": 22
+        },
+        {
+          "nome": "Cristiano Ronaldo",
+          "squadra": "Juventus",
+          "gol": 21
+        },
+        {
+          "nome": "Arkadiusz Milik",
+          "squadra": "Napoli",
+          "gol": 17
+        },
+        {
+          "nome": "Andrea Petagna",
+          "squadra": "Spal",
+          "gol": 16
+        },
+        {
+          "nome": "Francesco Caputo",
+          "squadra": "Empoli",
+          "gol": 16
+        },
+        {
+          "nome": "Leonardo Pavoletti",
+          "squadra": "Cagliari",
+          "gol": 16
+        },
+        {
+          "nome": "Dries Mertens",
+          "squadra": "Napoli",
+          "gol": 16
+        },
+        {
+          "nome": "Ciro Immobile",
+          "squadra": "Lazio",
+          "gol": 15
+        }
+      ],
+      "curiosita": {
+        "titolo": "L'effetto CR7 e l'alba dei buchi neri",
+        "calcio": [
+          "Il Re non è Cristiano: nonostante l'arrivo shock di Cristiano Ronaldo alla Juventus, il titolo di capocannoniere viene vinto dall'eterno Fabio Quagliarella (Sampdoria) a 36 anni, con 26 gol.",
+          "La favola dell'Atalanta: per la prima volta nei suoi 112 anni di storia, la squadra di Gasperini si qualifica in Champions League, chiudendo al 3° posto e segnando più gol di tutti (77 reti).",
+          "L'addio del Capitan Futuro: è l'ultima stagione in Serie A di Daniele De Rossi, che saluta la Roma dopo 18 anni per trasferirsi al Boca Juniors.",
+          "Il ciclone Piątek: il polacco Krzysztof Piątek sconvolge il campionato segnando a raffica prima con il Genoa e poi, da gennaio, con il Milan."
+        ],
+        "mondo": [
+          "La prima foto di un buco nero: ad aprile 2019, l'Event Horizon Telescope pubblica la prima vera immagine della storia di un buco nero, al centro della galassia M87.",
+          "Tragedia e rinascita a Genova: il 14 agosto 2018 crolla il Ponte Morandi, un evento che sconvolge l'Italia; Genoa e Sampdoria rinviano le loro prime partite di campionato in segno di lutto.",
+          "La minaccia di Thanos: nei cinema esce Avengers: Endgame, diventando temporaneamente il film con i maggiori incassi della storia del cinema.",
+          "La rivoluzione di TikTok: l'app esplode definitivamente tra i giovani in Italia, cambiando per sempre il mondo dei social media."
+        ]
+      }
+    },
+    {
+      "anno": "2019/20",
+      "annoInizio": 2019,
+      "campionato": [
+        "Lelio"
+      ],
+      "coppa": [],
+      "classificaSerieA": [
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 83
+        },
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 82
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 78
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 78
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 70
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 66
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 62
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 62
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 49
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 49
+        },
+        {
+          "nome": "Parma",
+          "codice": "PAR",
+          "punti": 47
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 45
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 45
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 45
+        },
+        {
+          "nome": "Sampdoria",
+          "codice": "SAM",
+          "punti": 42
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 40
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 36
+        },
+        {
+          "nome": "Lecce",
+          "codice": "LEC",
+          "punti": 35
+        },
+        {
+          "nome": "Brescia",
+          "codice": "BRE",
+          "punti": 25
+        },
+        {
+          "nome": "Spal",
+          "codice": "SPA",
+          "punti": 20
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Ciro Immobile",
+          "squadra": "Lazio",
+          "gol": 36
+        },
+        {
+          "nome": "Cristiano Ronaldo",
+          "squadra": "Juventus",
+          "gol": 31
+        },
+        {
+          "nome": "Romelu Lukaku",
+          "squadra": "Inter",
+          "gol": 23
+        },
+        {
+          "nome": "Francesco Caputo",
+          "squadra": "Sassuolo",
+          "gol": 21
+        },
+        {
+          "nome": "Joao Pedro",
+          "squadra": "Cagliari",
+          "gol": 18
+        },
+        {
+          "nome": "Luis Muriel",
+          "squadra": "Atalanta",
+          "gol": 18
+        },
+        {
+          "nome": "Duvan Zapata",
+          "squadra": "Atalanta",
+          "gol": 18
+        },
+        {
+          "nome": "Andrea Belotti",
+          "squadra": "Torino",
+          "gol": 16
+        },
+        {
+          "nome": "Edin Dzeko",
+          "squadra": "Roma",
+          "gol": 16
+        },
+        {
+          "nome": "Josip Ilicic",
+          "squadra": "Atalanta",
+          "gol": 15
+        }
+      ],
+      "curiosita": {
+        "titolo": "Il campionato più lungo della storia",
+        "calcio": [
+          "La Juventus vince il suo 9° scudetto consecutivo (36° totale), ma in Champions League viene eliminata a sorpresa dal Lione agli ottavi.",
+          "Ciro Immobile è il grande protagonista dell'annata: i suoi 36 gol con la Lazio eguagliano il record assoluto di reti in una singola stagione di Serie A, stabilito da Higuaín nel 2015/16.",
+          "L'Atalanta di Gasperini si conferma grande sorpresa d'Europa, arrivando fino ai quarti di finale di Champions League — mai così in alto nella sua storia.",
+          "Il campionato si ferma il 9 marzo 2020 per il lockdown nazionale, riprende il 20 giugno a porte chiuse e si conclude solo il 2 agosto: il più lungo della storia della Serie A."
+        ],
+        "mondo": [
+          "L'Organizzazione Mondiale della Sanità dichiara lo stato di pandemia globale per il COVID-19 l'11 marzo 2020, sconvolgendo il mondo intero.",
+          "L'Italia entra in lockdown nazionale il 9 marzo 2020, prima nazione occidentale a farlo, con la popolazione confinata in casa per mesi.",
+          "Kobe Bryant, leggenda del basket NBA, muore in un incidente in elicottero il 26 gennaio 2020, lasciando sotto shock il mondo dello sport.",
+          "Nel maggio 2020 esplode negli Stati Uniti il movimento Black Lives Matter dopo la morte di George Floyd, con proteste che si estendono a livello globale."
+        ]
+      }
+    },
+    {
+      "anno": "2020/21",
+      "annoInizio": 2020,
+      "campionato": [
+        "Filippo"
+      ],
+      "coppa": [
+        "Raffaele"
+      ],
+      "classificaSerieA": [
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 91
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 79
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 78
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 78
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 77
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 68
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 62
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 62
+        },
+        {
+          "nome": "Sampdoria",
+          "codice": "SAM",
+          "punti": 52
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 45
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 42
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 41
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 40
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 40
+        },
+        {
+          "nome": "Spezia",
+          "codice": "SPE",
+          "punti": 39
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 37
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 37
+        },
+        {
+          "nome": "Benevento",
+          "codice": "BEN",
+          "punti": 33
+        },
+        {
+          "nome": "Crotone",
+          "codice": "CRO",
+          "punti": 23
+        },
+        {
+          "nome": "Parma",
+          "codice": "PAR",
+          "punti": 20
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Cristiano Ronaldo",
+          "squadra": "Juventus",
+          "gol": 29
+        },
+        {
+          "nome": "Romelu Lukaku",
+          "squadra": "Inter",
+          "gol": 24
+        },
+        {
+          "nome": "Luis Muriel",
+          "squadra": "Atalanta",
+          "gol": 22
+        },
+        {
+          "nome": "Dusan Vlahovic",
+          "squadra": "Fiorentina",
+          "gol": 21
+        },
+        {
+          "nome": "Ciro Immobile",
+          "squadra": "Lazio",
+          "gol": 20
+        },
+        {
+          "nome": "Simy",
+          "squadra": "Crotone",
+          "gol": 20
+        },
+        {
+          "nome": "Lorenzo Insigne",
+          "squadra": "Napoli",
+          "gol": 19
+        },
+        {
+          "nome": "Domenico Berardi",
+          "squadra": "Sassuolo",
+          "gol": 17
+        },
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 17
+        },
+        {
+          "nome": "Joao Pedro",
+          "squadra": "Cagliari",
+          "gol": 16
+        }
+      ],
+      "curiosita": {
+        "titolo": "CR7 sul trono dei bomber, e la Superlega che durò due giorni",
+        "calcio": [
+          "Dopo nove anni di dominio Juventus, l'Inter di Antonio Conte torna campione d'Italia (19° scudetto) con 12 punti di vantaggio sul Milan secondo.",
+          "Cristiano Ronaldo vince il suo primo (e unico) titolo di capocannoniere in Serie A con 29 gol, unico giocatore nella storia a riuscirci in Premier League, Liga e Serie A.",
+          "Il 18 aprile 2021 dodici grandi club europei (tra cui Juventus, Inter e Milan) annunciano la Superlega: il progetto crolla sotto le proteste dei tifosi in appena 48 ore.",
+          "Gli stadi restano vuoti o quasi per l'intera stagione a causa delle restrizioni anti-Covid ancora in vigore."
+        ],
+        "mondo": [
+          "Iniziano le campagne vaccinali di massa contro il COVID-19 in tutto il mondo, con l'Italia che parte a fine dicembre 2020.",
+          "Il 6 gennaio 2021 sostenitori di Donald Trump assaltano il Campidoglio di Washington, immagini che fanno il giro del mondo.",
+          "A marzo 2021 la nave container Ever Given si incaglia nel Canale di Suez, bloccando per giorni una delle rotte commerciali più importanti del pianeta.",
+          "Il mondo resta ancora in gran parte chiuso: mascherine, distanziamento e coprifuoco scandiscono la vita quotidiana per tutta la stagione."
+        ]
+      }
+    },
+    {
+      "anno": "2021/22",
+      "annoInizio": 2021,
+      "campionato": [],
+      "coppa": [],
+      "classificaSerieA": [
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 86
+        },
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 84
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 79
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 70
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 64
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 63
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 62
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 59
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 53
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 50
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 50
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 47
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 46
+        },
+        {
+          "nome": "Empoli",
+          "codice": "EMP",
+          "punti": 41
+        },
+        {
+          "nome": "Sampdoria",
+          "codice": "SAM",
+          "punti": 36
+        },
+        {
+          "nome": "Spezia",
+          "codice": "SPE",
+          "punti": 36
+        },
+        {
+          "nome": "Salernitana",
+          "codice": "SAL",
+          "punti": 31
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 29
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 28
+        },
+        {
+          "nome": "Venezia",
+          "codice": "VEN",
+          "punti": 27
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Ciro Immobile",
+          "squadra": "Lazio",
+          "gol": 27
+        },
+        {
+          "nome": "Dusan Vlahovic",
+          "squadra": "Juventus",
+          "gol": 24
+        },
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 21
+        },
+        {
+          "nome": "Tammy Abraham",
+          "squadra": "Roma",
+          "gol": 17
+        },
+        {
+          "nome": "Giovanni Simeone",
+          "squadra": "Hellas Verona",
+          "gol": 17
+        },
+        {
+          "nome": "Gianluca Scamacca",
+          "squadra": "Sassuolo",
+          "gol": 16
+        },
+        {
+          "nome": "Domenico Berardi",
+          "squadra": "Sassuolo",
+          "gol": 15
+        },
+        {
+          "nome": "Marko Arnautovic",
+          "squadra": "Bologna",
+          "gol": 14
+        },
+        {
+          "nome": "Victor Osimhen",
+          "squadra": "Napoli",
+          "gol": 14
+        },
+        {
+          "nome": "Joao Pedro",
+          "squadra": "Cagliari",
+          "gol": 13
+        }
+      ],
+      "curiosita": {
+        "titolo": "Il Milan più giovane di sempre, mentre in Europa scoppia la guerra",
+        "calcio": [
+          "Il Milan vince il suo 19° scudetto all'ultima giornata, superando l'Inter: è la squadra più giovane di sempre a vincere il titolo nell'era dei tre punti a vittoria.",
+          "Ciro Immobile conquista il suo 4° titolo di capocannoniere (27 gol), diventando il secondo giocatore nella storia della Serie A a riuscirci, dopo il leggendario Gunnar Nordahl.",
+          "La 27ª giornata di campionato inizia con cinque minuti di ritardo in tutti gli stadi, per mandare un messaggio unanime di pace dopo lo scoppio della guerra in Ucraina.",
+          "L'Italia di Mancini, campione d'Europa in carica, fallisce clamorosamente la qualificazione al Mondiale 2022, eliminata dalla Macedonia del Nord."
+        ],
+        "mondo": [
+          "Il 24 febbraio 2022 la Russia invade l'Ucraina, dando inizio al più grande conflitto in Europa dalla Seconda Guerra Mondiale.",
+          "Le sanzioni internazionali contro la Russia e la crisi energetica che ne segue fanno impennare il costo di gas e bollette in tutta Europa, Italia compresa.",
+          "A gennaio 2022 la variante Omicron del COVID-19 fa esplodere i contagi in tutto il mondo, pur risultando meno letale delle precedenti.",
+          "Elon Musk annuncia ad aprile 2022 l'intenzione di acquistare Twitter per 44 miliardi di dollari, operazione conclusa in autunno."
+        ]
+      }
+    },
+    {
+      "anno": "2022/23",
+      "annoInizio": 2022,
+      "campionato": [
+        "Alessandro S."
+      ],
+      "coppa": [],
+      "classificaSerieA": [
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 90
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 74
+        },
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 72
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 70
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 61
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 63
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 62
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 53
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 50
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 53
+        },
+        {
+          "nome": "Monza",
+          "codice": "MON",
+          "punti": 51
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 47
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 50
+        },
+        {
+          "nome": "Empoli",
+          "codice": "EMP",
+          "punti": 37
+        },
+        {
+          "nome": "Salernitana",
+          "codice": "SAL",
+          "punti": 37
+        },
+        {
+          "nome": "Lecce",
+          "codice": "LEC",
+          "punti": 38
+        },
+        {
+          "nome": "Spezia",
+          "codice": "SPE",
+          "punti": 31
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 31
+        },
+        {
+          "nome": "Cremonese",
+          "codice": "CRE",
+          "punti": 26
+        },
+        {
+          "nome": "Sampdoria",
+          "codice": "SAM",
+          "punti": 19
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Victor Osimhen",
+          "squadra": "Napoli",
+          "gol": 26
+        },
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 21
+        },
+        {
+          "nome": "Boulaye Dia",
+          "squadra": "Salernitana",
+          "gol": 16
+        },
+        {
+          "nome": "Rafael Leao",
+          "squadra": "Milan",
+          "gol": 15
+        },
+        {
+          "nome": "Ademola Lookman",
+          "squadra": "Atalanta",
+          "gol": 13
+        },
+        {
+          "nome": "Mbala Nzola",
+          "squadra": "Spezia",
+          "gol": 13
+        },
+        {
+          "nome": "Olivier Giroud",
+          "squadra": "Milan",
+          "gol": 13
+        },
+        {
+          "nome": "Khvicha Kvaratskhelia",
+          "squadra": "Napoli",
+          "gol": 12
+        },
+        {
+          "nome": "Domenico Berardi",
+          "squadra": "Sassuolo",
+          "gol": 12
+        },
+        {
+          "nome": "Paulo Dybala",
+          "squadra": "Roma",
+          "gol": 12
+        }
+      ],
+      "curiosita": {
+        "titolo": "Il Napoli aspetta 33 anni, poi esplode",
+        "calcio": [
+          "Il Napoli di Spalletti vince il suo 3° scudetto, il primo dai tempi di Diego Armando Maradona (1990): 33 anni di attesa.",
+          "Victor Osimhen firma la doppietta scudetto più classifica cannonieri (26 gol): un'accoppiata che non era riuscita nemmeno nell'epoca di Maradona.",
+          "Khvicha Kvaratskhelia, sconosciuto ai più fino all'estate 2022, si rivela il vero fenomeno del campionato al suo primo anno in Serie A.",
+          "A gennaio 2023 la Juventus viene penalizzata di 15 punti in classifica per la vicenda plusvalenze, poi in parte riammessi dopo un lungo iter giudiziario."
+        ],
+        "mondo": [
+          "A dicembre 2022 l'Argentina di Lionel Messi vince il Mondiale in Qatar, in una delle finali più spettacolari della storia contro la Francia di Mbappé.",
+          "Il 30 novembre 2022 viene lanciato ChatGPT: nel giro di pochi mesi cambia per sempre il modo in cui milioni di persone lavorano e studiano.",
+          "L'8 settembre 2022 muore la Regina Elisabetta II dopo 70 anni di regno, evento seguito in diretta da centinaia di milioni di persone nel mondo.",
+          "Il 6 febbraio 2023 un violentissimo terremoto colpisce Turchia e Siria, causando oltre 50.000 vittime."
+        ]
+      }
+    },
+    {
+      "anno": "2023/24",
+      "annoInizio": 2023,
+      "campionato": [],
+      "coppa": [
+        "Dario"
+      ],
+      "classificaSerieA": [
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 94
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 75
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 71
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 69
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 68
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 63
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 61
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 60
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 56
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 53
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 49
+        },
+        {
+          "nome": "Monza",
+          "codice": "MON",
+          "punti": 48
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 41
+        },
+        {
+          "nome": "Lecce",
+          "codice": "LEC",
+          "punti": 38
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 36
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 36
+        },
+        {
+          "nome": "Empoli",
+          "codice": "EMP",
+          "punti": 34
+        },
+        {
+          "nome": "Frosinone",
+          "codice": "FRO",
+          "punti": 33
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": 31
+        },
+        {
+          "nome": "Salernitana",
+          "codice": "SAL",
+          "punti": 17
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 24
+        },
+        {
+          "nome": "Dusan Vlahovic",
+          "squadra": "Juventus",
+          "gol": 16
+        },
+        {
+          "nome": "Olivier Giroud",
+          "squadra": "Milan",
+          "gol": 15
+        },
+        {
+          "nome": "Victor Osimhen",
+          "squadra": "Napoli",
+          "gol": 15
+        },
+        {
+          "nome": "Albert Gudmundsson",
+          "squadra": "Genoa",
+          "gol": 13
+        },
+        {
+          "nome": "Hakan Calhanoglu",
+          "squadra": "Inter",
+          "gol": 13
+        },
+        {
+          "nome": "Marcus Thuram",
+          "squadra": "Inter",
+          "gol": 13
+        },
+        {
+          "nome": "Paulo Dybala",
+          "squadra": "Roma",
+          "gol": 13
+        },
+        {
+          "nome": "Romelu Lukaku",
+          "squadra": "Roma",
+          "gol": 13
+        },
+        {
+          "nome": "Duvan Zapata",
+          "squadra": "Torino/Atalanta",
+          "gol": 13
+        }
+      ],
+      "curiosita": {
+        "titolo": "La seconda stella dell'Inter",
+        "calcio": [
+          "L'Inter vince il suo 20° scudetto, conquistando ufficialmente la \"seconda stella\" (le stelle sul petto si guadagnano ogni 10 titoli).",
+          "Il titolo matematico arriva nel modo più dolce possibile: vinto proprio nel derby, in casa del Milan, il 22 aprile 2024.",
+          "Lautaro Martinez è il grande protagonista: capocannoniere con 24 gol e MVP del campionato, capitano della squadra scudettata.",
+          "La Fiorentina vive una stagione agrodolce, arrivando a due finali europee di fila (Conference League) e perdendole entrambe ai supplementari."
+        ],
+        "mondo": [
+          "Il 7 ottobre 2023 Hamas attacca Israele, scatenando un conflitto a Gaza che domina le cronache internazionali per tutta la stagione.",
+          "Taylor Swift diventa un fenomeno globale con il suo \"Eras Tour\", il tour musicale con maggiori incassi della storia.",
+          "L'intelligenza artificiale generativa esplode nell'uso quotidiano, con milioni di persone che iniziano a usare strumenti come ChatGPT per lavoro e studio.",
+          "Nel febbraio 2024 la sonda Odysseus firma il primo allunaggio privato della storia degli Stati Uniti, dopo oltre 50 anni dall'ultima missione Apollo."
+        ]
+      }
+    },
+    {
+      "anno": "2024/25",
+      "annoInizio": 2024,
+      "campionato": [],
+      "coppa": [
+        "Lelio"
+      ],
+      "classificaSerieA": [
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": 82
+        },
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": 81
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": 69
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": 66
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": 63
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": 63
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": 63
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": 62
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": 61
+        },
+        {
+          "nome": "Como",
+          "codice": "COM",
+          "punti": 50
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": 46
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": 44
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": 42
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": 38
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": 34
+        },
+        {
+          "nome": "Parma",
+          "codice": "PAR",
+          "punti": 33
+        },
+        {
+          "nome": "Lecce",
+          "codice": "LEC",
+          "punti": 31
+        },
+        {
+          "nome": "Empoli",
+          "codice": "EMP",
+          "punti": 26
+        },
+        {
+          "nome": "Venezia",
+          "codice": "VEN",
+          "punti": 25
+        },
+        {
+          "nome": "Monza",
+          "codice": "MON",
+          "punti": 18
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Mateo Retegui",
+          "squadra": "Atalanta",
+          "gol": 25
+        },
+        {
+          "nome": "Moise Kean",
+          "squadra": "Fiorentina",
+          "gol": 19
+        },
+        {
+          "nome": "Ademola Lookman",
+          "squadra": "Atalanta",
+          "gol": 15
+        },
+        {
+          "nome": "Riccardo Orsolini",
+          "squadra": "Bologna",
+          "gol": 15
+        },
+        {
+          "nome": "Marcus Thuram",
+          "squadra": "Inter",
+          "gol": 14
+        },
+        {
+          "nome": "Romelu Lukaku",
+          "squadra": "Napoli",
+          "gol": 14
+        },
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 12
+        },
+        {
+          "nome": "Artem Dovbyk",
+          "squadra": "Roma",
+          "gol": 12
+        },
+        {
+          "nome": "Scott McTominay",
+          "squadra": "Napoli",
+          "gol": 12
+        },
+        {
+          "nome": "Lorenzo Lucca",
+          "squadra": "Udinese",
+          "gol": 12
+        }
+      ],
+      "curiosita": {
+        "titolo": "Il Napoli di Conte, dal decimo posto allo scudetto",
+        "calcio": [
+          "Il Napoli, guidato al primo anno da Antonio Conte, vince il suo 4° scudetto — un'impresa mai riuscita a nessuno nell'era a 20 squadre: nessuno aveva mai vinto il titolo l'anno dopo essere arrivato solo 10°.",
+          "Mateo Retegui, centravanti italo-argentino dell'Atalanta, si laurea capocannoniere con 25 gol, davanti a Moise Kean.",
+          "L'Inter, corsara fino all'ultimo, si arrende al Napoli solo nelle giornate conclusive di un testa a testa serratissimo durato tutta la stagione.",
+          "La Fiorentina si qualifica a sorpresa per la Conference League ai danni di una Lazio in caduta libera nel finale."
+        ],
+        "mondo": [
+          "Il 5 novembre 2024 Donald Trump viene rieletto Presidente degli Stati Uniti, tornando alla Casa Bianca dopo quattro anni.",
+          "L'estate 2024, appena prima dell'inizio del campionato, Parigi ospita le Olimpiadi, con l'Italia che chiude con un ottimo bottino di medaglie.",
+          "Il 7 dicembre 2024 riapre al pubblico la Cattedrale di Notre-Dame a Parigi, oltre cinque anni dopo il devastante incendio del 2019.",
+          "L'intelligenza artificiale continua la sua corsa: modelli sempre più avanzati diventano strumenti quotidiani per centinaia di milioni di persone nel mondo."
+        ]
+      }
+    },
+    {
+      "anno": "2025/26",
+      "annoInizio": 2025,
+      "campionato": [
+        "Giuseppe"
+      ],
+      "coppa": [
+        "Raffaele",
+        "Riccardo"
+      ],
+      "classificaSerieA": [
+        {
+          "nome": "Inter",
+          "codice": "INT",
+          "punti": null
+        },
+        {
+          "nome": "Napoli",
+          "codice": "NAP",
+          "punti": null
+        },
+        {
+          "nome": "Roma",
+          "codice": "ROM",
+          "punti": null
+        },
+        {
+          "nome": "Como",
+          "codice": "COM",
+          "punti": null
+        },
+        {
+          "nome": "Milan",
+          "codice": "MIL",
+          "punti": null
+        },
+        {
+          "nome": "Juventus",
+          "codice": "JUV",
+          "punti": null
+        },
+        {
+          "nome": "Atalanta",
+          "codice": "ATA",
+          "punti": null
+        },
+        {
+          "nome": "Bologna",
+          "codice": "BOL",
+          "punti": null
+        },
+        {
+          "nome": "Lazio",
+          "codice": "LAZ",
+          "punti": null
+        },
+        {
+          "nome": "Udinese",
+          "codice": "UDI",
+          "punti": null
+        },
+        {
+          "nome": "Sassuolo",
+          "codice": "SAS",
+          "punti": null
+        },
+        {
+          "nome": "Torino",
+          "codice": "TOR",
+          "punti": null
+        },
+        {
+          "nome": "Parma",
+          "codice": "PAR",
+          "punti": null
+        },
+        {
+          "nome": "Cagliari",
+          "codice": "CAG",
+          "punti": null
+        },
+        {
+          "nome": "Fiorentina",
+          "codice": "FIO",
+          "punti": null
+        },
+        {
+          "nome": "Genoa",
+          "codice": "GEN",
+          "punti": null
+        },
+        {
+          "nome": "Lecce",
+          "codice": "LEC",
+          "punti": null
+        },
+        {
+          "nome": "Cremonese",
+          "codice": "CRE",
+          "punti": null
+        },
+        {
+          "nome": "Hellas Verona",
+          "codice": "VER",
+          "punti": null
+        },
+        {
+          "nome": "Pisa",
+          "codice": "PIS",
+          "punti": null
+        }
+      ],
+      "topMarcatori": [
+        {
+          "nome": "Lautaro Martinez",
+          "squadra": "Inter",
+          "gol": 17
+        },
+        {
+          "nome": "Donyell Malen",
+          "squadra": "Roma",
+          "gol": 14
+        },
+        {
+          "nome": "Tasos Douvikas",
+          "squadra": "Como",
+          "gol": 14
+        },
+        {
+          "nome": "Marcus Thuram",
+          "squadra": "Inter",
+          "gol": 13
+        },
+        {
+          "nome": "Nico Paz",
+          "squadra": "Como",
+          "gol": 12
+        },
+        {
+          "nome": "Rasmus Hojlund",
+          "squadra": "Napoli",
+          "gol": 11
+        },
+        {
+          "nome": "Giovanni Simeone",
+          "squadra": "Torino",
+          "gol": 11
+        },
+        {
+          "nome": "Nikola Krstovic",
+          "squadra": "Atalanta",
+          "gol": 10
+        },
+        {
+          "nome": "Gianluca Scamacca",
+          "squadra": "Atalanta",
+          "gol": 10
+        },
+        {
+          "nome": "Riccardo Orsolini",
+          "squadra": "Bologna",
+          "gol": 10
+        }
+      ],
+      "curiosita": {
+        "titolo": "L'Inter di Chivu e la favola Champions del Como",
+        "calcio": [
+          "L'Inter vince il suo 21° scudetto con tre giornate d'anticipo, sotto la guida di Cristian Chivu: primo allenatore straniero a vincere il titolo in Italia dai tempi di José Mourinho (2009/10), 16 anni prima.",
+          "Lautaro Martinez si conferma capocannoniere per la seconda volta, ma con appena 17 gol: mai il titolo era stato vinto con così pochi gol nell'era del campionato a 20 squadre.",
+          "Il Como si qualifica clamorosamente per la Champions League, una delle storie più sorprendenti degli ultimi anni di Serie A.",
+          "Il Milan fa segnare la striscia di imbattibilità più lunga della stagione, con 24 partite consecutive senza sconfitte."
+        ],
+        "mondo": [
+          "Il mondo dell'intelligenza artificiale continua la sua corsa serrata, con nuovi modelli sempre più capaci che entrano nella vita quotidiana di miliardi di persone.",
+          "Le tensioni internazionali legate alla guerra in Ucraina e al Medio Oriente restano al centro delle cronache mondiali per tutta la stagione.",
+          "L'Italia ospita le Olimpiadi invernali di Milano-Cortina a febbraio 2026, con i riflettori del mondo intero puntati sul Paese."
+        ]
+      }
+    },
+    {
+      "anno": "2026/27",
+      "annoInizio": 2026,
+      "inCorso": true,
+      "campionato": [],
+      "coppa": [],
+      "classificaSerieA": [],
+      "topMarcatori": [],
+      "curiosita": null
+    }
+  ]
+}
