@@ -10,7 +10,7 @@
 // Cambia HV_CACHE_VERSIONE quando aggiorni pagine importanti, così i
 // dispositivi dei tuoi amici scaricano la versione fresca invece di quella
 // vecchia salvata.
-const HV_CACHE_VERSIONE = "hertavernello-v1";
+const HV_CACHE_VERSIONE = "hertavernello-v2";
 
 const HV_PRECACHE = [
   "index.html",
@@ -64,6 +64,24 @@ self.addEventListener("fetch", (event) => {
   // (via Worker) restano fuori, gestite già dalla cache in localStorage del sito.
   if (event.request.method !== "GET" || url.origin !== self.location.origin) return;
 
+  // Navigazione tra pagine (click su un link, indirizzo digitato): provo
+  // SEMPRE prima la rete, così non resti mai bloccato su una versione vecchia
+  // quando internet c'è. La cache interviene solo se sei davvero offline.
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((risposta) => {
+          const copia = risposta.clone();
+          caches.open(HV_CACHE_VERSIONE).then((cache) => cache.put(event.request, copia));
+          return risposta;
+        })
+        .catch(() => caches.match(event.request).then((r) => r || caches.match("index.html")))
+    );
+    return;
+  }
+
+  // Tutto il resto (css, js, immagini, loghi, bandiere): cache-first per
+  // velocità, aggiornato comunque in background quando la rete risponde.
   event.respondWith(
     caches.match(event.request).then((risposteCache) => {
       const dalNetwork = fetch(event.request)
