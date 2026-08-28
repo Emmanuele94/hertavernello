@@ -16,6 +16,7 @@ const HV_PRECACHE = [
   "index.html",
   "squadre.html",
   "quiz.html",
+  "archivio.html",
   "admin.html",
   "manifest.json",
   "css/style.css",

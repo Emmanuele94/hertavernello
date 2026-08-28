@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Mini-Quiz — Hertavernello</title>
+  <title>Archivio — Hertavernello</title>
   <link rel="icon" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icone-app/icon-180.png">
@@ -31,13 +31,13 @@
       <div class="site-header-testo">
         <h1 id="lega-nome">Hertavernello</h1>
       </div>
-      <a href="quiz.html" class="quiz-badge-link active" title="Mini-Quiz">
+      <a href="quiz.html" class="quiz-badge-link" title="Mini-Quiz">
         <img src="assets/icone/icon-quiz.png" class="quiz-badge-icona" alt="Quiz">
       </a>
       <nav>
         <a href="index.html" class="nav-btn"><img src="assets/icone/icon-house.png" class="icona-nav" alt="">Home</a>
         <a href="squadre.html" class="nav-btn"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
-        <a href="archivio.html" class="nav-btn"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
+        <a href="archivio.html" class="nav-btn active"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
         <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente">
           <img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="Esci">
         </a>
@@ -45,20 +45,18 @@
     </header>
 
     <section class="section" style="margin-top: 10px;">
-      <h2>Mini-Quiz di giornata</h2>
-      <p class="muted" style="font-size:13px; margin: -10px 0 20px;">
-        Una giornata si sblocca appena tutte le sue partite reali sono concluse. 10 domande basate sui risultati
-        veri e sulle vostre rose — il punteggio resta salvato solo in questo browser.
-      </p>
-      <div id="quiz-griglia" class="quiz-griglia"></div>
-      <div id="quiz-gioco" class="hidden"></div>
+      <h2>Archivio stagioni</h2>
+      <div class="torta-wip" style="max-width: 420px;">
+        <img src="assets/icone/icon-workinprogress.png" class="torta-wip-icona" alt="">
+        <p class="torta-wip-testo">In arrivo: l'albo d'oro di Hertavernello — rose, pagelle e previsioni di ogni stagione passata, con la classifica di chi ha vinto di più.</p>
+      </div>
     </section>
   </div>
 
   <script src="js/auth.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/cache.js"></script>
-  <script src="js/quiz.js"></script>
+  <script>
+    hv_checkGate();
+  </script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
