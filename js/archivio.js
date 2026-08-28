@@ -99,32 +99,6 @@ function hv_renderAnnoTabs(stagioni) {
       btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     });
   });
-
-  hv_initFrecceAnniTabs(wrap);
-}
-
-// Frecce ‹ › per scorrere i tab anno (uguali su mobile e desktop) + dissolvenza
-// ai bordi quando c'è altro contenuto nascosto da quel lato.
-function hv_initFrecceAnniTabs(wrap) {
-  const scroller = wrap.closest(".anno-tabs-scroller");
-  const prevBtn = document.getElementById("anno-tabs-prev");
-  const nextBtn = document.getElementById("anno-tabs-next");
-  if (!scroller || !prevBtn || !nextBtn) return;
-
-  const passo = () => Math.round(wrap.clientWidth * 0.7) || 160;
-
-  const aggiornaStato = () => {
-    const maxScroll = wrap.scrollWidth - wrap.clientWidth;
-    scroller.classList.toggle("puo-scorrere-sx", wrap.scrollLeft > 4);
-    scroller.classList.toggle("puo-scorrere-dx", wrap.scrollLeft < maxScroll - 4);
-  };
-
-  prevBtn.addEventListener("click", () => wrap.scrollBy({ left: -passo(), behavior: "smooth" }));
-  nextBtn.addEventListener("click", () => wrap.scrollBy({ left: passo(), behavior: "smooth" }));
-  wrap.addEventListener("scroll", aggiornaStato);
-  window.addEventListener("resize", aggiornaStato);
-
-  aggiornaStato();
 }
 
 function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {

@@ -449,80 +449,36 @@ a { color: inherit; }
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
   margin-bottom: 22px;
   scrollbar-width: thin;
 }
 
-/* Riga tab anni con frecce di scorrimento (uguale su mobile e desktop) */
-.anno-tabs-scroller {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+/* Barra di scorrimento dei tab anno (vista Lista in Archivio): sempre visibile
+   e colorata di verde neon, identica su desktop e mobile — non è quella grigia
+   di sistema, è disegnata a mano con le pseudo-classi dello scrollbar. */
+#lista-anni-tabs {
+  overflow-x: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--verde-prato) var(--bg-card);
 }
 
-.anno-tabs-scroller .tabs {
-  flex: 1;
-  min-width: 0; /* permette al contenitore di restringersi e scorrere invece di allargare la pagina */
-  position: relative;
+#lista-anni-tabs::-webkit-scrollbar {
+  height: 7px;
 }
-
-.anno-tabs-freccia {
-  flex: 0 0 auto;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+#lista-anni-tabs::-webkit-scrollbar-track {
   background: var(--bg-card);
-  border: 1px solid var(--border-hairline);
-  color: var(--text-primary);
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  border-radius: 4px;
 }
-
-.anno-tabs-freccia:hover { border-color: var(--verde-prato); color: var(--verde-prato); }
-
-/* Le frecce restano sempre cliccabili, ma si affievoliscono quando non c'è
-   altro da scorrere in quella direzione */
-.anno-tabs-scroller:not(.puo-scorrere-sx) #anno-tabs-prev,
-.anno-tabs-scroller:not(.puo-scorrere-dx) #anno-tabs-next {
-  opacity: 0.3;
+#lista-anni-tabs::-webkit-scrollbar-thumb {
+  background: var(--verde-prato);
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.7);
 }
-
-/* Dissolvenza sul bordo interno quando c'è altro contenuto nascosto */
-.anno-tabs-scroller .tabs::before,
-.anno-tabs-scroller .tabs::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 18px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
+#lista-anni-tabs::-webkit-scrollbar-thumb:hover {
+  background: var(--giallo-neon);
+  box-shadow: 0 0 8px rgba(245, 255, 0, 0.8);
 }
-.anno-tabs-scroller .tabs::before {
-  left: 0;
-  background: linear-gradient(90deg, var(--bg-void), transparent);
-}
-.anno-tabs-scroller .tabs::after {
-  right: 0;
-  background: linear-gradient(270deg, var(--bg-void), transparent);
-}
-.anno-tabs-scroller.puo-scorrere-sx .tabs::before { opacity: 1; }
-.anno-tabs-scroller.puo-scorrere-dx .tabs::after { opacity: 1; }
-
-@media (max-width: 480px) {
-  .anno-tabs-freccia { width: 26px; height: 26px; font-size: 16px; }
-}
-
-
 
 .tab-btn {
   flex: 0 0 auto;
