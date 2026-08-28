@@ -454,6 +454,76 @@ a { color: inherit; }
   scrollbar-width: thin;
 }
 
+/* Riga tab anni con frecce di scorrimento (uguale su mobile e desktop) */
+.anno-tabs-scroller {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.anno-tabs-scroller .tabs {
+  flex: 1;
+  min-width: 0; /* permette al contenitore di restringersi e scorrere invece di allargare la pagina */
+  position: relative;
+}
+
+.anno-tabs-freccia {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.anno-tabs-freccia:hover { border-color: var(--verde-prato); color: var(--verde-prato); }
+
+/* Le frecce restano sempre cliccabili, ma si affievoliscono quando non c'è
+   altro da scorrere in quella direzione */
+.anno-tabs-scroller:not(.puo-scorrere-sx) #anno-tabs-prev,
+.anno-tabs-scroller:not(.puo-scorrere-dx) #anno-tabs-next {
+  opacity: 0.3;
+}
+
+/* Dissolvenza sul bordo interno quando c'è altro contenuto nascosto */
+.anno-tabs-scroller .tabs::before,
+.anno-tabs-scroller .tabs::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+.anno-tabs-scroller .tabs::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-void), transparent);
+}
+.anno-tabs-scroller .tabs::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-void), transparent);
+}
+.anno-tabs-scroller.puo-scorrere-sx .tabs::before { opacity: 1; }
+.anno-tabs-scroller.puo-scorrere-dx .tabs::after { opacity: 1; }
+
+@media (max-width: 480px) {
+  .anno-tabs-freccia { width: 26px; height: 26px; font-size: 16px; }
+}
+
+
+
 .tab-btn {
   flex: 0 0 auto;
   background: var(--bg-card);
@@ -1200,6 +1270,10 @@ body.mostra-info-match .info-match {
   grid-template-columns: 220px 1fr;
   gap: 28px;
   align-items: start;
+}
+
+.archivio-contenuto {
+  min-width: 0; /* la colonna di contenuto non deve mai forzare la pagina ad allargarsi */
 }
 
 .archivio-sidebar {
