@@ -423,7 +423,7 @@ async function hv_initSquadre(config) {
   let partiteConOrario = [];
   let giornataCorrente = null;
   const apiKey = config.lega.footballDataApiKey;
-  const statoInfo = document.getElementById("info-match-stato");
+  const statoInfo = window.hv_role === "admin" ? document.getElementById("info-match-stato") : null;
 
   if (!apiKey) {
     if (statoInfo) statoInfo.textContent = "Orari partite non disponibili: manca la chiave API in config.json.";

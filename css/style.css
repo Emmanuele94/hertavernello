@@ -280,13 +280,14 @@ a { color: inherit; }
 }
 
 .sezione-contenuto {
-  overflow: hidden;
+  overflow: visible;
   max-height: 4000px;
   transition: max-height 0.3s ease, opacity 0.2s ease;
   opacity: 1;
 }
 
 .sezione-contenuto.collassato {
+  overflow: hidden;
   max-height: 0;
   opacity: 0;
 }
