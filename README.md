@@ -24,6 +24,11 @@ Una scheda per ogni fantallenatore, con:
 - **🥧 Composizione rosa** — grafico a torta di quali squadre reali compongono la rosa, con soprannome goliardico automatico ("Il Fedelissimo del Napoli", "Lo Sfascia-derby", "Il Turista"...)
 - **🌍 Da dove arriva la tua squadra** — stessa idea ma per nazionalità dei giocatori *(in arrivo dopo il calciomercato)*
 
+### 📜 Archivio
+Due viste per rivivere le stagioni passate:
+- **🏅 Albo d'oro** — classifica di sempre per Campionato, Coppa e generale; gli anni delle vittorie stanno sempre visibili sotto il nome, senza bisogno di cliccare
+- **📅 Lista stagioni** — una scheda per ogni annata (dal 2018/19 a oggi), selezionabile da una barra di anni scorrevole; per la stagione scelta: vincitore del campionato, vincitore/i della coppa, classifica Serie A completa con gli stemmi reali (comprese le squadre non più in A, come Benevento, Sampdoria, Chievo...), classifica marcatori e curiosità dell'anno — tutte espandibili/comprimibili
+
 ### 🧠 Mini-Quiz
 - 38 giornate, una scheda per ciascuna
 - Ogni giornata si sblocca da sola appena le partite reali sono concluse
@@ -59,4 +64,4 @@ Una scheda per ogni fantallenatore, con:
 
 ---
 
-*Aggiornato al 27/08/2026 — questo file cresce insieme al sito, quindi se leggi questo elenco tra qualche mese potrebbe già essere superato.*
+*Aggiornato al 28/08/2026 — questo file cresce insieme al sito, quindi se leggi questo elenco tra qualche mese potrebbe già essere superato.*
