@@ -491,8 +491,18 @@ document.addEventListener("hv:unlocked", (e) => hv_initSquadre(e.detail));
 
 const hv_toggleInfoBtn = document.getElementById("toggle-info-match");
 if (hv_toggleInfoBtn) {
-  hv_toggleInfoBtn.addEventListener("click", () => {
+  hv_toggleInfoBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // non deve anche collassare/espandere il blocco Rosa
     document.body.classList.toggle("mostra-info-match");
     hv_toggleInfoBtn.classList.toggle("attivo");
   });
 }
+
+document.querySelectorAll(".sezione-toggle").forEach((titolo) => {
+  titolo.addEventListener("click", () => {
+    const contenuto = document.getElementById(titolo.dataset.target);
+    if (!contenuto) return;
+    titolo.classList.toggle("collassato");
+    contenuto.classList.toggle("collassato");
+  });
+});

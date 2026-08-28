@@ -56,38 +56,74 @@
 
       <div class="squadre-layout">
         <div class="squadra-block" style="margin: 0;">
-          <h3 class="squadra-block-title">
+          <h3 class="squadra-block-title sezione-toggle" data-target="rosa-blocco-contenuto">
             Rosa
             <button type="button" id="toggle-info-match" class="toggle-info-btn" title="Mostra/nascondi orari e avversari">
               <img src="assets/icone/icon-info.png" class="icona-info-toggle" alt="Info">
             </button>
+            <span class="toggle-chevron">▾</span>
           </h3>
-          <p id="info-match-stato" class="muted" style="font-size:11.5px; margin: -10px 0 12px;"></p>
-          <div id="roster-content" class="roster-groups"></div>
+          <div id="rosa-blocco-contenuto" class="sezione-contenuto">
+            <p id="info-match-stato" class="muted" style="font-size:11.5px; margin: -10px 0 12px;"></p>
+            <div id="roster-content" class="roster-groups"></div>
+          </div>
         </div>
 
         <div class="squadre-sidebar">
           <div class="squadra-block" style="margin: 0 0 26px;">
-            <h3 class="squadra-block-title"><img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagella</h3>
-            <div id="pagella-content"></div>
+            <h3 class="squadra-block-title sezione-toggle" data-target="pagella-blocco-contenuto">
+              <img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagella
+              <span class="toggle-chevron">▾</span>
+            </h3>
+            <div id="pagella-blocco-contenuto" class="sezione-contenuto">
+              <div id="pagella-content"></div>
+            </div>
           </div>
 
           <div class="squadra-block" style="margin: 0;">
-            <h3 class="squadra-block-title"><img src="assets/icone/icon-predict.png" class="icona-titolo" alt="">Previsione Serie A</h3>
-            <div id="previsione-content"></div>
-            <div id="previsione-upload-admin"></div>
+            <h3 class="squadra-block-title sezione-toggle" data-target="previsione-blocco-contenuto">
+              <img src="assets/icone/icon-predict.png" class="icona-titolo" alt="">Previsione Serie A
+              <span class="toggle-chevron">▾</span>
+            </h3>
+            <div id="previsione-blocco-contenuto" class="sezione-contenuto">
+              <div id="previsione-content"></div>
+              <div id="previsione-upload-admin"></div>
+            </div>
           </div>
 
           <div class="squadra-block" style="margin: 26px 0 0;">
-            <h3 class="squadra-block-title"><img src="assets/icone/icon-teamsoccer.png" class="icona-titolo" alt="">Composizione rosa</h3>
-            <div id="torta-squadre-content"></div>
+            <h3 class="squadra-block-title sezione-toggle" data-target="torta-squadre-blocco-contenuto">
+              <img src="assets/icone/icon-teamsoccer.png" class="icona-titolo" alt="">Composizione rosa
+              <span class="toggle-chevron">▾</span>
+            </h3>
+            <div id="torta-squadre-blocco-contenuto" class="sezione-contenuto">
+              <div id="torta-squadre-content"></div>
+            </div>
           </div>
 
           <div class="squadra-block" style="margin: 26px 0 0;">
-            <h3 class="squadra-block-title"><img src="assets/icone/icon-world.png" class="icona-titolo" alt="">Da dove arriva la tua squadra</h3>
-            <div id="torta-nazioni-content" class="torta-wip">
-              <img src="assets/icone/icon-workinprogress.png" class="torta-wip-icona" alt="">
-              <p class="torta-wip-testo">In arrivo dopo il calciomercato — la composizione per nazionalità di tutta la rosa.</p>
+            <h3 class="squadra-block-title sezione-toggle" data-target="torta-nazioni-blocco-contenuto">
+              <img src="assets/icone/icon-world.png" class="icona-titolo" alt="">Da dove arriva la tua squadra
+              <span class="toggle-chevron">▾</span>
+            </h3>
+            <div id="torta-nazioni-blocco-contenuto" class="sezione-contenuto">
+              <div id="torta-nazioni-content" class="torta-wip">
+                <img src="assets/icone/icon-workinprogress.png" class="torta-wip-icona" alt="">
+                <p class="torta-wip-testo">In arrivo dopo il calciomercato — la composizione per nazionalità di tutta la rosa.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="squadra-block" style="margin: 26px 0 0;">
+            <h3 class="squadra-block-title sezione-toggle" data-target="highlights-blocco-contenuto">
+              <img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Highlights
+              <span class="toggle-chevron">▾</span>
+            </h3>
+            <div id="highlights-blocco-contenuto" class="sezione-contenuto">
+              <div id="highlights-content" class="torta-wip">
+                <img src="assets/icone/icon-workinprogress.png" class="torta-wip-icona" alt="">
+                <p class="torta-wip-testo">In arrivo i momenti migliori dell'asta di ogni fantallenatore.</p>
+              </div>
             </div>
           </div>
         </div>
