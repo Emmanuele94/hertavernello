@@ -27,8 +27,9 @@ function hv_calcolaAlboOro(stagioni) {
   return { campionato, coppa, generale };
 }
 
-// Disegna una lista di nomi ordinata per numero di vittorie, ciascuno espandibile
-// per vedere il dettaglio (anni, ed eventualmente il tipo se è la generale).
+// Disegna una lista di nomi ordinata per numero di vittorie. Gli anni di
+// ciascuno stanno sempre visibili sotto il nome, in piccolo: niente click,
+// niente accordion, niente chevron.
 function hv_renderListaAlbo(containerId, mappa, prefissoId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -54,7 +55,6 @@ function hv_renderListaAlbo(containerId, mappa, prefissoId) {
         posizione = i + 1;
         ultimoCount = v.count;
       }
-      const targetId = `${prefissoId}-dett-${i}`;
       const dettaglioHtml = v.elenco
         .slice()
         .sort((a, b) => b.anno.localeCompare(a.anno))
@@ -65,23 +65,15 @@ function hv_renderListaAlbo(containerId, mappa, prefissoId) {
 
       return `
       <div class="albo-voce">
-        <button type="button" class="albo-voce-toggle" data-target="${targetId}">
+        <div class="albo-voce-riga">
           <span class="albo-posizione">${posizione}°</span>
           <span class="albo-nome">${v.nome}</span>
           <span class="albo-count">${v.count}</span>
-          <span class="albo-chevron">▾</span>
-        </button>
-        <div id="${targetId}" class="albo-dettaglio hidden">${dettaglioHtml}</div>
+        </div>
+        <div class="albo-dettaglio">${dettaglioHtml}</div>
       </div>`;
     })
     .join("");
-
-  container.querySelectorAll(".albo-voce-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.getElementById(btn.dataset.target).classList.toggle("hidden");
-      btn.classList.toggle("attivo");
-    });
-  });
 }
 
 function hv_renderVistaAlboOro(stagioni) {

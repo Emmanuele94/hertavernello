@@ -1220,22 +1220,18 @@ body.mostra-info-match .info-match {
   .archivio-nav-item { flex: 1; justify-content: center; }
 }
 
-/* Voci Albo d'oro (campionato/coppa/generale), ordinate ed espandibili */
+/* Voci Albo d'oro (campionato/coppa/generale), ordinate, anni sempre visibili */
 .albo-voce {
   border-bottom: 1px solid var(--border-hairline);
 }
 .albo-voce:last-child { border-bottom: none; }
 
-.albo-voce-toggle {
+.albo-voce-riga {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
-  background: transparent;
-  border: none;
-  padding: 12px 4px;
-  cursor: pointer;
-  text-align: left;
+  padding: 12px 4px 0;
   color: var(--text-primary);
 }
 
@@ -1255,16 +1251,8 @@ body.mostra-info-match .info-match {
   font-size: 15px;
 }
 
-.albo-chevron {
-  color: var(--text-muted);
-  font-size: 12px;
-  transition: transform 0.2s ease;
-}
-
-.albo-voce-toggle.attivo .albo-chevron { transform: rotate(-180deg); }
-
 .albo-dettaglio {
-  padding: 0 4px 14px 42px;
+  padding: 4px 4px 14px 42px;
   display: flex;
   flex-direction: column;
   gap: 5px;
