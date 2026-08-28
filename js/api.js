@@ -48,45 +48,69 @@ async function hv_fetchAPI(path, apiKey) {
   return res.json();
 }
 
-// { NAP: 1, JUV: 4, ... } posizione attuale in classifica
-async function hv_getClassificaReale(apiKey, squadreRef) {
-  const data = await hv_fetchAPI("/competitions/SA/standings", apiKey);
-  const tabella = data.standings.find((s) => s.type === "TOTAL") || data.standings[0];
-  const risultato = {};
-  tabella.table.forEach((riga) => {
-    const codice = hv_trovaCodice(riga.team.shortName || riga.team.name, squadreRef);
-    if (codice) risultato[codice] = riga.position;
+// Tra tutte le partite scaricate, stabilisce quale "giornata" (turno) mostrare:
+// quella più recente il cui primo calcio d'inizio è già passato — così un turno
+// resta visibile (coi risultati) finché non parte il primo anticipo di quello
+// successivo, anche se contiene un posticipo che deve ancora giocare.
+function hv_calcolaGiornataAttiva(matches, now) {
+  const conGiornata = matches.filter((m) => m.matchday);
+  if (conGiornata.length === 0) return null;
+
+  const iniziPerGiornata = {};
+  conGiornata.forEach((m) => {
+    const t = new Date(m.data).getTime();
+    if (!(m.matchday in iniziPerGiornata) || t < iniziPerGiornata[m.matchday]) {
+      iniziPerGiornata[m.matchday] = t;
+    }
   });
-  return risultato;
+
+  let giornataAttiva = null;
+  Object.entries(iniziPerGiornata).forEach(([g, inizio]) => {
+    if (inizio <= now) {
+      const gn = Number(g);
+      if (giornataAttiva === null || gn > giornataAttiva) giornataAttiva = gn;
+    }
+  });
+
+  // Nessuna giornata è ancora iniziata (caso raro): mostriamo la prossima.
+  if (giornataAttiva === null) {
+    giornataAttiva = Math.min(...Object.keys(iniziPerGiornata).map(Number));
+  }
+  return giornataAttiva;
 }
 
-// { live: [...], prossimoTurno: [...] }
+// Tutte le partite della giornata attiva, con stato/punteggio/minuto. Restano
+// visibili (col risultato) anche da finite, finché non inizia la giornata dopo.
 async function hv_getPartite(apiKey, squadreRef) {
   const oggi = new Date();
-  const tra8gg = new Date(oggi.getTime() + 8 * 86400000);
+  const indietro5gg = new Date(oggi.getTime() - 5 * 86400000);
+  const avanti9gg = new Date(oggi.getTime() + 9 * 86400000);
   const fmt = (d) => d.toISOString().slice(0, 10);
 
-  const data = await hv_fetchAPI(`/competitions/SA/matches?dateFrom=${fmt(oggi)}&dateTo=${fmt(tra8gg)}`, apiKey);
+  const data = await hv_fetchAPI(`/competitions/SA/matches?dateFrom=${fmt(indietro5gg)}&dateTo=${fmt(avanti9gg)}`, apiKey);
 
-  const partite = data.matches.map((m) => ({
-    live: m.status === "IN_PLAY" || m.status === "PAUSED",
+  const tutte = data.matches.map((m) => ({
+    id: m.id,
     matchday: m.matchday,
+    status: m.status,
+    live: m.status === "IN_PLAY" || m.status === "PAUSED",
+    finita: m.status === "FINISHED",
     data: m.utcDate,
+    minuto: m.minute ?? null,
+    // Punteggio: football-data.org tiene score.fullTime aggiornato come "punteggio
+    // corrente" per tutta la partita (0-0 dal fischio d'inizio, non solo a fine gara).
+    golCasa: m.score && m.score.fullTime && m.score.fullTime.home != null ? m.score.fullTime.home : null,
+    golTrasferta: m.score && m.score.fullTime && m.score.fullTime.away != null ? m.score.fullTime.away : null,
     casaCodice: hv_trovaCodice(m.homeTeam.shortName || m.homeTeam.name, squadreRef),
     trasfertaCodice: hv_trovaCodice(m.awayTeam.shortName || m.awayTeam.name, squadreRef),
     casaNome: m.homeTeam.shortName || m.homeTeam.name,
     trasfertaNome: m.awayTeam.shortName || m.awayTeam.name,
   }));
 
-  const live = partite.filter((p) => p.live);
-  const future = partite.filter((p) => !p.live && p.matchday && p.data > new Date().toISOString());
-  let prossimoTurno = [];
-  if (future.length > 0) {
-    const minGiornata = Math.min(...future.map((p) => p.matchday));
-    prossimoTurno = future.filter((p) => p.matchday === minGiornata);
-  }
+  const giornata = hv_calcolaGiornataAttiva(tutte, Date.now());
+  const partite = tutte.filter((p) => p.matchday === giornata).sort((a, b) => new Date(a.data) - new Date(b.data));
 
-  return { live, prossimoTurno };
+  return { giornata, partite };
 }
 
 // Tutte le partite della stagione (tutte le giornate, con risultato se giocate).

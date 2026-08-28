@@ -62,7 +62,14 @@ function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendari
   return schede;
 }
 
-function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData) {
+const HV_GIORNI_BREVI = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+
+function hv_giornoOrarioBreve(iso) {
+  const d = new Date(iso);
+  return HV_GIORNI_BREVI[d.getDay()] + " " + hv_orarioBreve(d.getTime());
+}
+
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggioPrecedente) {
   const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData);
 
   const listaGiocatori = (giocatori) =>
@@ -90,9 +97,38 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       .join("")}</div>`;
   }
 
-  const etichetta = match.live
-    ? '<span class="incrocio-live">● LIVE</span>'
-    : `Giornata ${match.matchday}`;
+  // Stato: LIVE (lampeggiante) / FINALE (resta visibile, non lampeggia) / orario se deve ancora iniziare
+  let etichettaStato;
+  if (match.live) {
+    etichettaStato = `<span class="incrocio-live">● LIVE${match.minuto ? " " + match.minuto + "'" : ""}</span>`;
+  } else if (match.finita) {
+    etichettaStato = `<span class="incrocio-finale">● FINALE</span>`;
+  } else {
+    etichettaStato = `<span class="incrocio-orario">${hv_giornoOrarioBreve(match.data)}</span>`;
+  }
+
+  // Punteggio: mostrato appena disponibile (dal calcio d'inizio in poi), sia live che a fine partita
+  let punteggioHtml = "";
+  if (match.golCasa != null && match.golTrasferta != null) {
+    punteggioHtml = `<div class="incrocio-punteggio">${match.golCasa} - ${match.golTrasferta}</div>`;
+  }
+
+  // "Ha segnato": confronto col punteggio dell'ultimo controllo per questa stessa
+  // partita. Sappiamo CHE è successo un gol, non chi l'ha fatto — il piano gratuito
+  // di football-data.org non include marcatori/cartellini (serve un add-on a pagamento).
+  let golFlashHtml = "";
+  if (match.live && punteggioPrecedente) {
+    const golNotizie = [];
+    if (match.golCasa != null && punteggioPrecedente.golCasa != null && match.golCasa > punteggioPrecedente.golCasa) {
+      golNotizie.push(`⚽ Ha segnato il ${match.casaNome}!`);
+    }
+    if (match.golTrasferta != null && punteggioPrecedente.golTrasferta != null && match.golTrasferta > punteggioPrecedente.golTrasferta) {
+      golNotizie.push(`⚽ Ha segnato il ${match.trasfertaNome}!`);
+    }
+    if (golNotizie.length > 0) {
+      golFlashHtml = `<div class="incrocio-gol-flash">${golNotizie.join(" · ")}</div>`;
+    }
+  }
 
   const div = document.createElement("div");
   div.className = "incrocio-match";
@@ -103,8 +139,10 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
         ${match.casaNome} — ${match.trasfertaNome}
         <img src="assets/loghi/${match.trasfertaCodice}.png" alt="${match.trasfertaCodice}" class="logo-squadra-mini">
       </span>
-      ${etichetta}
+      ${etichettaStato}
     </div>
+    ${punteggioHtml}
+    ${golFlashHtml}
     ${corpo}
   `;
   return div;
@@ -130,28 +168,52 @@ async function hv_renderIncrocio(config) {
     const roseData = await roseRes.json();
     const calendarioData = await calendarioRes.json();
 
-    const { dati: partite, scaduta } = await hv_cacheOFetch("hv_cache_partite", HV_CACHE_DURATA, () =>
-      hv_getPartite(apiKey, squadreRef)
-    );
-    const { live, prossimoTurno } = partite;
+    // Punteggi dell'ultimo controllo (per capire se nel frattempo qualcuno ha segnato)
+    // e finestra dinamica prima di ricontrollare l'API: spesso durante le partite,
+    // molto più raramente nei giorni senza Serie A in programma.
+    const cachePrecedente = hv_cacheLeggiGrezzo("hv_cache_partite");
+    const partitePrecedenti = cachePrecedente && cachePrecedente.v && cachePrecedente.v.partite ? cachePrecedente.v.partite : [];
+    const punteggiPrecedenti = {};
+    partitePrecedenti.forEach((p) => {
+      punteggiPrecedenti[p.id] = { golCasa: p.golCasa, golTrasferta: p.golTrasferta };
+    });
+
+    const ttlDinamico = hv_prossimoTTLPartite(partitePrecedenti, Date.now());
+    const { dati, scaduta } = await hv_cacheOFetch("hv_cache_partite", ttlDinamico, () => hv_getPartite(apiKey, squadreRef));
+    const { giornata, partite } = dati;
 
     wrap.innerHTML = "";
-    const daMostrare = live.length > 0 ? live : prossimoTurno;
 
-    if (daMostrare.length === 0) {
+    if (!partite || partite.length === 0) {
       wrap.innerHTML = '<p class="empty-state">Nessuna partita trovata nei prossimi giorni.</p>';
       return;
     }
 
-    daMostrare.forEach((match) => {
+    if (giornata) {
+      wrap.insertAdjacentHTML("beforeend", `<p class="incrocio-giornata-label">Giornata ${giornata}</p>`);
+    }
+
+    partite.forEach((match) => {
       if (!match.casaCodice || !match.trasfertaCodice) return;
-      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData));
+      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggiPrecedenti[match.id]));
     });
 
     if (scaduta) wrap.insertAdjacentHTML("beforeend", hv_avvisoDatiVecchi(true));
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
+}
+
+// TTL dinamico per classifica/marcatori/previsioni: guarda le partite già in
+// cache (stessa lista di "chi gioca contro chi", nessuna chiamata in più) e la
+// data dell'ultimo aggiornamento di QUESTO dato, per capire se nel frattempo una
+// partita è arrivata al checkpoint dei ~100 minuti dal calcio d'inizio.
+function hv_ttlClassificaDinamico(chiaveCacheDati) {
+  const cachePartite = hv_cacheLeggiGrezzo("hv_cache_partite");
+  const partite = cachePartite && cachePartite.v && cachePartite.v.partite ? cachePartite.v.partite : [];
+  const cacheDati = hv_cacheLeggiGrezzo(chiaveCacheDati);
+  const ultimoAggiornamento = cacheDati ? cacheDati.t : 0;
+  return hv_prossimoTTLClassifica(partite, Date.now(), ultimoAggiornamento);
 }
 
 // ===== Classifica generale previsioni =====
@@ -170,9 +232,15 @@ async function hv_renderLeaderboard(config) {
     const [squadreRef, previsioniRes] = await Promise.all([hv_caricaSquadreRef(), fetch("data/previsioni.json")]);
     const { previsioni } = await previsioniRes.json();
 
-    const { dati: classificaReale, scaduta } = await hv_cacheOFetch("hv_cache_classifica_reale", HV_CACHE_DURATA, () =>
-      hv_getClassificaReale(apiKey, squadreRef)
+    // Stessa cache/chiamata della "Classifica Serie A" qui sotto (unico endpoint
+    // /standings condiviso): qui ci serve solo la posizione per codice squadra.
+    const { dati: classificaCompleta, scaduta } = await hv_cacheOFetch("hv_cache_classifica", hv_ttlClassificaDinamico("hv_cache_classifica"), () =>
+      hv_getClassificaCompleta(apiKey, squadreRef)
     );
+    const classificaReale = {};
+    classificaCompleta.forEach((r) => {
+      if (r.codice) classificaReale[r.codice] = r.posizione;
+    });
 
     const righe = [];
     (previsioni || []).forEach((p) => {
@@ -237,11 +305,11 @@ async function hv_renderClassificaSerieA(config) {
   wrap.innerHTML = '<p class="empty-state">Carico la classifica...</p>';
 
   let risultato;
+  let ttl;
   try {
-    risultato = await hv_cacheOFetch("hv_cache_classifica", HV_CACHE_DURATA, async () => {
-      const squadreRef = await hv_caricaSquadreRef();
-      return hv_getClassificaCompleta(apiKey, squadreRef);
-    });
+    const squadreRef = await hv_caricaSquadreRef();
+    ttl = hv_ttlClassificaDinamico("hv_cache_classifica");
+    risultato = await hv_cacheOFetch("hv_cache_classifica", ttl, () => hv_getClassificaCompleta(apiKey, squadreRef));
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
     return;
@@ -263,7 +331,7 @@ async function hv_renderClassificaSerieA(config) {
           .join("")}
       </tbody>
     </table>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — Si aggiornerà alle ore ${hv_orarioBreve(orario + HV_CACHE_DURATA)}.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — prossimo controllo verso le ${hv_orarioBreve(orario + ttl)} (si aggiorna a fine partita, non a orario fisso).</p>
     ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }
@@ -281,11 +349,11 @@ async function hv_renderTopScorers(config) {
   wrap.innerHTML = '<p class="empty-state">Carico i marcatori...</p>';
 
   let risultato;
+  let ttl;
   try {
-    risultato = await hv_cacheOFetch("hv_cache_marcatori", HV_CACHE_DURATA, async () => {
-      const squadreRef = await hv_caricaSquadreRef();
-      return hv_getTopScorers(apiKey, squadreRef);
-    });
+    const squadreRef = await hv_caricaSquadreRef();
+    ttl = hv_ttlClassificaDinamico("hv_cache_marcatori");
+    risultato = await hv_cacheOFetch("hv_cache_marcatori", ttl, () => hv_getTopScorers(apiKey, squadreRef));
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
     return;
@@ -315,7 +383,7 @@ async function hv_renderTopScorers(config) {
       </tbody>
     </table>
     </div>
-    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — Si aggiornerà alle ore ${hv_orarioBreve(orario + HV_CACHE_DURATA)}. Copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
+    <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — prossimo controllo verso le ${hv_orarioBreve(orario + ttl)}. Copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
     ${hv_avvisoDatiVecchi(scaduta)}
   `;
 }
