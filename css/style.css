@@ -473,6 +473,31 @@ a { color: inherit; }
   border-color: var(--verde-prato);
 }
 
+/* Tab anni nella vista Lista (Archivio) — stesso "badge" dei tab qui sopra,
+   con un bagliore neon quando l'anno è selezionato (stile quiz-badge-da-giocare) */
+.anno-tab {
+  flex: 0 0 auto;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--border-hairline);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.25s ease, color 0.15s ease;
+}
+
+.anno-tab:not(.active):hover { border-color: var(--verde-prato); }
+
+.anno-tab.active {
+  color: var(--bg-void);
+  background: var(--verde-prato);
+  border-color: var(--verde-prato);
+  box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.35), 0 0 18px rgba(57, 255, 20, 0.4);
+}
+
 .roster-groups {
   display: flex;
   flex-direction: column;
