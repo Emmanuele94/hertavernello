@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#040912">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Squadre — Hertavernello Preview</title>
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="icon-system.css">
+  <link rel="stylesheet" href="squadra.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell team-app">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Hertavernello Home">
+        <span class="brand-logo-frame"><img src="../assets/logo.png" class="brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">La lega del fantacalcio</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
+        <a class="nav-item active" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="archive"></i><span>Archivio</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="circle-help"></i><span>Quiz</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="shield-check"></i><span>Admin</span></a>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button>
+        <div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="team-switcher-wrap">
+        <div class="section-eyebrow"><i data-lucide="users-round"></i><span>Le 12 fantasquadre</span></div>
+        <div id="team-switcher" class="team-switcher" aria-label="Seleziona fantasquadra"></div>
+      </section>
+
+      <section class="team-hero" id="team-hero">
+        <div class="team-hero-lines"></div>
+        <div class="team-logo-stage" id="team-logo-stage"></div>
+        <div class="team-identity">
+          <span class="team-label">FANTASQUADRA</span>
+          <h1 id="team-name">—</h1>
+          <div class="manager-line"><span class="manager-avatar"><i data-lucide="user-round"></i></span><div><small>Fantallenatore</small><strong id="manager-name">—</strong></div></div>
+          <div class="team-status-row">
+            <span class="team-chip"><i data-lucide="calendar-range"></i><span id="team-season">Stagione —</span></span>
+            <span class="team-chip muted-chip"><i data-lucide="database"></i>Dati reali disponibili</span>
+          </div>
+        </div>
+        <div class="team-kpi-panel" id="team-kpis">
+          <div class="team-kpi"><small>Posizione</small><strong>—</strong><span>in attesa risultati</span></div>
+          <div class="team-kpi"><small>Punti</small><strong>—</strong><span>in attesa risultati</span></div>
+          <div class="team-kpi"><small>Fantapunti</small><strong>—</strong><span>in attesa risultati</span></div>
+          <div class="team-kpi"><small>Media</small><strong>—</strong><span>in attesa risultati</span></div>
+        </div>
+      </section>
+
+      <nav class="team-tabs" aria-label="Sezioni squadra">
+        <button class="team-tab active" data-tab="overview"><i data-lucide="layout-dashboard"></i>Panoramica</button>
+        <button class="team-tab" data-tab="roster"><i data-lucide="shirt"></i>Rosa</button>
+        <button class="team-tab" data-tab="auction"><i data-lucide="gavel"></i>Asta</button>
+        <button class="team-tab" data-tab="stats"><i data-lucide="chart-no-axes-combined"></i>Statistiche</button>
+      </nav>
+
+      <section class="team-view active" data-view="overview">
+        <div class="team-grid">
+          <article class="team-card overview-card team-card-large">
+            <header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shield"></i></span><div><small>PANORAMICA</small><h2>Identità della squadra</h2></div></div><span class="data-tag">DB</span></header>
+            <div class="identity-body" id="identity-body"></div>
+          </article>
+
+          <article class="team-card auction-grade-card">
+            <header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="badge-check"></i></span><div><small>ASTA</small><h2>Pagella dell’asta</h2></div></div><span class="data-tag manual">MANUALE</span></header>
+            <div id="auction-grade"></div>
+          </article>
+
+          <article class="team-card prediction-card">
+            <header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="scan-eye"></i></span><div><small>PREVISIONE</small><h2>Serie A</h2></div></div><span class="data-tag manual">MANUALE</span></header>
+            <div id="prediction-content"></div>
+          </article>
+
+          <article class="team-card data-card">
+            <header class="team-card-head"><div><span class="mini-emblem cyan"><i data-lucide="globe-2"></i></span><div><small>ROSA</small><h2>Il mondo nella tua rosa</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header>
+            <div id="nationality-content"></div>
+          </article>
+
+          <article class="team-card data-card">
+            <header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="chart-pie"></i></span><div><small>ROSA</small><h2>Composizione per ruolo</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header>
+            <div id="role-content"></div>
+          </article>
+
+          <article class="team-card data-card">
+            <header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="landmark"></i></span><div><small>ROSA</small><h2>Club più rappresentati</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header>
+            <div id="club-content"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="team-view" data-view="roster">
+        <article class="team-card full-card">
+          <header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shirt"></i></span><div><small>ROSA</small><h2>Giocatori</h2></div></div><span class="data-tag">DB</span></header>
+          <div id="roster-content"></div>
+        </article>
+      </section>
+
+      <section class="team-view" data-view="auction">
+        <div class="team-grid auction-grid">
+          <article class="team-card team-card-large"><header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="gavel"></i></span><div><small>ASTA</small><h2>Pagella dell’asta</h2></div></div><span class="data-tag manual">MANUALE</span></header><div id="auction-full"></div></article>
+          <article class="team-card team-card-large"><header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="sparkles"></i></span><div><small>ASTA</small><h2>Highlights asta</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="auction-highlights"></div></article>
+        </div>
+      </section>
+
+      <section class="team-view" data-view="stats">
+        <div class="team-grid stats-grid">
+          <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem cyan"><i data-lucide="globe-2"></i></span><div><small>STATISTICHE</small><h2>Nazionalità</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="stats-nationality"></div></article>
+          <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="chart-pie"></i></span><div><small>STATISTICHE</small><h2>Ruoli</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="stats-role"></div></article>
+          <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="building-2"></i></span><div><small>STATISTICHE</small><h2>Club reali</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="stats-clubs"></div></article>
+          <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="arrow-left-right"></i></span><div><small>STORICO</small><h2>Movimenti rosa</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div class="premium-empty"><span><i data-lucide="history"></i></span><strong>Nessuno snapshot precedente</strong><p>Questa sezione confronterà automaticamente due import reali consecutivi.</p></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigazione mobile">
+    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
+    <a href="squadra.html" class="mobile-nav-item active"><i data-lucide="users"></i><span>Squadre</span></a>
+    <a href="#" class="mobile-nav-item preview-pending"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+    <a href="#" class="mobile-nav-item preview-pending"><i data-lucide="archive"></i><span>Archivio</span></a>
+    <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
+  </nav>
+
+  <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita più avanti nella preview.</div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="squadra.js"></script>
+</body>
+</html>
