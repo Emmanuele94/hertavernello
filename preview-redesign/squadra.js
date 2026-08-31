@@ -29,10 +29,13 @@ function logoMeta(teamId) {
   return (state.logos?.loghi || []).find(x => x.squadraId === teamId) || null;
 }
 
-function teamLogo(team, cls = "team-switch-logo") {
+function teamLogo(team, imgClass = "team-switch-logo", fallbackClass = "") {
   const logo = logoMeta(team.id);
-  if (logo?.immagine) return `<img class="${cls}" src="${ROOT}assets/stemmi/${logo.immagine}" alt="Logo ${esc(team.nomeFantasquadra)}">`;
-  return `<span class="${cls === 'team-switch-logo' ? 'team-switch-fallback' : 'team-logo-big-fallback'}">${esc(initials(team.nomeFantasquadra))}</span>`;
+  if (logo?.immagine) {
+    return `<img class="${imgClass}" src="${ROOT}assets/stemmi/${logo.immagine}" alt="Logo ${esc(team.nomeFantasquadra)}">`;
+  }
+  const fallback = fallbackClass || (imgClass === "team-switch-logo" ? "team-switch-fallback" : "team-logo-big-fallback");
+  return `<span class="${fallback}">${esc(initials(team.nomeFantasquadra))}</span>`;
 }
 
 function refreshIcons() {
@@ -73,25 +76,31 @@ function renderTeamHero(team) {
 function renderIdentity(team) {
   const hasLogo = !!logoMeta(team.id)?.immagine;
   $("identity-body").innerHTML = `
+    <div class="identity-profile">
+      <div class="identity-logo-mini">${teamLogo(team, "identity-logo-image", "identity-logo-fallback")}</div>
+      <div class="identity-profile-copy">
+        <small>STEMMA FANTALEGA</small>
+        <strong>${esc(team.nomeFantasquadra)}</strong>
+        <span>${hasLogo ? 'Stemma personalizzato caricato' : 'Fallback con iniziali finché non carichi uno stemma'}</span>
+      </div>
+    </div>
     <div class="identity-banner">
       <div class="identity-box"><small>Nome squadra</small><strong>${esc(team.nomeFantasquadra)}</strong></div>
       <div class="identity-box"><small>Fantallenatore</small><strong>${esc(team.nomeReale)}</strong></div>
-      <div class="identity-box"><small>Stemma personalizzato</small><strong>${hasLogo ? 'Disponibile' : 'Fallback con iniziali'}</strong></div>
+      <div class="identity-box"><small>Stemma personalizzato</small><strong>${hasLogo ? 'Disponibile' : 'Non ancora caricato'}</strong></div>
       <div class="identity-box"><small>Stagione</small><strong>${esc(state.config.lega.stagione)}</strong></div>
     </div>`;
 }
 
 function renderPagella(team) {
+  const target = $("auction-full");
   const grade = (state.pagelle?.pagelle || []).find(x => x.squadraId === team.id);
-  const targets = [$("auction-grade"), $("auction-full")];
   if (!grade) {
-    const html = emptyBlock("badge-help", "Pagella non ancora inserita", "Quando l'admin inserirà voto, titolo e commento, compariranno qui senza generazione automatica.");
-    targets.forEach(el => el.innerHTML = html);
+    target.innerHTML = emptyBlock("badge-help", "Pagella non ancora inserita", "Quando l'admin inserirà voto, titolo e commento, compariranno qui senza generazione automatica.");
     return;
   }
 
-  const html = `<div class="grade-wrap"><div class="grade-score"><strong>${esc(String(grade.voto).replace('.', ','))}</strong></div><div class="grade-copy"><span class="grade-badge">${esc(grade.badge || 'PAGELLA')}</span><p>${esc(grade.commento || '')}</p></div></div>`;
-  targets.forEach(el => el.innerHTML = html);
+  target.innerHTML = `<div class="grade-wrap"><div class="grade-score"><strong>${esc(String(grade.voto).replace('.', ','))}</strong></div><div class="grade-copy"><span class="grade-badge">${esc(grade.badge || 'PAGELLA')}</span><p>${esc(grade.commento || '')}</p></div></div>`;
 }
 
 function renderPrediction(team) {
@@ -111,7 +120,10 @@ function rosterUnavailableHtml() {
 
 function renderRosterDependent() {
   const html = rosterUnavailableHtml();
-  ["nationality-content","role-content","club-content","roster-content","auction-highlights","stats-nationality","stats-role","stats-clubs"].forEach(id => $(id).innerHTML = html);
+  ["roster-content","auction-highlights","stats-nationality","stats-role","stats-clubs"].forEach(id => {
+    const el = $(id);
+    if (el) el.innerHTML = html;
+  });
 }
 
 function renderTeam() {
@@ -126,11 +138,43 @@ function renderTeam() {
   refreshIcons();
 }
 
+function openTab(tabName, scroll = true) {
+  document.querySelectorAll(".team-tab").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tabName));
+  document.querySelectorAll(".team-view").forEach(view => view.classList.toggle("active", view.dataset.view === tabName));
+  if (scroll) document.querySelector(".team-tabs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function setupTabs() {
-  document.querySelectorAll(".team-tab").forEach(btn => btn.addEventListener("click", () => {
-    document.querySelectorAll(".team-tab").forEach(x => x.classList.toggle("active", x === btn));
-    document.querySelectorAll(".team-view").forEach(view => view.classList.toggle("active", view.dataset.view === btn.dataset.tab));
-  }));
+  document.querySelectorAll(".team-tab").forEach(btn => btn.addEventListener("click", () => openTab(btn.dataset.tab, false)));
+  document.querySelectorAll("[data-open-tab]").forEach(btn => btn.addEventListener("click", () => openTab(btn.dataset.openTab, true)));
+}
+
+function openCrestLightbox() {
+  const team = getCurrentTeam();
+  const lightbox = $("crest-lightbox");
+  $("crest-lightbox-content").innerHTML = teamLogo(team, "lightbox-logo-image", "lightbox-logo-fallback");
+  $("crest-lightbox-label").textContent = team.nomeFantasquadra;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("lightbox-open");
+}
+
+function closeCrestLightbox() {
+  const lightbox = $("crest-lightbox");
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("lightbox-open");
+}
+
+function setupCrestLightbox() {
+  $("team-logo-stage").addEventListener("click", openCrestLightbox);
+  document.querySelector(".crest-lightbox-close").addEventListener("click", closeCrestLightbox);
+  $("crest-lightbox").addEventListener("click", e => {
+    if (e.target === $("crest-lightbox")) closeCrestLightbox();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeCrestLightbox();
+  });
 }
 
 function setupPending() {
@@ -162,6 +206,7 @@ async function init() {
     console.error(err);
   }
   setupTabs();
+  setupCrestLightbox();
   setupPending();
   refreshIcons();
 }
