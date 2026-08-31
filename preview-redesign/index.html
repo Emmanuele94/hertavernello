@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="home-incroci.css">
   <link rel="stylesheet" href="home-reference.css">
+  <link rel="stylesheet" href="home-v2.css">
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -64,7 +65,7 @@
         <article class="panel panel-fixtures" id="calendario" data-source="API + DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon violet"><i data-lucide="swords"></i></span><h2>Chi gioca contro chi</h2></div><a class="text-link" href="calendario.html">Apri match center <i data-lucide="chevron-right"></i></a></header><div class="panel-body" id="fixtures-list"><div class="skeleton-list"><span></span><span></span><span></span></div></div></article>
         <article class="panel panel-league" data-source="DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon gold"><i data-lucide="trophy"></i></span><h2>Classifica Hertavernello</h2></div><span class="priority-badge">PRINCIPALE</span></header><div class="panel-body" id="league-standings"><div class="empty-state compact"><span class="empty-icon"><i data-lucide="table-properties"></i></span><div><strong>Classifica non ancora disponibile</strong><p>Verrà calcolata dai risultati della vostra lega appena saranno importati.</p></div></div></div></article>
         <article class="panel panel-seriea" data-source="API football-data.org"><header class="panel-head"><div class="panel-title"><span class="panel-brand-icon seriea-brand-icon"><img src="../assets/icon-serie-a.png" alt="Serie A"></span><h2>Serie A</h2></div><span class="source-label">LIVE DATA</span></header><div class="panel-body" id="seriea-standings"><div class="skeleton-table"><span></span><span></span><span></span><span></span><span></span></div></div></article>
-        <article class="panel panel-scorers" data-source="API football-data.org"><header class="panel-head"><div class="panel-title"><span class="panel-icon purple"><i data-lucide="crosshair"></i></span><h2>Capocannonieri</h2></div><span class="source-label">API</span></header><div class="panel-body" id="top-scorers"><div class="skeleton-table"><span></span><span></span><span></span><span></span></div></div></article>
+        <article class="panel panel-scorers" data-source="API football-data.org"><header class="panel-head"><div class="panel-title"><span class="panel-icon purple"><i data-lucide="goal"></i></span><h2>Capocannonieri</h2></div><span class="source-label">API</span></header><div class="panel-body" id="top-scorers"><div class="skeleton-table"><span></span><span></span><span></span><span></span></div></div></article>
         <article class="panel panel-feature" data-source="DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon gold"><i data-lucide="star"></i></span><h2>Squadra in evidenza</h2></div><span class="outline-badge">TOP</span></header><div class="panel-body" id="featured-team"><div class="empty-state feature-empty"><span class="empty-icon"><i data-lucide="sparkles"></i></span><div><strong>Si accende con la stagione</strong><p>La card userà leader, miglior punteggio o forma reale. Nessun dato viene simulato.</p></div></div></div></article>
         <article class="panel panel-hall" id="archivio" data-source="DB + CALCOLATO" hidden><div class="panel-body" id="hall-of-fame"></div></article>
         <article class="panel panel-quiz reference-quiz" id="quiz" data-source="DB + CALCOLATO">
@@ -90,5 +91,6 @@
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
   <script src="home-incroci.js"></script>
+  <script src="home-v2.js"></script>
 </body>
 </html>
