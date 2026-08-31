@@ -1,79 +1,86 @@
-/* Readability pass for Hall of Fame / Archivio. */
+/* Strong readability pass for Hall of Fame / Archivio. */
 
-.archive-section{margin-top:42px}
-.archive-section-head{margin-bottom:22px}
-.section-kicker{font-size:10px;letter-spacing:.16em}
-.archive-section-head h2{margin-top:7px;font-size:clamp(31px,3.25vw,44px);line-height:1.02}
+.archive-section{margin-top:50px}
+.archive-section-head{margin-bottom:27px}
+.section-kicker{font-size:12px;letter-spacing:.16em}
+.archive-section-head h2{margin-top:8px;font-size:clamp(36px,3.6vw,50px);line-height:1.02}
 
-.archive-kpis{gap:13px;margin-top:32px}
-.archive-kpis>div{padding:19px 20px;border-radius:16px}
-.archive-kpis small{font-size:9px}
-.archive-kpis strong{font-size:30px}
+.archive-kpis{gap:15px;margin-top:36px}
+.archive-kpis>div{padding:22px 23px;border-radius:17px}
+.archive-kpis small{font-size:10.5px}
+.archive-kpis strong{font-size:34px}
 
-.hall-grid{gap:18px}
-.hall-card{min-height:370px;padding:22px;border-radius:22px}
-.hall-card>header{gap:13px;padding-bottom:17px}
-.hall-card header small{font-size:8px}
-.hall-card header h3{font-size:18px}
-.hall-icon{width:45px;height:45px;flex:0 0 45px}
-.hall-icon svg{width:22px;height:22px}
-.hall-row{grid-template-columns:40px minmax(0,1fr) auto;gap:12px;padding:14px 6px}
-.hall-rank{width:32px;height:32px;font-size:11px}
-.hall-person strong{font-size:13px}
-.hall-person small{margin-top:4px;font-size:8.5px;line-height:1.5}
-.hall-count strong{font-size:22px}
-.hall-count small{font-size:7.5px}
+.hall-grid{gap:20px}
+.hall-card{min-height:405px;padding:25px;border-radius:23px}
+.hall-card>header{gap:14px;padding-bottom:19px}
+.hall-card header small{font-size:9.5px}
+.hall-card header h3{font-size:20px}
+.hall-icon{width:49px;height:49px;flex:0 0 49px}
+.hall-icon svg{width:24px;height:24px}
+.hall-row{grid-template-columns:44px minmax(0,1fr) auto;gap:14px;padding:16px 7px}
+.hall-rank{width:36px;height:36px;font-size:12px}
+.hall-person strong{font-size:15px;line-height:1.25}
+.hall-person small{margin-top:5px;font-size:10px;line-height:1.55}
+.hall-count strong{font-size:25px}
+.hall-count small{font-size:8.5px}
 
-.season-title-row{margin-bottom:19px}
-.season-nav-arrows button{width:42px;height:42px;border-radius:12px}
-.season-nav-arrows svg{width:19px;height:19px}
-.season-tabs{gap:9px;padding-bottom:14px}
-.season-tab{padding:11px 16px;border-radius:10px;font-size:10px}
+.season-title-row{margin-bottom:22px}
+.season-nav-arrows button{width:46px;height:46px;border-radius:13px}
+.season-nav-arrows svg{width:21px;height:21px}
+.season-tabs{gap:10px;padding-bottom:16px}
+.season-tab{padding:13px 18px;border-radius:11px;font-size:11.5px}
 
-.season-stage{grid-template-columns:minmax(0,1.14fr) minmax(430px,.86fr);gap:18px}
-.season-main-card,.season-data-card{border-radius:22px}
-.season-main-card{min-height:640px;padding:29px}
-.season-year-label{font-size:8.5px}
-.season-main-top h2{font-size:52px}
-.season-status{padding:9px 11px;font-size:8px}
-.season-winners{gap:14px;margin-top:24px}
-.winner-card{min-height:154px;padding:21px;border-radius:17px}
-.winner-card>span{width:40px;height:40px}
-.winner-card>span svg{width:21px;height:21px}
-.winner-card small{margin-top:15px;font-size:8px}
-.winner-card strong{margin-top:7px;font-size:22px}
+.season-stage{grid-template-columns:minmax(0,1.1fr) minmax(470px,.9fr);gap:20px}
+.season-main-card,.season-data-card{border-radius:23px}
+.season-main-card{min-height:700px;padding:34px}
+.season-year-label{font-size:10px}
+.season-main-top h2{font-size:58px}
+.season-status{padding:10px 13px;font-size:9.5px}
+.season-winners{gap:16px;margin-top:27px}
+.winner-card{min-height:170px;padding:24px;border-radius:18px}
+.winner-card>span{width:44px;height:44px}
+.winner-card>span svg{width:23px;height:23px}
+.winner-card small{margin-top:16px;font-size:9.5px}
+.winner-card strong{margin-top:8px;font-size:25px;line-height:1.2}
 
-.season-curiosity{margin-top:20px}
-.curiosity-panel{padding:21px;border-radius:17px}
-.curiosity-panel>h3{font-size:18px}
-.curiosity-all{gap:14px;margin-top:15px}
-.curiosity-group{padding:17px 18px;border-radius:14px}
-.curiosity-group-head{font-size:9px}
-.curiosity-group-head svg{width:16px;height:16px}
-.curiosity-list.full{gap:11px;margin-top:14px}
-.curiosity-list.full li{padding-left:16px;font-size:11.5px;line-height:1.68}
-.curiosity-list.full li:before{width:5px;height:5px;top:.64em}
-.curiosity-empty{font-size:10px}
+.season-curiosity{margin-top:23px}
+.curiosity-panel{padding:24px;border-radius:18px}
+.curiosity-panel>h3{font-size:21px;line-height:1.25}
+.curiosity-all{gap:16px;margin-top:18px}
+.curiosity-group{padding:20px 21px;border-radius:15px}
+.curiosity-group-head{font-size:10.5px}
+.curiosity-group-head svg{width:18px;height:18px}
+.curiosity-list.full{gap:13px;margin-top:16px}
+.curiosity-list.full li{padding-left:18px;font-size:13.5px;line-height:1.72}
+.curiosity-list.full li:before{width:5px;height:5px;top:.68em}
+.curiosity-empty{font-size:11.5px}
 
-.season-side-stack{gap:18px}
-.season-data-card{padding:21px}
-.season-data-card>header{gap:12px;padding-bottom:15px}
-.season-data-card header>span{width:43px;height:43px;flex:0 0 43px;border-radius:12px}
-.season-data-card header img{width:32px;height:32px}
-.season-data-card header svg{width:21px;height:21px}
-.season-data-card header small{font-size:8px}
-.season-data-card header h3{font-size:17px}
-.history-table{padding-top:8px}
-.history-row{grid-template-columns:31px 34px minmax(0,1fr) auto;gap:11px;min-height:47px}
-.history-rank{font-size:10px}
-.history-row img{width:29px;height:29px}
-.history-name{font-size:12px}
-.history-name small{margin-top:3px;font-size:8px}
-.history-value{font-size:10.5px}
-.scorer-table .history-row{grid-template-columns:31px minmax(0,1fr) auto}
+.season-side-stack{gap:20px}
+.season-data-card{padding:24px}
+.season-data-card>header{gap:14px;padding-bottom:17px}
+.season-data-card header>span{width:47px;height:47px;flex:0 0 47px;border-radius:13px}
+.season-data-card header img{width:35px;height:35px}
+.season-data-card header svg{width:23px;height:23px}
+.season-data-card header small{font-size:9.5px}
+.season-data-card header h3{font-size:20px}
+.history-table{padding-top:10px}
+.history-row{grid-template-columns:34px 38px minmax(0,1fr) auto;gap:12px;min-height:54px}
+.history-rank{font-size:11.5px}
+.history-row img{width:32px;height:32px}
+.history-name{font-size:14px;line-height:1.2}
+.history-name small{margin-top:4px;font-size:9.5px}
+.history-value{font-size:12.5px}
+.scorer-table .history-row{grid-template-columns:34px minmax(0,1fr) auto}
 .scorer-history-icon{color:#b67cff!important}
 .scorer-history-icon svg{stroke-width:1.8}
-.empty-history{padding:28px 7px;font-size:11px}
+.empty-history{padding:31px 8px;font-size:12.5px}
+
+@media(min-width:1500px){
+  .season-stage{grid-template-columns:minmax(0,1.05fr) minmax(520px,.95fr)}
+  .curiosity-list.full li{font-size:14px}
+  .history-name{font-size:14.5px}
+  .history-value{font-size:13px}
+}
 
 @media(max-width:1120px){
   .season-stage{grid-template-columns:1fr}
@@ -82,19 +89,25 @@
 }
 
 @media(max-width:760px){
-  .archive-section{margin-top:30px}
-  .archive-section-head h2{font-size:30px}
-  .archive-kpis strong{font-size:25px}
-  .hall-card{padding:18px;min-height:auto}
-  .hall-person strong{font-size:12px}
-  .season-tab{font-size:9px;padding:10px 13px}
-  .season-main-card{padding:20px}
-  .season-main-top h2{font-size:39px}
-  .winner-card{min-height:135px;padding:18px}
-  .winner-card strong{font-size:19px}
+  .archive-section{margin-top:32px}
+  .section-kicker{font-size:10px}
+  .archive-section-head h2{font-size:32px}
+  .archive-kpis strong{font-size:27px}
+  .hall-card{padding:20px;min-height:auto}
+  .hall-person strong{font-size:13.5px}
+  .hall-person small{font-size:9px}
+  .season-tab{font-size:10px;padding:11px 14px}
+  .season-main-card{padding:22px}
+  .season-main-top h2{font-size:42px}
+  .winner-card{min-height:145px;padding:20px}
+  .winner-card strong{font-size:21px}
+  .curiosity-panel{padding:19px}
+  .curiosity-panel>h3{font-size:18px}
   .curiosity-all{grid-template-columns:1fr}
-  .curiosity-list.full li{font-size:10.5px}
+  .curiosity-list.full li{font-size:12px;line-height:1.65}
   .season-side-stack{grid-template-columns:1fr}
-  .history-row{min-height:43px}
-  .history-name{font-size:11px}
+  .season-data-card{padding:19px}
+  .history-row{min-height:48px}
+  .history-name{font-size:12.5px}
+  .history-value{font-size:11px}
 }
