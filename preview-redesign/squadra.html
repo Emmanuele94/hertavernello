@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#040912">
   <meta name="robots" content="noindex, nofollow">
   <title>Squadre — Hertavernello Preview</title>
-  <link rel="icon" href="../assets/logo.png">
+  <link rel="icon" href="../assets/hertavernello-restyling.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,123 +16,38 @@
   <link rel="stylesheet" href="squadra-refine.css">
 </head>
 <body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
-
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
   <div class="app-shell team-app">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Hertavernello Home">
-        <span class="brand-logo-frame"><img src="../assets/logo.png" class="brand-logo" alt="Logo Hertavernello"></span>
-        <span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">La lega del fantacalcio</small></span>
-      </a>
-
+      <a class="brand" href="index.html" aria-label="Hertavernello Home"><span class="brand-logo-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo" alt="Logo Hertavernello"></span><span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">La lega del fantacalcio</small></span></a>
       <nav class="desktop-nav" aria-label="Navigazione principale">
         <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a class="nav-item active" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
         <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
-        <a class="nav-item preview-pending" href="#"><i data-lucide="archive"></i><span>Archivio</span></a>
+        <a class="nav-item" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a>
         <a class="nav-item preview-pending" href="#"><i data-lucide="circle-help"></i><span>Quiz</span></a>
         <a class="nav-item preview-pending" href="#"><i data-lucide="shield-check"></i><span>Admin</span></a>
       </nav>
-
-      <div class="top-actions">
-        <button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button>
-        <div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div>
-      </div>
+      <div class="top-actions"><button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button><div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div></div>
     </header>
 
     <main>
-      <section class="team-switcher-wrap">
-        <div class="section-eyebrow"><i data-lucide="users-round"></i><span>Le 12 fantasquadre</span></div>
-        <div id="team-switcher" class="team-switcher" aria-label="Seleziona fantasquadra"></div>
-      </section>
-
-      <section class="team-hero" id="team-hero">
-        <div class="team-hero-lines"></div>
-        <button class="team-logo-stage" id="team-logo-stage" type="button" aria-label="Ingrandisci stemma squadra"></button>
-        <div class="team-identity">
-          <span class="team-label">FANTASQUADRA</span>
-          <h1 id="team-name">—</h1>
-          <div class="manager-line"><span class="manager-avatar"><i data-lucide="user-round"></i></span><div><small>Fantallenatore</small><strong id="manager-name">—</strong></div></div>
-          <div class="team-status-row">
-            <span class="team-chip"><i data-lucide="calendar-range"></i><span id="team-season">Stagione —</span></span>
-            <span class="team-chip muted-chip"><i data-lucide="database"></i>Profilo lega</span>
-          </div>
-        </div>
-        <div class="team-kpi-panel" id="team-kpis">
-          <div class="team-kpi"><small>Posizione</small><strong>—</strong><span>in attesa risultati</span></div>
-          <div class="team-kpi"><small>Punti</small><strong>—</strong><span>in attesa risultati</span></div>
-          <div class="team-kpi"><small>Fantapunti</small><strong>—</strong><span>in attesa risultati</span></div>
-          <div class="team-kpi"><small>Media</small><strong>—</strong><span>in attesa risultati</span></div>
-        </div>
-      </section>
-
-      <nav class="team-tabs team-tabs-two" aria-label="Sezioni squadra">
-        <button class="team-tab active" data-tab="overview"><i data-lucide="layout-dashboard"></i>Panoramica</button>
-        <button class="team-tab" data-tab="roster"><i data-lucide="shirt"></i>Rosa</button>
-      </nav>
+      <section class="team-switcher-wrap"><div class="section-eyebrow"><i data-lucide="users-round"></i><span>Le 12 fantasquadre</span></div><div id="team-switcher" class="team-switcher" aria-label="Seleziona fantasquadra"></div></section>
+      <section class="team-hero" id="team-hero"><div class="team-hero-lines"></div><button class="team-logo-stage" id="team-logo-stage" type="button" aria-label="Ingrandisci stemma squadra"></button><div class="team-identity"><span class="team-label">FANTASQUADRA</span><h1 id="team-name">—</h1><div class="manager-line"><span class="manager-avatar"><i data-lucide="user-round"></i></span><div><small>Fantallenatore</small><strong id="manager-name">—</strong></div></div><div class="team-status-row"><span class="team-chip"><i data-lucide="calendar-range"></i><span id="team-season">Stagione —</span></span><span class="team-chip muted-chip"><i data-lucide="database"></i>Profilo lega</span></div></div><div class="team-kpi-panel" id="team-kpis"><div class="team-kpi"><small>Posizione</small><strong>—</strong><span>in attesa risultati</span></div><div class="team-kpi"><small>Punti</small><strong>—</strong><span>in attesa risultati</span></div><div class="team-kpi"><small>Fantapunti</small><strong>—</strong><span>in attesa risultati</span></div><div class="team-kpi"><small>Media</small><strong>—</strong><span>in attesa risultati</span></div></div></section>
+      <nav class="team-tabs team-tabs-two" aria-label="Sezioni squadra"><button class="team-tab active" data-tab="overview"><i data-lucide="layout-dashboard"></i>Panoramica</button><button class="team-tab" data-tab="roster"><i data-lucide="shirt"></i>Rosa</button></nav>
 
       <section class="team-view active" data-view="overview">
-        <div class="overview-layout overview-layout-main">
-          <article class="team-card overview-card">
-            <header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shield"></i></span><div><small>PANORAMICA</small><h2>Identità della squadra</h2></div></div><span class="data-tag">DB</span></header>
-            <div class="identity-body" id="identity-body"></div>
-          </article>
-
-          <article class="team-card prediction-card">
-            <header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="scan-eye"></i></span><div><small>PREVISIONE</small><h2>Serie A</h2></div></div><span class="data-tag manual">MANUALE</span></header>
-            <div id="prediction-content"></div>
-          </article>
-        </div>
-
-        <div class="overview-layout overview-layout-secondary">
-          <article class="team-card auction-grade-card">
-            <header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="badge-check"></i></span><div><small>ASTA</small><h2>Pagella dell’asta</h2></div></div><span class="data-tag manual">MANUALE</span></header>
-            <div id="auction-grade"></div>
-          </article>
-
-          <article class="team-card auction-video-card">
-            <header class="team-card-head"><div><span class="mini-emblem red"><i data-lucide="youtube"></i></span><div><small>ASTA</small><h2>Highlights asta</h2></div></div><span class="data-tag manual">YOUTUBE</span></header>
-            <div id="auction-video"></div>
-          </article>
-        </div>
+        <div class="overview-layout overview-layout-main"><article class="team-card overview-card"><header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shield"></i></span><div><small>PANORAMICA</small><h2>Identità della squadra</h2></div></div><span class="data-tag">DB</span></header><div class="identity-body" id="identity-body"></div></article><article class="team-card prediction-card"><header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="scan-eye"></i></span><div><small>PREVISIONE</small><h2>Serie A</h2></div></div><span class="data-tag manual">MANUALE</span></header><div id="prediction-content"></div></article></div>
+        <div class="overview-layout overview-layout-secondary"><article class="team-card auction-grade-card"><header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="badge-check"></i></span><div><small>ASTA</small><h2>Pagella dell’asta</h2></div></div><span class="data-tag manual">MANUALE</span></header><div id="auction-grade"></div></article><article class="team-card auction-video-card"><header class="team-card-head"><div><span class="mini-emblem red"><i data-lucide="youtube"></i></span><div><small>ASTA</small><h2>Highlights asta</h2></div></div><span class="data-tag manual">YOUTUBE</span></header><div id="auction-video"></div></article></div>
       </section>
 
-      <section class="team-view" data-view="roster">
-        <div class="roster-page-grid">
-          <article class="team-card roster-main-card">
-            <header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shirt"></i></span><div><small>ROSA</small><h2>Giocatori</h2></div></div><span class="data-tag">DB</span></header>
-            <div id="roster-content"></div>
-          </article>
-
-          <div class="roster-stats-grid">
-            <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem cyan"><i data-lucide="globe-2"></i></span><div><small>ROSA</small><h2>Nazionalità</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-nationality"></div></article>
-            <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="chart-pie"></i></span><div><small>ROSA</small><h2>Composizione per ruolo</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-role"></div></article>
-            <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="building-2"></i></span><div><small>ROSA</small><h2>Club reali</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-clubs"></div></article>
-            <article class="team-card"><header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="arrow-left-right"></i></span><div><small>ROSA</small><h2>Movimenti rosa</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-movements"></div></article>
-          </div>
-        </div>
-      </section>
+      <section class="team-view" data-view="roster"><div class="roster-page-grid"><article class="team-card roster-main-card"><header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="shirt"></i></span><div><small>ROSA</small><h2>Giocatori</h2></div></div><span class="data-tag">DB</span></header><div id="roster-content"></div></article><div class="roster-stats-grid"><article class="team-card"><header class="team-card-head"><div><span class="mini-emblem cyan"><i data-lucide="globe-2"></i></span><div><small>ROSA</small><h2>Nazionalità</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-nationality"></div></article><article class="team-card"><header class="team-card-head"><div><span class="mini-emblem violet"><i data-lucide="chart-pie"></i></span><div><small>ROSA</small><h2>Composizione per ruolo</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-role"></div></article><article class="team-card"><header class="team-card-head"><div><span class="mini-emblem blue"><i data-lucide="building-2"></i></span><div><small>ROSA</small><h2>Club reali</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-clubs"></div></article><article class="team-card"><header class="team-card-head"><div><span class="mini-emblem gold"><i data-lucide="arrow-left-right"></i></span><div><small>ROSA</small><h2>Movimenti rosa</h2></div></div><span class="data-tag calculated">CALCOLATO</span></header><div id="roster-movements"></div></article></div></div></section>
     </main>
   </div>
 
-  <nav class="mobile-nav" aria-label="Navigazione mobile">
-    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
-    <a href="squadra.html" class="mobile-nav-item active"><i data-lucide="users"></i><span>Squadre</span></a>
-    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
-    <a href="#" class="mobile-nav-item preview-pending"><i data-lucide="archive"></i><span>Archivio</span></a>
-    <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
-  </nav>
-
-  <div class="crest-lightbox" id="crest-lightbox" aria-hidden="true">
-    <button class="crest-lightbox-close" type="button" aria-label="Chiudi"><i data-lucide="x"></i></button>
-    <div class="crest-lightbox-content" id="crest-lightbox-content"></div>
-    <small id="crest-lightbox-label">Stemma squadra</small>
-  </div>
-
+  <nav class="mobile-nav" aria-label="Navigazione mobile"><a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a><a href="squadra.html" class="mobile-nav-item active"><i data-lucide="users"></i><span>Squadre</span></a><a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a><a href="archivio.html" class="mobile-nav-item"><i data-lucide="trophy"></i><span>Archivio</span></a><button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button></nav>
+  <div class="crest-lightbox" id="crest-lightbox" aria-hidden="true"><button class="crest-lightbox-close" type="button" aria-label="Chiudi"><i data-lucide="x"></i></button><div class="crest-lightbox-content" id="crest-lightbox-content"></div><small id="crest-lightbox-label">Stemma squadra</small></div>
   <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita più avanti nella preview.</div>
-
-  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-  <script src="squadra.js"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="squadra.js"></script>
 </body>
 </html>
