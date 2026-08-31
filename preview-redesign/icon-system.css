@@ -1,0 +1,273 @@
+/* Hertavernello Preview — premium icon system
+   La navigazione resta outline come nella reference; le card usano emblemi SVG dedicati. */
+
+/* NAV: outline, ma con un vero trattamento da app premium */
+.nav-item > svg,
+.mobile-nav-item > svg {
+  position: relative;
+  z-index: 2;
+  stroke-width: 1.75;
+  filter: drop-shadow(0 0 0 transparent);
+  transition: color .2s ease, filter .2s ease, transform .2s ease;
+}
+
+.nav-item::before {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  left: 50%;
+  top: 50%;
+  border-radius: 11px;
+  transform: translate(-50%, -50%) scale(.78);
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(91,190,255,.18), transparent 60%),
+    linear-gradient(145deg, rgba(43,137,255,.12), rgba(33,62,111,.025));
+  border: 1px solid rgba(87,159,255,.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.nav-item:hover::before,
+.nav-item.active::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.nav-item.active > svg {
+  color: #65c9ff;
+  filter: drop-shadow(0 0 7px rgba(42,140,255,.5));
+  transform: translateY(-1px);
+}
+
+.nav-item.active span {
+  text-shadow: 0 0 16px rgba(74,162,255,.23);
+}
+
+/* top actions: non più icone nude sul fondo */
+.icon-button {
+  border: 1px solid rgba(105,151,217,.06);
+  background: linear-gradient(145deg, rgba(255,255,255,.018), rgba(255,255,255,.005));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+
+.icon-button svg {
+  stroke-width: 1.7;
+  filter: drop-shadow(0 0 7px rgba(69,151,255,.08));
+}
+
+/* HERO KPI: mini componenti, non semplici disegnini */
+.kpi-icon {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(77,164,255,.16);
+  background:
+    radial-gradient(circle at 30% 15%, rgba(119,211,255,.16), transparent 45%),
+    linear-gradient(145deg, rgba(25,82,139,.34), rgba(9,25,45,.78));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    0 7px 18px rgba(0,0,0,.18);
+}
+
+.kpi-icon::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: -12px;
+  bottom: -12px;
+  border-radius: 50%;
+  background: rgba(53,142,255,.18);
+  filter: blur(7px);
+  z-index: -1;
+}
+
+.kpi-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.7;
+  color: #74d4ff;
+  filter: drop-shadow(0 0 6px rgba(55,166,255,.36));
+}
+
+/* HERO SIDE PANEL */
+.side-panel-item > svg {
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  border-radius: 9px;
+  border: 1px solid rgba(81,159,255,.1);
+  background: linear-gradient(145deg, rgba(42,140,255,.09), rgba(42,140,255,.018));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  stroke-width: 1.6;
+}
+
+/* CARD EMBLEMS — SVG originali per la preview Hertavernello */
+.panel-icon.panel-emblem {
+  --emblem-rgb: 64,148,255;
+  position: relative;
+  isolation: isolate;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(var(--emblem-rgb), .21);
+  background:
+    radial-gradient(circle at 34% 17%, rgba(255,255,255,.10), transparent 27%),
+    linear-gradient(145deg, rgba(var(--emblem-rgb), .18), rgba(5,13,25,.92) 70%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -8px 22px rgba(0,0,0,.18),
+    0 7px 18px rgba(0,0,0,.2);
+}
+
+.panel-icon.panel-emblem::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+  border-radius: 7px;
+  border: 1px solid rgba(var(--emblem-rgb), .12);
+  background: linear-gradient(145deg, rgba(var(--emblem-rgb), .055), transparent 68%);
+}
+
+.panel-icon.panel-emblem::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 12px;
+  left: 5px;
+  bottom: -8px;
+  border-radius: 50%;
+  background: rgba(var(--emblem-rgb), .34);
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.panel-icon.panel-emblem > svg {
+  width: 25px;
+  height: 25px;
+  overflow: visible;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.3));
+}
+
+.panel-icon.panel-emblem.emblem-fixtures { --emblem-rgb: 126,91,255; }
+.panel-icon.panel-emblem.emblem-league   { --emblem-rgb: 232,180,78; }
+.panel-icon.panel-emblem.emblem-seriea   { --emblem-rgb: 43,151,255; }
+.panel-icon.panel-emblem.emblem-scorers  { --emblem-rgb: 186,78,255; }
+.panel-icon.panel-emblem.emblem-feature  { --emblem-rgb: 241,187,73; }
+.panel-icon.panel-emblem.emblem-hall     { --emblem-rgb: 211,165,73; }
+.panel-icon.panel-emblem.emblem-quiz     { --emblem-rgb: 175,71,255; }
+
+/* La card principale della lega ha un emblema un po' più presente */
+.panel-league .panel-icon.panel-emblem {
+  width: 37px;
+  height: 37px;
+  flex-basis: 37px;
+  border-color: rgba(235,186,88,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 20px rgba(224,171,66,.055),
+    0 8px 20px rgba(0,0,0,.22);
+}
+
+.panel-league .panel-icon.panel-emblem > svg {
+  width: 27px;
+  height: 27px;
+}
+
+/* Hall e Quiz ricevono un trattamento più "modalità speciale" */
+.panel-hall .panel-icon.panel-emblem {
+  background:
+    radial-gradient(circle at 35% 18%, rgba(255,230,169,.14), transparent 28%),
+    linear-gradient(145deg, rgba(113,78,22,.38), rgba(10,16,25,.94) 72%);
+}
+
+.panel-quiz .panel-icon.panel-emblem {
+  border-color: rgba(190,91,255,.28);
+  background:
+    radial-gradient(circle at 35% 18%, rgba(227,174,255,.16), transparent 28%),
+    linear-gradient(145deg, rgba(92,34,157,.4), rgba(18,10,42,.94) 72%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 23px rgba(166,61,255,.08),
+    0 8px 20px rgba(0,0,0,.22);
+}
+
+/* Empty states: icona con struttura coerente, ma volutamente più neutra */
+.empty-icon {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(85,145,225,.12);
+  background:
+    radial-gradient(circle at 30% 15%, rgba(100,180,255,.1), transparent 40%),
+    linear-gradient(145deg, rgba(34,78,128,.18), rgba(6,15,27,.7));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.empty-icon svg {
+  stroke-width: 1.55;
+  filter: drop-shadow(0 0 7px rgba(82,148,236,.16));
+}
+
+/* Strip finale */
+.strip-stat > svg {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  border-radius: 10px;
+  color: #76bfff;
+  border: 1px solid rgba(82,150,236,.11);
+  background: linear-gradient(145deg, rgba(42,140,255,.08), rgba(6,15,27,.4));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  stroke-width: 1.55;
+}
+
+/* Mobile bottom nav: reference = outline pulito, glow soltanto sull'attivo */
+@media (max-width: 680px) {
+  .mobile-nav-item {
+    position: relative;
+  }
+
+  .mobile-nav-item > svg {
+    width: 21px;
+    height: 21px;
+    padding: 0;
+    stroke-width: 1.7;
+  }
+
+  .mobile-nav-item.active > svg {
+    color: #58c9ff;
+    filter: drop-shadow(0 0 7px rgba(42,140,255,.5));
+  }
+
+  .mobile-nav-item.active::before {
+    content: "";
+    position: absolute;
+    width: 39px;
+    height: 29px;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    background: radial-gradient(circle at 50% 50%, rgba(42,140,255,.17), transparent 70%);
+    border: 1px solid rgba(52,146,255,.07);
+    pointer-events: none;
+  }
+
+  .panel-icon.panel-emblem {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+
+  .panel-icon.panel-emblem > svg {
+    width: 23px;
+    height: 23px;
+  }
+}
