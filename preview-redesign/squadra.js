@@ -31,9 +31,7 @@ function logoMeta(teamId) {
 
 function teamLogo(team, imgClass = "team-switch-logo", fallbackClass = "") {
   const logo = logoMeta(team.id);
-  if (logo?.immagine) {
-    return `<img class="${imgClass}" src="${ROOT}assets/stemmi/${logo.immagine}" alt="Logo ${esc(team.nomeFantasquadra)}">`;
-  }
+  if (logo?.immagine) return `<img class="${imgClass}" src="${ROOT}assets/stemmi/${logo.immagine}" alt="Logo ${esc(team.nomeFantasquadra)}">`;
   const fallback = fallbackClass || (imgClass === "team-switch-logo" ? "team-switch-fallback" : "team-logo-big-fallback");
   return `<span class="${fallback}">${esc(initials(team.nomeFantasquadra))}</span>`;
 }
@@ -93,14 +91,25 @@ function renderIdentity(team) {
 }
 
 function renderPagella(team) {
-  const target = $("auction-full");
+  const target = $("auction-grade");
   const grade = (state.pagelle?.pagelle || []).find(x => x.squadraId === team.id);
   if (!grade) {
-    target.innerHTML = emptyBlock("badge-help", "Pagella non ancora inserita", "Quando l'admin inserirà voto, titolo e commento, compariranno qui senza generazione automatica.");
+    target.innerHTML = emptyBlock("badge-help", "Pagella non ancora inserita", "Quando l'admin inserirà voto, titolo e commento, compariranno qui.");
     return;
   }
-
   target.innerHTML = `<div class="grade-wrap"><div class="grade-score"><strong>${esc(String(grade.voto).replace('.', ','))}</strong></div><div class="grade-copy"><span class="grade-badge">${esc(grade.badge || 'PAGELLA')}</span><p>${esc(grade.commento || '')}</p></div></div>`;
+}
+
+function renderAuctionVideo() {
+  $("auction-video").innerHTML = `
+    <div class="auction-video-placeholder">
+      <div class="auction-video-frame">
+        <span class="video-grid"></span>
+        <span class="video-play"><i data-lucide="play"></i></span>
+        <div class="video-copy"><small>HIGHLIGHTS ASTA</small><strong>Video non ancora collegato</strong><p>Qui comparirà il montaggio YouTube con le scene migliori dell'asta in videochiamata.</p></div>
+      </div>
+      <div class="auction-video-meta"><i data-lucide="youtube"></i><span>Fonte: link YouTube inserito manualmente</span></div>
+    </div>`;
 }
 
 function renderPrediction(team) {
@@ -113,17 +122,14 @@ function renderPrediction(team) {
 }
 
 function rosterUnavailableHtml() {
-  return `<div class="roster-notice"><strong>Dataset rosa attuale escluso dalla preview</strong><p>` +
-    `Il file rose.json dichiara esplicitamente di contenere dati casuali di test. Per questo questa pagina non calcola ruoli, club, costi o nazionalità come se fossero reali.</p></div>` +
-    emptyBlock("database-zap", "In attesa della rosa reale", "Dopo l'asta, l'import reale alimenterà automaticamente rosa, donut, nazionalità, club rappresentati e highlights asta.");
+  return `<div class="roster-notice"><strong>Dataset rosa attuale escluso dalla preview</strong><p>Il file rose.json dichiara esplicitamente di contenere dati casuali di test. Per questo non calcolo statistiche come se fossero reali.</p></div>` +
+    emptyBlock("database-zap", "In attesa della rosa reale", "Dopo l'asta, l'import reale alimenterà automaticamente giocatori, nazionalità, ruoli, club rappresentati e movimenti rosa.");
 }
 
 function renderRosterDependent() {
   const html = rosterUnavailableHtml();
-  ["roster-content","auction-highlights","stats-nationality","stats-role","stats-clubs"].forEach(id => {
-    const el = $(id);
-    if (el) el.innerHTML = html;
-  });
+  ["roster-content","roster-nationality","roster-role","roster-clubs"].forEach(id => $(id).innerHTML = html);
+  $("roster-movements").innerHTML = emptyBlock("history", "Nessuno snapshot precedente", "Questa sezione confronterà automaticamente due import reali consecutivi della rosa.");
 }
 
 function renderTeam() {
@@ -133,20 +139,17 @@ function renderTeam() {
   renderTeamHero(team);
   renderIdentity(team);
   renderPagella(team);
+  renderAuctionVideo();
   renderPrediction(team);
   renderRosterDependent();
   refreshIcons();
 }
 
-function openTab(tabName, scroll = true) {
-  document.querySelectorAll(".team-tab").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tabName));
-  document.querySelectorAll(".team-view").forEach(view => view.classList.toggle("active", view.dataset.view === tabName));
-  if (scroll) document.querySelector(".team-tabs")?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 function setupTabs() {
-  document.querySelectorAll(".team-tab").forEach(btn => btn.addEventListener("click", () => openTab(btn.dataset.tab, false)));
-  document.querySelectorAll("[data-open-tab]").forEach(btn => btn.addEventListener("click", () => openTab(btn.dataset.openTab, true)));
+  document.querySelectorAll(".team-tab").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll(".team-tab").forEach(x => x.classList.toggle("active", x === btn));
+    document.querySelectorAll(".team-view").forEach(view => view.classList.toggle("active", view.dataset.view === btn.dataset.tab));
+  }));
 }
 
 function openCrestLightbox() {
