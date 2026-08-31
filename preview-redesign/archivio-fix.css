@@ -1,0 +1,22 @@
+/* Archive refinements: full curiosities + stronger Hertavernello restyling mark. */
+.archive-brand-frame{width:54px;height:54px;display:grid;place-items:center;overflow:visible;background:radial-gradient(circle,rgba(122,14,31,.16),transparent 68%)}
+.archive-brand-logo{width:52px!important;height:52px!important;max-width:none!important;max-height:none!important;object-fit:contain;display:block;filter:drop-shadow(0 7px 13px rgba(0,0,0,.45)) drop-shadow(0 0 10px rgba(157,52,80,.16))}
+.archive-hero-mark{isolation:isolate}
+.archive-hero-mark:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(122,14,31,.17),rgba(239,189,98,.045) 38%,transparent 70%);filter:blur(6px);z-index:0}
+.archive-hero-mark img{z-index:2!important;width:min(330px,94%)!important;display:block!important;opacity:1!important;visibility:visible!important;object-fit:contain;filter:drop-shadow(0 26px 42px rgba(0,0,0,.62)) drop-shadow(0 0 24px rgba(147,42,70,.2))!important}
+
+.curiosity-panel{padding:18px}
+.curiosity-all{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.curiosity-group{padding:14px;border:1px solid rgba(135,94,211,.11);border-radius:12px;background:rgba(10,15,27,.45)}
+.curiosity-group-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#baa3e6;font-size:8px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.curiosity-group-head svg{width:14px;height:14px;color:#aa78f0}
+.curiosity-group.world .curiosity-group-head{color:#9eb9d6}.curiosity-group.world .curiosity-group-head svg{color:#69a9e8}
+.curiosity-list.full{gap:9px}.curiosity-list.full li{font-size:8.5px;line-height:1.58;color:#8896aa}
+.curiosity-group.world .curiosity-list li:before{background:#5d9fdf;box-shadow:0 0 8px rgba(93,159,223,.38)}
+.curiosity-empty{color:#65758a;font-size:8.5px;line-height:1.55}
+
+@media(max-width:760px){
+  .archive-brand-frame{width:48px;height:48px}.archive-brand-logo{width:46px!important;height:46px!important}
+  .archive-hero-mark:before{width:230px;height:230px}.archive-hero-mark img{width:min(220px,94%)!important}
+  .curiosity-all{grid-template-columns:1fr}.curiosity-panel{padding:15px}.curiosity-group{padding:12px}
+}
