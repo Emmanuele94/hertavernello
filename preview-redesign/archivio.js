@@ -84,7 +84,7 @@ function winnerCard(kind, names) {
 function serieARows(season) {
   const rows = season.classificaSerieA || [];
   if (!rows.length) return `<div class="empty-history">Classifica Serie A non disponibile per questa stagione.</div>`;
-  return `<div class="history-table">${rows.slice(0, 8).map((r, i) => `<div class="history-row">
+  return `<div class="history-table">${rows.map((r, i) => `<div class="history-row">
     <span class="history-rank">${i + 1}</span>
     ${r.codice ? `<img src="${ROOT}assets/loghi/${esc(r.codice)}.png" alt="">` : `<span></span>`}
     <span class="history-name">${esc(r.nome)}</span>
@@ -95,7 +95,7 @@ function serieARows(season) {
 function scorerRows(season) {
   const rows = season.topMarcatori || [];
   if (!rows.length) return `<div class="empty-history">Top marcatori non disponibile per questa stagione.</div>`;
-  return `<div class="history-table scorer-table">${rows.slice(0, 6).map((r, i) => `<div class="history-row">
+  return `<div class="history-table scorer-table">${rows.map((r, i) => `<div class="history-row">
     <span class="history-rank">${i + 1}</span>
     <span class="history-name">${esc(r.nome)}<small>${esc(r.squadra || "")}</small></span>
     <span class="history-value">${r.gol != null ? `${esc(r.gol)} gol` : "—"}</span>
