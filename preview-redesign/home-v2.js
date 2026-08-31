@@ -25,7 +25,7 @@
   }
 
   function esc(v = "") {
-    return String(v).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;"}[c]));
+    return String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   }
 
   function normalizeName(str) {
@@ -75,6 +75,7 @@
     renderFullSerieA();
     setTimeout(replaceHomeIcons, 250);
     setTimeout(renderFullSerieA, 650);
+    setTimeout(renderFullSerieA, 1800);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initV2);
