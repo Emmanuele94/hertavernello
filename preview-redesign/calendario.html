@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#040912">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Calendario — Hertavernello Preview</title>
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="icon-system.css">
+  <link rel="stylesheet" href="calendario.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell calendar-app">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Hertavernello Home">
+        <span class="brand-logo-frame"><img src="../assets/logo.png" class="brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">La lega del fantacalcio</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
+        <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
+        <a class="nav-item active" href="calendario.html"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="archive"></i><span>Archivio</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="circle-help"></i><span>Quiz</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="shield-check"></i><span>Admin</span></a>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button>
+        <div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="calendar-hero">
+        <div class="calendar-hero-grid"></div>
+        <div class="calendar-hero-copy">
+          <span class="calendar-kicker"><i data-lucide="swords"></i> HERTAVERNELLO MATCH CENTER</span>
+          <h1>CHI GIOCA<br><span>CONTRO CHI</span></h1>
+          <p>Il calendario completo della nostra lega. Ogni giornata mostra gli incroci tra fantasquadre senza confonderli con le partite reali di Serie A.</p>
+        </div>
+        <div class="calendar-hero-stats">
+          <div class="calendar-stat"><span><i data-lucide="users-round"></i></span><div><small>Fantasquadre</small><strong id="stat-teams">—</strong></div></div>
+          <div class="calendar-stat"><span><i data-lucide="calendar-range"></i></span><div><small>Giornate caricate</small><strong id="stat-rounds">—</strong></div></div>
+          <div class="calendar-stat"><span><i data-lucide="swords"></i></span><div><small>Incontri registrati</small><strong id="stat-matches">—</strong></div></div>
+        </div>
+      </section>
+
+      <section class="calendar-toolbar" aria-label="Filtri calendario">
+        <div class="toolbar-copy">
+          <small>CALENDARIO LEGA</small>
+          <strong id="toolbar-title">In attesa del calendario</strong>
+        </div>
+        <label class="team-filter-wrap" for="team-filter">
+          <i data-lucide="filter"></i>
+          <select id="team-filter" aria-label="Filtra per fantasquadra">
+            <option value="all">Tutte le fantasquadre</option>
+          </select>
+          <i data-lucide="chevron-down"></i>
+        </label>
+      </section>
+
+      <section class="round-selector-shell" id="round-selector-shell">
+        <div class="round-selector-head">
+          <div><small>SELEZIONA GIORNATA</small><strong id="round-selector-label">Nessuna giornata disponibile</strong></div>
+          <div class="round-nav-actions">
+            <button id="round-prev" type="button" aria-label="Giornata precedente" disabled><i data-lucide="chevron-left"></i></button>
+            <button id="round-next" type="button" aria-label="Giornata successiva" disabled><i data-lucide="chevron-right"></i></button>
+          </div>
+        </div>
+        <div id="round-selector" class="round-selector"></div>
+      </section>
+
+      <section class="calendar-content" id="calendar-content">
+        <div class="calendar-empty">
+          <div class="empty-calendar-art">
+            <span class="calendar-ring ring-one"></span>
+            <span class="calendar-ring ring-two"></span>
+            <i data-lucide="calendar-clock"></i>
+          </div>
+          <div class="calendar-empty-copy">
+            <span class="empty-status">DB · CALENDARIO</span>
+            <h2>Il calendario della lega non è ancora stato caricato.</h2>
+            <p>Quando verrà importato dall’Admin, qui compariranno automaticamente tutte le giornate e gli incroci reali tra i 12 fantallenatori.</p>
+            <div class="empty-rules">
+              <span><i data-lucide="circle-dot"></i> Giornata futura → A <b>VS</b> B</span>
+              <span><i data-lucide="check-circle-2"></i> Giornata conclusa → punteggi reali quando saranno salvati</span>
+              <span><i data-lucide="pause-circle"></i> Eventuale riposo → squadra indicata senza avversario</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigazione mobile">
+    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
+    <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
+    <a href="calendario.html" class="mobile-nav-item active"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+    <a href="#" class="mobile-nav-item preview-pending"><i data-lucide="archive"></i><span>Archivio</span></a>
+    <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
+  </nav>
+
+  <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita più avanti nella preview.</div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="calendario.js"></script>
+</body>
+</html>
