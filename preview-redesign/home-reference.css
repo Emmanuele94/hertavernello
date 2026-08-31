@@ -1,0 +1,63 @@
+/* Home refinement: closer to the supplied reference, using user-provided branding. */
+
+.restyling-brand-frame{overflow:visible;background:transparent;border-color:rgba(239,189,98,.16);box-shadow:none}
+.restyling-brand-logo{max-width:52px;max-height:52px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.36))}
+
+.reference-hero{background:
+  radial-gradient(circle at 51% 48%,rgba(91,55,255,.13),transparent 24%),
+  radial-gradient(circle at 20% 35%,rgba(31,122,255,.11),transparent 28%),
+  linear-gradient(118deg,#06101c,#050b14 56%,#07111e)}
+.restyling-hero-visual{min-width:0}
+.restyling-logo-card{width:245px;height:245px;border:0;background:transparent;box-shadow:none;overflow:visible}
+.restyling-logo-card:before{content:"";position:absolute;inset:10%;border-radius:50%;background:radial-gradient(circle,rgba(139,33,70,.2),rgba(42,140,255,.08) 47%,transparent 70%);filter:blur(18px);z-index:-1}
+.restyling-logo-card img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 32px rgba(0,0,0,.5)) drop-shadow(0 0 20px rgba(129,31,65,.2))}
+
+.side-seriea-mark{width:30px;height:30px;object-fit:contain;padding:3px;border-radius:9px;border:1px solid rgba(72,145,255,.12);background:linear-gradient(145deg,rgba(28,84,143,.18),rgba(7,16,29,.75));filter:drop-shadow(0 0 7px rgba(42,140,255,.16))}
+
+.panel-brand-icon{width:37px;height:37px;flex:0 0 37px;display:grid;place-items:center;border-radius:10px;border:1px solid rgba(72,146,255,.18);background:linear-gradient(145deg,rgba(27,83,145,.2),rgba(5,14,26,.94));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 18px rgba(0,0,0,.18)}
+.seriea-brand-icon img{width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 0 7px rgba(42,140,255,.2))}
+
+/* With Hall of Fame removed from Home, the second row becomes balanced 6/6. */
+.reference-dashboard .panel-scorers{grid-column:span 6}
+.reference-dashboard .panel-feature{grid-column:span 6}
+
+/* Quiz = final hero-card of the page. */
+.reference-quiz{grid-column:1/-1;min-height:292px;border-color:rgba(160,76,255,.27);background:
+  radial-gradient(circle at 79% 44%,rgba(148,55,255,.2),transparent 26%),
+  radial-gradient(circle at 12% 95%,rgba(62,49,173,.12),transparent 30%),
+  linear-gradient(118deg,rgba(13,13,30,.98),rgba(13,9,32,.98) 58%,rgba(25,10,50,.98));box-shadow:0 20px 55px rgba(0,0,0,.28),0 0 45px rgba(146,52,255,.045)}
+.reference-quiz .panel-head{background:linear-gradient(90deg,rgba(153,62,255,.035),transparent)}
+.reference-quiz-content{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:24px;align-items:center;min-height:235px;padding:25px 30px 28px}
+.reference-quiz .quiz-copy{max-width:720px}
+.quiz-brand-line{display:flex;align-items:center;gap:9px;margin-bottom:10px;color:#a985ff;font-size:8px;font-weight:800;letter-spacing:.12em}
+.quiz-brand-line img{width:27px;height:27px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
+.reference-quiz .quiz-copy h3{max-width:650px;margin:0;font:700 clamp(28px,3.5vw,46px)/1.02 "Space Grotesk",sans-serif;letter-spacing:-.045em}
+.reference-quiz .quiz-copy p{max-width:650px;margin:10px 0 0;color:#968caf;font-size:11px;line-height:1.62}
+.quiz-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.quiz-badges span{height:28px;display:inline-flex;align-items:center;gap:6px;padding:0 9px;border:1px solid rgba(177,91,255,.13);border-radius:8px;background:rgba(161,69,255,.045);color:#a998be;font-size:8px;font-weight:650}
+.quiz-badges svg{width:13px;color:#b879ff}.quiz-badges img{width:15px;height:15px;object-fit:contain}
+.quiz-play-button{margin-top:17px;min-width:132px;justify-content:center;border-color:rgba(181,92,255,.35);background:linear-gradient(135deg,#7a41f2,#a34cff 56%,#7545ed);box-shadow:0 10px 26px rgba(126,61,235,.24),inset 0 1px 0 rgba(255,255,255,.16)}
+.quiz-play-button:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.reference-quiz-orbit{position:relative;width:260px;height:210px;justify-self:center;display:grid;place-items:center}
+.reference-quiz-orbit .orbit-ring{position:absolute;width:168px;height:168px;border-radius:50%;border:1px solid rgba(181,94,255,.22);box-shadow:0 0 40px rgba(151,55,255,.1),inset 0 0 30px rgba(95,55,255,.06)}
+.reference-quiz-orbit .orbit-ring-two{width:215px;height:215px;border-color:rgba(99,85,255,.09);transform:rotate(22deg)}
+.quiz-cup-halo{position:absolute;width:138px;height:138px;border-radius:50%;background:radial-gradient(circle,rgba(179,85,255,.22),rgba(97,49,255,.07) 48%,transparent 72%);filter:blur(8px)}
+.reference-quiz-orbit>svg{position:relative;z-index:2;width:93px;height:93px;padding:18px;border-radius:28px;color:#c17aff;stroke-width:1.35;border:1px solid rgba(195,119,255,.22);background:linear-gradient(145deg,rgba(103,44,163,.34),rgba(20,12,42,.9));filter:drop-shadow(0 0 24px rgba(168,72,255,.3))}
+.reference-quiz-orbit>b{position:absolute;z-index:3;right:69px;top:49px;width:43px;height:43px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(233,205,255,.45);background:linear-gradient(145deg,#b661ff,#6d3ce5);box-shadow:0 0 22px rgba(183,82,255,.42);color:#fff;font:800 24px "Space Grotesk",sans-serif}
+
+@media(max-width:1120px){
+  .restyling-logo-card{width:215px;height:215px}
+  .reference-dashboard .panel-scorers,.reference-dashboard .panel-feature{grid-column:span 6}
+  .reference-quiz-content{grid-template-columns:1fr 260px}
+}
+
+@media(max-width:760px){
+  .restyling-brand-logo{max-width:45px;max-height:45px}
+  .restyling-logo-card{width:190px;height:190px}
+  .reference-dashboard .panel-scorers,.reference-dashboard .panel-feature{grid-column:1/-1}
+  .reference-quiz-content{grid-template-columns:1fr;padding:20px 18px 25px}
+  .reference-quiz-orbit{width:220px;height:180px;margin:2px auto 0}
+  .reference-quiz-orbit .orbit-ring{width:145px;height:145px}.reference-quiz-orbit .orbit-ring-two{width:185px;height:185px}
+  .reference-quiz-orbit>svg{width:82px;height:82px}.reference-quiz-orbit>b{right:56px;top:38px;width:39px;height:39px;font-size:21px}
+  .quiz-badges{gap:5px}.quiz-badges span{font-size:7.5px;padding:0 7px}
+}
