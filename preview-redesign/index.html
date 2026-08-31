@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#040912">
   <meta name="robots" content="noindex, nofollow">
   <title>Hertavernello — Preview Redesign</title>
-  <link rel="icon" href="../assets/logo.png">
+  <link rel="icon" href="../assets/hertavernello-restyling.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -21,32 +21,21 @@
   <div class="app-shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Hertavernello Home">
-        <span class="brand-logo-frame restyling-brand-frame">
-          <img src="../assets/hertavernello-restyling.webp" class="brand-logo restyling-brand-logo" alt="Logo Hertavernello">
-        </span>
-        <span class="brand-copy">
-          <strong id="brand-name">Hertavernello</strong>
-          <small id="brand-season">La lega del fantacalcio</small>
-        </span>
+        <span class="brand-logo-frame restyling-brand-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo restyling-brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-copy"><strong id="brand-name">Hertavernello</strong><small id="brand-season">La lega del fantacalcio</small></span>
       </a>
-
       <nav class="desktop-nav" aria-label="Navigazione principale">
         <a class="nav-item active" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
         <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
-        <a class="nav-item preview-pending" href="#archivio"><i data-lucide="archive"></i><span>Archivio</span></a>
+        <a class="nav-item" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a>
         <a class="nav-item preview-pending" href="#quiz"><i data-lucide="circle-help"></i><span>Quiz</span></a>
         <a class="nav-item preview-pending" href="#admin"><i data-lucide="shield-check"></i><span>Admin</span></a>
       </nav>
-
       <div class="top-actions">
         <button class="icon-button" type="button" aria-label="Ricerca" disabled title="Ricerca: da implementare solo se utile"><i data-lucide="search"></i></button>
         <button class="icon-button notification-button" type="button" aria-label="Notifiche" disabled title="Notifiche: non ancora implementate"><i data-lucide="bell"></i></button>
-        <div class="profile-chip" title="Profilo admin — preview grafica">
-          <span class="profile-avatar">ET</span>
-          <span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span>
-          <i data-lucide="chevron-down"></i>
-        </div>
+        <div class="profile-chip" title="Profilo admin — preview grafica"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span><i data-lucide="chevron-down"></i></div>
       </div>
     </header>
 
@@ -54,145 +43,38 @@
       <section class="hero reference-hero" id="hero" data-source="DB + API + CALCOLATO">
         <div class="hero-noise"></div>
         <div class="hero-copy">
-          <div class="hero-status-row">
-            <span class="status-pill status-pill-live" id="hero-status"><span class="status-dot"></span>PRE-SEASON</span>
-            <span class="hero-context" id="hero-context">Stagione 2026/27</span>
-          </div>
-
+          <div class="hero-status-row"><span class="status-pill status-pill-live" id="hero-status"><span class="status-dot"></span>PRE-SEASON</span><span class="hero-context" id="hero-context">Stagione 2026/27</span></div>
           <h1 id="hero-title">HERTAVERNELLO <span>26/27</span></h1>
           <p class="hero-lead" id="hero-lead">La nuova stagione sta per iniziare.</p>
-
           <div class="hero-kpis">
-            <div class="hero-kpi">
-              <span class="kpi-icon"><i data-lucide="timer"></i></span>
-              <span><small id="countdown-label">Countdown asta</small><strong id="auction-countdown">—</strong></span>
-            </div>
-            <div class="hero-kpi">
-              <span class="kpi-icon"><i data-lucide="calendar-clock"></i></span>
-              <span><small>Asta</small><strong id="auction-date">—</strong></span>
-            </div>
-            <div class="hero-kpi">
-              <span class="kpi-icon"><i data-lucide="users-round"></i></span>
-              <span><small>Fantasquadre</small><strong id="hero-team-count">—</strong></span>
-            </div>
+            <div class="hero-kpi"><span class="kpi-icon"><i data-lucide="timer"></i></span><span><small id="countdown-label">Countdown asta</small><strong id="auction-countdown">—</strong></span></div>
+            <div class="hero-kpi"><span class="kpi-icon"><i data-lucide="calendar-clock"></i></span><span><small>Asta</small><strong id="auction-date">—</strong></span></div>
+            <div class="hero-kpi"><span class="kpi-icon"><i data-lucide="users-round"></i></span><span><small>Fantasquadre</small><strong id="hero-team-count">—</strong></span></div>
           </div>
         </div>
-
-        <div class="hero-visual restyling-hero-visual" aria-hidden="true">
-          <div class="arena-lines"></div>
-          <div class="logo-aura aura-one"></div>
-          <div class="logo-aura aura-two"></div>
-          <div class="hero-logo-platform"></div>
-          <div class="hero-logo-card restyling-logo-card">
-            <img src="../assets/hertavernello-restyling.webp" alt="">
-          </div>
-        </div>
-
+        <div class="hero-visual restyling-hero-visual" aria-hidden="true"><div class="arena-lines"></div><div class="logo-aura aura-one"></div><div class="logo-aura aura-two"></div><div class="hero-logo-platform"></div><div class="hero-logo-card restyling-logo-card"><img src="../assets/hertavernello-restyling.webp" alt=""></div></div>
         <aside class="hero-side-panel" id="hero-side-panel">
-          <div class="side-panel-item">
-            <img class="side-seriea-mark" src="../assets/icon-serie-a.png" alt="">
-            <div><small>Serie A</small><strong id="api-status">Connessione…</strong></div>
-            <span class="mini-state" id="api-state-chip">API</span>
-          </div>
-          <div class="side-panel-item">
-            <i data-lucide="git-compare-arrows"></i>
-            <div><small>Chi gioca contro chi</small><strong id="calendar-status">Verifica…</strong></div>
-            <span class="mini-state neutral">LIVE</span>
-          </div>
-          <div class="side-panel-item">
-            <i data-lucide="lock-keyhole"></i>
-            <div><small>Mercato</small><strong id="market-status">Non configurato</strong></div>
-            <span class="mini-state neutral">—</span>
-          </div>
+          <div class="side-panel-item"><img class="side-seriea-mark" src="../assets/icon-serie-a.png" alt=""><div><small>Serie A</small><strong id="api-status">Connessione…</strong></div><span class="mini-state" id="api-state-chip">API</span></div>
+          <div class="side-panel-item"><i data-lucide="git-compare-arrows"></i><div><small>Chi gioca contro chi</small><strong id="calendar-status">Verifica…</strong></div><span class="mini-state neutral">LIVE</span></div>
+          <div class="side-panel-item"><i data-lucide="lock-keyhole"></i><div><small>Mercato</small><strong id="market-status">Non configurato</strong></div><span class="mini-state neutral">—</span></div>
         </aside>
       </section>
 
       <section class="dashboard-grid reference-dashboard" aria-label="Dashboard Hertavernello">
-        <article class="panel panel-fixtures" id="calendario" data-source="API + DB + CALCOLATO">
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon violet"><i data-lucide="swords"></i></span><h2>Chi gioca contro chi</h2></div>
-            <a class="text-link" href="calendario.html">Apri match center <i data-lucide="chevron-right"></i></a>
-          </header>
-          <div class="panel-body" id="fixtures-list"><div class="skeleton-list"><span></span><span></span><span></span></div></div>
-        </article>
-
-        <article class="panel panel-league" data-source="DB + CALCOLATO">
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon gold"><i data-lucide="trophy"></i></span><h2>Classifica Hertavernello</h2></div>
-            <span class="priority-badge">PRINCIPALE</span>
-          </header>
-          <div class="panel-body" id="league-standings">
-            <div class="empty-state compact"><span class="empty-icon"><i data-lucide="table-properties"></i></span><div><strong>Classifica non ancora disponibile</strong><p>Verrà calcolata dai risultati della vostra lega appena saranno importati.</p></div></div>
-          </div>
-        </article>
-
-        <article class="panel panel-seriea" data-source="API football-data.org">
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-brand-icon seriea-brand-icon"><img src="../assets/icon-serie-a.png" alt="Serie A"></span><h2>Serie A</h2></div>
-            <span class="source-label">LIVE DATA</span>
-          </header>
-          <div class="panel-body" id="seriea-standings"><div class="skeleton-table"><span></span><span></span><span></span><span></span><span></span></div></div>
-        </article>
-
-        <article class="panel panel-scorers" data-source="API football-data.org">
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon purple"><i data-lucide="crosshair"></i></span><h2>Capocannonieri</h2></div>
-            <span class="source-label">API</span>
-          </header>
-          <div class="panel-body" id="top-scorers"><div class="skeleton-table"><span></span><span></span><span></span><span></span></div></div>
-        </article>
-
-        <article class="panel panel-feature" data-source="DB + CALCOLATO">
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon gold"><i data-lucide="star"></i></span><h2>Squadra in evidenza</h2></div>
-            <span class="outline-badge">TOP</span>
-          </header>
-          <div class="panel-body" id="featured-team">
-            <div class="empty-state feature-empty"><span class="empty-icon"><i data-lucide="sparkles"></i></span><div><strong>Si accende con la stagione</strong><p>La card userà leader, miglior punteggio o forma reale. Nessun dato viene simulato.</p></div></div>
-          </div>
-        </article>
-
-        <!-- Rimane nel DOM per compatibilità coi dati della preview, ma non è mostrato nella Home. -->
-        <article class="panel panel-hall" id="archivio" data-source="DB + CALCOLATO" hidden>
-          <div class="panel-body" id="hall-of-fame"></div>
-        </article>
-
+        <article class="panel panel-fixtures" id="calendario" data-source="API + DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon violet"><i data-lucide="swords"></i></span><h2>Chi gioca contro chi</h2></div><a class="text-link" href="calendario.html">Apri match center <i data-lucide="chevron-right"></i></a></header><div class="panel-body" id="fixtures-list"><div class="skeleton-list"><span></span><span></span><span></span></div></div></article>
+        <article class="panel panel-league" data-source="DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon gold"><i data-lucide="trophy"></i></span><h2>Classifica Hertavernello</h2></div><span class="priority-badge">PRINCIPALE</span></header><div class="panel-body" id="league-standings"><div class="empty-state compact"><span class="empty-icon"><i data-lucide="table-properties"></i></span><div><strong>Classifica non ancora disponibile</strong><p>Verrà calcolata dai risultati della vostra lega appena saranno importati.</p></div></div></div></article>
+        <article class="panel panel-seriea" data-source="API football-data.org"><header class="panel-head"><div class="panel-title"><span class="panel-brand-icon seriea-brand-icon"><img src="../assets/icon-serie-a.png" alt="Serie A"></span><h2>Serie A</h2></div><span class="source-label">LIVE DATA</span></header><div class="panel-body" id="seriea-standings"><div class="skeleton-table"><span></span><span></span><span></span><span></span><span></span></div></div></article>
+        <article class="panel panel-scorers" data-source="API football-data.org"><header class="panel-head"><div class="panel-title"><span class="panel-icon purple"><i data-lucide="crosshair"></i></span><h2>Capocannonieri</h2></div><span class="source-label">API</span></header><div class="panel-body" id="top-scorers"><div class="skeleton-table"><span></span><span></span><span></span><span></span></div></div></article>
+        <article class="panel panel-feature" data-source="DB + CALCOLATO"><header class="panel-head"><div class="panel-title"><span class="panel-icon gold"><i data-lucide="star"></i></span><h2>Squadra in evidenza</h2></div><span class="outline-badge">TOP</span></header><div class="panel-body" id="featured-team"><div class="empty-state feature-empty"><span class="empty-icon"><i data-lucide="sparkles"></i></span><div><strong>Si accende con la stagione</strong><p>La card userà leader, miglior punteggio o forma reale. Nessun dato viene simulato.</p></div></div></div></article>
+        <article class="panel panel-hall" id="archivio" data-source="DB + CALCOLATO" hidden><div class="panel-body" id="hall-of-fame"></div></article>
         <article class="panel panel-quiz reference-quiz" id="quiz" data-source="DB + CALCOLATO">
           <div class="quiz-glow"></div>
-          <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon quiz"><i data-lucide="circle-help"></i></span><h2>Quiz del Fantallenatore</h2></div>
-            <span class="quiz-state">10 DOMANDE</span>
-          </header>
-          <div class="panel-body quiz-content reference-quiz-content">
-            <div class="quiz-copy">
-              <div class="quiz-brand-line"><img src="../assets/hertavernello-restyling.webp" alt=""><span>HERTAVERNELLO QUIZ MODE</span></div>
-              <h3>Quanto conosci davvero la lega?</h3>
-              <p id="quiz-description">10 domande sulla lega Hertavernello e sulla Serie A. Memoria, rivalità, calcio reale e cultura da fantallenatore.</p>
-              <div class="quiz-badges">
-                <span><i data-lucide="list-checks"></i> 10 domande</span>
-                <span><img src="../assets/icon-serie-a.png" alt=""> Lega + Serie A</span>
-                <span><i data-lucide="zap"></i> Sfida rapida</span>
-              </div>
-              <button class="primary-button quiz-play-button preview-pending" type="button">Gioca ora <i data-lucide="play"></i></button>
-            </div>
-            <div class="quiz-orbit reference-quiz-orbit" aria-hidden="true">
-              <span class="orbit-ring"></span>
-              <span class="orbit-ring orbit-ring-two"></span>
-              <div class="quiz-cup-halo"></div>
-              <i data-lucide="trophy"></i>
-              <b>?</b>
-            </div>
-          </div>
+          <header class="panel-head"><div class="panel-title"><span class="panel-icon quiz"><i data-lucide="circle-help"></i></span><h2>Quiz del Fantallenatore</h2></div><span class="quiz-state">10 DOMANDE</span></header>
+          <div class="panel-body quiz-content reference-quiz-content"><div class="quiz-copy"><div class="quiz-brand-line"><img src="../assets/hertavernello-restyling.webp" alt=""><span>HERTAVERNELLO QUIZ MODE</span></div><h3>Quanto conosci davvero la lega?</h3><p id="quiz-description">10 domande sulla lega Hertavernello e sulla Serie A. Memoria, rivalità, calcio reale e cultura da fantallenatore.</p><div class="quiz-badges"><span><i data-lucide="list-checks"></i> 10 domande</span><span><img src="../assets/icon-serie-a.png" alt=""> Lega + Serie A</span><span><i data-lucide="zap"></i> Sfida rapida</span></div><button class="primary-button quiz-play-button preview-pending" type="button">Gioca ora <i data-lucide="play"></i></button></div><div class="quiz-orbit reference-quiz-orbit" aria-hidden="true"><span class="orbit-ring"></span><span class="orbit-ring orbit-ring-two"></span><div class="quiz-cup-halo"></div><i data-lucide="trophy"></i><b>?</b></div></div>
         </article>
       </section>
 
-      <!-- Dati mantenuti per il JS corrente, ma la reference termina col Quiz. -->
-      <section class="league-strip" data-source="DB + CALCOLATO" hidden>
-        <div class="strip-stat"><span><strong id="strip-teams">—</strong></span></div>
-        <div class="strip-stat"><span><strong id="strip-managers">—</strong></span></div>
-        <div class="strip-stat"><span><strong id="strip-season">—</strong></span></div>
-        <div class="strip-stat"><span><strong id="strip-history">—</strong></span></div>
-      </section>
+      <section class="league-strip" data-source="DB + CALCOLATO" hidden><div class="strip-stat"><span><strong id="strip-teams">—</strong></span></div><div class="strip-stat"><span><strong id="strip-managers">—</strong></span></div><div class="strip-stat"><span><strong id="strip-season">—</strong></span></div><div class="strip-stat"><span><strong id="strip-history">—</strong></span></div></section>
     </main>
   </div>
 
@@ -200,12 +82,11 @@
     <a href="index.html" class="mobile-nav-item active"><i data-lucide="house"></i><span>Home</span></a>
     <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
     <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
-    <a href="#archivio" class="mobile-nav-item preview-pending"><i data-lucide="archive"></i><span>Archivio</span></a>
+    <a href="archivio.html" class="mobile-nav-item"><i data-lucide="trophy"></i><span>Archivio</span></a>
     <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
   </nav>
 
   <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita nella preview, non nel sito ufficiale.</div>
-
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
   <script src="home-incroci.js"></script>
