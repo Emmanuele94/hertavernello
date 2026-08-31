@@ -1,7 +1,7 @@
 const ROOT = "../";
 const $ = id => document.getElementById(id);
 
-const state = { seasons: [], activeIndex: 0, curiosityMode: "calcio" };
+const state = { seasons: [], activeIndex: 0 };
 
 async function getJson(path) {
   const res = await fetch(ROOT + path, { cache: "no-store" });
@@ -102,17 +102,28 @@ function scorerRows(season) {
   </div>`).join("")}</div>`;
 }
 
+function curiosityGroup(title, icon, items, extraClass = "") {
+  return `<section class="curiosity-group ${extraClass}">
+    <div class="curiosity-group-head"><i data-lucide="${icon}"></i><span>${esc(title)}</span></div>
+    ${items.length
+      ? `<ul class="curiosity-list full">${items.map(item => `<li>${esc(item)}</li>`).join("")}</ul>`
+      : `<div class="curiosity-empty">Nessuna notizia registrata in questa categoria.</div>`}
+  </section>`;
+}
+
 function curiosityHtml(season) {
   const c = season.curiosita;
   if (!c) return `<div class="empty-history">Nessuna curiosità storica registrata.</div>`;
-  const list = c[state.curiosityMode] || [];
+
+  const calcio = Array.isArray(c.calcio) ? c.calcio : [];
+  const mondo = Array.isArray(c.mondo) ? c.mondo : [];
+
   return `<div class="curiosity-panel">
     <h3>${esc(c.titolo || `Curiosità ${season.anno}`)}</h3>
-    <div class="curiosity-tabs">
-      <button class="curiosity-tab${state.curiosityMode === "calcio" ? " active" : ""}" data-mode="calcio">Nel calcio</button>
-      <button class="curiosity-tab${state.curiosityMode === "mondo" ? " active" : ""}" data-mode="mondo">Nel mondo</button>
+    <div class="curiosity-all">
+      ${curiosityGroup("Nel calcio", "circle-dot", calcio)}
+      ${curiosityGroup("Nel mondo", "globe-2", mondo, "world")}
     </div>
-    <ul class="curiosity-list">${list.map(item => `<li>${esc(item)}</li>`).join("")}</ul>
   </div>`;
 }
 
@@ -125,27 +136,12 @@ function renderSeason() {
   $("season-seriea").innerHTML = serieARows(season);
   $("season-scorers").innerHTML = scorerRows(season);
   $("season-curiosity").innerHTML = curiosityHtml(season);
-
-  document.querySelectorAll(".curiosity-tab").forEach(btn => btn.addEventListener("click", () => {
-    state.curiosityMode = btn.dataset.mode;
-    $("season-curiosity").innerHTML = curiosityHtml(season);
-    bindCuriosityTabs();
-  }));
   refreshIcons();
-}
-
-function bindCuriosityTabs() {
-  document.querySelectorAll(".curiosity-tab").forEach(btn => btn.addEventListener("click", () => {
-    state.curiosityMode = btn.dataset.mode;
-    $("season-curiosity").innerHTML = curiosityHtml(state.seasons[state.activeIndex]);
-    bindCuriosityTabs();
-  }));
 }
 
 function setSeason(index) {
   if (!state.seasons.length) return;
   state.activeIndex = Math.max(0, Math.min(index, state.seasons.length - 1));
-  state.curiosityMode = "calcio";
   renderTabs();
   renderSeason();
   document.querySelector(`.season-tab[data-i="${state.activeIndex}"]`)?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
