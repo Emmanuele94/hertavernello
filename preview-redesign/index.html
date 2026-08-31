@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home-incroci.css">
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -31,7 +32,7 @@
       <nav class="desktop-nav" aria-label="Navigazione principale">
         <a class="nav-item active" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
-        <a class="nav-item" href="calendario.html"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+        <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
         <a class="nav-item preview-pending" href="#archivio"><i data-lucide="archive"></i><span>Archivio</span></a>
         <a class="nav-item preview-pending" href="#quiz"><i data-lucide="circle-help"></i><span>Quiz</span></a>
         <a class="nav-item preview-pending" href="#admin"><i data-lucide="shield-check"></i><span>Admin</span></a>
@@ -97,9 +98,9 @@
             <span class="mini-state" id="api-state-chip">API</span>
           </div>
           <div class="side-panel-item">
-            <i data-lucide="calendar-range"></i>
-            <div><small>Calendario lega</small><strong id="calendar-status">Verifica…</strong></div>
-            <span class="mini-state neutral">DB</span>
+            <i data-lucide="git-compare-arrows"></i>
+            <div><small>Chi gioca contro chi</small><strong id="calendar-status">Verifica…</strong></div>
+            <span class="mini-state neutral">LIVE</span>
           </div>
           <div class="side-panel-item">
             <i data-lucide="lock-keyhole"></i>
@@ -110,10 +111,10 @@
       </section>
 
       <section class="dashboard-grid" aria-label="Dashboard Hertavernello">
-        <article class="panel panel-fixtures" id="calendario" data-source="DB">
+        <article class="panel panel-fixtures" id="calendario" data-source="API + DB + CALCOLATO">
           <header class="panel-head">
-            <div class="panel-title"><span class="panel-icon violet"><i data-lucide="swords"></i></span><h2>Prossime sfide</h2></div>
-            <a class="text-link" href="calendario.html">Vedi calendario <i data-lucide="chevron-right"></i></a>
+            <div class="panel-title"><span class="panel-icon violet"><i data-lucide="swords"></i></span><h2>Chi gioca contro chi</h2></div>
+            <a class="text-link" href="calendario.html">Apri match center <i data-lucide="chevron-right"></i></a>
           </header>
           <div class="panel-body" id="fixtures-list">
             <div class="skeleton-list"><span></span><span></span><span></span></div>
@@ -211,7 +212,7 @@
   <nav class="mobile-nav" aria-label="Navigazione mobile">
     <a href="index.html" class="mobile-nav-item active"><i data-lucide="house"></i><span>Home</span></a>
     <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
-    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
     <a href="#archivio" class="mobile-nav-item"><i data-lucide="archive"></i><span>Archivio</span></a>
     <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
   </nav>
@@ -220,5 +221,6 @@
 
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
+  <script src="home-incroci.js"></script>
 </body>
 </html>
