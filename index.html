@@ -8,13 +8,14 @@
   <link rel="icon" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icone-app/icon-180.png">
-  <meta name="theme-color" content="#7A0E1F">
+  <meta name="theme-color" content="#050a13">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home-modern.css">
 </head>
-<body>
+<body class="home-v2">
 
   <div id="gate" class="gate">
     <img src="assets/logo.png" class="gate-logo" alt="Hertavernello">
@@ -27,62 +28,87 @@
 
   <div id="app" class="app hidden">
     <header class="site-header">
-      <img src="assets/logo.png" class="logo" alt="">
+      <img src="assets/logo.png" class="logo" alt="Hertavernello">
       <div class="site-header-testo">
         <h1 id="lega-nome">Hertavernello</h1>
         <p id="lega-stagione" class="muted"></p>
       </div>
-      <a href="quiz.html" class="quiz-badge-link" title="Mini-Quiz">
-        <img src="assets/icone/icon-quiz.png" class="quiz-badge-icona" alt="Quiz">
-      </a>
-      <nav>
+
+      <nav aria-label="Navigazione principale">
         <a href="index.html" class="nav-btn active"><img src="assets/icone/icon-house.png" class="icona-nav" alt="">Home</a>
         <a href="squadre.html" class="nav-btn"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
         <a href="archivio.html" class="nav-btn"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
-        <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente">
-          <img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="Esci">
+        <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente" aria-label="Esci">
+          <img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="">
         </a>
       </nav>
+
+      <a href="quiz.html" class="quiz-badge-link" title="Mini-Quiz" aria-label="Apri il Mini-Quiz">
+        <img src="assets/icone/icon-quiz.png" class="quiz-badge-icona" alt="Quiz">
+      </a>
     </header>
 
-    <section class="hero">
-      <p id="countdown" class="countdown"></p>
-    </section>
+    <main>
+      <section class="hero" aria-label="Panoramica lega">
+        <div class="hero-copy">
+          <p class="hero-kicker">Hertavernello live</p>
+          <h2 class="hero-title">La lega.<br><span>Versione next-gen.</span></h2>
+          <p class="hero-subtitle">Sfide, classifiche e numeri della lega in un'unica plancia. Più pulita, più leggibile, più spettacolare — anche da telefono.</p>
+          <div class="hero-meta">
+            <div class="hero-stat">
+              <span class="hero-stat-label">Countdown asta</span>
+              <p id="countdown" class="countdown"></p>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-label">Stato piattaforma</span>
+              <p class="countdown">● Online · dati automatici</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-logo-wrap">
+            <img src="assets/logo.png" class="hero-logo" alt="">
+          </div>
+        </div>
+      </section>
 
-    <section class="section">
-      <h2 class="sezione-toggle" data-target="incrocio-wrap">
-        <img src="assets/icone/icon-vs.png" class="icona-titolo" alt="">Chi gioca contro chi
-        <span class="toggle-chevron">▾</span>
-      </h2>
-      <div id="incrocio-wrap" class="incrocio-wrap sezione-contenuto"></div>
-    </section>
+      <div class="dashboard-grid">
+        <section class="section section--fixtures">
+          <h2 class="sezione-toggle" data-target="incrocio-wrap">
+            <img src="assets/icone/icon-vs.png" class="icona-titolo" alt="">Prossime sfide
+            <span class="toggle-chevron">▾</span>
+          </h2>
+          <div id="incrocio-wrap" class="incrocio-wrap sezione-contenuto"></div>
+        </section>
 
-    <section class="section">
-      <h2 class="sezione-toggle" data-target="leaderboard-wrap">
-        <img src="assets/icone/icon-win-classifica-generale.png" class="icona-titolo" alt="">Classifica generale previsioni
-        <span class="toggle-chevron">▾</span>
-      </h2>
-      <div id="leaderboard-wrap" class="sezione-contenuto"></div>
-    </section>
+        <section class="section section--leaderboard">
+          <h2 class="sezione-toggle" data-target="leaderboard-wrap">
+            <img src="assets/icone/icon-win-classifica-generale.png" class="icona-titolo" alt="">Classifica generale previsioni
+            <span class="toggle-chevron">▾</span>
+          </h2>
+          <div id="leaderboard-wrap" class="sezione-contenuto"></div>
+        </section>
 
-    <section class="section">
-      <h2 class="sezione-toggle" data-target="classifica-wrap">
-        <img src="assets/icone/icon-raking.png" class="icona-titolo" alt="">Classifica Serie A
-        <span class="toggle-chevron">▾</span>
-      </h2>
-      <div id="classifica-wrap" class="sezione-contenuto"></div>
-    </section>
+        <section class="section section--seriea">
+          <h2 class="sezione-toggle" data-target="classifica-wrap">
+            <img src="assets/icone/icon-raking.png" class="icona-titolo" alt="">Classifica Serie A
+            <span class="toggle-chevron">▾</span>
+          </h2>
+          <div id="classifica-wrap" class="sezione-contenuto"></div>
+        </section>
 
-    <section class="section">
-      <h2 class="sezione-toggle" data-target="marcatori-wrap">
-        <img src="assets/icone/icon-player.png" class="icona-titolo icona-player-grande" alt="">Top marcatori
-        <span class="toggle-chevron">▾</span>
-      </h2>
-      <div id="marcatori-wrap" class="sezione-contenuto"></div>
-    </section>
+        <section class="section section--scorers">
+          <h2 class="sezione-toggle" data-target="marcatori-wrap">
+            <img src="assets/icone/icon-player.png" class="icona-titolo icona-player-grande" alt="">Top marcatori
+            <span class="toggle-chevron">▾</span>
+          </h2>
+          <div id="marcatori-wrap" class="sezione-contenuto"></div>
+        </section>
+      </div>
+    </main>
 
     <footer class="site-footer">
-      HertaVernello · aggiornato a mano da chi ha già perso il fanta - © Emmanuele Tufano - Tutti i diritti riservati.
+      HertaVernello · aggiornato a mano da chi ha già perso il fanta — © Emmanuele Tufano · Tutti i diritti riservati.
     </footer>
   </div>
 
