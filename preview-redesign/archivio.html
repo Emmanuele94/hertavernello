@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#040912">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Hall of Fame — Hertavernello Preview</title>
+  <link rel="icon" href="../assets/hertavernello-restyling.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="icon-system.css">
+  <link rel="stylesheet" href="archivio.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell archive-app">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Hertavernello Home">
+        <span class="brand-logo-frame archive-brand-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo archive-brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">Hall of Fame</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
+        <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
+        <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
+        <a class="nav-item active" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="circle-help"></i><span>Quiz</span></a>
+        <a class="nav-item preview-pending" href="#"><i data-lucide="shield-check"></i><span>Admin</span></a>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button>
+        <div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="archive-hero">
+        <div class="archive-hero-copy">
+          <span class="archive-eyebrow"><i data-lucide="crown"></i> HALL OF FAME</span>
+          <h1>La storia di <span>Hertavernello</span></h1>
+          <p>Campioni, coppe, stagioni e ricordi. Tutto ciò che è successo nella lega, senza perdere un pezzo di storia.</p>
+          <div class="archive-kpis">
+            <div><small>Stagioni</small><strong id="kpi-seasons">—</strong></div>
+            <div><small>Campionati assegnati</small><strong id="kpi-leagues">—</strong></div>
+            <div><small>Coppe registrate</small><strong id="kpi-cups">—</strong></div>
+            <div><small>Trofei totali</small><strong id="kpi-trophies">—</strong></div>
+          </div>
+        </div>
+        <div class="archive-hero-mark" aria-hidden="true">
+          <div class="archive-rings"></div>
+          <img src="../assets/hertavernello-restyling.webp" alt="">
+          <span class="gold-star star-one">✦</span><span class="gold-star star-two">✦</span>
+        </div>
+      </section>
+
+      <section class="archive-section">
+        <header class="archive-section-head">
+          <div><span class="section-kicker">ALBO D’ORO</span><h2>I più vincenti</h2></div>
+          <span class="archive-source"><i data-lucide="database"></i> Storico reale</span>
+        </header>
+
+        <div class="hall-grid">
+          <article class="hall-card hall-league">
+            <header><span class="hall-icon league"><i data-lucide="trophy"></i></span><div><small>CAMPIONATO</small><h3>Re della lega</h3></div></header>
+            <div id="hall-league" class="hall-ranking"></div>
+          </article>
+          <article class="hall-card hall-cup">
+            <header><span class="hall-icon cup"><i data-lucide="award"></i></span><div><small>COPPA</small><h3>Specialisti della coppa</h3></div></header>
+            <div id="hall-cup" class="hall-ranking"></div>
+          </article>
+          <article class="hall-card hall-overall">
+            <header><span class="hall-icon overall"><i data-lucide="crown"></i></span><div><small>GENERALE</small><h3>Palmarès totale</h3></div></header>
+            <div id="hall-overall" class="hall-ranking"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="archive-section season-section">
+        <header class="archive-section-head season-title-row">
+          <div><span class="section-kicker">STAGIONE PER STAGIONE</span><h2>La macchina del tempo</h2></div>
+          <div class="season-nav-arrows">
+            <button type="button" id="season-prev" aria-label="Stagione precedente"><i data-lucide="chevron-left"></i></button>
+            <button type="button" id="season-next" aria-label="Stagione successiva"><i data-lucide="chevron-right"></i></button>
+          </div>
+        </header>
+
+        <div id="season-tabs" class="season-tabs" aria-label="Seleziona stagione"></div>
+
+        <div class="season-stage">
+          <article class="season-main-card">
+            <div class="season-main-top">
+              <div><span class="season-year-label">STAGIONE</span><h2 id="season-year">—</h2></div>
+              <span id="season-status" class="season-status">ARCHIVIATA</span>
+            </div>
+            <div id="season-winners" class="season-winners"></div>
+            <div id="season-curiosity" class="season-curiosity"></div>
+          </article>
+
+          <div class="season-side-stack">
+            <article class="season-data-card">
+              <header><span><img src="../assets/icon-serie-a.png" alt="Serie A"></span><div><small>SERIE A</small><h3>Classifica reale</h3></div></header>
+              <div id="season-seriea"></div>
+            </article>
+            <article class="season-data-card scorer-history-card">
+              <header><span class="scorer-history-icon"><i data-lucide="crosshair"></i></span><div><small>SERIE A</small><h3>Top marcatori</h3></div></header>
+              <div id="season-scorers"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigazione mobile">
+    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
+    <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
+    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
+    <a href="archivio.html" class="mobile-nav-item active"><i data-lucide="trophy"></i><span>Archivio</span></a>
+    <button class="mobile-nav-item preview-pending" type="button"><i data-lucide="menu"></i><span>Menu</span></button>
+  </nav>
+
+  <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita più avanti nella preview.</div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="archivio.js"></script>
+</body>
+</html>
