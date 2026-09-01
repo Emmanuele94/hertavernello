@@ -39,7 +39,6 @@ function styleLegacyAdmin(doc){
   style.id = "hv-preview-admin-style";
   style.textContent = FRAME_CSS;
   doc.head.appendChild(style);
-
   const legacyLogo = doc.querySelector(".gate-logo");
   if(legacyLogo) legacyLogo.src = "https://raw.githubusercontent.com/Emmanuele94/hertavernello/main/assets/hertavernello-restyling.webp";
 }
@@ -48,8 +47,16 @@ function resizeFrame(frame){
   try{
     const doc = frame.contentDocument;
     if(!doc) return;
-    const h = Math.max(doc.documentElement.scrollHeight,doc.body?.scrollHeight || 0,700);
-    frame.style.height = `${h + 12}px`;
+    const gate = doc.getElementById("gate");
+    const wrap = doc.querySelector(".admin-wrap");
+    const denied = doc.getElementById("admin-negato");
+    const natural = Math.max(
+      gate && getComputedStyle(gate).display !== "none" ? gate.offsetTop + gate.offsetHeight + 90 : 0,
+      wrap && getComputedStyle(wrap).display !== "none" ? wrap.offsetTop + wrap.offsetHeight + 30 : 0,
+      denied && getComputedStyle(denied).display !== "none" ? denied.offsetTop + denied.offsetHeight + 90 : 0,
+      700
+    );
+    frame.style.height = `${natural}px`;
   }catch(err){ console.warn(err); }
 }
 
@@ -61,7 +68,6 @@ function setupFrame(){
     styleLegacyAdmin(doc);
     $("admin-frame-loading").style.display = "none";
     resizeFrame(frame);
-
     const observer = new ResizeObserver(()=>resizeFrame(frame));
     if(doc.body) observer.observe(doc.body);
     new MutationObserver(()=>resizeFrame(frame)).observe(doc.documentElement,{subtree:true,childList:true,attributes:true});
