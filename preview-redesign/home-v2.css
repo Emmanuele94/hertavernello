@@ -84,7 +84,7 @@ box-shadow:0 24px 62px rgba(0,0,0,.31),0 0 58px rgba(144,54,255,.055)!important}
 .cup-aura{position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(177,83,255,.24),rgba(107,60,255,.08) 46%,transparent 70%);filter:blur(10px)}
 .quiz-premium-cup svg{position:relative;z-index:2;width:185px;height:185px;overflow:visible}
 .quiz-premium-cup .cup-shadow{fill:#32145b;fill-opacity:.68;stroke:#8f53d9;stroke-opacity:.35;stroke-width:2}
-.quiz-premium-cup .cup-body{fill:url(#none);stroke:#bf7bff;stroke-width:3;filter:drop-shadow(0 0 10px rgba(181,102,255,.22))}
+.quiz-premium-cup .cup-body{fill:#6330a6;fill-opacity:.28;stroke:#bf7bff;stroke-width:3;filter:drop-shadow(0 0 10px rgba(181,102,255,.22))}
 .quiz-premium-cup .cup-edge{fill:#7d42ce;fill-opacity:.17;stroke:#d5a2ff;stroke-opacity:.75;stroke-width:1.5}
 .quiz-premium-cup .cup-handle{fill:none;stroke:#a867ed;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:.82}
 .quiz-premium-cup .cup-stem{fill:none;stroke:#c184ff;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
