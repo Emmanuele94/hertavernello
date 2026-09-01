@@ -2,13 +2,22 @@ const ROOT = "../";
 const $ = id => document.getElementById(id);
 let activeAdminModule = 1;
 let resizeTimer = null;
+let adminFrameReady = false;
+let adminFrameObserver = null;
+let adminFrameResizeObserver = null;
 
 function refreshIcons(){ if(window.lucide) lucide.createIcons(); }
 
 async function getJson(path){
-  const res = await fetch(ROOT + path,{cache:"no-store"});
-  if(!res.ok) throw new Error(`${path}: ${res.status}`);
-  return res.json();
+  const controller = new AbortController();
+  const timeout = setTimeout(()=>controller.abort(),5000);
+  try{
+    const res = await fetch(ROOT + path,{cache:"no-store",signal:controller.signal});
+    if(!res.ok) throw new Error(`${path}: ${res.status}`);
+    return await res.json();
+  }finally{
+    clearTimeout(timeout);
+  }
 }
 
 async function renderAdminStatus(){
@@ -23,7 +32,7 @@ async function renderAdminStatus(){
     $("admin-roster-status").textContent = test ? "TEST" : ((rose.rose || []).length ? "CARICATE" : "VUOTE");
     $("admin-calendar-count").textContent = String((calendar.giornate || []).length);
   }catch(err){
-    console.warn(err);
+    console.warn("Stato Admin non disponibile",err);
     $("admin-roster-status").textContent = "—";
   }
 }
@@ -83,46 +92,84 @@ function resizeFrame(frame){
       const doc = frame.contentDocument;
       if(!doc) return;
       const target = visibleFrameTarget(doc);
-      frame.style.height = "320px";
-      requestAnimationFrame(()=>{
-        const rect = target.getBoundingClientRect();
-        const contentHeight = Math.max(target.scrollHeight,target.offsetHeight,rect.height);
-        const top = Math.max(0,rect.top);
-        frame.style.height = `${Math.max(520,Math.ceil(top + contentHeight + 28))}px`;
-      });
+      const gate = doc.getElementById("gate");
+      const denied = doc.getElementById("admin-negato");
+      const activeModule = getModules(doc).find(el=>getComputedStyle(el).display !== "none");
+      let natural = 620;
+      if(gate && getComputedStyle(gate).display !== "none") natural = gate.offsetTop + gate.offsetHeight + 90;
+      else if(denied && getComputedStyle(denied).display !== "none") natural = denied.offsetTop + denied.offsetHeight + 90;
+      else if(activeModule) natural = activeModule.offsetTop + activeModule.offsetHeight + 50;
+      else if(target) natural = Math.min(1600,Math.max(620,target.scrollHeight || target.offsetHeight || 620));
+      frame.style.height = `${Math.max(620,Math.ceil(natural))}px`;
     }catch(err){ console.warn(err); }
-  },35);
+  },40);
 }
 
 function syncAdminView(frame){
+  try{
+    const doc = frame.contentDocument;
+    if(!doc || !doc.documentElement || !doc.body) return false;
+    styleLegacyAdmin(doc);
+    const app = doc.getElementById("app");
+    if(app && getComputedStyle(app).display !== "none") applyActiveModule(doc);
+    resizeFrame(frame);
+    return true;
+  }catch(err){
+    console.warn("Admin iframe non ancora pronto",err);
+    return false;
+  }
+}
+
+function initializeFrame(frame){
+  if(adminFrameReady) return true;
+  const ok = syncAdminView(frame);
+  if(!ok) return false;
+
+  adminFrameReady = true;
+  const loading = $("admin-frame-loading");
+  if(loading) loading.style.display = "none";
+
   const doc = frame.contentDocument;
-  if(!doc) return;
-  styleLegacyAdmin(doc);
-  const app = doc.getElementById("app");
-  if(app && getComputedStyle(app).display !== "none") applyActiveModule(doc);
-  resizeFrame(frame);
+  if(doc){
+    if(adminFrameObserver) adminFrameObserver.disconnect();
+    adminFrameObserver = new MutationObserver(()=>syncAdminView(frame));
+    adminFrameObserver.observe(doc.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+
+    if(window.ResizeObserver && doc.body){
+      if(adminFrameResizeObserver) adminFrameResizeObserver.disconnect();
+      adminFrameResizeObserver = new ResizeObserver(()=>resizeFrame(frame));
+      adminFrameResizeObserver.observe(doc.body);
+    }
+  }
+  return true;
 }
 
 function setupFrame(){
   const frame = $("admin-frame");
+  if(!frame) return;
   setOuterActive(activeAdminModule);
 
-  frame.addEventListener("load",()=>{
-    const doc = frame.contentDocument;
-    if(!doc) return;
-    styleLegacyAdmin(doc);
-    $("admin-frame-loading").style.display = "none";
-    syncAdminView(frame);
+  const attemptInit = ()=>initializeFrame(frame);
+  frame.addEventListener("load",attemptInit);
 
-    const observer = new MutationObserver(()=>syncAdminView(frame));
-    observer.observe(doc.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
-    if(doc.body && window.ResizeObserver){
-      const ro = new ResizeObserver(()=>resizeFrame(frame));
-      ro.observe(doc.body);
+  // RawGitHack può completare l'iframe prima che il listener venga registrato.
+  if(frame.contentDocument?.readyState === "interactive" || frame.contentDocument?.readyState === "complete"){
+    attemptInit();
+  }
+
+  let attempts = 0;
+  const poll = setInterval(()=>{
+    attempts += 1;
+    if(initializeFrame(frame) || attempts >= 80){
+      clearInterval(poll);
+      if(attempts >= 80 && !adminFrameReady){
+        const loading = $("admin-frame-loading");
+        if(loading){
+          loading.innerHTML = '<strong>Impossibile inizializzare gli strumenti Admin.</strong><p>Ricarica la pagina o apri temporaneamente l\'Admin ufficiale.</p>';
+        }
+      }
     }
-    setTimeout(()=>syncAdminView(frame),350);
-    setTimeout(()=>syncAdminView(frame),1000);
-  });
+  },100);
 
   document.querySelectorAll("#admin-jump button").forEach(btn=>btn.addEventListener("click",()=>{
     const next = Number(btn.dataset.index);
@@ -136,10 +183,10 @@ function setupFrame(){
   }));
 }
 
-async function init(){
+function init(){
   refreshIcons();
-  await renderAdminStatus();
   setupFrame();
+  renderAdminStatus();
 }
 
 init();
