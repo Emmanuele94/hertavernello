@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#040912">
   <meta name="robots" content="noindex, nofollow">
   <title>Admin — Hertavernello Preview</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/Emmanuele94/hertavernello/main/assets/hertavernello-restyling.webp">
+  <link rel="icon" href="../assets/hertavernello-restyling.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -15,10 +15,28 @@
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
-  <div class="app-shell admin-app">
+
+  <section id="gate" class="admin-gate">
+    <div class="gate-mark"><i data-lucide="shield-check"></i></div>
+    <span class="admin-kicker">HERTAVERNELLO CONTROL CENTER</span>
+    <h1>Accesso Admin</h1>
+    <p>Inserisci la password amministratore della lega.</p>
+    <input type="password" id="gate-input" placeholder="Password admin" autocomplete="off">
+    <button id="gate-btn" type="button">Entra</button>
+    <p id="gate-error" class="gate-error"></p>
+  </section>
+
+  <section id="admin-negato" class="admin-denied hidden">
+    <i data-lucide="shield-x"></i>
+    <h1>Accesso non autorizzato</h1>
+    <p>La sessione attuale non dispone del ruolo amministratore.</p>
+    <a href="index.html">Torna alla Home</a>
+  </section>
+
+  <div id="app" class="app-shell admin-app hidden">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Hertavernello Home">
-        <span class="brand-logo-frame"><img src="https://raw.githubusercontent.com/Emmanuele94/hertavernello/main/assets/hertavernello-restyling.webp" class="brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-logo-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo" alt="Logo Hertavernello"></span>
         <span class="brand-copy"><strong>Hertavernello</strong><small>Control Center</small></span>
       </a>
       <nav class="desktop-nav" aria-label="Navigazione principale">
@@ -30,7 +48,7 @@
         <a class="nav-item active" href="admin.html"><i data-lucide="shield-check"></i><span>Admin</span></a>
       </nav>
       <div class="top-actions">
-        <span class="admin-secure-chip"><i data-lucide="lock-keyhole"></i> Area riservata</span>
+        <button id="hv-esci" class="admin-logout" type="button"><i data-lucide="log-out"></i> Esci</button>
       </div>
     </header>
 
@@ -39,8 +57,8 @@
         <div class="admin-hero-copy">
           <span class="admin-kicker"><i data-lucide="command"></i> HERTAVERNELLO CONTROL CENTER</span>
           <h1>Gestisci la <span>lega</span></h1>
-          <p>Configurazione, rose, pagelle, previsioni e calendario in un unico spazio. La preview utilizza gli strumenti operativi reali già presenti nel progetto.</p>
-          <div class="admin-status-grid" id="admin-status-grid">
+          <p>Configurazione, rose, pagelle, previsioni e calendario in un unico spazio. Gli strumenti lavorano direttamente sui dati reali del progetto.</p>
+          <div class="admin-status-grid">
             <div><span><i data-lucide="users-round"></i></span><small>Fantasquadre</small><strong id="admin-team-count">—</strong></div>
             <div><span><i data-lucide="shirt"></i></span><small>Rose reali</small><strong id="admin-roster-status">—</strong></div>
             <div><span><i data-lucide="calendar-range"></i></span><small>Giornate lega</small><strong id="admin-calendar-count">—</strong></div>
@@ -48,44 +66,119 @@
           </div>
         </div>
         <div class="admin-console-mark" aria-hidden="true">
-          <div class="console-orbit"></div>
-          <div class="console-shield"><i data-lucide="shield-check"></i></div>
+          <div class="console-orbit"></div><div class="console-shield"><i data-lucide="shield-check"></i></div>
           <span class="console-node n1"></span><span class="console-node n2"></span><span class="console-node n3"></span>
         </div>
       </section>
 
-      <section class="admin-tools-head">
-        <div><small>STRUMENTI OPERATIVI</small><h2>Console amministratore</h2></div>
-        <div class="admin-jump" id="admin-jump">
-          <button type="button" data-index="1"><i data-lucide="settings-2"></i> Config</button>
-          <button type="button" data-index="2"><i data-lucide="upload"></i> Rose</button>
-          <button type="button" data-index="3"><i data-lucide="badge-check"></i> Pagelle</button>
-          <button type="button" data-index="4"><i data-lucide="scan-eye"></i> Previsioni</button>
-          <button type="button" data-index="5"><i data-lucide="calendar-days"></i> Calendario</button>
-        </div>
-      </section>
+      <section class="admin-workspace">
+        <header class="admin-tools-head">
+          <div><small>STRUMENTI OPERATIVI</small><h2>Console amministratore</h2></div>
+          <span class="admin-live-chip"><i data-lucide="circle-dot"></i> Dati reali</span>
+        </header>
 
-      <section class="admin-bridge-note">
-        <i data-lucide="git-branch"></i>
-        <div><strong>Preview collegata all’Admin reale</strong><p>Le azioni qui sotto usano direttamente gli strumenti del <code>main</code>. Il token GitHub, se utilizzato, resta gestito dal flusso esistente e non viene salvato nel repository.</p></div>
-      </section>
+        <nav class="admin-tabs" id="admin-tabs" aria-label="Moduli Admin">
+          <button class="active" type="button" data-admin-tab="config"><i data-lucide="settings-2"></i><span>Config</span></button>
+          <button type="button" data-admin-tab="rose"><i data-lucide="upload"></i><span>Rose</span></button>
+          <button type="button" data-admin-tab="pagelle"><i data-lucide="badge-check"></i><span>Pagelle</span></button>
+          <button type="button" data-admin-tab="previsioni"><i data-lucide="scan-eye"></i><span>Previsioni</span></button>
+          <button type="button" data-admin-tab="calendario"><i data-lucide="calendar-days"></i><span>Calendario</span></button>
+        </nav>
 
-      <section class="admin-frame-shell" id="admin-frame-shell">
-        <div class="admin-frame-loading" id="admin-frame-loading"><span><i data-lucide="loader-circle"></i></span><strong>Caricamento strumenti Admin…</strong></div>
-        <iframe id="admin-frame" src="../admin.html" title="Strumenti Admin Hertavernello" loading="eager"></iframe>
+        <section class="admin-module active" data-admin-view="config">
+          <header class="module-head"><span class="module-icon"><i data-lucide="settings-2"></i></span><div><small>MODULO 01</small><h2>Impostazioni lega</h2><p>Nome, stagione, asta, password e fantallenatori.</p></div></header>
+          <div class="campo-riga"><input type="text" id="cfg-nome-lega" placeholder="Nome lega"><input type="text" id="cfg-stagione" placeholder="Stagione (es. 2026/2027)"></div>
+          <div class="campo-riga"><input type="datetime-local" id="cfg-data-asta"><input type="text" id="cfg-api-key" placeholder="Chiave API football-data.org (opzionale)"></div>
+          <div class="campo-riga"><input type="text" id="cfg-nuova-password-guest" placeholder="Nuova password GUEST"><input type="text" id="cfg-nuova-password-admin" placeholder="Nuova password ADMIN"></div>
+          <div class="admin-subbox"><p>Il token GitHub resta soltanto nella sessione del browser e non viene salvato nel repository.</p><button id="cfg-cambia-token" type="button">Imposta / cambia token GitHub</button><p id="cfg-stato-token" class="admin-status-line"></p></div>
+          <p class="campo-titolo">Fantallenatori</p><div id="cfg-squadre"></div>
+          <button id="cfg-aggiungi-squadra" type="button" class="secondary-action">+ Aggiungi fantallenatore</button>
+          <div class="admin-actions"><button id="cfg-genera" type="button">Genera config.json</button><button id="cfg-salva-github" class="save-action" type="button">Salva direttamente su GitHub</button></div>
+          <p id="cfg-stato-github" class="admin-status-line"></p>
+          <div id="cfg-output-wrap" class="hidden output-wrap"><textarea id="cfg-output" readonly></textarea><a id="cfg-download" class="output-download hidden" download="config.json">Scarica config.json</a></div>
+        </section>
+
+        <section class="admin-module" data-admin-view="rose">
+          <header class="module-head"><span class="module-icon"><i data-lucide="shirt"></i></span><div><small>MODULO 02</small><h2>Importa rose da CSV</h2><p>Dopo l’asta carica l’export di leghe.fantacalcio.it e verifica le associazioni.</p></div></header>
+          <label class="file-drop" for="csv-file"><i data-lucide="file-up"></i><strong>Seleziona CSV rose</strong><span>Fantasquadra, giocatore, ruolo e prezzo</span><input type="file" id="csv-file" accept=".csv"></label>
+          <p id="csv-avviso" class="csv-avviso"></p><div id="csv-associazioni" class="hidden associations"></div>
+          <div class="admin-actions"><button id="csv-conferma" class="hidden" type="button">Genera rose.json</button><button id="csv-salva-github" type="button" class="hidden save-action">Salva direttamente su GitHub</button></div>
+          <p id="csv-stato-github" class="admin-status-line"></p>
+          <div id="csv-output-wrap" class="hidden output-wrap"><textarea id="csv-output" readonly></textarea><a id="csv-download" class="output-download hidden" download="rose.json">Scarica rose.json</a></div>
+        </section>
+
+        <section class="admin-module" data-admin-view="pagelle">
+          <header class="module-head"><span class="module-icon"><i data-lucide="badge-check"></i></span><div><small>MODULO 03</small><h2>Pagelle dell’asta</h2><p>Voto, badge e commento per ogni fantasquadra.</p></div></header>
+          <div id="pagelle-form"></div>
+          <div class="admin-actions"><button id="pagelle-genera" type="button">Genera pagelle.json</button><button id="pagelle-salva-github" class="save-action" type="button">Salva direttamente su GitHub</button></div>
+          <p id="pagelle-stato-github" class="admin-status-line"></p>
+          <div id="pagelle-output-wrap" class="hidden output-wrap"><textarea id="pagelle-output" readonly></textarea><a id="pagelle-download" class="output-download hidden" download="pagelle.json">Scarica pagelle.json</a></div>
+        </section>
+
+        <section class="admin-module" data-admin-view="previsioni">
+          <header class="module-head"><span class="module-icon"><i data-lucide="scan-eye"></i></span><div><small>MODULO 04</small><h2>Previsioni Serie A</h2><p>Screenshot/link e fasce previste dai fantallenatori.</p></div></header>
+          <div id="previsioni-form"></div>
+          <div class="admin-actions"><button id="previsioni-genera" type="button">Genera previsioni.json</button><button id="previsioni-salva-github" class="save-action" type="button">Salva direttamente su GitHub</button></div>
+          <p id="previsioni-stato-github" class="admin-status-line"></p>
+          <div id="previsioni-output-wrap" class="hidden output-wrap"><textarea id="previsioni-output" readonly></textarea><a id="previsioni-download" class="output-download hidden" download="previsioni.json">Scarica previsioni.json</a></div>
+        </section>
+
+        <section class="admin-module" data-admin-view="calendario">
+          <header class="module-head"><span class="module-icon"><i data-lucide="calendar-days"></i></span><div><small>MODULO 05</small><h2>Calendario Hertavernello</h2><p>Import Excel consigliato oppure inserimento manuale degli scontri di lega.</p></div></header>
+          <p id="cal-suggerimento" class="admin-hint"></p>
+          <div class="admin-subbox"><p class="campo-titolo">Import automatico da Excel</p><p>Carica il file export calendario/buste chiuse di leghe.fantacalcio.it.</p><input type="file" id="cal-excel-file" accept=".xlsx,.xls"><div id="cal-excel-anteprima"></div><button id="cal-excel-conferma" class="hidden" type="button">Aggiungi queste giornate</button></div>
+          <div class="manual-calendar"><p class="campo-titolo">Inserimento / correzione manuale</p><input type="number" id="cal-giornata" min="1" placeholder="Giornata reale Serie A"><div id="calendario-form-coppie"></div><p id="cal-avviso" class="csv-avviso"></p><button id="cal-aggiungi" type="button">Aggiungi / aggiorna giornata</button></div>
+          <div id="calendario-lista" class="calendar-list"></div>
+          <div class="admin-actions"><button id="calendario-genera" type="button">Genera calendario.json</button><button id="calendario-salva-github" class="save-action" type="button">Salva direttamente su GitHub</button></div>
+          <p id="calendario-stato-github" class="admin-status-line"></p>
+          <div id="calendario-output-wrap" class="hidden output-wrap"><textarea id="calendario-output" readonly></textarea><a id="calendario-download" class="output-download hidden" download="calendario.json">Scarica calendario.json</a></div>
+        </section>
       </section>
     </main>
   </div>
 
   <nav class="mobile-nav" aria-label="Navigazione mobile">
-    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
-    <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
-    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
-    <a href="quiz.html" class="mobile-nav-item"><i data-lucide="circle-help"></i><span>Quiz</span></a>
-    <a href="admin.html" class="mobile-nav-item active"><i data-lucide="shield-check"></i><span>Admin</span></a>
+    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a><a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a><a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a><a href="quiz.html" class="mobile-nav-item"><i data-lucide="circle-help"></i><span>Quiz</span></a><a href="admin.html" class="mobile-nav-item active"><i data-lucide="shield-check"></i><span>Admin</span></a>
   </nav>
 
+  <script>
+    const __hvNativeFetch = window.fetch.bind(window);
+    window.fetch = function(input, init) {
+      if (typeof input === 'string' && input.startsWith('data/')) input = '../' + input;
+      return __hvNativeFetch(input, init);
+    };
+  </script>
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/github-api.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="../js/admin-config.js"></script>
+  <script src="../js/importer.js"></script>
+  <script src="../js/admin-pagelle.js"></script>
+  <script src="../js/admin-previsioni.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/admin-calendario.js"></script>
+  <script src="../js/admin-calendario-excel.js"></script>
   <script src="admin.js"></script>
+  <script>
+    function hv_applicaRuoloAdminPreview() {
+      if (window.hv_role !== 'admin') {
+        document.getElementById('app').classList.add('hidden');
+        document.getElementById('admin-negato').classList.remove('hidden');
+        return;
+      }
+      if (!window.__hvAdminFormsReady) {
+        window.__hvAdminFormsReady = true;
+        hv_initConfigForm();
+        hv_initPagelleForm();
+        hv_initPrevisioniForm();
+        hv_initCalendarioForm();
+      }
+      window.hvPreviewAdminReady?.();
+    }
+    hv_checkGate().then(data => { if (data) hv_applicaRuoloAdminPreview(); });
+    document.addEventListener('hv:unlocked', hv_applicaRuoloAdminPreview);
+  </script>
 </body>
 </html>
