@@ -7,91 +7,26 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Quiz del Fantallenatore — Hertavernello Preview</title>
   <link rel="icon" href="../assets/hertavernello-restyling.webp">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="icon-system.css">
-  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="icon-system.css"><link rel="stylesheet" href="quiz.css">
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
-
   <div class="app-shell quiz-app">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Hertavernello Home">
-        <span class="brand-logo-frame quiz-brand-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo quiz-brand-logo" alt="Logo Hertavernello"></span>
-        <span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">Quiz del Fantallenatore</small></span>
-      </a>
-      <nav class="desktop-nav" aria-label="Navigazione principale">
-        <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
-        <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
-        <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
-        <a class="nav-item" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a>
-        <a class="nav-item active" href="quiz.html"><i data-lucide="circle-help"></i><span>Quiz</span></a>
-        <a class="nav-item preview-pending" href="#"><i data-lucide="shield-check"></i><span>Admin</span></a>
-      </nav>
-      <div class="top-actions">
-        <button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button>
-        <div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div>
-      </div>
+      <a class="brand" href="index.html" aria-label="Hertavernello Home"><span class="brand-logo-frame quiz-brand-frame"><img src="../assets/hertavernello-restyling.webp" class="brand-logo quiz-brand-logo" alt="Logo Hertavernello"></span><span class="brand-copy"><strong>Hertavernello</strong><small id="brand-season">Quiz del Fantallenatore</small></span></a>
+      <nav class="desktop-nav" aria-label="Navigazione principale"><a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a><a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a><a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a><a class="nav-item" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a><a class="nav-item active" href="quiz.html"><i data-lucide="circle-help"></i><span>Quiz</span></a><a class="nav-item" href="admin.html"><i data-lucide="shield-check"></i><span>Admin</span></a></nav>
+      <div class="top-actions"><button class="icon-button" type="button" disabled aria-label="Ricerca"><i data-lucide="search"></i></button><div class="profile-chip"><span class="profile-avatar">ET</span><span class="profile-copy"><small>Profilo</small><strong>Admin</strong></span></div></div>
     </header>
 
     <main>
-      <section class="quiz-hero">
-        <div class="quiz-hero-grid"></div>
-        <div class="quiz-hero-copy">
-          <span class="quiz-kicker"><i data-lucide="sparkles"></i> QUIZ MODE</span>
-          <h1>QUIZ DEL<br><span>FANTALLENATORE</span></h1>
-          <p>10 domande per giornata tra Serie A reale e storia Hertavernello. Nessuna risposta inventata: il quiz si costruisce dai dati disponibili.</p>
-          <div class="quiz-hero-badges">
-            <span><i data-lucide="list-checks"></i><b>10</b> domande</span>
-            <span><img src="../assets/icon-serie-a.png" alt=""><b>Serie A</b> reale</span>
-            <span><i data-lucide="trophy"></i><b>Hertavernello</b> storico</span>
-          </div>
-        </div>
-        <div class="quiz-trophy" aria-hidden="true">
-          <span class="quiz-ring ring-a"></span><span class="quiz-ring ring-b"></span><span class="quiz-ring ring-c"></span>
-          <div class="quiz-trophy-core"><i data-lucide="trophy"></i><b>?</b></div>
-        </div>
-        <div class="quiz-hero-stats">
-          <div><small>Giornate disponibili</small><strong id="available-count">—</strong></div>
-          <div><small>Miglior punteggio</small><strong id="best-score">—</strong></div>
-          <div><small>Ultima giocata</small><strong id="last-played">—</strong></div>
-        </div>
-      </section>
-
-      <section class="quiz-layout">
-        <aside class="quiz-rounds-card">
-          <header class="quiz-card-head">
-            <div><span class="quiz-mini-icon"><i data-lucide="calendar-range"></i></span><div><small>GIORNATE</small><h2>Scegli la sfida</h2></div></div>
-            <span class="data-tag">API</span>
-          </header>
-          <p class="quiz-side-intro">Una giornata diventa giocabile quando tutte le partite Serie A risultano concluse.</p>
-          <div id="round-list" class="round-list"><div class="quiz-loading-lines"><span></span><span></span><span></span><span></span></div></div>
-        </aside>
-
-        <section class="quiz-game-card" id="quiz-game">
-          <div class="quiz-game-loading" id="quiz-loading">
-            <span><i data-lucide="brain-circuit"></i></span>
-            <strong>Sto preparando il Quiz del Fantallenatore…</strong>
-            <p>Leggo risultati Serie A e Archivio Hertavernello.</p>
-          </div>
-        </section>
-      </section>
+      <section class="quiz-hero"><div class="quiz-hero-grid"></div><div class="quiz-hero-copy"><span class="quiz-kicker"><i data-lucide="sparkles"></i> QUIZ MODE</span><h1>QUIZ DEL<br><span>FANTALLENATORE</span></h1><p>10 domande per giornata tra Serie A reale e storia Hertavernello. Nessuna risposta inventata: il quiz si costruisce dai dati disponibili.</p><div class="quiz-hero-badges"><span><i data-lucide="list-checks"></i><b>10</b> domande</span><span><img src="../assets/icon-serie-a.png" alt=""><b>Serie A</b> reale</span><span><i data-lucide="trophy"></i><b>Hertavernello</b> storico</span></div></div><div class="quiz-trophy" aria-hidden="true"><span class="quiz-ring ring-a"></span><span class="quiz-ring ring-b"></span><span class="quiz-ring ring-c"></span><div class="quiz-trophy-core"><i data-lucide="trophy"></i><b>?</b></div></div><div class="quiz-hero-stats"><div><small>Giornate disponibili</small><strong id="available-count">—</strong></div><div><small>Miglior punteggio</small><strong id="best-score">—</strong></div><div><small>Ultima giocata</small><strong id="last-played">—</strong></div></div></section>
+      <section class="quiz-layout"><aside class="quiz-rounds-card"><header class="quiz-card-head"><div><span class="quiz-mini-icon"><i data-lucide="calendar-range"></i></span><div><small>GIORNATE</small><h2>Scegli la sfida</h2></div></div><span class="data-tag">API</span></header><p class="quiz-side-intro">Una giornata diventa giocabile quando tutte le partite Serie A risultano concluse.</p><div id="round-list" class="round-list"><div class="quiz-loading-lines"><span></span><span></span><span></span><span></span></div></div></aside><section class="quiz-game-card" id="quiz-game"><div class="quiz-game-loading" id="quiz-loading"><span><i data-lucide="brain-circuit"></i></span><strong>Sto preparando il Quiz del Fantallenatore…</strong><p>Leggo risultati Serie A e Archivio Hertavernello.</p></div></section></section>
     </main>
   </div>
-
-  <nav class="mobile-nav" aria-label="Navigazione mobile">
-    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
-    <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
-    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
-    <a href="archivio.html" class="mobile-nav-item"><i data-lucide="trophy"></i><span>Archivio</span></a>
-    <a href="quiz.html" class="mobile-nav-item active"><i data-lucide="circle-help"></i><span>Quiz</span></a>
-  </nav>
-
+  <nav class="mobile-nav" aria-label="Navigazione mobile"><a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a><a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a><a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a><a href="archivio.html" class="mobile-nav-item"><i data-lucide="trophy"></i><span>Archivio</span></a><a href="quiz.html" class="mobile-nav-item active"><i data-lucide="circle-help"></i><span>Quiz</span></a></nav>
   <div class="toast" id="preview-toast" role="status" aria-live="polite">Questa sezione verrà costruita più avanti nella preview.</div>
-  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-  <script src="quiz.js"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="quiz.js"></script>
 </body>
 </html>
