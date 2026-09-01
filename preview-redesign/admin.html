@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#040912">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Hertavernello Preview</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/Emmanuele94/hertavernello/main/assets/hertavernello-restyling.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <div class="app-shell admin-app">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Hertavernello Home">
+        <span class="brand-logo-frame"><img src="https://raw.githubusercontent.com/Emmanuele94/hertavernello/main/assets/hertavernello-restyling.webp" class="brand-logo" alt="Logo Hertavernello"></span>
+        <span class="brand-copy"><strong>Hertavernello</strong><small>Control Center</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <a class="nav-item" href="index.html"><i data-lucide="house"></i><span>Home</span></a>
+        <a class="nav-item" href="squadra.html"><i data-lucide="users"></i><span>Squadre</span></a>
+        <a class="nav-item" href="calendario.html"><i data-lucide="swords"></i><span>Chi gioca</span></a>
+        <a class="nav-item" href="archivio.html"><i data-lucide="trophy"></i><span>Archivio</span></a>
+        <a class="nav-item" href="quiz.html"><i data-lucide="circle-help"></i><span>Quiz</span></a>
+        <a class="nav-item active" href="admin.html"><i data-lucide="shield-check"></i><span>Admin</span></a>
+      </nav>
+      <div class="top-actions">
+        <span class="admin-secure-chip"><i data-lucide="lock-keyhole"></i> Area riservata</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="admin-hero">
+        <div class="admin-hero-copy">
+          <span class="admin-kicker"><i data-lucide="command"></i> HERTAVERNELLO CONTROL CENTER</span>
+          <h1>Gestisci la <span>lega</span></h1>
+          <p>Configurazione, rose, pagelle, previsioni e calendario in un unico spazio. La preview utilizza gli strumenti operativi reali già presenti nel progetto.</p>
+          <div class="admin-status-grid" id="admin-status-grid">
+            <div><span><i data-lucide="users-round"></i></span><small>Fantasquadre</small><strong id="admin-team-count">—</strong></div>
+            <div><span><i data-lucide="shirt"></i></span><small>Rose reali</small><strong id="admin-roster-status">—</strong></div>
+            <div><span><i data-lucide="calendar-range"></i></span><small>Giornate lega</small><strong id="admin-calendar-count">—</strong></div>
+            <div><span><i data-lucide="database"></i></span><small>Modalità</small><strong>LIVE DATA</strong></div>
+          </div>
+        </div>
+        <div class="admin-console-mark" aria-hidden="true">
+          <div class="console-orbit"></div>
+          <div class="console-shield"><i data-lucide="shield-check"></i></div>
+          <span class="console-node n1"></span><span class="console-node n2"></span><span class="console-node n3"></span>
+        </div>
+      </section>
+
+      <section class="admin-tools-head">
+        <div><small>STRUMENTI OPERATIVI</small><h2>Console amministratore</h2></div>
+        <div class="admin-jump" id="admin-jump">
+          <button type="button" data-index="1"><i data-lucide="settings-2"></i> Config</button>
+          <button type="button" data-index="2"><i data-lucide="upload"></i> Rose</button>
+          <button type="button" data-index="3"><i data-lucide="badge-check"></i> Pagelle</button>
+          <button type="button" data-index="4"><i data-lucide="scan-eye"></i> Previsioni</button>
+          <button type="button" data-index="5"><i data-lucide="calendar-days"></i> Calendario</button>
+        </div>
+      </section>
+
+      <section class="admin-bridge-note">
+        <i data-lucide="git-branch"></i>
+        <div><strong>Preview collegata all’Admin reale</strong><p>Le azioni qui sotto usano direttamente gli strumenti del <code>main</code>. Il token GitHub, se utilizzato, resta gestito dal flusso esistente e non viene salvato nel repository.</p></div>
+      </section>
+
+      <section class="admin-frame-shell" id="admin-frame-shell">
+        <div class="admin-frame-loading" id="admin-frame-loading"><span><i data-lucide="loader-circle"></i></span><strong>Caricamento strumenti Admin…</strong></div>
+        <iframe id="admin-frame" src="../admin.html" title="Strumenti Admin Hertavernello" loading="eager"></iframe>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigazione mobile">
+    <a href="index.html" class="mobile-nav-item"><i data-lucide="house"></i><span>Home</span></a>
+    <a href="squadra.html" class="mobile-nav-item"><i data-lucide="users"></i><span>Squadre</span></a>
+    <a href="calendario.html" class="mobile-nav-item"><i data-lucide="swords"></i><span>Incroci</span></a>
+    <a href="quiz.html" class="mobile-nav-item"><i data-lucide="circle-help"></i><span>Quiz</span></a>
+    <a href="admin.html" class="mobile-nav-item active"><i data-lucide="shield-check"></i><span>Admin</span></a>
+  </nav>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
