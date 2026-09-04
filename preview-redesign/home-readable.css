@@ -1,0 +1,159 @@
+/* Home readability & responsive scale pass */
+
+:root{--home-readable-text:13px}
+
+.reference-hero{min-height:390px;padding:34px 36px;gap:28px}
+.reference-hero .hero-copy{max-width:680px}
+.reference-hero h1{font-size:clamp(42px,5vw,68px);line-height:.98;letter-spacing:-.045em}
+.reference-hero .hero-lead{font-size:15px;line-height:1.65;max-width:620px}
+.hero-status-row{gap:10px;margin-bottom:15px}
+.hero-context,.status-pill{font-size:10px}
+.hero-kpis{gap:12px;margin-top:24px}
+.hero-kpi{min-height:76px;padding:14px 16px;gap:12px}
+.hero-kpi .kpi-icon{width:38px;height:38px;flex:0 0 38px}
+.hero-kpi .kpi-icon svg{width:19px;height:19px}
+.hero-kpi small{font-size:9px}
+.hero-kpi strong{font-size:15px;line-height:1.25}
+
+.restyling-logo-card{width:286px!important;height:286px!important}
+.restyling-brand-logo{max-width:64px!important;max-height:64px!important}
+.brand-logo-frame{width:68px!important;height:68px!important;flex:0 0 68px!important}
+.brand-copy strong{font-size:17px!important}
+.brand-copy small{font-size:9px!important}
+
+.hero-side-panel{min-width:260px}
+.side-panel-item{min-height:76px;padding:14px 15px;gap:12px}
+.side-panel-item small{font-size:9px}
+.side-panel-item strong{font-size:12px;line-height:1.35}
+.side-custom-icon,.side-seriea-mark{width:42px!important;height:42px!important;flex:0 0 42px!important}
+
+.reference-dashboard{gap:16px}
+.reference-dashboard>.panel{border-radius:18px}
+.home-premium-panel .panel-head,.reference-dashboard .panel-head{min-height:84px!important;padding:14px 18px!important}
+.home-premium-panel .panel-title{gap:15px!important}
+.home-premium-panel .panel-title h2,.reference-dashboard .panel-title h2{font-size:17px!important;line-height:1.18!important;letter-spacing:-.025em}
+.reference-dashboard .text-link,.priority-badge,.source-label,.outline-badge,.quiz-state{font-size:9px!important}
+
+.home-asset-icon{width:78px!important;height:78px!important;flex:0 0 78px!important}
+.home-asset-icon img{width:74px!important;height:74px!important;object-fit:contain!important;filter:drop-shadow(0 10px 16px rgba(0,0,0,.42))!important}
+.home-asset-icon::after{width:52px!important;height:15px!important;bottom:1px!important;filter:blur(10px)!important}
+.seriea-brand-icon{width:72px!important;height:72px!important;flex:0 0 72px!important;border-radius:17px!important}
+.seriea-brand-icon img{width:51px!important;height:51px!important}
+
+.reference-dashboard .panel-body{font-size:13px}
+.reference-dashboard .empty-state{padding:24px!important;gap:15px!important}
+.reference-dashboard .empty-state strong{font-size:14px!important;line-height:1.35!important}
+.reference-dashboard .empty-state p{font-size:11px!important;line-height:1.65!important;margin-top:5px!important}
+.reference-dashboard .empty-icon{width:48px!important;height:48px!important;flex:0 0 48px!important}
+.reference-dashboard .empty-icon svg{width:22px!important;height:22px!important}
+
+.home-seriea-scroll{max-height:700px!important}
+.home-seriea-table td{height:54px!important;padding:0 15px!important;font-size:12px!important}
+.home-seriea-table .rank{width:38px!important;font-size:11px!important}
+.home-seriea-table .club-cell{gap:12px!important}
+.home-seriea-table .club-cell img{width:32px!important;height:32px!important;flex:0 0 32px!important}
+.home-seriea-table .club-cell span{font-size:12px!important}
+.home-seriea-table .points{width:48px!important;font-size:13px!important}
+
+.reference-quiz{min-height:400px!important}
+.reference-quiz-content{grid-template-columns:minmax(0,1fr) 390px!important;min-height:315px!important;padding:34px 40px 38px!important;gap:32px!important}
+.quiz-brand-line{font-size:10px!important;gap:11px!important;margin-bottom:13px!important}
+.quiz-brand-line img{width:40px!important;height:40px!important}
+.reference-quiz .quiz-copy h3{font-size:clamp(38px,4.2vw,58px)!important;line-height:1!important}
+.reference-quiz .quiz-copy p{font-size:13px!important;line-height:1.7!important;max-width:720px!important}
+.quiz-badges{gap:9px!important;margin-top:18px!important}
+.quiz-badges span{height:34px!important;padding:0 11px!important;font-size:9px!important}
+.quiz-badges svg{width:15px!important;height:15px!important}
+.quiz-badges img{width:18px!important;height:18px!important}
+.quiz-play-button{height:50px!important;min-width:166px!important;font-size:12px!important;margin-top:20px!important}
+.quiz-asset-showpiece{width:360px!important;height:300px!important}
+.quiz-asset-showpiece::before{width:245px!important;height:245px!important}
+.quiz-asset-showpiece::after{width:320px!important;height:160px!important}
+.quiz-asset-aura{width:220px!important;height:220px!important}
+.quiz-asset-showpiece>img{width:245px!important;height:245px!important}
+
+@media(max-width:1180px){
+  .reference-hero{grid-template-columns:minmax(0,1fr) 260px;min-height:370px;padding:30px 28px}
+  .hero-side-panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);min-width:0}
+  .side-panel-item{min-height:68px}
+  .restyling-logo-card{width:245px!important;height:245px!important}
+  .reference-quiz-content{grid-template-columns:minmax(0,1fr) 320px!important}
+  .quiz-asset-showpiece{width:310px!important}
+}
+
+@media(max-width:820px){
+  .reference-hero{grid-template-columns:1fr;min-height:auto;padding:25px 20px;gap:18px}
+  .reference-hero h1{font-size:clamp(38px,10vw,54px)}
+  .reference-hero .hero-lead{font-size:14px}
+  .restyling-hero-visual{order:-1;min-height:210px}
+  .restyling-logo-card{width:220px!important;height:220px!important}
+  .hero-side-panel{grid-template-columns:1fr}
+  .side-panel-item{min-height:66px}
+  .hero-kpis{grid-template-columns:1fr}
+  .hero-kpi{min-height:68px}
+
+  .reference-dashboard{gap:14px}
+  .reference-dashboard>.panel{grid-column:1/-1!important}
+  .home-premium-panel .panel-head,.reference-dashboard .panel-head{min-height:78px!important;padding:13px 15px!important}
+  .home-premium-panel .panel-title h2,.reference-dashboard .panel-title h2{font-size:16px!important}
+  .home-asset-icon{width:66px!important;height:66px!important;flex-basis:66px!important}
+  .home-asset-icon img{width:63px!important;height:63px!important}
+  .seriea-brand-icon{width:62px!important;height:62px!important;flex-basis:62px!important}
+  .seriea-brand-icon img{width:45px!important;height:45px!important}
+
+  .home-seriea-scroll{max-height:580px!important}
+  .home-seriea-table td{height:50px!important;padding:0 12px!important;font-size:11.5px!important}
+  .home-seriea-table .club-cell img{width:30px!important;height:30px!important;flex-basis:30px!important}
+
+  .reference-quiz-content{grid-template-columns:1fr!important;padding:26px 20px 30px!important;gap:18px!important}
+  .reference-quiz .quiz-copy h3{font-size:clamp(34px,10vw,48px)!important}
+  .reference-quiz .quiz-copy p{font-size:12.5px!important}
+  .quiz-asset-showpiece{width:280px!important;height:235px!important;margin:0 auto!important}
+  .quiz-asset-showpiece::before{width:190px!important;height:190px!important}
+  .quiz-asset-showpiece::after{width:250px!important;height:125px!important}
+  .quiz-asset-showpiece>img{width:205px!important;height:205px!important}
+}
+
+@media(max-width:520px){
+  .app-shell{padding-left:12px!important;padding-right:12px!important}
+  .topbar{min-height:70px!important}
+  .brand-logo-frame{width:58px!important;height:58px!important;flex-basis:58px!important}
+  .restyling-brand-logo{max-width:56px!important;max-height:56px!important}
+  .brand-copy strong{font-size:15px!important}
+  .brand-copy small{font-size:8.5px!important}
+
+  .reference-hero{padding:21px 15px;border-radius:17px}
+  .reference-hero h1{font-size:clamp(34px,11vw,46px)}
+  .reference-hero .hero-lead{font-size:13.5px;line-height:1.6}
+  .restyling-hero-visual{min-height:190px}
+  .restyling-logo-card{width:190px!important;height:190px!important}
+  .hero-kpi{padding:12px 13px}
+  .hero-kpi strong{font-size:14px}
+
+  .home-premium-panel .panel-head,.reference-dashboard .panel-head{min-height:76px!important;padding:12px!important}
+  .home-premium-panel .panel-title{gap:10px!important}
+  .home-premium-panel .panel-title h2,.reference-dashboard .panel-title h2{font-size:15px!important;line-height:1.2!important}
+  .home-asset-icon{width:60px!important;height:60px!important;flex-basis:60px!important}
+  .home-asset-icon img{width:58px!important;height:58px!important}
+  .seriea-brand-icon{width:58px!important;height:58px!important;flex-basis:58px!important}
+  .seriea-brand-icon img{width:42px!important;height:42px!important}
+  .reference-dashboard .text-link{font-size:8.5px!important}
+
+  .reference-dashboard .empty-state{padding:19px!important}
+  .reference-dashboard .empty-state strong{font-size:13.5px!important}
+  .reference-dashboard .empty-state p{font-size:11px!important}
+
+  .home-seriea-table td{height:48px!important;padding:0 9px!important;font-size:11px!important}
+  .home-seriea-table .rank{width:30px!important;font-size:10px!important}
+  .home-seriea-table .club-cell{gap:8px!important}
+  .home-seriea-table .club-cell img{width:27px!important;height:27px!important;flex-basis:27px!important}
+  .home-seriea-table .club-cell span{font-size:11px!important}
+  .home-seriea-table .points{font-size:12px!important}
+
+  .reference-quiz-content{padding:22px 15px 26px!important}
+  .quiz-brand-line img{width:34px!important;height:34px!important}
+  .quiz-badges span{height:32px!important;font-size:8.5px!important;padding:0 9px!important}
+  .quiz-play-button{width:100%!important;height:50px!important;font-size:12px!important}
+  .quiz-asset-showpiece{width:245px!important;height:215px!important}
+  .quiz-asset-showpiece>img{width:185px!important;height:185px!important}
+}
