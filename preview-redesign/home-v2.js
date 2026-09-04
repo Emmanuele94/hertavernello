@@ -2,6 +2,16 @@
   const ROOT = "../";
   const API = "https://hertavernello-api-proxy.emmanueletufano.workers.dev";
 
+  // Readability layer is intentionally loaded last so the larger desktop/mobile
+  // sizing wins over the earlier visual refinement sheets.
+  if (!document.getElementById("home-readable-css")) {
+    const readable = document.createElement("link");
+    readable.id = "home-readable-css";
+    readable.rel = "stylesheet";
+    readable.href = "home-readable.css";
+    document.head.appendChild(readable);
+  }
+
   const ASSETS = {
     logo: `${ROOT}assets/logo.png`,
     matchup: `${ROOT}assets/icone/hv-home-chi-gioca.png`,
