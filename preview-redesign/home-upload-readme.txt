@@ -1,1 +1,0 @@
-Home.rar ricevuto il 2026-09-04. Asset finali Home: hv-home-chi-gioca.png, hv-home-classifica-generale.png, hv-home-capocannonieri.png, hv-home-squadra-evidenza.png, hv-home-quiz-fantallenatore.png.
