@@ -1,14 +1,14 @@
 (() => {
   const ROOT = "../";
   const ICONS = {
-    overview: `${ROOT}assets/icone/hv-squadra-panoramica.png`,
-    roster: `${ROOT}assets/icone/hv-squadra-rosa.png`,
-    auction: `${ROOT}assets/icone/hv-squadra-asta.png`,
-    stats: `${ROOT}assets/icone/hv-squadra-statistiche.png`,
-    prediction: `${ROOT}assets/icone/hv-squadra-previsione-serie-a.png`,
-    movements: `${ROOT}assets/icone/hv-squadra-movimenti-rosa.png`,
-    origin: `${ROOT}assets/icone/hv-squadra-origine-rosa.png`,
-    clubs: `${ROOT}assets/icone/hv-squadra-club-piu-rappresentati.png`
+    overview: `${ROOT}assets/icone/hv-squadra-panoramica.webp`,
+    roster: `${ROOT}assets/icone/hv-squadra-rosa.webp`,
+    auction: `${ROOT}assets/icone/hv-squadra-asta.webp`,
+    stats: `${ROOT}assets/icone/hv-squadra-statistiche.webp`,
+    prediction: `${ROOT}assets/icone/hv-squadra-previsione-serie-a.webp`,
+    movements: `${ROOT}assets/icone/hv-squadra-movimenti-rosa.webp`,
+    origin: `${ROOT}assets/icone/hv-squadra-origine-rosa.webp`,
+    clubs: `${ROOT}assets/icone/hv-squadra-club-piu-rappresentati.webp`
   };
 
   function useBranding() {
@@ -46,14 +46,16 @@
     ]);
   }
 
-  function decorateTabs() {
+  async function decorateTabs() {
     const overview = document.querySelector('.team-tab[data-tab="overview"]');
     const roster = document.querySelector('.team-tab[data-tab="roster"]');
-    [[overview, ICONS.overview], [roster, ICONS.roster]].forEach(async ([btn, src]) => {
-      if (!btn || !(await testAsset(src))) return;
-      const old = btn.querySelector('svg');
-      if (old) old.outerHTML = `<img class="team-tab-custom-icon" src="${src}" alt="">`;
-    });
+    for (const [btn, src] of [[overview, ICONS.overview], [roster, ICONS.roster]]) {
+      if (!btn || !(await testAsset(src))) continue;
+      const old = btn.querySelector('svg, .team-tab-custom-icon');
+      const icon = `<img class="team-tab-custom-icon" src="${src}" alt="">`;
+      if (old) old.outerHTML = icon;
+      else btn.insertAdjacentHTML('afterbegin', icon);
+    }
   }
 
   function init() {
