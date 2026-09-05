@@ -1,0 +1,50 @@
+/* Sharpness guard: never enlarge the low-resolution Home PNGs beyond their useful source size. */
+.panel-fixtures .home-asset-icon img,
+.panel-league .home-asset-icon img,
+.panel-scorers .home-asset-icon img,
+.panel-feature .home-asset-icon img{
+  width:64px!important;
+  height:64px!important;
+  image-rendering:auto!important;
+  transform:none!important;
+  filter:drop-shadow(0 7px 10px rgba(0,0,0,.30))!important;
+}
+
+/* Quiz header source is 128px: it can remain larger than the other section icons. */
+.panel-quiz .home-asset-icon img{
+  width:72px!important;
+  height:72px!important;
+  image-rendering:auto!important;
+  transform:none!important;
+}
+
+/* The current repository Quiz PNG is 128x128. Keep the artwork at native CSS size;
+   the surrounding aura provides visual presence without stretching the pixels. */
+.quiz-asset-showpiece>img{
+  width:128px!important;
+  height:128px!important;
+  image-rendering:auto!important;
+  transform:none!important;
+  filter:drop-shadow(0 11px 17px rgba(0,0,0,.28))!important;
+}
+.quiz-asset-showpiece::before{width:205px!important;height:205px!important}
+.quiz-asset-showpiece::after{width:285px!important;height:145px!important}
+.quiz-asset-aura{width:175px!important;height:175px!important}
+
+@media(max-width:820px){
+  .panel-fixtures .home-asset-icon img,
+  .panel-league .home-asset-icon img,
+  .panel-scorers .home-asset-icon img,
+  .panel-feature .home-asset-icon img{width:60px!important;height:60px!important}
+  .panel-quiz .home-asset-icon img{width:64px!important;height:64px!important}
+  .quiz-asset-showpiece>img{width:128px!important;height:128px!important}
+}
+
+@media(max-width:520px){
+  .panel-fixtures .home-asset-icon img,
+  .panel-league .home-asset-icon img,
+  .panel-scorers .home-asset-icon img,
+  .panel-feature .home-asset-icon img{width:56px!important;height:56px!important}
+  .panel-quiz .home-asset-icon img{width:60px!important;height:60px!important}
+  .quiz-asset-showpiece>img{width:124px!important;height:124px!important}
+}
