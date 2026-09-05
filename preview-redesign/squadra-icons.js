@@ -11,6 +11,15 @@
     clubs: `${ROOT}assets/icone/hv-squadra-club-piu-rappresentati.webp`
   };
 
+  function loadFinalIconCss() {
+    if (document.getElementById('squadra-icons-final-css')) return;
+    const link = document.createElement('link');
+    link.id = 'squadra-icons-final-css';
+    link.rel = 'stylesheet';
+    link.href = 'squadra-icons-final.css';
+    document.head.appendChild(link);
+  }
+
   function useBranding() {
     document.querySelectorAll('.brand-logo').forEach(img => img.src = `${ROOT}assets/logo.png`);
     const favicon = document.querySelector('link[rel="icon"]');
@@ -59,6 +68,7 @@
   }
 
   function init() {
+    loadFinalIconCss();
     useBranding();
     applyIcons();
     decorateTabs();
