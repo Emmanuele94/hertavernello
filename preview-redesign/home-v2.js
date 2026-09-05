@@ -2,15 +2,19 @@
   const ROOT = "../";
   const API = "https://hertavernello-api-proxy.emmanueletufano.workers.dev";
 
-  // Readability layer is intentionally loaded last so the larger desktop/mobile
-  // sizing wins over the earlier visual refinement sheets.
-  if (!document.getElementById("home-readable-css")) {
-    const readable = document.createElement("link");
-    readable.id = "home-readable-css";
-    readable.rel = "stylesheet";
-    readable.href = "home-readable.css";
-    document.head.appendChild(readable);
-  }
+  // Readability + sharpness layers are loaded last so their desktop/mobile
+  // sizing and native-resolution guards win over the earlier refinement sheets.
+  [
+    ["home-readable-css", "home-readable.css"],
+    ["home-sharp-css", "home-sharp.css"]
+  ].forEach(([id, href]) => {
+    if (document.getElementById(id)) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  });
 
   const ASSETS = {
     logo: `${ROOT}assets/logo.png`,
@@ -22,7 +26,7 @@
   };
 
   function esc(v = "") {
-    return String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+    return String(v).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   }
 
   function normalizeName(str) {
