@@ -2,11 +2,10 @@
   const ROOT = "../";
   const API = "https://hertavernello-api-proxy.emmanueletufano.workers.dev";
 
-  // Readability + sharpness layers are loaded last so their desktop/mobile
-  // sizing and native-resolution guards win over the earlier refinement sheets.
   [
     ["home-readable-css", "home-readable.css"],
-    ["home-sharp-css", "home-sharp.css"]
+    ["home-sharp-css", "home-sharp.css"],
+    ["home-final-css", "home-final.css"]
   ].forEach(([id, href]) => {
     if (document.getElementById(id)) return;
     const link = document.createElement("link");
@@ -15,6 +14,14 @@
     link.href = href;
     document.head.appendChild(link);
   });
+
+  if (!document.getElementById("home-final-js")) {
+    const script = document.createElement("script");
+    script.id = "home-final-js";
+    script.src = "home-final.js";
+    script.defer = true;
+    document.head.appendChild(script);
+  }
 
   const ASSETS = {
     logo: `${ROOT}assets/logo.png`,
@@ -60,7 +67,7 @@
   function applyHomeAssets() {
     replacePanelIcon(".panel-fixtures .panel-title", ASSETS.matchup, "Chi gioca contro chi");
     replacePanelIcon(".panel-league .panel-title", ASSETS.league, "Classifica Hertavernello");
-    replacePanelIcon(".panel-scorers .panel-title", ASSETS.scorers, "Capocannonieri");
+    replacePanelIcon(".panel-scorers .panel-title", ASSETS.scorers, "Marcatori");
     replacePanelIcon(".panel-feature .panel-title", ASSETS.featured, "Squadra in evidenza");
     replacePanelIcon(".panel-quiz .panel-title", ASSETS.quiz, "Quiz del Fantallenatore");
 
