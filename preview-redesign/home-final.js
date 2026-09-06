@@ -70,6 +70,7 @@
     renderScorers();
     setTimeout(labelLeagueStrip, 500);
     setTimeout(renderScorers, 900);
+    setTimeout(renderScorers, 2200);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
