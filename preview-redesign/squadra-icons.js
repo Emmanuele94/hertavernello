@@ -6,7 +6,8 @@
     auction: `${ROOT}assets/icone/hv-squadra-asta.webp`,
     stats: `${ROOT}assets/icone/hv-squadra-statistiche.webp`,
     prediction: `${ROOT}assets/icone/hv-squadra-previsione-serie-a.webp`,
-    origin: `${ROOT}assets/icone/hv-squadra-origine-rosa.webp`
+    origin: `${ROOT}assets/icone/hv-squadra-origine-rosa.webp`,
+    movements: `${ROOT}assets/icone/hv-squadra-movimenti-rosa.svg`
   };
 
   function loadFinalIconCss() {
@@ -48,8 +49,9 @@
       /* Highlights asta: nessuna icona custom dedicata per ora. */
       replaceIcon('.roster-main-card .mini-emblem', ICONS.roster, 'Rosa'),
       replaceIcon('[data-view="roster"] .roster-stats-grid .team-card:nth-child(1) .mini-emblem', ICONS.origin, 'Origine rosa'),
-      replaceIcon('[data-view="roster"] .roster-stats-grid .team-card:nth-child(2) .mini-emblem', ICONS.stats, 'Statistiche rosa')
-      /* Club reali e Movimenti rosa: i due WebP corrotti sono disattivati, resta il fallback Lucide pulito. */
+      replaceIcon('[data-view="roster"] .roster-stats-grid .team-card:nth-child(2) .mini-emblem', ICONS.stats, 'Statistiche rosa'),
+      /* Club reali resta con fallback Lucide finché non ricevo il suo asset corretto. */
+      replaceIcon('[data-view="roster"] .roster-stats-grid .team-card:nth-child(4) .mini-emblem', ICONS.movements, 'Movimenti rosa')
     ]);
   }
 
