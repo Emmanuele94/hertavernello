@@ -44,6 +44,14 @@ function setupTabs(){
   activateTab(allowed.includes(requested) ? requested : "config");
 }
 
+function loadRosterXlsxImporter(){
+  if(document.getElementById("hv-roster-xlsx-importer")) return;
+  const script = document.createElement("script");
+  script.id = "hv-roster-xlsx-importer";
+  script.src = "admin-roster-xlsx.js";
+  document.body.appendChild(script);
+}
+
 window.hvPreviewAdminReady = function(){
   renderAdminStatus();
   refreshIcons();
@@ -52,3 +60,4 @@ window.hvPreviewAdminReady = function(){
 setupTabs();
 renderAdminStatus();
 refreshIcons();
+loadRosterXlsxImporter();
