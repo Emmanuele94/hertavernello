@@ -1,0 +1,7 @@
+Struttura campione verificata (file i-politicanti-rosters-1788690796582.xlsx):
+- foglio: ROSE
+- ogni fantasquadra occupa 3 colonne: nome squadra | costo | separatore vuoto
+- il campione contiene 8 fantasquadre, ma l'importer rileva dinamicamente tutti i blocchi presenti
+- righe giocatori fino a 'totale'
+- ruoli: quattro blocchi colore ordinati POR, DIF, CEN, ATT; fallback campione 4/8/8/6 solo se i colori non sono leggibili dal browser
+- il club reale non è presente nell'export campione e non viene inventato
