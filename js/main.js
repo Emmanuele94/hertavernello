@@ -416,11 +416,96 @@ async function hv_renderTopScorers(config) {
   `;
 }
 
+// ===== Classifica della lega — calcolata da data/risultati.json, niente
+// inserimento manuale oltre ai risultati caricati da Admin =====
+async function hv_caricaRisultatiLega() {
+  const res = await fetch("data/risultati.json");
+  const data = await res.json();
+  return data.risultati || [];
+}
+
+async function hv_renderClassificaLega(config) {
+  const wrap = document.getElementById("classifica-lega-wrap");
+  const risultati = await hv_caricaRisultatiLega();
+
+  if (risultati.length === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessun risultato ancora caricato — si popola da sola man mano che carichi le giornate da Admin → Aggiorna risultati.</p>';
+    return;
+  }
+
+  const classifica = hv_calcolaClassificaLega(risultati, config.squadre);
+  wrap.innerHTML = `
+    <table class="roster-table">
+      <thead>
+        <tr>
+          <th style="text-align:left; font-size:11px; color:var(--text-muted); padding-bottom:6px;"></th>
+          <th style="text-align:left; font-size:11px; color:var(--text-muted); padding-bottom:6px;">Fantasquadra</th>
+          <th style="font-size:11px; color:var(--text-muted); padding-bottom:6px;">G</th>
+          <th style="font-size:11px; color:var(--text-muted); padding-bottom:6px;">V</th>
+          <th style="font-size:11px; color:var(--text-muted); padding-bottom:6px;">P</th>
+          <th style="font-size:11px; color:var(--text-muted); padding-bottom:6px;">S</th>
+          <th style="font-size:11px; color:var(--text-muted); padding-bottom:6px;">Pt</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${classifica
+          .map(
+            (r) => `<tr>
+          <td class="mono" style="color:var(--text-muted); width:22px;">${r.posizione}</td>
+          <td>${r.squadra.nomeFantasquadra}</td>
+          <td class="mono" style="text-align:center;">${r.giocate}</td>
+          <td class="mono" style="text-align:center;">${r.vinte}</td>
+          <td class="mono" style="text-align:center;">${r.pareggiate}</td>
+          <td class="mono" style="text-align:center;">${r.perse}</td>
+          <td class="mono" style="text-align:center; color:var(--verde-prato); font-weight:700;">${r.punti}</td>
+        </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+// ===== Highlights della settimana =====
+async function hv_renderHighlightsSettimana(config) {
+  const wrap = document.getElementById("highlights-settimana-wrap");
+  const risultati = await hv_caricaRisultatiLega();
+
+  if (risultati.length === 0) {
+    wrap.innerHTML = '<p class="empty-state">Vuoto per ora — appena carichi la prima giornata da Admin, qui compaiono automaticamente il punteggio più alto, chi segna di più e le altre curiosità.</p>';
+    return;
+  }
+
+  const classifica = hv_calcolaClassificaLega(risultati, config.squadre);
+  const record = hv_calcolaRecord(risultati, config.squadre);
+  const news = hv_generaNews(risultati, config.squadre, classifica);
+
+  // Quante giornate consecutive (dall'ultima a ritroso) l'attuale leader è stato primo
+  const leaderId = classifica[0].squadra.id;
+  const giornateDisponibili = [...new Set(risultati.map((r) => r.matchday))].sort((a, b) => a - b);
+  let strisciaPrimo = 0;
+  for (let i = giornateDisponibili.length - 1; i >= 0; i--) {
+    const parziale = hv_calcolaClassificaLega(risultati.filter((r) => r.matchday <= giornateDisponibili[i]), config.squadre);
+    if (parziale[0] && parziale[0].squadra.id === leaderId) strisciaPrimo++;
+    else break;
+  }
+
+  const righe = [
+    `<div class="highlight-riga">🔥 <b>${record.migliorPunteggio.nome}</b> ha il miglior punteggio stagionale: <b>${record.migliorPunteggio.score}</b> (giornata ${record.migliorPunteggio.matchday}).</div>`,
+    `<div class="highlight-riga">👑 <b>${classifica[0].squadra.nomeFantasquadra}</b> è prima in classifica da <b>${strisciaPrimo}</b> giornata/e di fila.</div>`,
+    ...news.map((n) => `<div class="highlight-riga">${n}</div>`),
+  ];
+
+  wrap.innerHTML = `<div class="highlights-lista">${[...new Set(righe)].join("")}</div>`;
+}
+
 async function hv_initHome(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
   document.getElementById("lega-stagione").textContent = "Stagione " + config.lega.stagione;
   hv_countdown(config.lega.dataAsta);
   await hv_renderIncrocio(config);
+  await hv_renderHighlightsSettimana(config);
+  await hv_renderClassificaLega(config);
   await hv_renderLeaderboard(config);
   await hv_renderClassificaSerieA(config);
   await hv_renderTopScorers(config);

@@ -40,18 +40,6 @@ function hv_distribuzioneSquadreReali(giocatori, squadreRef) {
   return { fette, totale };
 }
 
-function hv_costruisciConicGradient(fette) {
-  let cursore = 0;
-  const segmenti = fette.map((f, i) => {
-    const inizio = cursore;
-    const fine = cursore + f.percentuale;
-    cursore = fine;
-    const colore = HV_PALETTE_TORTA[i % HV_PALETTE_TORTA.length];
-    return `${colore} ${inizio}% ${fine}%`;
-  });
-  return `conic-gradient(${segmenti.join(", ")})`;
-}
-
 function hv_nomeSquadraReale(codice, squadreRef) {
   const s = squadreRef.squadre.find((x) => x.codice === codice);
   return s ? s.nome : codice;
@@ -85,6 +73,36 @@ function hv_soprannomeRosa(fette, squadreRef) {
   return { titolo: "Il Generalista", sotto: "Rosa equilibrata, senza preferenze evidenti" };
 }
 
+// Lista a due colonne (icona, nome, barra, percentuale) — sostituisce il
+// grafico a torta: con tante fette piccole (es. 10+ nazionalità diverse)
+// il conic-gradient diventava illeggibile, con etichette che si accavallavano.
+function hv_renderDistribuzioneLista(wrap, fette, iconaCartella, nomeFn, soprannome) {
+  const righe = fette
+    .map(
+      (f) => `
+    <div class="distribuzione-riga">
+      <img src="${iconaCartella}/${f.codice}.png" alt="" class="distribuzione-icona">
+      <span class="distribuzione-nome" title="${nomeFn(f.codice)}">${nomeFn(f.codice)}</span>
+      <span class="distribuzione-barra-track"><span class="distribuzione-barra-fill" style="width:${f.percentuale}%;"></span></span>
+      <span class="distribuzione-percentuale">${Math.round(f.percentuale)}%</span>
+      <span class="distribuzione-conteggio">${f.n}</span>
+    </div>`
+    )
+    .join("");
+
+  wrap.innerHTML = `
+    <div class="distribuzione-lista">${righe}</div>
+    ${
+      soprannome
+        ? `<div class="torta-soprannome">
+             <p class="torta-soprannome-titolo">${soprannome.titolo}</p>
+             <p class="torta-soprannome-sotto">${soprannome.sotto}</p>
+           </div>`
+        : ""
+    }
+  `;
+}
+
 function hv_renderTortaSquadre(giocatori, squadreRef) {
   const wrap = document.getElementById("torta-squadre-content");
   if (!giocatori || giocatori.length === 0) {
@@ -98,59 +116,8 @@ function hv_renderTortaSquadre(giocatori, squadreRef) {
     return;
   }
 
-  const gradiente = hv_costruisciConicGradient(fette);
   const soprannome = hv_soprannomeRosa(fette, squadreRef);
-
-  const DIAMETRO = 240;
-  const RAGGIO_LABEL = DIAMETRO * 0.33;
-  const SOGLIA_ETICHETTA = 5; // % minima per meritare un'etichetta dentro la fetta
-
-  let cursore = 0;
-  const etichette = [];
-  const piccole = [];
-
-  fette.forEach((f) => {
-    const inizio = cursore;
-    const fine = cursore + f.percentuale;
-    const metaAngolo = ((inizio + fine) / 2 / 100) * 360; // gradi, 0° = ore 12, orario
-    cursore = fine;
-
-    if (f.percentuale < SOGLIA_ETICHETTA) {
-      piccole.push(f);
-      return;
-    }
-
-    const rad = (metaAngolo * Math.PI) / 180;
-    const x = DIAMETRO / 2 + RAGGIO_LABEL * Math.sin(rad);
-    const y = DIAMETRO / 2 - RAGGIO_LABEL * Math.cos(rad);
-
-    etichette.push(`
-      <div class="torta-fetta-label" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;">
-        <img src="assets/loghi/${f.codice}.png" alt="" class="torta-fetta-logo">
-        <span class="torta-fetta-testo">${Math.round(f.percentuale)}%<br>${f.n}</span>
-      </div>`);
-  });
-
-  const notaPiccole =
-    piccole.length > 0
-      ? `<p class="torta-piccole-nota">+ ${piccole.map((f) => `${hv_nomeSquadraReale(f.codice, squadreRef)} ${Math.round(f.percentuale)}%`).join(", ")}</p>`
-      : "";
-
-  wrap.innerHTML = `
-    <div class="torta-grafico-wrap" style="width:${DIAMETRO}px; height:${DIAMETRO}px;">
-      <div class="torta-grafico" style="background:${gradiente}; width:${DIAMETRO}px; height:${DIAMETRO}px;"></div>
-      ${etichette.join("")}
-    </div>
-    ${notaPiccole}
-    ${
-      soprannome
-        ? `<div class="torta-soprannome">
-             <p class="torta-soprannome-titolo">${soprannome.titolo}</p>
-             <p class="torta-soprannome-sotto">${soprannome.sotto}</p>
-           </div>`
-        : ""
-    }
-  `;
+  hv_renderDistribuzioneLista(wrap, fette, "assets/loghi", (cod) => hv_nomeSquadraReale(cod, squadreRef), soprannome);
 }
 
 // ===== Torta "da dove arrivano i tuoi calciatori" — distribuzione per
@@ -207,59 +174,8 @@ function hv_renderTortaNazioni(giocatori, squadreRef, giocatoriDb, nazioni) {
     return;
   }
 
-  const gradiente = hv_costruisciConicGradient(fette);
   const soprannome = hv_soprannomeNazioni(fette, nazioni);
-
-  const DIAMETRO = 240;
-  const RAGGIO_LABEL = DIAMETRO * 0.33;
-  const SOGLIA_ETICHETTA = 5;
-
-  let cursore = 0;
-  const etichette = [];
-  const piccole = [];
-
-  fette.forEach((f) => {
-    const inizio = cursore;
-    const fine = cursore + f.percentuale;
-    const metaAngolo = ((inizio + fine) / 2 / 100) * 360;
-    cursore = fine;
-
-    if (f.percentuale < SOGLIA_ETICHETTA) {
-      piccole.push(f);
-      return;
-    }
-
-    const rad = (metaAngolo * Math.PI) / 180;
-    const x = DIAMETRO / 2 + RAGGIO_LABEL * Math.sin(rad);
-    const y = DIAMETRO / 2 - RAGGIO_LABEL * Math.cos(rad);
-
-    etichette.push(`
-      <div class="torta-fetta-label" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;">
-        <img src="assets/bandiere/${f.codice}.png" alt="" class="torta-fetta-logo">
-        <span class="torta-fetta-testo">${Math.round(f.percentuale)}%<br>${f.n}</span>
-      </div>`);
-  });
-
-  const notaPiccole =
-    piccole.length > 0
-      ? `<p class="torta-piccole-nota">+ ${piccole.map((f) => `${nazioni ? nazioni[f.codice] || f.codice : f.codice} ${Math.round(f.percentuale)}%`).join(", ")}</p>`
-      : "";
-
-  wrap.innerHTML = `
-    <div class="torta-grafico-wrap" style="width:${DIAMETRO}px; height:${DIAMETRO}px;">
-      <div class="torta-grafico" style="background:${gradiente}; width:${DIAMETRO}px; height:${DIAMETRO}px;"></div>
-      ${etichette.join("")}
-    </div>
-    ${notaPiccole}
-    ${
-      soprannome
-        ? `<div class="torta-soprannome">
-             <p class="torta-soprannome-titolo">${soprannome.titolo}</p>
-             <p class="torta-soprannome-sotto">${soprannome.sotto}</p>
-           </div>`
-        : ""
-    }
-  `;
+  hv_renderDistribuzioneLista(wrap, fette, "assets/bandiere", (cod) => (nazioni ? nazioni[cod] || cod : cod), soprannome);
 }
 
 // ===== Info partita accanto a ogni giocatore (giorno/ora, avversario, già giocata o no) =====

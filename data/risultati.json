@@ -1,0 +1,4 @@
+{
+  "_leggimi": "Risultati di giornata della lega, confermati da admin.html sezione Aggiorna risultati. Ogni voce: matchday (numero giornata), homeTeamId/awayTeamId (id fantasquadra), homeScore/awayScore (fantapunti), importMethod (screenshot/text/manual), savedAt (data ISO). Da qui si calcolano automaticamente classifica lega, strisce, record e news — non serve inserire nient'altro a mano.",
+  "risultati": []
+}

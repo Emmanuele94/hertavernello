@@ -238,6 +238,50 @@
         <a id="calendario-download" class="output-download hidden" download="calendario.json">Scarica calendario.json</a>
       </div>
     </div>
+
+    <div class="admin-box">
+      <h2>6. Aggiorna risultati di giornata</h2>
+      <p class="desc">
+        Da qui in poi classifica di lega, striscie e news si calcolano da sole — carica solo i 6 risultati di ogni
+        giornata, in uno dei 3 modi qui sotto. In tutti e 3 i casi arriverai alla stessa schermata di controllo
+        finale, dove puoi correggere a mano prima di salvare.
+      </p>
+
+      <div class="campo-riga" style="max-width: 220px; margin-bottom: 14px;">
+        <input type="number" id="ris-giornata" min="1" placeholder="Giornata">
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+        <button type="button" id="ris-tab-screenshot" class="ris-tab-btn ris-tab-attivo">📷 Screenshot</button>
+        <button type="button" id="ris-tab-testo" class="ris-tab-btn">📋 Incolla testo</button>
+        <button type="button" id="ris-tab-manuale" class="ris-tab-btn">✎ Manuale</button>
+      </div>
+
+      <div id="ris-metodo-screenshot" class="ris-metodo">
+        <div id="ris-dropzone" class="ris-dropzone">
+          <p><strong>Incolla screenshot</strong> — Ctrl+V dopo Lightshot, o trascina/scegli un'immagine qui</p>
+        </div>
+        <input type="file" id="ris-file-input" accept="image/png,image/jpeg,image/webp" class="hidden">
+        <div id="ris-immagine-anteprima"></div>
+      </div>
+
+      <div id="ris-metodo-testo" class="ris-metodo hidden">
+        <p class="desc" style="margin: 0 0 8px;">Una riga per partita: "Nome fantasquadra" punteggio v "Nome fantasquadra" punteggio</p>
+        <textarea id="ris-textarea" rows="7" placeholder='"Herta Vernello" 78,5 v "Real Disagio" 71'></textarea>
+        <button type="button" id="ris-analizza-testo" style="margin-top: 8px;">Analizza</button>
+      </div>
+
+      <div id="ris-metodo-manuale" class="ris-metodo hidden">
+        <p class="desc" style="margin: 0 0 8px;">Accoppiamenti dal calendario di lega — inserisci solo i 12 punteggi.</p>
+        <div id="ris-manuale-righe"></div>
+        <button type="button" id="ris-manuale-genera" style="margin-top: 8px;">Genera anteprima</button>
+      </div>
+
+      <div id="ris-ocr-stato" class="desc"></div>
+      <div id="ris-ocr-debug"></div>
+
+      <div id="ris-anteprima-wrap" style="margin-top: 20px;"></div>
+    </div>
   </div>
   </div>
 
@@ -252,6 +296,12 @@
   <script src="js/api.js"></script>
   <script src="js/admin-calendario.js"></script>
   <script src="js/admin-calendario-excel.js"></script>
+  <script src="js/risultati-utils.js"></script>
+  <script src="js/parser-risultati.js"></script>
+  <script src="js/ocr-risultati.js"></script>
+  <script src="js/calcolo-derivati.js"></script>
+  <script src="js/motore-news.js"></script>
+  <script src="js/admin-risultati.js"></script>
   <script>
     function hv_applicaRuoloAdmin() {
       if (window.hv_role !== "admin") {
@@ -263,6 +313,7 @@
       hv_initPagelleForm();
       hv_initPrevisioniForm();
       hv_initCalendarioForm();
+      hv_initRisultatiForm();
     }
 
     hv_checkGate().then((data) => { if (data) hv_applicaRuoloAdmin(); });

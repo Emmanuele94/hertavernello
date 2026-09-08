@@ -57,6 +57,22 @@
       <div id="incrocio-wrap" class="incrocio-wrap sezione-contenuto"></div>
     </section>
 
+    <section class="section">
+      <h2 class="sezione-toggle" data-target="highlights-settimana-wrap">
+        <img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Highlights della settimana
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="highlights-settimana-wrap" class="sezione-contenuto"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="sezione-toggle" data-target="classifica-lega-wrap">
+        <img src="assets/icone/icon-albodoro.png" class="icona-titolo" alt="">Classifica della lega
+        <span class="toggle-chevron">▾</span>
+      </h2>
+      <div id="classifica-lega-wrap" class="sezione-contenuto"></div>
+    </section>
+
     <div class="home-3col">
       <section class="section section-3col">
         <h2 class="sezione-toggle" data-target="leaderboard-wrap">
@@ -76,7 +92,7 @@
 
       <section class="section section-3col">
         <h2 class="sezione-toggle" data-target="marcatori-wrap">
-          <img src="assets/icone/icon-player.png" class="icona-titolo icona-player-grande" alt="">Top marcatori
+          <img src="assets/icone/icon-player.png" class="icona-titolo" alt="">Top marcatori
           <span class="toggle-chevron">▾</span>
         </h2>
         <div id="marcatori-wrap" class="sezione-contenuto"></div>
@@ -92,6 +108,8 @@
   <script src="js/api.js"></script>
   <script src="js/cache.js"></script>
   <script src="js/giocatori.js"></script>
+  <script src="js/calcolo-derivati.js"></script>
+  <script src="js/motore-news.js"></script>
   <script src="js/main.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
