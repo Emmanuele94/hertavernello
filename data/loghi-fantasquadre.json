@@ -17,7 +17,8 @@
     },
     {
       "squadraId": "sq-05",
-      "immagine": "sq-05.jpeg"
+      "immagine": "sq-05.jpeg",
+      "immaginePiccola": "sq-05.png"
     }
   ]
 }
