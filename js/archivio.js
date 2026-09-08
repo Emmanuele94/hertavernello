@@ -121,7 +121,7 @@ function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
     </div>`;
 }
 
-function hv_mostraStagione(stagione) {
+async function hv_mostraStagione(stagione) {
   const wrap = document.getElementById("lista-dettaglio");
 
   if (stagione.inCorso) {
@@ -131,6 +131,21 @@ function hv_mostraStagione(stagione) {
         <p class="torta-wip-testo">Stagione ${stagione.anno} in corso — qui troverai tutto a fine campionato.</p>
       </div>`;
     return;
+  }
+
+  wrap.innerHTML = '<p class="empty-state">Carico...</p>';
+  const [squadreRef, giocatoriDb] = await Promise.all([hv_caricaSquadreRef(), hv_caricaGiocatoriDb()]);
+
+  // Foto giocatore per una voce di marcatori/rosa storica. NOTA IMPORTANTE:
+  // il database giocatori/foto è quello della stagione CORRENTE — per le
+  // stagioni vecchie (giocatori ritirati, trasferiti, ecc.) è normale che la
+  // maggior parte non trovi corrispondenza: in quel caso restano le iniziali,
+  // mai un'immagine rotta o sbagliata.
+  function hv_fotoStorica(nome, squadraRealeNome) {
+    const codice = squadraRealeNome ? hv_trovaCodice(squadraRealeNome, squadreRef) : null;
+    const giocatoreDb = hv_trovaGiocatore(nome, codice, giocatoriDb);
+    if (giocatoreDb && giocatoreDb.foto) return `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`;
+    return `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(nome)}</span>`;
   }
 
   const vincitoriHtml = `
@@ -164,7 +179,7 @@ function hv_mostraStagione(stagione) {
           (m, i) => `
         <tr>
           <td style="width:26px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
-          <td>${m.nome} <span class="muted" style="font-size:11.5px;">(${m.squadra})</span></td>
+          <td>${hv_fotoStorica(m.nome, m.squadra)}${m.nome} <span class="muted" style="font-size:11.5px;">(${m.squadra})</span></td>
           <td class="costo">${m.gol} gol</td>
         </tr>`
         )
@@ -182,7 +197,10 @@ function hv_mostraStagione(stagione) {
     : '<p class="empty-state">Non disponibile.</p>';
 
   // Le rose storiche e i video sono FACOLTATIVI: appaiono solo se presenti per
-  // questa stagione (vedi _leggimi in data/albo-oro.json per il formato).
+  // questa stagione (vedi _leggimi in data/albo-oro.json per il formato). Ogni
+  // giocatore può essere una semplice stringa "Nome", oppure un oggetto
+  // { nome, squadraReale } se conosci anche la squadra reale di quell'anno —
+  // con quella in più la foto si abbina meglio.
   const roseHtml =
     stagione.rose && stagione.rose.length
       ? `<div class="rose-storiche-griglia">${stagione.rose
@@ -191,12 +209,18 @@ function hv_mostraStagione(stagione) {
         <div class="rosa-storica-card">
           <p class="rosa-storica-nome">${r.squadra}</p>
           <ul class="rosa-storica-lista">
-            ${r.giocatori.map((g) => `<li>${typeof g === "string" ? g : g.nome}</li>`).join("")}
+            ${r.giocatori
+              .map((g) => {
+                const nome = typeof g === "string" ? g : g.nome;
+                const squadraReale = typeof g === "object" ? g.squadraReale : null;
+                return `<li>${hv_fotoStorica(nome, squadraReale)}${nome}</li>`;
+              })
+              .join("")}
           </ul>
         </div>`
           )
           .join("")}</div>`
-      : "";
+      : '<p class="empty-state">Rose non ancora caricate per questa stagione.</p>';
 
   const videoHtml =
     stagione.video && stagione.video.length
@@ -213,14 +237,36 @@ function hv_mostraStagione(stagione) {
           .join("")}</div>`
       : "";
 
-  wrap.innerHTML = `
-    ${vincitoriHtml}
+  const curiositaTabHtml = `
     ${hv_blocEspandibile("classifica-sa", "Classifica Serie A", "assets/icone/icon-raking.png", classificaHtml)}
     ${hv_blocEspandibile("top-marcatori", "Classifica migliori 10 marcatori", "assets/icone/icon-migliori10marcatori.png", marcatoriHtml)}
     ${hv_blocEspandibile("curiosita", `Curiosità dell'anno ${stagione.anno}`, "assets/icone/icon-curiosita.png", curiositaHtml)}
-    ${roseHtml ? hv_blocEspandibile("rose-storiche", "Rose della stagione", "assets/icone/icon-teams.png", roseHtml) : ""}
-    ${videoHtml ? hv_blocEspandibile("video-stagione", "Video", "assets/icone/icon-highlights.png", videoHtml) : ""}
   `;
+
+  const squadreTabHtml = `
+    ${roseHtml}
+    ${videoHtml ? `<h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>${videoHtml}` : ""}
+  `;
+
+  wrap.innerHTML = `
+    <div class="sotto-tab-nav">
+      <button type="button" class="sotto-tab-btn active" data-tab="home">Home</button>
+      <button type="button" class="sotto-tab-btn" data-tab="curiosita">Curiosità</button>
+      <button type="button" class="sotto-tab-btn" data-tab="squadre">Squadre</button>
+    </div>
+    <div id="sotto-tab-home" class="sotto-tab-contenuto">${vincitoriHtml}</div>
+    <div id="sotto-tab-curiosita" class="sotto-tab-contenuto hidden">${curiositaTabHtml}</div>
+    <div id="sotto-tab-squadre" class="sotto-tab-contenuto hidden">${squadreTabHtml}</div>
+  `;
+
+  wrap.querySelectorAll(".sotto-tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      wrap.querySelectorAll(".sotto-tab-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      wrap.querySelectorAll(".sotto-tab-contenuto").forEach((c) => c.classList.add("hidden"));
+      document.getElementById("sotto-tab-" + btn.dataset.tab).classList.remove("hidden");
+    });
+  });
 
   wrap.querySelectorAll(".sezione-toggle").forEach((titolo) => {
     titolo.addEventListener("click", () => {

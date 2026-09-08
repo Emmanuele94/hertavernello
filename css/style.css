@@ -1720,6 +1720,34 @@ body.mostra-info-match .info-match {
 }
 
 /* ===== Archivio: rose storiche (facoltative) ===== */
+/* ===== Archivio: sotto-tab della vista Lista (Home/Curiosità/Squadre) ===== */
+.sotto-tab-nav {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 20px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.sotto-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 8px 4px 10px;
+  cursor: pointer;
+}
+
+.sotto-tab-btn:hover { color: var(--text-primary); }
+
+.sotto-tab-btn.active {
+  color: var(--verde-prato);
+  border-bottom-color: var(--verde-prato);
+}
+
 .rose-storiche-griglia {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
