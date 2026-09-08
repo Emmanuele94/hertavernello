@@ -378,8 +378,73 @@ function hv_renderUploadAdmin(squadraId, config) {
   });
 }
 
-function hv_renderIntestazioneSquadra(squadra, logo) {
+function hv_calcolaBadgeGolReali(marcatori, rose, giocatoriDb, squadre) {
+  if (!marcatori || marcatori.length === 0) return null;
+  const golPerSquadra = {};
+  squadre.forEach((s) => (golPerSquadra[s.id] = 0));
+
+  marcatori.forEach((m) => {
+    const giocatoreDb = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb);
+    if (!giocatoreDb) return;
+    rose.forEach((r) => {
+      const inRosa = r.giocatori.some((g) => g.nome === giocatoreDb.nome && g.squadraReale === giocatoreDb.squadraCodice);
+      if (inRosa) golPerSquadra[r.squadraId] = (golPerSquadra[r.squadraId] || 0) + m.gol;
+    });
+  });
+
+  const entries = Object.entries(golPerSquadra)
+    .filter(([, v]) => v > 0)
+    .sort((a, b) => b[1] - a[1]);
+  if (entries.length === 0) return null;
+  const nome = (id) => (squadre.find((s) => s.id === id) || {}).nomeFantasquadra || id;
+  return { icona: "⚽", titolo: "Bomber di Lega", descrizione: `${nome(entries[0][0])} — ${entries[0][1]} gol reali tra i suoi giocatori`, squadraId: entries[0][0] };
+}
+
+async function hv_renderBadge(squadraId, risultati, rose, giocatoriDb, config) {
+  const wrap = document.getElementById("squadra-badge-wrap");
+  const badgePerSquadra = hv_calcolaBadge(risultati, config.squadre);
+  const badgeSquadra = badgePerSquadra[squadraId] || [];
+
+  // Badge "gol reali", solo se la chiave API è configurata — non blocca il resto
+  // se manca o se l'API non risponde (limite del piano gratuito già segnalato altrove).
+  let badgeGol = null;
+  const apiKey = config.lega.footballDataApiKey;
+  if (apiKey && rose && rose.length > 0) {
+    try {
+      const squadreRef = await hv_caricaSquadreRef();
+      const { dati: marcatori } = await hv_cacheOFetch("hv_cache_marcatori", 6 * 60 * 60 * 1000, () => hv_getTopScorers(apiKey, squadreRef));
+      const b = hv_calcolaBadgeGolReali(marcatori, rose, giocatoriDb, config.squadre);
+      if (b && b.squadraId === squadraId) badgeGol = b;
+    } catch (e) {
+      // silenzioso: il badge gol è un extra, non deve rompere il resto della pagina
+    }
+  }
+
+  const tutti = [...badgeSquadra, ...(badgeGol ? [badgeGol] : [])];
+  if (tutti.length === 0) {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  wrap.innerHTML = tutti
+    .map(
+      (b) => `<div class="badge-pill" title="${b.descrizione}"><span class="badge-pill-icona">${b.icona}</span>${b.titolo}</div>`
+    )
+    .join("");
+}
+
+function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
   document.getElementById("squadra-nome-grande").textContent = squadra.nomeFantasquadra || squadra.nomeReale;
+
+  let badgePosizione = document.getElementById("squadra-posizione-badge");
+  if (!badgePosizione) {
+    badgePosizione = document.createElement("span");
+    badgePosizione.id = "squadra-posizione-badge";
+    badgePosizione.className = "squadra-posizione-badge";
+    document.getElementById("squadra-nome-grande").insertAdjacentElement("afterend", badgePosizione);
+  }
+  badgePosizione.textContent = posizioneLega ? `${posizioneLega}° in classifica` : "";
+  badgePosizione.style.display = posizioneLega ? "" : "none";
 
   const wrapLogo = document.getElementById("squadra-logo-wrap");
   wrapLogo.innerHTML = "";
@@ -396,7 +461,66 @@ function hv_renderIntestazioneSquadra(squadra, logo) {
   }
 }
 
-function hv_renderLogoUploadAdmin(squadraId, config) {
+// Stessa estrazione ID YouTube già usata in Archivio — duplicata qui perché
+// squadre.html non carica js/archivio.js (pagine diverse, stessa piccola funzione).
+function hv_estraiIdYoutubeSquadre(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function hv_renderHighlights(squadraId, logoEsistente, config) {
+  const contenuto = document.getElementById("highlights-content");
+  const video = logoEsistente && logoEsistente.video;
+
+  if (video && video.url) {
+    const id = hv_estraiIdYoutubeSquadre(video.url);
+    const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+    contenuto.innerHTML = `
+      <a href="${video.url}" target="_blank" rel="noopener" class="video-card">
+        ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
+        <span class="video-titolo">${video.titolo || "Guarda su YouTube"}</span>
+      </a>`;
+  } else {
+    contenuto.innerHTML = '<p class="empty-state">Nessun video ancora aggiunto per questa fantasquadra.</p>';
+  }
+
+  const formWrap = document.getElementById("highlights-admin-form");
+  if (window.hv_role !== "admin" || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    formWrap.innerHTML = "";
+    return;
+  }
+
+  formWrap.innerHTML = `
+    <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
+      <p class="campo-titolo" style="margin: 0 0 8px;">Aggiungi/aggiorna video (es. i momenti salienti dell'asta)</p>
+      <input type="text" id="highlights-titolo-input" placeholder="Titolo (es. Asta 2026 - i momenti migliori)" value="${video ? video.titolo || "" : ""}" style="margin-bottom: 8px;">
+      <input type="text" id="highlights-url-input" placeholder="Link YouTube" value="${video ? video.url || "" : ""}">
+      <button type="button" id="highlights-salva-btn" style="margin-top: 8px;">Salva</button>
+      <p id="highlights-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+    </div>
+  `;
+
+  document.getElementById("highlights-salva-btn").addEventListener("click", async () => {
+    const stato = document.getElementById("highlights-stato");
+    const titolo = document.getElementById("highlights-titolo-input").value.trim();
+    const url = document.getElementById("highlights-url-input").value.trim();
+    if (!url) { stato.textContent = "Serve almeno il link."; stato.style.color = "var(--wine-bright)"; return; }
+    stato.textContent = "Salvataggio in corso...";
+    stato.style.color = "var(--text-muted)";
+    try {
+      await hv_salvaVideoHighlightViaGitHub(squadraId, { titolo, url }, config);
+      stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+      stato.style.color = "var(--verde-prato)";
+      hv_renderHighlights(squadraId, { ...(logoEsistente || {}), video: { titolo, url } }, config);
+    } catch (err) {
+      stato.textContent = "Errore: " + err.message;
+      stato.style.color = "var(--wine-bright)";
+    }
+  });
+}
+
+function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {
   const wrap = document.getElementById("squadra-logo-upload-admin");
   if (window.hv_role !== "admin") {
     wrap.innerHTML = "";
@@ -409,13 +533,45 @@ function hv_renderLogoUploadAdmin(squadraId, config) {
     return;
   }
 
+  const anteprimaEsistente =
+    logoEsistente && logoEsistente.immaginePiccola
+      ? `<img src="assets/stemmi-piccoli/${logoEsistente.immaginePiccola}?v=${Date.now()}" alt="" style="width:36px; height:36px; object-fit:cover; border-radius:6px;">`
+      : "";
+
   wrap.innerHTML = `
     <label class="upload-admin-btn">
       Carica/aggiorna logo
       <input type="file" accept="image/*" id="squadra-logo-file-input" style="display:none;">
     </label>
     <p id="squadra-logo-upload-stato" class="muted" style="font-size:12px; margin-top:8px;"></p>
+
+    <label class="upload-admin-btn" style="margin-top:10px;">
+      Carica/aggiorna logo piccolo (512×512, per le classifiche)
+      <input type="file" accept="image/*" id="squadra-logo-piccolo-file-input" style="display:none;">
+    </label>
+    <div id="squadra-logo-piccolo-anteprima" style="margin-top:8px;">${anteprimaEsistente}</div>
+    <p id="squadra-logo-piccolo-stato" class="muted" style="font-size:12px; margin-top:4px;"></p>
   `;
+
+  document.getElementById("squadra-logo-piccolo-file-input").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const stato = document.getElementById("squadra-logo-piccolo-stato");
+    stato.textContent = "Ridimensiono e carico...";
+    stato.style.color = "var(--text-muted)";
+
+    try {
+      await hv_caricaLogoPiccoloSquadraViaGitHub(squadraId, file, config);
+      stato.textContent = "Salvato ✓ — comparirà in Classifica lega e Classifica previsioni tra circa un minuto.";
+      stato.style.color = "var(--verde-prato)";
+
+      const anteprima = document.getElementById("squadra-logo-piccolo-anteprima");
+      anteprima.innerHTML = `<img src="${URL.createObjectURL(file)}" alt="" style="width:36px; height:36px; object-fit:cover; border-radius:6px;">`;
+    } catch (err) {
+      stato.textContent = "Errore: " + err.message;
+      stato.style.color = "var(--wine-bright)";
+    }
+  });
 
   document.getElementById("squadra-logo-file-input").addEventListener("change", async (e) => {
     const file = e.target.files[0];
@@ -446,11 +602,12 @@ function hv_renderLogoUploadAdmin(squadraId, config) {
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes, loghiRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
+  const [roseRes, pagelleRes, previsioniRes, loghiRes, risultatiRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
     fetch("data/loghi-fantasquadre.json"),
+    fetch("data/risultati.json"),
     hv_caricaSquadreRef(),
     hv_caricaGiocatoriDb(),
     hv_caricaNazioni(),
@@ -459,6 +616,8 @@ async function hv_initSquadre(config) {
   const { pagelle } = await pagelleRes.json();
   const { previsioni } = await previsioniRes.json();
   const { loghi } = await loghiRes.json();
+  const { risultati } = await risultatiRes.json();
+  const classificaLega = risultati && risultati.length > 0 ? hv_calcolaClassificaLega(risultati, config.squadre) : [];
 
   let partiteStagione = [];
   let partiteConOrario = [];
@@ -492,14 +651,17 @@ async function hv_initSquadre(config) {
     const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
-    hv_renderIntestazioneSquadra(squadra, logo);
-    hv_renderLogoUploadAdmin(squadra.id, config);
+    const posizioneLega = classificaLega.find((r) => r.squadra.id === squadra.id)?.posizione || null;
+    hv_renderIntestazioneSquadra(squadra, logo, posizioneLega);
+    hv_renderBadge(squadra.id, risultati, rose, giocatoriDb, config);
+    hv_renderLogoUploadAdmin(squadra.id, config, logo);
     hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario, giocatoriDb, nazioni);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
     hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
     hv_renderTortaNazioni(roster ? roster.giocatori : [], squadreRef, giocatoriDb, nazioni);
+    hv_renderHighlights(squadra.id, logo, config);
 
     if (statoInfo && giornataCorrente) {
       const trovati = document.querySelectorAll("#roster-content .info-match").length;

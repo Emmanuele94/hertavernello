@@ -152,7 +152,99 @@ async function hv_caricaLogoSquadraViaGitHub(squadraId, file, config) {
   return percorsoImmagine;
 }
 
-// Carica/aggiorna lo screenshot previsione di una squadra e aggiorna previsioni.json di conseguenza.
+// Ridimensiona un'immagine lato client (canvas) prima di caricarla — così
+// qualunque foto carichi l'admin, il file salvato resta piccolo e quadrato
+// al massimo 512x512, senza dover installare nulla o pre-ridimensionare a mano.
+function hv_ridimensionaImmagine(file, latoMax) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const scala = Math.min(1, latoMax / Math.max(img.width, img.height));
+        const w = Math.round(img.width * scala);
+        const h = Math.round(img.height * scala);
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Impossibile elaborare l'immagine."))), "image/png");
+      };
+      img.onerror = () => reject(new Error("File immagine non valido."));
+      img.src = reader.result;
+    };
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+}
+
+// Logo piccolo (512x512): stesso principio del logo grande, ma salvato in una
+// cartella diversa (assets/stemmi-piccoli/) e in un campo diverso dello stesso
+// data/loghi-fantasquadre.json — pensato per le classifiche, non per l'intestazione.
+async function hv_caricaLogoPiccoloSquadraViaGitHub(squadraId, file, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const blobRidimensionato = await hv_ridimensionaImmagine(file, 512);
+  const nomeFile = `${squadraId}.png`;
+  const percorsoImmagine = `assets/stemmi-piccoli/${nomeFile}`;
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere l'immagine ridimensionata."));
+    reader.readAsDataURL(blobRidimensionato);
+  });
+
+  const esistenteImg = await hv_ghGetFile(owner, repo, percorsoImmagine, token);
+  await hv_ghPutFile(owner, repo, percorsoImmagine, token, contentBase64, `Aggiorna logo piccolo ${squadraId}`, esistenteImg ? esistenteImg.sha : null);
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
+  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+
+  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  if (!loghiObj.loghi) loghiObj.loghi = [];
+  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
+  if (!entry) {
+    entry = { squadraId, immagine: "" };
+    loghiObj.loghi.push(entry);
+  }
+  entry.immaginePiccola = nomeFile;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna logo piccolo ${squadraId} in loghi-fantasquadre.json`, fileJson.sha);
+  return percorsoImmagine;
+}
+
+// Video "Highlights" della fantasquadra (es. i momenti dell'asta) — stesso file
+// loghi-fantasquadre.json, un campo in più per squadra, nessun file nuovo.
+async function hv_salvaVideoHighlightViaGitHub(squadraId, video, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
+  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+
+  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  if (!loghiObj.loghi) loghiObj.loghi = [];
+  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
+  if (!entry) {
+    entry = { squadraId, immagine: "" };
+    loghiObj.loghi.push(entry);
+  }
+  entry.video = video;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna video highlights ${squadraId}`, fileJson.sha);
+}
+
+
 async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();

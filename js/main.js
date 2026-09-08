@@ -242,6 +242,7 @@ async function hv_renderLeaderboard(config) {
       if (r.codice) classificaReale[r.codice] = r.posizione;
     });
 
+    const loghi = await hv_caricaLoghiFantasquadre();
     const righe = [];
     (previsioni || []).forEach((p) => {
       const squadra = config.squadre.find((s) => s.id === p.squadraId);
@@ -259,7 +260,7 @@ async function hv_renderLeaderboard(config) {
         }
       });
 
-      if (conteggiate > 0) righe.push({ nomeReale: squadra.nomeReale, punteggio });
+      if (conteggiate > 0) righe.push({ nomeReale: squadra.nomeReale, punteggio, logoHtml: hv_logoPiccoloHtml(squadra.id, loghi) });
     });
 
     righe.sort((a, b) => a.punteggio - b.punteggio);
@@ -277,7 +278,7 @@ async function hv_renderLeaderboard(config) {
               (r, i) => `
             <tr>
               <td style="width:30px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
-              <td>${r.nomeReale}</td>
+              <td>${r.logoHtml}${r.nomeReale}</td>
               <td class="costo">${r.punteggio} pt</td>
             </tr>`
             )
@@ -418,6 +419,30 @@ async function hv_renderTopScorers(config) {
 
 // ===== Classifica della lega — calcolata da data/risultati.json, niente
 // inserimento manuale oltre ai risultati caricati da Admin =====
+// ===== Logo piccolo delle fantasquadre (512x512, caricato da Squadre) — usato
+// nelle classifiche, sempre con fallback alle iniziali se non ancora caricato =====
+let hv_loghiFantasquadreCache = null;
+
+async function hv_caricaLoghiFantasquadre() {
+  if (hv_loghiFantasquadreCache) return hv_loghiFantasquadreCache;
+  try {
+    const res = await fetch("data/loghi-fantasquadre.json");
+    const data = await res.json();
+    hv_loghiFantasquadreCache = data.loghi || [];
+  } catch (e) {
+    hv_loghiFantasquadreCache = [];
+  }
+  return hv_loghiFantasquadreCache;
+}
+
+function hv_logoPiccoloHtml(squadraId, loghi) {
+  const entry = (loghi || []).find((l) => l.squadraId === squadraId && l.immaginePiccola);
+  if (entry) {
+    return `<img src="assets/stemmi-piccoli/${entry.immaginePiccola}" alt="" class="logo-fantasquadra-mini">`;
+  }
+  return `<span class="logo-fantasquadra-mini logo-fantasquadra-mini-vuoto"></span>`;
+}
+
 async function hv_caricaRisultatiLega() {
   const res = await fetch("data/risultati.json");
   const data = await res.json();
@@ -434,6 +459,7 @@ async function hv_renderClassificaLega(config) {
   }
 
   const classifica = hv_calcolaClassificaLega(risultati, config.squadre);
+  const loghi = await hv_caricaLoghiFantasquadre();
   wrap.innerHTML = `
     <table class="roster-table">
       <thead>
@@ -452,7 +478,7 @@ async function hv_renderClassificaLega(config) {
           .map(
             (r) => `<tr>
           <td class="mono" style="color:var(--text-muted); width:22px;">${r.posizione}</td>
-          <td>${r.squadra.nomeFantasquadra}</td>
+          <td>${hv_logoPiccoloHtml(r.squadra.id, loghi)}${r.squadra.nomeFantasquadra}</td>
           <td class="mono" style="text-align:center;">${r.giocate}</td>
           <td class="mono" style="text-align:center;">${r.vinte}</td>
           <td class="mono" style="text-align:center;">${r.pareggiate}</td>

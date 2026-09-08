@@ -101,6 +101,101 @@ function hv_testaATesta(risultati, teamIdA, teamIdB) {
   return { incontri: scontri.length, vittorieA, vittorieB, pareggi };
 }
 
+// ===== Badge (Fase 2 del brief): tutti calcolati da data/risultati.json,
+// nessun inserimento manuale in più. Restituisce { squadraId: [badge, ...] }. =====
+function hv_calcolaBadge(risultati, squadre) {
+  if (!risultati || risultati.length === 0) return {};
+
+  const giornate = [...new Set(risultati.map((r) => r.matchday))].sort((a, b) => a - b);
+  const contaComando = {};
+  const contaUltimo = {};
+  const striscaMax = {};
+  const striscaCorrente = {};
+  squadre.forEach((s) => {
+    contaComando[s.id] = 0;
+    contaUltimo[s.id] = 0;
+    striscaMax[s.id] = 0;
+    striscaCorrente[s.id] = 0;
+  });
+
+  giornate.forEach((g) => {
+    const parziale = hv_calcolaClassificaLega(risultati.filter((r) => r.matchday <= g), squadre);
+    if (parziale.length === 0) return;
+    contaComando[parziale[0].squadra.id]++;
+    contaUltimo[parziale[parziale.length - 1].squadra.id]++;
+
+    risultati
+      .filter((r) => r.matchday === g)
+      .forEach((r) => {
+        const winnerId = r.homeScore > r.awayScore ? r.homeTeamId : r.awayScore > r.homeScore ? r.awayTeamId : null;
+        const loserId = r.homeScore > r.awayScore ? r.awayTeamId : r.awayScore > r.homeScore ? r.homeTeamId : null;
+        if (winnerId) {
+          striscaCorrente[winnerId] = (striscaCorrente[winnerId] || 0) + 1;
+          striscaMax[winnerId] = Math.max(striscaMax[winnerId] || 0, striscaCorrente[winnerId]);
+        }
+        if (loserId) striscaCorrente[loserId] = 0;
+      });
+  });
+
+  const vittorieMisura = {};
+  const sconfitteMisura = {};
+  squadre.forEach((s) => {
+    vittorieMisura[s.id] = 0;
+    sconfitteMisura[s.id] = 0;
+  });
+  risultati.forEach((r) => {
+    const scarto = Math.abs(r.homeScore - r.awayScore);
+    if (r.homeScore > r.awayScore) {
+      if (scarto <= 1) vittorieMisura[r.homeTeamId]++;
+      if (scarto <= 0.5) sconfitteMisura[r.awayTeamId]++;
+    } else if (r.awayScore > r.homeScore) {
+      if (scarto <= 1) vittorieMisura[r.awayTeamId]++;
+      if (scarto <= 0.5) sconfitteMisura[r.homeTeamId]++;
+    }
+  });
+
+  const classificaFinale = hv_calcolaClassificaLega(risultati, squadre);
+  const nomeSquadra = (id) => (squadre.find((s) => s.id === id) || {}).nomeFantasquadra || id;
+
+  const top = (obj, minimo = 1) => {
+    const entries = Object.entries(obj).filter(([, v]) => v >= minimo);
+    if (entries.length === 0) return null;
+    entries.sort((a, b) => b[1] - a[1]);
+    return { squadraId: entries[0][0], valore: entries[0][1] };
+  };
+
+  const badge = [];
+  const bComando = top(contaComando);
+  if (bComando) badge.push({ icona: "👑", titolo: "Il Dominatore", descrizione: `${nomeSquadra(bComando.squadraId)} — ${bComando.valore} giornate al comando`, squadraId: bComando.squadraId });
+
+  const bUltimo = top(contaUltimo);
+  if (bUltimo) badge.push({ icona: "🔻", titolo: "La Maglia Nera", descrizione: `${nomeSquadra(bUltimo.squadraId)} — ${bUltimo.valore} giornate all'ultimo posto`, squadraId: bUltimo.squadraId });
+
+  const bStriscia = top(striscaMax, 2);
+  if (bStriscia) badge.push({ icona: "🔥", titolo: "La Corazzata", descrizione: `${nomeSquadra(bStriscia.squadraId)} — ${bStriscia.valore} vittorie di fila (record)`, squadraId: bStriscia.squadraId });
+
+  const bVittorieMisura = top(vittorieMisura);
+  if (bVittorieMisura) badge.push({ icona: "🎯", titolo: "Il Cecchino", descrizione: `${nomeSquadra(bVittorieMisura.squadraId)} — ${bVittorieMisura.valore} vittorie con un solo punto di scarto`, squadraId: bVittorieMisura.squadraId });
+
+  const bSconfitteMisura = top(sconfitteMisura);
+  if (bSconfitteMisura) badge.push({ icona: "💔", titolo: "Il Perseguitato", descrizione: `${nomeSquadra(bSconfitteMisura.squadraId)} — ${bSconfitteMisura.valore} sconfitte per mezzo punto o meno`, squadraId: bSconfitteMisura.squadraId });
+
+  if (classificaFinale.length > 0) {
+    const migliorDifesa = [...classificaFinale].sort((a, b) => a.fpSubiti - b.fpSubiti)[0];
+    badge.push({ icona: "🛡️", titolo: "Miglior Difesa", descrizione: `${migliorDifesa.squadra.nomeFantasquadra} — ${migliorDifesa.fpSubiti.toFixed(1)} fantapunti subiti in totale`, squadraId: migliorDifesa.squadra.id });
+
+    const migliorAttacco = [...classificaFinale].sort((a, b) => b.fpFatti - a.fpFatti)[0];
+    badge.push({ icona: "⚡", titolo: "Miglior Attacco", descrizione: `${migliorAttacco.squadra.nomeFantasquadra} — ${migliorAttacco.fpFatti.toFixed(1)} fantapunti fatti in totale`, squadraId: migliorAttacco.squadra.id });
+  }
+
+  const perSquadra = {};
+  badge.forEach((b) => {
+    if (!perSquadra[b.squadraId]) perSquadra[b.squadraId] = [];
+    perSquadra[b.squadraId].push(b);
+  });
+  return perSquadra;
+}
+
 if (typeof module !== "undefined") {
-  module.exports = { hv_calcolaClassificaLega, hv_strisciaAttiva, hv_calcolaRecord, hv_testaATesta };
+  module.exports = { hv_calcolaClassificaLega, hv_strisciaAttiva, hv_calcolaRecord, hv_testaATesta, hv_calcolaBadge };
 }
