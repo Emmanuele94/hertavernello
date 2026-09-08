@@ -369,8 +369,15 @@ async function hv_renderTopScorers(config) {
   const [giocatoriDb, nazioni] = await Promise.all([hv_caricaGiocatoriDb(), hv_caricaNazioni()]);
 
   wrap.innerHTML = `
-    <div style="overflow-x: auto;">
-    <table class="roster-table">
+    <table class="tabella-marcatori">
+      <colgroup>
+        <col class="col-pos"><col class="col-sq"><col><col class="col-naz"><col class="col-gol"><col class="col-ass">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Pos</th><th>Sq</th><th class="col-nome-th">Nome</th><th>Naz</th><th>Gol</th><th>Ass</th>
+        </tr>
+      </thead>
       <tbody>
         ${marcatori
           .map((m, i) => {
@@ -388,22 +395,22 @@ async function hv_renderTopScorers(config) {
               : "";
             return `
           <tr>
-            <td style="width:26px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
-            <td style="white-space: nowrap;">
-              <div class="riga-marcatore">
-                ${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}
+            <td class="col-pos">${i + 1}°</td>
+            <td class="col-sq">${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="" title="${m.squadraCodice}">` : ""}</td>
+            <td>
+              <div class="cella-nome-marcatore">
                 ${fotoHtml}
-                <span class="nome-marcatore">${m.nome}</span>
-                ${bandieraHtml}
+                <span class="nome-marcatore" title="${m.nome}">${m.nome}</span>
               </div>
             </td>
-            <td class="costo" style="white-space: nowrap;">${m.gol} gol${m.assist ? " · " + m.assist + " ast" : ""}</td>
+            <td class="col-naz">${bandieraHtml}</td>
+            <td class="col-gol">${m.gol}</td>
+            <td class="col-ass">${m.assist ?? "–"}</td>
           </tr>`;
           })
           .join("")}
       </tbody>
     </table>
-    </div>
     <p class="muted" style="font-size:11px; margin-top:8px;">Aggiornato alle ${hv_orarioBreve(orario)} — prossimo controllo verso le ${hv_orarioBreve(orario + ttl)}. Copre solo i migliori marcatori del campionato (limite del piano gratuito), non tutti i giocatori.</p>
     ${hv_avvisoDatiVecchi(scaduta)}
   `;

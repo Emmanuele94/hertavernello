@@ -657,18 +657,88 @@ a { color: inherit; }
   opacity: 1;
 }
 
-.riga-marcatore {
-  display: flex;
-  align-items: center;
-  gap: 2px;
+/* ===== Tabella Top Marcatori: colonne vere e fisse, pensata per stare
+   compatta nella colonna Home senza bisogno di scorrimento orizzontale ===== */
+.tabella-marcatori {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
 }
 
-.riga-marcatore .nome-marcatore {
+.tabella-marcatori col.col-pos { width: 24px; }
+.tabella-marcatori col.col-sq { width: 24px; }
+.tabella-marcatori col.col-naz { width: 24px; }
+.tabella-marcatori col.col-gol { width: 28px; }
+.tabella-marcatori col.col-ass { width: 26px; }
+
+.tabella-marcatori th {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: center;
+  padding: 0 2px 6px;
+  border-bottom: 1px solid var(--border-hairline);
+  border-right: 3px solid var(--bg-void); /* piccolo distacco visivo tra intestazioni strette, senza intaccare le righe sotto */
+}
+
+.tabella-marcatori th:last-child { border-right: none; }
+
+.tabella-marcatori th.col-nome-th { text-align: left; }
+
+.tabella-marcatori td {
+  padding: 6px 2px;
+  border-bottom: 1px solid var(--border-hairline);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabella-marcatori tr:last-child td { border-bottom: none; }
+
+.tabella-marcatori td.col-pos {
+  font-family: var(--font-mono);
+  color: var(--giallo-neon);
+  font-size: 12px;
+}
+
+.tabella-marcatori td.col-gol {
+  font-family: var(--font-mono);
+  color: var(--verde-prato);
+  font-weight: 700;
+}
+
+.tabella-marcatori td.col-ass {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.cella-nome-marcatore {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  text-align: left;
+}
+
+.cella-nome-marcatore .nome-marcatore {
   flex: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tabella-marcatori .logo-squadra-mini,
+.tabella-marcatori .foto-giocatore-mini,
+.tabella-marcatori .foto-giocatore-iniziali {
+  margin-right: 0;
+}
+
+.tabella-marcatori .bandiera-wrap {
+  margin-left: 0;
 }
 
 .empty-state {
@@ -1528,6 +1598,85 @@ body.mostra-info-match .info-match {
   font-size: 13px;
   line-height: 1.5;
   color: var(--text-muted);
+}
+
+/* ===== Archivio: rose storiche (facoltative) ===== */
+.rose-storiche-griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.rosa-storica-card {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-hairline);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.rosa-storica-nome {
+  font-weight: 700;
+  font-size: 13.5px;
+  margin: 0 0 8px;
+  color: var(--verde-prato);
+}
+
+.rosa-storica-lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rosa-storica-lista li {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* ===== Archivio: video YouTube (facoltativi) ===== */
+.video-griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.video-card {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-hairline);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.video-card:hover {
+  border-color: var(--verde-prato);
+  transform: translateY(-2px);
+}
+
+.video-miniatura {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--bg-void);
+}
+
+.video-miniatura-vuota {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--text-muted);
+}
+
+.video-titolo {
+  display: block;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  color: var(--text-primary);
 }
 
 /* ===== Motion ===== */

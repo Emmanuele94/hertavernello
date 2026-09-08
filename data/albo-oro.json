@@ -1,5 +1,5 @@
 {
-  "_leggimi": "Storico stagioni del fantacalcio Hertavernello. Generato a mano, un blocco per stagione.",
+  "_leggimi": "Storico stagioni del fantacalcio Hertavernello. Generato a mano, un blocco per stagione. Due campi FACOLTATIVI per stagione, aggiungili solo se/quando trovi i dati: \"rose\": [ { \"squadra\": \"Nome fantasquadra\", \"giocatori\": [\"Nome1\", \"Nome2\", ...] }, ... ] — lista giocatori semplice, va bene anche solo il nome, non serve ruolo/costo. \"video\": [ { \"titolo\": \"Testo del link\", \"url\": \"https://www.youtube.com/watch?v=...\" }, ... ] — un link YouTube per riga, la miniatura si genera da sola dall'URL, non serve caricare immagini. Se questi campi non ci sono per una stagione, il sito semplicemente non mostra quelle sezioni.",
   "stagioni": [
     {
       "anno": "2018/19",

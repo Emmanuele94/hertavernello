@@ -101,6 +101,15 @@ function hv_renderAnnoTabs(stagioni) {
   });
 }
 
+// Estrae l'ID video da un URL YouTube in uno qualsiasi dei formati comuni
+// (watch?v=, youtu.be/, /embed/, /shorts/) — serve per costruire la miniatura
+// senza bisogno di chiamare nessuna API.
+function hv_estraiIdYoutube(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
 function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
   return `
     <div class="squadra-block" style="margin: 0 0 20px;">
@@ -172,11 +181,45 @@ function hv_mostraStagione(stagione) {
     `
     : '<p class="empty-state">Non disponibile.</p>';
 
+  // Le rose storiche e i video sono FACOLTATIVI: appaiono solo se presenti per
+  // questa stagione (vedi _leggimi in data/albo-oro.json per il formato).
+  const roseHtml =
+    stagione.rose && stagione.rose.length
+      ? `<div class="rose-storiche-griglia">${stagione.rose
+          .map(
+            (r) => `
+        <div class="rosa-storica-card">
+          <p class="rosa-storica-nome">${r.squadra}</p>
+          <ul class="rosa-storica-lista">
+            ${r.giocatori.map((g) => `<li>${typeof g === "string" ? g : g.nome}</li>`).join("")}
+          </ul>
+        </div>`
+          )
+          .join("")}</div>`
+      : "";
+
+  const videoHtml =
+    stagione.video && stagione.video.length
+      ? `<div class="video-griglia">${stagione.video
+          .map((v) => {
+            const id = hv_estraiIdYoutube(v.url);
+            const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+            return `
+          <a href="${v.url}" target="_blank" rel="noopener" class="video-card">
+            ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
+            <span class="video-titolo">${v.titolo || "Guarda su YouTube"}</span>
+          </a>`;
+          })
+          .join("")}</div>`
+      : "";
+
   wrap.innerHTML = `
     ${vincitoriHtml}
     ${hv_blocEspandibile("classifica-sa", "Classifica Serie A", "assets/icone/icon-raking.png", classificaHtml)}
     ${hv_blocEspandibile("top-marcatori", "Classifica migliori 10 marcatori", "assets/icone/icon-migliori10marcatori.png", marcatoriHtml)}
     ${hv_blocEspandibile("curiosita", `Curiosità dell'anno ${stagione.anno}`, "assets/icone/icon-curiosita.png", curiositaHtml)}
+    ${roseHtml ? hv_blocEspandibile("rose-storiche", "Rose della stagione", "assets/icone/icon-teams.png", roseHtml) : ""}
+    ${videoHtml ? hv_blocEspandibile("video-stagione", "Video", "assets/icone/icon-highlights.png", videoHtml) : ""}
   `;
 
   wrap.querySelectorAll(".sezione-toggle").forEach((titolo) => {
