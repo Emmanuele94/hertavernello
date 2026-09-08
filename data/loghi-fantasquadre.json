@@ -3,7 +3,8 @@
   "loghi": [
     {
       "squadraId": "sq-01",
-      "immagine": "sq-01.jpeg"
+      "immagine": "sq-01.jpeg",
+      "immaginePiccola": "sq-01.png"
     },
     {
       "squadraId": "sq-04",
