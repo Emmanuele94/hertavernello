@@ -7,7 +7,8 @@
     },
     {
       "squadraId": "sq-04",
-      "immagine": "sq-04.jpeg"
+      "immagine": "sq-04.jpeg",
+      "immaginePiccola": "sq-04.png"
     },
     {
       "squadraId": "sq-03",
