@@ -153,6 +153,115 @@ function hv_renderTortaSquadre(giocatori, squadreRef) {
   `;
 }
 
+// ===== Torta "da dove arrivano i tuoi calciatori" — distribuzione per
+// nazionalità, stesso identico meccanismo (conic-gradient CSS) di sopra,
+// ora possibile grazie a data/giocatori.json. =====
+
+function hv_distribuzioneNazioni(giocatori, squadreRef, giocatoriDb) {
+  const conteggio = {};
+  giocatori.forEach((g) => {
+    const codiceSquadra = hv_trovaCodice(g.squadraReale, squadreRef);
+    const giocatoreDb = hv_trovaGiocatore(g.nome, codiceSquadra, giocatoriDb);
+    const naz = giocatoreDb ? giocatoreDb.nazionalitaCodice : null;
+    if (!naz) return;
+    conteggio[naz] = (conteggio[naz] || 0) + 1;
+  });
+  const totale = Object.values(conteggio).reduce((a, b) => a + b, 0);
+  const fette = Object.entries(conteggio)
+    .map(([codice, n]) => ({ codice, n, percentuale: totale ? (n / totale) * 100 : 0 }))
+    .sort((a, b) => b.n - a.n);
+  return { fette, totale };
+}
+
+function hv_soprannomeNazioni(fette, nazioni) {
+  if (fette.length === 0) return null;
+  const top = fette[0];
+  const nome = (cod) => (nazioni ? nazioni[cod] || cod : cod);
+
+  if (top.codice === "it" && top.percentuale >= 70) {
+    return { titolo: "Il Nazionalista", sotto: `${Math.round(top.percentuale)}% di italiani in rosa` };
+  }
+  if (top.percentuale >= 60) {
+    return { titolo: `L'Ambasciatore del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  }
+  if (fette.length >= 10) {
+    return { titolo: "Il Cosmopolita", sotto: `Giocatori da ${fette.length} nazionalità diverse` };
+  }
+  if (top.codice !== "it" && top.percentuale >= 30) {
+    return { titolo: `Lo Straniero (di cuore ${nome(top.codice)})`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  }
+  return { titolo: "La Legione Straniera", sotto: "Rosa internazionale, senza una vera preferenza" };
+}
+
+function hv_renderTortaNazioni(giocatori, squadreRef, giocatoriDb, nazioni) {
+  const wrap = document.getElementById("torta-nazioni-content");
+  wrap.classList.remove("torta-wip");
+  if (!giocatori || giocatori.length === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessuna rosa caricata ancora.</p>';
+    return;
+  }
+
+  const { fette, totale } = hv_distribuzioneNazioni(giocatori, squadreRef, giocatoriDb);
+  if (totale === 0) {
+    wrap.innerHTML = '<p class="empty-state">Nessun giocatore abbinato a una nazionalità riconosciuta.</p>';
+    return;
+  }
+
+  const gradiente = hv_costruisciConicGradient(fette);
+  const soprannome = hv_soprannomeNazioni(fette, nazioni);
+
+  const DIAMETRO = 240;
+  const RAGGIO_LABEL = DIAMETRO * 0.33;
+  const SOGLIA_ETICHETTA = 5;
+
+  let cursore = 0;
+  const etichette = [];
+  const piccole = [];
+
+  fette.forEach((f) => {
+    const inizio = cursore;
+    const fine = cursore + f.percentuale;
+    const metaAngolo = ((inizio + fine) / 2 / 100) * 360;
+    cursore = fine;
+
+    if (f.percentuale < SOGLIA_ETICHETTA) {
+      piccole.push(f);
+      return;
+    }
+
+    const rad = (metaAngolo * Math.PI) / 180;
+    const x = DIAMETRO / 2 + RAGGIO_LABEL * Math.sin(rad);
+    const y = DIAMETRO / 2 - RAGGIO_LABEL * Math.cos(rad);
+
+    etichette.push(`
+      <div class="torta-fetta-label" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;">
+        <img src="assets/bandiere/${f.codice}.png" alt="" class="torta-fetta-logo">
+        <span class="torta-fetta-testo">${Math.round(f.percentuale)}%<br>${f.n}</span>
+      </div>`);
+  });
+
+  const notaPiccole =
+    piccole.length > 0
+      ? `<p class="torta-piccole-nota">+ ${piccole.map((f) => `${nazioni ? nazioni[f.codice] || f.codice : f.codice} ${Math.round(f.percentuale)}%`).join(", ")}</p>`
+      : "";
+
+  wrap.innerHTML = `
+    <div class="torta-grafico-wrap" style="width:${DIAMETRO}px; height:${DIAMETRO}px;">
+      <div class="torta-grafico" style="background:${gradiente}; width:${DIAMETRO}px; height:${DIAMETRO}px;"></div>
+      ${etichette.join("")}
+    </div>
+    ${notaPiccole}
+    ${
+      soprannome
+        ? `<div class="torta-soprannome">
+             <p class="torta-soprannome-titolo">${soprannome.titolo}</p>
+             <p class="torta-soprannome-sotto">${soprannome.sotto}</p>
+           </div>`
+        : ""
+    }
+  `;
+}
+
 // ===== Info partita accanto a ogni giocatore (giorno/ora, avversario, già giocata o no) =====
 const HV_GIORNI_ABBR = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
 
@@ -474,6 +583,7 @@ async function hv_initSquadre(config) {
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
     hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
+    hv_renderTortaNazioni(roster ? roster.giocatori : [], squadreRef, giocatoriDb, nazioni);
 
     if (statoInfo && giornataCorrente) {
       const trovati = document.querySelectorAll("#roster-content .info-match").length;
