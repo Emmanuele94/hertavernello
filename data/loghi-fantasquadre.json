@@ -19,6 +19,11 @@
       "squadraId": "sq-05",
       "immagine": "sq-05.jpeg",
       "immaginePiccola": "sq-05.png"
+    },
+    {
+      "squadraId": "sq-06",
+      "immagine": "",
+      "immaginePiccola": "sq-06.png"
     }
   ]
 }
