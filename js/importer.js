@@ -34,15 +34,41 @@ async function hv_caricaConfig() {
 document.getElementById("csv-file").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
+  const estensione = file.name.split(".").pop().toLowerCase();
 
-  Papa.parse(file, {
-    header: true,
-    skipEmptyLines: true,
-    complete: async (results) => {
-      await hv_processaCSV(results.data, results.meta.fields);
-    },
-  });
+  if (estensione === "xlsx" || estensione === "xls") {
+    hv_leggiExcelRose(file);
+  } else {
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: async (results) => {
+        await hv_processaCSV(results.data, results.meta.fields);
+      },
+    });
+  }
 });
+
+// Stesso "motore unico": qualunque sia il formato (CSV o Excel), il resto
+// della pipeline (hv_processaCSV) resta identico — legge solo righe con
+// intestazione, non gli importa da dove arrivano.
+function hv_leggiExcelRose(file) {
+  const avviso = document.getElementById("csv-avviso");
+  const reader = new FileReader();
+  reader.onload = async (ev) => {
+    try {
+      const wb = XLSX.read(ev.target.result, { type: "array" });
+      const foglio = wb.Sheets[wb.SheetNames[0]];
+      const righe = XLSX.utils.sheet_to_json(foglio, { defval: "" });
+      const headers = righe.length > 0 ? Object.keys(righe[0]) : [];
+      await hv_processaCSV(righe, headers);
+    } catch (err) {
+      avviso.textContent = "Non riesco a leggere questo file Excel: " + err.message;
+    }
+  };
+  reader.onerror = () => { avviso.textContent = "Errore nella lettura del file."; };
+  reader.readAsArrayBuffer(file);
+}
 
 async function hv_processaCSV(rows, headers) {
   if (!hv_configCorrente) await hv_caricaConfig();

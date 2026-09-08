@@ -197,7 +197,7 @@ function hv_infoPartitaGiocatore(codiceSquadra, giornataCorrente, partiteStagion
   };
 }
 
-function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagione) {
+function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagione, giocatoriDb, nazioni) {
   const wrap = document.getElementById("roster-content");
   wrap.innerHTML = "";
 
@@ -220,9 +220,23 @@ function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagion
           : `${g.squadraReale || ""}`;
         const info = codice && partiteStagione ? hv_infoPartitaGiocatore(codice, giornataCorrente, partiteStagione) : null;
         const infoHtml = info ? ` <span class="info-match ${info.classe}">${info.testo}</span>` : "";
+
+        const giocatoreDb = giocatoriDb ? hv_trovaGiocatore(g.nome, codice, giocatoriDb) : null;
+        const fotoHtml = giocatoreDb && giocatoreDb.foto
+          ? `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`
+          : `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(g.nome)}</span>`;
+        const nazioneCodice = giocatoreDb ? giocatoreDb.nazionalitaCodice : null;
+        const nazioneNome = nazioneCodice && nazioni ? nazioni[nazioneCodice] : null;
+        const bandieraHtml = nazioneCodice
+          ? `<span class="bandiera-wrap" data-tooltip-nazione>
+               <img src="assets/bandiere/${nazioneCodice}.png" class="bandiera-mini" alt="${nazioneNome || ""}">
+               <span class="bandiera-tooltip">${nazioneNome || ""}</span>
+             </span>`
+          : "";
+
         return `
         <tr>
-          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${g.nome}${infoHtml}</td>
+          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${fotoHtml}${g.nome}${bandieraHtml}${infoHtml}</td>
           <td class="squadra-reale">${cellaSquadra}</td>
           <td class="costo">${g.costo ?? ""}</td>
         </tr>`;
@@ -407,12 +421,14 @@ function hv_renderLogoUploadAdmin(squadraId, config) {
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes, loghiRes, squadreRef] = await Promise.all([
+  const [roseRes, pagelleRes, previsioniRes, loghiRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
     fetch("data/loghi-fantasquadre.json"),
     hv_caricaSquadreRef(),
+    hv_caricaGiocatoriDb(),
+    hv_caricaNazioni(),
   ]);
   const { rose } = await roseRes.json();
   const { pagelle } = await pagelleRes.json();
@@ -453,7 +469,7 @@ async function hv_initSquadre(config) {
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
     hv_renderIntestazioneSquadra(squadra, logo);
     hv_renderLogoUploadAdmin(squadra.id, config);
-    hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario);
+    hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario, giocatoriDb, nazioni);
     hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);

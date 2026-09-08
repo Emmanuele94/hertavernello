@@ -143,13 +143,13 @@
     </div>
 
     <div class="admin-box">
-      <h2>2. Importa rose da CSV</h2>
+      <h2>2. Importa rose da CSV o Excel</h2>
       <p class="desc">
-        Dopo l'asta: su leghe.fantacalcio.it vai in "Gestione rose" → "Esporta rose" e scarica il CSV, poi caricalo qui.
+        Dopo l'asta: su leghe.fantacalcio.it vai in "Gestione rose" → "Esporta rose" e scarica il file (CSV o Excel), poi caricalo qui.
         Riconosce le colonne Fantasquadra/Squadra, Calciatore/Giocatore, Ruolo, Prezzo/Costo. Controlla le associazioni
         proposte prima di generare il file — funziona con i ruoli classici P/D/C/A.
       </p>
-      <input type="file" id="csv-file" accept=".csv">
+      <input type="file" id="csv-file" accept=".csv,.xlsx,.xls">
       <p id="csv-avviso" class="csv-avviso"></p>
       <div id="csv-associazioni" class="hidden" style="margin-top: 14px;"></div>
       <button id="csv-conferma" class="hidden" style="margin-top: 14px;">Genera rose.json</button>

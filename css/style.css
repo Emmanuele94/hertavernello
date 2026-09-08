@@ -564,6 +564,113 @@ a { color: inherit; }
   font-size: 12.5px;
 }
 
+/* ===== Home: le 3 classifiche affiancate su una riga (desktop/tablet) ===== */
+.home-3col {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 36px 0;
+}
+
+.section-3col {
+  flex: 1;
+  min-width: 0; /* fondamentale: senza questo il contenuto largo (tabelle) spinge la riga fuori dallo schermo */
+  margin: 0;
+}
+
+.section-3col .tabella-scroll,
+.section-3col .roster-table {
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .home-3col { flex-direction: column; }
+}
+
+/* ===== Foto giocatore (Top marcatori, Rosa) ===== */
+.foto-giocatore-mini {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--bg-card-2);
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.foto-giocatore-iniziali {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-card-2);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* ===== Bandiera con tooltip nazionalità (hover su desktop, click/tap su mobile) ===== */
+.bandiera-wrap {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+.bandiera-mini {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.bandiera-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 5;
+}
+
+.bandiera-wrap:hover .bandiera-tooltip,
+.bandiera-wrap.tooltip-attivo .bandiera-tooltip {
+  opacity: 1;
+}
+
+.riga-marcatore {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.riga-marcatore .nome-marcatore {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .empty-state {
   color: var(--text-muted);
   font-size: 14px;

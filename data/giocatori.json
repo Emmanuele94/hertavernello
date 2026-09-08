@@ -1,0 +1,4253 @@
+{
+ "_leggimi": "Generato incrociando l'export nazionalità/foto caricati il 08/09/2026. 'foto' è null se non disponibile nel pacchetto (soprattutto portieri di riserva) — il sito deve gestire questo caso con un'iniziale al posto della foto, mai un'immagine rotta.",
+ "giocatori": [
+  {
+   "nome": "Svilar",
+   "ruolo": "POR",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Roma/svilar-mile.png"
+  },
+  {
+   "nome": "Carnesecchi",
+   "ruolo": "POR",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/carnesecchi-marco.png"
+  },
+  {
+   "nome": "Martinez Jo.",
+   "ruolo": "POR",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Inter/martinez-josep.png"
+  },
+  {
+   "nome": "Vicario",
+   "ruolo": "POR",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Juventus/vicario-guglielmo.png"
+  },
+  {
+   "nome": "Butez",
+   "ruolo": "POR",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Como/butez-jean.png"
+  },
+  {
+   "nome": "Maignan",
+   "ruolo": "POR",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Milan/maignan-mike.png"
+  },
+  {
+   "nome": "Caprile",
+   "ruolo": "POR",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/caprile-elia.png"
+  },
+  {
+   "nome": "Mandas",
+   "ruolo": "POR",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "gr",
+   "foto": "assets/calciatori/Lazio/mandas-christos.png"
+  },
+  {
+   "nome": "Meret",
+   "ruolo": "POR",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/meret-alex.png"
+  },
+  {
+   "nome": "Skorupski",
+   "ruolo": "POR",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Bologna/skorupski-lukasz.png"
+  },
+  {
+   "nome": "De Gea",
+   "ruolo": "POR",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Fiorentina/de-gea-david.png"
+  },
+  {
+   "nome": "Okoye",
+   "ruolo": "POR",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ng",
+   "foto": "assets/calciatori/Udinese/okoye-maduks.png"
+  },
+  {
+   "nome": "Perri",
+   "ruolo": "POR",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Falcone",
+   "ruolo": "POR",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lecce/falcone-wladimiro.png"
+  },
+  {
+   "nome": "Sanchez Ro.",
+   "ruolo": "POR",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Fiorentina/sanchez-alejandro-jimenez.png"
+  },
+  {
+   "nome": "Bijlow",
+   "ruolo": "POR",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Genoa/bijlow-justin.png"
+  },
+  {
+   "nome": "Muric",
+   "ruolo": "POR",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Sassuolo/muric-arijanet.png"
+  },
+  {
+   "nome": "Daffara",
+   "ruolo": "POR",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/daffara-giovanni.png"
+  },
+  {
+   "nome": "Stankovic F.",
+   "ruolo": "POR",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Venezia/stankovic-filip.png"
+  },
+  {
+   "nome": "Palmisani",
+   "ruolo": "POR",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/palmisani-lorenzo.png"
+  },
+  {
+   "nome": "Thiam",
+   "ruolo": "POR",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "sn",
+   "foto": null
+  },
+  {
+   "nome": "Milinkovic-Savic V.",
+   "ruolo": "POR",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Napoli/milinkovic-savic-vanja.png"
+  },
+  {
+   "nome": "Corvi",
+   "ruolo": "POR",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/corvi-edoardo.png"
+  },
+  {
+   "nome": "Sportiello",
+   "ruolo": "POR",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/sportiello-marco.png"
+  },
+  {
+   "nome": "Happonen",
+   "ruolo": "POR",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "fi",
+   "foto": null
+  },
+  {
+   "nome": "Pessina Mas.",
+   "ruolo": "POR",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/pessina-massimo.png"
+  },
+  {
+   "nome": "Sherri",
+   "ruolo": "POR",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "al",
+   "foto": "assets/calciatori/Cagliari/sherri-alen.png"
+  },
+  {
+   "nome": "Tornqvist",
+   "ruolo": "POR",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Como/tornqvist-noel.png"
+  },
+  {
+   "nome": "Vigorito",
+   "ruolo": "POR",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Como/vigorito-mauro.png"
+  },
+  {
+   "nome": "Christensen O.",
+   "ruolo": "POR",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Fiorentina/christensen-oliver.png"
+  },
+  {
+   "nome": "Lezzerini",
+   "ruolo": "POR",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/lezzerini-luca.png"
+  },
+  {
+   "nome": "Desplanches",
+   "ruolo": "POR",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Frosinone/desplanches-sebastiano.png"
+  },
+  {
+   "nome": "Lolic",
+   "ruolo": "POR",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ba",
+   "foto": "assets/calciatori/Frosinone/lolic-eldin.png"
+  },
+  {
+   "nome": "Sommariva",
+   "ruolo": "POR",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/sommariva-daniele.png"
+  },
+  {
+   "nome": "Stolz",
+   "ruolo": "POR",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Genoa/stolz-franz.png"
+  },
+  {
+   "nome": "Di Gennaro",
+   "ruolo": "POR",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/di-gennaro-raffaele.png"
+  },
+  {
+   "nome": "Provedel",
+   "ruolo": "POR",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/provedel-ivan.png"
+  },
+  {
+   "nome": "Pinsoglio",
+   "ruolo": "POR",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Motta",
+   "ruolo": "POR",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/motta-edoardo.png"
+  },
+  {
+   "nome": "Renzetti",
+   "ruolo": "POR",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/renzetti-davide.png"
+  },
+  {
+   "nome": "Terracciano",
+   "ruolo": "POR",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/terracciano-filippo.png"
+  },
+  {
+   "nome": "Torriani",
+   "ruolo": "POR",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/torriani-lorenzo.png"
+  },
+  {
+   "nome": "Strajnar",
+   "ruolo": "POR",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "si",
+   "foto": "assets/calciatori/Monza/strajnar-aljaz.png"
+  },
+  {
+   "nome": "Contini",
+   "ruolo": "POR",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "De Marzi",
+   "ruolo": "POR",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/de-marzi-giorgio.png"
+  },
+  {
+   "nome": "Gollini",
+   "ruolo": "POR",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/gollini-pierluigi.png"
+  },
+  {
+   "nome": "Russo A.",
+   "ruolo": "POR",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Turati",
+   "ruolo": "POR",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/turati-stefano.png"
+  },
+  {
+   "nome": "Mascardi",
+   "ruolo": "POR",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/mascardi-diego.png"
+  },
+  {
+   "nome": "Siviero",
+   "ruolo": "POR",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/siviero-lapo.png"
+  },
+  {
+   "nome": "Padelli",
+   "ruolo": "POR",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Udinese/padelli-daniele.png"
+  },
+  {
+   "nome": "Piana",
+   "ruolo": "POR",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Udinese/piana-edoardo.png"
+  },
+  {
+   "nome": "Grandi",
+   "ruolo": "POR",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Venezia/grandi-matteo.png"
+  },
+  {
+   "nome": "Pozzi",
+   "ruolo": "POR",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Venezia/pozzi-alessio.png"
+  },
+  {
+   "nome": "Satalino",
+   "ruolo": "POR",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/satalino-giacomo.png"
+  },
+  {
+   "nome": "Penev",
+   "ruolo": "POR",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "bg",
+   "foto": "assets/calciatori/Lecce/penev-plamen.png"
+  },
+  {
+   "nome": "Pisseri",
+   "ruolo": "POR",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/pisseri-matteo.png"
+  },
+  {
+   "nome": "Radunovic",
+   "ruolo": "POR",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "me",
+   "foto": "assets/calciatori/Cagliari/radunovic-boris.png"
+  },
+  {
+   "nome": "Montipò",
+   "ruolo": "POR",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Venezia/montipo-lorenzo.png"
+  },
+  {
+   "nome": "Bleve",
+   "ruolo": "POR",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lecce/bleve-marco.png"
+  },
+  {
+   "nome": "Grabara",
+   "ruolo": "POR",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "pl",
+   "foto": null
+  },
+  {
+   "nome": "Mrozek",
+   "ruolo": "POR",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Udinese/mrozek-bartosz.png"
+  },
+  {
+   "nome": "Ghidotti",
+   "ruolo": "POR",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Pompei",
+   "ruolo": "POR",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Dimarco",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/dimarco-federico.png"
+  },
+  {
+   "nome": "Wesley",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Roma/wesley-franca.png"
+  },
+  {
+   "nome": "Molina N.",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Roma/molina-nahuel.png"
+  },
+  {
+   "nome": "Bremer",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Juventus/bremer.png"
+  },
+  {
+   "nome": "Akanji",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Inter/akanji-manuel.png"
+  },
+  {
+   "nome": "Mancini",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/mancini-gianluca.png"
+  },
+  {
+   "nome": "Bastoni",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/bastoni-alessandro.png"
+  },
+  {
+   "nome": "Kalulu",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Juventus/kalulu-kyatengwa-piere.png"
+  },
+  {
+   "nome": "Pavlovic",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Milan/pavlovic-strahinja.png"
+  },
+  {
+   "nome": "Rrahmani",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Napoli/rrahmani-amir.png"
+  },
+  {
+   "nome": "Bisseck",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Inter/bisseck-yann-aurel.png"
+  },
+  {
+   "nome": "Gila",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Milan/gila-mario.png"
+  },
+  {
+   "nome": "Solet",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Udinese/solet-oumar.png"
+  },
+  {
+   "nome": "Stones",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Inter/stones-john.png"
+  },
+  {
+   "nome": "Di Lorenzo",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/di-lorenzo-giovanni.png"
+  },
+  {
+   "nome": "Hermoso",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Roma/hermoso-mario.png"
+  },
+  {
+   "nome": "N'Dicka",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Roma/n-dicka-obite.png"
+  },
+  {
+   "nome": "Scalvini",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/scalvini-giorgio.png"
+  },
+  {
+   "nome": "Spence",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Inter/spence-djed.png"
+  },
+  {
+   "nome": "Ramon",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Como/ramon-jacobo.png"
+  },
+  {
+   "nome": "Ostigard",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "no",
+   "foto": "assets/calciatori/Genoa/ostigard-leo.png"
+  },
+  {
+   "nome": "Kamara H.",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Udinese/kamara-hassane.png"
+  },
+  {
+   "nome": "Chalobah T.",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Como/chalobah-trevoh.png"
+  },
+  {
+   "nome": "Miranda J.",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Bologna/miranda-juan.png"
+  },
+  {
+   "nome": "Dodò",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/dodo.png"
+  },
+  {
+   "nome": "Vasquez",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Genoa/vasquez-johan.png"
+  },
+  {
+   "nome": "Valeri",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/valeri-emanuele.png"
+  },
+  {
+   "nome": "Vojvoda",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Udinese/vojvoda-mergim.png"
+  },
+  {
+   "nome": "Couto",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Como/couto-yan.png"
+  },
+  {
+   "nome": "Zappacosta",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/zappacosta-davide.png"
+  },
+  {
+   "nome": "Lucumì",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Juventus/lucumi-jhon.png"
+  },
+  {
+   "nome": "Obert",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "sk",
+   "foto": "assets/calciatori/Cagliari/obert-adam.png"
+  },
+  {
+   "nome": "Bracaglia",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/bracaglia-gabriele.png"
+  },
+  {
+   "nome": "Celik",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "ba",
+   "foto": "assets/calciatori/Juventus/celik-zeki.png"
+  },
+  {
+   "nome": "Cambiaso",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Juventus/cambiaso-andrea.png"
+  },
+  {
+   "nome": "Doekhi",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Lazio/doekhi-danilho.png"
+  },
+  {
+   "nome": "Tiago Gabriel",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Bartesaghi",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/bartesaghi-davide.png"
+  },
+  {
+   "nome": "Spinazzola",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/spinazzola-leonardo.png"
+  },
+  {
+   "nome": "Delprato",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Koulierakis",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "gr",
+   "foto": "assets/calciatori/Roma/koulierakis-konstantinos.png"
+  },
+  {
+   "nome": "Comuzzo",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/comuzzo-pietro.png"
+  },
+  {
+   "nome": "Ismajli",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "al",
+   "foto": "assets/calciatori/Torino/ismajli-ardian.png"
+  },
+  {
+   "nome": "Theate",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Bologna/theate-arthur.png"
+  },
+  {
+   "nome": "Belghali",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "ma",
+   "foto": null
+  },
+  {
+   "nome": "Diego Carlos",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Hien",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/hien-isak.png"
+  },
+  {
+   "nome": "Mina",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Cagliari/mina-yerry.png"
+  },
+  {
+   "nome": "Valle",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Como/valle-gomez-alex.png"
+  },
+  {
+   "nome": "Dragusin",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "ro",
+   "foto": "assets/calciatori/Fiorentina/dragusin-radu.png"
+  },
+  {
+   "nome": "Jimenez A.",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "es",
+   "foto": null
+  },
+  {
+   "nome": "Oyono A.",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ga",
+   "foto": "assets/calciatori/Frosinone/oyono-anthony.png"
+  },
+  {
+   "nome": "Carlos Augusto",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Tavares N.",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "cv",
+   "foto": "assets/calciatori/Lazio/tavares-nuno.png"
+  },
+  {
+   "nome": "Gabbia",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/gabbia-matteo.png"
+  },
+  {
+   "nome": "Mangas",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Monza/mangas-ricardo.png"
+  },
+  {
+   "nome": "Idzes",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "id",
+   "foto": "assets/calciatori/Sassuolo/idzes-jay.png"
+  },
+  {
+   "nome": "Doig",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Sassuolo/doig-josh.png"
+  },
+  {
+   "nome": "Coco",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/coco-saul.png"
+  },
+  {
+   "nome": "Kolasinac",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "ba",
+   "foto": "assets/calciatori/Atalanta/kolasinac-sead.png"
+  },
+  {
+   "nome": "Holm",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Bologna/holm-emil.png"
+  },
+  {
+   "nome": "Zortea",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/zortea-nadir.png"
+  },
+  {
+   "nome": "Kofler",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "at",
+   "foto": "assets/calciatori/Cagliari/kofler-raphael.png"
+  },
+  {
+   "nome": "Zè Pedro",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Cagliari/ze-pedro.png"
+  },
+  {
+   "nome": "Kaiki",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "jp",
+   "foto": "assets/calciatori/Como/kaiki.png"
+  },
+  {
+   "nome": "Calvani",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/calvani-gabriele.png"
+  },
+  {
+   "nome": "Monterisi",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/monterisi-ilario.png"
+  },
+  {
+   "nome": "Marcandalli",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/marcandalli-alessandro.png"
+  },
+  {
+   "nome": "Pavard",
+   "ruolo": "DIF",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Inter/pavard-benjamin.png"
+  },
+  {
+   "nome": "Pedraza",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "es",
+   "foto": null
+  },
+  {
+   "nome": "Marusic",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "me",
+   "foto": "assets/calciatori/Lazio/marusic-adam.png"
+  },
+  {
+   "nome": "Tomori",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Milan/tomori-fikayo.png"
+  },
+  {
+   "nome": "Buongiorno",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/buongiorno-alessandro.png"
+  },
+  {
+   "nome": "Kristensen T.",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Atalanta/kristensen-thomas.png"
+  },
+  {
+   "nome": "Obrador",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Sassuolo/obrador-rafael.png"
+  },
+  {
+   "nome": "Fortini",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/fortini-niccolo.png"
+  },
+  {
+   "nome": "Leysen F.",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Sassuolo/leysen-fedde.png"
+  },
+  {
+   "nome": "Badiashile",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Napoli/badiashile-benoit.png"
+  },
+  {
+   "nome": "Sutalo J.",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Lazio/sutalo-josip.png"
+  },
+  {
+   "nome": "Balerdi",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Roma/balerdi-leonardo.png"
+  },
+  {
+   "nome": "Caleta-Car",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "hr",
+   "foto": null
+  },
+  {
+   "nome": "Sugawara",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "jp",
+   "foto": null
+  },
+  {
+   "nome": "Bellanova",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/bellanova-raoul.png"
+  },
+  {
+   "nome": "Bernasconi",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/bernasconi-lorenzo.png"
+  },
+  {
+   "nome": "Heggem",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "no",
+   "foto": "assets/calciatori/Bologna/heggem-torbjorn.png"
+  },
+  {
+   "nome": "Rodriguez Ju.",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Cagliari/rodriguez-juan.png"
+  },
+  {
+   "nome": "Kempf",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Como/kempf-marc-oliver.png"
+  },
+  {
+   "nome": "Valdepenas",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "es",
+   "foto": null
+  },
+  {
+   "nome": "Viery",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Fiorentina/viery.png"
+  },
+  {
+   "nome": "Gatti",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Kelly L.",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Juventus/kelly-lloyd.png"
+  },
+  {
+   "nome": "Gaspar K.",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "at",
+   "foto": "assets/calciatori/Lecce/gaspar-kialonga.png"
+  },
+  {
+   "nome": "Veiga D.",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Lecce/veiga-danilo.png"
+  },
+  {
+   "nome": "Gallo",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lecce/gallo-antonino.png"
+  },
+  {
+   "nome": "De Winter",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Milan/de-winter-koni.png"
+  },
+  {
+   "nome": "Birindelli",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/birindelli-samuele.png"
+  },
+  {
+   "nome": "Beukema",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Napoli/beukema-sam.png"
+  },
+  {
+   "nome": "Ghilardi",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/ghilardi-daniele.png"
+  },
+  {
+   "nome": "Comert",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Torino/comert-eray.png"
+  },
+  {
+   "nome": "Bella-Kotchap",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Venezia/bella-kotchap-armel.png"
+  },
+  {
+   "nome": "Correia T.",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Venezia/correia-thierry.png"
+  },
+  {
+   "nome": "Hainaut",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Venezia/hainaut-antoine.png"
+  },
+  {
+   "nome": "Haps",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Venezia/haps-ridgeciano.png"
+  },
+  {
+   "nome": "Patterson",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "gb-sct",
+   "foto": null
+  },
+  {
+   "nome": "Rodriguez R.",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Como/rodriguez-jesus.png"
+  },
+  {
+   "nome": "Kossounou",
+   "ruolo": "DIF",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Atalanta/kossounou-odilon.png"
+  },
+  {
+   "nome": "Vitik",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "cz",
+   "foto": "assets/calciatori/Bologna/vitik-martin.png"
+  },
+  {
+   "nome": "Smolcic I.",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Como/smolcic-ivan.png"
+  },
+  {
+   "nome": "Parisi",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/parisi-fabiano.png"
+  },
+  {
+   "nome": "Cittadini",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/cittadini-giorgio.png"
+  },
+  {
+   "nome": "Provstgaard",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Lazio/provstgaard-oliver.png"
+  },
+  {
+   "nome": "Floriani Mussolini",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Siebert",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Lecce/siebert-jamil.png"
+  },
+  {
+   "nome": "Lucchesi",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/lucchesi-lorenzo.png"
+  },
+  {
+   "nome": "Kouadio",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Monza/kouadio-eddy.png"
+  },
+  {
+   "nome": "Carboni A.",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Monza/carboni-andrea.png"
+  },
+  {
+   "nome": "Olivera",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "uy",
+   "foto": "assets/calciatori/Napoli/olivera-mathias.png"
+  },
+  {
+   "nome": "Troilo",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/troilo-mariano.png"
+  },
+  {
+   "nome": "Valenti",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/valenti-lautaro.png"
+  },
+  {
+   "nome": "Britschgi",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Parma/britschgi-sascha.png"
+  },
+  {
+   "nome": "Rensch",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Roma/rensch-devyne.png"
+  },
+  {
+   "nome": "Kabasele",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "cd",
+   "foto": "assets/calciatori/Udinese/kabasele-christian.png"
+  },
+  {
+   "nome": "Bertola",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Udinese/bertola-nicolo.png"
+  },
+  {
+   "nome": "Moreno M.",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Venezia/moreno-matias.png"
+  },
+  {
+   "nome": "Sagrado",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Venezia/sagrado-richie.png"
+  },
+  {
+   "nome": "Terzic",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Frosinone/terzic-aleksa.png"
+  },
+  {
+   "nome": "Cinquegrano",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/cinquegrano-simone.png"
+  },
+  {
+   "nome": "Juan Jesus",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Ehizibue",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "nl",
+   "foto": null
+  },
+  {
+   "nome": "Helland",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "no",
+   "foto": "assets/calciatori/Bologna/helland-eivind.png"
+  },
+  {
+   "nome": "Pongracic",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Fiorentina/pongracic-marin.png"
+  },
+  {
+   "nome": "Joao Mario",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Fiorentina/joao-mario.png"
+  },
+  {
+   "nome": "Mitaj",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "al",
+   "foto": "assets/calciatori/Genoa/mitaj-mario.png"
+  },
+  {
+   "nome": "Estupinan",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "ec",
+   "foto": "assets/calciatori/Milan/estupinan-pervis.png"
+  },
+  {
+   "nome": "Walukiewicz",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Sassuolo/walukiewicz-sebastian.png"
+  },
+  {
+   "nome": "Abankwah",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ie",
+   "foto": "assets/calciatori/Udinese/abankwah-james.png"
+  },
+  {
+   "nome": "Ebosse",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "cm",
+   "foto": "assets/calciatori/Udinese/ebosse-enzo.png"
+  },
+  {
+   "nome": "Zanoli",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Udinese/zanoli-alessandro.png"
+  },
+  {
+   "nome": "Arizala",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ec",
+   "foto": "assets/calciatori/Udinese/arizala-juan.png"
+  },
+  {
+   "nome": "Halhal",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Venezia/halhal-redouane.png"
+  },
+  {
+   "nome": "Schingtienne",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Venezia/schingtienne-joel.png"
+  },
+  {
+   "nome": "Odenthal",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Sassuolo/odenthal-cas.png"
+  },
+  {
+   "nome": "Favasuli",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/favasuli-costantino.png"
+  },
+  {
+   "nome": "Lulli",
+   "ruolo": "DIF",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/lulli-emanuele.png"
+  },
+  {
+   "nome": "Tchato",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "cm",
+   "foto": "assets/calciatori/Frosinone/tchato-enzo.png"
+  },
+  {
+   "nome": "Kambwala",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Como/kambwala-willy.png"
+  },
+  {
+   "nome": "Drameh",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "gb-eng",
+   "foto": null
+  },
+  {
+   "nome": "Casale",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/casale-nicolo.png"
+  },
+  {
+   "nome": "Alhassane",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "ne",
+   "foto": "assets/calciatori/Bologna/alhassane-rahim.png"
+  },
+  {
+   "nome": "Idrissi R.",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Cagliari/idrissi-riyad.png"
+  },
+  {
+   "nome": "Ranieri L.",
+   "ruolo": "DIF",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/ranieri-luca.png"
+  },
+  {
+   "nome": "Akpoguma",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Frosinone/akpoguma-kevin.png"
+  },
+  {
+   "nome": "Otoa",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "cm",
+   "foto": "assets/calciatori/Genoa/otoa-sebastian.png"
+  },
+  {
+   "nome": "Sabelli",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/sabelli-stefano.png"
+  },
+  {
+   "nome": "Marin R.",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Napoli/marin-rafa.png"
+  },
+  {
+   "nome": "Candè",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "gw",
+   "foto": null
+  },
+  {
+   "nome": "Palma",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "hn",
+   "foto": "assets/calciatori/Udinese/palma-matteo.png"
+  },
+  {
+   "nome": "Sverko",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Venezia/sverko-marin.png"
+  },
+  {
+   "nome": "Franjic",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "au",
+   "foto": "assets/calciatori/Venezia/franjic-bartol.png"
+  },
+  {
+   "nome": "Goglichidze",
+   "ruolo": "DIF",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ge",
+   "foto": "assets/calciatori/Udinese/goglichidze-saba.png"
+  },
+  {
+   "nome": "Drobnic",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "si",
+   "foto": "assets/calciatori/Parma/drobnic-dominik.png"
+  },
+  {
+   "nome": "De Silvestri",
+   "ruolo": "DIF",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/de-silvestri-lorenzo.png"
+  },
+  {
+   "nome": "Goldaniga",
+   "ruolo": "DIF",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Como/goldaniga-edoardo.png"
+  },
+  {
+   "nome": "Van Der Brempt",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Sassuolo/van-der-brempt-ignace.png"
+  },
+  {
+   "nome": "Amey",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Frosinone/amey-wisdom.png"
+  },
+  {
+   "nome": "Puczka",
+   "ruolo": "DIF",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Genoa/puczka-david.png"
+  },
+  {
+   "nome": "Rugani",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Cabal",
+   "ruolo": "DIF",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "co",
+   "foto": null
+  },
+  {
+   "nome": "Patric",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Lazio/patric.png"
+  },
+  {
+   "nome": "Lazzari",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/lazzari-manuel.png"
+  },
+  {
+   "nome": "Pellegrini Lu.",
+   "ruolo": "DIF",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/pellegrini-luca.png"
+  },
+  {
+   "nome": "Jean",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Lecce/jean-gaby.png"
+  },
+  {
+   "nome": "Ndaba",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "gb-eng",
+   "foto": null
+  },
+  {
+   "nome": "Diawara S.",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/diawara-sankhoun.png"
+  },
+  {
+   "nome": "Antov",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "bg",
+   "foto": "assets/calciatori/Monza/antov-valentin.png"
+  },
+  {
+   "nome": "Bakoune",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Monza/bakoune-adam.png"
+  },
+  {
+   "nome": "Marianucci",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/marianucci-luca.png"
+  },
+  {
+   "nome": "Mazzocchi",
+   "ruolo": "DIF",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/mazzocchi-pasquale.png"
+  },
+  {
+   "nome": "Ndiaye",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "sn",
+   "foto": null
+  },
+  {
+   "nome": "Carboni F.",
+   "ruolo": "DIF",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Parma/carboni-franco.png"
+  },
+  {
+   "nome": "Ziolkowski",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Monza/ziolkowski-jan.png"
+  },
+  {
+   "nome": "Pieragnolo",
+   "ruolo": "DIF",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Biraghi",
+   "ruolo": "DIF",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/biraghi-cristiano.png"
+  },
+  {
+   "nome": "Gomes",
+   "ruolo": "DIF",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Venezia/gomes-ale.png"
+  },
+  {
+   "nome": "Aurelio",
+   "ruolo": "DIF",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/aurelio-giuseppe.png"
+  },
+  {
+   "nome": "Omar Fayed",
+   "ruolo": "DIF",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "eg",
+   "foto": "assets/calciatori/Frosinone/omar-fayed.png"
+  },
+  {
+   "nome": "Terracciano F.",
+   "ruolo": "DIF",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/terracciano-filippo.png"
+  },
+  {
+   "nome": "Maye",
+   "ruolo": "DIF",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Monza/maye-yvan.png"
+  },
+  {
+   "nome": "Dembelè A.",
+   "ruolo": "DIF",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Lecce/dembele-ali.png"
+  },
+  {
+   "nome": "Paz N.",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Como/paz-martinez-nicolas.png"
+  },
+  {
+   "nome": "Calhanoglu",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "tr",
+   "foto": "assets/calciatori/Inter/calhanoglu-hakan.png"
+  },
+  {
+   "nome": "McTominay",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Napoli/mctominay-scott.png"
+  },
+  {
+   "nome": "Orsolini",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/orsolini-riccardo.png"
+  },
+  {
+   "nome": "Pulisic",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Milan/pulisic-christian.png"
+  },
+  {
+   "nome": "Rabiot",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Milan/rabiot-adrien.png"
+  },
+  {
+   "nome": "Baturina",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Como/baturina-martin.png"
+  },
+  {
+   "nome": "Mora",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Roma/mora-rodrigo.png"
+  },
+  {
+   "nome": "Da Cunha",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Como/da-cunha-lucas.png"
+  },
+  {
+   "nome": "Barella",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/barella-nicolo.png"
+  },
+  {
+   "nome": "De Bruyne",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Napoli/de-bruyne-kevin.png"
+  },
+  {
+   "nome": "Zaniolo",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Udinese/zaniolo-nicolo.png"
+  },
+  {
+   "nome": "McKennie",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Juventus/mckennie-weston.png"
+  },
+  {
+   "nome": "Zaccagni",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/zaccagni-mattia.png"
+  },
+  {
+   "nome": "Atta",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "gh",
+   "foto": "assets/calciatori/Fiorentina/atta-arthur.png"
+  },
+  {
+   "nome": "Ederson D.S.",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Atalanta/ederson-silva.png"
+  },
+  {
+   "nome": "Samardzic",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Atalanta/samardzic-lazar.png"
+  },
+  {
+   "nome": "Gudmundsson A.",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "is",
+   "foto": "assets/calciatori/Fiorentina/gudmundsson-albert.png"
+  },
+  {
+   "nome": "Conceicao",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "pt",
+   "foto": null
+  },
+  {
+   "nome": "Taylor K.",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "jm",
+   "foto": "assets/calciatori/Lazio/taylor-kenneth.png"
+  },
+  {
+   "nome": "Vlasic",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Torino/vlasic-nikola.png"
+  },
+  {
+   "nome": "Gonzalez N.",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Juventus/gonzalez-nicolas-ivan.png"
+  },
+  {
+   "nome": "Zielinski",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Inter/zielinski-piotr.png"
+  },
+  {
+   "nome": "Modric",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Milan/modric-luka.png"
+  },
+  {
+   "nome": "Ekkelenkamp",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Udinese/ekkelenkamp-jurgen.png"
+  },
+  {
+   "nome": "Jones C.",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Inter/jones-curtis.png"
+  },
+  {
+   "nome": "Kessiè",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Atalanta/kessie-franck.png"
+  },
+  {
+   "nome": "Goncalves P.",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "pt",
+   "foto": null
+  },
+  {
+   "nome": "Perrone",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Como/perrone-maximo.png"
+  },
+  {
+   "nome": "Rodriguez Je.",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Como/rodriguez-jesus.png"
+  },
+  {
+   "nome": "Baldanzi",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/baldanzi-tommaso.png"
+  },
+  {
+   "nome": "Frattesi",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/frattesi-davide.png"
+  },
+  {
+   "nome": "Alajbegovic",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "at",
+   "foto": "assets/calciatori/Juventus/alajbegovic-kerim.png"
+  },
+  {
+   "nome": "Saelemaekers",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Milan/saelemaekers-alexis.png"
+  },
+  {
+   "nome": "Mastantuono",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Fiorentina/mastantuono-franco.png"
+  },
+  {
+   "nome": "Moreira",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Milan/moreira-diego.png"
+  },
+  {
+   "nome": "Bernardeschi",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/bernardeschi-federico.png"
+  },
+  {
+   "nome": "Rowe",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Bologna/rowe-jon.png"
+  },
+  {
+   "nome": "Mandragora",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/mandragora-rolando.png"
+  },
+  {
+   "nome": "Zambo Anguissa",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "cm",
+   "foto": null
+  },
+  {
+   "nome": "Politano",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/politano-matteo.png"
+  },
+  {
+   "nome": "Konè M.",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/kone-kouadio.png"
+  },
+  {
+   "nome": "Thorstvedt",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "no",
+   "foto": "assets/calciatori/Sassuolo/thorstvedt-kristian.png"
+  },
+  {
+   "nome": "Diouf",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Inter/diouf-andy.png"
+  },
+  {
+   "nome": "Sucic P.",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Inter/sucic-petar.png"
+  },
+  {
+   "nome": "Locatelli",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Juventus/locatelli-manuel.png"
+  },
+  {
+   "nome": "Thuram K.",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Inter/thuram-marcus.png"
+  },
+  {
+   "nome": "Cancellieri",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/cancellieri-matteo.png"
+  },
+  {
+   "nome": "Isaksen",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Lazio/isaksen-gustav.png"
+  },
+  {
+   "nome": "Colpani",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/colpani-andrea.png"
+  },
+  {
+   "nome": "Vergara",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Napoli/vergara-antonio.png"
+  },
+  {
+   "nome": "Cristante",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/cristante-bryan.png"
+  },
+  {
+   "nome": "Volpato",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "au",
+   "foto": "assets/calciatori/Sassuolo/volpato-cristian.png"
+  },
+  {
+   "nome": "Casadei",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/casadei-cesare.png"
+  },
+  {
+   "nome": "Pellegrini Lo.",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/pellegrini-lorenzo.png"
+  },
+  {
+   "nome": "Pasalic",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Atalanta/pasalic-mario.png"
+  },
+  {
+   "nome": "Ferguson",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Bologna/ferguson-lewis.png"
+  },
+  {
+   "nome": "Odgaard",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Bologna/odgaard-jens.png"
+  },
+  {
+   "nome": "Cambiaghi",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/cambiaghi-nicolo.png"
+  },
+  {
+   "nome": "Romano",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/romano-alessandro.png"
+  },
+  {
+   "nome": "Fazzini",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/fazzini-jacopo.png"
+  },
+  {
+   "nome": "Calò",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/calo-giacomo.png"
+  },
+  {
+   "nome": "Chukwueze",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "ng",
+   "foto": "assets/calciatori/Milan/chukwueze-samuel.png"
+  },
+  {
+   "nome": "Lobotka",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "sk",
+   "foto": "assets/calciatori/Napoli/lobotka-stanislav.png"
+  },
+  {
+   "nome": "Konè I.",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Sassuolo/kone-ismael.png"
+  },
+  {
+   "nome": "Karlstrom",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Udinese/karlstrom-jesper.png"
+  },
+  {
+   "nome": "Schmid",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Frosinone/schmid-romano.png"
+  },
+  {
+   "nome": "Hutchinson",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "ca",
+   "foto": null
+  },
+  {
+   "nome": "Mbangula",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "cd",
+   "foto": null
+  },
+  {
+   "nome": "Gaetano",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/gaetano-gianluca.png"
+  },
+  {
+   "nome": "Zalewski",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Atalanta/zalewski-nicola.png"
+  },
+  {
+   "nome": "Adopo",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Cagliari/adopo-michel.png"
+  },
+  {
+   "nome": "Winks",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Cagliari/winks-harry.png"
+  },
+  {
+   "nome": "Caqueret",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Como/caqueret-maxence.png"
+  },
+  {
+   "nome": "Fagioli",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/fagioli-nicolo.png"
+  },
+  {
+   "nome": "Ndour",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Fiorentina/ndour-cher.png"
+  },
+  {
+   "nome": "Frendrup",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Genoa/frendrup-morten.png"
+  },
+  {
+   "nome": "Koopmeiners",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Juventus/koopmeiners-teun.png"
+  },
+  {
+   "nome": "Rovella",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/rovella-nicolo.png"
+  },
+  {
+   "nome": "Coulibaly L.",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "ml",
+   "foto": "assets/calciatori/Lecce/coulibaly-lassana.png"
+  },
+  {
+   "nome": "Akinsanmiro",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "ie",
+   "foto": "assets/calciatori/Monza/akinsanmiro-ebenezer.png"
+  },
+  {
+   "nome": "Bernabè",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Parma/bernabe-adrian.png"
+  },
+  {
+   "nome": "Pisilli",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Roma/pisilli-niccolo.png"
+  },
+  {
+   "nome": "Adzic",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Sassuolo/adzic-vasilije.png"
+  },
+  {
+   "nome": "Sow",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Genoa/sow-djibril.png"
+  },
+  {
+   "nome": "Cissè A.",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Milan/cisse-alphadjo.png"
+  },
+  {
+   "nome": "Elmas",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "mk",
+   "foto": "assets/calciatori/Atalanta/elmas-elif.png"
+  },
+  {
+   "nome": "Monteiro J.",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "pt",
+   "foto": null
+  },
+  {
+   "nome": "Sarr P.",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "sn",
+   "foto": null
+  },
+  {
+   "nome": "El Shaarawy",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Pobega",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/pobega-tommaso.png"
+  },
+  {
+   "nome": "Milla",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Como/milla-luis.png"
+  },
+  {
+   "nome": "Liberali",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Como/liberali-mattia.png"
+  },
+  {
+   "nome": "Oulai",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "ci",
+   "foto": null
+  },
+  {
+   "nome": "Zerbin",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/zerbin-alessio.png"
+  },
+  {
+   "nome": "Ellertsson",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "is",
+   "foto": "assets/calciatori/Genoa/ellertsson-mikael-egill.png"
+  },
+  {
+   "nome": "Zhegrova",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Juventus/zhegrova-edon.png"
+  },
+  {
+   "nome": "Pierotti",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lecce/pierotti-santiago.png"
+  },
+  {
+   "nome": "Pessina",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/pessina-matteo.png"
+  },
+  {
+   "nome": "Matic",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Sassuolo/matic-nemanja.png"
+  },
+  {
+   "nome": "Bakola",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "cd",
+   "foto": "assets/calciatori/Sassuolo/bakola-darryl.png"
+  },
+  {
+   "nome": "Cacciamani",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/cacciamani-alessio.png"
+  },
+  {
+   "nome": "Fitz-Jim",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Torino/fitz-jim-kian.png"
+  },
+  {
+   "nome": "Oristanio",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Torino/oristanio-gaetano.png"
+  },
+  {
+   "nome": "Piotrowski",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Udinese/piotrowski-jakub.png"
+  },
+  {
+   "nome": "Unai Gomez",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "es",
+   "foto": null
+  },
+  {
+   "nome": "Basic",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "au",
+   "foto": "assets/calciatori/Venezia/basic-toma.png"
+  },
+  {
+   "nome": "Busio",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Venezia/busio-gianluca.png"
+  },
+  {
+   "nome": "Braganca",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Felici",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/felici-mattia.png"
+  },
+  {
+   "nome": "Fini",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/fini-seydou.png"
+  },
+  {
+   "nome": "Masini",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/masini-patrizio.png"
+  },
+  {
+   "nome": "Meichtry",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Genoa/meichtry-franz-ethan.png"
+  },
+  {
+   "nome": "Messias",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Genoa/messias-junior.png"
+  },
+  {
+   "nome": "Luis Henrique",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Inter/luis-henrique.png"
+  },
+  {
+   "nome": "Jashari",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "ch",
+   "foto": null
+  },
+  {
+   "nome": "Keita M.",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "gn",
+   "foto": "assets/calciatori/Parma/keita-mandela.png"
+  },
+  {
+   "nome": "Nicolussi Caviglia",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Gineitis",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "lt",
+   "foto": "assets/calciatori/Torino/gineitis-gvidas.png"
+  },
+  {
+   "nome": "Njie",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "cm",
+   "foto": null
+  },
+  {
+   "nome": "Sohm",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "ch",
+   "foto": "assets/calciatori/Venezia/sohm-simon.png"
+  },
+  {
+   "nome": "Perez K.",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "es",
+   "foto": null
+  },
+  {
+   "nome": "Tourè I.",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "gn",
+   "foto": "assets/calciatori/Monza/toure-idrissa.png"
+  },
+  {
+   "nome": "Amondarain",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "uy",
+   "foto": "assets/calciatori/Bologna/amondarain-mikel.png"
+  },
+  {
+   "nome": "Moro N.",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Bologna/moro-nikola.png"
+  },
+  {
+   "nome": "Deiola",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/deiola-alessandro.png"
+  },
+  {
+   "nome": "Addai",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "gh",
+   "foto": null
+  },
+  {
+   "nome": "Brescianini",
+   "ruolo": "CEN",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/brescianini-marco.png"
+  },
+  {
+   "nome": "Fabbian",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/fabbian-giovanni.png"
+  },
+  {
+   "nome": "Cichella",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/cichella-matteo.png"
+  },
+  {
+   "nome": "Amorim",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Genoa/amorim.png"
+  },
+  {
+   "nome": "Traorè Hj.",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Genoa/traore-hamed.png"
+  },
+  {
+   "nome": "Mkhitaryan",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "am",
+   "foto": "assets/calciatori/Inter/mkhitaryan-henrikh.png"
+  },
+  {
+   "nome": "Douglas Luiz",
+   "ruolo": "CEN",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Juventus/douglas-luiz.png"
+  },
+  {
+   "nome": "Dele-Bashiru",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "ng",
+   "foto": "assets/calciatori/Lazio/dele-bashiru-fisayo.png"
+  },
+  {
+   "nome": "Ngom",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Lecce/ngom-oumar.png"
+  },
+  {
+   "nome": "Berisha M.",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Lecce/berisha-medon.png"
+  },
+  {
+   "nome": "Gandelman",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "il",
+   "foto": null
+  },
+  {
+   "nome": "Musah",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Milan/musah-yunus.png"
+  },
+  {
+   "nome": "Loftus-Cheek",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Milan/loftus-cheek-ruben.png"
+  },
+  {
+   "nome": "Folorunsho",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/folorunsho-michael.png"
+  },
+  {
+   "nome": "Almqvist",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Parma/almqvist-pontus.png"
+  },
+  {
+   "nome": "Ilkhan",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "ir",
+   "foto": "assets/calciatori/Torino/ilkhan-emirhan.png"
+  },
+  {
+   "nome": "Miller L.",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Udinese/miller-lennon.png"
+  },
+  {
+   "nome": "Grillitsch",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "at",
+   "foto": "assets/calciatori/Frosinone/grillitsch-florian.png"
+  },
+  {
+   "nome": "Massolin",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Fernandez T.",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "ar",
+   "foto": null
+  },
+  {
+   "nome": "De Roon",
+   "ruolo": "CEN",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Roma/de-roon-marten.png"
+  },
+  {
+   "nome": "Sulemana I.",
+   "ruolo": "CEN",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "gh",
+   "foto": "assets/calciatori/Atalanta/sulemana-kamal-deen.png"
+  },
+  {
+   "nome": "Dominguez B.",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Sassuolo/dominguez-benjamin.png"
+  },
+  {
+   "nome": "Fadera",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "gm",
+   "foto": "assets/calciatori/Cagliari/fadera-alieu.png"
+  },
+  {
+   "nome": "Belahyane",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Lazio/belahyane-reda.png"
+  },
+  {
+   "nome": "Cataldi",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/cataldi-danilo.png"
+  },
+  {
+   "nome": "Gorter",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Lecce/gorter-olaf.png"
+  },
+  {
+   "nome": "Maleh",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Lecce/maleh-youssef.png"
+  },
+  {
+   "nome": "Ricci S.",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Como/ricci-samuele.png"
+  },
+  {
+   "nome": "Ordonez C.",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "ec",
+   "foto": "assets/calciatori/Parma/ordonez-christian.png"
+  },
+  {
+   "nome": "Diallo O.",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Parma/diallo-ousmane.png"
+  },
+  {
+   "nome": "Aboukhlal",
+   "ruolo": "CEN",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Torino/aboukhlal-zakaria.png"
+  },
+  {
+   "nome": "Gagliardini",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "El Azzouzi O.",
+   "ruolo": "CEN",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Bologna/el-azzouzi-oussama.png"
+  },
+  {
+   "nome": "Gelli F.",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/gelli-francesco.png"
+  },
+  {
+   "nome": "Hasa",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "al",
+   "foto": "assets/calciatori/Frosinone/hasa-luis.png"
+  },
+  {
+   "nome": "Stankovic A.",
+   "ruolo": "CEN",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Inter/stankovic-aleksandar.png"
+  },
+  {
+   "nome": "Colombo L.",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/colombo-leonardo.png"
+  },
+  {
+   "nome": "Gilmour",
+   "ruolo": "CEN",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Napoli/gilmour-billy.png"
+  },
+  {
+   "nome": "Cremaschi",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Parma/cremaschi-benjamin.png"
+  },
+  {
+   "nome": "Lipani",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/lipani-luca.png"
+  },
+  {
+   "nome": "Zarraga",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Udinese/zarraga-oier.png"
+  },
+  {
+   "nome": "Helgason",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "is",
+   "foto": "assets/calciatori/Venezia/helgason-thorir.png"
+  },
+  {
+   "nome": "Forson O.",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Monza/forson-omari.png"
+  },
+  {
+   "nome": "Foe Ondoa",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "cm",
+   "foto": "assets/calciatori/Monza/foe-ondoa-manga.png"
+  },
+  {
+   "nome": "Jovanovic",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "rs",
+   "foto": null
+  },
+  {
+   "nome": "Liteta",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/liteta-joseph.png"
+  },
+  {
+   "nome": "Lahdo",
+   "ruolo": "CEN",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "se",
+   "foto": "assets/calciatori/Como/lahdo-adrian.png"
+  },
+  {
+   "nome": "El Azzouzi A.",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ma",
+   "foto": "assets/calciatori/Frosinone/el-azzouzi-anouar.png"
+  },
+  {
+   "nome": "Kone B.",
+   "ruolo": "CEN",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Frosinone/kone-benjamin-lhassine.png"
+  },
+  {
+   "nome": "Venturino",
+   "ruolo": "CEN",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/venturino-lorenzo.png"
+  },
+  {
+   "nome": "Przyborek",
+   "ruolo": "CEN",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "pl",
+   "foto": "assets/calciatori/Lazio/przyborek-adrian.png"
+  },
+  {
+   "nome": "Kaba",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "gn",
+   "foto": "assets/calciatori/Lecce/kaba-mohamed.png"
+  },
+  {
+   "nome": "Fofana Sa.",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Lecce/fofana-sadik.png"
+  },
+  {
+   "nome": "Ciurria",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/ciurria-patrick.png"
+  },
+  {
+   "nome": "Boloca",
+   "ruolo": "CEN",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "ro",
+   "foto": null
+  },
+  {
+   "nome": "Ilic",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "rs",
+   "foto": null
+  },
+  {
+   "nome": "Chakvetadze",
+   "ruolo": "CEN",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ge",
+   "foto": "assets/calciatori/Udinese/chakvetadze-giorgi.png"
+  },
+  {
+   "nome": "Dagasso",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Venezia/dagasso-matteo.png"
+  },
+  {
+   "nome": "Duncan",
+   "ruolo": "CEN",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "jm",
+   "foto": "assets/calciatori/Venezia/duncan-alfred.png"
+  },
+  {
+   "nome": "Laerke",
+   "ruolo": "CEN",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Lecce/laerke-hjalte.png"
+  },
+  {
+   "nome": "Comotto",
+   "ruolo": "CEN",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/comotto-christian.png"
+  },
+  {
+   "nome": "Mout",
+   "ruolo": "CEN",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Monza/mout-mathis.png"
+  },
+  {
+   "nome": "Ciervo",
+   "ruolo": "CEN",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/ciervo-riccardo.png"
+  },
+  {
+   "nome": "Sierro",
+   "ruolo": "CEN",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "ch",
+   "foto": null
+  },
+  {
+   "nome": "Malen",
+   "ruolo": "ATT",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Roma/malen-donyell.png"
+  },
+  {
+   "nome": "Martinez L.",
+   "ruolo": "ATT",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Inter/martinez-lautaro.png"
+  },
+  {
+   "nome": "Hojlund",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "dk",
+   "foto": "assets/calciatori/Napoli/hojlund-rasmus.png"
+  },
+  {
+   "nome": "Thuram",
+   "ruolo": "ATT",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Inter/thuram-marcus.png"
+  },
+  {
+   "nome": "Ramos G.",
+   "ruolo": "ATT",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Milan/ramos-goncalo.png"
+  },
+  {
+   "nome": "Kean",
+   "ruolo": "ATT",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Fiorentina/kean-moise.png"
+  },
+  {
+   "nome": "Kolo Muani",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Juventus/kolo-muani-randal.png"
+  },
+  {
+   "nome": "Woltemade",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "de",
+   "foto": null
+  },
+  {
+   "nome": "Douvikas",
+   "ruolo": "ATT",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "gr",
+   "foto": "assets/calciatori/Como/douvikas-anastasios.png"
+  },
+  {
+   "nome": "Yildiz",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "tr",
+   "foto": "assets/calciatori/Juventus/yildiz-kenan.png"
+  },
+  {
+   "nome": "Scamacca",
+   "ruolo": "ATT",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/scamacca-gianluca.png"
+  },
+  {
+   "nome": "Berardi",
+   "ruolo": "ATT",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/berardi-domenico.png"
+  },
+  {
+   "nome": "Davis K.",
+   "ruolo": "ATT",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "ca",
+   "foto": "assets/calciatori/Udinese/davis-keinan.png"
+  },
+  {
+   "nome": "Krstovic",
+   "ruolo": "ATT",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "me",
+   "foto": "assets/calciatori/Atalanta/krstovic-nikola.png"
+  },
+  {
+   "nome": "De Ketelaere",
+   "ruolo": "ATT",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Atalanta/de-ketelaere-charles.png"
+  },
+  {
+   "nome": "Esposito F.P.",
+   "ruolo": "ATT",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/esposito-francesco.png"
+  },
+  {
+   "nome": "Dovbyk",
+   "ruolo": "ATT",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "ua",
+   "foto": "assets/calciatori/Bologna/dovbyk-artem.png"
+  },
+  {
+   "nome": "Dybala",
+   "ruolo": "ATT",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Roma/dybala-paulo.png"
+  },
+  {
+   "nome": "Soulè",
+   "ruolo": "ATT",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Roma/soule-matias.png"
+  },
+  {
+   "nome": "Laurientè",
+   "ruolo": "ATT",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/lauriente-armand.png"
+  },
+  {
+   "nome": "Diao",
+   "ruolo": "ATT",
+   "squadraReale": "Como",
+   "squadraCodice": "COM",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Como/diao-assane.png"
+  },
+  {
+   "nome": "Santos A.",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Pellegrino M.",
+   "ruolo": "ATT",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Fiorentina/pellegrino-mateo.png"
+  },
+  {
+   "nome": "Castro S.",
+   "ruolo": "ATT",
+   "squadraReale": "Roma",
+   "squadraCodice": "ROM",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Roma/castro-santiago.png"
+  },
+  {
+   "nome": "Simeone",
+   "ruolo": "ATT",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Torino/simeone-giovanni.png"
+  },
+  {
+   "nome": "Beto",
+   "ruolo": "ATT",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "pt",
+   "foto": null
+  },
+  {
+   "nome": "Raspadori",
+   "ruolo": "ATT",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Atalanta/raspadori-giacomo.png"
+  },
+  {
+   "nome": "Esposito Se.",
+   "ruolo": "ATT",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Sassuolo/esposito-sebastiano.png"
+  },
+  {
+   "nome": "Pinamonti",
+   "ruolo": "ATT",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Lazio/pinamonti-andrea.png"
+  },
+  {
+   "nome": "Adams C.",
+   "ruolo": "ATT",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Torino/adams-che.png"
+  },
+  {
+   "nome": "Kevin Carlos",
+   "ruolo": "ATT",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "es",
+   "foto": "assets/calciatori/Cagliari/kevin-carlos.png"
+  },
+  {
+   "nome": "Raimondo",
+   "ruolo": "ATT",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Frosinone/raimondo-antonio.png"
+  },
+  {
+   "nome": "Colombo",
+   "ruolo": "ATT",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Genoa/colombo-lorenzo.png"
+  },
+  {
+   "nome": "Adams A.",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "us",
+   "foto": "assets/calciatori/Venezia/adams-akor.png"
+  },
+  {
+   "nome": "Tourè E.",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "gn",
+   "foto": "assets/calciatori/Parma/toure-el-bilal.png"
+  },
+  {
+   "nome": "Bowie",
+   "ruolo": "ATT",
+   "squadraReale": "Sassuolo",
+   "squadraCodice": "SAS",
+   "nazionalitaCodice": "gb-sct",
+   "foto": "assets/calciatori/Sassuolo/bowie-kieron.png"
+  },
+  {
+   "nome": "Yeboah J.",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "gh",
+   "foto": "assets/calciatori/Venezia/yeboah-john.png"
+  },
+  {
+   "nome": "Romero D.",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "ar",
+   "foto": "assets/calciatori/Parma/romero-jose.png"
+  },
+  {
+   "nome": "Piccoli",
+   "ruolo": "ATT",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Bologna/piccoli-roberto.png"
+  },
+  {
+   "nome": "Ghedjemis",
+   "ruolo": "ATT",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Frosinone/ghedjemis-fares.png"
+  },
+  {
+   "nome": "Cutrone",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Monza/cutrone-patrick.png"
+  },
+  {
+   "nome": "Osmajic",
+   "ruolo": "ATT",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "me",
+   "foto": "assets/calciatori/Genoa/osmajic-milutin.png"
+  },
+  {
+   "nome": "Kvernadze",
+   "ruolo": "ATT",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ge",
+   "foto": "assets/calciatori/Frosinone/kvernadze-giorgi.png"
+  },
+  {
+   "nome": "Geubbels",
+   "ruolo": "ATT",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Lecce/geubbels-willem.png"
+  },
+  {
+   "nome": "Bobcek",
+   "ruolo": "ATT",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "sk",
+   "foto": "assets/calciatori/Frosinone/bobcek-tomas.png"
+  },
+  {
+   "nome": "Maldini",
+   "ruolo": "ATT",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Cagliari/maldini-daniel.png"
+  },
+  {
+   "nome": "Vitinha O.",
+   "ruolo": "ATT",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Genoa/vitinha.png"
+  },
+  {
+   "nome": "Bonny",
+   "ruolo": "ATT",
+   "squadraReale": "Inter",
+   "squadraCodice": "INT",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Inter/bonny-ange-yoan.png"
+  },
+  {
+   "nome": "Varela G.",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "uy",
+   "foto": "assets/calciatori/Monza/varela-gustavo.png"
+  },
+  {
+   "nome": "Rrahmani Al.",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "xk",
+   "foto": "assets/calciatori/Venezia/rrahmani-albion.png"
+  },
+  {
+   "nome": "Gnonto",
+   "ruolo": "ATT",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "it",
+   "foto": null
+  },
+  {
+   "nome": "Boga",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "ci",
+   "foto": "assets/calciatori/Juventus/boga-jeremie.png"
+  },
+  {
+   "nome": "Noslin",
+   "ruolo": "ATT",
+   "squadraReale": "Lazio",
+   "squadraCodice": "LAZ",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Lazio/noslin-tijjani.png"
+  },
+  {
+   "nome": "Stulic",
+   "ruolo": "ATT",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "rs",
+   "foto": "assets/calciatori/Lecce/stulic-nikola.png"
+  },
+  {
+   "nome": "Zapata D.",
+   "ruolo": "ATT",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "co",
+   "foto": "assets/calciatori/Torino/zapata-duvan.png"
+  },
+  {
+   "nome": "Robinson J.",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "gb-eng",
+   "foto": "assets/calciatori/Monza/robinson-jay.png"
+  },
+  {
+   "nome": "Zeballos",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "ar",
+   "foto": null
+  },
+  {
+   "nome": "Sulemana K.",
+   "ruolo": "ATT",
+   "squadraReale": "Atalanta",
+   "squadraCodice": "ATA",
+   "nazionalitaCodice": "gh",
+   "foto": "assets/calciatori/Atalanta/sulemana-kamal-deen.png"
+  },
+  {
+   "nome": "Mendy P.",
+   "ruolo": "ATT",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Cagliari/mendy-paul.png"
+  },
+  {
+   "nome": "Mota",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "pt",
+   "foto": null
+  },
+  {
+   "nome": "Neres",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "br",
+   "foto": null
+  },
+  {
+   "nome": "Lontani",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/lontani-simone.png"
+  },
+  {
+   "nome": "N'Dri",
+   "ruolo": "ATT",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "ci",
+   "foto": null
+  },
+  {
+   "nome": "Camarda",
+   "ruolo": "ATT",
+   "squadraReale": "Milan",
+   "squadraCodice": "MIL",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Milan/camarda-francesco.png"
+  },
+  {
+   "nome": "Frigan",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Parma/frigan-matija.png"
+  },
+  {
+   "nome": "Kulenovic",
+   "ruolo": "ATT",
+   "squadraReale": "Torino",
+   "squadraCodice": "TOR",
+   "nazionalitaCodice": "hr",
+   "foto": "assets/calciatori/Torino/kulenovic-sandro.png"
+  },
+  {
+   "nome": "Gueye",
+   "ruolo": "ATT",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "sn",
+   "foto": "assets/calciatori/Udinese/gueye-idrissa.png"
+  },
+  {
+   "nome": "Adorante",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "pt",
+   "foto": "assets/calciatori/Venezia/adorante-andrea.png"
+  },
+  {
+   "nome": "Milik",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "pl",
+   "foto": null
+  },
+  {
+   "nome": "Fatah",
+   "ruolo": "ATT",
+   "squadraReale": "Lecce",
+   "squadraCodice": "LEC",
+   "nazionalitaCodice": "ma",
+   "foto": null
+  },
+  {
+   "nome": "Birligea",
+   "ruolo": "ATT",
+   "squadraReale": "Frosinone",
+   "squadraCodice": "FRO",
+   "nazionalitaCodice": "ro",
+   "foto": "assets/calciatori/Frosinone/birligea-daniel.png"
+  },
+  {
+   "nome": "Ngonge",
+   "ruolo": "ATT",
+   "squadraReale": "Monza",
+   "squadraCodice": "MON",
+   "nazionalitaCodice": "be",
+   "foto": "assets/calciatori/Monza/ngonge-cyril.png"
+  },
+  {
+   "nome": "Nzola",
+   "ruolo": "ATT",
+   "squadraReale": "Fiorentina",
+   "squadraCodice": "FIO",
+   "nazionalitaCodice": "ao",
+   "foto": "assets/calciatori/Fiorentina/nzola-m-bala.png"
+  },
+  {
+   "nome": "Havel",
+   "ruolo": "ATT",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "cz",
+   "foto": "assets/calciatori/Genoa/havel-elias.png"
+  },
+  {
+   "nome": "Giovane",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "br",
+   "foto": "assets/calciatori/Napoli/giovane.png"
+  },
+  {
+   "nome": "Lang",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Napoli/lang-noa.png"
+  },
+  {
+   "nome": "Lucca",
+   "ruolo": "ATT",
+   "squadraReale": "Napoli",
+   "squadraCodice": "NAP",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Napoli/lucca-lorenzo.png"
+  },
+  {
+   "nome": "Elphege",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Parma/elphege-nesta.png"
+  },
+  {
+   "nome": "Ekhator",
+   "ruolo": "ATT",
+   "squadraReale": "Juventus",
+   "squadraCodice": "JUV",
+   "nazionalitaCodice": "ng",
+   "foto": null
+  },
+  {
+   "nome": "Lauberbach",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "de",
+   "foto": "assets/calciatori/Venezia/lauberbach-lion.png"
+  },
+  {
+   "nome": "Enem",
+   "ruolo": "ATT",
+   "squadraReale": "Bologna",
+   "squadraCodice": "BOL",
+   "nazionalitaCodice": "ng",
+   "foto": null
+  },
+  {
+   "nome": "Trepy",
+   "ruolo": "ATT",
+   "squadraReale": "Cagliari",
+   "squadraCodice": "CAG",
+   "nazionalitaCodice": "fr",
+   "foto": "assets/calciatori/Cagliari/trepy-yael.png"
+  },
+  {
+   "nome": "Bayo V.",
+   "ruolo": "ATT",
+   "squadraReale": "Udinese",
+   "squadraCodice": "UDI",
+   "nazionalitaCodice": "gn",
+   "foto": "assets/calciatori/Udinese/bayo-vakoun.png"
+  },
+  {
+   "nome": "Lisman",
+   "ruolo": "ATT",
+   "squadraReale": "Venezia",
+   "squadraCodice": "VEN",
+   "nazionalitaCodice": "nl",
+   "foto": "assets/calciatori/Venezia/lisman-kornel.png"
+  },
+  {
+   "nome": "De Martis",
+   "ruolo": "ATT",
+   "squadraReale": "Parma",
+   "squadraCodice": "PAR",
+   "nazionalitaCodice": "it",
+   "foto": "assets/calciatori/Parma/de-martis-thomas.png"
+  },
+  {
+   "nome": "Robinho Junior",
+   "ruolo": "ATT",
+   "squadraReale": "Genoa",
+   "squadraCodice": "GEN",
+   "nazionalitaCodice": "br",
+   "foto": null
+  }
+ ]
+}

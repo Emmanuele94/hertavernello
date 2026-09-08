@@ -366,19 +366,40 @@ async function hv_renderTopScorers(config) {
     return;
   }
 
+  const [giocatoriDb, nazioni] = await Promise.all([hv_caricaGiocatoriDb(), hv_caricaNazioni()]);
+
   wrap.innerHTML = `
     <div style="overflow-x: auto;">
     <table class="roster-table">
       <tbody>
         ${marcatori
-          .map(
-            (m, i) => `
+          .map((m, i) => {
+            const g = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb);
+            const fotoHtml = g && g.foto
+              ? `<img src="${g.foto}" class="foto-giocatore-mini" alt="">`
+              : `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(m.nome)}</span>`;
+            const nazioneCodice = g ? g.nazionalitaCodice : null;
+            const nazioneNome = nazioneCodice ? nazioni[nazioneCodice] : null;
+            const bandieraHtml = nazioneCodice
+              ? `<span class="bandiera-wrap" data-tooltip-nazione>
+                   <img src="assets/bandiere/${nazioneCodice}.png" class="bandiera-mini" alt="${nazioneNome || ""}">
+                   <span class="bandiera-tooltip">${nazioneNome || ""}</span>
+                 </span>`
+              : "";
+            return `
           <tr>
             <td style="width:26px; font-family:var(--font-mono); color:var(--giallo-neon);">${i + 1}°</td>
-            <td style="white-space: nowrap;">${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}${m.nome}</td>
+            <td style="white-space: nowrap;">
+              <div class="riga-marcatore">
+                ${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="">` : ""}
+                ${fotoHtml}
+                <span class="nome-marcatore">${m.nome}</span>
+                ${bandieraHtml}
+              </div>
+            </td>
             <td class="costo" style="white-space: nowrap;">${m.gol} gol${m.assist ? " · " + m.assist + " ast" : ""}</td>
-          </tr>`
-          )
+          </tr>`;
+          })
           .join("")}
       </tbody>
     </table>
