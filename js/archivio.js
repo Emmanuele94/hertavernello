@@ -245,7 +245,6 @@ async function hv_mostraStagione(stagione) {
 
   const squadreTabHtml = `
     ${roseHtml}
-    ${videoHtml ? `<h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>${videoHtml}` : ""}
   `;
 
   wrap.innerHTML = `
@@ -254,7 +253,10 @@ async function hv_mostraStagione(stagione) {
       <button type="button" class="sotto-tab-btn" data-tab="curiosita">Curiosità</button>
       <button type="button" class="sotto-tab-btn" data-tab="squadre">Squadre</button>
     </div>
-    <div id="sotto-tab-home" class="sotto-tab-contenuto">${vincitoriHtml}</div>
+    <div id="sotto-tab-home" class="sotto-tab-contenuto">
+      ${vincitoriHtml}
+      ${videoHtml ? `<h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>${videoHtml}` : ""}
+    </div>
     <div id="sotto-tab-curiosita" class="sotto-tab-contenuto hidden">${curiositaTabHtml}</div>
     <div id="sotto-tab-squadre" class="sotto-tab-contenuto hidden">${squadreTabHtml}</div>
   `;

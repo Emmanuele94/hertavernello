@@ -436,15 +436,20 @@ async function hv_renderBadge(squadraId, risultati, rose, giocatoriDb, config) {
 function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
   document.getElementById("squadra-nome-grande").textContent = squadra.nomeFantasquadra || squadra.nomeReale;
 
-  let badgePosizione = document.getElementById("squadra-posizione-badge");
-  if (!badgePosizione) {
-    badgePosizione = document.createElement("span");
-    badgePosizione.id = "squadra-posizione-badge";
-    badgePosizione.className = "squadra-posizione-badge";
-    document.getElementById("squadra-nome-grande").insertAdjacentElement("afterend", badgePosizione);
-  }
-  badgePosizione.textContent = posizioneLega ? `${posizioneLega}° in classifica` : "";
-  badgePosizione.style.display = posizioneLega ? "" : "none";
+  // Logo piccolo (512x512 caricato) + posizione in classifica, insieme in un
+  // riquadro a fianco del nome. 72px è un display sicuro: parte da un originale
+  // di 512px, quindi a 72px resta nitido (è un forte rimpicciolimento, non un
+  // ingrandimento — l'effetto "sgranato" scatterebbe solo mostrandolo più
+  // grande dell'originale, qui siamo lontanissimi da quella soglia).
+  const wrapPiccolo = document.getElementById("squadra-logo-piccolo-posizione-wrap");
+  const logoPiccoloHtml =
+    logo && logo.immaginePiccola
+      ? `<img src="assets/stemmi-piccoli/${logo.immaginePiccola}?v=${Date.now()}" class="squadra-logo-piccolo-grande" alt="">`
+      : `<div class="squadra-logo-piccolo-grande squadra-logo-piccolo-vuoto" title="Nessun logo piccolo caricato"></div>`;
+  const posizioneHtml = posizioneLega
+    ? `<span class="squadra-posizione-badge">${posizioneLega}° in classifica</span>`
+    : `<span class="squadra-posizione-badge squadra-posizione-badge-vuoto">Posizione n.d.</span>`;
+  wrapPiccolo.innerHTML = `${logoPiccoloHtml}${posizioneHtml}`;
 
   const wrapLogo = document.getElementById("squadra-logo-wrap");
   wrapLogo.innerHTML = "";
