@@ -121,6 +121,99 @@ function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
     </div>`;
 }
 
+// Form admin per i video di una stagione: righe dinamiche (titolo+url), un
+// pulsante "+" per aggiungerne altre, salvataggio diretto su GitHub — stesso
+// principio del video di Squadre, ma con più righe invece di una sola.
+function hv_renderVideoAdminForm(stagione) {
+  const formWrap = document.getElementById("video-admin-form");
+  const config = hv_archivioConfig;
+
+  if (!formWrap || window.hv_role !== "admin" || !config || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    if (formWrap) formWrap.innerHTML = "";
+    return;
+  }
+
+  // Righe di partenza: quelle già salvate, più una vuota pronta da compilare.
+  let righe = (stagione.video || []).map((v) => ({ titolo: v.titolo || "", url: v.url || "" }));
+  righe.push({ titolo: "", url: "" });
+
+  function disegna() {
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica i video di questa stagione</p>
+        <div id="video-admin-righe" style="display:flex; flex-direction:column; gap:10px;">
+          ${righe
+            .map(
+              (r, i) => `
+            <div class="campo-riga video-admin-riga" data-i="${i}" style="align-items:center; flex-wrap:wrap;">
+              <input type="text" class="video-admin-titolo" data-i="${i}" placeholder="Titolo (es. Asta 2025 - i momenti migliori)" value="${r.titolo.replace(/"/g, "&quot;")}" style="flex:1; min-width:200px;">
+              <input type="text" class="video-admin-url" data-i="${i}" placeholder="Link YouTube" value="${r.url.replace(/"/g, "&quot;")}" style="flex:1; min-width:200px;">
+              ${righe.length > 1 ? `<button type="button" class="video-admin-rimuovi" data-i="${i}" title="Rimuovi questa riga">✕</button>` : ""}
+            </div>`
+            )
+            .join("")}
+        </div>
+        <button type="button" id="video-admin-aggiungi" style="margin-top: 10px;">+ Aggiungi un altro video</button>
+        <br>
+        <button type="button" id="video-admin-salva" style="margin-top: 10px;">Salva</button>
+        <p id="video-admin-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    formWrap.querySelectorAll(".video-admin-titolo").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].titolo = el.value));
+    });
+    formWrap.querySelectorAll(".video-admin-url").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].url = el.value));
+    });
+    formWrap.querySelectorAll(".video-admin-rimuovi").forEach((el) => {
+      el.addEventListener("click", () => {
+        righe.splice(Number(el.dataset.i), 1);
+        disegna();
+      });
+    });
+    document.getElementById("video-admin-aggiungi").addEventListener("click", () => {
+      righe.push({ titolo: "", url: "" });
+      disegna();
+    });
+    document.getElementById("video-admin-salva").addEventListener("click", async () => {
+      const stato = document.getElementById("video-admin-stato");
+      const daSalvare = righe.filter((r) => r.url.trim()).map((r) => ({ titolo: r.titolo.trim(), url: r.url.trim() }));
+      stato.textContent = "Salvataggio in corso...";
+      stato.style.color = "var(--text-muted)";
+      try {
+        await hv_salvaVideoStagioneViaGitHub(stagione.anno, daSalvare, config);
+        stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        stato.style.color = "var(--verde-prato)";
+        stagione.video = daSalvare;
+        righe = daSalvare.map((v) => ({ titolo: v.titolo, url: v.url }));
+        righe.push({ titolo: "", url: "" });
+        disegna();
+
+        // Aggiorno anche l'anteprima già visibile, senza dover ricaricare la pagina
+        const listaWrap = document.getElementById("video-lista-wrap");
+        listaWrap.innerHTML = daSalvare.length
+          ? `<div class="video-lista">${daSalvare
+              .map((v) => {
+                const id = hv_estraiIdYoutube(v.url);
+                const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+                return `<a href="${v.url}" target="_blank" rel="noopener" class="video-card video-card-riga">
+                  ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
+                  <span class="video-titolo">${v.titolo || "Guarda su YouTube"}</span>
+                </a>`;
+              })
+              .join("")}</div>`
+          : "";
+      } catch (err) {
+        stato.textContent = "Errore: " + err.message;
+        stato.style.color = "var(--wine-bright)";
+      }
+    });
+  }
+
+  disegna();
+}
+
 async function hv_mostraStagione(stagione) {
   const wrap = document.getElementById("lista-dettaglio");
 
@@ -224,12 +317,12 @@ async function hv_mostraStagione(stagione) {
 
   const videoHtml =
     stagione.video && stagione.video.length
-      ? `<div class="video-griglia">${stagione.video
+      ? `<div class="video-lista">${stagione.video
           .map((v) => {
             const id = hv_estraiIdYoutube(v.url);
             const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
             return `
-          <a href="${v.url}" target="_blank" rel="noopener" class="video-card">
+          <a href="${v.url}" target="_blank" rel="noopener" class="video-card video-card-riga">
             ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
             <span class="video-titolo">${v.titolo || "Guarda su YouTube"}</span>
           </a>`;
@@ -255,7 +348,9 @@ async function hv_mostraStagione(stagione) {
     </div>
     <div id="sotto-tab-home" class="sotto-tab-contenuto">
       ${vincitoriHtml}
-      ${videoHtml ? `<h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>${videoHtml}` : ""}
+      <h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>
+      <div id="video-lista-wrap">${videoHtml}</div>
+      <div id="video-admin-form"></div>
     </div>
     <div id="sotto-tab-curiosita" class="sotto-tab-contenuto hidden">${curiositaTabHtml}</div>
     <div id="sotto-tab-squadre" class="sotto-tab-contenuto hidden">${squadreTabHtml}</div>
@@ -278,6 +373,8 @@ async function hv_mostraStagione(stagione) {
       contenuto.classList.toggle("collassato");
     });
   });
+
+  hv_renderVideoAdminForm(stagione);
 }
 
 // ===== Cambio vista: Albo d'oro <-> Lista =====
@@ -288,7 +385,10 @@ function hv_attivaVista(nome) {
 }
 
 // ===== Init =====
+let hv_archivioConfig = null;
+
 async function hv_initArchivio(config) {
+  hv_archivioConfig = config;
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
   const wrap = document.getElementById("vista-albo");

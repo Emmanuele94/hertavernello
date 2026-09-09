@@ -244,6 +244,27 @@ async function hv_salvaVideoHighlightViaGitHub(squadraId, video, config) {
   await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna video highlights ${squadraId}`, fileJson.sha);
 }
 
+// Video di una STAGIONE in Archivio (data/albo-oro.json) — array di link,
+// stesso principio del video di Squadre ma per anno invece che per squadraId.
+async function hv_salvaVideoStagioneViaGitHub(annoStagione, videoArray, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/albo-oro.json", token);
+  if (!fileJson) throw new Error("Non trovo data/albo-oro.json nel repository.");
+
+  const alboObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  const stagione = (alboObj.stagioni || []).find((s) => s.anno === annoStagione);
+  if (!stagione) throw new Error(`Stagione ${annoStagione} non trovata in albo-oro.json.`);
+  stagione.video = videoArray;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(alboObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna video stagione ${annoStagione}`, fileJson.sha);
+}
+
 
 async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
