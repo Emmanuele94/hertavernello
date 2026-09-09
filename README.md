@@ -7,27 +7,32 @@ Il sito ufficiale (non ufficiale) della lega di fantacalcio più temuta del web.
 ## ⚽ Cosa fa questo sito
 
 ### 🏠 Home
-- **⚔️ Chi gioca contro chi** — per ogni partita reale di Serie A, le schede sfida tra i fantallenatori che si affrontano in quella giornata di lega, con i rispettivi giocatori coinvolti
-- **🏆 Classifica generale previsioni** — chi ha indovinato meglio l'ordine finale della Serie A, aggiornata da sola col procedere del campionato
-- **📊 Classifica Serie A** — la classifica reale, sempre aggiornata
-- **🥅 Top marcatori** — i migliori marcatori del campionato
+- **⚔️ Chi gioca contro chi** — per ogni partita reale di Serie A, le schede sfida tra i fantallenatori che si affrontano in quella giornata di lega; il live resta visibile (col punteggio) anche a partita finita, fino all'inizio della giornata successiva
+- **🔥 Highlights della settimana** — punteggio più alto, striscia di chi è primo in classifica, e altre curiosità, generati da soli dai risultati caricati
+- **🏆 Classifica della lega** — la classifica vera della fantalega (vittorie, pareggi, sconfitte, punti), calcolata da sola dai risultati settimanali
+- **Classifica generale previsioni · Classifica Serie A · Top marcatori** — affiancate su una riga sola; i marcatori mostrano stemma squadra, foto del giocatore, nazionalità (bandiera col tooltip) e assist, non solo i gol
 - Tutte le sezioni sono **espandibili/comprimibili** con un click sul titolo
-- Aggiornamento automatico ogni 4 ore (per non sforare i limiti gratuiti dell'API), con l'orario del prossimo aggiornamento sempre visibile
+- Aggiornamento **intelligente**: più frequente quando ci sono partite in corso, molto più diluito nei giorni morti — non più un orario fisso ogni 4 ore
 
 ### 👕 Squadre
 Una scheda per ogni fantallenatore, con:
-- **Nome fantasquadra e logo personalizzato**, caricabile direttamente dalla pagina
-- **Rosa completa** divisa per ruolo, con lo stemma della squadra reale di ogni giocatore
+- **Logo grande personalizzato** + **logo piccolo (512×512)** e **posizione in classifica**, affiancati accanto al nome
+- **Badge automatici** — Il Dominatore, La Maglia Nera, La Corazzata, Il Cecchino, Il Perseguitato, Miglior Difesa, Miglior Attacco, Bomber di Lega (incrocia i gol reali dei giocatori in rosa con l'API) — tutti calcolati da soli dai risultati
+- **Rosa completa** divisa per ruolo, con foto del giocatore, stemma della squadra reale e bandiera della nazionalità
 - **ℹ️ Orari partite** — icona a comparsa che mostra quando gioca ciascun calciatore in questa giornata (🟡 da giocare, ⚪ già giocata), con avversario e orario in italiano
 - **📝 Pagella** — il voto e il commento (rigorosamente ironico) dopo l'asta
 - **🔮 Previsione Serie A** — lo screenshot del tiermaker con l'ordine previsto delle 20 squadre
-- **🥧 Composizione rosa** — grafico a torta di quali squadre reali compongono la rosa, con soprannome goliardico automatico ("Il Fedelissimo del Napoli", "Lo Sfascia-derby", "Il Turista"...)
-- **🌍 Da dove arriva la tua squadra** — stessa idea ma per nazionalità dei giocatori *(in arrivo dopo il calciomercato)*
+- **🥧 Composizione rosa** e **🌍 Da dove arriva la tua squadra** — liste con percentuali (squadre reali e nazionalità dei giocatori), con soprannome goliardico automatico ("Il Fedelissimo del Napoli", "Il Cosmopolita", "Il Turista"...)
+- **🎬 Highlights** — video YouTube della fantasquadra (quanti se ne vuole), caricabili direttamente dalla pagina
 
 ### 📜 Archivio
 Due viste per rivivere le stagioni passate:
 - **🏅 Albo d'oro** — classifica di sempre per Campionato, Coppa e generale; gli anni delle vittorie stanno sempre visibili sotto il nome, senza bisogno di cliccare
-- **📅 Lista stagioni** — una scheda per ogni annata (dal 2018/19 a oggi), selezionabile da una barra di anni scorrevole; per la stagione scelta: vincitore del campionato, vincitore/i della coppa, classifica Serie A completa con gli stemmi reali (comprese le squadre non più in A, come Benevento, Sampdoria, Chievo...), classifica marcatori e curiosità dell'anno — tutte espandibili/comprimibili
+- **📅 Lista stagioni** — una scheda per ogni annata (dal 2018/19 a oggi), selezionabile da una barra di anni scorrevole, organizzata in 3 sotto-sezioni:
+  - **Home** — vincitore del campionato, vincitore/i della coppa, video della stagione
+  - **Curiosità** — classifica Serie A completa (con gli stemmi reali, comprese le squadre non più in A come Benevento, Sampdoria, Chievo...), classifica marcatori (con foto, dove disponibili) e curiosità dell'anno
+  - **Squadre** — le rose storiche di ogni fantasquadra (con foto dei giocatori, dove riconoscibili) e le pagelle di quell'anno
+  - Video e pagelle si caricano **direttamente dalla pagina**, righe multiple, salvataggio diretto su GitHub
 
 ### 🧠 Mini-Quiz
 - 38 giornate, una scheda per ciascuna
@@ -41,9 +46,9 @@ Due viste per rivivere le stagioni passate:
 
 ### 🛠️ Pannello Admin (riservato)
 - Impostazioni lega (nomi, password, date, chiave API)
-- Import rose da CSV (esportazione diretta da fantacalcio.it)
-- Scrittura pagelle
-- Previsioni esatte posizione-per-posizione
+- Import rose da **CSV o Excel** (esportazione diretta da fantacalcio.it)
+- **Aggiorna risultati** — carica i 6 risultati della giornata in 3 modi (screenshot con riconoscimento automatico, testo incollato, o inserimento manuale), con schermata di controllo prima di salvare; da qui si calcolano da soli classifica di lega, badge e highlights
+- Scrittura pagelle, previsioni esatte posizione-per-posizione
 - Calendario di lega, con import automatico dal file Excel di leghe.fantacalcio.it
 - Salvataggio diretto su GitHub da ogni sezione, senza dover scaricare/ricaricare file a mano
 
@@ -52,16 +57,17 @@ Due viste per rivivere le stagioni passate:
 ## ⚙️ Come funziona sotto il cofano
 
 - **Zero backend, zero database** — solo file statici HTML/CSS/JavaScript
-- **Dati Serie A** in tempo reale da [football-data.org](https://www.football-data.org) (piano gratuito), con cache intelligente per restare sotto il limite di richieste
+- **Dati Serie A** in tempo reale da [football-data.org](https://www.football-data.org) (piano gratuito), con cache **dinamica** (si stringe nei giorni di partite, si allarga nei giorni morti) per restare sotto il limite di richieste
+- **Database giocatori** (foto + nazionalità, oltre 500 calciatori di Serie A) usato per riconoscere automaticamente foto e bandiere ovunque compaia un nome — marcatori, rose, archivio
 - **Ospitato gratis** su GitHub Pages
-- Tutti i dati della lega (rose, pagelle, previsioni, calendario) vivono in semplici file `.json` dentro `data/`
+- Tutti i dati della lega (rose, pagelle, previsioni, calendario, risultati) vivono in semplici file `.json` dentro `data/`
 
 ---
 
 ## 🚧 In lavorazione
 
-- Grafico a torta per nazionalità dei giocatori (in attesa dei dati aggiornati dopo il calciomercato)
+- Foto "d'epoca" dei giocatori nell'Archivio (per ora si vedono solo se il giocatore gioca ancora oggi — il database foto è quello della stagione attuale)
 
 ---
 
-*Aggiornato al 28/08/2026 — questo file cresce insieme al sito, quindi se leggi questo elenco tra qualche mese potrebbe già essere superato.*
+*Aggiornato al 09/09/2026 — questo file cresce insieme al sito, quindi se leggi questo elenco tra qualche mese potrebbe già essere superato.*
