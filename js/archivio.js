@@ -214,6 +214,92 @@ function hv_renderVideoAdminForm(stagione) {
   disegna();
 }
 
+// Form admin per le pagelle di una stagione: stesso meccanismo del video
+// (righe dinamiche + salva su GitHub), ma con nome sopra e testo (più lungo,
+// quindi un'area di testo) sotto.
+function hv_renderPagelleAdminForm(stagione) {
+  const formWrap = document.getElementById("pagelle-admin-form");
+  const config = hv_archivioConfig;
+
+  if (!formWrap || window.hv_role !== "admin" || !config || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    if (formWrap) formWrap.innerHTML = "";
+    return;
+  }
+
+  let righe = (stagione.pagelle || []).map((p) => ({ nome: p.nome || "", testo: p.testo || "" }));
+  righe.push({ nome: "", testo: "" });
+
+  function disegna() {
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica le pagelle di questa stagione</p>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          ${righe
+            .map(
+              (r, i) => `
+            <div class="pagella-admin-riga" data-i="${i}">
+              <div class="campo-riga" style="align-items:center;">
+                <input type="text" class="pagella-admin-nome" data-i="${i}" placeholder="Nome fantallenatore" value="${r.nome.replace(/"/g, "&quot;")}" style="flex:1;">
+                ${righe.length > 1 ? `<button type="button" class="pagella-admin-rimuovi" data-i="${i}" title="Rimuovi questa pagella">✕</button>` : ""}
+              </div>
+              <textarea class="pagella-admin-testo" data-i="${i}" rows="2" placeholder="Testo della pagella" style="margin-top: 6px;">${r.testo}</textarea>
+            </div>`
+            )
+            .join("")}
+        </div>
+        <button type="button" id="pagelle-admin-aggiungi" style="margin-top: 10px;">+ Aggiungi persona</button>
+        <br>
+        <button type="button" id="pagelle-salva-btn" style="margin-top: 10px;">Salva</button>
+        <p id="pagelle-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    formWrap.querySelectorAll(".pagella-admin-nome").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].nome = el.value));
+    });
+    formWrap.querySelectorAll(".pagella-admin-testo").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].testo = el.value));
+    });
+    formWrap.querySelectorAll(".pagella-admin-rimuovi").forEach((el) => {
+      el.addEventListener("click", () => {
+        righe.splice(Number(el.dataset.i), 1);
+        disegna();
+      });
+    });
+    document.getElementById("pagelle-admin-aggiungi").addEventListener("click", () => {
+      righe.push({ nome: "", testo: "" });
+      disegna();
+    });
+    document.getElementById("pagelle-salva-btn").addEventListener("click", async () => {
+      const stato = document.getElementById("pagelle-stato");
+      const daSalvare = righe.filter((r) => r.nome.trim() || r.testo.trim()).map((r) => ({ nome: r.nome.trim(), testo: r.testo.trim() }));
+      stato.textContent = "Salvataggio in corso...";
+      stato.style.color = "var(--text-muted)";
+      try {
+        await hv_salvaPagelleStagioneViaGitHub(stagione.anno, daSalvare, config);
+        stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        stato.style.color = "var(--verde-prato)";
+        stagione.pagelle = daSalvare;
+        righe = daSalvare.map((p) => ({ nome: p.nome, testo: p.testo }));
+        righe.push({ nome: "", testo: "" });
+        disegna();
+
+        const listaWrap = document.getElementById("pagelle-lista-wrap");
+        listaWrap.innerHTML = daSalvare.length
+          ? `<div class="pagelle-stagione-lista">${daSalvare
+              .map((p) => `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${p.nome}</p><p class="pagella-stagione-testo">${p.testo}</p></div>`)
+              .join("")}</div>`
+          : "";
+      } catch (err) {
+        stato.textContent = "Errore: " + err.message;
+        stato.style.color = "var(--wine-bright)";
+      }
+    });
+  }
+
+  disegna();
+}
+
 async function hv_mostraStagione(stagione) {
   const wrap = document.getElementById("lista-dettaglio");
 
@@ -330,6 +416,13 @@ async function hv_mostraStagione(stagione) {
           .join("")}</div>`
       : "";
 
+  const pagelleHtml =
+    stagione.pagelle && stagione.pagelle.length
+      ? `<div class="pagelle-stagione-lista">${stagione.pagelle
+          .map((p) => `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${p.nome}</p><p class="pagella-stagione-testo">${p.testo}</p></div>`)
+          .join("")}</div>`
+      : "";
+
   const curiositaTabHtml = `
     ${hv_blocEspandibile("classifica-sa", "Classifica Serie A", "assets/icone/icon-raking.png", classificaHtml)}
     ${hv_blocEspandibile("top-marcatori", "Classifica migliori 10 marcatori", "assets/icone/icon-migliori10marcatori.png", marcatoriHtml)}
@@ -338,6 +431,9 @@ async function hv_mostraStagione(stagione) {
 
   const squadreTabHtml = `
     ${roseHtml}
+    <h3 class="squadra-block-title" style="margin-top: 26px;"><img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagelle</h3>
+    <div id="pagelle-lista-wrap">${pagelleHtml}</div>
+    <div id="pagelle-admin-form"></div>
   `;
 
   wrap.innerHTML = `
@@ -375,6 +471,7 @@ async function hv_mostraStagione(stagione) {
   });
 
   hv_renderVideoAdminForm(stagione);
+  hv_renderPagelleAdminForm(stagione);
 }
 
 // ===== Cambio vista: Albo d'oro <-> Lista =====

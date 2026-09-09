@@ -1,5 +1,5 @@
 {
-  "_leggimi": "Storico stagioni del fantacalcio Hertavernello. Generato a mano, un blocco per stagione. Due campi FACOLTATIVI per stagione, aggiungili solo se/quando trovi i dati: \"rose\": [ { \"squadra\": \"Nome fantasquadra\", \"giocatori\": [\"Nome1\", \"Nome2\", ...] }, ... ] — lista giocatori semplice, va bene anche solo il nome, non serve ruolo/costo. \"video\": [ { \"titolo\": \"Testo del link\", \"url\": \"https://www.youtube.com/watch?v=...\" }, ... ] — un link YouTube per riga, la miniatura si genera da sola dall'URL, non serve caricare immagini. Se questi campi non ci sono per una stagione, il sito semplicemente non mostra quelle sezioni.",
+  "_leggimi": "Storico stagioni del fantacalcio Hertavernello. Generato a mano, un blocco per stagione. Due campi FACOLTATIVI per stagione, aggiungili solo se/quando trovi i dati: \"rose\": [ { \"squadra\": \"Nome fantasquadra\", \"giocatori\": [\"Nome1\", \"Nome2\", ...] }, ... ] — lista giocatori semplice, va bene anche solo il nome, non serve ruolo/costo. \"video\": [ { \"titolo\": \"Testo del link\", \"url\": \"https://www.youtube.com/watch?v=...\" }, ... ] — un link YouTube per riga, la miniatura si genera da sola dall'URL, non serve caricare immagini. Se questi campi non ci sono per una stagione, il sito semplicemente non mostra quelle sezioni. \"pagelle\": [ { \"nome\": \"Nome fantallenatore\", \"testo\": \"Commento/pagella\" }, ... ] — anche questo facoltativo, un blocco nome+testo per persona, quanti ne vuoi.",
   "stagioni": [
     {
       "anno": "2018/19",
@@ -178,13 +178,7 @@
           "La minaccia di Thanos: nei cinema esce Avengers: Endgame, diventando temporaneamente il film con i maggiori incassi della storia del cinema.",
           "La rivoluzione di TikTok: l'app esplode definitivamente tra i giovani in Italia, cambiando per sempre il mondo dei social media."
         ]
-      },
-      "video": [
-        {
-          "titolo": "Riassunto Fanta 2018/19",
-          "url": "https://www.youtube.com/watch?v=PK8hP8j0Rig"
-        }
-      ]
+      }
     },
     {
       "anno": "2019/20",

@@ -221,7 +221,8 @@ async function hv_caricaLogoPiccoloSquadraViaGitHub(squadraId, file, config) {
 
 // Video "Highlights" della fantasquadra (es. i momenti dell'asta) — stesso file
 // loghi-fantasquadre.json, un campo in più per squadra, nessun file nuovo.
-async function hv_salvaVideoHighlightViaGitHub(squadraId, video, config) {
+// "video" è un ARRAY: come in Archivio, se ne possono aggiungere quanti si vuole.
+async function hv_salvaVideoHighlightViaGitHub(squadraId, videoArray, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -238,7 +239,7 @@ async function hv_salvaVideoHighlightViaGitHub(squadraId, video, config) {
     entry = { squadraId, immagine: "" };
     loghiObj.loghi.push(entry);
   }
-  entry.video = video;
+  entry.video = videoArray;
 
   const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
   await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna video highlights ${squadraId}`, fileJson.sha);
@@ -263,6 +264,27 @@ async function hv_salvaVideoStagioneViaGitHub(annoStagione, videoArray, config) 
 
   const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(alboObj, null, 2));
   await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna video stagione ${annoStagione}`, fileJson.sha);
+}
+
+// Pagelle di una STAGIONE in Archivio (data/albo-oro.json) — stesso principio
+// dei video: un array di { nome, testo }, quanti se ne vuole.
+async function hv_salvaPagelleStagioneViaGitHub(annoStagione, pagelleArray, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/albo-oro.json", token);
+  if (!fileJson) throw new Error("Non trovo data/albo-oro.json nel repository.");
+
+  const alboObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  const stagione = (alboObj.stagioni || []).find((s) => s.anno === annoStagione);
+  if (!stagione) throw new Error(`Stagione ${annoStagione} non trovata in albo-oro.json.`);
+  stagione.pagelle = pagelleArray;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(alboObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna pagelle stagione ${annoStagione}`, fileJson.sha);
 }
 
 
