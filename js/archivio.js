@@ -1092,6 +1092,12 @@ async function hv_renderAudioStorici() {
   hv_renderAudioStoriciAdminForm();
 }
 
+// Titolo proposto di default: il nome del file senza estensione, con
+// trattini/underscore trasformati in spazi — modificabile prima di caricare.
+function hv_titoloDaNomeFileAudioStorico(nomeFile) {
+  return nomeFile.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
+}
+
 function hv_renderAudioStoriciAdminForm() {
   const formWrap = document.getElementById("audio-storici-admin-form");
   const config = hv_archivioConfig;
@@ -1100,43 +1106,85 @@ function hv_renderAudioStoriciAdminForm() {
     return;
   }
 
-  formWrap.innerHTML = `
-    <div class="admin-box" style="background: var(--bg-void); padding: 14px;">
-      <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi un audio storico</p>
-      <input type="text" id="audio-storico-testo" placeholder="Cosa dice / di cosa si tratta" style="margin-bottom: 8px;">
-      <input type="file" id="audio-storico-file" accept="audio/*">
-      <p class="muted" style="font-size:12px; margin: 6px 0 0;">Formati supportati: mp3, ogg, wav, m4a e altri audio del browser. Massimo 5 MB.</p>
-      <button type="button" id="audio-storico-carica-btn" style="margin-top: 10px;">Carica</button>
-      <p id="audio-storico-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
-    </div>
-  `;
+  // File scelti ma non ancora caricati: puoi selezionarne più di uno insieme,
+  // ognuno con un titolo modificabile (parte dal nome del file).
+  let fileSelezionati = [];
 
-  document.getElementById("audio-storico-carica-btn").addEventListener("click", async () => {
-    const stato = document.getElementById("audio-storico-stato");
-    const testo = document.getElementById("audio-storico-testo").value.trim();
-    const file = document.getElementById("audio-storico-file").files[0];
-    if (!testo) {
-      stato.textContent = "Scrivi cosa dice l'audio.";
-      stato.style.color = "var(--wine-bright)";
-      return;
+  function disegna() {
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi uno o più audio storici</p>
+        <input type="file" id="audio-storico-file" accept="audio/*" multiple>
+        <p class="muted" style="font-size:12px; margin: 6px 0 0;">Puoi selezionarne più di uno insieme. Formati supportati: mp3, ogg, wav, m4a e altri audio del browser. Il titolo parte dal nome del file, modificalo pure prima di caricare. Massimo 5 MB a file.</p>
+        ${
+          fileSelezionati.length
+            ? `<div style="display:flex; flex-direction:column; gap:8px; margin-top: 12px;">
+                ${fileSelezionati
+                  .map(
+                    (f, i) => `
+                  <div class="campo-riga" data-i="${i}" style="align-items:center;">
+                    <input type="text" class="audio-storico-pending-titolo" data-i="${i}" value="${f.titolo.replace(/"/g, "&quot;")}" style="flex:1;">
+                    <span class="muted" style="font-size:11px; white-space:nowrap;">${(f.file.size / 1024 / 1024).toFixed(1)} MB</span>
+                    <button type="button" class="audio-storico-pending-rimuovi" data-i="${i}" title="Togli dalla lista">✕</button>
+                  </div>`
+                  )
+                  .join("")}
+              </div>
+              <button type="button" id="audio-storico-carica-btn" style="margin-top: 10px;">Carica ${fileSelezionati.length > 1 ? `tutti (${fileSelezionati.length})` : ""}</button>`
+            : ""
+        }
+        <p id="audio-storico-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    document.getElementById("audio-storico-file").addEventListener("change", (e) => {
+      const nuovi = Array.from(e.target.files).map((file) => ({ file, titolo: hv_titoloDaNomeFileAudioStorico(file.name) }));
+      fileSelezionati = fileSelezionati.concat(nuovi);
+      disegna();
+    });
+
+    formWrap.querySelectorAll(".audio-storico-pending-titolo").forEach((el) => {
+      el.addEventListener("input", () => (fileSelezionati[Number(el.dataset.i)].titolo = el.value));
+    });
+    formWrap.querySelectorAll(".audio-storico-pending-rimuovi").forEach((el) => {
+      el.addEventListener("click", () => {
+        fileSelezionati.splice(Number(el.dataset.i), 1);
+        disegna();
+      });
+    });
+
+    const btnCarica = document.getElementById("audio-storico-carica-btn");
+    if (btnCarica) {
+      btnCarica.addEventListener("click", async () => {
+        const stato = document.getElementById("audio-storico-stato");
+        for (let i = 0; i < fileSelezionati.length; i++) {
+          const { file, titolo } = fileSelezionati[i];
+          stato.textContent = `Caricamento ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}")...`;
+          stato.style.color = "var(--text-muted)";
+          try {
+            await hv_caricaAudioStoricoViaGitHub(titolo.trim() || file.name, file, config);
+          } catch (err) {
+            fileSelezionati = fileSelezionati.slice(i);
+            hv_renderAudioStorici();
+            const statoNuovo = document.getElementById("audio-storico-stato");
+            if (statoNuovo) {
+              statoNuovo.textContent = `Caricati ${i} su ${i + fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}`;
+              statoNuovo.style.color = "var(--wine-bright)";
+            }
+            return;
+          }
+        }
+        hv_renderAudioStorici();
+        const statoFinale = document.getElementById("audio-storico-stato");
+        if (statoFinale) {
+          statoFinale.textContent = "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+          statoFinale.style.color = "var(--verde-prato)";
+        }
+      });
     }
-    if (!file) {
-      stato.textContent = "Scegli un file audio.";
-      stato.style.color = "var(--wine-bright)";
-      return;
-    }
-    stato.textContent = "Caricamento in corso...";
-    stato.style.color = "var(--text-muted)";
-    try {
-      await hv_caricaAudioStoricoViaGitHub(testo, file, config);
-      hv_renderAudioStorici();
-      document.getElementById("audio-storico-stato").textContent = "Caricato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-      document.getElementById("audio-storico-stato").style.color = "var(--verde-prato)";
-    } catch (err) {
-      stato.textContent = "Errore: " + err.message;
-      stato.style.color = "var(--wine-bright)";
-    }
-  });
+  }
+
+  disegna();
 }
 
 // ===== Cambio vista: Albo d'oro <-> Lista <-> Audio storici =====
