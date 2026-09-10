@@ -516,12 +516,14 @@ function hv_wireVideoEmbedSquadre(container) {
   });
 }
 
-// I video di una fantasquadra sono un ARRAY (data/loghi-fantasquadre.json,
-// campo "video"): zero, uno, o più highlights. Stesso meccanismo a righe
-// dinamiche già usato per i video di stagione in Archivio.
+// I video di una fantasquadra sono legati alla STAGIONE in corso
+// (data/loghi-fantasquadre.json, campo "video", un oggetto per anno): così
+// gli highlights di un'asta non cancellano mai quelli dell'asta precedente.
 function hv_renderHighlights(squadraId, logoEsistente, config) {
   const contenuto = document.getElementById("highlights-content");
-  const videoArray = (logoEsistente && logoEsistente.video) || [];
+  const stagioneAttuale = config.lega.stagione;
+  const videoPerAnno = (logoEsistente && logoEsistente.video) || {};
+  const videoArray = Array.isArray(videoPerAnno) ? [] : videoPerAnno[stagioneAttuale] || [];
 
   contenuto.innerHTML = videoArray.length
     ? `<div class="video-embed-lista">${videoArray.map((v) => hv_creaVideoEmbedHtmlSquadre(v)).join("")}</div>`
@@ -534,14 +536,15 @@ function hv_renderHighlights(squadraId, logoEsistente, config) {
     return;
   }
 
-  // Righe di partenza: quelle già salvate, più una vuota pronta da compilare.
+  // Righe di partenza: quelle già salvate PER QUESTA STAGIONE, più una vuota
+  // pronta da compilare.
   let righe = videoArray.map((v) => ({ titolo: v.titolo || "", url: v.url || "" }));
   righe.push({ titolo: "", url: "" });
 
   function disegna() {
     formWrap.innerHTML = `
       <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
-        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica i video (es. i momenti salienti dell'asta)</p>
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica i video di questa stagione (${stagioneAttuale}) — es. i momenti salienti dell'asta</p>
         <div style="display:flex; flex-direction:column; gap:10px;">
           ${righe
             .map(
@@ -583,10 +586,11 @@ function hv_renderHighlights(squadraId, logoEsistente, config) {
       stato.textContent = "Salvataggio in corso...";
       stato.style.color = "var(--text-muted)";
       try {
-        await hv_salvaVideoHighlightViaGitHub(squadraId, daSalvare, config);
+        await hv_salvaVideoHighlightViaGitHub(squadraId, stagioneAttuale, daSalvare, config);
         stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
         stato.style.color = "var(--verde-prato)";
-        hv_renderHighlights(squadraId, { ...(logoEsistente || {}), video: daSalvare }, config);
+        const videoAggiornato = { ...videoPerAnno, [stagioneAttuale]: daSalvare };
+        hv_renderHighlights(squadraId, { ...(logoEsistente || {}), video: videoAggiornato }, config);
       } catch (err) {
         stato.textContent = "Errore: " + err.message;
         stato.style.color = "var(--wine-bright)";

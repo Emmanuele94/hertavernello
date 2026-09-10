@@ -340,10 +340,15 @@ function hv_contenutoSquadraStorica(stagione, nome) {
   const rosaHtml = roseTrovate
     .map((rosa) => {
       const etichetta = roseTrovate.length > 1 ? HV_ETICHETTA_FASE_ROSA[rosa.fase] || "Rosa" : null;
+      const stemmaHtml = rosa.stemmaPiccolo || rosa.stemma ? `<img src="${rosa.stemmaPiccolo || rosa.stemma}" class="rosa-storica-stemma" alt="">` : "";
+      const videoRosaHtml =
+        rosa.video && rosa.video.length
+          ? `<div class="video-embed-lista" style="margin-top: 14px;">${rosa.video.map((v) => hv_creaVideoEmbedHtml(v)).join("")}</div>`
+          : "";
       return `
         ${etichetta ? `<p class="rosa-storica-fase-label">${etichetta}</p>` : ""}
         <div class="rosa-storica-card"${roseTrovate.length > 1 ? ' style="margin-bottom: 14px;"' : ""}>
-          <p class="rosa-storica-nome">${rosa.squadra}</p>
+          <p class="rosa-storica-nome">${stemmaHtml}${rosa.squadra}</p>
           <ul class="rosa-storica-lista">
             ${rosa.giocatori
               .map((g) => {
@@ -353,6 +358,7 @@ function hv_contenutoSquadraStorica(stagione, nome) {
               })
               .join("")}
           </ul>
+          ${videoRosaHtml}
         </div>`;
     })
     .join("");
@@ -410,6 +416,7 @@ function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
   contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[indiceIniziale]);
   hv_wirePagellaStorica(contentWrap);
   hv_wireCaricaFotoStorica(contentWrap, stagione);
+  hv_wireVideoEmbed(contentWrap);
 
   navWrap.querySelectorAll(".squadra-persona-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -418,6 +425,7 @@ function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
       contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[Number(btn.dataset.i)]);
       hv_wirePagellaStorica(contentWrap);
       hv_wireCaricaFotoStorica(contentWrap, stagione);
+      hv_wireVideoEmbed(contentWrap);
       btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     });
   });

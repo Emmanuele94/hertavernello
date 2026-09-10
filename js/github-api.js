@@ -222,7 +222,11 @@ async function hv_caricaLogoPiccoloSquadraViaGitHub(squadraId, file, config) {
 // Video "Highlights" della fantasquadra (es. i momenti dell'asta) — stesso file
 // loghi-fantasquadre.json, un campo in più per squadra, nessun file nuovo.
 // "video" è un ARRAY: come in Archivio, se ne possono aggiungere quanti si vuole.
-async function hv_salvaVideoHighlightViaGitHub(squadraId, videoArray, config) {
+// I video highlights sono legati alla STAGIONE (config.lega.stagione, es.
+// "2026/2027"): entry.video è un oggetto { "2026/2027": [...], "2025/2026":
+// [...] }, mai un array unico — così caricare gli highlights di un'asta
+// nuova non sovrascrive mai quelli di quella vecchia.
+async function hv_salvaVideoHighlightViaGitHub(squadraId, stagioneAttuale, videoArray, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -239,10 +243,26 @@ async function hv_salvaVideoHighlightViaGitHub(squadraId, videoArray, config) {
     entry = { squadraId, immagine: "" };
     loghiObj.loghi.push(entry);
   }
-  entry.video = videoArray;
+  // Se una versione vecchia del sito aveva salvato qui un array semplice
+  // (formato pre-2026), lo scarto: non è recuperabile in modo affidabile
+  // per una singola stagione, meglio ripartire puliti che tenerlo sbagliato.
+  if (!entry.video || Array.isArray(entry.video)) entry.video = {};
+  entry.video[stagioneAttuale] = videoArray;
 
   const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
-  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna video highlights ${squadraId}`, fileJson.sha);
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna video highlights ${squadraId} (${stagioneAttuale})`, fileJson.sha);
+}
+
+// Duplica un file già presente nel repository su un nuovo percorso (usata
+// per congelare stemmi/loghi al momento dell'archiviazione: così anche se il
+// file originale viene sostituito in futuro, la copia archiviata resta
+// intatta). Ritorna il nuovo percorso, o null se il file di origine non
+// esiste (es. quella fantasquadra non ha ancora caricato un logo).
+async function hv_copiaFileGitHub(owner, repo, percorsoOrigine, percorsoDestinazione, token, messaggio) {
+  const origine = await hv_ghGetFile(owner, repo, percorsoOrigine, token);
+  if (!origine) return null;
+  await hv_ghPutFile(owner, repo, percorsoDestinazione, token, origine.content, messaggio, null);
+  return percorsoDestinazione;
 }
 
 // Video di una STAGIONE in Archivio (data/albo-oro.json) — array di link,
