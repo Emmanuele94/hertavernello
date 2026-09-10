@@ -11,6 +11,14 @@ async function hv_sha256(testo) {
     .join("");
 }
 
+// Il tasto "Admin" in nav (se presente in questa pagina) si vede solo se sei
+// entrato come admin — stessa logica del ruolo di sessione, niente di nuovo.
+function hv_aggiornaLinkAdmin() {
+  const link = document.getElementById("nav-admin-link");
+  if (!link) return;
+  link.classList.toggle("hidden", window.hv_role !== "admin");
+}
+
 async function hv_checkGate() {
   const gate = document.getElementById("gate");
   const app = document.getElementById("app");
@@ -38,6 +46,7 @@ async function hv_checkGate() {
     window.hv_role = ruoloSalvato;
     gate.classList.add("hidden");
     app.classList.remove("hidden");
+    hv_aggiornaLinkAdmin();
     return data;
   }
 
@@ -59,6 +68,7 @@ async function hv_checkGate() {
       window.hv_role = ruolo;
       gate.classList.add("hidden");
       app.classList.remove("hidden");
+      hv_aggiornaLinkAdmin();
       document.dispatchEvent(new CustomEvent("hv:unlocked", { detail: data }));
     } else {
       errore.textContent = "Password sbagliata, riprova.";
