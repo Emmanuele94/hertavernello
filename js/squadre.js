@@ -601,6 +601,222 @@ function hv_renderHighlights(squadraId, logoEsistente, config) {
   disegna();
 }
 
+// ===== Audio per fantasquadra (Squadre > Audio) =====
+// Stesso player a onda di Archivio > Audio storici, duplicato qui perché
+// squadre.html non carica js/archivio.js. Un solo audio alla volta.
+let hv_audioContextSquadra = null;
+let hv_audioAttivoSquadra = null;
+
+function hv_ottieniAudioContextSquadra() {
+  if (!hv_audioContextSquadra) hv_audioContextSquadra = new (window.AudioContext || window.webkitAudioContext)();
+  return hv_audioContextSquadra;
+}
+
+function hv_fermaAudioSquadra() {
+  if (!hv_audioAttivoSquadra) return;
+  hv_audioAttivoSquadra.audio.pause();
+  hv_audioAttivoSquadra.audio.currentTime = 0;
+  cancelAnimationFrame(hv_audioAttivoSquadra.animId);
+  hv_audioAttivoSquadra.tile.classList.remove("in-riproduzione");
+  const ctx2d = hv_audioAttivoSquadra.canvas.getContext("2d");
+  ctx2d.clearRect(0, 0, hv_audioAttivoSquadra.canvas.width, hv_audioAttivoSquadra.canvas.height);
+  const icona = hv_audioAttivoSquadra.tile.querySelector(".audio-storico-icona");
+  if (icona) icona.textContent = "▶";
+  hv_audioAttivoSquadra = null;
+}
+
+function hv_disegnaOndaAudioSquadra(stato) {
+  const ctx2d = stato.canvas.getContext("2d");
+  const dataArray = new Uint8Array(stato.analyser.frequencyBinCount);
+
+  function loop() {
+    stato.analyser.getByteTimeDomainData(dataArray);
+    ctx2d.clearRect(0, 0, stato.canvas.width, stato.canvas.height);
+    ctx2d.beginPath();
+    const slice = stato.canvas.width / dataArray.length;
+    let x = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = (v * stato.canvas.height) / 2;
+      if (i === 0) ctx2d.moveTo(x, y);
+      else ctx2d.lineTo(x, y);
+      x += slice;
+    }
+    ctx2d.strokeStyle = "#39ff14";
+    ctx2d.lineWidth = 2;
+    ctx2d.stroke();
+    stato.animId = requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+function hv_avviaAudioSquadra(tile, url) {
+  if (hv_audioAttivoSquadra && hv_audioAttivoSquadra.tile === tile) {
+    hv_fermaAudioSquadra();
+    return;
+  }
+  hv_fermaAudioSquadra();
+
+  const audio = tile._audioEl || (tile._audioEl = new Audio());
+  audio.src = url;
+  audio.crossOrigin = "anonymous";
+
+  const canvas = tile.querySelector(".audio-storico-onda");
+  const ctxAudio = hv_ottieniAudioContextSquadra();
+  if (ctxAudio.state === "suspended") ctxAudio.resume();
+
+  if (!tile._analyser) {
+    const sourceNode = ctxAudio.createMediaElementSource(audio);
+    tile._analyser = ctxAudio.createAnalyser();
+    tile._analyser.fftSize = 256;
+    sourceNode.connect(tile._analyser);
+    tile._analyser.connect(ctxAudio.destination);
+  }
+
+  hv_audioAttivoSquadra = { audio, tile, canvas, analyser: tile._analyser, animId: null };
+  tile.classList.add("in-riproduzione");
+  const icona = tile.querySelector(".audio-storico-icona");
+  if (icona) icona.textContent = "❚❚";
+  audio.play();
+  hv_disegnaOndaAudioSquadra(hv_audioAttivoSquadra);
+
+  audio.addEventListener(
+    "ended",
+    () => {
+      if (hv_audioAttivoSquadra && hv_audioAttivoSquadra.tile === tile) hv_fermaAudioSquadra();
+    },
+    { once: true }
+  );
+}
+
+// Titolo proposto di default: il nome del file senza estensione, con trattini
+// e underscore trasformati in spazi — tu puoi sempre modificarlo prima di
+// caricare.
+function hv_titoloDaNomeFileAudio(nomeFile) {
+  return nomeFile.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
+}
+
+function hv_renderAudioSquadra(squadraId, logoEsistente, config) {
+  const contenuto = document.getElementById("audio-squadra-content");
+  const stagioneAttuale = config.lega.stagione;
+  const audioPerAnno = (logoEsistente && logoEsistente.audio) || {};
+  const audioArray = Array.isArray(audioPerAnno) ? [] : audioPerAnno[stagioneAttuale] || [];
+
+  contenuto.innerHTML = audioArray.length
+    ? `<div class="audio-storici-griglia">${audioArray
+        .map(
+          (a) => `
+      <div class="audio-storico-tile" data-id="${a.id}" data-file="${a.file}">
+        <span class="audio-storico-icona">▶</span>
+        <canvas class="audio-storico-onda" width="120" height="28"></canvas>
+        <p class="audio-storico-testo">${a.testo}</p>
+        ${window.hv_role === "admin" ? `<button type="button" class="audio-squadra-rimuovi" data-id="${a.id}">Rimuovi</button>` : ""}
+      </div>`
+        )
+        .join("")}</div>`
+    : '<p class="empty-state">Nessun audio ancora aggiunto per questa fantasquadra.</p>';
+
+  contenuto.querySelectorAll(".audio-storico-tile").forEach((tile) => {
+    tile.addEventListener("click", (e) => {
+      if (e.target.classList.contains("audio-squadra-rimuovi")) return;
+      hv_avviaAudioSquadra(tile, tile.dataset.file);
+    });
+  });
+  contenuto.querySelectorAll(".audio-squadra-rimuovi").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      if (!confirm("Rimuovere questo audio? Non si può annullare.")) return;
+      try {
+        const audioAggiornato = await hv_rimuoviAudioSquadraViaGitHub(squadraId, stagioneAttuale, btn.dataset.id, config);
+        hv_renderAudioSquadra(squadraId, { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } }, config);
+      } catch (err) {
+        alert("Errore: " + err.message);
+      }
+    });
+  });
+
+  const formWrap = document.getElementById("audio-squadra-admin-form");
+  if (window.hv_role !== "admin" || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    formWrap.innerHTML = "";
+    return;
+  }
+
+  // File scelti ma non ancora caricati: puoi selezionarne più di uno insieme,
+  // ognuno con un titolo modificabile (parte dal nome del file).
+  let fileSelezionati = [];
+
+  function disegnaForm() {
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi uno o più audio di questa stagione (${stagioneAttuale})</p>
+        <input type="file" id="audio-squadra-file-input" accept="audio/*" multiple>
+        <p class="muted" style="font-size:12px; margin: 6px 0 0;">Puoi selezionarne più di uno insieme. Il titolo parte dal nome del file, modificalo pure prima di caricare. Massimo 5 MB a file.</p>
+        ${
+          fileSelezionati.length
+            ? `<div style="display:flex; flex-direction:column; gap:8px; margin-top: 12px;">
+                ${fileSelezionati
+                  .map(
+                    (f, i) => `
+                  <div class="campo-riga" data-i="${i}" style="align-items:center;">
+                    <input type="text" class="audio-squadra-pending-titolo" data-i="${i}" value="${f.titolo.replace(/"/g, "&quot;")}" style="flex:1;">
+                    <span class="muted" style="font-size:11px; white-space:nowrap;">${(f.file.size / 1024 / 1024).toFixed(1)} MB</span>
+                    <button type="button" class="audio-squadra-pending-rimuovi" data-i="${i}" title="Togli dalla lista">✕</button>
+                  </div>`
+                  )
+                  .join("")}
+              </div>
+              <button type="button" id="audio-squadra-carica-btn" style="margin-top: 10px;">Carica ${fileSelezionati.length > 1 ? `tutti (${fileSelezionati.length})` : ""}</button>`
+            : ""
+        }
+        <p id="audio-squadra-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    document.getElementById("audio-squadra-file-input").addEventListener("change", (e) => {
+      const nuovi = Array.from(e.target.files).map((file) => ({ file, titolo: hv_titoloDaNomeFileAudio(file.name) }));
+      fileSelezionati = fileSelezionati.concat(nuovi);
+      disegnaForm();
+    });
+
+    formWrap.querySelectorAll(".audio-squadra-pending-titolo").forEach((el) => {
+      el.addEventListener("input", () => (fileSelezionati[Number(el.dataset.i)].titolo = el.value));
+    });
+    formWrap.querySelectorAll(".audio-squadra-pending-rimuovi").forEach((el) => {
+      el.addEventListener("click", () => {
+        fileSelezionati.splice(Number(el.dataset.i), 1);
+        disegnaForm();
+      });
+    });
+
+    const btnCarica = document.getElementById("audio-squadra-carica-btn");
+    if (btnCarica) {
+      btnCarica.addEventListener("click", async () => {
+        const stato = document.getElementById("audio-squadra-stato");
+        let audioAggiornato = audioArray;
+        for (let i = 0; i < fileSelezionati.length; i++) {
+          const { file, titolo } = fileSelezionati[i];
+          stato.textContent = `Caricamento ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}")...`;
+          stato.style.color = "var(--text-muted)";
+          try {
+            audioAggiornato = await hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, titolo.trim() || file.name, file, config);
+          } catch (err) {
+            stato.textContent = `Caricati ${i} su ${fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}`;
+            stato.style.color = "var(--wine-bright)";
+            fileSelezionati = fileSelezionati.slice(i);
+            hv_renderAudioSquadra(squadraId, { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } }, config);
+            return;
+          }
+        }
+        hv_renderAudioSquadra(squadraId, { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } }, config);
+        document.getElementById("audio-squadra-stato").textContent = "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        document.getElementById("audio-squadra-stato").style.color = "var(--verde-prato)";
+      });
+    }
+  }
+
+  disegnaForm();
+}
+
 function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {
   const wrap = document.getElementById("squadra-logo-upload-admin");
   if (window.hv_role !== "admin") {
@@ -743,6 +959,7 @@ async function hv_initSquadre(config) {
     hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
     hv_renderTortaNazioni(roster ? roster.giocatori : [], squadreRef, giocatoriDb, nazioni);
     hv_renderHighlights(squadra.id, logo, config);
+    hv_renderAudioSquadra(squadra.id, logo, config);
 
     if (statoInfo && giornataCorrente) {
       const trovati = document.querySelectorAll("#roster-content .info-match").length;

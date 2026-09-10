@@ -507,3 +507,83 @@ async function hv_rimuoviAudioStoricoViaGitHub(id, config) {
     } catch (e) {}
   }
 }
+
+// Audio propri di una fantasquadra (Squadre > Audio), legati alla STAGIONE
+// come i video highlights (config.lega.stagione), sotto
+// data/loghi-fantasquadre.json campo "audio" — un oggetto { "2026/2027":
+// [...], ... }, mai un array unico. File veri su assets/audio-squadre/.
+// Ritorna l'elenco aggiornato di QUESTA stagione, comodo per ridisegnare
+// subito senza dover ricaricare tutto il JSON dal repository.
+async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo, file, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+  if (file.size > HV_LIMITE_AUDIO_BYTE) {
+    throw new Error(`"${file.name}" pesa ${(file.size / 1024 / 1024).toFixed(1)} MB, sopra il limite di 5 MB.`);
+  }
+
+  const ext = (file.name.split(".").pop() || "mp3").toLowerCase();
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  const percorso = `assets/audio-squadre/${squadraId}-${id}.${ext}`;
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+
+  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio ${squadraId}: ${testo.slice(0, 60)}`, null);
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
+  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  if (!loghiObj.loghi) loghiObj.loghi = [];
+  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
+  if (!entry) {
+    entry = { squadraId, immagine: "" };
+    loghiObj.loghi.push(entry);
+  }
+  if (!entry.audio || Array.isArray(entry.audio)) entry.audio = {};
+  if (!entry.audio[stagioneAttuale]) entry.audio[stagioneAttuale] = [];
+  const voce = { id, testo, file: percorso };
+  entry.audio[stagioneAttuale].push(voce);
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiungi audio ${squadraId} (${stagioneAttuale})`, fileJson.sha);
+
+  return entry.audio[stagioneAttuale];
+}
+
+async function hv_rimuoviAudioSquadraViaGitHub(squadraId, stagioneAttuale, id, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
+  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  const entry = (loghiObj.loghi || []).find((p) => p.squadraId === squadraId);
+  if (!entry || !entry.audio || Array.isArray(entry.audio) || !entry.audio[stagioneAttuale]) {
+    return [];
+  }
+
+  const voce = entry.audio[stagioneAttuale].find((a) => a.id === id);
+  entry.audio[stagioneAttuale] = entry.audio[stagioneAttuale].filter((a) => a.id !== id);
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Rimuovi audio ${squadraId} (${id})`, fileJson.sha);
+
+  if (voce && voce.file) {
+    try {
+      const fileAudio = await hv_ghGetFile(owner, repo, voce.file, token);
+      if (fileAudio) await hv_ghDeleteFile(owner, repo, voce.file, token, fileAudio.sha, `Rimuovi file audio ${squadraId} (${id})`);
+    } catch (e) {}
+  }
+
+  return entry.audio[stagioneAttuale];
+}
