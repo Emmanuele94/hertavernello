@@ -56,6 +56,9 @@
           <button type="button" class="archivio-nav-item" data-vista="lista">
             <img src="assets/icone/icon-lista.png" class="icona-titolo" alt="">Lista
           </button>
+          <button type="button" class="archivio-nav-item" data-vista="audio">
+            <img src="assets/icone/icon-audiostorici.png" class="icona-titolo" alt="">Audio storici
+          </button>
         </div>
 
         <div class="archivio-contenuto">
@@ -77,6 +80,12 @@
           <div id="vista-lista" class="hidden">
             <div id="lista-anni-tabs" class="tabs" style="margin-bottom: 22px;"></div>
             <div id="lista-dettaglio"></div>
+          </div>
+
+          <div id="vista-audio" class="hidden">
+            <p class="desc" style="margin: 0 0 18px;">Gli audio migliori e più storici del nostro fantacalcio. Clicca su un riquadro per ascoltarlo.</p>
+            <div id="audio-storici-griglia" class="audio-storici-griglia"></div>
+            <div id="audio-storici-admin-form" style="margin-top: 24px;"></div>
           </div>
         </div>
       </div>

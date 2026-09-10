@@ -443,3 +443,67 @@ async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
 
   return percorsoImmagine;
 }
+
+// Audio storici (Archivio): data/audio-storici.json + i file veri su
+// assets/audio-storici/. Limite di peso lato client per non appesantire il
+// repository (l'utente l'ha chiesto esplicitamente: avviso sopra i 5 MB).
+const HV_LIMITE_AUDIO_BYTE = 5 * 1024 * 1024;
+
+async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+  if (file.size > HV_LIMITE_AUDIO_BYTE) {
+    throw new Error(`Il file pesa ${(file.size / 1024 / 1024).toFixed(1)} MB, sopra il limite di 5 MB. Comprimilo o accorcia la clip prima di ricaricarlo.`);
+  }
+
+  const ext = (file.name.split(".").pop() || "mp3").toLowerCase();
+  const id = `${Date.now()}`;
+  const percorso = `assets/audio-storici/${id}.${ext}`;
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+
+  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio storico: ${testo.slice(0, 60)}`, null);
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/audio-storici.json", token);
+  const audioObj = fileJson ? JSON.parse(hv_base64ToUtf8(fileJson.content)) : { audio: [] };
+  if (!audioObj.audio) audioObj.audio = [];
+  const voce = { id, testo, file: percorso };
+  audioObj.audio.push(voce);
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(audioObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/audio-storici.json", token, nuovoContenuto, `Aggiungi audio storico: ${testo.slice(0, 60)}`, fileJson ? fileJson.sha : null);
+
+  return voce;
+}
+
+async function hv_rimuoviAudioStoricoViaGitHub(id, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/audio-storici.json", token);
+  if (!fileJson) throw new Error("Non trovo data/audio-storici.json nel repository.");
+  const audioObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  const voce = (audioObj.audio || []).find((a) => a.id === id);
+  audioObj.audio = (audioObj.audio || []).filter((a) => a.id !== id);
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(audioObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/audio-storici.json", token, nuovoContenuto, `Rimuovi audio storico ${id}`, fileJson.sha);
+
+  if (voce && voce.file) {
+    try {
+      const fileAudio = await hv_ghGetFile(owner, repo, voce.file, token);
+      if (fileAudio) await hv_ghDeleteFile(owner, repo, voce.file, token, fileAudio.sha, `Rimuovi file audio ${id}`);
+    } catch (e) {}
+  }
+}

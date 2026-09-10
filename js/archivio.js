@@ -947,11 +947,211 @@ async function hv_mostraStagione(stagione) {
   hv_wireVideoEmbed(document.getElementById("video-lista-wrap"));
 }
 
-// ===== Cambio vista: Albo d'oro <-> Lista =====
+// ===== Audio storici (Archivio) =====
+// Un solo player alla volta: se ne parte un altro, quello prima si ferma.
+// L'onda è disegnata leggendo i campioni AUDIO VERI con l'AnalyserNode della
+// Web Audio API — non è un'animazione finta, reagisce davvero al volume.
+let hv_audioContext = null;
+let hv_audioAttivo = null;
+
+function hv_ottieniAudioContext() {
+  if (!hv_audioContext) hv_audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  return hv_audioContext;
+}
+
+function hv_fermaAudioStorico() {
+  if (!hv_audioAttivo) return;
+  hv_audioAttivo.audio.pause();
+  hv_audioAttivo.audio.currentTime = 0;
+  cancelAnimationFrame(hv_audioAttivo.animId);
+  hv_audioAttivo.tile.classList.remove("in-riproduzione");
+  const ctx2d = hv_audioAttivo.canvas.getContext("2d");
+  ctx2d.clearRect(0, 0, hv_audioAttivo.canvas.width, hv_audioAttivo.canvas.height);
+  const icona = hv_audioAttivo.tile.querySelector(".audio-storico-icona");
+  if (icona) icona.textContent = "▶";
+  hv_audioAttivo = null;
+}
+
+function hv_disegnaOndaAudio(stato) {
+  const ctx2d = stato.canvas.getContext("2d");
+  const dataArray = new Uint8Array(stato.analyser.frequencyBinCount);
+
+  function loop() {
+    stato.analyser.getByteTimeDomainData(dataArray);
+    ctx2d.clearRect(0, 0, stato.canvas.width, stato.canvas.height);
+    ctx2d.beginPath();
+    const slice = stato.canvas.width / dataArray.length;
+    let x = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = (v * stato.canvas.height) / 2;
+      if (i === 0) ctx2d.moveTo(x, y);
+      else ctx2d.lineTo(x, y);
+      x += slice;
+    }
+    ctx2d.strokeStyle = "#39ff14";
+    ctx2d.lineWidth = 2;
+    ctx2d.stroke();
+    stato.animId = requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+// Fa partire (o ferma, se era già in riproduzione) l'audio di un riquadro.
+// Il nodo audio va creato UNA SOLA VOLTA per elemento <audio> (limite della
+// Web Audio API), quindi lo tengo agganciato al riquadro stesso.
+function hv_avviaAudioStorico(tile, url) {
+  if (hv_audioAttivo && hv_audioAttivo.tile === tile) {
+    hv_fermaAudioStorico();
+    return;
+  }
+  hv_fermaAudioStorico();
+
+  const audio = tile._audioEl || (tile._audioEl = new Audio());
+  audio.src = url;
+  audio.crossOrigin = "anonymous";
+
+  const canvas = tile.querySelector(".audio-storico-onda");
+  const ctxAudio = hv_ottieniAudioContext();
+  if (ctxAudio.state === "suspended") ctxAudio.resume();
+
+  if (!tile._analyser) {
+    const sourceNode = ctxAudio.createMediaElementSource(audio);
+    tile._analyser = ctxAudio.createAnalyser();
+    tile._analyser.fftSize = 256;
+    sourceNode.connect(tile._analyser);
+    tile._analyser.connect(ctxAudio.destination);
+  }
+
+  hv_audioAttivo = { audio, tile, canvas, analyser: tile._analyser, animId: null };
+  tile.classList.add("in-riproduzione");
+  const icona = tile.querySelector(".audio-storico-icona");
+  if (icona) icona.textContent = "❚❚";
+  audio.play();
+  hv_disegnaOndaAudio(hv_audioAttivo);
+
+  audio.addEventListener(
+    "ended",
+    () => {
+      if (hv_audioAttivo && hv_audioAttivo.tile === tile) hv_fermaAudioStorico();
+    },
+    { once: true }
+  );
+}
+
+async function hv_renderAudioStorici() {
+  const griglia = document.getElementById("audio-storici-griglia");
+  griglia.innerHTML = '<p class="empty-state">Carico...</p>';
+
+  let audioLista = [];
+  try {
+    const res = await fetch("data/audio-storici.json");
+    const data = await res.json();
+    audioLista = data.audio || [];
+  } catch (err) {
+    griglia.innerHTML = `<p class="empty-state">Non riesco a caricare gli audio (${err.message}).</p>`;
+    hv_renderAudioStoriciAdminForm();
+    return;
+  }
+
+  if (!audioLista.length) {
+    griglia.innerHTML = '<p class="empty-state">Nessun audio ancora caricato.</p>';
+  } else {
+    griglia.innerHTML = audioLista
+      .map(
+        (a) => `
+      <div class="audio-storico-tile" data-id="${a.id}" data-file="${a.file}">
+        <span class="audio-storico-icona">▶</span>
+        <canvas class="audio-storico-onda" width="120" height="28"></canvas>
+        <p class="audio-storico-testo">${a.testo}</p>
+        ${window.hv_role === "admin" ? `<button type="button" class="audio-storico-rimuovi" data-id="${a.id}">Rimuovi</button>` : ""}
+      </div>`
+      )
+      .join("");
+
+    griglia.querySelectorAll(".audio-storico-tile").forEach((tile) => {
+      tile.addEventListener("click", (e) => {
+        if (e.target.classList.contains("audio-storico-rimuovi")) return;
+        hv_avviaAudioStorico(tile, tile.dataset.file);
+      });
+    });
+    griglia.querySelectorAll(".audio-storico-rimuovi").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (!confirm("Rimuovere questo audio? Non si può annullare.")) return;
+        try {
+          await hv_rimuoviAudioStoricoViaGitHub(btn.dataset.id, hv_archivioConfig);
+          hv_renderAudioStorici();
+        } catch (err) {
+          alert("Errore: " + err.message);
+        }
+      });
+    });
+  }
+
+  hv_renderAudioStoriciAdminForm();
+}
+
+function hv_renderAudioStoriciAdminForm() {
+  const formWrap = document.getElementById("audio-storici-admin-form");
+  const config = hv_archivioConfig;
+  if (!formWrap || window.hv_role !== "admin" || !config || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    if (formWrap) formWrap.innerHTML = "";
+    return;
+  }
+
+  formWrap.innerHTML = `
+    <div class="admin-box" style="background: var(--bg-void); padding: 14px;">
+      <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi un audio storico</p>
+      <input type="text" id="audio-storico-testo" placeholder="Cosa dice / di cosa si tratta" style="margin-bottom: 8px;">
+      <input type="file" id="audio-storico-file" accept="audio/*">
+      <p class="muted" style="font-size:12px; margin: 6px 0 0;">Formati supportati: mp3, ogg, wav, m4a e altri audio del browser. Massimo 5 MB.</p>
+      <button type="button" id="audio-storico-carica-btn" style="margin-top: 10px;">Carica</button>
+      <p id="audio-storico-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+    </div>
+  `;
+
+  document.getElementById("audio-storico-carica-btn").addEventListener("click", async () => {
+    const stato = document.getElementById("audio-storico-stato");
+    const testo = document.getElementById("audio-storico-testo").value.trim();
+    const file = document.getElementById("audio-storico-file").files[0];
+    if (!testo) {
+      stato.textContent = "Scrivi cosa dice l'audio.";
+      stato.style.color = "var(--wine-bright)";
+      return;
+    }
+    if (!file) {
+      stato.textContent = "Scegli un file audio.";
+      stato.style.color = "var(--wine-bright)";
+      return;
+    }
+    stato.textContent = "Caricamento in corso...";
+    stato.style.color = "var(--text-muted)";
+    try {
+      await hv_caricaAudioStoricoViaGitHub(testo, file, config);
+      hv_renderAudioStorici();
+      document.getElementById("audio-storico-stato").textContent = "Caricato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+      document.getElementById("audio-storico-stato").style.color = "var(--verde-prato)";
+    } catch (err) {
+      stato.textContent = "Errore: " + err.message;
+      stato.style.color = "var(--wine-bright)";
+    }
+  });
+}
+
+// ===== Cambio vista: Albo d'oro <-> Lista <-> Audio storici =====
+let hv_audioStoriciCaricati = false;
+
 function hv_attivaVista(nome) {
   document.querySelectorAll(".archivio-nav-item").forEach((b) => b.classList.toggle("active", b.dataset.vista === nome));
   document.getElementById("vista-albo").classList.toggle("hidden", nome !== "albo");
   document.getElementById("vista-lista").classList.toggle("hidden", nome !== "lista");
+  document.getElementById("vista-audio").classList.toggle("hidden", nome !== "audio");
+  if (nome !== "audio") hv_fermaAudioStorico();
+  if (nome === "audio" && !hv_audioStoriciCaricati) {
+    hv_audioStoriciCaricati = true;
+    hv_renderAudioStorici();
+  }
 }
 
 // ===== Init =====

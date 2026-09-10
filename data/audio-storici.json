@@ -1,0 +1,4 @@
+{
+  "_leggimi": "Audio migliori/storici della lega. Gestito da js/archivio.js tramite il pannello admin in Archivio > Audio storici, non serve modificarlo a mano. Ogni voce: id, testo (cosa dice/di cosa si tratta), file (percorso su assets/audio-storici/).",
+  "audio": []
+}
