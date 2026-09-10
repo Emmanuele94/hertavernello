@@ -198,6 +198,44 @@ function hv_elencoNomiSquadreStoriche(stagione) {
   return nomi;
 }
 
+// Colore della card pagella storica (stessa soglia della pagella asta attuale
+// in js/squadre.js, duplicata qui per lo stesso motivo delle altre funzioni:
+// archivio.html non carica squadre.js).
+function hv_statoVotoStorico(voto) {
+  if (voto >= 7) return "promosso";
+  if (voto >= 5.5) return "medio";
+  return "bocciato";
+}
+
+// Emoji automatica in base al voto, scelta da Claude come richiesto — 5
+// fasce, dalla più bassa alla più alta. Nessun campo manuale: cambia
+// automaticamente insieme al voto, sia in anteprima admin sia nella card.
+function hv_emojiAutomaticaStorica(voto) {
+  if (voto == null || voto === "") return "";
+  const v = Number(voto);
+  if (v >= 9) return "👑";
+  if (v >= 7) return "🔥";
+  if (v >= 5.5) return "🙂";
+  if (v >= 4) return "😬";
+  return "🤦";
+}
+
+// Effetto "lucido" della medaglia al passaggio del mouse — stessa idea di
+// hv_medagliaShine in js/squadre.js, duplicata per lo stesso motivo.
+function hv_medagliaShineArchivio(el) {
+  el.addEventListener("mousemove", (e) => {
+    const r = el.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    el.style.setProperty("--sx", x + "%");
+    el.style.setProperty("--sy", y + "%");
+  });
+  el.addEventListener("mouseleave", () => {
+    el.style.setProperty("--sx", "35%");
+    el.style.setProperty("--sy", "28%");
+  });
+}
+
 // Contenuto per UN solo fantallenatore selezionato: la sua rosa storica (se
 // c'è) e la sua pagella (se c'è). Se manca l'una o l'altra, si mostra solo
 // quello che è disponibile, senza scrivere "pagella non disponibile" ecc.
@@ -225,13 +263,30 @@ function hv_contenutoSquadraStorica(stagione, nome) {
     : "";
 
   const pagellaHtml = pagella
-    ? `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${pagella.nome}</p><p class="pagella-stagione-testo">${pagella.testo}</p></div>`
+    ? pagella.voto != null && pagella.voto !== ""
+      ? `<div class="pagella-card ${hv_statoVotoStorico(Number(pagella.voto))} pagella-storica-card">
+          <div class="pagella-medaglia-wrap">
+            <div class="pagella-medaglia">
+              <span class="pagella-medaglia-voto">${pagella.voto}</span>
+            </div>
+            <span class="pagella-medaglia-charm">${hv_emojiAutomaticaStorica(pagella.voto)}</span>
+          </div>
+          <p class="pagella-commento pagella-commento-storica">${pagella.testo || ""}</p>
+        </div>`
+      : `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${pagella.nome}</p><p class="pagella-stagione-testo">${pagella.testo}</p></div>`
     : "";
 
   return `
     ${rosaHtml}
     ${pagellaHtml ? `<h3 class="squadra-block-title" style="margin-top: ${rosaHtml ? "18px" : "0"};"><img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagella</h3>${pagellaHtml}` : ""}
   `;
+}
+
+// Aggancia l'effetto "lucido" alla medaglia, se presente nel contenuto appena
+// disegnato (le pagelle senza voto non hanno medaglia, quindi non fa nulla).
+function hv_wirePagellaStorica(container) {
+  const medaglia = container.querySelector(".pagella-medaglia");
+  if (medaglia) hv_medagliaShineArchivio(medaglia);
 }
 
 // Costruisce la tab "Squadre" (bottoni orizzontali scrollabili, stile
@@ -258,12 +313,14 @@ function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
     .map((n, i) => `<button type="button" class="anno-tab squadra-persona-tab${i === indiceIniziale ? " active" : ""}" data-i="${i}">${n}</button>`)
     .join("");
   contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[indiceIniziale]);
+  hv_wirePagellaStorica(contentWrap);
 
   navWrap.querySelectorAll(".squadra-persona-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
       navWrap.querySelectorAll(".squadra-persona-tab").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[Number(btn.dataset.i)]);
+      hv_wirePagellaStorica(contentWrap);
       btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     });
   });
@@ -352,9 +409,9 @@ function hv_renderVideoAdminForm(stagione) {
   disegna();
 }
 
-// Form admin per le pagelle di una stagione: stesso meccanismo del video
-// (righe dinamiche + salva su GitHub), ma con nome sopra e testo (più lungo,
-// quindi un'area di testo) sotto.
+// Form admin per le pagelle di una stagione: righe dinamiche come il video,
+// più un voto (facoltativo, 0-10) con emoji automatica in anteprima — la
+// stessa scala di colori/soglie della pagella dell'asta in corso.
 function hv_renderPagelleAdminForm(stagione) {
   const formWrap = document.getElementById("pagelle-admin-form");
   const config = hv_archivioConfig;
@@ -364,20 +421,23 @@ function hv_renderPagelleAdminForm(stagione) {
     return;
   }
 
-  let righe = (stagione.pagelle || []).map((p) => ({ nome: p.nome || "", testo: p.testo || "" }));
-  righe.push({ nome: "", testo: "" });
+  let righe = (stagione.pagelle || []).map((p) => ({ nome: p.nome || "", testo: p.testo || "", voto: p.voto ?? "" }));
+  righe.push({ nome: "", testo: "", voto: "" });
 
   function disegna() {
     formWrap.innerHTML = `
       <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
         <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica le pagelle di questa stagione</p>
+        <p class="muted" style="font-size:12px; margin: 0 0 10px;">Il voto è facoltativo: se lo metti, l'emoji si sceglie da sola (👑 9-10, 🔥 7-8.9, 🙂 5.5-6.9, 😬 4-5.4, 🤦 sotto 4) e compare la medaglia sul sito. Senza voto resta una semplice card di testo.</p>
         <div style="display:flex; flex-direction:column; gap:14px;">
           ${righe
             .map(
               (r, i) => `
             <div class="pagella-admin-riga" data-i="${i}">
-              <div class="campo-riga" style="align-items:center;">
-                <input type="text" class="pagella-admin-nome" data-i="${i}" placeholder="Nome fantallenatore" value="${r.nome.replace(/"/g, "&quot;")}" style="flex:1;">
+              <div class="campo-riga" style="align-items:center; flex-wrap:wrap;">
+                <input type="text" class="pagella-admin-nome" data-i="${i}" placeholder="Nome fantallenatore" value="${r.nome.replace(/"/g, "&quot;")}" style="flex:1; min-width:160px;">
+                <input type="number" class="pagella-admin-voto" data-i="${i}" placeholder="Voto" step="0.5" min="0" max="10" value="${r.voto}" style="width:80px;">
+                <span class="pagella-admin-emoji-anteprima" data-i="${i}" style="font-size:20px; width:26px; text-align:center;">${hv_emojiAutomaticaStorica(r.voto)}</span>
                 ${righe.length > 1 ? `<button type="button" class="pagella-admin-rimuovi" data-i="${i}" title="Rimuovi questa pagella">✕</button>` : ""}
               </div>
               <textarea class="pagella-admin-testo" data-i="${i}" rows="2" placeholder="Testo della pagella" style="margin-top: 6px;">${r.testo}</textarea>
@@ -398,6 +458,14 @@ function hv_renderPagelleAdminForm(stagione) {
     formWrap.querySelectorAll(".pagella-admin-testo").forEach((el) => {
       el.addEventListener("input", () => (righe[Number(el.dataset.i)].testo = el.value));
     });
+    formWrap.querySelectorAll(".pagella-admin-voto").forEach((el) => {
+      el.addEventListener("input", () => {
+        const i = Number(el.dataset.i);
+        righe[i].voto = el.value;
+        const anteprima = formWrap.querySelector(`.pagella-admin-emoji-anteprima[data-i="${i}"]`);
+        if (anteprima) anteprima.textContent = hv_emojiAutomaticaStorica(el.value);
+      });
+    });
     formWrap.querySelectorAll(".pagella-admin-rimuovi").forEach((el) => {
       el.addEventListener("click", () => {
         righe.splice(Number(el.dataset.i), 1);
@@ -405,12 +473,18 @@ function hv_renderPagelleAdminForm(stagione) {
       });
     });
     document.getElementById("pagelle-admin-aggiungi").addEventListener("click", () => {
-      righe.push({ nome: "", testo: "" });
+      righe.push({ nome: "", testo: "", voto: "" });
       disegna();
     });
     document.getElementById("pagelle-salva-btn").addEventListener("click", async () => {
       const stato = document.getElementById("pagelle-stato");
-      const daSalvare = righe.filter((r) => r.nome.trim() || r.testo.trim()).map((r) => ({ nome: r.nome.trim(), testo: r.testo.trim() }));
+      const daSalvare = righe
+        .filter((r) => r.nome.trim() || r.testo.trim())
+        .map((r) => {
+          const voce = { nome: r.nome.trim(), testo: r.testo.trim() };
+          if (r.voto !== "" && r.voto != null) voce.voto = Number(r.voto);
+          return voce;
+        });
       stato.textContent = "Salvataggio in corso...";
       stato.style.color = "var(--text-muted)";
       try {
@@ -418,8 +492,8 @@ function hv_renderPagelleAdminForm(stagione) {
         stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
         stato.style.color = "var(--verde-prato)";
         stagione.pagelle = daSalvare;
-        righe = daSalvare.map((p) => ({ nome: p.nome, testo: p.testo }));
-        righe.push({ nome: "", testo: "" });
+        righe = daSalvare.map((p) => ({ nome: p.nome, testo: p.testo, voto: p.voto ?? "" }));
+        righe.push({ nome: "", testo: "", voto: "" });
         disegna();
 
         // Riaggiorno i bottoni della tab "Squadre" (potrebbe essere comparso

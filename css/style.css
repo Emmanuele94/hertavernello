@@ -444,6 +444,11 @@ a { color: inherit; }
   opacity: 0.92;
   margin: 0;
   text-align: center;
+  white-space: pre-wrap;
+}
+
+.pagella-commento-storica {
+  text-align: left;
 }
 
 /* ===== Previsioni ===== */
@@ -1828,6 +1833,7 @@ body.mostra-info-match .info-match {
   color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
+  white-space: pre-wrap;
 }
 
 .rosa-storica-lista {
