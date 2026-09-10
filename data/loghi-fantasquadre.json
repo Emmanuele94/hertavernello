@@ -4,7 +4,16 @@
     {
       "squadraId": "sq-01",
       "immagine": "sq-01.jpeg",
-      "immaginePiccola": "sq-01.png"
+      "immaginePiccola": "sq-01.png",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789083125902-qybid",
+            "testo": "Aia Manu",
+            "file": "assets/audio-squadre/sq-01-1789083125902-qybid.ogg"
+          }
+        ]
+      }
     },
     {
       "squadraId": "sq-04",
