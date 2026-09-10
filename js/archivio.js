@@ -121,6 +121,110 @@ function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
     </div>`;
 }
 
+// Cache condivisa di squadre reali/giocatori, popolata da hv_mostraStagione:
+// serve anche a hv_fotoStorica quando viene richiamata più tardi (es. dopo un
+// salvataggio pagelle) senza dover ricaricare i JSON ogni volta.
+let hv_archivioSquadreRef = null;
+let hv_archivioGiocatoriDb = null;
+
+// Foto giocatore per una voce di marcatori/rosa storica. NOTA IMPORTANTE: il
+// database giocatori/foto è quello della stagione CORRENTE — per le stagioni
+// vecchie (giocatori ritirati, trasferiti, ecc.) è normale che la maggior
+// parte non trovi corrispondenza: in quel caso restano le iniziali, mai
+// un'immagine rotta o sbagliata.
+function hv_fotoStorica(nome, squadraRealeNome) {
+  const codice = squadraRealeNome ? hv_trovaCodice(squadraRealeNome, hv_archivioSquadreRef) : null;
+  const giocatoreDb = hv_trovaGiocatore(nome, codice, hv_archivioGiocatoriDb);
+  if (giocatoreDb && giocatoreDb.foto) return `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`;
+  return `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(nome)}</span>`;
+}
+
+// Elenco dei nomi delle fantasquadre di una stagione, per i bottoni della tab
+// "Squadre" dell'Archivio: prima i nomi che hanno una rosa storica (nell'ordine
+// in cui compaiono in stagione.rose), poi eventuali nomi che hanno SOLO la
+// pagella e nessuna rosa — senza doppioni.
+function hv_elencoNomiSquadreStoriche(stagione) {
+  const nomi = [];
+  (stagione.rose || []).forEach((r) => {
+    if (r.squadra && !nomi.includes(r.squadra)) nomi.push(r.squadra);
+  });
+  (stagione.pagelle || []).forEach((p) => {
+    if (p.nome && !nomi.includes(p.nome)) nomi.push(p.nome);
+  });
+  return nomi;
+}
+
+// Contenuto per UN solo fantallenatore selezionato: la sua rosa storica (se
+// c'è) e la sua pagella (se c'è). Se manca l'una o l'altra, si mostra solo
+// quello che è disponibile, senza scrivere "pagella non disponibile" ecc.
+function hv_contenutoSquadraStorica(stagione, nome) {
+  const rosa = (stagione.rose || []).find((r) => r.squadra === nome);
+  const pagella = (stagione.pagelle || []).find((p) => p.nome === nome);
+
+  if (!rosa && !pagella) {
+    return '<p class="empty-state">Nessun dato ancora disponibile per questo partecipante in questa stagione.</p>';
+  }
+
+  const rosaHtml = rosa
+    ? `<div class="rosa-storica-card">
+        <p class="rosa-storica-nome">${rosa.squadra}</p>
+        <ul class="rosa-storica-lista">
+          ${rosa.giocatori
+            .map((g) => {
+              const nomeG = typeof g === "string" ? g : g.nome;
+              const squadraReale = typeof g === "object" ? g.squadraReale : null;
+              return `<li>${hv_fotoStorica(nomeG, squadraReale)}${nomeG}</li>`;
+            })
+            .join("")}
+        </ul>
+      </div>`
+    : "";
+
+  const pagellaHtml = pagella
+    ? `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${pagella.nome}</p><p class="pagella-stagione-testo">${pagella.testo}</p></div>`
+    : "";
+
+  return `
+    ${rosaHtml}
+    ${pagellaHtml ? `<h3 class="squadra-block-title" style="margin-top: ${rosaHtml ? "18px" : "0"};"><img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagella</h3>${pagellaHtml}` : ""}
+  `;
+}
+
+// Costruisce la tab "Squadre" (bottoni orizzontali scrollabili, stile
+// identico alla barra anni, + il contenuto del fantallenatore selezionato) e
+// aggancia i click. Richiamata sia al primo caricamento della stagione, sia
+// dopo ogni salvataggio pagelle, così i bottoni restano sempre aggiornati.
+function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
+  const navWrap = document.getElementById("squadre-persona-tabs");
+  const contentWrap = document.getElementById("squadra-persona-content");
+  if (!navWrap || !contentWrap) return;
+
+  const nomi = hv_elencoNomiSquadreStoriche(stagione);
+
+  if (!nomi.length) {
+    navWrap.innerHTML = "";
+    contentWrap.innerHTML = '<p class="empty-state">Rose e pagelle non ancora caricate per questa stagione.</p>';
+    return;
+  }
+
+  let indiceIniziale = nomeDaSelezionare ? nomi.indexOf(nomeDaSelezionare) : 0;
+  if (indiceIniziale < 0) indiceIniziale = 0;
+
+  navWrap.innerHTML = nomi
+    .map((n, i) => `<button type="button" class="anno-tab squadra-persona-tab${i === indiceIniziale ? " active" : ""}" data-i="${i}">${n}</button>`)
+    .join("");
+  contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[indiceIniziale]);
+
+  navWrap.querySelectorAll(".squadra-persona-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      navWrap.querySelectorAll(".squadra-persona-tab").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[Number(btn.dataset.i)]);
+      btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    });
+  });
+}
+
 // Form admin per i video di una stagione: righe dinamiche (titolo+url), un
 // pulsante "+" per aggiungerne altre, salvataggio diretto su GitHub — stesso
 // principio del video di Squadre, ma con più righe invece di una sola.
@@ -284,12 +388,11 @@ function hv_renderPagelleAdminForm(stagione) {
         righe.push({ nome: "", testo: "" });
         disegna();
 
-        const listaWrap = document.getElementById("pagelle-lista-wrap");
-        listaWrap.innerHTML = daSalvare.length
-          ? `<div class="pagelle-stagione-lista">${daSalvare
-              .map((p) => `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${p.nome}</p><p class="pagella-stagione-testo">${p.testo}</p></div>`)
-              .join("")}</div>`
-          : "";
+        // Riaggiorno i bottoni della tab "Squadre" (potrebbe essere comparso
+        // o sparito un nome), cercando di restare sullo stesso partecipante
+        // selezionato se è ancora tra le opzioni.
+        const tabAttivo = document.querySelector(".squadra-persona-tab.active");
+        hv_renderSquadreTab(stagione, tabAttivo ? tabAttivo.textContent : null);
       } catch (err) {
         stato.textContent = "Errore: " + err.message;
         stato.style.color = "var(--wine-bright)";
@@ -314,18 +417,8 @@ async function hv_mostraStagione(stagione) {
 
   wrap.innerHTML = '<p class="empty-state">Carico...</p>';
   const [squadreRef, giocatoriDb] = await Promise.all([hv_caricaSquadreRef(), hv_caricaGiocatoriDb()]);
-
-  // Foto giocatore per una voce di marcatori/rosa storica. NOTA IMPORTANTE:
-  // il database giocatori/foto è quello della stagione CORRENTE — per le
-  // stagioni vecchie (giocatori ritirati, trasferiti, ecc.) è normale che la
-  // maggior parte non trovi corrispondenza: in quel caso restano le iniziali,
-  // mai un'immagine rotta o sbagliata.
-  function hv_fotoStorica(nome, squadraRealeNome) {
-    const codice = squadraRealeNome ? hv_trovaCodice(squadraRealeNome, squadreRef) : null;
-    const giocatoreDb = hv_trovaGiocatore(nome, codice, giocatoriDb);
-    if (giocatoreDb && giocatoreDb.foto) return `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`;
-    return `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(nome)}</span>`;
-  }
+  hv_archivioSquadreRef = squadreRef;
+  hv_archivioGiocatoriDb = giocatoriDb;
 
   const vincitoriHtml = `
     <div class="albo-vincitori-riga">
@@ -380,27 +473,6 @@ async function hv_mostraStagione(stagione) {
   // giocatore può essere una semplice stringa "Nome", oppure un oggetto
   // { nome, squadraReale } se conosci anche la squadra reale di quell'anno —
   // con quella in più la foto si abbina meglio.
-  const roseHtml =
-    stagione.rose && stagione.rose.length
-      ? `<div class="rose-storiche-griglia">${stagione.rose
-          .map(
-            (r) => `
-        <div class="rosa-storica-card">
-          <p class="rosa-storica-nome">${r.squadra}</p>
-          <ul class="rosa-storica-lista">
-            ${r.giocatori
-              .map((g) => {
-                const nome = typeof g === "string" ? g : g.nome;
-                const squadraReale = typeof g === "object" ? g.squadraReale : null;
-                return `<li>${hv_fotoStorica(nome, squadraReale)}${nome}</li>`;
-              })
-              .join("")}
-          </ul>
-        </div>`
-          )
-          .join("")}</div>`
-      : '<p class="empty-state">Rose non ancora caricate per questa stagione.</p>';
-
   const videoHtml =
     stagione.video && stagione.video.length
       ? `<div class="video-lista">${stagione.video
@@ -416,13 +488,6 @@ async function hv_mostraStagione(stagione) {
           .join("")}</div>`
       : "";
 
-  const pagelleHtml =
-    stagione.pagelle && stagione.pagelle.length
-      ? `<div class="pagelle-stagione-lista">${stagione.pagelle
-          .map((p) => `<div class="pagella-stagione-card"><p class="pagella-stagione-nome">${p.nome}</p><p class="pagella-stagione-testo">${p.testo}</p></div>`)
-          .join("")}</div>`
-      : "";
-
   const curiositaTabHtml = `
     ${hv_blocEspandibile("classifica-sa", "Classifica Serie A", "assets/icone/icon-raking.png", classificaHtml)}
     ${hv_blocEspandibile("top-marcatori", "Classifica migliori 10 marcatori", "assets/icone/icon-migliori10marcatori.png", marcatoriHtml)}
@@ -430,10 +495,9 @@ async function hv_mostraStagione(stagione) {
   `;
 
   const squadreTabHtml = `
-    ${roseHtml}
-    <h3 class="squadra-block-title" style="margin-top: 26px;"><img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagelle</h3>
-    <div id="pagelle-lista-wrap">${pagelleHtml}</div>
-    <div id="pagelle-admin-form"></div>
+    <div id="squadre-persona-tabs" class="tabs"></div>
+    <div id="squadra-persona-content"></div>
+    <div id="pagelle-admin-form" style="margin-top: 22px;"></div>
   `;
 
   wrap.innerHTML = `
@@ -472,6 +536,7 @@ async function hv_mostraStagione(stagione) {
 
   hv_renderVideoAdminForm(stagione);
   hv_renderPagelleAdminForm(stagione);
+  hv_renderSquadreTab(stagione);
 }
 
 // ===== Cambio vista: Albo d'oro <-> Lista =====
