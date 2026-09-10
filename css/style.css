@@ -278,6 +278,12 @@ a { color: inherit; }
   margin: 0;
 }
 
+.countdown-secondario {
+  color: var(--giallo-neon);
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+
 .section { margin: 36px 0; }
 
 .section h2 {
@@ -1840,6 +1846,14 @@ body.mostra-info-match .info-match {
   font-size: 13.5px;
   margin: 0 0 8px;
   color: var(--verde-prato);
+}
+
+.rosa-storica-fase-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 0 0 6px;
 }
 
 .pagelle-stagione-lista {

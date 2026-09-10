@@ -319,31 +319,43 @@ function hv_medagliaShineArchivio(el) {
   });
 }
 
+// Etichetta della fase mostrata sopra la rosa, solo quando per questo
+// partecipante ce n'è più di una (asta iniziale + dopo la riparazione).
+const HV_ETICHETTA_FASE_ROSA = { iniziale: "Rosa — asta iniziale", riparazione: "Rosa — dopo la riparazione" };
+
 // Contenuto per UN solo fantallenatore selezionato: la sua rosa storica (se
-// c'è) e la sua pagella (se c'è). Se manca l'una o l'altra, si mostra solo
-// quello che è disponibile, senza scrivere "pagella non disponibile" ecc.
+// c'è, anche più di una se ci sono sia l'asta iniziale che la riparazione)
+// e la sua pagella (se c'è). Se manca qualcosa, si mostra solo quello che è
+// disponibile, senza scrivere "non disponibile" ecc.
 function hv_contenutoSquadraStorica(stagione, nome) {
-  const rosa = (stagione.rose || []).find((r) => r.squadra === nome);
+  const roseTrovate = (stagione.rose || [])
+    .filter((r) => r.squadra === nome)
+    .sort((a, b) => (a.fase === "riparazione" ? 1 : 0) - (b.fase === "riparazione" ? 1 : 0));
   const pagella = (stagione.pagelle || []).find((p) => p.nome === nome);
 
-  if (!rosa && !pagella) {
+  if (!roseTrovate.length && !pagella) {
     return '<p class="empty-state">Nessun dato ancora disponibile per questo partecipante in questa stagione.</p>';
   }
 
-  const rosaHtml = rosa
-    ? `<div class="rosa-storica-card">
-        <p class="rosa-storica-nome">${rosa.squadra}</p>
-        <ul class="rosa-storica-lista">
-          ${rosa.giocatori
-            .map((g) => {
-              const nomeG = typeof g === "string" ? g : g.nome;
-              const squadraReale = typeof g === "object" ? g.squadraReale : null;
-              return `<li>${hv_fotoStorica(nomeG, squadraReale, true)}${nomeG}</li>`;
-            })
-            .join("")}
-        </ul>
-      </div>`
-    : "";
+  const rosaHtml = roseTrovate
+    .map((rosa) => {
+      const etichetta = roseTrovate.length > 1 ? HV_ETICHETTA_FASE_ROSA[rosa.fase] || "Rosa" : null;
+      return `
+        ${etichetta ? `<p class="rosa-storica-fase-label">${etichetta}</p>` : ""}
+        <div class="rosa-storica-card"${roseTrovate.length > 1 ? ' style="margin-bottom: 14px;"' : ""}>
+          <p class="rosa-storica-nome">${rosa.squadra}</p>
+          <ul class="rosa-storica-lista">
+            ${rosa.giocatori
+              .map((g) => {
+                const nomeG = typeof g === "string" ? g : g.nome;
+                const squadraReale = typeof g === "object" ? g.squadraReale : null;
+                return `<li>${hv_fotoStorica(nomeG, squadraReale, true)}${nomeG}</li>`;
+              })
+              .join("")}
+          </ul>
+        </div>`;
+    })
+    .join("");
 
   const pagellaHtml = pagella
     ? pagella.voto != null && pagella.voto !== ""
@@ -639,19 +651,29 @@ function hv_renderRoseAdminForm(stagione) {
 
   const NUOVA = "__nuova__";
   let squadraSelezionata = NUOVA;
+  let faseSelezionata = "iniziale";
   let testoIncolla = "";
 
-  function squadraCorrente() {
-    return (stagione.rose || []).find((r) => r.squadra === squadraSelezionata);
+  // La stessa fantasquadra può avere due rose nella stessa stagione (prima e
+  // dopo l'asta di riparazione): l'abbinamento per trovare/salvare/rimuovere
+  // è sempre sulla COPPIA nome+fase, mai sul nome da solo.
+  function entryCorrente() {
+    return (stagione.rose || []).find((r) => r.squadra === squadraSelezionata && (r.fase || "iniziale") === faseSelezionata);
   }
 
   function disegna() {
-    const nomiEsistenti = (stagione.rose || []).map((r) => r.squadra);
+    const nomiEsistenti = [...new Set((stagione.rose || []).map((r) => r.squadra))];
     const giocatoriLetti = hv_parsaIncollaRosa(testoIncolla);
+    const selettoreFase = `
+      <select id="rose-admin-fase" style="min-width:180px;">
+        <option value="iniziale"${faseSelezionata === "iniziale" ? " selected" : ""}>Asta iniziale</option>
+        <option value="riparazione"${faseSelezionata === "riparazione" ? " selected" : ""}>Dopo la riparazione</option>
+      </select>`;
 
     formWrap.innerHTML = `
       <div class="admin-box" style="background: var(--bg-void); padding: 14px;">
         <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica una rosa storica</p>
+        <p class="muted" style="font-size:12px; margin: 0 0 10px;">Se questa fantasquadra ha avuto sia l'asta iniziale che una di riparazione nella stessa stagione, salvale come due voci separate scegliendo la fase giusta qui sotto: restano entrambe visibili, una sotto l'altra.</p>
         <div class="campo-riga" style="align-items:center; flex-wrap:wrap; margin-bottom: 10px;">
           <select id="rose-admin-select" style="flex:1; min-width:200px;">
             <option value="${NUOVA}"${squadraSelezionata === NUOVA ? " selected" : ""}>+ Nuova fantasquadra</option>
@@ -659,11 +681,12 @@ function hv_renderRoseAdminForm(stagione) {
               .map((n) => `<option value="${n.replace(/"/g, "&quot;")}"${n === squadraSelezionata ? " selected" : ""}>Modifica: ${n}</option>`)
               .join("")}
           </select>
+          ${selettoreFase}
         </div>
         ${
           squadraSelezionata === NUOVA
             ? `<input type="text" id="rose-admin-nome-nuova" placeholder="Nome della fantasquadra di quella stagione" style="margin-bottom: 10px;">`
-            : `<p class="muted" style="font-size:12px; margin: 0 0 10px;">Stai modificando: <strong>${squadraSelezionata}</strong>. Il testo qui sotto è già precompilato con la rosa salvata: correggilo e salva, oppure sostituiscilo del tutto reincollando da Excel.</p>`
+            : `<p class="muted" style="font-size:12px; margin: 0 0 10px;">Stai modificando: <strong>${squadraSelezionata}</strong> (${faseSelezionata === "riparazione" ? "dopo la riparazione" : "asta iniziale"}). Il testo qui sotto è già precompilato se questa fase esiste già: correggilo e salva, oppure sostituiscilo del tutto reincollando da Excel.</p>`
         }
         <p class="muted" style="font-size:12px; margin: 0 0 6px;">Incolla qui la colonna dei nomi copiata da Excel (un giocatore per riga). Se copi ANCHE la colonna della squadra reale accanto, Excel la incolla già separata: la leggo da sola e la uso per abbinare meglio la foto.</p>
         <textarea id="rose-admin-incolla" rows="8" placeholder="Osimhen&#10;Lautaro&#10;Vlahovic	Juventus" style="font-family: var(--font-mono); font-size:12.5px;">${testoIncolla.replace(/</g, "&lt;")}</textarea>
@@ -684,14 +707,25 @@ function hv_renderRoseAdminForm(stagione) {
             : ""
         }
         <button type="button" id="rose-admin-salva">Salva questa rosa</button>
-        ${squadraSelezionata !== NUOVA ? `<button type="button" id="rose-admin-rimuovi" style="margin-left:8px; background: var(--wine); color: var(--text-primary);">Rimuovi questa rosa</button>` : ""}
+        ${
+          squadraSelezionata !== NUOVA && entryCorrente()
+            ? `<button type="button" id="rose-admin-rimuovi" style="margin-left:8px; background: var(--wine); color: var(--text-primary);">Rimuovi questa rosa</button>`
+            : ""
+        }
         <p id="rose-admin-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
       </div>
     `;
 
     document.getElementById("rose-admin-select").addEventListener("change", (e) => {
       squadraSelezionata = e.target.value;
-      const esistente = squadraCorrente();
+      const esistente = entryCorrente();
+      testoIncolla = esistente ? hv_rosaComeTesto(esistente.giocatori) : "";
+      disegna();
+    });
+
+    document.getElementById("rose-admin-fase").addEventListener("change", (e) => {
+      faseSelezionata = e.target.value;
+      const esistente = entryCorrente();
       testoIncolla = esistente ? hv_rosaComeTesto(esistente.giocatori) : "";
       disegna();
     });
@@ -711,6 +745,7 @@ function hv_renderRoseAdminForm(stagione) {
       const stato = document.getElementById("rose-admin-stato");
       const nomeNuovaInput = document.getElementById("rose-admin-nome-nuova");
       const nomeSquadra = squadraSelezionata === NUOVA ? (nomeNuovaInput ? nomeNuovaInput.value.trim() : "") : squadraSelezionata;
+      const fase = faseSelezionata;
       const giocatori = hv_parsaIncollaRosa(testoIncolla);
 
       if (!nomeSquadra) {
@@ -727,8 +762,8 @@ function hv_renderRoseAdminForm(stagione) {
       stato.textContent = "Salvataggio in corso...";
       stato.style.color = "var(--text-muted)";
       try {
-        const roseAggiornate = (stagione.rose || []).filter((r) => r.squadra !== nomeSquadra);
-        roseAggiornate.push({ squadra: nomeSquadra, giocatori });
+        const roseAggiornate = (stagione.rose || []).filter((r) => !(r.squadra === nomeSquadra && (r.fase || "iniziale") === fase));
+        roseAggiornate.push({ squadra: nomeSquadra, fase, giocatori });
         await hv_salvaRoseStagioneViaGitHub(stagione.anno, roseAggiornate, config);
         stagione.rose = roseAggiornate;
         squadraSelezionata = nomeSquadra;
@@ -751,10 +786,13 @@ function hv_renderRoseAdminForm(stagione) {
         stato.textContent = "Rimozione in corso...";
         stato.style.color = "var(--text-muted)";
         try {
-          const roseAggiornate = (stagione.rose || []).filter((r) => r.squadra !== squadraSelezionata);
+          const roseAggiornate = (stagione.rose || []).filter(
+            (r) => !(r.squadra === squadraSelezionata && (r.fase || "iniziale") === faseSelezionata)
+          );
           await hv_salvaRoseStagioneViaGitHub(stagione.anno, roseAggiornate, config);
           stagione.rose = roseAggiornate;
           squadraSelezionata = NUOVA;
+          faseSelezionata = "iniziale";
           testoIncolla = "";
           disegna();
           document.getElementById("rose-admin-stato").textContent = "Rimossa ✓";

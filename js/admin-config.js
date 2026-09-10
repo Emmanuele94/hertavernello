@@ -38,6 +38,7 @@ async function hv_initConfigForm() {
   document.getElementById("cfg-nome-lega").value = hv_configBozza.lega.nome;
   document.getElementById("cfg-stagione").value = hv_configBozza.lega.stagione;
   document.getElementById("cfg-data-asta").value = (hv_configBozza.lega.dataAsta || "").slice(0, 16);
+  document.getElementById("cfg-data-asta-riparazione").value = (hv_configBozza.lega.dataAstaRiparazione || "").slice(0, 16);
   document.getElementById("cfg-api-key").value = hv_configBozza.lega.footballDataApiKey || "";
 
   hv_renderSquadreRows();
@@ -60,6 +61,7 @@ async function hv_applicaCampiConfig() {
   hv_configBozza.lega.nome = document.getElementById("cfg-nome-lega").value.trim();
   hv_configBozza.lega.stagione = document.getElementById("cfg-stagione").value.trim();
   hv_configBozza.lega.dataAsta = document.getElementById("cfg-data-asta").value;
+  hv_configBozza.lega.dataAstaRiparazione = document.getElementById("cfg-data-asta-riparazione").value;
   hv_configBozza.lega.footballDataApiKey = document.getElementById("cfg-api-key").value.trim();
 
   if (nuovaGuest) {

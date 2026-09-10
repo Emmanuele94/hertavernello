@@ -120,6 +120,13 @@
         <input type="text" id="cfg-api-key" placeholder="Chiave API football-data.org (opzionale)">
       </div>
       <div class="campo-riga">
+        <input type="datetime-local" id="cfg-data-asta-riparazione">
+      </div>
+      <p class="desc" style="margin: -6px 0 14px; font-size: 12px;">
+        Data/ora dell'asta di riparazione (facoltativa). Lasciala vuota finché non la conosci: il secondo
+        countdown in home compare da solo appena la imposti.
+      </p>
+      <div class="campo-riga">
         <input type="text" id="cfg-nuova-password-guest" placeholder="Nuova password GUEST (lascia vuoto per non cambiarla)">
         <input type="text" id="cfg-nuova-password-admin" placeholder="Nuova password ADMIN (lascia vuoto per non cambiarla)">
       </div>
@@ -289,6 +296,20 @@
 
       <div id="ris-anteprima-wrap" style="margin-top: 20px;"></div>
     </div>
+
+    <div class="admin-box">
+      <h2>7. Archivia la stagione (copia di sicurezza)</h2>
+      <p class="desc">
+        Salva una copia di quello che c'è ORA in Squadre (rose + pagelle) dentro l'Archivio, senza toccare
+        Squadre. Resta nascosta al pubblico finché la stagione è segnata "in corso" (la togli a fine
+        campionato dal blocco stagione in <code>data/albo-oro.json</code>) — serve solo a non perdere niente
+        nel frattempo. "Prima parte" salva anche le pagelle (una volta sola, sono legate all'asta iniziale).
+        "Dopo la riparazione" salva solo le rose aggiornate, accanto a quelle iniziali, senza cancellarle.
+      </p>
+      <button type="button" id="archivia-iniziale-btn">Archivia prima parte della stagione</button>
+      <button type="button" id="archivia-riparazione-btn" style="margin-left: 8px;">Archivia dopo la riparazione</button>
+      <p id="archivia-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+    </div>
   </div>
   </div>
 
@@ -309,6 +330,7 @@
   <script src="js/calcolo-derivati.js"></script>
   <script src="js/motore-news.js"></script>
   <script src="js/admin-risultati.js"></script>
+  <script src="js/admin-archivia-stagione.js"></script>
   <script>
     function hv_applicaRuoloAdmin() {
       if (window.hv_role !== "admin") {

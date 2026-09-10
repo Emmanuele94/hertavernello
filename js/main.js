@@ -9,26 +9,31 @@ function hv_formattaDataAsta(dataAstaISO) {
   return `${giorno} ${mese} alle ore ${ore}:${minuti}`;
 }
 
-function hv_countdown(dataAstaISO) {
-  const el = document.getElementById("countdown");
+function hv_countdown(dataAstaISO, elementId, etichetta) {
+  const el = document.getElementById(elementId || "countdown");
   if (!el) return;
+  const prefisso = etichetta || "Asta";
+  let timer;
 
   function aggiorna() {
     const diff = new Date(dataAstaISO).getTime() - Date.now();
     if (diff <= 0) {
-      el.textContent = `Asta fatta il ${hv_formattaDataAsta(dataAstaISO)} ora italiana`;
-      clearInterval(timer);
+      el.textContent = `${prefisso} fatta il ${hv_formattaDataAsta(dataAstaISO)} ora italiana`;
+      if (timer) clearInterval(timer);
       return;
     }
     const g = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
-    el.textContent = `Asta tra ${g}g ${h}h ${m}m ${s}s`;
+    el.textContent = `${prefisso} tra ${g}g ${h}h ${m}m ${s}s`;
   }
 
+  // Il timer va creato PRIMA della prima chiamata ad aggiorna(): se la data è
+  // già passata al caricamento, aggiorna() prova subito a fermarlo, quindi
+  // deve già esistere (altrimenti errore su una variabile non ancora pronta).
+  timer = setInterval(aggiorna, 1000);
   aggiorna();
-  const timer = setInterval(aggiorna, 1000);
 }
 
 // ===== Incrocio: schede sfida per ogni scontro di fantalega coinvolto nella partita reale =====
@@ -528,7 +533,14 @@ async function hv_renderHighlightsSettimana(config) {
 async function hv_initHome(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
   document.getElementById("lega-stagione").textContent = "Stagione " + config.lega.stagione;
-  hv_countdown(config.lega.dataAsta);
+  hv_countdown(config.lega.dataAsta, "countdown", "Asta");
+  const countdownRiparazioneEl = document.getElementById("countdown-riparazione");
+  if (config.lega.dataAstaRiparazione) {
+    if (countdownRiparazioneEl) countdownRiparazioneEl.classList.remove("hidden");
+    hv_countdown(config.lega.dataAstaRiparazione, "countdown-riparazione", "Asta di riparazione");
+  } else if (countdownRiparazioneEl) {
+    countdownRiparazioneEl.classList.add("hidden");
+  }
   await hv_renderIncrocio(config);
   await hv_renderHighlightsSettimana(config);
   await hv_renderClassificaLega(config);
