@@ -266,6 +266,67 @@ async function hv_salvaVideoStagioneViaGitHub(annoStagione, videoArray, config) 
   await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna video stagione ${annoStagione}`, fileJson.sha);
 }
 
+function hv_slugifyNomeFile(testo) {
+  return (
+    (testo || "foto")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "foto"
+  );
+}
+
+// Foto caricata a mano per UN giocatore storico (data/foto-storiche.json +
+// il file immagine su assets/calciatori-storici/). Sostituisce l'eventuale
+// foto già caricata per lo stesso nome+squadra reale, cancellando il vecchio
+// file. Ritorna la voce salvata, così archivio.js può aggiornare subito la
+// sua copia in memoria senza dover ricaricare tutto il JSON da GitHub.
+async function hv_caricaFotoStoricaViaGitHub(nome, squadraReale, file, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const ext = (file.name.split(".").pop() || "png").toLowerCase();
+  const nomeFile = `${hv_slugifyNomeFile(nome)}-${Date.now()}.${ext}`;
+  const percorsoImmagine = `assets/calciatori-storici/${nomeFile}`;
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+
+  await hv_ghPutFile(owner, repo, percorsoImmagine, token, contentBase64, `Aggiungi foto storica ${nome}`, null);
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/foto-storiche.json", token);
+  const fotoObj = fileJson ? JSON.parse(hv_base64ToUtf8(fileJson.content)) : { foto: [] };
+  if (!fotoObj.foto) fotoObj.foto = [];
+
+  let entry = fotoObj.foto.find((f) => f.nome === nome && (f.squadraReale || "") === (squadraReale || ""));
+  const vecchiaImmagine = entry ? entry.immagine : null;
+  if (!entry) {
+    entry = { nome, squadraReale: squadraReale || "" };
+    fotoObj.foto.push(entry);
+  }
+  entry.immagine = percorsoImmagine;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(fotoObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/foto-storiche.json", token, nuovoContenuto, `Aggiorna foto-storiche.json (${nome})`, fileJson ? fileJson.sha : null);
+
+  if (vecchiaImmagine && vecchiaImmagine !== percorsoImmagine) {
+    try {
+      const vecchioFile = await hv_ghGetFile(owner, repo, vecchiaImmagine, token);
+      if (vecchioFile) await hv_ghDeleteFile(owner, repo, vecchiaImmagine, token, vecchioFile.sha, `Rimuovi vecchia foto storica ${nome}`);
+    } catch (e) {}
+  }
+
+  return { nome: entry.nome, squadraReale: entry.squadraReale, immagine: entry.immagine };
+}
+
 // Rose di una STAGIONE in Archivio (data/albo-oro.json) — stesso principio
 // di video/pagelle: sostituisce l'intero array "rose" della stagione.
 async function hv_salvaRoseStagioneViaGitHub(annoStagione, roseArray, config) {

@@ -663,6 +663,40 @@ a { color: inherit; }
   flex-shrink: 0;
 }
 
+/* Solo in Archivio, solo per admin, solo sui giocatori senza nessuna foto
+   trovata: un "+" cliccabile sopra le iniziali per caricarne una a mano. */
+.foto-giocatore-carica {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.foto-giocatore-carica .foto-giocatore-iniziali {
+  margin-right: 0;
+}
+
+.foto-giocatore-carica-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--verde-prato);
+  color: var(--bg-void);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+}
+
+.foto-giocatore-carica:hover .foto-giocatore-carica-badge {
+  background: var(--giallo-neon);
+}
+
 /* ===== Bandiera con tooltip nazionalità (hover su desktop, click/tap su mobile) ===== */
 .bandiera-wrap {
   position: relative;

@@ -165,22 +165,105 @@ function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
     </div>`;
 }
 
-// Cache condivisa di squadre reali/giocatori, popolata da hv_mostraStagione:
-// serve anche a hv_fotoStorica quando viene richiamata più tardi (es. dopo un
-// salvataggio pagelle) senza dover ricaricare i JSON ogni volta.
+// Cache condivisa di squadre reali/giocatori/foto manuali, popolata da
+// hv_mostraStagione: serve anche a hv_fotoStorica quando viene richiamata più
+// tardi (es. dopo un salvataggio pagelle) senza dover ricaricare i JSON ogni
+// volta.
 let hv_archivioSquadreRef = null;
 let hv_archivioGiocatoriDb = null;
+let hv_archivioFotoStoriche = [];
 
-// Foto giocatore per una voce di marcatori/rosa storica. NOTA IMPORTANTE: il
-// database giocatori/foto è quello della stagione CORRENTE — per le stagioni
-// vecchie (giocatori ritirati, trasferiti, ecc.) è normale che la maggior
-// parte non trovi corrispondenza: in quel caso restano le iniziali, mai
-// un'immagine rotta o sbagliata.
-function hv_fotoStorica(nome, squadraRealeNome) {
+// Carica data/foto-storiche.json. Se il file manca o non è ancora valido
+// (es. prima volta che si usa questa funzione, repository non aggiornato)
+// non blocca il resto della pagina: restituisce semplicemente un elenco
+// vuoto, come se nessuna foto manuale fosse ancora stata caricata.
+async function hv_caricaFotoStoricheArchivio() {
+  try {
+    const res = await fetch("data/foto-storiche.json");
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.foto || [];
+  } catch (err) {
+    return [];
+  }
+}
+
+// Cerca tra le foto caricate a mano (data/foto-storiche.json). Abbinamento
+// per nome normalizzato (stessa normalizzazione usata per il database
+// principale); se la voce manuale specifica anche una squadra reale, deve
+// combaciare — serve a distinguere due giocatori diversi con lo stesso
+// cognome caricati separatamente.
+function hv_trovaFotoManualeStorica(nome, squadraRealeNome) {
+  if (!hv_archivioFotoStoriche.length) return null;
+  const norm = hv_normalizzaNomeGiocatore(nome);
+  if (!norm) return null;
+  return (
+    hv_archivioFotoStoriche.find((f) => {
+      if (hv_normalizzaNomeGiocatore(f.nome) !== norm) return false;
+      if (!f.squadraReale) return true;
+      return f.squadraReale.toLowerCase() === (squadraRealeNome || "").toLowerCase();
+    }) || null
+  );
+}
+
+// Foto giocatore per una voce di marcatori/rosa storica. Ordine di ricerca:
+// 1) una foto caricata a mano per questo giocatore, 2) il database della
+// stagione CORRENTE (per chi gioca ancora), 3) iniziali. Per le stagioni
+// vecchie è normale che molti non trovino corrispondenza al punto 2 — è
+// voluto, non un difetto. Con consentiCaricamento=true (solo dalle rose,
+// solo per admin con GitHub configurato) le iniziali diventano cliccabili
+// per caricare una foto al volo.
+function hv_fotoStorica(nome, squadraRealeNome, consentiCaricamento) {
+  const manuale = hv_trovaFotoManualeStorica(nome, squadraRealeNome);
+  if (manuale) return `<img src="${manuale.immagine}?v=${Date.now()}" class="foto-giocatore-mini" alt="">`;
+
   const codice = squadraRealeNome ? hv_trovaCodice(squadraRealeNome, hv_archivioSquadreRef) : null;
   const giocatoreDb = hv_trovaGiocatore(nome, codice, hv_archivioGiocatoriDb);
   if (giocatoreDb && giocatoreDb.foto) return `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`;
-  return `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(nome)}</span>`;
+
+  const iniziali = hv_inizialiGiocatore(nome);
+  const puoCaricare =
+    consentiCaricamento && window.hv_role === "admin" && hv_archivioConfig && hv_archivioConfig.lega.githubOwner && hv_archivioConfig.lega.githubRepo;
+  if (puoCaricare) {
+    const nomeAttr = (nome || "").replace(/"/g, "&quot;");
+    const squadraAttr = (squadraRealeNome || "").replace(/"/g, "&quot;");
+    return `
+      <label class="foto-giocatore-carica" title="Carica una foto per ${nomeAttr}" data-nome="${nomeAttr}" data-squadra-reale="${squadraAttr}">
+        <span class="foto-giocatore-iniziali">${iniziali}</span>
+        <span class="foto-giocatore-carica-badge">+</span>
+        <input type="file" accept="image/*" class="foto-giocatore-carica-input" style="display:none;">
+      </label>`;
+  }
+  return `<span class="foto-giocatore-iniziali">${iniziali}</span>`;
+}
+
+// Aggancia il caricamento foto: al cambio del file, carica su GitHub,
+// aggiorna la cache locale e ridisegna la scheda del fantallenatore corrente
+// così la nuova foto compare subito, senza ricaricare la pagina.
+function hv_wireCaricaFotoStorica(container, stagione) {
+  container.querySelectorAll(".foto-giocatore-carica-input").forEach((input) => {
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      if (!file) return;
+      const label = input.closest(".foto-giocatore-carica");
+      const nome = label.dataset.nome;
+      const squadraReale = label.dataset.squadraReale;
+      const badge = label.querySelector(".foto-giocatore-carica-badge");
+      badge.textContent = "…";
+      try {
+        const entry = await hv_caricaFotoStoricaViaGitHub(nome, squadraReale, file, hv_archivioConfig);
+        hv_archivioFotoStoriche = hv_archivioFotoStoriche.filter(
+          (f) => !(hv_normalizzaNomeGiocatore(f.nome) === hv_normalizzaNomeGiocatore(entry.nome) && (f.squadraReale || "") === (entry.squadraReale || ""))
+        );
+        hv_archivioFotoStoriche.push(entry);
+        const tabAttivo = document.querySelector(".squadra-persona-tab.active");
+        hv_renderSquadreTab(stagione, tabAttivo ? tabAttivo.textContent : null);
+      } catch (err) {
+        badge.textContent = "+";
+        label.title = "Errore: " + err.message;
+      }
+    });
+  });
 }
 
 // Elenco dei nomi delle fantasquadre di una stagione, per i bottoni della tab
@@ -255,7 +338,7 @@ function hv_contenutoSquadraStorica(stagione, nome) {
             .map((g) => {
               const nomeG = typeof g === "string" ? g : g.nome;
               const squadraReale = typeof g === "object" ? g.squadraReale : null;
-              return `<li>${hv_fotoStorica(nomeG, squadraReale)}${nomeG}</li>`;
+              return `<li>${hv_fotoStorica(nomeG, squadraReale, true)}${nomeG}</li>`;
             })
             .join("")}
         </ul>
@@ -314,6 +397,7 @@ function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
     .join("");
   contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[indiceIniziale]);
   hv_wirePagellaStorica(contentWrap);
+  hv_wireCaricaFotoStorica(contentWrap, stagione);
 
   navWrap.querySelectorAll(".squadra-persona-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -321,6 +405,7 @@ function hv_renderSquadreTab(stagione, nomeDaSelezionare) {
       btn.classList.add("active");
       contentWrap.innerHTML = hv_contenutoSquadraStorica(stagione, nomi[Number(btn.dataset.i)]);
       hv_wirePagellaStorica(contentWrap);
+      hv_wireCaricaFotoStorica(contentWrap, stagione);
       btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     });
   });
@@ -699,9 +784,10 @@ async function hv_mostraStagione(stagione) {
   }
 
   wrap.innerHTML = '<p class="empty-state">Carico...</p>';
-  const [squadreRef, giocatoriDb] = await Promise.all([hv_caricaSquadreRef(), hv_caricaGiocatoriDb()]);
+  const [squadreRef, giocatoriDb, fotoStoriche] = await Promise.all([hv_caricaSquadreRef(), hv_caricaGiocatoriDb(), hv_caricaFotoStoricheArchivio()]);
   hv_archivioSquadreRef = squadreRef;
   hv_archivioGiocatoriDb = giocatoriDb;
+  hv_archivioFotoStoriche = fotoStoriche;
 
   const vincitoriHtml = `
     <div class="albo-vincitori-riga">

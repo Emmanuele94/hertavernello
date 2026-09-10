@@ -1,0 +1,4 @@
+{
+  "_leggimi": "Foto caricate a mano dall'admin per giocatori storici (ritirati o non più in Serie A) che non si trovano nel database della stagione in corso. Abbinamento per nome + squadra reale (se specificata, serve a distinguere due giocatori con lo stesso cognome). Gestito da js/archivio.js, non serve modificarlo a mano.",
+  "foto": []
+}
