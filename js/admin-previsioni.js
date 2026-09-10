@@ -54,11 +54,57 @@ async function hv_initPrevisioniForm() {
       <details class="previsione-dettagli">
         <summary>Ordine previsto, posizione per posizione (20 squadre)</summary>
         <p class="muted" style="font-size:12px; margin: 8px 0;">Per ogni fascia, indica quale squadra hai messo in quale posizione ESATTA guardando l'ordine sinistra→destra nel tuo tiermaker.</p>
+        <p class="previsione-contatore" data-squadra-id="${squadra.id}"></p>
         ${gruppiFasce}
       </details>
     `;
     wrap.appendChild(div);
+
+    // Il menu a cascata: appena scegli una squadra in una posizione, sparisce
+    // dagli altri 19 menu DI QUESTA STESSA fantasquadra (indipendente dalle
+    // altre fantasquadre). Se la rimetti a "—", ricompare subito ovunque.
+    div.addEventListener("change", (e) => {
+      if (e.target.classList.contains("pv-posizione")) hv_aggiornaCascataPrevisioni(div);
+    });
+    hv_aggiornaCascataPrevisioni(div);
   });
+}
+
+// Ricostruisce le opzioni di tutti i menu posizione di UNA fantasquadra,
+// togliendo dagli altri le squadre reali già scelte altrove, e aggiorna il
+// contatore "X su 20 squadre assegnate". Non ricrea i <select> (solo le
+// <option> al loro interno), così non serve mai riagganciare listener.
+function hv_aggiornaCascataPrevisioni(div) {
+  const selects = div.querySelectorAll(".pv-posizione");
+  const assegnazioni = {};
+  selects.forEach((sel) => {
+    assegnazioni[sel.dataset.pos] = sel.value || null;
+  });
+
+  selects.forEach((sel) => {
+    const pos = sel.dataset.pos;
+    const valoreCorrente = assegnazioni[pos];
+    const usateAltrove = new Set(
+      Object.entries(assegnazioni)
+        .filter(([p, v]) => p !== pos && v)
+        .map(([, v]) => v)
+    );
+    const opzioniHtml =
+      `<option value="">—</option>` +
+      hv_squadreRefPrevisioni.squadre
+        .filter((s) => !usateAltrove.has(s.codice))
+        .map((s) => `<option value="${s.codice}" ${s.codice === valoreCorrente ? "selected" : ""}>${s.nome}</option>`)
+        .join("");
+    if (sel.innerHTML !== opzioniHtml) sel.innerHTML = opzioniHtml;
+  });
+
+  const totale = hv_squadreRefPrevisioni.squadre.length;
+  const assegnate = Object.values(assegnazioni).filter(Boolean).length;
+  const contatore = div.querySelector(".previsione-contatore");
+  if (contatore) {
+    contatore.textContent = `${assegnate} su ${totale} squadre assegnate`;
+    contatore.classList.toggle("previsione-contatore-completa", assegnate === totale);
+  }
 }
 
 function hv_costruisciOrdine(campo) {
