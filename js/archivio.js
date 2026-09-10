@@ -110,6 +110,50 @@ function hv_estraiIdYoutube(url) {
   return m ? m[1] : null;
 }
 
+// Card di un singolo video in stile "embed": miniatura a piena larghezza,
+// cliccabile. Il click sostituisce solo la miniatura con l'iframe YouTube
+// (autoplay), senza cambiare scheda — vedi hv_wireVideoEmbed più sotto.
+function hv_creaVideoEmbedHtml(v) {
+  const id = hv_estraiIdYoutube(v.url);
+  const titolo = (v.titolo || "Video").replace(/"/g, "&quot;");
+  if (!id) {
+    return `
+      <div class="video-embed-card">
+        <p class="video-embed-titolo">${titolo}</p>
+        <div class="video-embed-player-wrap video-embed-vuoto">Link YouTube non riconosciuto</div>
+      </div>`;
+  }
+  return `
+    <div class="video-embed-card" data-video-id="${id}">
+      <p class="video-embed-titolo">${titolo}</p>
+      <div class="video-embed-player-wrap">
+        <button type="button" class="video-embed-thumb" aria-label="Guarda: ${titolo}">
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-embed-play">▶</span>
+        </button>
+      </div>
+    </div>`;
+}
+
+// Aggancia il click delle miniature dentro un contenitore: al primo click si
+// sostituisce con l'iframe del player e si resta lì (non serve più cliccare).
+function hv_wireVideoEmbed(container) {
+  if (!container) return;
+  container.querySelectorAll(".video-embed-thumb").forEach((btn) => {
+    btn.addEventListener(
+      "click",
+      () => {
+        const card = btn.closest(".video-embed-card");
+        const wrap = card.querySelector(".video-embed-player-wrap");
+        const titoloEl = card.querySelector(".video-embed-titolo");
+        const titoloAttr = titoloEl ? titoloEl.textContent.replace(/"/g, "&quot;") : "Video";
+        wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${card.dataset.videoId}?autoplay=1&rel=0" title="${titoloAttr}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      },
+      { once: true }
+    );
+  });
+}
+
 function hv_blocEspandibile(idBase, titolo, iconaSrc, contenutoHtml) {
   return `
     <div class="squadra-block" style="margin: 0 0 20px;">
@@ -296,18 +340,8 @@ function hv_renderVideoAdminForm(stagione) {
 
         // Aggiorno anche l'anteprima già visibile, senza dover ricaricare la pagina
         const listaWrap = document.getElementById("video-lista-wrap");
-        listaWrap.innerHTML = daSalvare.length
-          ? `<div class="video-lista">${daSalvare
-              .map((v) => {
-                const id = hv_estraiIdYoutube(v.url);
-                const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
-                return `<a href="${v.url}" target="_blank" rel="noopener" class="video-card video-card-riga">
-                  ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
-                  <span class="video-titolo">${v.titolo || "Guarda su YouTube"}</span>
-                </a>`;
-              })
-              .join("")}</div>`
-          : "";
+        listaWrap.innerHTML = daSalvare.length ? `<div class="video-embed-lista">${daSalvare.map((v) => hv_creaVideoEmbedHtml(v)).join("")}</div>` : "";
+        hv_wireVideoEmbed(listaWrap);
       } catch (err) {
         stato.textContent = "Errore: " + err.message;
         stato.style.color = "var(--wine-bright)";
@@ -475,17 +509,7 @@ async function hv_mostraStagione(stagione) {
   // con quella in più la foto si abbina meglio.
   const videoHtml =
     stagione.video && stagione.video.length
-      ? `<div class="video-lista">${stagione.video
-          .map((v) => {
-            const id = hv_estraiIdYoutube(v.url);
-            const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
-            return `
-          <a href="${v.url}" target="_blank" rel="noopener" class="video-card video-card-riga">
-            ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
-            <span class="video-titolo">${v.titolo || "Guarda su YouTube"}</span>
-          </a>`;
-          })
-          .join("")}</div>`
+      ? `<div class="video-embed-lista">${stagione.video.map((v) => hv_creaVideoEmbedHtml(v)).join("")}</div>`
       : "";
 
   const curiositaTabHtml = `
@@ -537,6 +561,7 @@ async function hv_mostraStagione(stagione) {
   hv_renderVideoAdminForm(stagione);
   hv_renderPagelleAdminForm(stagione);
   hv_renderSquadreTab(stagione);
+  hv_wireVideoEmbed(document.getElementById("video-lista-wrap"));
 }
 
 // ===== Cambio vista: Albo d'oro <-> Lista =====

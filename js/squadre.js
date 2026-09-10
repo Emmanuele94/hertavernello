@@ -474,21 +474,59 @@ function hv_estraiIdYoutubeSquadre(url) {
   return m ? m[1] : null;
 }
 
+// Card embed di un video (miniatura a piena larghezza cliccabile, si
+// trasforma nel player YouTube incorporato al click) — stessa identica idea
+// usata per i video di stagione in Archivio.
+function hv_creaVideoEmbedHtmlSquadre(v) {
+  const id = hv_estraiIdYoutubeSquadre(v.url);
+  const titolo = (v.titolo || "Video").replace(/"/g, "&quot;");
+  if (!id) {
+    return `
+      <div class="video-embed-card">
+        <p class="video-embed-titolo">${titolo}</p>
+        <div class="video-embed-player-wrap video-embed-vuoto">Link YouTube non riconosciuto</div>
+      </div>`;
+  }
+  return `
+    <div class="video-embed-card" data-video-id="${id}">
+      <p class="video-embed-titolo">${titolo}</p>
+      <div class="video-embed-player-wrap">
+        <button type="button" class="video-embed-thumb" aria-label="Guarda: ${titolo}">
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-embed-play">▶</span>
+        </button>
+      </div>
+    </div>`;
+}
+
+function hv_wireVideoEmbedSquadre(container) {
+  if (!container) return;
+  container.querySelectorAll(".video-embed-thumb").forEach((btn) => {
+    btn.addEventListener(
+      "click",
+      () => {
+        const card = btn.closest(".video-embed-card");
+        const wrap = card.querySelector(".video-embed-player-wrap");
+        const titoloEl = card.querySelector(".video-embed-titolo");
+        const titoloAttr = titoloEl ? titoloEl.textContent.replace(/"/g, "&quot;") : "Video";
+        wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${card.dataset.videoId}?autoplay=1&rel=0" title="${titoloAttr}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      },
+      { once: true }
+    );
+  });
+}
+
+// I video di una fantasquadra sono un ARRAY (data/loghi-fantasquadre.json,
+// campo "video"): zero, uno, o più highlights. Stesso meccanismo a righe
+// dinamiche già usato per i video di stagione in Archivio.
 function hv_renderHighlights(squadraId, logoEsistente, config) {
   const contenuto = document.getElementById("highlights-content");
-  const video = logoEsistente && logoEsistente.video;
+  const videoArray = (logoEsistente && logoEsistente.video) || [];
 
-  if (video && video.url) {
-    const id = hv_estraiIdYoutubeSquadre(video.url);
-    const miniatura = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
-    contenuto.innerHTML = `
-      <a href="${video.url}" target="_blank" rel="noopener" class="video-card">
-        ${miniatura ? `<img src="${miniatura}" class="video-miniatura" alt="">` : `<div class="video-miniatura video-miniatura-vuota">▶</div>`}
-        <span class="video-titolo">${video.titolo || "Guarda su YouTube"}</span>
-      </a>`;
-  } else {
-    contenuto.innerHTML = '<p class="empty-state">Nessun video ancora aggiunto per questa fantasquadra.</p>';
-  }
+  contenuto.innerHTML = videoArray.length
+    ? `<div class="video-embed-lista">${videoArray.map((v) => hv_creaVideoEmbedHtmlSquadre(v)).join("")}</div>`
+    : '<p class="empty-state">Nessun video ancora aggiunto per questa fantasquadra.</p>';
+  hv_wireVideoEmbedSquadre(contenuto);
 
   const formWrap = document.getElementById("highlights-admin-form");
   if (window.hv_role !== "admin" || !(config.lega.githubOwner && config.lega.githubRepo)) {
@@ -496,33 +534,67 @@ function hv_renderHighlights(squadraId, logoEsistente, config) {
     return;
   }
 
-  formWrap.innerHTML = `
-    <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
-      <p class="campo-titolo" style="margin: 0 0 8px;">Aggiungi/aggiorna video (es. i momenti salienti dell'asta)</p>
-      <input type="text" id="highlights-titolo-input" placeholder="Titolo (es. Asta 2026 - i momenti migliori)" value="${video ? video.titolo || "" : ""}" style="margin-bottom: 8px;">
-      <input type="text" id="highlights-url-input" placeholder="Link YouTube" value="${video ? video.url || "" : ""}">
-      <button type="button" id="highlights-salva-btn" style="margin-top: 8px;">Salva</button>
-      <p id="highlights-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
-    </div>
-  `;
+  // Righe di partenza: quelle già salvate, più una vuota pronta da compilare.
+  let righe = videoArray.map((v) => ({ titolo: v.titolo || "", url: v.url || "" }));
+  righe.push({ titolo: "", url: "" });
 
-  document.getElementById("highlights-salva-btn").addEventListener("click", async () => {
-    const stato = document.getElementById("highlights-stato");
-    const titolo = document.getElementById("highlights-titolo-input").value.trim();
-    const url = document.getElementById("highlights-url-input").value.trim();
-    if (!url) { stato.textContent = "Serve almeno il link."; stato.style.color = "var(--wine-bright)"; return; }
-    stato.textContent = "Salvataggio in corso...";
-    stato.style.color = "var(--text-muted)";
-    try {
-      await hv_salvaVideoHighlightViaGitHub(squadraId, { titolo, url }, config);
-      stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-      stato.style.color = "var(--verde-prato)";
-      hv_renderHighlights(squadraId, { ...(logoEsistente || {}), video: { titolo, url } }, config);
-    } catch (err) {
-      stato.textContent = "Errore: " + err.message;
-      stato.style.color = "var(--wine-bright)";
-    }
-  });
+  function disegna() {
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); margin-top: 14px; padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica i video (es. i momenti salienti dell'asta)</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          ${righe
+            .map(
+              (r, i) => `
+            <div class="campo-riga highlights-admin-riga" data-i="${i}" style="align-items:center; flex-wrap:wrap;">
+              <input type="text" class="highlights-admin-titolo" data-i="${i}" placeholder="Titolo (es. Asta 2026 - i momenti migliori)" value="${r.titolo.replace(/"/g, "&quot;")}" style="flex:1; min-width:200px;">
+              <input type="text" class="highlights-admin-url" data-i="${i}" placeholder="Link YouTube" value="${r.url.replace(/"/g, "&quot;")}" style="flex:1; min-width:200px;">
+              ${righe.length > 1 ? `<button type="button" class="highlights-admin-rimuovi" data-i="${i}" title="Rimuovi questa riga">✕</button>` : ""}
+            </div>`
+            )
+            .join("")}
+        </div>
+        <button type="button" id="highlights-admin-aggiungi" style="margin-top: 10px;">+ Aggiungi un altro video</button>
+        <br>
+        <button type="button" id="highlights-salva-btn" style="margin-top: 10px;">Salva</button>
+        <p id="highlights-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    formWrap.querySelectorAll(".highlights-admin-titolo").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].titolo = el.value));
+    });
+    formWrap.querySelectorAll(".highlights-admin-url").forEach((el) => {
+      el.addEventListener("input", () => (righe[Number(el.dataset.i)].url = el.value));
+    });
+    formWrap.querySelectorAll(".highlights-admin-rimuovi").forEach((el) => {
+      el.addEventListener("click", () => {
+        righe.splice(Number(el.dataset.i), 1);
+        disegna();
+      });
+    });
+    document.getElementById("highlights-admin-aggiungi").addEventListener("click", () => {
+      righe.push({ titolo: "", url: "" });
+      disegna();
+    });
+    document.getElementById("highlights-salva-btn").addEventListener("click", async () => {
+      const stato = document.getElementById("highlights-stato");
+      const daSalvare = righe.filter((r) => r.url.trim()).map((r) => ({ titolo: r.titolo.trim(), url: r.url.trim() }));
+      stato.textContent = "Salvataggio in corso...";
+      stato.style.color = "var(--text-muted)";
+      try {
+        await hv_salvaVideoHighlightViaGitHub(squadraId, daSalvare, config);
+        stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        stato.style.color = "var(--verde-prato)";
+        hv_renderHighlights(squadraId, { ...(logoEsistente || {}), video: daSalvare }, config);
+      } catch (err) {
+        stato.textContent = "Errore: " + err.message;
+        stato.style.color = "var(--wine-bright)";
+      }
+    });
+  }
+
+  disegna();
 }
 
 function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {

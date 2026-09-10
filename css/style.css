@@ -1851,72 +1851,104 @@ body.mostra-info-match .info-match {
   gap: 14px;
 }
 
-/* Lista verticale (Archivio): un video per riga, miniatura piccola a sinistra
-   e titolo accanto — invece che affiancati in griglia. */
-.video-lista {
+/* Video "embed": miniatura a piena larghezza, cliccabile, che al click si
+   trasforma nel player YouTube incorporato NELLA pagina (niente nuova
+   scheda). Aspect-ratio 16:9 fluido: si adatta da solo dal telefono più
+   piccolo al monitor più grande, perché segue sempre la larghezza del suo
+   contenitore (che a sua volta è già limitato da .app a 1080px). Usata sia
+   in Archivio (video di stagione) sia in Squadre (highlights fantasquadra).
+   Se il video sono più di uno, restano semplicemente impilati uno sotto
+   l'altro: niente colonne strette da leggere sullo schermo piccolo. */
+.video-embed-lista {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 22px;
 }
 
-.video-card-riga {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-}
+.video-embed-card { width: 100%; }
 
-.video-card-riga .video-miniatura {
-  width: 120px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  aspect-ratio: 16 / 9;
-}
-
-.video-card-riga .video-miniatura-vuota {
-  font-size: 18px;
-}
-
-.video-card-riga .video-titolo {
-  padding: 0;
-  font-size: 13px;
-}
-
-.video-card {
-  display: block;
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--bg-card-2);
-  border: 1px solid var(--border-hairline);
-  transition: border-color 0.15s ease, transform 0.15s ease;
-}
-
-.video-card:hover {
-  border-color: var(--verde-prato);
-  transform: translateY(-2px);
-}
-
-.video-miniatura {
+.video-embed-player-wrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
+  border-radius: 10px;
+  overflow: hidden;
   background: var(--bg-void);
+  border: 1px solid var(--border-hairline);
 }
 
-.video-miniatura-vuota {
+.video-embed-thumb {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.video-embed-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-embed-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.72);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  color: var(--text-muted);
+  font-size: 22px;
+  pointer-events: none;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.video-titolo {
+.video-embed-thumb:hover .video-embed-play,
+.video-embed-thumb:focus-visible .video-embed-play {
+  background: var(--verde-prato);
+  color: var(--bg-void);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.video-embed-player-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
   display: block;
-  padding: 8px 10px;
-  font-size: 12.5px;
+}
+
+.video-embed-vuoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-hairline);
+  text-align: center;
+  padding: 0 16px;
+}
+
+.video-embed-titolo {
+  margin: 0 0 10px;
+  font-size: 15.5px;
+  font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.35;
+}
+
+@media (max-width: 480px) {
+  .video-embed-play { width: 50px; height: 50px; font-size: 18px; }
+  .video-embed-titolo { font-size: 14px; }
+  .video-embed-lista { gap: 18px; }
 }
 
 /* ===== Motion ===== */
