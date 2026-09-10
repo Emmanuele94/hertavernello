@@ -388,12 +388,12 @@ function hv_renderVideoAdminForm(stagione) {
       stato.style.color = "var(--text-muted)";
       try {
         await hv_salvaVideoStagioneViaGitHub(stagione.anno, daSalvare, config);
-        stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-        stato.style.color = "var(--verde-prato)";
         stagione.video = daSalvare;
         righe = daSalvare.map((v) => ({ titolo: v.titolo, url: v.url }));
         righe.push({ titolo: "", url: "" });
         disegna();
+        document.getElementById("video-admin-stato").textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        document.getElementById("video-admin-stato").style.color = "var(--verde-prato)";
 
         // Aggiorno anche l'anteprima già visibile, senza dover ricaricare la pagina
         const listaWrap = document.getElementById("video-lista-wrap");
@@ -489,12 +489,12 @@ function hv_renderPagelleAdminForm(stagione) {
       stato.style.color = "var(--text-muted)";
       try {
         await hv_salvaPagelleStagioneViaGitHub(stagione.anno, daSalvare, config);
-        stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-        stato.style.color = "var(--verde-prato)";
         stagione.pagelle = daSalvare;
         righe = daSalvare.map((p) => ({ nome: p.nome, testo: p.testo, voto: p.voto ?? "" }));
         righe.push({ nome: "", testo: "", voto: "" });
         disegna();
+        document.getElementById("pagelle-stato").textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        document.getElementById("pagelle-stato").style.color = "var(--verde-prato)";
 
         // Riaggiorno i bottoni della tab "Squadre" (potrebbe essere comparso
         // o sparito un nome), cercando di restare sullo stesso partecipante
@@ -506,6 +506,181 @@ function hv_renderPagelleAdminForm(stagione) {
         stato.style.color = "var(--wine-bright)";
       }
     });
+  }
+
+  disegna();
+}
+
+// Trasforma il testo incollato (una colonna, o due colonne di Excel separate
+// da tabulazione: nome + squadra reale) in un elenco di giocatori. Righe
+// vuote ignorate. Se c'è solo il nome resta una stringa semplice (come già
+// previsto dal formato); se c'è anche la squadra reale diventa un oggetto
+// {nome, squadraReale}, che serve poi ad abbinare meglio la foto storica.
+function hv_parsaIncollaRosa(testo) {
+  return (testo || "")
+    .split(/\r?\n/)
+    .map((riga) => riga.trim())
+    .filter((riga) => riga.length > 0)
+    .map((riga) => {
+      const parti = riga
+        .split("\t")
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0);
+      if (parti.length >= 2) return { nome: parti[0], squadraReale: parti[1] };
+      return parti[0];
+    });
+}
+
+// L'inverso: da un elenco giocatori già salvato al testo da rimettere nella
+// casella (per poterlo ricontrollare/modificare e reincollare).
+function hv_rosaComeTesto(giocatori) {
+  return (giocatori || [])
+    .map((g) => (typeof g === "string" ? g : g.squadraReale ? `${g.nome}\t${g.squadraReale}` : g.nome))
+    .join("\n");
+}
+
+// Editor delle rose storiche: scegli una fantasquadra già presente in questa
+// stagione (o scrivine una nuova), incolla la colonna (o le due colonne)
+// copiate da Excel, vedi subito un'anteprima di quanti giocatori ho letto,
+// poi salvi. Stessa filosofia degli altri form admin di questa pagina.
+function hv_renderRoseAdminForm(stagione) {
+  const formWrap = document.getElementById("rose-admin-form");
+  const config = hv_archivioConfig;
+
+  if (!formWrap || window.hv_role !== "admin" || !config || !(config.lega.githubOwner && config.lega.githubRepo)) {
+    if (formWrap) formWrap.innerHTML = "";
+    return;
+  }
+
+  const NUOVA = "__nuova__";
+  let squadraSelezionata = NUOVA;
+  let testoIncolla = "";
+
+  function squadraCorrente() {
+    return (stagione.rose || []).find((r) => r.squadra === squadraSelezionata);
+  }
+
+  function disegna() {
+    const nomiEsistenti = (stagione.rose || []).map((r) => r.squadra);
+    const giocatoriLetti = hv_parsaIncollaRosa(testoIncolla);
+
+    formWrap.innerHTML = `
+      <div class="admin-box" style="background: var(--bg-void); padding: 14px;">
+        <p class="campo-titolo" style="margin: 0 0 10px;">Aggiungi/modifica una rosa storica</p>
+        <div class="campo-riga" style="align-items:center; flex-wrap:wrap; margin-bottom: 10px;">
+          <select id="rose-admin-select" style="flex:1; min-width:200px;">
+            <option value="${NUOVA}"${squadraSelezionata === NUOVA ? " selected" : ""}>+ Nuova fantasquadra</option>
+            ${nomiEsistenti
+              .map((n) => `<option value="${n.replace(/"/g, "&quot;")}"${n === squadraSelezionata ? " selected" : ""}>Modifica: ${n}</option>`)
+              .join("")}
+          </select>
+        </div>
+        ${
+          squadraSelezionata === NUOVA
+            ? `<input type="text" id="rose-admin-nome-nuova" placeholder="Nome della fantasquadra di quella stagione" style="margin-bottom: 10px;">`
+            : `<p class="muted" style="font-size:12px; margin: 0 0 10px;">Stai modificando: <strong>${squadraSelezionata}</strong>. Il testo qui sotto è già precompilato con la rosa salvata: correggilo e salva, oppure sostituiscilo del tutto reincollando da Excel.</p>`
+        }
+        <p class="muted" style="font-size:12px; margin: 0 0 6px;">Incolla qui la colonna dei nomi copiata da Excel (un giocatore per riga). Se copi ANCHE la colonna della squadra reale accanto, Excel la incolla già separata: la leggo da sola e la uso per abbinare meglio la foto.</p>
+        <textarea id="rose-admin-incolla" rows="8" placeholder="Osimhen&#10;Lautaro&#10;Vlahovic	Juventus" style="font-family: var(--font-mono); font-size:12.5px;">${testoIncolla.replace(/</g, "&lt;")}</textarea>
+        <p id="rose-admin-conteggio" class="muted" style="font-size:12px; margin: 8px 0;">
+          ${giocatoriLetti.length ? `Ho letto <strong>${giocatoriLetti.length}</strong> giocatore${giocatoriLetti.length === 1 ? "" : "i"}.` : "Ancora nessun giocatore incollato."}
+        </p>
+        ${
+          giocatoriLetti.length
+            ? `<div id="rose-admin-anteprima" style="max-height:160px; overflow-y:auto; border:1px solid var(--border-hairline); border-radius:8px; padding:8px 10px; margin-bottom:10px;">
+                ${giocatoriLetti
+                  .map((g) => {
+                    const nome = typeof g === "string" ? g : g.nome;
+                    const sq = typeof g === "object" ? g.squadraReale : null;
+                    return `<div style="font-size:12.5px; padding:2px 0; display:flex; justify-content:space-between; gap:8px;"><span>${nome}</span>${sq ? `<span class="muted">${sq}</span>` : ""}</div>`;
+                  })
+                  .join("")}
+              </div>`
+            : ""
+        }
+        <button type="button" id="rose-admin-salva">Salva questa rosa</button>
+        ${squadraSelezionata !== NUOVA ? `<button type="button" id="rose-admin-rimuovi" style="margin-left:8px; background: var(--wine); color: var(--text-primary);">Rimuovi questa rosa</button>` : ""}
+        <p id="rose-admin-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+      </div>
+    `;
+
+    document.getElementById("rose-admin-select").addEventListener("change", (e) => {
+      squadraSelezionata = e.target.value;
+      const esistente = squadraCorrente();
+      testoIncolla = esistente ? hv_rosaComeTesto(esistente.giocatori) : "";
+      disegna();
+    });
+
+    document.getElementById("rose-admin-incolla").addEventListener("input", (e) => {
+      testoIncolla = e.target.value;
+      const contatore = document.getElementById("rose-admin-conteggio");
+      const n = hv_parsaIncollaRosa(testoIncolla).length;
+      contatore.innerHTML = n ? `Ho letto <strong>${n}</strong> giocatore${n === 1 ? "" : "i"}.` : "Ancora nessun giocatore incollato.";
+      // L'anteprima elenco sotto si ridisegna solo al prossimo giro (blur/salva),
+      // per non ridisegnare l'intero form a ogni tasto premuto e perdere il focus.
+    });
+
+    document.getElementById("rose-admin-incolla").addEventListener("blur", () => disegna());
+
+    document.getElementById("rose-admin-salva").addEventListener("click", async () => {
+      const stato = document.getElementById("rose-admin-stato");
+      const nomeNuovaInput = document.getElementById("rose-admin-nome-nuova");
+      const nomeSquadra = squadraSelezionata === NUOVA ? (nomeNuovaInput ? nomeNuovaInput.value.trim() : "") : squadraSelezionata;
+      const giocatori = hv_parsaIncollaRosa(testoIncolla);
+
+      if (!nomeSquadra) {
+        stato.textContent = "Serve il nome della fantasquadra.";
+        stato.style.color = "var(--wine-bright)";
+        return;
+      }
+      if (!giocatori.length) {
+        stato.textContent = "Incolla almeno un giocatore prima di salvare.";
+        stato.style.color = "var(--wine-bright)";
+        return;
+      }
+
+      stato.textContent = "Salvataggio in corso...";
+      stato.style.color = "var(--text-muted)";
+      try {
+        const roseAggiornate = (stagione.rose || []).filter((r) => r.squadra !== nomeSquadra);
+        roseAggiornate.push({ squadra: nomeSquadra, giocatori });
+        await hv_salvaRoseStagioneViaGitHub(stagione.anno, roseAggiornate, config);
+        stagione.rose = roseAggiornate;
+        squadraSelezionata = nomeSquadra;
+        disegna();
+        document.getElementById("rose-admin-stato").textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
+        document.getElementById("rose-admin-stato").style.color = "var(--verde-prato)";
+
+        const tabAttivo = document.querySelector(".squadra-persona-tab.active");
+        hv_renderSquadreTab(stagione, tabAttivo ? tabAttivo.textContent : nomeSquadra);
+      } catch (err) {
+        stato.textContent = "Errore: " + err.message;
+        stato.style.color = "var(--wine-bright)";
+      }
+    });
+
+    const btnRimuovi = document.getElementById("rose-admin-rimuovi");
+    if (btnRimuovi) {
+      btnRimuovi.addEventListener("click", async () => {
+        const stato = document.getElementById("rose-admin-stato");
+        stato.textContent = "Rimozione in corso...";
+        stato.style.color = "var(--text-muted)";
+        try {
+          const roseAggiornate = (stagione.rose || []).filter((r) => r.squadra !== squadraSelezionata);
+          await hv_salvaRoseStagioneViaGitHub(stagione.anno, roseAggiornate, config);
+          stagione.rose = roseAggiornate;
+          squadraSelezionata = NUOVA;
+          testoIncolla = "";
+          disegna();
+          document.getElementById("rose-admin-stato").textContent = "Rimossa ✓";
+          document.getElementById("rose-admin-stato").style.color = "var(--verde-prato)";
+          hv_renderSquadreTab(stagione);
+        } catch (err) {
+          stato.textContent = "Errore: " + err.message;
+          stato.style.color = "var(--wine-bright)";
+        }
+      });
+    }
   }
 
   disegna();
@@ -596,6 +771,7 @@ async function hv_mostraStagione(stagione) {
     <div id="squadre-persona-tabs" class="tabs"></div>
     <div id="squadra-persona-content"></div>
     <div id="pagelle-admin-form" style="margin-top: 22px;"></div>
+    <div id="rose-admin-form" style="margin-top: 22px;"></div>
   `;
 
   wrap.innerHTML = `
@@ -634,6 +810,7 @@ async function hv_mostraStagione(stagione) {
 
   hv_renderVideoAdminForm(stagione);
   hv_renderPagelleAdminForm(stagione);
+  hv_renderRoseAdminForm(stagione);
   hv_renderSquadreTab(stagione);
   hv_wireVideoEmbed(document.getElementById("video-lista-wrap"));
 }

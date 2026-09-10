@@ -266,6 +266,27 @@ async function hv_salvaVideoStagioneViaGitHub(annoStagione, videoArray, config) 
   await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna video stagione ${annoStagione}`, fileJson.sha);
 }
 
+// Rose di una STAGIONE in Archivio (data/albo-oro.json) — stesso principio
+// di video/pagelle: sostituisce l'intero array "rose" della stagione.
+async function hv_salvaRoseStagioneViaGitHub(annoStagione, roseArray, config) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+
+  const fileJson = await hv_ghGetFile(owner, repo, "data/albo-oro.json", token);
+  if (!fileJson) throw new Error("Non trovo data/albo-oro.json nel repository.");
+
+  const alboObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
+  const stagione = (alboObj.stagioni || []).find((s) => s.anno === annoStagione);
+  if (!stagione) throw new Error(`Stagione ${annoStagione} non trovata in albo-oro.json.`);
+  stagione.rose = roseArray;
+
+  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(alboObj, null, 2));
+  await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Aggiorna rose stagione ${annoStagione}`, fileJson.sha);
+}
+
 // Pagelle di una STAGIONE in Archivio (data/albo-oro.json) — stesso principio
 // dei video: un array di { nome, testo }, quanti se ne vuole.
 async function hv_salvaPagelleStagioneViaGitHub(annoStagione, pagelleArray, config) {
