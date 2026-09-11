@@ -69,7 +69,16 @@
     {
       "squadraId": "sq-12",
       "immagine": "",
-      "immaginePiccola": "sq-12.png"
+      "immaginePiccola": "sq-12.png",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789086022942-tgf3l",
+            "testo": "Aia Andre",
+            "file": "assets/audio-squadre/sq-12-1789086022942-tgf3l.ogg"
+          }
+        ]
+      }
     },
     {
       "squadraId": "sq-02",
