@@ -96,6 +96,19 @@
           }
         ]
       }
+    },
+    {
+      "squadraId": "sq-10",
+      "immagine": "",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085953185-fkohw",
+            "testo": "Aia Dario",
+            "file": "assets/audio-squadre/sq-10-1789085953185-fkohw.ogg"
+          }
+        ]
+      }
     }
   ]
 }
