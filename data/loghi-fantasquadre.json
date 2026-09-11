@@ -50,7 +50,16 @@
     {
       "squadraId": "sq-06",
       "immagine": "",
-      "immaginePiccola": "sq-06.png"
+      "immaginePiccola": "sq-06.png",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085697211-it1jq",
+            "testo": "Aia Ale",
+            "file": "assets/audio-squadre/sq-06-1789085697211-it1jq.ogg"
+          }
+        ]
+      }
     },
     {
       "squadraId": "sq-09",
