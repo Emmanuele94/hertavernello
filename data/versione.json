@@ -1,4 +1,4 @@
 {
   "_leggimi": "Claude aggiorna il campo 'v' ogni volta che consegna un blocco che tocca file JS o CSS: i browser se ne accorgono da soli e si aggiornano (vedi js/versione-check.js), senza bisogno di Ctrl+F5. Usato anche dal tasto Admin > Disconnetti tutti. Non modificarlo a mano, a meno che tu non voglia forzare tu stesso l'aggiornamento di tutti.",
-  "v": "1789128194112"
+  "v": "20260911b"
 }

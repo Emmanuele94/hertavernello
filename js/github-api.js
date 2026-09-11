@@ -52,7 +52,31 @@ async function hv_ghGetFile(owner, repo, path, token, branch = "main") {
   return res.json();
 }
 
-async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sha, branch = "main") {
+// GitHub ha un limite "anti-abuso" sulle scritture troppo ravvicinate (non è
+// la dimensione dei file: è il tempo tra un salvataggio e il successivo —
+// per questo aspettare un minuto risolve sempre). Invece di farlo scattare e
+// sperare che l'admin aspetti da solo, il sito aspetta in automatico prima
+// di OGNI scrittura (crea/modifica/cancella un file), da qualunque pannello
+// arrivi — un solo punto, valido per tutto il sito.
+const HV_GH_INTERVALLO_MINIMO_MS = 60 * 1000;
+let hv_ghUltimaScrittura = 0;
+
+// Se c'è ancora tempo da aspettare prima della prossima scrittura, aspetta
+// (richiamando ogni secondo "alSecondo", se fornito, per mostrare un
+// countdown in pagina). Se non c'è nessuna attesa da fare, ritorna subito.
+async function hv_ghAspettaTurno(alSecondo) {
+  const daAspettare = HV_GH_INTERVALLO_MINIMO_MS - (Date.now() - hv_ghUltimaScrittura);
+  if (daAspettare <= 0) return;
+
+  const fineAttesa = Date.now() + daAspettare;
+  while (Date.now() < fineAttesa) {
+    if (alSecondo) alSecondo(Math.ceil((fineAttesa - Date.now()) / 1000));
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+}
+
+async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sha, branch = "main", alSecondo) {
+  await hv_ghAspettaTurno(alSecondo);
   const body = { message, content: contentBase64, branch };
   if (sha) body.sha = sha;
 
@@ -65,6 +89,7 @@ async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sh
     },
     body: JSON.stringify(body),
   });
+  hv_ghUltimaScrittura = Date.now();
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || `GitHub PUT ${path} → ${res.status}`);
@@ -72,7 +97,8 @@ async function hv_ghPutFile(owner, repo, path, token, contentBase64, message, sh
   return res.json();
 }
 
-async function hv_ghDeleteFile(owner, repo, path, token, sha, message, branch = "main") {
+async function hv_ghDeleteFile(owner, repo, path, token, sha, message, branch = "main", alSecondo) {
+  await hv_ghAspettaTurno(alSecondo);
   const res = await fetch(`${HV_GH_API}/repos/${owner}/${repo}/contents/${path}`, {
     method: "DELETE",
     headers: {
@@ -82,6 +108,7 @@ async function hv_ghDeleteFile(owner, repo, path, token, sha, message, branch = 
     },
     body: JSON.stringify({ message, sha, branch }),
   });
+  hv_ghUltimaScrittura = Date.now();
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || `GitHub DELETE ${path} → ${res.status}`);
@@ -102,7 +129,7 @@ async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
 }
 
 // Carica/aggiorna il logo personalizzato di una fantasquadra e aggiorna loghi-fantasquadre.json.
-async function hv_caricaLogoSquadraViaGitHub(squadraId, file, config) {
+async function hv_caricaLogoSquadraViaGitHub(squadraId, file, config, alSecondo) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -121,35 +148,41 @@ async function hv_caricaLogoSquadraViaGitHub(squadraId, file, config) {
   });
 
   const esistenteImg = await hv_ghGetFile(owner, repo, percorsoImmagine, token);
-  await hv_ghPutFile(owner, repo, percorsoImmagine, token, contentBase64, `Aggiorna logo ${squadraId}`, esistenteImg ? esistenteImg.sha : null);
+  await hv_ghPutFile(owner, repo, percorsoImmagine, token, contentBase64, `Aggiorna logo ${squadraId}`, esistenteImg ? esistenteImg.sha : null, "main", alSecondo);
 
-  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
-  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
+  let vecchioNomeFile = null;
+  const percorsoFinale = await hv_scriviJsonConRitentativo(
+    owner,
+    repo,
+    "data/loghi-fantasquadre.json",
+    token,
+    (loghiObj) => {
+      const obj = loghiObj || { loghi: [] };
+      if (!obj.loghi) obj.loghi = [];
+      let entry = obj.loghi.find((p) => p.squadraId === squadraId);
+      if (!entry) {
+        entry = { squadraId, immagine: "" };
+        obj.loghi.push(entry);
+      }
+      vecchioNomeFile = entry.immagine;
+      entry.immagine = nomeFile;
+      return { oggetto: obj, valore: percorsoImmagine };
+    },
+    `Aggiorna loghi-fantasquadre.json (${squadraId})`,
+    3,
+    alSecondo
+  );
 
-  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
-  if (!loghiObj.loghi) loghiObj.loghi = [];
-  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
-  if (!entry) {
-    entry = { squadraId, immagine: "" };
-    loghiObj.loghi.push(entry);
-  }
-
-  const vecchioNomeFile = entry.immagine;
   if (vecchioNomeFile && vecchioNomeFile !== nomeFile) {
     try {
       const vecchioFile = await hv_ghGetFile(owner, repo, `assets/stemmi/${vecchioNomeFile}`, token);
       if (vecchioFile) {
-        await hv_ghDeleteFile(owner, repo, `assets/stemmi/${vecchioNomeFile}`, token, vecchioFile.sha, `Rimuovi vecchio logo ${squadraId}`);
+        await hv_ghDeleteFile(owner, repo, `assets/stemmi/${vecchioNomeFile}`, token, vecchioFile.sha, `Rimuovi vecchio logo ${squadraId}`, "main", alSecondo);
       }
     } catch (e) {}
   }
 
-  entry.immagine = nomeFile;
-
-  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
-  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiorna loghi-fantasquadre.json (${squadraId})`, fileJson.sha);
-
-  return percorsoImmagine;
+  return percorsoFinale;
 }
 
 // Ridimensiona un'immagine lato client (canvas) prima di caricarla — così
@@ -454,14 +487,14 @@ const HV_LIMITE_AUDIO_BYTE = 5 * 1024 * 1024;
 // ravvicinato nel tempo, come quando si caricano più audio in sequenza:
 // rilegge lo sha più fresco e ritenta, fino a 3 volte con una piccola pausa,
 // invece di far fallire subito tutto il resto della lista.
-async function hv_scriviJsonConRitentativo(owner, repo, path, token, aggiornaOggetto, messaggio, tentativiMassimi = 3) {
+async function hv_scriviJsonConRitentativo(owner, repo, path, token, aggiornaOggetto, messaggio, tentativiMassimi = 3, alSecondo) {
   for (let tentativo = 1; tentativo <= tentativiMassimi; tentativo++) {
     const fileJson = await hv_ghGetFile(owner, repo, path, token);
     const oggetto = fileJson ? JSON.parse(hv_base64ToUtf8(fileJson.content)) : null;
     const { oggetto: oggettoAggiornato, valore } = aggiornaOggetto(oggetto);
     const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(oggettoAggiornato, null, 2));
     try {
-      await hv_ghPutFile(owner, repo, path, token, nuovoContenuto, messaggio, fileJson ? fileJson.sha : null);
+      await hv_ghPutFile(owner, repo, path, token, nuovoContenuto, messaggio, fileJson ? fileJson.sha : null, "main", alSecondo);
       return valore;
     } catch (err) {
       const messaggioErrore = (err && err.message) || "";
@@ -472,7 +505,7 @@ async function hv_scriviJsonConRitentativo(owner, repo, path, token, aggiornaOgg
   }
 }
 
-async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
+async function hv_caricaAudioStoricoViaGitHub(testo, file, config, alSecondo) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -493,7 +526,7 @@ async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
     reader.readAsDataURL(file);
   });
 
-  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio storico: ${testo.slice(0, 60)}`, null);
+  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio storico: ${testo.slice(0, 60)}`, null, "main", alSecondo);
 
   const voce = { id, testo, file: percorso };
   return hv_scriviJsonConRitentativo(
@@ -507,7 +540,9 @@ async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
       obj.audio.push(voce);
       return { oggetto: obj, valore: voce };
     },
-    `Aggiungi audio storico: ${testo.slice(0, 60)}`
+    `Aggiungi audio storico: ${testo.slice(0, 60)}`,
+    3,
+    alSecondo
   );
 }
 
@@ -541,7 +576,7 @@ async function hv_rimuoviAudioStoricoViaGitHub(id, config) {
 // [...], ... }, mai un array unico. File veri su assets/audio-squadre/.
 // Ritorna l'elenco aggiornato di QUESTA stagione, comodo per ridisegnare
 // subito senza dover ricaricare tutto il JSON dal repository.
-async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo, file, config) {
+async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo, file, config, alSecondo) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -562,7 +597,7 @@ async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo,
     reader.readAsDataURL(file);
   });
 
-  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio ${squadraId}: ${testo.slice(0, 60)}`, null);
+  await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio ${squadraId}: ${testo.slice(0, 60)}`, null, "main", alSecondo);
 
   const voce = { id, testo, file: percorso };
   return hv_scriviJsonConRitentativo(
@@ -583,7 +618,9 @@ async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo,
       entry.audio[stagioneAttuale].push(voce);
       return { oggetto: obj, valore: entry.audio[stagioneAttuale] };
     },
-    `Aggiungi audio ${squadraId} (${stagioneAttuale})`
+    `Aggiungi audio ${squadraId} (${stagioneAttuale})`,
+    3,
+    alSecondo
   );
 }
 

@@ -1169,7 +1169,10 @@ function hv_renderAudioStoriciAdminForm(messaggioIniziale, fileSelezionatiInizia
           stato.textContent = `Caricamento ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}")...`;
           stato.style.color = "var(--text-muted)";
           try {
-            await hv_caricaAudioStoricoViaGitHub(titolo.trim() || file.name, file, config);
+            await hv_caricaAudioStoricoViaGitHub(titolo.trim() || file.name, file, config, (secondi) => {
+              stato.textContent = `File ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}"): aspetto ${secondi}s (limite di GitHub tra un caricamento e l'altro)...`;
+              stato.style.color = "var(--text-muted)";
+            });
           } catch (err) {
             const rimanenti = fileSelezionati.slice(i);
             await hv_renderAudioStorici(

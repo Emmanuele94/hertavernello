@@ -800,7 +800,10 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config, messaggioInizia
           stato.textContent = `Caricamento ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}")...`;
           stato.style.color = "var(--text-muted)";
           try {
-            audioAggiornato = await hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, titolo.trim() || file.name, file, config);
+            audioAggiornato = await hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, titolo.trim() || file.name, file, config, (secondi) => {
+              stato.textContent = `File ${i + 1} di ${fileSelezionati.length} ("${titolo || file.name}"): aspetto ${secondi}s (limite di GitHub tra un caricamento e l'altro)...`;
+              stato.style.color = "var(--text-muted)";
+            });
           } catch (err) {
             const rimanenti = fileSelezionati.slice(i);
             hv_renderAudioSquadra(
@@ -890,7 +893,10 @@ function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {
     stato.style.color = "var(--text-muted)";
 
     try {
-      await hv_caricaLogoSquadraViaGitHub(squadraId, file, config);
+      await hv_caricaLogoSquadraViaGitHub(squadraId, file, config, (secondi) => {
+        stato.textContent = `Hai appena salvato qualcosa su GitHub: aspetto ${secondi}s prima di questo caricamento, per non far scattare il suo limite anti-abuso...`;
+        stato.style.color = "var(--text-muted)";
+      });
       stato.textContent = "Salvato ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
       stato.style.color = "var(--verde-prato)";
 
