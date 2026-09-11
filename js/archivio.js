@@ -1039,7 +1039,7 @@ function hv_avviaAudioStorico(tile, url) {
   );
 }
 
-async function hv_renderAudioStorici() {
+async function hv_renderAudioStorici(messaggioIniziale, fileSelezionatiIniziali) {
   const griglia = document.getElementById("audio-storici-griglia");
   griglia.innerHTML = '<p class="empty-state">Carico...</p>';
 
@@ -1050,7 +1050,7 @@ async function hv_renderAudioStorici() {
     audioLista = data.audio || [];
   } catch (err) {
     griglia.innerHTML = `<p class="empty-state">Non riesco a caricare gli audio (${err.message}).</p>`;
-    hv_renderAudioStoriciAdminForm();
+    hv_renderAudioStoriciAdminForm(messaggioIniziale, fileSelezionatiIniziali);
     return;
   }
 
@@ -1089,7 +1089,11 @@ async function hv_renderAudioStorici() {
     });
   }
 
-  hv_renderAudioStoriciAdminForm();
+  // Il messaggio (e gli eventuali file ancora da caricare dopo un errore a
+  // metà lista) vanno passati QUI, dentro il form appena ricostruito — mai
+  // scritti "dopo" su un pezzo di pagina che stiamo per sostituire, altrimenti
+  // spariscono subito (bug corretto: prima capitava sempre, anche con 1 file).
+  hv_renderAudioStoriciAdminForm(messaggioIniziale, fileSelezionatiIniziali);
 }
 
 // Titolo proposto di default: il nome del file senza estensione, con
@@ -1098,7 +1102,7 @@ function hv_titoloDaNomeFileAudioStorico(nomeFile) {
   return nomeFile.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
 }
 
-function hv_renderAudioStoriciAdminForm() {
+function hv_renderAudioStoriciAdminForm(messaggioIniziale, fileSelezionatiIniziali) {
   const formWrap = document.getElementById("audio-storici-admin-form");
   const config = hv_archivioConfig;
   if (!formWrap || window.hv_role !== "admin" || !config || !(config.lega.githubOwner && config.lega.githubRepo)) {
@@ -1107,8 +1111,10 @@ function hv_renderAudioStoriciAdminForm() {
   }
 
   // File scelti ma non ancora caricati: puoi selezionarne più di uno insieme,
-  // ognuno con un titolo modificabile (parte dal nome del file).
-  let fileSelezionati = [];
+  // ognuno con un titolo modificabile (parte dal nome del file). Se arriviamo
+  // qui dopo un errore a metà lista, quelli non ancora caricati restano qui
+  // (non serve riselezionarli).
+  let fileSelezionati = fileSelezionatiIniziali || [];
 
   function disegna() {
     formWrap.innerHTML = `
@@ -1133,13 +1139,14 @@ function hv_renderAudioStoriciAdminForm() {
               <button type="button" id="audio-storico-carica-btn" style="margin-top: 10px;">Carica ${fileSelezionati.length > 1 ? `tutti (${fileSelezionati.length})` : ""}</button>`
             : ""
         }
-        <p id="audio-storico-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+        <p id="audio-storico-stato" class="muted" style="font-size: 12px; margin-top: 8px; color: ${messaggioIniziale ? messaggioIniziale.colore : "var(--text-muted)"};">${messaggioIniziale ? messaggioIniziale.testo : ""}</p>
       </div>
     `;
 
     document.getElementById("audio-storico-file").addEventListener("change", (e) => {
       const nuovi = Array.from(e.target.files).map((file) => ({ file, titolo: hv_titoloDaNomeFileAudioStorico(file.name) }));
       fileSelezionati = fileSelezionati.concat(nuovi);
+      messaggioIniziale = null;
       disegna();
     });
 
@@ -1164,22 +1171,18 @@ function hv_renderAudioStoriciAdminForm() {
           try {
             await hv_caricaAudioStoricoViaGitHub(titolo.trim() || file.name, file, config);
           } catch (err) {
-            fileSelezionati = fileSelezionati.slice(i);
-            hv_renderAudioStorici();
-            const statoNuovo = document.getElementById("audio-storico-stato");
-            if (statoNuovo) {
-              statoNuovo.textContent = `Caricati ${i} su ${i + fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}`;
-              statoNuovo.style.color = "var(--wine-bright)";
-            }
+            const rimanenti = fileSelezionati.slice(i);
+            await hv_renderAudioStorici(
+              {
+                testo: `Caricati ${i} su ${fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}. Gli altri ${rimanenti.length} sono rimasti nella lista, pronti per riprovare.`,
+                colore: "var(--wine-bright)",
+              },
+              rimanenti
+            );
             return;
           }
         }
-        hv_renderAudioStorici();
-        const statoFinale = document.getElementById("audio-storico-stato");
-        if (statoFinale) {
-          statoFinale.textContent = "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-          statoFinale.style.color = "var(--verde-prato)";
-        }
+        await hv_renderAudioStorici({ testo: "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.", colore: "var(--verde-prato)" });
       });
     }
   }

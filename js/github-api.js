@@ -449,6 +449,29 @@ async function hv_caricaPrevisioneViaGitHub(squadraId, file, config) {
 // repository (l'utente l'ha chiesto esplicitamente: avviso sopra i 5 MB).
 const HV_LIMITE_AUDIO_BYTE = 5 * 1024 * 1024;
 
+// Riprova a scrivere un JSON su GitHub se il salvataggio fallisce per un
+// conflitto sullo sha — può capitare scrivendo lo stesso file molto
+// ravvicinato nel tempo, come quando si caricano più audio in sequenza:
+// rilegge lo sha più fresco e ritenta, fino a 3 volte con una piccola pausa,
+// invece di far fallire subito tutto il resto della lista.
+async function hv_scriviJsonConRitentativo(owner, repo, path, token, aggiornaOggetto, messaggio, tentativiMassimi = 3) {
+  for (let tentativo = 1; tentativo <= tentativiMassimi; tentativo++) {
+    const fileJson = await hv_ghGetFile(owner, repo, path, token);
+    const oggetto = fileJson ? JSON.parse(hv_base64ToUtf8(fileJson.content)) : null;
+    const { oggetto: oggettoAggiornato, valore } = aggiornaOggetto(oggetto);
+    const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(oggettoAggiornato, null, 2));
+    try {
+      await hv_ghPutFile(owner, repo, path, token, nuovoContenuto, messaggio, fileJson ? fileJson.sha : null);
+      return valore;
+    } catch (err) {
+      const messaggioErrore = (err && err.message) || "";
+      const eConflittoSha = /sha/i.test(messaggioErrore) || /409/.test(messaggioErrore);
+      if (!eConflittoSha || tentativo === tentativiMassimi) throw err;
+      await new Promise((r) => setTimeout(r, 400 * tentativo));
+    }
+  }
+}
+
 async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
@@ -460,7 +483,7 @@ async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
   }
 
   const ext = (file.name.split(".").pop() || "mp3").toLowerCase();
-  const id = `${Date.now()}`;
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   const percorso = `assets/audio-storici/${id}.${ext}`;
 
   const contentBase64 = await new Promise((resolve, reject) => {
@@ -472,16 +495,20 @@ async function hv_caricaAudioStoricoViaGitHub(testo, file, config) {
 
   await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio storico: ${testo.slice(0, 60)}`, null);
 
-  const fileJson = await hv_ghGetFile(owner, repo, "data/audio-storici.json", token);
-  const audioObj = fileJson ? JSON.parse(hv_base64ToUtf8(fileJson.content)) : { audio: [] };
-  if (!audioObj.audio) audioObj.audio = [];
   const voce = { id, testo, file: percorso };
-  audioObj.audio.push(voce);
-
-  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(audioObj, null, 2));
-  await hv_ghPutFile(owner, repo, "data/audio-storici.json", token, nuovoContenuto, `Aggiungi audio storico: ${testo.slice(0, 60)}`, fileJson ? fileJson.sha : null);
-
-  return voce;
+  return hv_scriviJsonConRitentativo(
+    owner,
+    repo,
+    "data/audio-storici.json",
+    token,
+    (audioObj) => {
+      const obj = audioObj || { audio: [] };
+      if (!obj.audio) obj.audio = [];
+      obj.audio.push(voce);
+      return { oggetto: obj, valore: voce };
+    },
+    `Aggiungi audio storico: ${testo.slice(0, 60)}`
+  );
 }
 
 async function hv_rimuoviAudioStoricoViaGitHub(id, config) {
@@ -537,24 +564,27 @@ async function hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, testo,
 
   await hv_ghPutFile(owner, repo, percorso, token, contentBase64, `Aggiungi audio ${squadraId}: ${testo.slice(0, 60)}`, null);
 
-  const fileJson = await hv_ghGetFile(owner, repo, "data/loghi-fantasquadre.json", token);
-  if (!fileJson) throw new Error("Non trovo data/loghi-fantasquadre.json nel repository.");
-  const loghiObj = JSON.parse(hv_base64ToUtf8(fileJson.content));
-  if (!loghiObj.loghi) loghiObj.loghi = [];
-  let entry = loghiObj.loghi.find((p) => p.squadraId === squadraId);
-  if (!entry) {
-    entry = { squadraId, immagine: "" };
-    loghiObj.loghi.push(entry);
-  }
-  if (!entry.audio || Array.isArray(entry.audio)) entry.audio = {};
-  if (!entry.audio[stagioneAttuale]) entry.audio[stagioneAttuale] = [];
   const voce = { id, testo, file: percorso };
-  entry.audio[stagioneAttuale].push(voce);
-
-  const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(loghiObj, null, 2));
-  await hv_ghPutFile(owner, repo, "data/loghi-fantasquadre.json", token, nuovoContenuto, `Aggiungi audio ${squadraId} (${stagioneAttuale})`, fileJson.sha);
-
-  return entry.audio[stagioneAttuale];
+  return hv_scriviJsonConRitentativo(
+    owner,
+    repo,
+    "data/loghi-fantasquadre.json",
+    token,
+    (loghiObj) => {
+      const obj = loghiObj || { loghi: [] };
+      if (!obj.loghi) obj.loghi = [];
+      let entry = obj.loghi.find((p) => p.squadraId === squadraId);
+      if (!entry) {
+        entry = { squadraId, immagine: "" };
+        obj.loghi.push(entry);
+      }
+      if (!entry.audio || Array.isArray(entry.audio)) entry.audio = {};
+      if (!entry.audio[stagioneAttuale]) entry.audio[stagioneAttuale] = [];
+      entry.audio[stagioneAttuale].push(voce);
+      return { oggetto: obj, valore: entry.audio[stagioneAttuale] };
+    },
+    `Aggiungi audio ${squadraId} (${stagioneAttuale})`
+  );
 }
 
 async function hv_rimuoviAudioSquadraViaGitHub(squadraId, stagioneAttuale, id, config) {

@@ -696,7 +696,7 @@ function hv_titoloDaNomeFileAudio(nomeFile) {
   return nomeFile.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
 }
 
-function hv_renderAudioSquadra(squadraId, logoEsistente, config) {
+function hv_renderAudioSquadra(squadraId, logoEsistente, config, messaggioIniziale, fileSelezionatiIniziali) {
   const contenuto = document.getElementById("audio-squadra-content");
   const stagioneAttuale = config.lega.stagione;
   const audioPerAnno = (logoEsistente && logoEsistente.audio) || {};
@@ -742,8 +742,9 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config) {
   }
 
   // File scelti ma non ancora caricati: puoi selezionarne più di uno insieme,
-  // ognuno con un titolo modificabile (parte dal nome del file).
-  let fileSelezionati = [];
+  // ognuno con un titolo modificabile (parte dal nome del file). Se arriviamo
+  // qui dopo un errore a metà lista, quelli non ancora caricati restano qui.
+  let fileSelezionati = fileSelezionatiIniziali || [];
 
   function disegnaForm() {
     formWrap.innerHTML = `
@@ -768,13 +769,14 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config) {
               <button type="button" id="audio-squadra-carica-btn" style="margin-top: 10px;">Carica ${fileSelezionati.length > 1 ? `tutti (${fileSelezionati.length})` : ""}</button>`
             : ""
         }
-        <p id="audio-squadra-stato" class="muted" style="font-size: 12px; margin-top: 8px;"></p>
+        <p id="audio-squadra-stato" class="muted" style="font-size: 12px; margin-top: 8px; color: ${messaggioIniziale ? messaggioIniziale.colore : "var(--text-muted)"};">${messaggioIniziale ? messaggioIniziale.testo : ""}</p>
       </div>
     `;
 
     document.getElementById("audio-squadra-file-input").addEventListener("change", (e) => {
       const nuovi = Array.from(e.target.files).map((file) => ({ file, titolo: hv_titoloDaNomeFileAudio(file.name) }));
       fileSelezionati = fileSelezionati.concat(nuovi);
+      messaggioIniziale = null;
       disegnaForm();
     });
 
@@ -800,16 +802,26 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config) {
           try {
             audioAggiornato = await hv_caricaAudioSquadraViaGitHub(squadraId, stagioneAttuale, titolo.trim() || file.name, file, config);
           } catch (err) {
-            stato.textContent = `Caricati ${i} su ${fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}`;
-            stato.style.color = "var(--wine-bright)";
-            fileSelezionati = fileSelezionati.slice(i);
-            hv_renderAudioSquadra(squadraId, { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } }, config);
+            const rimanenti = fileSelezionati.slice(i);
+            hv_renderAudioSquadra(
+              squadraId,
+              { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } },
+              config,
+              {
+                testo: `Caricati ${i} su ${fileSelezionati.length}, poi errore su "${titolo || file.name}": ${err.message}. Gli altri ${rimanenti.length} sono rimasti nella lista, pronti per riprovare.`,
+                colore: "var(--wine-bright)",
+              },
+              rimanenti
+            );
             return;
           }
         }
-        hv_renderAudioSquadra(squadraId, { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } }, config);
-        document.getElementById("audio-squadra-stato").textContent = "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.";
-        document.getElementById("audio-squadra-stato").style.color = "var(--verde-prato)";
+        hv_renderAudioSquadra(
+          squadraId,
+          { ...(logoEsistente || {}), audio: { ...audioPerAnno, [stagioneAttuale]: audioAggiornato } },
+          config,
+          { testo: "Caricati ✓ — il sito pubblico si aggiornerà tra circa un minuto.", colore: "var(--verde-prato)" }
+        );
       });
     }
   }
