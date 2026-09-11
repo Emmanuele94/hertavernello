@@ -65,6 +65,19 @@
           }
         ]
       }
+    },
+    {
+      "squadraId": "sq-08",
+      "immagine": "",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085478166-bp80u",
+            "testo": "Aia Raffy",
+            "file": "assets/audio-squadre/sq-08-1789085478166-bp80u.ogg"
+          }
+        ]
+      }
     }
   ]
 }
