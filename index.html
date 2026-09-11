@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260911a">
 </head>
 <body>
 
@@ -40,6 +40,7 @@
         <a href="squadre.html" class="nav-btn"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
         <a href="archivio.html" class="nav-btn"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
         <a href="admin.html" id="nav-admin-link" class="nav-btn hidden">Admin</a>
+        <a href="#" id="hv-pulisci-cache" class="nav-pulisci-link" title="Pulisci cache e ricarica (ti disconnette)">↻</a>
         <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente">
           <img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="Esci">
         </a>
@@ -106,13 +107,14 @@
     </footer>
   </div>
 
-  <script src="js/auth.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/cache.js"></script>
-  <script src="js/giocatori.js"></script>
-  <script src="js/calcolo-derivati.js"></script>
-  <script src="js/motore-news.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/versione-check.js?v=20260911a"></script>
+  <script src="js/auth.js?v=20260911a"></script>
+  <script src="js/api.js?v=20260911a"></script>
+  <script src="js/cache.js?v=20260911a"></script>
+  <script src="js/giocatori.js?v=20260911a"></script>
+  <script src="js/calcolo-derivati.js?v=20260911a"></script>
+  <script src="js/motore-news.js?v=20260911a"></script>
+  <script src="js/main.js?v=20260911a"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

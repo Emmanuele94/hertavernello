@@ -268,6 +268,28 @@ a { color: inherit; }
   animation: hv-scatto-icona 0.45s ease;
 }
 
+.nav-pulisci-link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-card-2);
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.15s ease;
+}
+
+.nav-pulisci-link:hover {
+  color: var(--verde-prato);
+  transform: rotate(180deg);
+}
+
 .hero { padding: 8px 0 28px; }
 
 .countdown {
