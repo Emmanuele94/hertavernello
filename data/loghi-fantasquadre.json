@@ -36,7 +36,16 @@
     {
       "squadraId": "sq-05",
       "immagine": "sq-05.jpeg",
-      "immaginePiccola": "sq-05.png"
+      "immaginePiccola": "sq-05.png",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085550904-gf3y0",
+            "testo": "Aia Diego",
+            "file": "assets/audio-squadre/sq-05-1789085550904-gf3y0.ogg"
+          }
+        ]
+      }
     },
     {
       "squadraId": "sq-06",
