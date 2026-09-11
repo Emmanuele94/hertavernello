@@ -43,6 +43,19 @@
       "squadraId": "sq-12",
       "immagine": "",
       "immaginePiccola": "sq-12.png"
+    },
+    {
+      "squadraId": "sq-02",
+      "immagine": "",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085192991-n8m3o",
+            "testo": "Aia Fillo",
+            "file": "assets/audio-squadre/sq-02-1789085192991-n8m3o.ogg"
+          }
+        ]
+      }
     }
   ]
 }
