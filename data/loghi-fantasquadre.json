@@ -18,7 +18,16 @@
     {
       "squadraId": "sq-04",
       "immagine": "sq-04.jpeg",
-      "immaginePiccola": "sq-04.png"
+      "immaginePiccola": "sq-04.png",
+      "audio": {
+        "2026/2027": [
+          {
+            "id": "1789085416491-8c6tl",
+            "testo": "Aia Lelio",
+            "file": "assets/audio-squadre/sq-04-1789085416491-8c6tl.ogg"
+          }
+        ]
+      }
     },
     {
       "squadraId": "sq-03",
