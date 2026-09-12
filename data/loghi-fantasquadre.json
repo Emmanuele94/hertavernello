@@ -91,7 +91,8 @@
             "file": "assets/audio-squadre/sq-02-1789085192991-n8m3o.ogg"
           }
         ]
-      }
+      },
+      "immaginePiccola": "sq-02.png"
     },
     {
       "squadraId": "sq-08",
