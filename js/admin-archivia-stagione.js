@@ -112,12 +112,31 @@ async function hv_archiviaFaseStagione(fase) {
         })
         .filter(Boolean);
       if (pagelleNuove.length) stagione.pagelle = pagelleNuove;
+
+      // Regolamento: è un unico documento per tutto il sito (non per
+      // fantasquadra), quindi lo copio una sola volta, non dentro il ciclo
+      // sopra. Anche questo solo con l'iniziale — se cambia a stagione in
+      // corso, quello archiviato resta comunque quello di inizio anno.
+      // hv_copiaFileGitHub ritorna null da sola se non è mai stato caricato
+      // nessun regolamento: nessun errore, semplicemente non lo archivio.
+      try {
+        const destinazioneRegolamento = `assets/regolamento-storico/regolamento-${slugAnno}.pdf`;
+        const copiato = await hv_copiaFileGitHub(
+          owner,
+          repo,
+          "assets/regolamento.pdf",
+          destinazioneRegolamento,
+          token,
+          `Archivia regolamento (${stagione.anno})`
+        );
+        if (copiato) stagione.regolamento = copiato;
+      } catch (e) {}
     }
 
     const nuovoContenuto = hv_utf8ToBase64(JSON.stringify(alboObj, null, 2));
     await hv_ghPutFile(owner, repo, "data/albo-oro.json", token, nuovoContenuto, `Archivia stagione (${fase})`, fileJson.sha);
 
-    const messaggioFase = fase === "iniziale" ? "prima parte (rose + pagelle + video + stemmi)" : "rose dopo la riparazione";
+    const messaggioFase = fase === "iniziale" ? "prima parte (rose + pagelle + video + stemmi + regolamento)" : "rose dopo la riparazione";
     stato.textContent = `Archiviata ✓ la ${messaggioFase}. Resta nascosta in Archivio finché la stagione è segnata "in corso".`;
     stato.style.color = "var(--verde-prato)";
   } catch (err) {

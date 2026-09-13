@@ -906,6 +906,10 @@ async function hv_mostraStagione(stagione) {
     <div id="rose-admin-form" style="margin-top: 22px;"></div>
   `;
 
+  const regolamentoHtml = stagione.regolamento
+    ? `<p style="margin: 0 0 18px;"><a href="${stagione.regolamento}" target="_blank" rel="noopener" class="regolamento-storico-link"><img src="assets/icone/icon-regolamento.png" class="icona-titolo" alt="">Regolamento di questa stagione</a> — <a href="${stagione.regolamento}" download>scarica</a></p>`
+    : "";
+
   wrap.innerHTML = `
     <div class="sotto-tab-nav">
       <button type="button" class="sotto-tab-btn active" data-tab="home">Home</button>
@@ -914,6 +918,7 @@ async function hv_mostraStagione(stagione) {
     </div>
     <div id="sotto-tab-home" class="sotto-tab-contenuto">
       ${vincitoriHtml}
+      ${regolamentoHtml}
       <h3 class="squadra-block-title" style="margin-top: 22px;"><img src="assets/icone/icon-highlights.png" class="icona-titolo" alt="">Video</h3>
       <div id="video-lista-wrap">${videoHtml}</div>
       <div id="video-admin-form"></div>
