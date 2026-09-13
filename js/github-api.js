@@ -654,3 +654,36 @@ async function hv_rimuoviAudioSquadraViaGitHub(squadraId, stagioneAttuale, id, c
 
   return entry.audio[stagioneAttuale];
 }
+
+// Regolamento (PDF): sempre lo stesso percorso fisso, sovrascritto ogni volta
+// che se ne carica uno nuovo — non serve tenerne uno storico, è un documento
+// unico che si aggiorna. Limite di peso generoso (10 MB) solo per evitare
+// upload sbagliati per errore (es. un file enorme scelto per sbaglio).
+const HV_LIMITE_REGOLAMENTO_BYTE = 10 * 1024 * 1024;
+const HV_PERCORSO_REGOLAMENTO = "assets/regolamento.pdf";
+
+async function hv_caricaRegolamentoViaGitHub(file, config, alSecondo) {
+  const { githubOwner: owner, githubRepo: repo } = config.lega;
+  const token = hv_getGithubToken();
+  if (!token || !owner || !repo) {
+    throw new Error("Serve il token GitHub (e githubOwner/githubRepo in config.json).");
+  }
+  if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+    throw new Error("Il file deve essere un PDF.");
+  }
+  if (file.size > HV_LIMITE_REGOLAMENTO_BYTE) {
+    throw new Error(`Il file pesa ${(file.size / 1024 / 1024).toFixed(1)} MB, sopra il limite di 10 MB.`);
+  }
+
+  const contentBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossibile leggere il file selezionato."));
+    reader.readAsDataURL(file);
+  });
+
+  const esistente = await hv_ghGetFile(owner, repo, HV_PERCORSO_REGOLAMENTO, token);
+  await hv_ghPutFile(owner, repo, HV_PERCORSO_REGOLAMENTO, token, contentBase64, "Aggiorna il regolamento", esistente ? esistente.sha : null, "main", alSecondo);
+
+  return HV_PERCORSO_REGOLAMENTO;
+}
