@@ -1,66 +1,73 @@
-// Deve essere il PRIMO script caricato in ogni pagina, prima di auth.js:
-// controlla se il sito è stato aggiornato (o se l'admin ha premuto
-// "Disconnetti tutti" in Admin) confrontando data/versione.json — scaricato
-// sempre "fresco", mai dalla cache del browser — con l'ultima versione vista
-// su questo dispositivo. Se è cambiata: pulisce la sessione (quindi fa
-// logout, voluto) e ricarica la pagina, così tutti i file .js/.css vengono
-// ripescati veri e non dalla cache — niente più Ctrl+F5 a mano.
-//
-// Il controllo è anche periodico (ogni 2 minuti) mentre la pagina resta
-// aperta, così anche chi ha già una scheda aperta viene aggiornato/sloggato
-// entro un paio di minuti da "Disconnetti tutti", non solo chi ricarica.
+// Gestione separata di:
+// 1) release del sito: aggiorna CSS/JS/service worker senza fare logout;
+// 2) sessione globale: il comando Admin "Disconnetti tutti" cambia `v` e
+//    continua a invalidare le sessioni su tutti i dispositivi.
 
 const HV_CHIAVE_VERSIONE_VISTA = "hv_versione_vista";
+const HV_CHIAVE_RELEASE_VISTA = "hv_release_vista";
 
-function hv_pulisciCacheELocale() {
+function hv_pulisciSessioneELocale() {
   sessionStorage.clear();
   Object.keys(localStorage).forEach((chiave) => {
     if (chiave.indexOf("hv_cache_") === 0) localStorage.removeItem(chiave);
   });
 }
 
-async function hv_controllaVersione(alCambioRicarica) {
+function hv_urlRicaricaRelease() {
+  const url = new URL(location.href);
+  url.searchParams.set("_release", Date.now());
+  return url.pathname + url.search + url.hash;
+}
+
+async function hv_aggiornaServiceWorkerERicarica() {
+  try {
+    if ("serviceWorker" in navigator) {
+      const reg = await navigator.serviceWorker.getRegistration();
+      if (reg) await reg.update();
+    }
+  } catch (_) {
+    // Il versionamento degli asset nell'HTML garantisce comunque il refresh.
+  }
+  location.replace(hv_urlRicaricaRelease());
+}
+
+async function hv_controllaVersione(alCambioRicarica = true) {
   try {
     const res = await fetch("data/versione.json?_=" + Date.now(), { cache: "no-store" });
     if (!res.ok) return;
     const data = await res.json();
-    const vistaOra = localStorage.getItem(HV_CHIAVE_VERSIONE_VISTA);
 
-    if (!vistaOra) {
-      // Prima visita su questo dispositivo: memorizzo e basta, niente da pulire.
-      localStorage.setItem(HV_CHIAVE_VERSIONE_VISTA, data.v);
+    const versioneSessione = String(data.v ?? "");
+    const release = String(data.release ?? "");
+    const sessioneVista = localStorage.getItem(HV_CHIAVE_VERSIONE_VISTA);
+    const releaseVista = localStorage.getItem(HV_CHIAVE_RELEASE_VISTA);
+
+    // Prima visita: memorizza lo stato senza interrompere il login.
+    if (!sessioneVista && versioneSessione) {
+      localStorage.setItem(HV_CHIAVE_VERSIONE_VISTA, versioneSessione);
+    }
+    if (!releaseVista && release) {
+      localStorage.setItem(HV_CHIAVE_RELEASE_VISTA, release);
+    }
+
+    // "Disconnetti tutti": è l'unico caso in cui la sessione viene cancellata.
+    if (sessioneVista && versioneSessione && sessioneVista !== versioneSessione && alCambioRicarica) {
+      hv_pulisciSessioneELocale();
+      localStorage.setItem(HV_CHIAVE_VERSIONE_VISTA, versioneSessione);
+      if (release) localStorage.setItem(HV_CHIAVE_RELEASE_VISTA, release);
+      location.replace(hv_urlRicaricaRelease());
       return;
     }
 
-    if (vistaOra !== data.v && alCambioRicarica) {
-      hv_pulisciCacheELocale();
-      localStorage.setItem(HV_CHIAVE_VERSIONE_VISTA, data.v);
-      location.href = location.pathname + "?_agg=" + Date.now();
+    // Nuova release: aggiorna gli asset senza disconnettere l'utente.
+    if (releaseVista && release && releaseVista !== release && alCambioRicarica) {
+      localStorage.setItem(HV_CHIAVE_RELEASE_VISTA, release);
+      await hv_aggiornaServiceWorkerERicarica();
     }
-  } catch (err) {
-    // Nessuna connessione o file non raggiungibile: non blocco la pagina,
-    // riproverà al prossimo caricamento o al prossimo controllo periodico.
+  } catch (_) {
+    // Offline o file non raggiungibile: il sito resta utilizzabile e riprova dopo.
   }
 }
 
 hv_controllaVersione(true);
 setInterval(() => hv_controllaVersione(true), 2 * 60 * 1000);
-
-// Usata dal tasto "Pulisci cache" presente in ogni pagina: uguale al
-// controllo automatico, ma immediato e senza aspettare che la versione sia
-// davvero cambiata — utile quando non si vuole aspettare.
-function hv_pulisciCacheManuale() {
-  hv_pulisciCacheELocale();
-  localStorage.removeItem(HV_CHIAVE_VERSIONE_VISTA);
-  location.href = location.pathname + "?_agg=" + Date.now();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const link = document.getElementById("hv-pulisci-cache");
-  if (link) {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      hv_pulisciCacheManuale();
-    });
-  }
-});

@@ -12,10 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260914a">
-<link rel="stylesheet" href="css/restyling.css?v=20260914-restyling-main1">
-<script defer src="js/restyling-ui.js?v=20260914-restyling-main1"></script>
-<script defer src="js/admin-icone-home.js?v=20260914-restyling-main1"></script>
+  <link rel="stylesheet" href="css/style.css?v=20260914-mobile1">
+<link rel="stylesheet" href="css/restyling.css?v=20260914-mobile1">
+<script defer src="js/restyling-ui.js?v=20260914-mobile1"></script>
+<script defer src="js/admin-icone-home.js?v=20260914-mobile1"></script>
 </head>
 <body>
 
@@ -43,7 +43,6 @@
         <a href="archivio.html" class="nav-btn"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
         <a href="#" id="hv-apri-regolamento" class="nav-btn"><img src="assets/icone/icon-regolamento.png" class="icona-nav" alt="">Regolamento</a>
         <a href="admin.html" id="nav-admin-link" class="nav-btn hidden">Admin</a>
-        <a href="#" id="hv-pulisci-cache" class="nav-pulisci-link" title="Pulisci cache e ricarica (ti disconnette)">↻</a>
         <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente">
           <img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="Esci">
         </a>
@@ -51,6 +50,26 @@
     </header>
 
     <section class="section" style="margin-top: 10px;">
+      <div class="rosa-search" id="rosa-search-wrap">
+        <label class="rosa-search-label" for="rosa-search-input">Cerca giocatore o fantasquadra</label>
+        <div class="rosa-search-box">
+          <span class="rosa-search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            id="rosa-search-input"
+            class="rosa-search-input"
+            placeholder="Es. Zielinski, Zodiac FC…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-autocomplete="list"
+            aria-controls="rosa-search-results"
+            aria-expanded="false"
+          >
+          <button type="button" id="rosa-search-clear" class="rosa-search-clear hidden" aria-label="Cancella ricerca">✕</button>
+        </div>
+        <div id="rosa-search-results" class="rosa-search-results hidden" role="listbox" aria-label="Risultati ricerca"></div>
+      </div>
+
       <div id="tabs" class="tabs"></div>
 
       <div class="squadra-intestazione">
@@ -68,9 +87,6 @@
         <div class="squadra-block" style="margin: 0;">
           <h3 class="squadra-block-title sezione-toggle" data-target="rosa-blocco-contenuto">
             Rosa
-            <button type="button" id="toggle-info-match" class="toggle-info-btn" title="Mostra/nascondi orari e avversari">
-              <img src="assets/icone/icon-info.png" class="icona-info-toggle" alt="Info">
-            </button>
             <span class="toggle-chevron">▾</span>
           </h3>
           <div id="rosa-blocco-contenuto" class="sezione-contenuto">
@@ -164,15 +180,15 @@
     </div>
   </div>
 
-  <script src="js/versione-check.js?v=20260914a"></script>
-  <script src="js/auth.js?v=20260914a"></script>
-  <script src="js/regolamento-modal.js?v=20260914a"></script>
-  <script src="js/api.js?v=20260914a"></script>
-  <script src="js/cache.js?v=20260914a"></script>
-  <script src="js/giocatori.js?v=20260914a"></script>
-  <script src="js/calcolo-derivati.js?v=20260914a"></script>
-  <script src="js/github-api.js?v=20260914a"></script>
-  <script src="js/squadre.js?v=20260914a"></script>
+  <script src="js/versione-check.js?v=20260914-mobile1"></script>
+  <script src="js/auth.js?v=20260914-mobile1"></script>
+  <script src="js/regolamento-modal.js?v=20260914-mobile1"></script>
+  <script src="js/api.js?v=20260914-mobile1"></script>
+  <script src="js/cache.js?v=20260914-mobile1"></script>
+  <script src="js/giocatori.js?v=20260914-mobile1"></script>
+  <script src="js/calcolo-derivati.js?v=20260914-mobile1"></script>
+  <script src="js/github-api.js?v=20260914-mobile1"></script>
+  <script src="js/squadre.js?v=20260914-mobile1"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

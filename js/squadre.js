@@ -219,7 +219,27 @@ function hv_infoPartitaGiocatore(codiceSquadra, giornataCorrente, partiteStagion
   return {
     testo: giaGiocata ? `Giocato ${oraTesto} vs ${avversario}` : `${oraTesto} vs ${avversario}`,
     classe: giaGiocata ? "info-match-giocato" : "info-match-daGiocare",
+    avversario,
+    oraTesto,
+    giaGiocata,
   };
+}
+
+function hv_escapeHtml(valore) {
+  return String(valore ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function hv_normalizzaRicerca(valore) {
+  return String(valore ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
 }
 
 function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagione, giocatoriDb, nazioni) {
@@ -240,36 +260,63 @@ function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagion
     const righe = lista
       .map((g) => {
         const codice = squadreRef ? hv_trovaCodice(g.squadraReale, squadreRef) : null;
+        const codiceSafe = hv_escapeHtml(codice || g.squadraReale || "");
+        const nomeSafe = hv_escapeHtml(g.nome);
+        const costoSafe = hv_escapeHtml(g.costo ?? "");
         const cellaSquadra = codice
-          ? `<img src="assets/loghi/${codice}.png" alt="${codice}" title="${codice}" class="logo-squadra-mini"><span>${codice}</span>`
-          : `${g.squadraReale || ""}`;
+          ? `<img src="assets/loghi/${encodeURIComponent(codice)}.png" alt="" class="logo-squadra-mini"><span>${codiceSafe}</span>`
+          : `<span>${codiceSafe}</span>`;
         const info = codice && partiteStagione ? hv_infoPartitaGiocatore(codice, giornataCorrente, partiteStagione) : null;
-        const infoHtml = info ? ` <span class="info-match ${info.classe}">${info.testo}</span>` : "";
 
         const giocatoreDb = giocatoriDb ? hv_trovaGiocatore(g.nome, codice, giocatoriDb) : null;
         const fotoHtml = giocatoreDb && giocatoreDb.foto
-          ? `<img src="${giocatoreDb.foto}" class="foto-giocatore-mini" alt="">`
-          : `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(g.nome)}</span>`;
+          ? `<img src="${hv_escapeHtml(giocatoreDb.foto)}" class="foto-giocatore-mini" alt="">`
+          : `<span class="foto-giocatore-iniziali">${hv_escapeHtml(hv_inizialiGiocatore(g.nome))}</span>`;
         const nazioneCodice = giocatoreDb ? giocatoreDb.nazionalitaCodice : null;
         const nazioneNome = nazioneCodice && nazioni ? nazioni[nazioneCodice] : null;
         const bandieraHtml = nazioneCodice
           ? `<span class="bandiera-wrap" data-tooltip-nazione>
-               <img src="assets/bandiere/${nazioneCodice}.png" class="bandiera-mini" alt="${nazioneNome || ""}">
-               <span class="bandiera-tooltip">${nazioneNome || ""}</span>
+               <img src="assets/bandiere/${encodeURIComponent(nazioneCodice)}.png" class="bandiera-mini" alt="${hv_escapeHtml(nazioneNome || "")}">
+               <span class="bandiera-tooltip">${hv_escapeHtml(nazioneNome || "")}</span>
              </span>`
           : "";
 
+        const dettaglioTesto = info
+          ? `${giornataCorrente ? `Giornata ${giornataCorrente} · ` : ""}${info.testo}`
+          : `${giornataCorrente ? `Giornata ${giornataCorrente} · ` : ""}Orario della partita non ancora disponibile.`;
+        const dettaglioClasse = info ? info.classe : "info-match-nondisponibile";
+
         return `
-        <tr>
-          <td><span class="badge-ruolo ${ruolo.toLowerCase()}">${ruolo[0]}</span>${fotoHtml}${g.nome}${bandieraHtml}${infoHtml}</td>
-          <td class="squadra-reale">${cellaSquadra}</td>
-          <td class="costo">${g.costo ?? ""}</td>
-        </tr>`;
+          <div class="roster-player" data-giocatore-nome="${nomeSafe}">
+            <div class="roster-player-main">
+              <span class="badge-ruolo ${ruolo.toLowerCase()}" title="${hv_escapeHtml(HV_NOME_RUOLI[ruolo])}">${ruolo[0]}</span>
+              ${fotoHtml}
+              <span class="roster-player-name">${nomeSafe}${bandieraHtml}</span>
+            </div>
+            <div class="roster-player-team" title="Squadra reale">${cellaSquadra}</div>
+            <div class="roster-player-cost" title="Crediti pagati"><span>${costoSafe}</span><small> cr</small></div>
+            <button type="button" class="player-info-toggle" aria-expanded="false" aria-label="Mostra informazioni partita di ${nomeSafe}">INFO</button>
+            <div class="roster-match-detail hidden" data-has-match="${info ? "true" : "false"}">
+              <span class="info-match ${dettaglioClasse}">${hv_escapeHtml(dettaglioTesto)}</span>
+            </div>
+          </div>`;
       })
       .join("");
 
-    group.innerHTML = `<h3>${HV_NOME_RUOLI[ruolo]}</h3><table class="roster-table"><tbody>${righe}</tbody></table>`;
+    group.innerHTML = `<h3>${HV_NOME_RUOLI[ruolo]}</h3><div class="roster-list">${righe}</div>`;
     wrap.appendChild(group);
+  });
+
+  wrap.querySelectorAll(".player-info-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const riga = btn.closest(".roster-player");
+      const dettaglio = riga ? riga.querySelector(".roster-match-detail") : null;
+      if (!dettaglio) return;
+      const aperto = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!aperto));
+      btn.classList.toggle("attivo", !aperto);
+      dettaglio.classList.toggle("hidden", aperto);
+    });
   });
 }
 
@@ -975,7 +1022,15 @@ async function hv_initSquadre(config) {
     }
   }
 
+  const tabsEl = document.getElementById("tabs");
+  const searchInput = document.getElementById("rosa-search-input");
+  const searchResults = document.getElementById("rosa-search-results");
+  const searchClear = document.getElementById("rosa-search-clear");
+  const tabPerSquadra = new Map();
+  let squadraCorrente = null;
+
   function mostraSquadra(squadra) {
+    squadraCorrente = squadra;
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
     const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
@@ -994,43 +1049,173 @@ async function hv_initSquadre(config) {
     hv_renderAudioSquadra(squadra.id, logo, config);
 
     if (statoInfo && giornataCorrente) {
-      const trovati = document.querySelectorAll("#roster-content .info-match").length;
+      const trovati = document.querySelectorAll('#roster-content .roster-match-detail[data-has-match="true"]').length;
       const totaliGiocatori = roster ? roster.giocatori.length : 0;
       statoInfo.textContent = `Giornata ${giornataCorrente} — orario disponibile per ${trovati} su ${totaliGiocatori} giocatori.`;
     }
   }
 
-  const tabsEl = document.getElementById("tabs");
-  tabsEl.innerHTML = "";
+  function selezionaSquadra(squadra, giocatoreDaEvidenziare = null) {
+    if (!squadra) return;
+    tabPerSquadra.forEach((btn) => btn.classList.remove("active"));
+    const tab = tabPerSquadra.get(squadra.id);
+    if (tab) {
+      tab.classList.add("active");
+      tab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+    mostraSquadra(squadra);
 
+    if (giocatoreDaEvidenziare) {
+      requestAnimationFrame(() => {
+        const riga = Array.from(document.querySelectorAll("#roster-content .roster-player"))
+          .find((el) => el.dataset.giocatoreNome === giocatoreDaEvidenziare);
+        if (!riga) return;
+        riga.scrollIntoView({ behavior: "smooth", block: "center" });
+        riga.classList.remove("roster-player-highlight");
+        void riga.offsetWidth;
+        riga.classList.add("roster-player-highlight");
+        window.setTimeout(() => riga.classList.remove("roster-player-highlight"), 4000);
+      });
+    }
+  }
+
+  tabsEl.innerHTML = "";
   config.squadre.forEach((squadra, i) => {
     const btn = document.createElement("button");
     btn.className = "tab-btn" + (i === 0 ? " active" : "");
     btn.textContent = squadra.nomeReale;
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      mostraSquadra(squadra);
-    });
+    btn.addEventListener("click", () => selezionaSquadra(squadra));
+    tabPerSquadra.set(squadra.id, btn);
     tabsEl.appendChild(btn);
   });
 
-  if (config.squadre.length > 0) mostraSquadra(config.squadre[0]);
+  const squadraPerId = new Map(config.squadre.map((s) => [s.id, s]));
+  const indiceRicerca = [];
+  (rose || []).forEach((rosa) => {
+    const squadra = squadraPerId.get(rosa.squadraId);
+    if (!squadra) return;
+    (rosa.giocatori || []).forEach((g) => {
+      indiceRicerca.push({
+        tipo: "giocatore",
+        nome: g.nome,
+        chiave: hv_normalizzaRicerca(g.nome),
+        squadra,
+        ruolo: g.ruolo,
+      });
+    });
+  });
+  config.squadre.forEach((squadra) => {
+    indiceRicerca.push({
+      tipo: "squadra",
+      nome: squadra.nomeFantasquadra,
+      chiave: hv_normalizzaRicerca(`${squadra.nomeFantasquadra} ${squadra.nomeReale}`),
+      squadra,
+    });
+  });
+
+  function chiudiRicerca() {
+    searchResults.classList.add("hidden");
+    searchInput.setAttribute("aria-expanded", "false");
+  }
+
+  function apriRisultato(item) {
+    if (item.tipo === "giocatore") {
+      searchInput.value = item.nome;
+      searchClear.classList.remove("hidden");
+      chiudiRicerca();
+      selezionaSquadra(item.squadra, item.nome);
+    } else {
+      searchInput.value = item.squadra.nomeFantasquadra;
+      searchClear.classList.remove("hidden");
+      chiudiRicerca();
+      selezionaSquadra(item.squadra);
+      requestAnimationFrame(() => {
+        document.querySelector(".squadra-intestazione")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+
+  function aggiornaRicerca() {
+    const query = hv_normalizzaRicerca(searchInput.value);
+    searchClear.classList.toggle("hidden", query.length === 0);
+    if (query.length < 3) {
+      chiudiRicerca();
+      searchResults.innerHTML = "";
+      return;
+    }
+
+    const trovati = indiceRicerca
+      .filter((item) => item.chiave.includes(query))
+      .sort((a, b) => {
+        const aInizia = a.chiave.startsWith(query) ? 0 : 1;
+        const bInizia = b.chiave.startsWith(query) ? 0 : 1;
+        if (aInizia !== bInizia) return aInizia - bInizia;
+        if (a.tipo !== b.tipo) return a.tipo === "giocatore" ? -1 : 1;
+        return a.nome.localeCompare(b.nome, "it");
+      })
+      .slice(0, 8);
+
+    searchResults.innerHTML = "";
+    if (trovati.length === 0) {
+      const vuoto = document.createElement("div");
+      vuoto.className = "rosa-search-empty";
+      vuoto.textContent = "Nessun giocatore o fantasquadra trovata.";
+      searchResults.appendChild(vuoto);
+    } else {
+      trovati.forEach((item) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "rosa-search-result";
+        btn.setAttribute("role", "option");
+
+        const principale = document.createElement("span");
+        principale.className = "rosa-search-result-name";
+        principale.textContent = item.nome;
+        const meta = document.createElement("span");
+        meta.className = "rosa-search-result-meta";
+        meta.textContent = item.tipo === "giocatore"
+          ? `${item.ruolo} · ${item.squadra.nomeFantasquadra} (${item.squadra.nomeReale})`
+          : `Fantasquadra · ${item.squadra.nomeReale}`;
+
+        btn.append(principale, meta);
+        btn.addEventListener("click", () => apriRisultato(item));
+        searchResults.appendChild(btn);
+      });
+    }
+    searchResults.classList.remove("hidden");
+    searchInput.setAttribute("aria-expanded", "true");
+  }
+
+  searchInput.addEventListener("input", aggiornaRicerca);
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      chiudiRicerca();
+      searchInput.blur();
+    } else if (e.key === "Enter") {
+      const primo = searchResults.querySelector(".rosa-search-result");
+      if (primo && !searchResults.classList.contains("hidden")) {
+        e.preventDefault();
+        primo.click();
+      }
+    }
+  });
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    searchClear.classList.add("hidden");
+    chiudiRicerca();
+    searchInput.focus();
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#rosa-search-wrap")) chiudiRicerca();
+  });
+
+  if (config.squadre.length > 0) selezionaSquadra(config.squadre[0]);
 }
 
 hv_checkGate().then((data) => {
   if (data) hv_initSquadre(data);
 });
 document.addEventListener("hv:unlocked", (e) => hv_initSquadre(e.detail));
-
-const hv_toggleInfoBtn = document.getElementById("toggle-info-match");
-if (hv_toggleInfoBtn) {
-  hv_toggleInfoBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // non deve anche collassare/espandere il blocco Rosa
-    document.body.classList.toggle("mostra-info-match");
-    hv_toggleInfoBtn.classList.toggle("attivo");
-  });
-}
 
 document.querySelectorAll(".sezione-toggle").forEach((titolo) => {
   titolo.addEventListener("click", () => {

@@ -1,4 +1,5 @@
 {
-  "_leggimi": "Claude aggiorna il campo 'v' ogni volta che consegna un blocco che tocca file JS o CSS: i browser se ne accorgono da soli e si aggiornano (vedi js/versione-check.js), senza bisogno di Ctrl+F5. Usato anche dal tasto Admin > Disconnetti tutti. Non modificarlo a mano, a meno che tu non voglia forzare tu stesso l'aggiornamento di tutti.",
-  "v": "1789413219799"
+  "_leggimi": "`release` cambia a ogni pubblicazione e aggiorna CSS/JS senza logout. `v` cambia solo dal comando Admin 'Disconnetti tutti' e invalida le sessioni.",
+  "v": "1789413219799",
+  "release": "20260914-mobile1"
 }
