@@ -129,7 +129,8 @@
     },
     {
       "squadraId": "sq-07",
-      "immagine": "sq-07.png"
+      "immagine": "sq-07.png",
+      "immaginePiccola": "sq-07.png"
     }
   ]
 }
