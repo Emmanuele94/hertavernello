@@ -1,6 +1,9 @@
-/* Cloudflare Worker per Hertavernello: static assets + API Bug/Consigli (D1 + R2). */
+/* Cloudflare Worker per Hertavernello: static assets + API Bug/Consigli (solo D1, incluse le immagini). */
 const STATI = new Set(["nuova", "da_valutare", "accettata", "risolta", "scartata"]);
 const TIPI = new Set(["bug", "consiglio"]);
+const MAX_IMAGES = 5;
+// D1 limita BLOB/righe a 2.000.000 byte. Manteniamo margine per metadati e serializzazione.
+const MAX_IMAGE_BYTES = 1_700_000;
 let schemaReady = null;
 let configCache = null;
 const githubVerificationCache = new Map();
@@ -14,6 +17,15 @@ function json(data, status = 200, extraHeaders = {}) {
 
 function clean(value, max = 5000) {
   return String(value ?? "").trim().slice(0, max);
+}
+
+function safeFilename(value, fallback = "immagine.jpg") {
+  const name = String(value || fallback)
+    .replace(/[\\/\0\r\n\t\"<>:|?*]+/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 120);
+  return name || fallback;
 }
 
 async function ensureSchema(env) {
@@ -35,6 +47,17 @@ async function ensureSchema(env) {
         updated_at TEXT NOT NULL
       )`),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_feedback_status_created ON feedback(status, created_at DESC)"),
+      env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_images (
+        feedback_id TEXT NOT NULL,
+        image_index INTEGER NOT NULL,
+        filename TEXT NOT NULL,
+        content_type TEXT NOT NULL,
+        byte_size INTEGER NOT NULL,
+        data BLOB NOT NULL,
+        created_at TEXT NOT NULL,
+        PRIMARY KEY (feedback_id, image_index)
+      )`),
+      env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_feedback_images_feedback ON feedback_images(feedback_id, image_index)"),
     ]).catch((error) => {
       schemaReady = null;
       throw error;
@@ -43,19 +66,13 @@ async function ensureSchema(env) {
   return schemaReady;
 }
 
-function extFor(type) {
-  if (type === "image/png") return "png";
-  if (type === "image/webp") return "webp";
-  if (type === "image/gif") return "gif";
-  return "jpg";
-}
-
 async function handleCreate(request, env) {
   await ensureSchema(env);
   let form;
   try { form = await request.formData(); }
   catch (_) { return json({ error: "Dati della segnalazione non validi." }, 400); }
 
+  // Honeypot anti-spam: i bot che lo compilano ricevono una risposta neutra, senza scrivere nel DB.
   if (clean(form.get("website"), 120)) return json({ ok: true, id: "ricevuto" });
 
   const tipo = clean(form.get("tipo"), 20).toLowerCase();
@@ -66,45 +83,57 @@ async function handleCreate(request, env) {
   if (descrizione.length < 8) return json({ error: "Descrizione troppo breve." }, 400);
 
   const files = form.getAll("images").filter((item) => item instanceof File && item.size > 0);
-  if (files.length > 5) return json({ error: "Puoi allegare al massimo 5 immagini." }, 400);
-  if (files.some((file) => !file.type.startsWith("image/") || file.size > 2 * 1024 * 1024)) {
-    return json({ error: "Una delle immagini non è valida o supera 2 MB dopo la compressione." }, 400);
+  if (files.length > MAX_IMAGES) return json({ error: `Puoi allegare al massimo ${MAX_IMAGES} immagini.` }, 400);
+  if (files.some((file) => !file.type.startsWith("image/") || file.size > MAX_IMAGE_BYTES)) {
+    return json({ error: "Una delle immagini non è valida o è troppo grande dopo la compressione." }, 400);
   }
 
   const id = `fb_${Date.now().toString(36)}_${crypto.randomUUID().slice(0, 8)}`;
-  const imageKeys = [];
+  const now = new Date().toISOString();
+
   try {
+    const statements = [
+      env.DB.prepare(`INSERT INTO feedback
+        (id, tipo, nome, descrizione, pagina, release, user_agent, platform, screen, status, image_keys, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'nuova', '[]', ?, ?)`)
+        .bind(
+          id,
+          tipo,
+          nome,
+          descrizione,
+          clean(form.get("pagina"), 300),
+          clean(form.get("release"), 120),
+          clean(form.get("userAgent"), 600),
+          clean(form.get("platform"), 160),
+          clean(form.get("screen"), 160),
+          now,
+          now,
+        ),
+    ];
+
     for (let i = 0; i < files.length; i += 1) {
       const file = files[i];
-      const key = `feedback/${id}/${String(i + 1).padStart(2, "0")}-${crypto.randomUUID()}.${extFor(file.type)}`;
-      await env.FEEDBACK_IMAGES.put(key, file.stream(), {
-        httpMetadata: { contentType: file.type || "image/jpeg", cacheControl: "private, no-store" },
-        customMetadata: { reportId: id, index: String(i) },
-      });
-      imageKeys.push(key);
+      const bytes = await file.arrayBuffer();
+      statements.push(
+        env.DB.prepare(`INSERT INTO feedback_images
+          (feedback_id, image_index, filename, content_type, byte_size, data, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?)`)
+          .bind(
+            id,
+            i,
+            safeFilename(file.name, `immagine-${i + 1}.jpg`),
+            clean(file.type || "image/jpeg", 100),
+            file.size,
+            bytes,
+            now,
+          ),
+      );
     }
 
-    const now = new Date().toISOString();
-    await env.DB.prepare(`INSERT INTO feedback
-      (id, tipo, nome, descrizione, pagina, release, user_agent, platform, screen, status, image_keys, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'nuova', ?, ?, ?)`)
-      .bind(
-        id,
-        tipo,
-        nome,
-        descrizione,
-        clean(form.get("pagina"), 300),
-        clean(form.get("release"), 120),
-        clean(form.get("userAgent"), 600),
-        clean(form.get("platform"), 160),
-        clean(form.get("screen"), 160),
-        JSON.stringify(imageKeys),
-        now,
-        now,
-      ).run();
+    // D1 batch è transazionale: se un allegato fallisce, non resta una segnalazione parziale.
+    await env.DB.batch(statements);
     return json({ ok: true, id }, 201);
   } catch (error) {
-    await Promise.allSettled(imageKeys.map((key) => env.FEEDBACK_IMAGES.delete(key)));
     console.error("feedback create", error);
     return json({ error: "Non riesco a salvare la segnalazione in questo momento." }, 500);
   }
@@ -170,31 +199,30 @@ async function handleAdminList(request, env) {
   await ensureSchema(env);
   if (!(await verifyAdmin(request, env))) return json({ error: "Accesso Admin non autorizzato." }, 403);
   const status = clean(new URL(request.url).searchParams.get("status"), 30);
+  const baseSelect = `SELECT f.*,
+    (SELECT COUNT(*) FROM feedback_images fi WHERE fi.feedback_id = f.id) AS image_count
+    FROM feedback f`;
   let result;
   if (status && status !== "tutte" && STATI.has(status)) {
-    result = await env.DB.prepare("SELECT * FROM feedback WHERE status = ? ORDER BY created_at DESC LIMIT 250").bind(status).all();
+    result = await env.DB.prepare(`${baseSelect} WHERE f.status = ? ORDER BY f.created_at DESC LIMIT 250`).bind(status).all();
   } else {
-    result = await env.DB.prepare("SELECT * FROM feedback ORDER BY created_at DESC LIMIT 250").all();
+    result = await env.DB.prepare(`${baseSelect} ORDER BY f.created_at DESC LIMIT 250`).all();
   }
-  const items = (result.results || []).map((row) => {
-    let keys = [];
-    try { keys = JSON.parse(row.image_keys || "[]"); } catch (_) {}
-    return {
-      id: row.id,
-      tipo: row.tipo,
-      nome: row.nome,
-      descrizione: row.descrizione,
-      pagina: row.pagina,
-      release: row.release,
-      user_agent: row.user_agent,
-      platform: row.platform,
-      screen: row.screen,
-      status: row.status,
-      created_at: row.created_at,
-      updated_at: row.updated_at,
-      imageCount: keys.length,
-    };
-  });
+  const items = (result.results || []).map((row) => ({
+    id: row.id,
+    tipo: row.tipo,
+    nome: row.nome,
+    descrizione: row.descrizione,
+    pagina: row.pagina,
+    release: row.release,
+    user_agent: row.user_agent,
+    platform: row.platform,
+    screen: row.screen,
+    status: row.status,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+    imageCount: Number(row.image_count || 0),
+  }));
   return json({ items });
 }
 
@@ -204,23 +232,33 @@ async function getReport(env, id) {
 }
 
 async function handleAdminImage(request, env, id, indexText) {
+  await ensureSchema(env);
   if (!(await verifyAdmin(request, env))) return json({ error: "Accesso Admin non autorizzato." }, 403);
-  const row = await getReport(env, id);
-  if (!row) return json({ error: "Segnalazione non trovata." }, 404);
-  let keys = [];
-  try { keys = JSON.parse(row.image_keys || "[]"); } catch (_) {}
+  const report = await getReport(env, id);
+  if (!report) return json({ error: "Segnalazione non trovata." }, 404);
+
   const index = Number(indexText);
-  if (!Number.isInteger(index) || index < 0 || index >= keys.length) return json({ error: "Immagine non trovata." }, 404);
-  const object = await env.FEEDBACK_IMAGES.get(keys[index]);
-  if (!object) return json({ error: "Immagine non trovata." }, 404);
-  const headers = new Headers();
-  object.writeHttpMetadata(headers);
-  headers.set("Cache-Control", "private, no-store");
-  headers.set("Content-Disposition", `inline; filename="${id}-${index + 1}.${extFor(headers.get("Content-Type") || "image/jpeg")}"`);
-  return new Response(object.body, { headers });
+  if (!Number.isInteger(index) || index < 0 || index >= MAX_IMAGES) return json({ error: "Immagine non trovata." }, 404);
+
+  const row = await env.DB.prepare(`SELECT filename, content_type, byte_size, data
+    FROM feedback_images WHERE feedback_id = ? AND image_index = ?`)
+    .bind(id, index).first();
+  if (!row || !row.data) return json({ error: "Immagine non trovata." }, 404);
+
+  const body = row.data instanceof ArrayBuffer ? row.data : new Uint8Array(row.data);
+  return new Response(body, {
+    headers: {
+      "Content-Type": clean(row.content_type, 100) || "image/jpeg",
+      "Content-Length": String(Number(row.byte_size || body.byteLength || 0)),
+      "Cache-Control": "private, no-store",
+      "Content-Disposition": `inline; filename="${safeFilename(row.filename, `${id}-${index + 1}.jpg`)}"`,
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
 }
 
 async function handleAdminPatch(request, env, id) {
+  await ensureSchema(env);
   if (!(await verifyAdmin(request, env))) return json({ error: "Accesso Admin non autorizzato." }, 403);
   const body = await request.json().catch(() => null);
   const status = clean(body?.status, 30);

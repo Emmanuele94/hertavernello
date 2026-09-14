@@ -7,6 +7,7 @@
   const MAX_IMAGES = 5;
   const MAX_SIDE = 1600;
   const JPEG_QUALITY = 0.82;
+  const MAX_IMAGE_BYTES = 1_700_000;
   let immagini = [];
   let saveTimer = null;
   let initialized = false;
@@ -156,9 +157,13 @@
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY));
-    if (!blob) throw new Error(`Non riesco a comprimere ${file.name}.`);
-    if (blob.size > 2 * 1024 * 1024) throw new Error(`${file.name} resta troppo grande anche dopo la compressione.`);
+    let blob = null;
+    for (const quality of [JPEG_QUALITY, 0.72, 0.62, 0.52]) {
+      blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", quality));
+      if (!blob) throw new Error(`Non riesco a comprimere ${file.name}.`);
+      if (blob.size <= MAX_IMAGE_BYTES) break;
+    }
+    if (!blob || blob.size > MAX_IMAGE_BYTES) throw new Error(`${file.name} resta troppo grande anche dopo la compressione.`);
     const base = (file.name || "immagine").replace(/\.[^.]+$/, "").replace(/[^a-z0-9_-]+/gi, "-").slice(0, 60) || "immagine";
     return { nome: `${base}.jpg`, blob };
   }

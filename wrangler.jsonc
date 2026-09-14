@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "hertavernello",
   "main": "worker.js",
-  "compatibility_date": "2026-09-14",
+  "compatibility_date": "2026-09-15",
   "observability": {
     "enabled": true
   },
@@ -12,12 +12,9 @@
   },
   "d1_databases": [
     {
-      "binding": "DB"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "FEEDBACK_IMAGES"
+      "binding": "DB",
+      "database_name": "hertavernello-db",
+      "database_id": "a8b0bfb5-1287-42c5-a085-bd368050ec3b"
     }
   ]
 }
