@@ -1,5 +1,6 @@
 /* Pannello Admin Bug/Consigli. L'accesso API viene validato dal Worker tramite il token GitHub già usato dall'admin. */
 (() => {
+  const FEEDBACK_API_ORIGIN = "https://hertavernello.emmanueletufano.workers.dev";
   const STATI = {
     nuova: "Nuova",
     da_valutare: "Da valutare",
@@ -21,7 +22,7 @@
     const headers = new Headers(options.headers || {});
     headers.set("Authorization", `Bearer ${token}`);
     if (options.body && !(options.body instanceof FormData)) headers.set("Content-Type", "application/json");
-    const res = await fetch(`api/feedback/admin${path}`, { ...options, headers, cache: "no-store" });
+    const res = await fetch(`${FEEDBACK_API_ORIGIN}/api/feedback/admin${path}`, { ...options, headers, cache: "no-store", mode: "cors" });
     if (res.status === 401 || res.status === 403) {
       sessionStorage.removeItem("hv_gh_token");
       throw new Error("Token GitHub non valido o senza permessi di scrittura sulla repository.");

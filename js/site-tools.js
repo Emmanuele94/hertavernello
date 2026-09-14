@@ -3,6 +3,7 @@
   const GUIDE_SEEN_KEY = "hv_guida_vista_v2";
   const GUIDE_NEVER_KEY = "hv_guida_non_mostrare_v2";
   const FEEDBACK_COUNT_INTERVAL = 60 * 1000;
+  const FEEDBACK_API_ORIGIN = "https://hertavernello.emmanueletufano.workers.dev";
   let countTimer = null;
   let guideOverlay = null;
 
@@ -69,7 +70,7 @@
     }
 
     try {
-      const res = await fetch(`api/feedback/count?_=${Date.now()}`, { cache: "no-store" });
+      const res = await fetch(`${FEEDBACK_API_ORIGIN}/api/feedback/count?_=${Date.now()}`, { cache: "no-store", mode: "cors" });
       if (!res.ok) throw new Error("feedback API non disponibile");
       const data = await res.json();
       const count = Math.max(0, Number(data.count) || 0);

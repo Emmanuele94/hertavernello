@@ -8,6 +8,7 @@
   const MAX_SIDE = 1600;
   const JPEG_QUALITY = 0.82;
   const MAX_IMAGE_BYTES = 1_700_000;
+  const FEEDBACK_API_ORIGIN = "https://hertavernello.emmanueletufano.workers.dev";
   let immagini = [];
   let saveTimer = null;
   let initialized = false;
@@ -235,7 +236,7 @@
     immagini.forEach((item, i) => fd.append("images", item.blob, item.nome || `immagine-${i + 1}.jpg`));
 
     try {
-      const res = await fetch("api/feedback", { method: "POST", body: fd });
+      const res = await fetch(`${FEEDBACK_API_ORIGIN}/api/feedback`, { method: "POST", body: fd, mode: "cors" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || `Invio non riuscito (${res.status}).`);
       await dbDelete().catch(() => {});

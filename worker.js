@@ -7,6 +7,34 @@ const MAX_IMAGE_BYTES = 1_700_000;
 let schemaReady = null;
 let configCache = null;
 const githubVerificationCache = new Map();
+const CORS_ORIGINS = new Set([
+  "https://emmanuele94.github.io",
+  "https://hertavernello.emmanueletufano.workers.dev",
+]);
+
+function allowedCorsOrigin(request) {
+  const origin = request.headers.get("Origin") || "";
+  if (!origin) return "";
+  if (CORS_ORIGINS.has(origin)) return origin;
+  try {
+    const url = new URL(origin);
+    if ((url.hostname === "localhost" || url.hostname === "127.0.0.1") && (url.protocol === "http:" || url.protocol === "https:")) return origin;
+  } catch (_) {}
+  return "";
+}
+
+function withCors(response, request) {
+  const origin = allowedCorsOrigin(request);
+  if (!origin) return response;
+  const headers = new Headers(response.headers);
+  headers.set("Access-Control-Allow-Origin", origin);
+  headers.set("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
+  headers.set("Access-Control-Allow-Headers", "Authorization, Content-Type");
+  headers.set("Access-Control-Max-Age", "86400");
+  const vary = headers.get("Vary");
+  headers.set("Vary", vary ? `${vary}, Origin` : "Origin");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
 
 function json(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {
@@ -290,11 +318,18 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     try {
-      if (url.pathname.startsWith("/api/")) return await handleApi(request, env);
+      if (url.pathname.startsWith("/api/")) {
+        if (request.method === "OPTIONS") {
+          const origin = allowedCorsOrigin(request);
+          if (!origin) return new Response(null, { status: 204 });
+          return withCors(new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } }), request);
+        }
+        return withCors(await handleApi(request, env), request);
+      }
       return env.ASSETS.fetch(request);
     } catch (error) {
       console.error("worker", error);
-      if (url.pathname.startsWith("/api/")) return json({ error: "Errore interno del servizio." }, 500);
+      if (url.pathname.startsWith("/api/")) return withCors(json({ error: "Errore interno del servizio." }, 500), request);
       return env.ASSETS.fetch(request);
     }
   },
