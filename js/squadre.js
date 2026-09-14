@@ -618,6 +618,7 @@ function hv_fermaAudioSquadra() {
   hv_audioAttivoSquadra.audio.currentTime = 0;
   cancelAnimationFrame(hv_audioAttivoSquadra.animId);
   hv_audioAttivoSquadra.tile.classList.remove("in-riproduzione");
+  hv_audioAttivoSquadra.tile.style.removeProperty("--audio-glow");
   const ctx2d = hv_audioAttivoSquadra.canvas.getContext("2d");
   ctx2d.clearRect(0, 0, hv_audioAttivoSquadra.canvas.width, hv_audioAttivoSquadra.canvas.height);
   const icona = hv_audioAttivoSquadra.tile.querySelector(".audio-storico-icona");
@@ -625,26 +626,36 @@ function hv_fermaAudioSquadra() {
   hv_audioAttivoSquadra = null;
 }
 
+// Piccolo equalizzatore a barre (frequenze vere) + alone verde che pulsa col
+// volume — stesso identico effetto di Archivio > Audio storici.
 function hv_disegnaOndaAudioSquadra(stato) {
   const ctx2d = stato.canvas.getContext("2d");
+  stato.analyser.fftSize = 64;
   const dataArray = new Uint8Array(stato.analyser.frequencyBinCount);
+  const nBarre = 14;
 
   function loop() {
-    stato.analyser.getByteTimeDomainData(dataArray);
-    ctx2d.clearRect(0, 0, stato.canvas.width, stato.canvas.height);
-    ctx2d.beginPath();
-    const slice = stato.canvas.width / dataArray.length;
-    let x = 0;
-    for (let i = 0; i < dataArray.length; i++) {
-      const v = dataArray[i] / 128.0;
-      const y = (v * stato.canvas.height) / 2;
-      if (i === 0) ctx2d.moveTo(x, y);
-      else ctx2d.lineTo(x, y);
-      x += slice;
+    stato.analyser.getByteFrequencyData(dataArray);
+    const { width, height } = stato.canvas;
+    ctx2d.clearRect(0, 0, width, height);
+
+    const passo = Math.max(1, Math.floor(dataArray.length / nBarre));
+    const larghezzaBarra = width / nBarre;
+    let volumeMedio = 0;
+
+    for (let i = 0; i < nBarre; i++) {
+      const valore = dataArray[i * passo] / 255;
+      volumeMedio += valore;
+      const altezza = Math.max(2, valore * height);
+      const grad = ctx2d.createLinearGradient(0, height - altezza, 0, height);
+      grad.addColorStop(0, "#f5ff00");
+      grad.addColorStop(1, "#39ff14");
+      ctx2d.fillStyle = grad;
+      ctx2d.fillRect(i * larghezzaBarra + 1, height - altezza, larghezzaBarra - 2, altezza);
     }
-    ctx2d.strokeStyle = "#39ff14";
-    ctx2d.lineWidth = 2;
-    ctx2d.stroke();
+
+    volumeMedio /= nBarre;
+    stato.tile.style.setProperty("--audio-glow", (volumeMedio * 26).toFixed(1) + "px");
     stato.animId = requestAnimationFrame(loop);
   }
   loop();
@@ -708,9 +719,12 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config, messaggioInizia
           (a) => `
       <div class="audio-storico-tile" data-id="${a.id}" data-file="${a.file}">
         <span class="audio-storico-icona">▶</span>
-        <canvas class="audio-storico-onda" width="120" height="28"></canvas>
+        <canvas class="audio-storico-onda" width="200" height="50"></canvas>
         <p class="audio-storico-testo">${a.testo}</p>
-        ${window.hv_role === "admin" ? `<button type="button" class="audio-squadra-rimuovi" data-id="${a.id}">Rimuovi</button>` : ""}
+        <div class="audio-storico-azioni">
+          <a href="${a.file}" download class="audio-storico-scarica" title="Scarica">⬇</a>
+          ${window.hv_role === "admin" ? `<button type="button" class="audio-squadra-rimuovi" data-id="${a.id}">Rimuovi</button>` : ""}
+        </div>
       </div>`
         )
         .join("")}</div>`
@@ -718,7 +732,7 @@ function hv_renderAudioSquadra(squadraId, logoEsistente, config, messaggioInizia
 
   contenuto.querySelectorAll(".audio-storico-tile").forEach((tile) => {
     tile.addEventListener("click", (e) => {
-      if (e.target.classList.contains("audio-squadra-rimuovi")) return;
+      if (e.target.closest(".audio-squadra-rimuovi") || e.target.closest(".audio-storico-scarica")) return;
       hv_avviaAudioSquadra(tile, tile.dataset.file);
     });
   });
