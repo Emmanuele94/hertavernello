@@ -13,6 +13,7 @@
   let saveTimer = null;
   let initialized = false;
   let releaseCorrente = "";
+  let invioInCorso = false;
 
   const el = (id) => document.getElementById(id);
 
@@ -213,12 +214,19 @@
 
   async function invia(event) {
     event.preventDefault();
+    if (invioInCorso) return;
+
+    // event.currentTarget puo diventare null dopo un await in alcuni browser:
+    // conserviamo subito un riferimento stabile al form.
+    const form = event.currentTarget;
+    const paginaOrigine = el("feedback-from")?.value || "feedback.html";
     const nome = el("feedback-nome").value.trim();
     const descrizione = el("feedback-descrizione").value.trim();
     if (nome.length < 2) return status("Inserisci il tuo nome.", "error");
     if (descrizione.length < 8) return status("Descrivi il bug o il consiglio con qualche dettaglio in più.", "error");
 
     const button = el("feedback-submit");
+    invioInCorso = true;
     button.disabled = true;
     button.textContent = "Invio in corso…";
     status("Sto inviando la segnalazione e gli eventuali allegati…");
@@ -227,7 +235,7 @@
     fd.append("tipo", getTipo());
     fd.append("nome", nome);
     fd.append("descrizione", descrizione);
-    fd.append("pagina", el("feedback-from").value || "feedback.html");
+    fd.append("pagina", paginaOrigine);
     fd.append("release", releaseCorrente);
     fd.append("userAgent", navigator.userAgent || "");
     fd.append("platform", navigator.userAgentData?.platform || navigator.platform || "");
@@ -239,10 +247,14 @@
       const res = await fetch(`${FEEDBACK_API_ORIGIN}/api/feedback`, { method: "POST", body: fd, mode: "cors" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || `Invio non riuscito (${res.status}).`);
+
+      // Da qui in poi il backend ha confermato il salvataggio: puliamo solo lo stato locale.
       await dbDelete().catch(() => {});
       immagini = [];
-      event.currentTarget.reset();
-      document.querySelector('input[name="tipo"][value="bug"]').checked = true;
+      form.reset();
+      el("feedback-from").value = paginaOrigine;
+      const bugRadio = document.querySelector('input[name="tipo"][value="bug"]');
+      if (bugRadio) bugRadio.checked = true;
       renderImmagini();
       aggiornaContatore();
       draftState("Bozza inviata e rimossa ✓");
@@ -251,6 +263,7 @@
       await salvaBozza().catch(() => {});
       status(`${err.message} La bozza resta salvata su questo dispositivo.`, "error");
     } finally {
+      invioInCorso = false;
       button.disabled = false;
       button.textContent = "Invia segnalazione";
     }
@@ -277,6 +290,67 @@
     return false;
   }
 
+  function isDesktopInput() {
+    return window.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches === true;
+  }
+
+  function aggiornaIstruzioniImmagini() {
+    const label = document.querySelector(".feedback-image-picker strong");
+    if (!label) return;
+    label.textContent = isDesktopInput()
+      ? "Trascina un’immagine, oppure fai uno screen, copialo e incollalo qui, oppure carica un’immagine"
+      : "Aggiungi screenshot o foto";
+  }
+
+  function installaClipboardEDragDrop() {
+    if (!isDesktopInput()) return;
+
+    // Ctrl+V / Cmd+V: se negli appunti c'e un'immagine, la aggiungiamo ovunque sia il focus nella pagina.
+    document.addEventListener("paste", (event) => {
+      const files = [...(event.clipboardData?.items || [])]
+        .filter((item) => item.kind === "file" && item.type.startsWith("image/"))
+        .map((item) => item.getAsFile())
+        .filter(Boolean);
+      if (!files.length) return;
+      event.preventDefault();
+      aggiungiImmagini(files);
+    });
+
+    const picker = document.querySelector(".feedback-image-picker");
+    if (!picker) return;
+
+    let dragDepth = 0;
+    const setDragState = (active) => {
+      picker.style.borderColor = active ? "#b7ff5c" : "";
+      picker.style.boxShadow = active ? "0 0 0 3px #b7ff5c18" : "";
+      picker.style.color = active ? "#b7ff5c" : "";
+    };
+
+    picker.addEventListener("dragenter", (event) => {
+      event.preventDefault();
+      dragDepth += 1;
+      setDragState(true);
+    });
+    picker.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+      setDragState(true);
+    });
+    picker.addEventListener("dragleave", (event) => {
+      event.preventDefault();
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (!dragDepth) setDragState(false);
+    });
+    picker.addEventListener("drop", (event) => {
+      event.preventDefault();
+      dragDepth = 0;
+      setDragState(false);
+      const files = [...(event.dataTransfer?.files || [])].filter((file) => file.type.startsWith("image/"));
+      if (files.length) aggiungiImmagini(files);
+      else status("Trascina qui un file immagine.", "error");
+    });
+  }
+
   async function init(config) {
     if (initialized) return;
     if (maybeRedirectAdmin()) return;
@@ -284,6 +358,9 @@
     if (config?.lega?.nome) el("lega-nome").textContent = config.lega.nome;
     const params = new URLSearchParams(location.search);
     el("feedback-from").value = params.get("from") || document.referrer || "";
+
+    aggiornaIstruzioniImmagini();
+    installaClipboardEDragDrop();
 
     el("feedback-form").addEventListener("submit", invia);
     el("feedback-clear-draft").addEventListener("click", svuotaBozza);
