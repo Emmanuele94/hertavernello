@@ -119,7 +119,8 @@
             "file": "assets/audio-squadre/sq-10-1789085953185-fkohw.ogg"
           }
         ]
-      }
+      },
+      "immaginePiccola": "sq-10.png"
     },
     {
       "squadraId": "sq-11",
