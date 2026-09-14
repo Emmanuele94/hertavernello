@@ -105,7 +105,8 @@
             "file": "assets/audio-squadre/sq-08-1789085478166-bp80u.ogg"
           }
         ]
-      }
+      },
+      "immaginePiccola": "sq-08.png"
     },
     {
       "squadraId": "sq-10",
