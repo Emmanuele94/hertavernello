@@ -178,7 +178,7 @@ function hv_renderTortaNazioni(giocatori, squadreRef, giocatoriDb, nazioni) {
   hv_renderDistribuzioneLista(wrap, fette, "assets/bandiere", (cod) => (nazioni ? nazioni[cod] || cod : cod), soprannome);
 }
 
-// ===== Info partita accanto a ogni giocatore (giorno/ora, avversario, già giocata o no) =====
+// ===== Info partita della rosa (giorno/ora, avversario, già giocata o no) =====
 const HV_GIORNI_ABBR = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
 
 function hv_formattaGiornoOra(utcDateStr) {
@@ -295,8 +295,7 @@ function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagion
             </div>
             <div class="roster-player-team" title="Squadra reale">${cellaSquadra}</div>
             <div class="roster-player-cost" title="Crediti pagati"><span>${costoSafe}</span><small> cr</small></div>
-            <button type="button" class="player-info-toggle" aria-expanded="false" aria-label="Mostra informazioni partita di ${nomeSafe}">INFO</button>
-            <div class="roster-match-detail hidden" data-has-match="${info ? "true" : "false"}">
+            <div class="roster-match-detail" data-has-match="${info ? "true" : "false"}">
               <span class="info-match ${dettaglioClasse}">${hv_escapeHtml(dettaglioTesto)}</span>
             </div>
           </div>`;
@@ -307,17 +306,6 @@ function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagion
     wrap.appendChild(group);
   });
 
-  wrap.querySelectorAll(".player-info-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const riga = btn.closest(".roster-player");
-      const dettaglio = riga ? riga.querySelector(".roster-match-detail") : null;
-      if (!dettaglio) return;
-      const aperto = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!aperto));
-      btn.classList.toggle("attivo", !aperto);
-      dettaglio.classList.toggle("hidden", aperto);
-    });
-  });
 }
 
 function hv_medagliaShine(el) {
@@ -1216,6 +1204,23 @@ hv_checkGate().then((data) => {
   if (data) hv_initSquadre(data);
 });
 document.addEventListener("hv:unlocked", (e) => hv_initSquadre(e.detail));
+
+const hv_toggleInfoBtn = document.getElementById("toggle-info-match");
+if (hv_toggleInfoBtn) {
+  const hv_syncToggleInfo = () => {
+    const attivo = document.body.classList.contains("mostra-info-match");
+    hv_toggleInfoBtn.classList.toggle("attivo", attivo);
+    hv_toggleInfoBtn.setAttribute("aria-expanded", String(attivo));
+    hv_toggleInfoBtn.textContent = "INFO";
+  };
+  hv_toggleInfoBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    document.body.classList.toggle("mostra-info-match");
+    hv_syncToggleInfo();
+  });
+  hv_syncToggleInfo();
+}
 
 document.querySelectorAll(".sezione-toggle").forEach((titolo) => {
   titolo.addEventListener("click", () => {

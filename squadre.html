@@ -12,10 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260914-mobile1">
-<link rel="stylesheet" href="css/restyling.css?v=20260914-mobile1">
-<script defer src="js/restyling-ui.js?v=20260914-mobile1"></script>
-<script defer src="js/admin-icone-home.js?v=20260914-mobile1"></script>
+  <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
+<link rel="stylesheet" href="css/restyling.css?v=20260914-mobile2">
+<script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
+<script defer src="js/site-tools.js?v=20260914-mobile2"></script>
+<script defer src="js/admin-icone-home.js?v=20260914-mobile2"></script>
 </head>
 <body>
 
@@ -58,7 +59,7 @@
             type="search"
             id="rosa-search-input"
             class="rosa-search-input"
-            placeholder="Es. Zielinski, Zodiac FC…"
+            placeholder="Cerca un giocatore o una fantasquadra…"
             autocomplete="off"
             spellcheck="false"
             aria-autocomplete="list"
@@ -85,8 +86,9 @@
 
       <div class="squadre-layout">
         <div class="squadra-block" style="margin: 0;">
-          <h3 class="squadra-block-title sezione-toggle" data-target="rosa-blocco-contenuto">
-            Rosa
+          <h3 class="squadra-block-title sezione-toggle rosa-title-row" data-target="rosa-blocco-contenuto">
+            <span class="rosa-title-label">Rosa</span>
+            <button type="button" id="toggle-info-match" class="toggle-info-btn" aria-expanded="false" title="Mostra o nascondi le partite della giornata">INFO</button>
             <span class="toggle-chevron">▾</span>
           </h3>
           <div id="rosa-blocco-contenuto" class="sezione-contenuto">
@@ -180,15 +182,15 @@
     </div>
   </div>
 
-  <script src="js/versione-check.js?v=20260914-mobile1"></script>
-  <script src="js/auth.js?v=20260914-mobile1"></script>
-  <script src="js/regolamento-modal.js?v=20260914-mobile1"></script>
-  <script src="js/api.js?v=20260914-mobile1"></script>
-  <script src="js/cache.js?v=20260914-mobile1"></script>
-  <script src="js/giocatori.js?v=20260914-mobile1"></script>
-  <script src="js/calcolo-derivati.js?v=20260914-mobile1"></script>
-  <script src="js/github-api.js?v=20260914-mobile1"></script>
-  <script src="js/squadre.js?v=20260914-mobile1"></script>
+  <script src="js/versione-check.js?v=20260914-mobile2"></script>
+  <script src="js/auth.js?v=20260914-mobile2"></script>
+  <script src="js/regolamento-modal.js?v=20260914-mobile2"></script>
+  <script src="js/api.js?v=20260914-mobile2"></script>
+  <script src="js/cache.js?v=20260914-mobile2"></script>
+  <script src="js/giocatori.js?v=20260914-mobile2"></script>
+  <script src="js/calcolo-derivati.js?v=20260914-mobile2"></script>
+  <script src="js/github-api.js?v=20260914-mobile2"></script>
+  <script src="js/squadre.js?v=20260914-mobile2"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

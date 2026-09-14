@@ -48,7 +48,7 @@
     if (window.hv_role!=='admin' || mounted) return;
     mounted=true;
     const panel=make('section','admin-box');panel.id='pv-admin-icons';
-    panel.append(make('h2','','10. Icone della Home'),make('p','pv-icons-help','Scegli un’immagine, controlla l’anteprima e salvala. Le proporzioni e la trasparenza vengono mantenute: ogni icona viene adattata a un PNG di 512 × 512.'));
+    panel.append(make('h2','','11. Icone della Home'),make('p','pv-icons-help','Scegli un’immagine, controlla l’anteprima e salvala. Le proporzioni e la trasparenza vengono mantenute: ogni icona viene adattata a un PNG di 512 × 512.'));
     panel.append(make('p','pv-icons-help','Le icone di navigazione e il logo sono condivisi: aggiornarli cambia anche le altre pagine che li utilizzano. Puoi scaricare il PNG senza pubblicare nulla.'));
     const grid=make('div','pv-icons-grid');panel.append(grid);
     for (const [label,asset,shared] of catalogue) {
@@ -88,7 +88,7 @@
       });
     }
     document.querySelector('.admin-wrap').append(panel);
-    const nav=document.querySelector('.pv-admin-nav');if(nav){const link=make('a','','10. Icone della Home');link.href='#pv-admin-icons';nav.append(link);}
+    const nav=document.querySelector('.pv-admin-nav');if(nav){const link=make('a','','11. Icone della Home');link.href='#pv-admin-icons';nav.append(link);}
     if(location.hash==='#pv-admin-icons')requestAnimationFrame(()=>panel.scrollIntoView({block:'start'}));
   }
   document.addEventListener('hv:unlocked',mount);

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bug & Consigli — Hertavernello</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icone-app/icon-180.png">
+  <meta name="theme-color" content="#7A0E1F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
+  <link rel="stylesheet" href="css/restyling.css?v=20260914-mobile2">
+  <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
+  <script defer src="js/site-tools.js?v=20260914-mobile2"></script>
+</head>
+<body>
+  <div id="gate" class="gate">
+    <img src="assets/logo.png" class="gate-logo" alt="Hertavernello">
+    <h1>Hertavernello</h1>
+    <p>Solo per fantallenatori. Inserisci la password.</p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn">Entra</button>
+    <p id="gate-error" class="gate-error"></p>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="site-header">
+      <img src="assets/logo.png" class="logo" alt="">
+      <div class="site-header-testo"><h1 id="lega-nome">Hertavernello</h1></div>
+      <a href="quiz.html" class="quiz-badge-link" title="Mini-Quiz"><img src="assets/icone/icon-quiz.png" class="quiz-badge-icona" alt="Quiz"></a>
+      <nav>
+        <a href="index.html" class="nav-btn"><img src="assets/icone/icon-house.png" class="icona-nav" alt="">Home</a>
+        <a href="squadre.html" class="nav-btn"><img src="assets/icone/icon-teams.png" class="icona-nav" alt="">Squadre</a>
+        <a href="archivio.html" class="nav-btn"><img src="assets/icone/icon-archivio.png" class="icona-nav" alt="">Archivio</a>
+        <a href="#" id="hv-apri-regolamento" class="nav-btn"><img src="assets/icone/icon-regolamento.png" class="icona-nav" alt="">Regolamento</a>
+        <a href="admin.html" id="nav-admin-link" class="nav-btn hidden">Admin</a>
+        <a href="#" id="hv-esci" class="nav-exit-link" title="Esci e cambia utente"><img src="assets/icone/icon-exit.png" class="nav-exit-icona" alt="Esci"></a>
+      </nav>
+    </header>
+
+    <section class="section feedback-section" style="margin-top:10px;">
+      <div class="feedback-heading">
+        <div>
+          <span class="pv-eyebrow">PARLA CON LA LEGA</span>
+          <h2>Bug & Consigli</h2>
+          <p>Segnala qualcosa che non funziona o proponi una miglioria. La bozza viene salvata automaticamente su questo dispositivo.</p>
+        </div>
+        <span class="feedback-draft-state" id="feedback-draft-state" role="status"></span>
+      </div>
+
+      <form id="feedback-form" class="feedback-form" novalidate>
+        <fieldset class="feedback-type-grid">
+          <legend>Cosa vuoi inviare?</legend>
+          <label class="feedback-type-card">
+            <input type="radio" name="tipo" value="bug" checked>
+            <span class="feedback-type-emoji">🐛</span>
+            <span><strong>Segnala bug</strong><small>Qualcosa non funziona come dovrebbe.</small></span>
+          </label>
+          <label class="feedback-type-card">
+            <input type="radio" name="tipo" value="consiglio">
+            <span class="feedback-type-emoji">💡</span>
+            <span><strong>Proponi consiglio</strong><small>Un'idea per rendere Hertavernello migliore.</small></span>
+          </label>
+        </fieldset>
+
+        <label class="feedback-field" for="feedback-nome">
+          <span>Nome</span>
+          <input id="feedback-nome" name="nome" type="text" maxlength="80" autocomplete="name" placeholder="Come ti chiami?" required>
+        </label>
+
+        <label class="feedback-field" for="feedback-descrizione">
+          <span>Descrizione</span>
+          <textarea id="feedback-descrizione" name="descrizione" rows="8" maxlength="5000" placeholder="Spiega cosa hai notato, cosa ti aspettavi oppure come dovrebbe funzionare secondo te…" required></textarea>
+          <small><span id="feedback-char-count">0</span>/5000</small>
+        </label>
+
+        <div class="feedback-images-block">
+          <div class="feedback-images-title"><span>Immagini</span><small>Massimo 5 · vengono compresse automaticamente</small></div>
+          <label class="feedback-image-picker">
+            <input id="feedback-images" type="file" accept="image/*" multiple>
+            <span>📷</span>
+            <strong>Aggiungi screenshot o foto</strong>
+          </label>
+          <div id="feedback-images-preview" class="feedback-images-preview"></div>
+        </div>
+
+        <input type="text" id="feedback-website" name="website" class="hv-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" id="feedback-from" name="from">
+
+        <div class="feedback-submit-row">
+          <button type="submit" id="feedback-submit">Invia segnalazione</button>
+          <button type="button" id="feedback-clear-draft" class="feedback-secondary-btn">Svuota bozza</button>
+        </div>
+        <p id="feedback-status" class="feedback-status" role="status"></p>
+      </form>
+    </section>
+  </div>
+
+  <div id="regolamento-overlay" class="regolamento-overlay hidden">
+    <div class="regolamento-pannello">
+      <div class="regolamento-intestazione">
+        <p class="regolamento-titolo">Regolamento</p>
+        <a href="assets/regolamento.pdf" download="Regolamento.pdf" class="regolamento-azione regolamento-scarica">⬇ Scarica</a>
+        <a href="assets/regolamento.pdf" target="_blank" rel="noopener" class="regolamento-azione regolamento-apri-scheda">Apri in un'altra scheda</a>
+        <button type="button" id="regolamento-chiudi" class="regolamento-chiudi" aria-label="Chiudi">✕</button>
+      </div>
+      <div id="regolamento-corpo" class="regolamento-corpo"></div>
+    </div>
+  </div>
+
+  <script src="js/versione-check.js?v=20260914-mobile2"></script>
+  <script src="js/auth.js?v=20260914-mobile2"></script>
+  <script src="js/regolamento-modal.js?v=20260914-mobile2"></script>
+  <script src="js/feedback.js?v=20260914-mobile2"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("sw-restyling.js", { updateViaCache: "none" }).catch(() => {}));
+    }
+  </script>
+</body>
+</html>

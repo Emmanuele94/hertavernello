@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hertavernello",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-14",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "FEEDBACK_IMAGES"
+    }
+  ]
+}
