@@ -70,6 +70,9 @@
     .cfg-squadra-row input { margin-bottom: 0; }
     .cfg-squadra-row button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 8px 12px; border-radius: 6px; cursor: pointer; flex-shrink: 0; }
   </style>
+<link rel="stylesheet" href="css/restyling.css?v=20260914-restyling-main1">
+<script defer src="js/restyling-ui.js?v=20260914-restyling-main1"></script>
+<script defer src="js/admin-icone-home.js?v=20260914-restyling-main1"></script>
 </head>
 <body>
   <div id="gate" class="gate">
@@ -384,7 +387,7 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("sw.js").catch(() => {});
+        navigator.serviceWorker.register("sw-restyling.js", { updateViaCache: "none" }).catch(() => {});
       });
     }
   </script>
