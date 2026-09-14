@@ -1,0 +1,25 @@
+# File tecnico usato dallo script di deploy Cloudflare.
+# Viene copiato in .assetsignore durante la build.
+
+# Repository / metadata Git
+**/.git
+**/.git/**
+**/.github
+**/.github/**
+
+# Dipendenze e file temporanei
+**/node_modules
+**/node_modules/**
+.wrangler
+.wrangler/**
+.dev.vars*
+*.log
+.DS_Store
+
+# File tecnici che non devono essere pubblicati come asset statici
+.assetsignore
+cloudflare-assetsignore.txt
+cloudflare-deploy.sh
+wrangler.jsonc
+worker.js
+README.md
