@@ -1,0 +1,34 @@
+HERTAVERNELLO - associazione foto calciatori 2026-09-16
+
+28 immagini associate esplicitamente ai rispettivi calciatori.
+Monteiro J.: nazionalita corretta da Portogallo (pt) a Svizzera (ch).
+Correzione extra: la foto sanchez-alejandro-jimenez.png e' stata assegnata a Jimenez A.; l'eventuale associazione precedente a Sanchez Ro. e' stata rimossa.
+
+- Mbangula [Fantacalcio_Id 6833] -> assets/calciatori/Bologna/mbangula-tshifunda-samuel.png
+- Beto [Fantacalcio_Id 5694] -> assets/calciatori/Fiorentina/beto.png
+- Gnonto [Fantacalcio_Id 7623] -> assets/calciatori/Fiorentina/gnonto-degnand.png
+- Goncalves P. [Fantacalcio_Id 7625] -> assets/calciatori/Fiorentina/goncalves-pedro.png
+- Oulai [Fantacalcio_Id 7464] -> assets/calciatori/Fiorentina/inao-oulai-christ.png
+- Jimenez A. [Fantacalcio_Id 6531] -> assets/calciatori/Fiorentina/sanchez-alejandro-jimenez.png
+- Floriani Mussolini [Fantacalcio_Id 7131] -> assets/calciatori/Lazio/floriani-mussolini.png
+- Belghali [Fantacalcio_Id 7220] -> assets/calciatori/Torino/belghali-rafik.png
+- Perri [Fantacalcio_Id 6534] -> assets/calciatori/Torino/lucas-perri.png
+- Fatah [Fantacalcio_Id 7602] -> assets/calciatori/Lecce/ahmed-fatah-amar.png
+- Ilic [Fantacalcio_Id 5007] -> assets/calciatori/Lecce/illic-ivan.png
+- N'Dri [Fantacalcio_Id 7001] -> assets/calciatori/Lecce/jocelyn-konan.png
+- Monteiro J. [Fantacalcio_Id 7619] -> assets/calciatori/Lecce/monteiro-joel.png
+- Tiago Gabriel [Fantacalcio_Id 6989] -> assets/calciatori/Lecce/oliveira-tiago.png
+- Mota [Fantacalcio_Id 5882] -> assets/calciatori/Monza/dany-mota.png
+- Thiam [Fantacalcio_Id 4485] -> assets/calciatori/Monza/ngagne-demba-thiam.png
+- Zeballos [Fantacalcio_Id 7620] -> assets/calciatori/Monza/zeballos-oscar.png
+- Santos A. [Fantacalcio_Id 7351] -> assets/calciatori/Napoli/alisson-santos.png
+- Zambo Anguissa [Fantacalcio_Id 4220] -> assets/calciatori/Napoli/anguissa-andre-zambo.png
+- Neres [Fantacalcio_Id 6831] -> assets/calciatori/Napoli/david-neres.png
+- Carlos Augusto [Fantacalcio_Id 5877] -> assets/calciatori/Inter/augusto-carlos.png
+- Ehizibue [Fantacalcio_Id 6047] -> assets/calciatori/Genoa/ehizibue-kingsley.png
+- El Shaarawy [Fantacalcio_Id 795] -> assets/calciatori/Genoa/el-shaarawy-stephan.png
+- Delprato [Fantacalcio_Id 6664] -> assets/calciatori/Parma/del-prato-enrico.png
+- Diego Carlos [Fantacalcio_Id 4137] -> assets/calciatori/Parma/diego-carlos.png
+- Grabara [Fantacalcio_Id 7603] -> assets/calciatori/Juventus/grabara-kamil.png
+- Pinsoglio [Fantacalcio_Id 1930] -> assets/calciatori/Juventus/pinsoglio-carlo.png
+- Woltemade [Fantacalcio_Id 6752] -> assets/calciatori/Juventus/woltemade-nick.png
