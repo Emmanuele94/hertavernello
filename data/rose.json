@@ -7,152 +7,177 @@
         {
           "ruolo": "POR",
           "nome": "Thiam",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "MON",
+          "costo": 2,
+          "fantacalcioId": "4485"
         },
         {
           "ruolo": "POR",
           "nome": "Provedel",
-          "squadraReale": "",
-          "costo": 23
+          "squadraReale": "INT",
+          "costo": 23,
+          "fantacalcioId": "2814"
         },
         {
           "ruolo": "POR",
           "nome": "Tornqvist",
-          "squadraReale": "",
-          "costo": 11
+          "squadraReale": "MON",
+          "costo": 11,
+          "fantacalcioId": "7301"
         },
         {
           "ruolo": "DIF",
           "nome": "Miranda J.",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "BOL",
+          "costo": 9,
+          "fantacalcioId": "4734"
         },
         {
           "ruolo": "DIF",
           "nome": "Bella-Kotchap",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "VEN",
+          "costo": 1,
+          "fantacalcioId": "7253"
         },
         {
           "ruolo": "DIF",
           "nome": "Favasuli",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "NAP",
+          "costo": 9,
+          "fantacalcioId": "7563"
         },
         {
           "ruolo": "DIF",
           "nome": "Sutalo J.",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "LAZ",
+          "costo": 3,
+          "fantacalcioId": "7580"
         },
         {
           "ruolo": "DIF",
           "nome": "Ostigard",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "GEN",
+          "costo": 18,
+          "fantacalcioId": "5750"
         },
         {
           "ruolo": "DIF",
           "nome": "Vojvoda",
-          "squadraReale": "",
-          "costo": 8
+          "squadraReale": "UDI",
+          "costo": 8,
+          "fantacalcioId": "4994"
         },
         {
           "ruolo": "DIF",
           "nome": "Scalvini",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "ATA",
+          "costo": 10,
+          "fantacalcioId": "5526"
         },
         {
           "ruolo": "DIF",
           "nome": "Ramon",
-          "squadraReale": "",
-          "costo": 22
+          "squadraReale": "COM",
+          "costo": 22,
+          "fantacalcioId": "6869"
         },
         {
           "ruolo": "CEN",
           "nome": "Frattesi",
-          "squadraReale": "",
-          "costo": 37
+          "squadraReale": "LAZ",
+          "costo": 37,
+          "fantacalcioId": "2848"
         },
         {
           "ruolo": "CEN",
           "nome": "Rabiot",
-          "squadraReale": "",
-          "costo": 42
+          "squadraReale": "MIL",
+          "costo": 42,
+          "fantacalcioId": "2379"
         },
         {
           "ruolo": "CEN",
           "nome": "Dele-Bashiru",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LAZ",
+          "costo": 1,
+          "fantacalcioId": "6629"
         },
         {
           "ruolo": "CEN",
           "nome": "Volpato",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "SAS",
+          "costo": 1,
+          "fantacalcioId": "5735"
         },
         {
           "ruolo": "CEN",
           "nome": "Bernardeschi",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "BOL",
+          "costo": 10,
+          "fantacalcioId": "184"
         },
         {
           "ruolo": "CEN",
           "nome": "Monteiro J.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "7619"
         },
         {
           "ruolo": "CEN",
           "nome": "Casadei",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "TOR",
+          "costo": 5,
+          "fantacalcioId": "5888"
         },
         {
           "ruolo": "CEN",
           "nome": "Rowe",
-          "squadraReale": "",
-          "costo": 30
+          "squadraReale": "ATA",
+          "costo": 30,
+          "fantacalcioId": "6844"
         },
         {
           "ruolo": "ATT",
           "nome": "Robinson J.",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "MON",
+          "costo": 2,
+          "fantacalcioId": "7546"
         },
         {
           "ruolo": "ATT",
           "nome": "Yildiz",
-          "squadraReale": "",
-          "costo": 22
+          "squadraReale": "JUV",
+          "costo": 22,
+          "fantacalcioId": "6434"
         },
         {
           "ruolo": "ATT",
           "nome": "Ramos G.",
-          "squadraReale": "",
-          "costo": 180
+          "squadraReale": "MIL",
+          "costo": 180,
+          "fantacalcioId": "6397"
         },
         {
           "ruolo": "ATT",
           "nome": "Mendy P.",
-          "squadraReale": "",
-          "costo": 13
+          "squadraReale": "CAG",
+          "costo": 13,
+          "fantacalcioId": "7374"
         },
         {
           "ruolo": "ATT",
           "nome": "Camarda",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "6519"
         },
         {
           "ruolo": "ATT",
           "nome": "Adams A.",
-          "squadraReale": "",
-          "costo": 28
+          "squadraReale": "VEN",
+          "costo": 28,
+          "fantacalcioId": "7484"
         }
       ]
     },
@@ -162,152 +187,177 @@
         {
           "ruolo": "POR",
           "nome": "Caprile",
-          "squadraReale": "",
-          "costo": 20
+          "squadraReale": "CAG",
+          "costo": 20,
+          "fantacalcioId": "4360"
         },
         {
           "ruolo": "POR",
           "nome": "Muric",
-          "squadraReale": "",
-          "costo": 11
+          "squadraReale": "SAS",
+          "costo": 11,
+          "fantacalcioId": "4236"
         },
         {
           "ruolo": "POR",
           "nome": "Turati",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "SAS",
+          "costo": 1,
+          "fantacalcioId": "4867"
         },
         {
           "ruolo": "DIF",
           "nome": "Dimarco",
-          "squadraReale": "",
-          "costo": 75
+          "squadraReale": "INT",
+          "costo": 75,
+          "fantacalcioId": "254"
         },
         {
           "ruolo": "DIF",
           "nome": "Zappacosta",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "ATA",
+          "costo": 12,
+          "fantacalcioId": "554"
         },
         {
           "ruolo": "DIF",
           "nome": "Kouadio",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MON",
+          "costo": 1,
+          "fantacalcioId": "7238"
         },
         {
           "ruolo": "DIF",
           "nome": "Provstgaard",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "LAZ",
+          "costo": 2,
+          "fantacalcioId": "7012"
         },
         {
           "ruolo": "DIF",
           "nome": "Pavard",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "INT",
+          "costo": 2,
+          "fantacalcioId": "4177"
         },
         {
           "ruolo": "DIF",
           "nome": "Rodriguez Ju.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "CAG",
+          "costo": 1,
+          "fantacalcioId": "7268"
         },
         {
           "ruolo": "DIF",
           "nome": "Valdepenas",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "7294"
         },
         {
           "ruolo": "DIF",
           "nome": "Leysen F.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "SAS",
+          "costo": 1,
+          "fantacalcioId": "7564"
         },
         {
           "ruolo": "CEN",
           "nome": "Isaksen",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "LAZ",
+          "costo": 5,
+          "fantacalcioId": "6398"
         },
         {
           "ruolo": "CEN",
           "nome": "Conceicao",
-          "squadraReale": "",
-          "costo": 39
+          "squadraReale": "JUV",
+          "costo": 39,
+          "fantacalcioId": "6884"
         },
         {
           "ruolo": "CEN",
           "nome": "Kessiè",
-          "squadraReale": "",
-          "costo": 13
+          "squadraReale": "ATA",
+          "costo": 13,
+          "fantacalcioId": "1850"
         },
         {
           "ruolo": "CEN",
           "nome": "Thorstvedt",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "SAS",
+          "costo": 9,
+          "fantacalcioId": "5844"
         },
         {
           "ruolo": "CEN",
           "nome": "Chukwueze",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "MIL",
+          "costo": 10,
+          "fantacalcioId": "4856"
         },
         {
           "ruolo": "CEN",
           "nome": "Cristante",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ROM",
+          "costo": 1,
+          "fantacalcioId": "779"
         },
         {
           "ruolo": "CEN",
           "nome": "Perrone",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "COM",
+          "costo": 5,
+          "fantacalcioId": "6151"
         },
         {
           "ruolo": "CEN",
           "nome": "Ndour",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "FIO",
+          "costo": 5,
+          "fantacalcioId": "6294"
         },
         {
           "ruolo": "ATT",
           "nome": "Lontani",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "PAR",
+          "costo": 4,
+          "fantacalcioId": "7561"
         },
         {
           "ruolo": "ATT",
           "nome": "Malen",
-          "squadraReale": "",
-          "costo": 198
+          "squadraReale": "ROM",
+          "costo": 198,
+          "fantacalcioId": "5585"
         },
         {
           "ruolo": "ATT",
           "nome": "Simeone",
-          "squadraReale": "",
-          "costo": 54
+          "squadraReale": "TOR",
+          "costo": 54,
+          "fantacalcioId": "2061"
         },
         {
           "ruolo": "ATT",
           "nome": "Tourè E.",
-          "squadraReale": "",
-          "costo": 20
+          "squadraReale": "PAR",
+          "costo": 20,
+          "fantacalcioId": "6229"
         },
         {
           "ruolo": "ATT",
           "nome": "Rrahmani Al.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "VEN",
+          "costo": 1,
+          "fantacalcioId": "7449"
         },
         {
           "ruolo": "ATT",
           "nome": "Elphege",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "PAR",
+          "costo": 4,
+          "fantacalcioId": "7342"
         }
       ]
     },
@@ -317,152 +367,177 @@
         {
           "ruolo": "POR",
           "nome": "Mandas",
-          "squadraReale": "",
-          "costo": 45
+          "squadraReale": "LAZ",
+          "costo": 45,
+          "fantacalcioId": "6482"
         },
         {
           "ruolo": "POR",
           "nome": "Motta",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LAZ",
+          "costo": 1,
+          "fantacalcioId": "7337"
         },
         {
           "ruolo": "POR",
           "nome": "Falcone",
-          "squadraReale": "",
-          "costo": 26
+          "squadraReale": "LEC",
+          "costo": 26,
+          "fantacalcioId": "2134"
         },
         {
           "ruolo": "DIF",
           "nome": "Monterisi",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "FRO",
+          "costo": 4,
+          "fantacalcioId": "4952"
         },
         {
           "ruolo": "DIF",
           "nome": "Vasquez",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "GEN",
+          "costo": 12,
+          "fantacalcioId": "5514"
         },
         {
           "ruolo": "DIF",
           "nome": "Jimenez A.",
-          "squadraReale": "",
-          "costo": 7
+          "squadraReale": "FIO",
+          "costo": 7,
+          "fantacalcioId": "6531"
         },
         {
           "ruolo": "DIF",
           "nome": "Couto",
-          "squadraReale": "",
-          "costo": 29
+          "squadraReale": "COM",
+          "costo": 29,
+          "fantacalcioId": "6727"
         },
         {
           "ruolo": "DIF",
           "nome": "Obrador",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "SAS",
+          "costo": 1,
+          "fantacalcioId": "7329"
         },
         {
           "ruolo": "DIF",
           "nome": "Valeri",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "PAR",
+          "costo": 10,
+          "fantacalcioId": "5862"
         },
         {
           "ruolo": "DIF",
           "nome": "Solet",
-          "squadraReale": "",
-          "costo": 25
+          "squadraReale": "UDI",
+          "costo": 25,
+          "fantacalcioId": "6956"
         },
         {
           "ruolo": "DIF",
           "nome": "Theate",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "BOL",
+          "costo": 5,
+          "fantacalcioId": "5675"
         },
         {
           "ruolo": "CEN",
           "nome": "Basic",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "VEN",
+          "costo": 1,
+          "fantacalcioId": "5674"
         },
         {
           "ruolo": "CEN",
           "nome": "Colpani",
-          "squadraReale": "",
-          "costo": 7
+          "squadraReale": "MON",
+          "costo": 7,
+          "fantacalcioId": "5878"
         },
         {
           "ruolo": "CEN",
           "nome": "Coulibaly L.",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "LEC",
+          "costo": 4,
+          "fantacalcioId": "5504"
         },
         {
           "ruolo": "CEN",
           "nome": "Adopo",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "CAG",
+          "costo": 4,
+          "fantacalcioId": "4870"
         },
         {
           "ruolo": "CEN",
           "nome": "Odgaard",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "BOL",
+          "costo": 2,
+          "fantacalcioId": "2765"
         },
         {
           "ruolo": "CEN",
           "nome": "Gaetano",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "ATA",
+          "costo": 10,
+          "fantacalcioId": "4364"
         },
         {
           "ruolo": "CEN",
           "nome": "Cacciamani",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "TOR",
+          "costo": 2,
+          "fantacalcioId": "7060"
         },
         {
           "ruolo": "CEN",
           "nome": "Moreira",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "MIL",
+          "costo": 21,
+          "fantacalcioId": "6372"
         },
         {
           "ruolo": "ATT",
           "nome": "Ghedjemis",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "FRO",
+          "costo": 2,
+          "fantacalcioId": "6530"
         },
         {
           "ruolo": "ATT",
           "nome": "Martinez L.",
-          "squadraReale": "",
-          "costo": 260
+          "squadraReale": "INT",
+          "costo": 260,
+          "fantacalcioId": "2764"
         },
         {
           "ruolo": "ATT",
           "nome": "Romero D.",
-          "squadraReale": "",
-          "costo": 14
+          "squadraReale": "PAR",
+          "costo": 14,
+          "fantacalcioId": "7554"
         },
         {
           "ruolo": "ATT",
           "nome": "Vitinha O.",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "GEN",
+          "costo": 4,
+          "fantacalcioId": "6164"
         },
         {
           "ruolo": "ATT",
           "nome": "Giovane",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "NAP",
+          "costo": 3,
+          "fantacalcioId": "7162"
         },
         {
           "ruolo": "ATT",
           "nome": "Nzola",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "CAG",
+          "costo": 1,
+          "fantacalcioId": "5336"
         }
       ]
     },
@@ -472,152 +547,177 @@
         {
           "ruolo": "POR",
           "nome": "Svilar",
-          "squadraReale": "",
-          "costo": 90
+          "squadraReale": "ROM",
+          "costo": 90,
+          "fantacalcioId": "5841"
         },
         {
           "ruolo": "POR",
           "nome": "Gollini",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ROM",
+          "costo": 1,
+          "fantacalcioId": "610"
         },
         {
           "ruolo": "POR",
           "nome": "De Marzi",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ROM",
+          "costo": 1,
+          "fantacalcioId": "7048"
         },
         {
           "ruolo": "DIF",
           "nome": "Kamara H.",
-          "squadraReale": "",
-          "costo": 14
+          "squadraReale": "UDI",
+          "costo": 14,
+          "fantacalcioId": "5555"
         },
         {
           "ruolo": "DIF",
           "nome": "Birindelli",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MON",
+          "costo": 1,
+          "fantacalcioId": "5838"
         },
         {
           "ruolo": "DIF",
           "nome": "Hainaut",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "VEN",
+          "costo": 2,
+          "fantacalcioId": "6821"
         },
         {
           "ruolo": "DIF",
           "nome": "Heggem",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "BOL",
+          "costo": 1,
+          "fantacalcioId": "7212"
         },
         {
           "ruolo": "DIF",
           "nome": "Abankwah",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "6021"
         },
         {
           "ruolo": "DIF",
           "nome": "Tavares N.",
-          "squadraReale": "",
-          "costo": 22
+          "squadraReale": "LAZ",
+          "costo": 22,
+          "fantacalcioId": "5620"
         },
         {
           "ruolo": "DIF",
           "nome": "Kaiki",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "COM",
+          "costo": 3,
+          "fantacalcioId": "7414"
         },
         {
           "ruolo": "DIF",
           "nome": "Puczka",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "GEN",
+          "costo": 1,
+          "fantacalcioId": "7413"
         },
         {
           "ruolo": "CEN",
           "nome": "Calò",
-          "squadraReale": "",
-          "costo": 13
+          "squadraReale": "FRO",
+          "costo": 13,
+          "fantacalcioId": "7472"
         },
         {
           "ruolo": "CEN",
           "nome": "Ekkelenkamp",
-          "squadraReale": "",
-          "costo": 33
+          "squadraReale": "UDI",
+          "costo": 33,
+          "fantacalcioId": "6684"
         },
         {
           "ruolo": "CEN",
           "nome": "Zaccagni",
-          "squadraReale": "",
-          "costo": 47
+          "squadraReale": "LAZ",
+          "costo": 47,
+          "fantacalcioId": "632"
         },
         {
           "ruolo": "CEN",
           "nome": "Cancellieri",
-          "squadraReale": "",
-          "costo": 8
+          "squadraReale": "LAZ",
+          "costo": 8,
+          "fantacalcioId": "5500"
         },
         {
           "ruolo": "CEN",
           "nome": "Pulisic",
-          "squadraReale": "",
-          "costo": 56
+          "squadraReale": "MIL",
+          "costo": 56,
+          "fantacalcioId": "2423"
         },
         {
           "ruolo": "CEN",
           "nome": "Cissè A.",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "MIL",
+          "costo": 12,
+          "fantacalcioId": "6618"
         },
         {
           "ruolo": "CEN",
           "nome": "Baturina",
-          "squadraReale": "",
-          "costo": 69
+          "squadraReale": "COM",
+          "costo": 69,
+          "fantacalcioId": "7126"
         },
         {
           "ruolo": "CEN",
           "nome": "Paz N.",
-          "squadraReale": "",
-          "costo": 89
+          "squadraReale": "COM",
+          "costo": 89,
+          "fantacalcioId": "6875"
         },
         {
           "ruolo": "ATT",
           "nome": "Zeballos",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "MON",
+          "costo": 4,
+          "fantacalcioId": "7620"
         },
         {
           "ruolo": "ATT",
           "nome": "Bobcek",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "FRO",
+          "costo": 1,
+          "fantacalcioId": "7612"
         },
         {
           "ruolo": "ATT",
           "nome": "Noslin",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "LAZ",
+          "costo": 2,
+          "fantacalcioId": "6556"
         },
         {
           "ruolo": "ATT",
           "nome": "Stulic",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "7252"
         },
         {
           "ruolo": "ATT",
           "nome": "Fatah",
-          "squadraReale": "",
-          "costo": 7
+          "squadraReale": "LEC",
+          "costo": 7,
+          "fantacalcioId": "7602"
         },
         {
           "ruolo": "ATT",
           "nome": "Zapata D.",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "TOR",
+          "costo": 19,
+          "fantacalcioId": "608"
         }
       ]
     },
@@ -627,152 +727,177 @@
         {
           "ruolo": "POR",
           "nome": "Stankovic F.",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "VEN",
+          "costo": 5,
+          "fantacalcioId": "6248"
         },
         {
           "ruolo": "POR",
           "nome": "De Gea",
-          "squadraReale": "",
-          "costo": 35
+          "squadraReale": "FIO",
+          "costo": 35,
+          "fantacalcioId": "2521"
         },
         {
           "ruolo": "POR",
           "nome": "Christensen O.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "6403"
         },
         {
           "ruolo": "DIF",
           "nome": "Doig",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "SAS",
+          "costo": 10,
+          "fantacalcioId": "5851"
         },
         {
           "ruolo": "DIF",
           "nome": "Valle",
-          "squadraReale": "",
-          "costo": 16
+          "squadraReale": "COM",
+          "costo": 16,
+          "fantacalcioId": "6867"
         },
         {
           "ruolo": "DIF",
           "nome": "Belghali",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "TOR",
+          "costo": 9,
+          "fantacalcioId": "7220"
         },
         {
           "ruolo": "DIF",
           "nome": "Bracaglia",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "FRO",
+          "costo": 4,
+          "fantacalcioId": "7469"
         },
         {
           "ruolo": "DIF",
           "nome": "Balerdi",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "ROM",
+          "costo": 4,
+          "fantacalcioId": "4705"
         },
         {
           "ruolo": "DIF",
           "nome": "Bastoni",
-          "squadraReale": "",
-          "costo": 33
+          "squadraReale": "INT",
+          "costo": 33,
+          "fantacalcioId": "2120"
         },
         {
           "ruolo": "DIF",
           "nome": "Gaspar K.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "6632"
         },
         {
           "ruolo": "DIF",
           "nome": "Carlos Augusto",
-          "squadraReale": "",
-          "costo": 15
+          "squadraReale": "INT",
+          "costo": 15,
+          "fantacalcioId": "5877"
         },
         {
           "ruolo": "CEN",
           "nome": "Bakola",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "SAS",
+          "costo": 2,
+          "fantacalcioId": "7036"
         },
         {
           "ruolo": "CEN",
           "nome": "Vlasic",
-          "squadraReale": "",
-          "costo": 36
+          "squadraReale": "TOR",
+          "costo": 36,
+          "fantacalcioId": "5687"
         },
         {
           "ruolo": "CEN",
           "nome": "Barella",
-          "squadraReale": "",
-          "costo": 36
+          "squadraReale": "INT",
+          "costo": 36,
+          "fantacalcioId": "1870"
         },
         {
           "ruolo": "CEN",
           "nome": "Romano",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "CAG",
+          "costo": 5,
+          "fantacalcioId": "7311"
         },
         {
           "ruolo": "CEN",
           "nome": "Milla",
-          "squadraReale": "",
-          "costo": 8
+          "squadraReale": "COM",
+          "costo": 8,
+          "fantacalcioId": "7412"
         },
         {
           "ruolo": "CEN",
           "nome": "Ederson D.S.",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "ATA",
+          "costo": 18,
+          "fantacalcioId": "5792"
         },
         {
           "ruolo": "CEN",
           "nome": "Zambo Anguissa",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "NAP",
+          "costo": 12,
+          "fantacalcioId": "4220"
         },
         {
           "ruolo": "CEN",
           "nome": "Locatelli",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "JUV",
+          "costo": 3,
+          "fantacalcioId": "827"
         },
         {
           "ruolo": "ATT",
           "nome": "Geubbels",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "5029"
         },
         {
           "ruolo": "ATT",
           "nome": "Kvernadze",
-          "squadraReale": "",
-          "costo": 23
+          "squadraReale": "FRO",
+          "costo": 23,
+          "fantacalcioId": "6204"
         },
         {
           "ruolo": "ATT",
           "nome": "Thuram",
-          "squadraReale": "",
-          "costo": 171
+          "squadraReale": "INT",
+          "costo": 171,
+          "fantacalcioId": "4871"
         },
         {
           "ruolo": "ATT",
           "nome": "Colombo",
-          "squadraReale": "",
-          "costo": 20
+          "squadraReale": "GEN",
+          "costo": 20,
+          "fantacalcioId": "4923"
         },
         {
           "ruolo": "ATT",
           "nome": "Cutrone",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MON",
+          "costo": 1,
+          "fantacalcioId": "2155"
         },
         {
           "ruolo": "ATT",
           "nome": "Kevin Carlos",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "CAG",
+          "costo": 6,
+          "fantacalcioId": "7547"
         }
       ]
     },
@@ -782,152 +907,177 @@
         {
           "ruolo": "POR",
           "nome": "Butez",
-          "squadraReale": "",
-          "costo": 50
+          "squadraReale": "COM",
+          "costo": 50,
+          "fantacalcioId": "6966"
         },
         {
           "ruolo": "POR",
           "nome": "Sanchez Ro.",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "COM",
+          "costo": 3,
+          "fantacalcioId": "6344"
         },
         {
           "ruolo": "POR",
           "nome": "Vigorito",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "COM",
+          "costo": 1,
+          "fantacalcioId": "2809"
         },
         {
           "ruolo": "DIF",
           "nome": "Kossounou",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ATA",
+          "costo": 1,
+          "fantacalcioId": "5578"
         },
         {
           "ruolo": "DIF",
           "nome": "Gabbia",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "4401"
         },
         {
           "ruolo": "DIF",
           "nome": "Kolasinac",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ATA",
+          "costo": 1,
+          "fantacalcioId": "2640"
         },
         {
           "ruolo": "DIF",
           "nome": "Tiago Gabriel",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "LEC",
+          "costo": 12,
+          "fantacalcioId": "6989"
         },
         {
           "ruolo": "DIF",
           "nome": "N'Dicka",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "ROM",
+          "costo": 18,
+          "fantacalcioId": "4317"
         },
         {
           "ruolo": "DIF",
           "nome": "Spinazzola",
-          "squadraReale": "",
-          "costo": 7
+          "squadraReale": "NAP",
+          "costo": 7,
+          "fantacalcioId": "1852"
         },
         {
           "ruolo": "DIF",
           "nome": "Gila",
-          "squadraReale": "",
-          "costo": 16
+          "squadraReale": "MIL",
+          "costo": 16,
+          "fantacalcioId": "5833"
         },
         {
           "ruolo": "DIF",
           "nome": "De Winter",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "MIL",
+          "costo": 2,
+          "fantacalcioId": "5739"
         },
         {
           "ruolo": "CEN",
           "nome": "Da Cunha",
-          "squadraReale": "",
-          "costo": 30
+          "squadraReale": "COM",
+          "costo": 30,
+          "fantacalcioId": "5559"
         },
         {
           "ruolo": "CEN",
           "nome": "Mandragora",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "TOR",
+          "costo": 19,
+          "fantacalcioId": "1933"
         },
         {
           "ruolo": "CEN",
           "nome": "Samardzic",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "ATA",
+          "costo": 21,
+          "fantacalcioId": "5119"
         },
         {
           "ruolo": "CEN",
           "nome": "El Shaarawy",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "GEN",
+          "costo": 1,
+          "fantacalcioId": "795"
         },
         {
           "ruolo": "CEN",
           "nome": "Mora",
-          "squadraReale": "",
-          "costo": 41
+          "squadraReale": "ROM",
+          "costo": 41,
+          "fantacalcioId": "7556"
         },
         {
           "ruolo": "CEN",
           "nome": "Ilic",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "5007"
         },
         {
           "ruolo": "CEN",
           "nome": "Rodriguez Je.",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "COM",
+          "costo": 4,
+          "fantacalcioId": "7129"
         },
         {
           "ruolo": "CEN",
           "nome": "Caqueret",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "COM",
+          "costo": 1,
+          "fantacalcioId": "5036"
         },
         {
           "ruolo": "ATT",
           "nome": "Laurientè",
-          "squadraReale": "",
-          "costo": 39
+          "squadraReale": "SAS",
+          "costo": 39,
+          "fantacalcioId": "6060"
         },
         {
           "ruolo": "ATT",
           "nome": "Adams C.",
-          "squadraReale": "",
-          "costo": 14
+          "squadraReale": "TOR",
+          "costo": 14,
+          "fantacalcioId": "6646"
         },
         {
           "ruolo": "ATT",
           "nome": "Maldini",
-          "squadraReale": "",
-          "costo": 17
+          "squadraReale": "CAG",
+          "costo": 17,
+          "fantacalcioId": "4896"
         },
         {
           "ruolo": "ATT",
           "nome": "Douvikas",
-          "squadraReale": "",
-          "costo": 146
+          "squadraReale": "COM",
+          "costo": 146,
+          "fantacalcioId": "7017"
         },
         {
           "ruolo": "ATT",
           "nome": "Esposito Se.",
-          "squadraReale": "",
-          "costo": 50
+          "squadraReale": "SAS",
+          "costo": 50,
+          "fantacalcioId": "4463"
         },
         {
           "ruolo": "ATT",
           "nome": "Sulemana K.",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "ATA",
+          "costo": 2,
+          "fantacalcioId": "5918"
         }
       ]
     },
@@ -937,152 +1087,177 @@
         {
           "ruolo": "POR",
           "nome": "Martinez Jo.",
-          "squadraReale": "",
-          "costo": 70
+          "squadraReale": "INT",
+          "costo": 70,
+          "fantacalcioId": "5116"
         },
         {
           "ruolo": "POR",
           "nome": "Palmisani",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "FRO",
+          "costo": 9,
+          "fantacalcioId": "6415"
         },
         {
           "ruolo": "POR",
           "nome": "Di Gennaro",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "INT",
+          "costo": 1,
+          "fantacalcioId": "1926"
         },
         {
           "ruolo": "DIF",
           "nome": "Molina N.",
-          "squadraReale": "",
-          "costo": 28
+          "squadraReale": "ROM",
+          "costo": 28,
+          "fantacalcioId": "4998"
         },
         {
           "ruolo": "DIF",
           "nome": "Mina",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "CAG",
+          "costo": 3,
+          "fantacalcioId": "4210"
         },
         {
           "ruolo": "DIF",
           "nome": "Stones",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "INT",
+          "costo": 5,
+          "fantacalcioId": "2514"
         },
         {
           "ruolo": "DIF",
           "nome": "Ismajli",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "TOR",
+          "costo": 1,
+          "fantacalcioId": "5010"
         },
         {
           "ruolo": "DIF",
           "nome": "Chalobah T.",
-          "squadraReale": "",
-          "costo": 17
+          "squadraReale": "COM",
+          "costo": 17,
+          "fantacalcioId": "5641"
         },
         {
           "ruolo": "DIF",
           "nome": "Marcandalli",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "GEN",
+          "costo": 1,
+          "fantacalcioId": "6660"
         },
         {
           "ruolo": "DIF",
           "nome": "Akanji",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "INT",
+          "costo": 18,
+          "fantacalcioId": "4159"
         },
         {
           "ruolo": "DIF",
           "nome": "Zortea",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "BOL",
+          "costo": 1,
+          "fantacalcioId": "4433"
         },
         {
           "ruolo": "CEN",
           "nome": "Saelemaekers",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "MIL",
+          "costo": 10,
+          "fantacalcioId": "4892"
         },
         {
           "ruolo": "CEN",
           "nome": "Mbangula",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "BOL",
+          "costo": 5,
+          "fantacalcioId": "6833"
         },
         {
           "ruolo": "CEN",
           "nome": "Pasalic",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ATA",
+          "costo": 1,
+          "fantacalcioId": "2077"
         },
         {
           "ruolo": "CEN",
           "nome": "McKennie",
-          "squadraReale": "",
-          "costo": 28
+          "squadraReale": "JUV",
+          "costo": 28,
+          "fantacalcioId": "4973"
         },
         {
           "ruolo": "CEN",
           "nome": "Calhanoglu",
-          "squadraReale": "",
-          "costo": 68
+          "squadraReale": "INT",
+          "costo": 68,
+          "fantacalcioId": "2194"
         },
         {
           "ruolo": "CEN",
           "nome": "Bernabè",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "PAR",
+          "costo": 1,
+          "fantacalcioId": "6666"
         },
         {
           "ruolo": "CEN",
           "nome": "Modric",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "MIL",
+          "costo": 2,
+          "fantacalcioId": "2606"
         },
         {
           "ruolo": "CEN",
           "nome": "Liberali",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "COM",
+          "costo": 1,
+          "fantacalcioId": "6678"
         },
         {
           "ruolo": "ATT",
           "nome": "Kolo Muani",
-          "squadraReale": "",
-          "costo": 95
+          "squadraReale": "JUV",
+          "costo": 95,
+          "fantacalcioId": "5951"
         },
         {
           "ruolo": "ATT",
           "nome": "Piccoli",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "BOL",
+          "costo": 19,
+          "fantacalcioId": "4359"
         },
         {
           "ruolo": "ATT",
           "nome": "Bowie",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "SAS",
+          "costo": 9,
+          "fantacalcioId": "7347"
         },
         {
           "ruolo": "ATT",
           "nome": "Davis K.",
-          "squadraReale": "",
-          "costo": 80
+          "squadraReale": "UDI",
+          "costo": 80,
+          "fantacalcioId": "5637"
         },
         {
           "ruolo": "ATT",
           "nome": "Yeboah J.",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "VEN",
+          "costo": 12,
+          "fantacalcioId": "6904"
         },
         {
           "ruolo": "ATT",
           "nome": "Neres",
-          "squadraReale": "",
-          "costo": 15
+          "squadraReale": "NAP",
+          "costo": 15,
+          "fantacalcioId": "6831"
         }
       ]
     },
@@ -1092,152 +1267,177 @@
         {
           "ruolo": "POR",
           "nome": "Skorupski",
-          "squadraReale": "",
-          "costo": 20
+          "squadraReale": "BOL",
+          "costo": 20,
+          "fantacalcioId": "133"
         },
         {
           "ruolo": "POR",
           "nome": "Maignan",
-          "squadraReale": "",
-          "costo": 71
+          "squadraReale": "MIL",
+          "costo": 71,
+          "fantacalcioId": "4312"
         },
         {
           "ruolo": "POR",
           "nome": "Terracciano",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "2815"
         },
         {
           "ruolo": "DIF",
           "nome": "Calvani",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "FRO",
+          "costo": 4,
+          "fantacalcioId": "7467"
         },
         {
           "ruolo": "DIF",
           "nome": "Holm",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "BOL",
+          "costo": 4,
+          "fantacalcioId": "5678"
         },
         {
           "ruolo": "DIF",
           "nome": "Ghilardi",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ROM",
+          "costo": 1,
+          "fantacalcioId": "6631"
         },
         {
           "ruolo": "DIF",
           "nome": "Rrahmani",
-          "squadraReale": "",
-          "costo": 29
+          "squadraReale": "NAP",
+          "costo": 29,
+          "fantacalcioId": "4409"
         },
         {
           "ruolo": "DIF",
           "nome": "Doekhi",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "LAZ",
+          "costo": 10,
+          "fantacalcioId": "6320"
         },
         {
           "ruolo": "DIF",
           "nome": "Bisseck",
-          "squadraReale": "",
-          "costo": 29
+          "squadraReale": "INT",
+          "costo": 29,
+          "fantacalcioId": "6217"
         },
         {
           "ruolo": "DIF",
           "nome": "Kalulu",
-          "squadraReale": "",
-          "costo": 26
+          "squadraReale": "JUV",
+          "costo": 26,
+          "fantacalcioId": "4976"
         },
         {
           "ruolo": "DIF",
           "nome": "Bellanova",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "ATA",
+          "costo": 2,
+          "fantacalcioId": "4887"
         },
         {
           "ruolo": "CEN",
           "nome": "Fagioli",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "FIO",
+          "costo": 9,
+          "fantacalcioId": "4465"
         },
         {
           "ruolo": "CEN",
           "nome": "Schmid",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "FRO",
+          "costo": 2,
+          "fantacalcioId": "7551"
         },
         {
           "ruolo": "CEN",
           "nome": "Matic",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "SAS",
+          "costo": 4,
+          "fantacalcioId": "2528"
         },
         {
           "ruolo": "CEN",
           "nome": "Gonzalez N.",
-          "squadraReale": "",
-          "costo": 24
+          "squadraReale": "JUV",
+          "costo": 24,
+          "fantacalcioId": "4179"
         },
         {
           "ruolo": "CEN",
           "nome": "Karlstrom",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
         },
         {
           "ruolo": "CEN",
           "nome": "De Bruyne",
-          "squadraReale": "",
-          "costo": 38
+          "squadraReale": "NAP",
+          "costo": 38,
+          "fantacalcioId": "2517"
         },
         {
           "ruolo": "CEN",
           "nome": "Musah",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "5295"
         },
         {
           "ruolo": "CEN",
           "nome": "Diouf",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "INT",
+          "costo": 21,
+          "fantacalcioId": "6274"
         },
         {
           "ruolo": "ATT",
           "nome": "Scamacca",
-          "squadraReale": "",
-          "costo": 68
+          "squadraReale": "ATA",
+          "costo": 68,
+          "fantacalcioId": "2137"
         },
         {
           "ruolo": "ATT",
           "nome": "Berardi",
-          "squadraReale": "",
-          "costo": 66
+          "squadraReale": "SAS",
+          "costo": 66,
+          "fantacalcioId": "531"
         },
         {
           "ruolo": "ATT",
           "nome": "Soulè",
-          "squadraReale": "",
-          "costo": 31
+          "squadraReale": "ROM",
+          "costo": 31,
+          "fantacalcioId": "5734"
         },
         {
           "ruolo": "ATT",
           "nome": "Bonny",
-          "squadraReale": "",
-          "costo": 31
+          "squadraReale": "INT",
+          "costo": 31,
+          "fantacalcioId": "6669"
         },
         {
           "ruolo": "ATT",
           "nome": "Gnonto",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "FIO",
+          "costo": 3,
+          "fantacalcioId": "7623"
         },
         {
           "ruolo": "ATT",
           "nome": "Gueye",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "7272"
         }
       ]
     },
@@ -1247,152 +1447,177 @@
         {
           "ruolo": "POR",
           "nome": "Corvi",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "PAR",
+          "costo": 10,
+          "fantacalcioId": "6662"
         },
         {
           "ruolo": "POR",
           "nome": "Perri",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "TOR",
+          "costo": 21,
+          "fantacalcioId": "6534"
         },
         {
           "ruolo": "POR",
           "nome": "Meret",
-          "squadraReale": "",
-          "costo": 54
+          "squadraReale": "NAP",
+          "costo": 54,
+          "fantacalcioId": "572"
         },
         {
           "ruolo": "DIF",
           "nome": "Haps",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "VEN",
+          "costo": 2,
+          "fantacalcioId": "5695"
         },
         {
           "ruolo": "DIF",
           "nome": "Cinquegrano",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "SAS",
+          "costo": 5,
+          "fantacalcioId": "7573"
         },
         {
           "ruolo": "DIF",
           "nome": "Floriani Mussolini",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "LAZ",
+          "costo": 6,
+          "fantacalcioId": "7131"
         },
         {
           "ruolo": "DIF",
           "nome": "Comuzzo",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "TOR",
+          "costo": 5,
+          "fantacalcioId": "6495"
         },
         {
           "ruolo": "DIF",
           "nome": "Bremer",
-          "squadraReale": "",
-          "costo": 32
+          "squadraReale": "JUV",
+          "costo": 32,
+          "fantacalcioId": "2788"
         },
         {
           "ruolo": "DIF",
           "nome": "Hermoso",
-          "squadraReale": "",
-          "costo": 16
+          "squadraReale": "ROM",
+          "costo": 16,
+          "fantacalcioId": "4807"
         },
         {
           "ruolo": "DIF",
           "nome": "Idzes",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "SAS",
+          "costo": 3,
+          "fantacalcioId": "6672"
         },
         {
           "ruolo": "DIF",
           "nome": "Mangas",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "MON",
+          "costo": 3,
+          "fantacalcioId": "7485"
         },
         {
           "ruolo": "CEN",
           "nome": "Konè M.",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "ROM",
+          "costo": 18,
+          "fantacalcioId": "5589"
         },
         {
           "ruolo": "CEN",
           "nome": "Gudmundsson A.",
-          "squadraReale": "",
-          "costo": 31
+          "squadraReale": "LAZ",
+          "costo": 31,
+          "fantacalcioId": "5800"
         },
         {
           "ruolo": "CEN",
           "nome": "Lobotka",
-          "squadraReale": "",
-          "costo": 12
+          "squadraReale": "NAP",
+          "costo": 12,
+          "fantacalcioId": "4287"
         },
         {
           "ruolo": "CEN",
           "nome": "Pisilli",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "ROM",
+          "costo": 6,
+          "fantacalcioId": "6190"
         },
         {
           "ruolo": "CEN",
           "nome": "Atta",
-          "squadraReale": "",
-          "costo": 34
+          "squadraReale": "FIO",
+          "costo": 34,
+          "fantacalcioId": "6908"
         },
         {
           "ruolo": "CEN",
           "nome": "Politano",
-          "squadraReale": "",
-          "costo": 4
+          "squadraReale": "NAP",
+          "costo": 4,
+          "fantacalcioId": "536"
         },
         {
           "ruolo": "CEN",
           "nome": "Sucic P.",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "INT",
+          "costo": 5,
+          "fantacalcioId": "7070"
         },
         {
           "ruolo": "CEN",
           "nome": "Fazzini",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "CAG",
+          "costo": 1,
+          "fantacalcioId": "6010"
         },
         {
           "ruolo": "ATT",
           "nome": "Osmajic",
-          "squadraReale": "",
-          "costo": 11
+          "squadraReale": "GEN",
+          "costo": 11,
+          "fantacalcioId": "7600"
         },
         {
           "ruolo": "ATT",
           "nome": "Pellegrino M.",
-          "squadraReale": "",
-          "costo": 40
+          "squadraReale": "FIO",
+          "costo": 40,
+          "fantacalcioId": "7023"
         },
         {
           "ruolo": "ATT",
           "nome": "Varela G.",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "MON",
+          "costo": 18,
+          "fantacalcioId": "7523"
         },
         {
           "ruolo": "ATT",
           "nome": "Hojlund",
-          "squadraReale": "",
-          "costo": 92
+          "squadraReale": "NAP",
+          "costo": 92,
+          "fantacalcioId": "6052"
         },
         {
           "ruolo": "ATT",
           "nome": "Raspadori",
-          "squadraReale": "",
-          "costo": 31
+          "squadraReale": "ATA",
+          "costo": 31,
+          "fantacalcioId": "4371"
         },
         {
           "ruolo": "ATT",
           "nome": "Lucca",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "NAP",
+          "costo": 21,
+          "fantacalcioId": "6215"
         }
       ]
     },
@@ -1402,152 +1627,177 @@
         {
           "ruolo": "POR",
           "nome": "Milinkovic-Savic V.",
-          "squadraReale": "",
-          "costo": 17
+          "squadraReale": "NAP",
+          "costo": 17,
+          "fantacalcioId": "2170"
         },
         {
           "ruolo": "POR",
           "nome": "Carnesecchi",
-          "squadraReale": "",
-          "costo": 75
+          "squadraReale": "ATA",
+          "costo": 75,
+          "fantacalcioId": "4431"
         },
         {
           "ruolo": "POR",
           "nome": "Sportiello",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ATA",
+          "costo": 1,
+          "fantacalcioId": "4"
         },
         {
           "ruolo": "DIF",
           "nome": "Bernasconi",
-          "squadraReale": "",
-          "costo": 9
+          "squadraReale": "ATA",
+          "costo": 9,
+          "fantacalcioId": "7219"
         },
         {
           "ruolo": "DIF",
           "nome": "Diego Carlos",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "PAR",
+          "costo": 5,
+          "fantacalcioId": "4137"
         },
         {
           "ruolo": "DIF",
           "nome": "Mancini",
-          "squadraReale": "",
-          "costo": 36
+          "squadraReale": "ROM",
+          "costo": 36,
+          "fantacalcioId": "2296"
         },
         {
           "ruolo": "DIF",
           "nome": "Dragusin",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "FIO",
+          "costo": 10,
+          "fantacalcioId": "5365"
         },
         {
           "ruolo": "DIF",
           "nome": "Coco",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "TOR",
+          "costo": 3,
+          "fantacalcioId": "6642"
         },
         {
           "ruolo": "DIF",
           "nome": "Bartesaghi",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "6496"
         },
         {
           "ruolo": "DIF",
           "nome": "Cambiaso",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "JUV",
+          "costo": 5,
+          "fantacalcioId": "5520"
         },
         {
           "ruolo": "DIF",
           "nome": "Kelly L.",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "JUV",
+          "costo": 2,
+          "fantacalcioId": "6766"
         },
         {
           "ruolo": "CEN",
           "nome": "Zaniolo",
-          "squadraReale": "",
-          "costo": 24
+          "squadraReale": "UDI",
+          "costo": 24,
+          "fantacalcioId": "2766"
         },
         {
           "ruolo": "CEN",
           "nome": "Douglas Luiz",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "JUV",
+          "costo": 6,
+          "fantacalcioId": "4911"
         },
         {
           "ruolo": "CEN",
           "nome": "Adzic",
-          "squadraReale": "",
-          "costo": 16
+          "squadraReale": "SAS",
+          "costo": 16,
+          "fantacalcioId": "6677"
         },
         {
           "ruolo": "CEN",
           "nome": "Goncalves P.",
-          "squadraReale": "",
-          "costo": 26
+          "squadraReale": "FIO",
+          "costo": 26,
+          "fantacalcioId": "7625"
         },
         {
           "ruolo": "CEN",
           "nome": "Busio",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "VEN",
+          "costo": 3,
+          "fantacalcioId": "5507"
         },
         {
           "ruolo": "CEN",
           "nome": "Alajbegovic",
-          "squadraReale": "",
-          "costo": 21
+          "squadraReale": "JUV",
+          "costo": 21,
+          "fantacalcioId": "7436"
         },
         {
           "ruolo": "CEN",
           "nome": "Jones C.",
-          "squadraReale": "",
-          "costo": 17
+          "squadraReale": "INT",
+          "costo": 17,
+          "fantacalcioId": "5172"
         },
         {
           "ruolo": "CEN",
           "nome": "Njie",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "6827"
         },
         {
           "ruolo": "ATT",
           "nome": "Woltemade",
-          "squadraReale": "",
-          "costo": 20
+          "squadraReale": "JUV",
+          "costo": 20,
+          "fantacalcioId": "6752"
         },
         {
           "ruolo": "ATT",
           "nome": "Raimondo",
-          "squadraReale": "",
-          "costo": 41
+          "squadraReale": "FRO",
+          "costo": 41,
+          "fantacalcioId": "5436"
         },
         {
           "ruolo": "ATT",
           "nome": "Santos A.",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "NAP",
+          "costo": 19,
+          "fantacalcioId": "7351"
         },
         {
           "ruolo": "ATT",
           "nome": "Castro S.",
-          "squadraReale": "",
-          "costo": 50
+          "squadraReale": "ROM",
+          "costo": 50,
+          "fantacalcioId": "6572"
         },
         {
           "ruolo": "ATT",
           "nome": "Dybala",
-          "squadraReale": "",
-          "costo": 71
+          "squadraReale": "ROM",
+          "costo": 71,
+          "fantacalcioId": "309"
         },
         {
           "ruolo": "ATT",
           "nome": "Boga",
-          "squadraReale": "",
-          "costo": 10
+          "squadraReale": "JUV",
+          "costo": 10,
+          "fantacalcioId": "2832"
         }
       ]
     },
@@ -1557,307 +1807,357 @@
         {
           "ruolo": "POR",
           "nome": "Okoye",
-          "squadraReale": "",
-          "costo": 29
+          "squadraReale": "UDI",
+          "costo": 29,
+          "fantacalcioId": "6462"
         },
         {
           "ruolo": "POR",
           "nome": "Bijlow",
-          "squadraReale": "",
-          "costo": 14
+          "squadraReale": "GEN",
+          "costo": 14,
+          "fantacalcioId": "7332"
         },
         {
           "ruolo": "POR",
           "nome": "Mrozek",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "7611"
         },
         {
           "ruolo": "DIF",
           "nome": "Di Lorenzo",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "NAP",
+          "costo": 19,
+          "fantacalcioId": "2816"
         },
         {
           "ruolo": "DIF",
           "nome": "Ehizibue",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "GEN",
+          "costo": 1,
+          "fantacalcioId": "6047"
         },
         {
           "ruolo": "DIF",
           "nome": "Kabasele",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "4263"
         },
         {
           "ruolo": "DIF",
           "nome": "Lucumì",
-          "squadraReale": "",
-          "costo": 14
+          "squadraReale": "JUV",
+          "costo": 14,
+          "fantacalcioId": "6042"
         },
         {
           "ruolo": "DIF",
           "nome": "Zanoli",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "5527"
         },
         {
           "ruolo": "DIF",
           "nome": "Wesley",
-          "squadraReale": "",
-          "costo": 57
+          "squadraReale": "ROM",
+          "costo": 57,
+          "fantacalcioId": "7181"
         },
         {
           "ruolo": "DIF",
           "nome": "Celik",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "JUV",
+          "costo": 6,
+          "fantacalcioId": "4657"
         },
         {
           "ruolo": "DIF",
           "nome": "Estupinan",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "5273"
         },
         {
           "ruolo": "CEN",
           "nome": "Loftus-Cheek",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MIL",
+          "costo": 1,
+          "fantacalcioId": "4199"
         },
         {
           "ruolo": "CEN",
           "nome": "Koopmeiners",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "JUV",
+          "costo": 3,
+          "fantacalcioId": "5685"
         },
         {
           "ruolo": "CEN",
           "nome": "Vergara",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "NAP",
+          "costo": 19,
+          "fantacalcioId": "7223"
         },
         {
           "ruolo": "CEN",
           "nome": "Ferguson",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "BOL",
+          "costo": 2,
+          "fantacalcioId": "5858"
         },
         {
           "ruolo": "CEN",
           "nome": "Baldanzi",
-          "squadraReale": "",
-          "costo": 8
+          "squadraReale": "GEN",
+          "costo": 8,
+          "fantacalcioId": "5823"
         },
         {
           "ruolo": "CEN",
           "nome": "Zielinski",
-          "squadraReale": "",
-          "costo": 36
+          "squadraReale": "INT",
+          "costo": 36,
+          "fantacalcioId": "152"
         },
         {
           "ruolo": "CEN",
           "nome": "Sow",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "GEN",
+          "costo": 3,
+          "fantacalcioId": "5946"
         },
         {
           "ruolo": "CEN",
           "nome": "Taylor K.",
-          "squadraReale": "",
-          "costo": 19
+          "squadraReale": "LAZ",
+          "costo": 19,
+          "fantacalcioId": "7314"
         },
         {
           "ruolo": "ATT",
           "nome": "Diao",
-          "squadraReale": "",
-          "costo": 79
+          "squadraReale": "COM",
+          "costo": 79,
+          "fantacalcioId": "6967"
         },
         {
           "ruolo": "ATT",
           "nome": "Pinamonti",
-          "squadraReale": "",
-          "costo": 39
+          "squadraReale": "LAZ",
+          "costo": 39,
+          "fantacalcioId": "2038"
         },
         {
           "ruolo": "ATT",
           "nome": "Beto",
-          "squadraReale": "",
-          "costo": 40
+          "squadraReale": "FIO",
+          "costo": 40,
+          "fantacalcioId": "5694"
         },
         {
           "ruolo": "ATT",
           "nome": "Esposito F.P.",
-          "squadraReale": "",
-          "costo": 86
+          "squadraReale": "INT",
+          "costo": 86,
+          "fantacalcioId": "7071"
         },
         {
           "ruolo": "ATT",
           "nome": "Lang",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "NAP",
+          "costo": 1,
+          "fantacalcioId": "7120"
         },
         {
           "ruolo": "ATT",
           "nome": "Mota",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "MON",
+          "costo": 2,
+          "fantacalcioId": "5882"
         }
       ]
     },
     {
-      "squadraId": "sq-08",
+      "squadraId": "sq-07",
       "giocatori": [
         {
           "ruolo": "POR",
           "nome": "Vicario",
-          "squadraReale": "",
-          "costo": 70
+          "squadraReale": "JUV",
+          "costo": 70,
+          "fantacalcioId": "4964"
         },
         {
           "ruolo": "POR",
           "nome": "Grabara",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "JUV",
+          "costo": 1,
+          "fantacalcioId": "7603"
         },
         {
           "ruolo": "POR",
           "nome": "Pinsoglio",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "JUV",
+          "costo": 1,
+          "fantacalcioId": "1930"
         },
         {
           "ruolo": "DIF",
           "nome": "Spence",
-          "squadraReale": "",
-          "costo": 15
+          "squadraReale": "INT",
+          "costo": 15,
+          "fantacalcioId": "5982"
         },
         {
           "ruolo": "DIF",
           "nome": "Marusic",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "LAZ",
+          "costo": 1,
+          "fantacalcioId": "2188"
         },
         {
           "ruolo": "DIF",
           "nome": "Troilo",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "PAR",
+          "costo": 1,
+          "fantacalcioId": "7235"
         },
         {
           "ruolo": "DIF",
           "nome": "Delprato",
-          "squadraReale": "",
-          "costo": 6
+          "squadraReale": "PAR",
+          "costo": 6,
+          "fantacalcioId": "6664"
         },
         {
           "ruolo": "DIF",
           "nome": "Pavlovic",
-          "squadraReale": "",
-          "costo": 18
+          "squadraReale": "MIL",
+          "costo": 18,
+          "fantacalcioId": "5022"
         },
         {
           "ruolo": "DIF",
           "nome": "Gallo",
-          "squadraReale": "",
-          "costo": 2
+          "squadraReale": "LEC",
+          "costo": 2,
+          "fantacalcioId": "4502"
         },
         {
           "ruolo": "DIF",
           "nome": "Lulli",
-          "squadraReale": "",
-          "costo": 16
+          "squadraReale": "ROM",
+          "costo": 16,
+          "fantacalcioId": "7599"
         },
         {
           "ruolo": "DIF",
           "nome": "Kristensen T.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "ATA",
+          "costo": 1,
+          "fantacalcioId": "6485"
         },
         {
           "ruolo": "CEN",
           "nome": "Traorè Hj.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "GEN",
+          "costo": 1,
+          "fantacalcioId": "2857"
         },
         {
           "ruolo": "CEN",
           "nome": "Mastantuono",
-          "squadraReale": "",
-          "costo": 43
+          "squadraReale": "FIO",
+          "costo": 43,
+          "fantacalcioId": "7078"
         },
         {
           "ruolo": "CEN",
           "nome": "Orsolini",
-          "squadraReale": "",
-          "costo": 58
+          "squadraReale": "BOL",
+          "costo": 58,
+          "fantacalcioId": "2167"
         },
         {
           "ruolo": "CEN",
           "nome": "Cambiaghi",
-          "squadraReale": "",
-          "costo": 5
+          "squadraReale": "BOL",
+          "costo": 5,
+          "fantacalcioId": "4436"
         },
         {
           "ruolo": "CEN",
           "nome": "McTominay",
-          "squadraReale": "",
-          "costo": 52
+          "squadraReale": "NAP",
+          "costo": 52,
+          "fantacalcioId": "4777"
         },
         {
           "ruolo": "CEN",
           "nome": "Keita M.",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "PAR",
+          "costo": 1,
+          "fantacalcioId": "6898"
         },
         {
           "ruolo": "CEN",
           "nome": "Zhegrova",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "JUV",
+          "costo": 3,
+          "fantacalcioId": "5761"
         },
         {
           "ruolo": "CEN",
           "nome": "Oulai",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "7464"
         },
         {
           "ruolo": "ATT",
           "nome": "Dovbyk",
-          "squadraReale": "",
-          "costo": 24
+          "squadraReale": "BOL",
+          "costo": 24,
+          "fantacalcioId": "6675"
         },
         {
           "ruolo": "ATT",
           "nome": "Kean",
-          "squadraReale": "",
-          "costo": 78
+          "squadraReale": "COM",
+          "costo": 78,
+          "fantacalcioId": "2097"
         },
         {
           "ruolo": "ATT",
           "nome": "De Ketelaere",
-          "squadraReale": "",
-          "costo": 45
+          "squadraReale": "ATA",
+          "costo": 45,
+          "fantacalcioId": "5995"
         },
         {
           "ruolo": "ATT",
           "nome": "Krstovic",
-          "squadraReale": "",
-          "costo": 53
+          "squadraReale": "ATA",
+          "costo": 53,
+          "fantacalcioId": "6435"
         },
         {
           "ruolo": "ATT",
           "nome": "N'Dri",
-          "squadraReale": "",
-          "costo": 3
+          "squadraReale": "LEC",
+          "costo": 3,
+          "fantacalcioId": "7001"
         },
         {
           "ruolo": "ATT",
           "nome": "Ngonge",
-          "squadraReale": "",
-          "costo": 1
+          "squadraReale": "MON",
+          "costo": 1,
+          "fantacalcioId": "6145"
         }
       ]
     }
