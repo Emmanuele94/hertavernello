@@ -92,7 +92,11 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       .map(
         (s) => `
       <div class="sfida-card">
-        <div class="sfida-testata">${s.nomeA} <span class="sfida-vs">vs</span> ${s.nomeB}</div>
+        <div class="sfida-testata">
+          <span class="sfida-team-name">${s.nomeA}</span>
+          <span class="sfida-vs">vs</span>
+          <span class="sfida-team-name sfida-team-name-right">${s.nomeB}</span>
+        </div>
         <div class="sfida-body">
           <div class="sfida-lato">${listaGiocatori(s.giocatoriA)}</div>
           <div class="sfida-lato">${listaGiocatori(s.giocatoriB)}</div>
@@ -139,14 +143,21 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
   div.className = "incrocio-match";
   div.innerHTML = `
     <div class="incrocio-testata">
-      <span class="incrocio-squadre">
-        <img src="assets/loghi/${match.casaCodice}.png" alt="${match.casaCodice}" class="logo-squadra-mini">
-        ${match.casaNome} — ${match.trasfertaNome}
-        <img src="assets/loghi/${match.trasfertaCodice}.png" alt="${match.trasfertaCodice}" class="logo-squadra-mini">
-      </span>
-      ${etichettaStato}
+      <div class="incrocio-duello">
+        <div class="incrocio-team incrocio-team-casa">
+          <img src="assets/loghi/${match.casaCodice}.png" alt="${match.casaCodice}" class="logo-squadra-mini">
+          <span class="incrocio-team-name">${match.casaNome}</span>
+        </div>
+        <div class="incrocio-centro">
+          ${punteggioHtml || '<span class="incrocio-vs-label">VS</span>'}
+          ${etichettaStato}
+        </div>
+        <div class="incrocio-team incrocio-team-trasferta">
+          <span class="incrocio-team-name">${match.trasfertaNome}</span>
+          <img src="assets/loghi/${match.trasfertaCodice}.png" alt="${match.trasfertaCodice}" class="logo-squadra-mini">
+        </div>
+      </div>
     </div>
-    ${punteggioHtml}
     ${golFlashHtml}
     ${corpo}
   `;

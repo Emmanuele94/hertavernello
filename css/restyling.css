@@ -77,3 +77,283 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
 }
 
 @media(max-width:380px){.roster-player{grid-template-columns:minmax(0,1fr) 42px 38px}.roster-player-team .logo-squadra-mini{display:none}.roster-player-name>.bandiera-wrap{display:none}.roster-player-cost small{display:none}.roster-match-detail{padding-left:10px}.feedback-images-preview,.feedback-admin-images{grid-template-columns:repeat(2,minmax(0,1fr))}.archivio-nav-item{font-size:9.5px}.audio-storici-griglia{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== Home 2026-09-15: più leggibile su monitor grandi, invariata nelle altre pagine ===== */
+.home-page .app{
+  width:92%;
+  max-width:1680px;
+}
+.home-page .section{
+  min-width:0;
+}
+.home-page .section .sezione-toggle{
+  min-height:56px;
+  gap:14px;
+}
+.home-page .section .icona-titolo{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+}
+.home-page .home-3col .sezione-toggle{
+  height:auto;
+  min-height:68px;
+}
+.home-page .home-3col .sezione-toggle .icona-titolo{
+  width:42px;
+  height:42px;
+}
+
+/* Chi gioca contro chi: meno verticale, duello leggibile e simmetrico. */
+.home-page .incrocio-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:12px;
+}
+.home-page .incrocio-giornata-label,
+.home-page .incrocio-wrap>.empty-state,
+.home-page .incrocio-wrap>.avviso-dati-vecchi{
+  grid-column:1/-1;
+}
+.home-page .incrocio-match{
+  min-width:0;
+  border-radius:14px;
+}
+.home-page .incrocio-testata{
+  display:block;
+  padding:10px 12px;
+}
+.home-page .incrocio-duello{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+.home-page .incrocio-team{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  gap:10px;
+  font-size:14px;
+  font-weight:700;
+}
+.home-page .incrocio-team-casa{justify-content:flex-start;text-align:left}
+.home-page .incrocio-team-trasferta{justify-content:flex-end;text-align:right}
+.home-page .incrocio-team-name{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.home-page .incrocio-team .logo-squadra-mini{
+  flex:0 0 auto;
+  width:34px;
+  height:34px;
+  margin:0;
+  padding:3px;
+}
+.home-page .incrocio-centro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:72px;
+}
+.home-page .incrocio-vs-label{
+  font-family:var(--font-mono);
+  font-size:13px;
+  font-weight:800;
+  color:var(--giallo-neon);
+  letter-spacing:.08em;
+}
+.home-page .incrocio-punteggio{
+  padding:0;
+  font-size:22px;
+  line-height:1;
+  letter-spacing:1px;
+}
+.home-page .incrocio-live,
+.home-page .incrocio-finale,
+.home-page .incrocio-orario{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:25px;
+  padding:4px 8px;
+  border:1px solid currentColor;
+  border-radius:999px;
+  font-size:11px;
+  line-height:1;
+}
+.home-page .incrocio-giornata-label{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  min-height:28px;
+  padding:5px 10px;
+  margin:0 0 2px 2px;
+  border:1px solid var(--border-hairline);
+  border-radius:999px;
+  font-size:12px;
+}
+.home-page .incrocio-gol-flash{
+  padding:8px 12px;
+  font-size:12px;
+}
+.home-page .sfide-lista{
+  gap:8px;
+  padding:9px 10px 10px;
+}
+.home-page .sfida-card{border-radius:11px}
+.home-page .sfida-testata{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  padding:7px 10px;
+  font-size:11.5px;
+}
+.home-page .sfida-team-name{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.home-page .sfida-team-name-right{text-align:right}
+.home-page .sfida-vs{margin:0}
+.home-page .sfida-lato{
+  min-width:0;
+  padding:8px 10px;
+  font-size:11.5px;
+}
+.home-page .sfida-lato p{
+  gap:4px;
+  margin-bottom:5px;
+  min-width:0;
+}
+.home-page .sfida-lato .logo-squadra-mini{
+  width:18px;
+  height:18px;
+  margin:0 2px 0 0;
+}
+
+/* Stemmi fantasquadra: più visibili nelle classifiche della Home. */
+.home-page #leaderboard-wrap .logo-fantasquadra-mini{
+  width:38px;
+  height:38px;
+  margin-right:10px;
+  border-radius:9px;
+}
+.home-page #classifica-lega-wrap .logo-fantasquadra-mini{
+  width:32px;
+  height:32px;
+  margin-right:9px;
+  border-radius:8px;
+}
+.home-page #leaderboard-wrap .roster-table td,
+.home-page #classifica-lega-wrap .roster-table td{
+  font-size:13px;
+}
+.home-page #leaderboard-wrap .roster-table td:first-child,
+.home-page #leaderboard-wrap .roster-table td.costo,
+.home-page #classifica-lega-wrap .roster-table td:first-child,
+.home-page #classifica-lega-wrap .roster-table td:last-child{
+  font-size:14px;
+  font-weight:800;
+  padding-top:10px!important;
+  padding-bottom:10px!important;
+}
+
+/* Icone e target cliccabili della Home più comodi senza cambiare palette. */
+.home-page .quiz-badge-link{
+  min-width:72px;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.home-page .quiz-badge-icona{width:70px}
+.home-page .nav-btn{
+  min-height:48px;
+  padding:11px 15px;
+}
+.home-page .nav-btn .icona-nav{
+  width:30px;
+  height:30px;
+  vertical-align:-9px;
+}
+.home-page .nav-exit-link{min-width:48px;min-height:48px}
+.home-page .hv-feedback-badge{
+  min-width:21px;
+  height:21px;
+  padding:0 6px;
+  font-size:10px;
+}
+
+@media(min-width:1380px){
+  .home-page .incrocio-wrap{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:1099px){
+  .home-page .app{width:94%;max-width:100%}
+  .home-page .section .icona-titolo{width:40px;height:40px;flex-basis:40px}
+  .home-page .home-3col .sezione-toggle .icona-titolo{width:38px;height:38px}
+}
+
+@media(max-width:699px){
+  .home-page .app{
+    width:100%;
+    max-width:100%;
+    padding-left:12px;
+    padding-right:12px;
+  }
+  .home-page .section{padding:16px;margin:16px 0;border-radius:18px}
+  .home-page .section .sezione-toggle{min-height:52px;gap:10px;font-size:17px}
+  .home-page .section .icona-titolo{width:36px;height:36px;flex-basis:36px}
+  .home-page .home-3col .sezione-toggle{min-height:58px}
+  .home-page .home-3col .sezione-toggle .icona-titolo{width:34px;height:34px}
+  .home-page .incrocio-duello{gap:7px}
+  .home-page .incrocio-team{gap:6px;font-size:12.5px}
+  .home-page .incrocio-team .logo-squadra-mini{width:29px;height:29px;padding:2px}
+  .home-page .incrocio-centro{min-width:58px;gap:3px}
+  .home-page .incrocio-punteggio{font-size:19px}
+  .home-page .incrocio-live,.home-page .incrocio-finale,.home-page .incrocio-orario{min-height:22px;padding:3px 6px;font-size:9.5px}
+  .home-page .sfide-lista{padding:8px}
+  .home-page .sfida-testata{font-size:10.5px;padding:6px 8px}
+  .home-page .sfida-lato{padding:7px 8px;font-size:10.5px}
+  .home-page #leaderboard-wrap .logo-fantasquadra-mini{width:31px;height:31px;margin-right:7px}
+  .home-page #classifica-lega-wrap .logo-fantasquadra-mini{width:28px;height:28px;margin-right:6px}
+  .home-page .quiz-badge-link{min-width:62px;min-height:62px}
+  .home-page .quiz-badge-icona{width:60px}
+  .home-page .nav-btn{min-height:46px;padding:9px 11px}
+  .home-page .nav-btn .icona-nav{width:27px;height:27px}
+}
+
+/* Solo sui telefoni davvero stretti le due squadre passano in verticale. */
+@media(max-width:340px){
+  .home-page .incrocio-duello{
+    grid-template-columns:minmax(0,1fr);
+    gap:6px;
+  }
+  .home-page .incrocio-team-casa,
+  .home-page .incrocio-team-trasferta{
+    justify-content:center;
+    text-align:center;
+  }
+  .home-page .incrocio-team-trasferta .incrocio-team-name{order:2}
+  .home-page .incrocio-team-trasferta .logo-squadra-mini{order:1}
+  .home-page .incrocio-centro{order:2}
+  .home-page .incrocio-team-trasferta{order:3}
+  .home-page .sfida-body{grid-template-columns:minmax(0,1fr)}
+  .home-page .sfida-lato:first-child{border-right:0;border-bottom:1px solid var(--border-hairline)}
+}
+
+/* Il vecchio breakpoint globale impila le sfide a 480px: in Home restano affiancate finché c'è spazio. */
+@media(min-width:341px) and (max-width:480px){
+  .home-page .sfida-body{grid-template-columns:1fr 1fr}
+  .home-page .sfida-lato:first-child{border-right:1px solid var(--border-hairline);border-bottom:0}
+}
