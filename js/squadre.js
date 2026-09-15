@@ -479,12 +479,24 @@ function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
   const wrapPiccolo = document.getElementById("squadra-logo-piccolo-posizione-wrap");
   const logoPiccoloHtml =
     logo && logo.immaginePiccola
-      ? `<img src="assets/stemmi-piccoli/${logo.immaginePiccola}" class="squadra-logo-piccolo-grande" alt="">`
+      ? `<img src="assets/stemmi-piccoli/${logo.immaginePiccola}" class="squadra-logo-piccolo-grande" alt="Stemma ${squadra.nomeFantasquadra || squadra.nomeReale}" title="Apri stemma" role="button" tabindex="0" style="cursor:pointer;">`
       : `<div class="squadra-logo-piccolo-grande squadra-logo-piccolo-vuoto" title="Nessun logo piccolo caricato"></div>`;
   const posizioneHtml = posizioneLega
     ? `<span class="squadra-posizione-badge">${posizioneLega}° in classifica</span>`
     : `<span class="squadra-posizione-badge squadra-posizione-badge-vuoto">Posizione n.d.</span>`;
   wrapPiccolo.innerHTML = `${logoPiccoloHtml}${posizioneHtml}`;
+
+  const stemmaPiccolo = wrapPiccolo.querySelector(".squadra-logo-piccolo-grande:not(.squadra-logo-piccolo-vuoto)");
+  if (stemmaPiccolo) {
+    const apriStemma = () => hv_apriLightbox(stemmaPiccolo.src);
+    stemmaPiccolo.addEventListener("click", apriStemma);
+    stemmaPiccolo.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        apriStemma();
+      }
+    });
+  }
 
   const wrapLogo = document.getElementById("squadra-logo-wrap");
   wrapLogo.innerHTML = "";
