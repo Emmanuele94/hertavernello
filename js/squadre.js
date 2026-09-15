@@ -353,7 +353,7 @@ function hv_renderPrevisione(previsione) {
 
   if (previsione && previsione.immagine) {
     const img = document.createElement("img");
-    img.src = "assets/previsioni/" + previsione.immagine + "?v=" + Date.now();
+    img.src = "assets/previsioni/" + previsione.immagine;
     img.alt = "Previsione Serie A";
     img.className = "previsione-clickable";
     img.addEventListener("click", () => hv_apriLightbox(img.src));
@@ -479,7 +479,7 @@ function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
   const wrapPiccolo = document.getElementById("squadra-logo-piccolo-posizione-wrap");
   const logoPiccoloHtml =
     logo && logo.immaginePiccola
-      ? `<img src="assets/stemmi-piccoli/${logo.immaginePiccola}?v=${Date.now()}" class="squadra-logo-piccolo-grande" alt="">`
+      ? `<img src="assets/stemmi-piccoli/${logo.immaginePiccola}" class="squadra-logo-piccolo-grande" alt="">`
       : `<div class="squadra-logo-piccolo-grande squadra-logo-piccolo-vuoto" title="Nessun logo piccolo caricato"></div>`;
   const posizioneHtml = posizioneLega
     ? `<span class="squadra-posizione-badge">${posizioneLega}° in classifica</span>`
@@ -491,7 +491,7 @@ function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
 
   if (logo && logo.immagine) {
     const img = document.createElement("img");
-    img.src = "assets/stemmi/" + logo.immagine + "?v=" + Date.now();
+    img.src = "assets/stemmi/" + logo.immagine;
     img.alt = "Logo " + squadra.nomeFantasquadra;
     img.className = "squadra-logo-img";
     img.addEventListener("click", () => hv_apriLightbox(img.src));
@@ -896,7 +896,7 @@ function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {
 
   const anteprimaEsistente =
     logoEsistente && logoEsistente.immaginePiccola
-      ? `<img src="assets/stemmi-piccoli/${logoEsistente.immaginePiccola}?v=${Date.now()}" alt="" style="width:36px; height:36px; object-fit:cover; border-radius:6px;">`
+      ? `<img src="assets/stemmi-piccoli/${logoEsistente.immaginePiccola}" alt="" style="width:36px; height:36px; object-fit:cover; border-radius:6px;">`
       : "";
 
   wrap.innerHTML = `

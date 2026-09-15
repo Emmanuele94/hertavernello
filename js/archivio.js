@@ -215,7 +215,7 @@ function hv_trovaFotoManualeStorica(nome, squadraRealeNome) {
 // per caricare una foto al volo.
 function hv_fotoStorica(nome, squadraRealeNome, consentiCaricamento) {
   const manuale = hv_trovaFotoManualeStorica(nome, squadraRealeNome);
-  if (manuale) return `<img src="${manuale.immagine}?v=${Date.now()}" class="foto-giocatore-mini" alt="">`;
+  if (manuale) return `<img src="${manuale.immagine}" class="foto-giocatore-mini" alt="">`;
 
   const codice = squadraRealeNome ? hv_trovaCodice(squadraRealeNome, hv_archivioSquadreRef) : null;
   const giocatoreDb = hv_trovaGiocatore(nome, codice, hv_archivioGiocatoriDb);
