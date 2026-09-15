@@ -1,116 +1,158 @@
 {
-  "_leggimi": "Rose generate con giocatori reali (incrociati con data/giocatori.json per foto e nazionalità corrette) — 2 portieri, 6 difensori, 6 centrocampisti, 4 attaccanti per squadra, tutti diversi tra le 12 fantasquadre. Crediti inventati.",
+  "_leggimi": "Generato da admin.html — carica questo file al posto di data/rose.json",
   "rose": [
     {
-      "squadraId": "sq-01",
+      "squadraId": "sq-11",
       "giocatori": [
         {
           "ruolo": "POR",
-          "nome": "Grandi",
-          "squadraReale": "VEN",
-          "costo": 12
+          "nome": "Thiam",
+          "squadraReale": "",
+          "costo": 2
         },
         {
           "ruolo": "POR",
-          "nome": "Meret",
-          "squadraReale": "NAP",
+          "nome": "Provedel",
+          "squadraReale": "",
+          "costo": 23
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Tornqvist",
+          "squadraReale": "",
+          "costo": 11
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Miranda J.",
+          "squadraReale": "",
           "costo": 9
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Gomes",
-          "squadraReale": "VEN",
-          "costo": 29
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Doekhi",
-          "squadraReale": "LAZ",
-          "costo": 4
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Helland",
-          "squadraReale": "BOL",
-          "costo": 27
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Dodò",
-          "squadraReale": "FIO",
-          "costo": 6
         },
         {
           "ruolo": "DIF",
           "nome": "Bella-Kotchap",
-          "squadraReale": "VEN",
-          "costo": 27
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Bertola",
-          "squadraReale": "UDI",
-          "costo": 21
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Modric",
-          "squadraReale": "MIL",
-          "costo": 7
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Diouf",
-          "squadraReale": "INT",
-          "costo": 11
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Mout",
-          "squadraReale": "MON",
+          "nome": "Favasuli",
+          "squadraReale": "",
           "costo": 9
         },
         {
+          "ruolo": "DIF",
+          "nome": "Sutalo J.",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Ostigard",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Vojvoda",
+          "squadraReale": "",
+          "costo": 8
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Scalvini",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Ramon",
+          "squadraReale": "",
+          "costo": 22
+        },
+        {
           "ruolo": "CEN",
-          "nome": "Foe Ondoa",
-          "squadraReale": "MON",
+          "nome": "Frattesi",
+          "squadraReale": "",
+          "costo": 37
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Rabiot",
+          "squadraReale": "",
+          "costo": 42
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Dele-Bashiru",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Volpato",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Bernardeschi",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Monteiro J.",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Casadei",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Rowe",
+          "squadraReale": "",
+          "costo": 30
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Robinson J.",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Yildiz",
+          "squadraReale": "",
+          "costo": 22
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Ramos G.",
+          "squadraReale": "",
+          "costo": 180
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Mendy P.",
+          "squadraReale": "",
           "costo": 13
         },
         {
-          "ruolo": "CEN",
-          "nome": "Ferguson",
-          "squadraReale": "BOL",
-          "costo": 29
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Elmas",
-          "squadraReale": "ATA",
-          "costo": 38
+          "ruolo": "ATT",
+          "nome": "Camarda",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "ATT",
-          "nome": "Dovbyk",
-          "squadraReale": "BOL",
+          "nome": "Adams A.",
+          "squadraReale": "",
           "costo": 28
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Kolo Muani",
-          "squadraReale": "JUV",
-          "costo": 16
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Kulenovic",
-          "squadraReale": "TOR",
-          "costo": 57
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Lisman",
-          "squadraReale": "VEN",
-          "costo": 10
         }
       ]
     },
@@ -119,337 +161,308 @@
       "giocatori": [
         {
           "ruolo": "POR",
-          "nome": "Carnesecchi",
-          "squadraReale": "ATA",
+          "nome": "Caprile",
+          "squadraReale": "",
+          "costo": 20
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Muric",
+          "squadraReale": "",
           "costo": 11
         },
         {
           "ruolo": "POR",
-          "nome": "Sportiello",
-          "squadraReale": "ATA",
-          "costo": 17
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Zortea",
-          "squadraReale": "BOL",
-          "costo": 3
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Spence",
-          "squadraReale": "INT",
-          "costo": 8
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Solet",
-          "squadraReale": "UDI",
-          "costo": 4
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Tomori",
-          "squadraReale": "MIL",
-          "costo": 31
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Comert",
-          "squadraReale": "TOR",
-          "costo": 5
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Maye",
-          "squadraReale": "MON",
-          "costo": 11
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "De Roon",
-          "squadraReale": "ROM",
-          "costo": 30
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Adopo",
-          "squadraReale": "CAG",
-          "costo": 22
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Lipani",
-          "squadraReale": "SAS",
-          "costo": 6
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Milla",
-          "squadraReale": "COM",
-          "costo": 44
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Cichella",
-          "squadraReale": "FRO",
-          "costo": 29
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Deiola",
-          "squadraReale": "CAG",
-          "costo": 7
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Nzola",
-          "squadraReale": "FIO",
-          "costo": 10
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Diao",
-          "squadraReale": "COM",
-          "costo": 21
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Cutrone",
-          "squadraReale": "MON",
-          "costo": 31
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Scamacca",
-          "squadraReale": "ATA",
-          "costo": 24
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-03",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Palmisani",
-          "squadraReale": "FRO",
+          "nome": "Turati",
+          "squadraReale": "",
           "costo": 1
         },
         {
-          "ruolo": "POR",
-          "nome": "Daffara",
-          "squadraReale": "PAR",
-          "costo": 5
-        },
-        {
           "ruolo": "DIF",
-          "nome": "Buongiorno",
-          "squadraReale": "NAP",
-          "costo": 29
+          "nome": "Dimarco",
+          "squadraReale": "",
+          "costo": 75
         },
         {
           "ruolo": "DIF",
           "nome": "Zappacosta",
-          "squadraReale": "ATA",
-          "costo": 31
+          "squadraReale": "",
+          "costo": 12
         },
         {
           "ruolo": "DIF",
-          "nome": "Holm",
-          "squadraReale": "BOL",
-          "costo": 3
+          "nome": "Kouadio",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Comuzzo",
-          "squadraReale": "TOR",
-          "costo": 9
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Antov",
-          "squadraReale": "MON",
-          "costo": 19
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Cittadini",
-          "squadraReale": "FRO",
-          "costo": 18
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Messias",
-          "squadraReale": "GEN",
-          "costo": 13
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Mastantuono",
-          "squadraReale": "FIO",
-          "costo": 22
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Sohm",
-          "squadraReale": "VEN",
-          "costo": 40
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Volpato",
-          "squadraReale": "SAS",
-          "costo": 46
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Schmid",
-          "squadraReale": "FRO",
-          "costo": 32
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Fini",
-          "squadraReale": "FRO",
-          "costo": 43
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Camarda",
-          "squadraReale": "MIL",
-          "costo": 15
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Lucca",
-          "squadraReale": "NAP",
-          "costo": 13
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Frigan",
-          "squadraReale": "PAR",
-          "costo": 48
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Trepy",
-          "squadraReale": "CAG",
-          "costo": 13
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-04",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Skorupski",
-          "squadraReale": "BOL",
-          "costo": 6
-        },
-        {
-          "ruolo": "POR",
-          "nome": "Mandas",
-          "squadraReale": "LAZ",
+          "nome": "Provstgaard",
+          "squadraReale": "",
           "costo": 2
         },
         {
           "ruolo": "DIF",
-          "nome": "Halhal",
-          "squadraReale": "VEN",
-          "costo": 29
+          "nome": "Pavard",
+          "squadraReale": "",
+          "costo": 2
         },
         {
           "ruolo": "DIF",
-          "nome": "Coco",
-          "squadraReale": "TOR",
-          "costo": 23
+          "nome": "Rodriguez Ju.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Lazzari",
-          "squadraReale": "LAZ",
-          "costo": 10
+          "nome": "Valdepenas",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Kolasinac",
-          "squadraReale": "ATA",
-          "costo": 18
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Doig",
-          "squadraReale": "SAS",
-          "costo": 21
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Lucumì",
-          "squadraReale": "JUV",
-          "costo": 6
+          "nome": "Leysen F.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "CEN",
-          "nome": "Busio",
-          "squadraReale": "VEN",
-          "costo": 7
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Calò",
-          "squadraReale": "FRO",
-          "costo": 29
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Caqueret",
-          "squadraReale": "COM",
-          "costo": 14
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Sow",
-          "squadraReale": "GEN",
+          "nome": "Isaksen",
+          "squadraReale": "",
           "costo": 5
         },
         {
           "ruolo": "CEN",
-          "nome": "Fagioli",
-          "squadraReale": "FIO",
-          "costo": 18
+          "nome": "Conceicao",
+          "squadraReale": "",
+          "costo": 39
         },
         {
           "ruolo": "CEN",
-          "nome": "Vlasic",
-          "squadraReale": "TOR",
-          "costo": 8
+          "nome": "Kessiè",
+          "squadraReale": "",
+          "costo": 13
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Thorstvedt",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Chukwueze",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Cristante",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Perrone",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Ndour",
+          "squadraReale": "",
+          "costo": 5
         },
         {
           "ruolo": "ATT",
-          "nome": "Thuram",
-          "squadraReale": "INT",
-          "costo": 58
+          "nome": "Lontani",
+          "squadraReale": "",
+          "costo": 4
         },
         {
           "ruolo": "ATT",
-          "nome": "Gueye",
-          "squadraReale": "UDI",
+          "nome": "Malen",
+          "squadraReale": "",
+          "costo": 198
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Simeone",
+          "squadraReale": "",
+          "costo": 54
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Tourè E.",
+          "squadraReale": "",
           "costo": 20
         },
         {
           "ruolo": "ATT",
-          "nome": "Douvikas",
-          "squadraReale": "COM",
-          "costo": 50
+          "nome": "Rrahmani Al.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "ATT",
-          "nome": "Osmajic",
-          "squadraReale": "GEN",
-          "costo": 54
+          "nome": "Elphege",
+          "squadraReale": "",
+          "costo": 4
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-01",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Mandas",
+          "squadraReale": "",
+          "costo": 45
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Motta",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Falcone",
+          "squadraReale": "",
+          "costo": 26
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Monterisi",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Vasquez",
+          "squadraReale": "",
+          "costo": 12
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Jimenez A.",
+          "squadraReale": "",
+          "costo": 7
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Couto",
+          "squadraReale": "",
+          "costo": 29
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Obrador",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Valeri",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Solet",
+          "squadraReale": "",
+          "costo": 25
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Theate",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Basic",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Colpani",
+          "squadraReale": "",
+          "costo": 7
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Coulibaly L.",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Adopo",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Odgaard",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Gaetano",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Cacciamani",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Moreira",
+          "squadraReale": "",
+          "costo": 21
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Ghedjemis",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Martinez L.",
+          "squadraReale": "",
+          "costo": 260
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Romero D.",
+          "squadraReale": "",
+          "costo": 14
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Vitinha O.",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Giovane",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Nzola",
+          "squadraReale": "",
+          "costo": 1
         }
       ]
     },
@@ -458,111 +471,308 @@
       "giocatori": [
         {
           "ruolo": "POR",
-          "nome": "Gollini",
-          "squadraReale": "ROM",
-          "costo": 3
+          "nome": "Svilar",
+          "squadraReale": "",
+          "costo": 90
         },
         {
           "ruolo": "POR",
-          "nome": "Caprile",
-          "squadraReale": "CAG",
-          "costo": 12
+          "nome": "Gollini",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "POR",
+          "nome": "De Marzi",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Kouadio",
-          "squadraReale": "MON",
-          "costo": 10
+          "nome": "Kamara H.",
+          "squadraReale": "",
+          "costo": 14
         },
         {
           "ruolo": "DIF",
-          "nome": "Koulierakis",
-          "squadraReale": "ROM",
-          "costo": 7
+          "nome": "Birindelli",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Britschgi",
-          "squadraReale": "PAR",
-          "costo": 3
+          "nome": "Hainaut",
+          "squadraReale": "",
+          "costo": 2
         },
         {
           "ruolo": "DIF",
-          "nome": "Troilo",
-          "squadraReale": "PAR",
+          "nome": "Heggem",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Abankwah",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Tavares N.",
+          "squadraReale": "",
           "costo": 22
         },
         {
           "ruolo": "DIF",
-          "nome": "Provstgaard",
-          "squadraReale": "LAZ",
-          "costo": 8
+          "nome": "Kaiki",
+          "squadraReale": "",
+          "costo": 3
         },
         {
           "ruolo": "DIF",
-          "nome": "Bisseck",
-          "squadraReale": "INT",
+          "nome": "Puczka",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Calò",
+          "squadraReale": "",
           "costo": 13
         },
         {
           "ruolo": "CEN",
-          "nome": "Thorstvedt",
-          "squadraReale": "SAS",
-          "costo": 28
+          "nome": "Ekkelenkamp",
+          "squadraReale": "",
+          "costo": 33
         },
         {
           "ruolo": "CEN",
-          "nome": "Rowe",
-          "squadraReale": "BOL",
-          "costo": 38
+          "nome": "Zaccagni",
+          "squadraReale": "",
+          "costo": 47
         },
         {
           "ruolo": "CEN",
-          "nome": "Barella",
-          "squadraReale": "INT",
+          "nome": "Cancellieri",
+          "squadraReale": "",
+          "costo": 8
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Pulisic",
+          "squadraReale": "",
+          "costo": 56
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Cissè A.",
+          "squadraReale": "",
           "costo": 12
         },
         {
           "ruolo": "CEN",
-          "nome": "Odgaard",
-          "squadraReale": "BOL",
-          "costo": 5
+          "nome": "Baturina",
+          "squadraReale": "",
+          "costo": 69
         },
         {
           "ruolo": "CEN",
-          "nome": "Orsolini",
-          "squadraReale": "BOL",
-          "costo": 40
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Pessina",
-          "squadraReale": "MON",
-          "costo": 10
+          "nome": "Paz N.",
+          "squadraReale": "",
+          "costo": 89
         },
         {
           "ruolo": "ATT",
-          "nome": "Havel",
-          "squadraReale": "GEN",
-          "costo": 33
+          "nome": "Zeballos",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Bobcek",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "ATT",
           "nome": "Noslin",
-          "squadraReale": "LAZ",
-          "costo": 64
+          "squadraReale": "",
+          "costo": 2
         },
         {
           "ruolo": "ATT",
-          "nome": "Raimondo",
-          "squadraReale": "FRO",
+          "nome": "Stulic",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Fatah",
+          "squadraReale": "",
+          "costo": 7
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Zapata D.",
+          "squadraReale": "",
+          "costo": 19
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-09",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Stankovic F.",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "POR",
+          "nome": "De Gea",
+          "squadraReale": "",
+          "costo": 35
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Christensen O.",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Doig",
+          "squadraReale": "",
           "costo": 10
         },
         {
+          "ruolo": "DIF",
+          "nome": "Valle",
+          "squadraReale": "",
+          "costo": 16
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Belghali",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bracaglia",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Balerdi",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bastoni",
+          "squadraReale": "",
+          "costo": 33
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Gaspar K.",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Carlos Augusto",
+          "squadraReale": "",
+          "costo": 15
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Bakola",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Vlasic",
+          "squadraReale": "",
+          "costo": 36
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Barella",
+          "squadraReale": "",
+          "costo": 36
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Romano",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Milla",
+          "squadraReale": "",
+          "costo": 8
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Ederson D.S.",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zambo Anguissa",
+          "squadraReale": "",
+          "costo": 12
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Locatelli",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
           "ruolo": "ATT",
-          "nome": "Simeone",
-          "squadraReale": "TOR",
-          "costo": 34
+          "nome": "Geubbels",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Kvernadze",
+          "squadraReale": "",
+          "costo": 23
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Thuram",
+          "squadraReale": "",
+          "costo": 171
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Colombo",
+          "squadraReale": "",
+          "costo": 20
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Cutrone",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Kevin Carlos",
+          "squadraReale": "",
+          "costo": 6
         }
       ]
     },
@@ -571,111 +781,928 @@
       "giocatori": [
         {
           "ruolo": "POR",
-          "nome": "Siviero",
-          "squadraReale": "TOR",
-          "costo": 5
+          "nome": "Butez",
+          "squadraReale": "",
+          "costo": 50
         },
         {
           "ruolo": "POR",
-          "nome": "Provedel",
-          "squadraReale": "INT",
-          "costo": 15
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Haps",
-          "squadraReale": "VEN",
-          "costo": 11
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "De Silvestri",
-          "squadraReale": "BOL",
-          "costo": 31
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Vasquez",
-          "squadraReale": "GEN",
-          "costo": 4
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Viery",
-          "squadraReale": "FIO",
-          "costo": 27
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Sagrado",
-          "squadraReale": "VEN",
-          "costo": 5
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Omar Fayed",
-          "squadraReale": "FRO",
+          "nome": "Sanchez Ro.",
+          "squadraReale": "",
           "costo": 3
         },
         {
-          "ruolo": "CEN",
-          "nome": "Liberali",
-          "squadraReale": "COM",
+          "ruolo": "POR",
+          "nome": "Vigorito",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Kossounou",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Gabbia",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Kolasinac",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Tiago Gabriel",
+          "squadraReale": "",
+          "costo": 12
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "N'Dicka",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Spinazzola",
+          "squadraReale": "",
+          "costo": 7
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Gila",
+          "squadraReale": "",
           "costo": 16
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "De Winter",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Da Cunha",
+          "squadraReale": "",
+          "costo": 30
         },
         {
           "ruolo": "CEN",
           "nome": "Mandragora",
-          "squadraReale": "FIO",
-          "costo": 20
+          "squadraReale": "",
+          "costo": 19
         },
         {
           "ruolo": "CEN",
-          "nome": "Almqvist",
-          "squadraReale": "PAR",
-          "costo": 35
+          "nome": "Samardzic",
+          "squadraReale": "",
+          "costo": 21
         },
         {
           "ruolo": "CEN",
-          "nome": "Fadera",
-          "squadraReale": "CAG",
-          "costo": 29
+          "nome": "El Shaarawy",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "CEN",
-          "nome": "Calhanoglu",
-          "squadraReale": "INT",
-          "costo": 44
+          "nome": "Mora",
+          "squadraReale": "",
+          "costo": 41
         },
         {
           "ruolo": "CEN",
-          "nome": "De Bruyne",
-          "squadraReale": "NAP",
-          "costo": 31
+          "nome": "Ilic",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Rodriguez Je.",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Caqueret",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "ATT",
-          "nome": "Soulè",
-          "squadraReale": "ROM",
+          "nome": "Laurientè",
+          "squadraReale": "",
+          "costo": 39
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Adams C.",
+          "squadraReale": "",
           "costo": 14
         },
         {
           "ruolo": "ATT",
-          "nome": "Stulic",
-          "squadraReale": "LEC",
-          "costo": 24
+          "nome": "Maldini",
+          "squadraReale": "",
+          "costo": 17
         },
         {
           "ruolo": "ATT",
-          "nome": "Giovane",
-          "squadraReale": "NAP",
-          "costo": 61
+          "nome": "Douvikas",
+          "squadraReale": "",
+          "costo": 146
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Esposito Se.",
+          "squadraReale": "",
+          "costo": 50
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Sulemana K.",
+          "squadraReale": "",
+          "costo": 2
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-04",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Martinez Jo.",
+          "squadraReale": "",
+          "costo": 70
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Palmisani",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Di Gennaro",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Molina N.",
+          "squadraReale": "",
+          "costo": 28
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Mina",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Stones",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Ismajli",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Chalobah T.",
+          "squadraReale": "",
+          "costo": 17
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Marcandalli",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Akanji",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Zortea",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Saelemaekers",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Mbangula",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Pasalic",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "McKennie",
+          "squadraReale": "",
+          "costo": 28
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Calhanoglu",
+          "squadraReale": "",
+          "costo": 68
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Bernabè",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Modric",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Liberali",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Kolo Muani",
+          "squadraReale": "",
+          "costo": 95
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Piccoli",
+          "squadraReale": "",
+          "costo": 19
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Bowie",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Davis K.",
+          "squadraReale": "",
+          "costo": 80
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Yeboah J.",
+          "squadraReale": "",
+          "costo": 12
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Neres",
+          "squadraReale": "",
+          "costo": 15
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-10",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Skorupski",
+          "squadraReale": "",
+          "costo": 20
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Maignan",
+          "squadraReale": "",
+          "costo": 71
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Terracciano",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Calvani",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Holm",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Ghilardi",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Rrahmani",
+          "squadraReale": "",
+          "costo": 29
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Doekhi",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bisseck",
+          "squadraReale": "",
+          "costo": 29
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Kalulu",
+          "squadraReale": "",
+          "costo": 26
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bellanova",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Fagioli",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Schmid",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Matic",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Gonzalez N.",
+          "squadraReale": "",
+          "costo": 24
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "De Bruyne",
+          "squadraReale": "",
+          "costo": 38
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Musah",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Diouf",
+          "squadraReale": "",
+          "costo": 21
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Scamacca",
+          "squadraReale": "",
+          "costo": 68
         },
         {
           "ruolo": "ATT",
           "nome": "Berardi",
-          "squadraReale": "SAS",
-          "costo": 58
+          "squadraReale": "",
+          "costo": 66
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Soulè",
+          "squadraReale": "",
+          "costo": 31
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Bonny",
+          "squadraReale": "",
+          "costo": 31
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Gnonto",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Gueye",
+          "squadraReale": "",
+          "costo": 1
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-12",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Corvi",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Perri",
+          "squadraReale": "",
+          "costo": 21
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Meret",
+          "squadraReale": "",
+          "costo": 54
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Haps",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Cinquegrano",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Floriani Mussolini",
+          "squadraReale": "",
+          "costo": 6
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Comuzzo",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bremer",
+          "squadraReale": "",
+          "costo": 32
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Hermoso",
+          "squadraReale": "",
+          "costo": 16
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Idzes",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Mangas",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Konè M.",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Gudmundsson A.",
+          "squadraReale": "",
+          "costo": 31
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Lobotka",
+          "squadraReale": "",
+          "costo": 12
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Pisilli",
+          "squadraReale": "",
+          "costo": 6
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Atta",
+          "squadraReale": "",
+          "costo": 34
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Politano",
+          "squadraReale": "",
+          "costo": 4
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Sucic P.",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Fazzini",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Osmajic",
+          "squadraReale": "",
+          "costo": 11
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Pellegrino M.",
+          "squadraReale": "",
+          "costo": 40
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Varela G.",
+          "squadraReale": "",
+          "costo": 18
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Hojlund",
+          "squadraReale": "",
+          "costo": 92
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Raspadori",
+          "squadraReale": "",
+          "costo": 31
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Lucca",
+          "squadraReale": "",
+          "costo": 21
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-03",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Milinkovic-Savic V.",
+          "squadraReale": "",
+          "costo": 17
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Carnesecchi",
+          "squadraReale": "",
+          "costo": 75
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Sportiello",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bernasconi",
+          "squadraReale": "",
+          "costo": 9
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Diego Carlos",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Mancini",
+          "squadraReale": "",
+          "costo": 36
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Dragusin",
+          "squadraReale": "",
+          "costo": 10
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Coco",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bartesaghi",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Cambiaso",
+          "squadraReale": "",
+          "costo": 5
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Kelly L.",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zaniolo",
+          "squadraReale": "",
+          "costo": 24
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Douglas Luiz",
+          "squadraReale": "",
+          "costo": 6
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Adzic",
+          "squadraReale": "",
+          "costo": 16
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Goncalves P.",
+          "squadraReale": "",
+          "costo": 26
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Busio",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Alajbegovic",
+          "squadraReale": "",
+          "costo": 21
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Jones C.",
+          "squadraReale": "",
+          "costo": 17
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Njie",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Woltemade",
+          "squadraReale": "",
+          "costo": 20
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Raimondo",
+          "squadraReale": "",
+          "costo": 41
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Santos A.",
+          "squadraReale": "",
+          "costo": 19
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Castro S.",
+          "squadraReale": "",
+          "costo": 50
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Dybala",
+          "squadraReale": "",
+          "costo": 71
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Boga",
+          "squadraReale": "",
+          "costo": 10
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-08",
+      "giocatori": [
+        {
+          "ruolo": "POR",
+          "nome": "Okoye",
+          "squadraReale": "",
+          "costo": 29
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Bijlow",
+          "squadraReale": "",
+          "costo": 14
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Mrozek",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Di Lorenzo",
+          "squadraReale": "",
+          "costo": 19
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Ehizibue",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Kabasele",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Lucumì",
+          "squadraReale": "",
+          "costo": 14
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Zanoli",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Wesley",
+          "squadraReale": "",
+          "costo": 57
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Celik",
+          "squadraReale": "",
+          "costo": 6
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Estupinan",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Loftus-Cheek",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Koopmeiners",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Vergara",
+          "squadraReale": "",
+          "costo": 19
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Ferguson",
+          "squadraReale": "",
+          "costo": 2
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Baldanzi",
+          "squadraReale": "",
+          "costo": 8
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zielinski",
+          "squadraReale": "",
+          "costo": 36
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Sow",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Taylor K.",
+          "squadraReale": "",
+          "costo": 19
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Diao",
+          "squadraReale": "",
+          "costo": 79
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Pinamonti",
+          "squadraReale": "",
+          "costo": 39
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Beto",
+          "squadraReale": "",
+          "costo": 40
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Esposito F.P.",
+          "squadraReale": "",
+          "costo": 86
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Lang",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Mota",
+          "squadraReale": "",
+          "costo": 2
         }
       ]
     },
@@ -685,675 +1712,152 @@
         {
           "ruolo": "POR",
           "nome": "Vicario",
-          "squadraReale": "JUV",
-          "costo": 11
+          "squadraReale": "",
+          "costo": 70
         },
         {
           "ruolo": "POR",
-          "nome": "Montipò",
-          "squadraReale": "VEN",
-          "costo": 12
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Franjic",
-          "squadraReale": "VEN",
-          "costo": 4
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Patric",
-          "squadraReale": "LAZ",
-          "costo": 28
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Amey",
-          "squadraReale": "FRO",
-          "costo": 13
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Akpoguma",
-          "squadraReale": "FRO",
-          "costo": 18
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Favasuli",
-          "squadraReale": "NAP",
-          "costo": 8
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Valenti",
-          "squadraReale": "PAR",
-          "costo": 19
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Gineitis",
-          "squadraReale": "TOR",
-          "costo": 22
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Oristanio",
-          "squadraReale": "TOR",
-          "costo": 8
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Da Cunha",
-          "squadraReale": "COM",
-          "costo": 27
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Loftus-Cheek",
-          "squadraReale": "MIL",
-          "costo": 14
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Chakvetadze",
-          "squadraReale": "UDI",
-          "costo": 32
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Rabiot",
-          "squadraReale": "MIL",
-          "costo": 8
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Dybala",
-          "squadraReale": "ROM",
-          "costo": 32
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Lauberbach",
-          "squadraReale": "VEN",
-          "costo": 23
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Colombo",
-          "squadraReale": "GEN",
-          "costo": 51
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Bonny",
-          "squadraReale": "INT",
-          "costo": 18
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-08",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Piana",
-          "squadraReale": "UDI",
-          "costo": 3
+          "nome": "Grabara",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "POR",
-          "nome": "Muric",
-          "squadraReale": "SAS",
+          "nome": "Pinsoglio",
+          "squadraReale": "",
+          "costo": 1
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Spence",
+          "squadraReale": "",
           "costo": 15
         },
         {
           "ruolo": "DIF",
-          "nome": "Birindelli",
-          "squadraReale": "MON",
-          "costo": 16
+          "nome": "Marusic",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Bracaglia",
-          "squadraReale": "FRO",
-          "costo": 8
+          "nome": "Troilo",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "DIF",
-          "nome": "Casale",
-          "squadraReale": "BOL",
-          "costo": 11
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Dragusin",
-          "squadraReale": "FIO",
-          "costo": 18
+          "nome": "Delprato",
+          "squadraReale": "",
+          "costo": 6
         },
         {
           "ruolo": "DIF",
           "nome": "Pavlovic",
-          "squadraReale": "MIL",
-          "costo": 13
+          "squadraReale": "",
+          "costo": 18
         },
         {
           "ruolo": "DIF",
-          "nome": "Celik",
-          "squadraReale": "JUV",
-          "costo": 23
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Duncan",
-          "squadraReale": "VEN",
-          "costo": 45
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Douglas Luiz",
-          "squadraReale": "JUV",
-          "costo": 31
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Adzic",
-          "squadraReale": "SAS",
-          "costo": 27
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Politano",
-          "squadraReale": "NAP",
-          "costo": 11
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Isaksen",
-          "squadraReale": "LAZ",
-          "costo": 27
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Cremaschi",
-          "squadraReale": "PAR",
-          "costo": 25
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Krstovic",
-          "squadraReale": "ATA",
-          "costo": 11
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Laurientè",
-          "squadraReale": "SAS",
-          "costo": 61
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "De Ketelaere",
-          "squadraReale": "ATA",
-          "costo": 15
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Adorante",
-          "squadraReale": "VEN",
-          "costo": 18
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-09",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Penev",
-          "squadraReale": "LEC",
-          "costo": 16
-        },
-        {
-          "ruolo": "POR",
-          "nome": "Turati",
-          "squadraReale": "SAS",
+          "nome": "Gallo",
+          "squadraReale": "",
           "costo": 2
         },
         {
           "ruolo": "DIF",
-          "nome": "Mancini",
-          "squadraReale": "ROM",
-          "costo": 3
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Valle",
-          "squadraReale": "COM",
-          "costo": 31
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Zè Pedro",
-          "squadraReale": "CAG",
+          "nome": "Lulli",
+          "squadraReale": "",
           "costo": 16
         },
         {
           "ruolo": "DIF",
-          "nome": "Walukiewicz",
-          "squadraReale": "SAS",
-          "costo": 22
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Rrahmani",
-          "squadraReale": "NAP",
-          "costo": 11
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Obert",
-          "squadraReale": "CAG",
-          "costo": 27
+          "nome": "Kristensen T.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "CEN",
-          "nome": "Akinsanmiro",
-          "squadraReale": "MON",
-          "costo": 23
+          "nome": "Traorè Hj.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "CEN",
-          "nome": "Bernardeschi",
-          "squadraReale": "BOL",
-          "costo": 30
+          "nome": "Mastantuono",
+          "squadraReale": "",
+          "costo": 43
         },
         {
           "ruolo": "CEN",
-          "nome": "Przyborek",
-          "squadraReale": "LAZ",
-          "costo": 14
+          "nome": "Orsolini",
+          "squadraReale": "",
+          "costo": 58
         },
         {
           "ruolo": "CEN",
-          "nome": "Zielinski",
-          "squadraReale": "INT",
-          "costo": 15
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Zhegrova",
-          "squadraReale": "JUV",
-          "costo": 7
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Basic",
-          "squadraReale": "VEN",
-          "costo": 29
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Malen",
-          "squadraReale": "ROM",
-          "costo": 56
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Piccoli",
-          "squadraReale": "BOL",
-          "costo": 53
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Pinamonti",
-          "squadraReale": "LAZ",
-          "costo": 55
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Kean",
-          "squadraReale": "FIO",
-          "costo": 47
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-10",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Radunovic",
-          "squadraReale": "CAG",
-          "costo": 3
-        },
-        {
-          "ruolo": "POR",
-          "nome": "Pozzi",
-          "squadraReale": "VEN",
-          "costo": 16
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Beukema",
-          "squadraReale": "NAP",
-          "costo": 19
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Kabasele",
-          "squadraReale": "UDI",
-          "costo": 12
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Aurelio",
-          "squadraReale": "CAG",
-          "costo": 14
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Siebert",
-          "squadraReale": "LEC",
-          "costo": 28
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Balerdi",
-          "squadraReale": "ROM",
-          "costo": 4
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Kofler",
-          "squadraReale": "CAG",
-          "costo": 4
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Koopmeiners",
-          "squadraReale": "JUV",
-          "costo": 18
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Belahyane",
-          "squadraReale": "LAZ",
-          "costo": 21
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Amorim",
-          "squadraReale": "GEN",
-          "costo": 22
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Gaetano",
-          "squadraReale": "ATA",
-          "costo": 12
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Saelemaekers",
-          "squadraReale": "MIL",
-          "costo": 32
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Zaccagni",
-          "squadraReale": "LAZ",
-          "costo": 17
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Ngonge",
-          "squadraReale": "MON",
-          "costo": 50
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Yildiz",
-          "squadraReale": "JUV",
-          "costo": 56
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Bobcek",
-          "squadraReale": "FRO",
-          "costo": 24
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Kvernadze",
-          "squadraReale": "FRO",
-          "costo": 57
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-11",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Desplanches",
-          "squadraReale": "FRO",
-          "costo": 7
-        },
-        {
-          "ruolo": "POR",
-          "nome": "Vigorito",
-          "squadraReale": "COM",
-          "costo": 2
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Goldaniga",
-          "squadraReale": "COM",
-          "costo": 26
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Ramon",
-          "squadraReale": "COM",
-          "costo": 11
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Spinazzola",
-          "squadraReale": "NAP",
-          "costo": 21
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Marianucci",
-          "squadraReale": "NAP",
-          "costo": 25
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Arizala",
-          "squadraReale": "UDI",
-          "costo": 7
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Joao Mario",
-          "squadraReale": "FIO",
-          "costo": 22
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Musah",
-          "squadraReale": "MIL",
-          "costo": 18
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Winks",
-          "squadraReale": "CAG",
-          "costo": 9
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Romano",
-          "squadraReale": "CAG",
-          "costo": 17
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Ciurria",
-          "squadraReale": "MON",
-          "costo": 30
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Bakola",
-          "squadraReale": "SAS",
-          "costo": 9
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Frendrup",
-          "squadraReale": "GEN",
-          "costo": 13
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Lontani",
-          "squadraReale": "PAR",
-          "costo": 56
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Birligea",
-          "squadraReale": "FRO",
-          "costo": 11
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Hojlund",
-          "squadraReale": "NAP",
-          "costo": 13
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Raspadori",
-          "squadraReale": "ATA",
-          "costo": 22
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-12",
-      "giocatori": [
-        {
-          "ruolo": "POR",
-          "nome": "Motta",
-          "squadraReale": "LAZ",
-          "costo": 2
-        },
-        {
-          "ruolo": "POR",
-          "nome": "Terracciano",
-          "squadraReale": "MIL",
-          "costo": 3
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Schingtienne",
-          "squadraReale": "VEN",
-          "costo": 10
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Kossounou",
-          "squadraReale": "ATA",
-          "costo": 8
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Monterisi",
-          "squadraReale": "FRO",
-          "costo": 12
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Rensch",
-          "squadraReale": "ROM",
-          "costo": 3
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Goglichidze",
-          "squadraReale": "UDI",
-          "costo": 25
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Pongracic",
-          "squadraReale": "FIO",
-          "costo": 9
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Mora",
-          "squadraReale": "ROM",
-          "costo": 33
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Pierotti",
-          "squadraReale": "LEC",
-          "costo": 44
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Venturino",
-          "squadraReale": "GEN",
+          "nome": "Cambiaghi",
+          "squadraReale": "",
           "costo": 5
         },
         {
           "ruolo": "CEN",
-          "nome": "Kaba",
-          "squadraReale": "LEC",
-          "costo": 40
+          "nome": "McTominay",
+          "squadraReale": "",
+          "costo": 52
         },
         {
           "ruolo": "CEN",
-          "nome": "Grillitsch",
-          "squadraReale": "FRO",
-          "costo": 23
+          "nome": "Keita M.",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "CEN",
-          "nome": "Atta",
-          "squadraReale": "FIO",
-          "costo": 18
+          "nome": "Zhegrova",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Oulai",
+          "squadraReale": "",
+          "costo": 1
         },
         {
           "ruolo": "ATT",
-          "nome": "De Martis",
-          "squadraReale": "PAR",
-          "costo": 60
+          "nome": "Dovbyk",
+          "squadraReale": "",
+          "costo": 24
         },
         {
           "ruolo": "ATT",
-          "nome": "Boga",
-          "squadraReale": "JUV",
-          "costo": 18
+          "nome": "Kean",
+          "squadraReale": "",
+          "costo": 78
         },
         {
           "ruolo": "ATT",
-          "nome": "Bowie",
-          "squadraReale": "SAS",
-          "costo": 22
+          "nome": "De Ketelaere",
+          "squadraReale": "",
+          "costo": 45
         },
         {
           "ruolo": "ATT",
-          "nome": "Ghedjemis",
-          "squadraReale": "FRO",
-          "costo": 56
+          "nome": "Krstovic",
+          "squadraReale": "",
+          "costo": 53
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "N'Dri",
+          "squadraReale": "",
+          "costo": 3
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Ngonge",
+          "squadraReale": "",
+          "costo": 1
         }
       ]
     }
