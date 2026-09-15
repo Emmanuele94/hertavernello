@@ -7,7 +7,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Roma/svilar-mile.png"
+   "foto": "assets/calciatori/Roma/svilar-mile.png",
+   "fantacalcioId": "5841"
   },
   {
    "nome": "Carnesecchi",
@@ -15,7 +16,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/carnesecchi-marco.png"
+   "foto": "assets/calciatori/Atalanta/carnesecchi-marco.png",
+   "fantacalcioId": "4431"
   },
   {
    "nome": "Martinez Jo.",
@@ -23,7 +25,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Inter/martinez-josep.png"
+   "foto": "assets/calciatori/Inter/martinez-josep.png",
+   "fantacalcioId": "5116"
   },
   {
    "nome": "Vicario",
@@ -31,7 +34,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Juventus/vicario-guglielmo.png"
+   "foto": "assets/calciatori/Juventus/vicario-guglielmo.png",
+   "fantacalcioId": "4964"
   },
   {
    "nome": "Butez",
@@ -39,7 +43,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Como/butez-jean.png"
+   "foto": "assets/calciatori/Como/butez-jean.png",
+   "fantacalcioId": "6966"
   },
   {
    "nome": "Maignan",
@@ -47,7 +52,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Milan/maignan-mike.png"
+   "foto": "assets/calciatori/Milan/maignan-mike.png",
+   "fantacalcioId": "4312"
   },
   {
    "nome": "Caprile",
@@ -55,7 +61,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Cagliari/caprile-elia.png"
+   "foto": "assets/calciatori/Cagliari/caprile-elia.png",
+   "fantacalcioId": "4360"
   },
   {
    "nome": "Mandas",
@@ -63,7 +70,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "gr",
-   "foto": "assets/calciatori/Lazio/mandas-christos.png"
+   "foto": "assets/calciatori/Lazio/mandas-christos.png",
+   "fantacalcioId": "6482"
   },
   {
    "nome": "Meret",
@@ -71,7 +79,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/meret-alex.png"
+   "foto": "assets/calciatori/Napoli/meret-alex.png",
+   "fantacalcioId": "572"
   },
   {
    "nome": "Skorupski",
@@ -79,7 +88,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "pl",
-   "foto": "assets/calciatori/Bologna/skorupski-lukasz.png"
+   "foto": "assets/calciatori/Bologna/skorupski-lukasz.png",
+   "fantacalcioId": "133"
   },
   {
    "nome": "De Gea",
@@ -87,7 +97,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Fiorentina/de-gea-david.png"
+   "foto": "assets/calciatori/Fiorentina/de-gea-david.png",
+   "fantacalcioId": "2521"
   },
   {
    "nome": "Okoye",
@@ -95,7 +106,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "ng",
-   "foto": "assets/calciatori/Udinese/okoye-maduks.png"
+   "foto": "assets/calciatori/Udinese/okoye-maduks.png",
+   "fantacalcioId": "6462"
   },
   {
    "nome": "Perri",
@@ -103,7 +115,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6534"
   },
   {
    "nome": "Falcone",
@@ -111,7 +124,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lecce/falcone-wladimiro.png"
+   "foto": "assets/calciatori/Lecce/falcone-wladimiro.png",
+   "fantacalcioId": "2134"
   },
   {
    "nome": "Sanchez Ro.",
@@ -119,7 +133,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Fiorentina/sanchez-alejandro-jimenez.png"
+   "foto": "assets/calciatori/Fiorentina/sanchez-alejandro-jimenez.png",
+   "fantacalcioId": "6344"
   },
   {
    "nome": "Bijlow",
@@ -127,7 +142,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Genoa/bijlow-justin.png"
+   "foto": "assets/calciatori/Genoa/bijlow-justin.png",
+   "fantacalcioId": "7332"
   },
   {
    "nome": "Muric",
@@ -135,7 +151,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "xk",
-   "foto": "assets/calciatori/Sassuolo/muric-arijanet.png"
+   "foto": "assets/calciatori/Sassuolo/muric-arijanet.png",
+   "fantacalcioId": "4236"
   },
   {
    "nome": "Daffara",
@@ -151,7 +168,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Venezia/stankovic-filip.png"
+   "foto": "assets/calciatori/Venezia/stankovic-filip.png",
+   "fantacalcioId": "6248"
   },
   {
    "nome": "Palmisani",
@@ -159,7 +177,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/palmisani-lorenzo.png"
+   "foto": "assets/calciatori/Frosinone/palmisani-lorenzo.png",
+   "fantacalcioId": "6415"
   },
   {
    "nome": "Thiam",
@@ -167,7 +186,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "sn",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "4485"
   },
   {
    "nome": "Milinkovic-Savic V.",
@@ -175,7 +195,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Napoli/milinkovic-savic-vanja.png"
+   "foto": "assets/calciatori/Napoli/milinkovic-savic-vanja.png",
+   "fantacalcioId": "2170"
   },
   {
    "nome": "Corvi",
@@ -183,7 +204,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Parma/corvi-edoardo.png"
+   "foto": "assets/calciatori/Parma/corvi-edoardo.png",
+   "fantacalcioId": "6662"
   },
   {
    "nome": "Sportiello",
@@ -191,7 +213,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/sportiello-marco.png"
+   "foto": "assets/calciatori/Atalanta/sportiello-marco.png",
+   "fantacalcioId": "4"
   },
   {
    "nome": "Happonen",
@@ -223,7 +246,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "se",
-   "foto": "assets/calciatori/Como/tornqvist-noel.png"
+   "foto": "assets/calciatori/Como/tornqvist-noel.png",
+   "fantacalcioId": "7301"
   },
   {
    "nome": "Vigorito",
@@ -231,7 +255,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Como/vigorito-mauro.png"
+   "foto": "assets/calciatori/Como/vigorito-mauro.png",
+   "fantacalcioId": "2809"
   },
   {
    "nome": "Christensen O.",
@@ -239,7 +264,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Fiorentina/christensen-oliver.png"
+   "foto": "assets/calciatori/Fiorentina/christensen-oliver.png",
+   "fantacalcioId": "6403"
   },
   {
    "nome": "Lezzerini",
@@ -287,7 +313,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/di-gennaro-raffaele.png"
+   "foto": "assets/calciatori/Inter/di-gennaro-raffaele.png",
+   "fantacalcioId": "1926"
   },
   {
    "nome": "Provedel",
@@ -295,7 +322,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/provedel-ivan.png"
+   "foto": "assets/calciatori/Inter/provedel-ivan.png",
+   "fantacalcioId": "2814"
   },
   {
    "nome": "Pinsoglio",
@@ -303,7 +331,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "1930"
   },
   {
    "nome": "Motta",
@@ -311,7 +340,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lazio/motta-edoardo.png"
+   "foto": "assets/calciatori/Lazio/motta-edoardo.png",
+   "fantacalcioId": "7337"
   },
   {
    "nome": "Renzetti",
@@ -327,7 +357,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Milan/terracciano-filippo.png"
+   "foto": "assets/calciatori/Milan/terracciano-filippo.png",
+   "fantacalcioId": "2815"
   },
   {
    "nome": "Torriani",
@@ -359,7 +390,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/de-marzi-giorgio.png"
+   "foto": "assets/calciatori/Roma/de-marzi-giorgio.png",
+   "fantacalcioId": "7048"
   },
   {
    "nome": "Gollini",
@@ -367,7 +399,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/gollini-pierluigi.png"
+   "foto": "assets/calciatori/Roma/gollini-pierluigi.png",
+   "fantacalcioId": "610"
   },
   {
    "nome": "Russo A.",
@@ -383,7 +416,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Sassuolo/turati-stefano.png"
+   "foto": "assets/calciatori/Sassuolo/turati-stefano.png",
+   "fantacalcioId": "4867"
   },
   {
    "nome": "Mascardi",
@@ -487,7 +521,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "pl",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7603"
   },
   {
    "nome": "Mrozek",
@@ -495,7 +530,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "pl",
-   "foto": "assets/calciatori/Udinese/mrozek-bartosz.png"
+   "foto": "assets/calciatori/Udinese/mrozek-bartosz.png",
+   "fantacalcioId": "7611"
   },
   {
    "nome": "Ghidotti",
@@ -519,7 +555,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/dimarco-federico.png"
+   "foto": "assets/calciatori/Inter/dimarco-federico.png",
+   "fantacalcioId": "254"
   },
   {
    "nome": "Wesley",
@@ -527,7 +564,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Roma/wesley-franca.png"
+   "foto": "assets/calciatori/Roma/wesley-franca.png",
+   "fantacalcioId": "7181"
   },
   {
    "nome": "Molina N.",
@@ -535,7 +573,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Roma/molina-nahuel.png"
+   "foto": "assets/calciatori/Roma/molina-nahuel.png",
+   "fantacalcioId": "4998"
   },
   {
    "nome": "Bremer",
@@ -543,7 +582,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Juventus/bremer.png"
+   "foto": "assets/calciatori/Juventus/bremer.png",
+   "fantacalcioId": "2788"
   },
   {
    "nome": "Akanji",
@@ -551,7 +591,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "ch",
-   "foto": "assets/calciatori/Inter/akanji-manuel.png"
+   "foto": "assets/calciatori/Inter/akanji-manuel.png",
+   "fantacalcioId": "4159"
   },
   {
    "nome": "Mancini",
@@ -559,7 +600,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/mancini-gianluca.png"
+   "foto": "assets/calciatori/Roma/mancini-gianluca.png",
+   "fantacalcioId": "2296"
   },
   {
    "nome": "Bastoni",
@@ -567,7 +609,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/bastoni-alessandro.png"
+   "foto": "assets/calciatori/Inter/bastoni-alessandro.png",
+   "fantacalcioId": "2120"
   },
   {
    "nome": "Kalulu",
@@ -575,7 +618,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Juventus/kalulu-kyatengwa-piere.png"
+   "foto": "assets/calciatori/Juventus/kalulu-kyatengwa-piere.png",
+   "fantacalcioId": "4976"
   },
   {
    "nome": "Pavlovic",
@@ -583,7 +627,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Milan/pavlovic-strahinja.png"
+   "foto": "assets/calciatori/Milan/pavlovic-strahinja.png",
+   "fantacalcioId": "5022"
   },
   {
    "nome": "Rrahmani",
@@ -591,7 +636,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "xk",
-   "foto": "assets/calciatori/Napoli/rrahmani-amir.png"
+   "foto": "assets/calciatori/Napoli/rrahmani-amir.png",
+   "fantacalcioId": "4409"
   },
   {
    "nome": "Bisseck",
@@ -599,7 +645,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "de",
-   "foto": "assets/calciatori/Inter/bisseck-yann-aurel.png"
+   "foto": "assets/calciatori/Inter/bisseck-yann-aurel.png",
+   "fantacalcioId": "6217"
   },
   {
    "nome": "Gila",
@@ -607,7 +654,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Milan/gila-mario.png"
+   "foto": "assets/calciatori/Milan/gila-mario.png",
+   "fantacalcioId": "5833"
   },
   {
    "nome": "Solet",
@@ -615,7 +663,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Udinese/solet-oumar.png"
+   "foto": "assets/calciatori/Udinese/solet-oumar.png",
+   "fantacalcioId": "6956"
   },
   {
    "nome": "Stones",
@@ -623,7 +672,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Inter/stones-john.png"
+   "foto": "assets/calciatori/Inter/stones-john.png",
+   "fantacalcioId": "2514"
   },
   {
    "nome": "Di Lorenzo",
@@ -631,7 +681,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/di-lorenzo-giovanni.png"
+   "foto": "assets/calciatori/Napoli/di-lorenzo-giovanni.png",
+   "fantacalcioId": "2816"
   },
   {
    "nome": "Hermoso",
@@ -639,7 +690,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Roma/hermoso-mario.png"
+   "foto": "assets/calciatori/Roma/hermoso-mario.png",
+   "fantacalcioId": "4807"
   },
   {
    "nome": "N'Dicka",
@@ -647,7 +699,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Roma/n-dicka-obite.png"
+   "foto": "assets/calciatori/Roma/n-dicka-obite.png",
+   "fantacalcioId": "4317"
   },
   {
    "nome": "Scalvini",
@@ -655,7 +708,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/scalvini-giorgio.png"
+   "foto": "assets/calciatori/Atalanta/scalvini-giorgio.png",
+   "fantacalcioId": "5526"
   },
   {
    "nome": "Spence",
@@ -663,7 +717,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Inter/spence-djed.png"
+   "foto": "assets/calciatori/Inter/spence-djed.png",
+   "fantacalcioId": "5982"
   },
   {
    "nome": "Ramon",
@@ -671,7 +726,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Como/ramon-jacobo.png"
+   "foto": "assets/calciatori/Como/ramon-jacobo.png",
+   "fantacalcioId": "6869"
   },
   {
    "nome": "Ostigard",
@@ -679,7 +735,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "no",
-   "foto": "assets/calciatori/Genoa/ostigard-leo.png"
+   "foto": "assets/calciatori/Genoa/ostigard-leo.png",
+   "fantacalcioId": "5750"
   },
   {
    "nome": "Kamara H.",
@@ -687,7 +744,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "se",
-   "foto": "assets/calciatori/Udinese/kamara-hassane.png"
+   "foto": "assets/calciatori/Udinese/kamara-hassane.png",
+   "fantacalcioId": "5555"
   },
   {
    "nome": "Chalobah T.",
@@ -695,7 +753,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Como/chalobah-trevoh.png"
+   "foto": "assets/calciatori/Como/chalobah-trevoh.png",
+   "fantacalcioId": "5641"
   },
   {
    "nome": "Miranda J.",
@@ -703,7 +762,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Bologna/miranda-juan.png"
+   "foto": "assets/calciatori/Bologna/miranda-juan.png",
+   "fantacalcioId": "4734"
   },
   {
    "nome": "Dodò",
@@ -719,7 +779,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Genoa/vasquez-johan.png"
+   "foto": "assets/calciatori/Genoa/vasquez-johan.png",
+   "fantacalcioId": "5514"
   },
   {
    "nome": "Valeri",
@@ -727,7 +788,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Parma/valeri-emanuele.png"
+   "foto": "assets/calciatori/Parma/valeri-emanuele.png",
+   "fantacalcioId": "5862"
   },
   {
    "nome": "Vojvoda",
@@ -735,7 +797,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "xk",
-   "foto": "assets/calciatori/Udinese/vojvoda-mergim.png"
+   "foto": "assets/calciatori/Udinese/vojvoda-mergim.png",
+   "fantacalcioId": "4994"
   },
   {
    "nome": "Couto",
@@ -743,7 +806,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Como/couto-yan.png"
+   "foto": "assets/calciatori/Como/couto-yan.png",
+   "fantacalcioId": "6727"
   },
   {
    "nome": "Zappacosta",
@@ -751,7 +815,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/zappacosta-davide.png"
+   "foto": "assets/calciatori/Atalanta/zappacosta-davide.png",
+   "fantacalcioId": "554"
   },
   {
    "nome": "Lucumì",
@@ -759,7 +824,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Juventus/lucumi-jhon.png"
+   "foto": "assets/calciatori/Juventus/lucumi-jhon.png",
+   "fantacalcioId": "6042"
   },
   {
    "nome": "Obert",
@@ -775,7 +841,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/bracaglia-gabriele.png"
+   "foto": "assets/calciatori/Frosinone/bracaglia-gabriele.png",
+   "fantacalcioId": "7469"
   },
   {
    "nome": "Celik",
@@ -783,7 +850,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "ba",
-   "foto": "assets/calciatori/Juventus/celik-zeki.png"
+   "foto": "assets/calciatori/Juventus/celik-zeki.png",
+   "fantacalcioId": "4657"
   },
   {
    "nome": "Cambiaso",
@@ -791,7 +859,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Juventus/cambiaso-andrea.png"
+   "foto": "assets/calciatori/Juventus/cambiaso-andrea.png",
+   "fantacalcioId": "5520"
   },
   {
    "nome": "Doekhi",
@@ -799,7 +868,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Lazio/doekhi-danilho.png"
+   "foto": "assets/calciatori/Lazio/doekhi-danilho.png",
+   "fantacalcioId": "6320"
   },
   {
    "nome": "Tiago Gabriel",
@@ -807,7 +877,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "br",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6989"
   },
   {
    "nome": "Bartesaghi",
@@ -815,7 +886,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Milan/bartesaghi-davide.png"
+   "foto": "assets/calciatori/Milan/bartesaghi-davide.png",
+   "fantacalcioId": "6496"
   },
   {
    "nome": "Spinazzola",
@@ -823,7 +895,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/spinazzola-leonardo.png"
+   "foto": "assets/calciatori/Napoli/spinazzola-leonardo.png",
+   "fantacalcioId": "1852"
   },
   {
    "nome": "Delprato",
@@ -831,7 +904,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6664"
   },
   {
    "nome": "Koulierakis",
@@ -847,7 +921,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Torino/comuzzo-pietro.png"
+   "foto": "assets/calciatori/Torino/comuzzo-pietro.png",
+   "fantacalcioId": "6495"
   },
   {
    "nome": "Ismajli",
@@ -855,7 +930,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "al",
-   "foto": "assets/calciatori/Torino/ismajli-ardian.png"
+   "foto": "assets/calciatori/Torino/ismajli-ardian.png",
+   "fantacalcioId": "5010"
   },
   {
    "nome": "Theate",
@@ -863,7 +939,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Bologna/theate-arthur.png"
+   "foto": "assets/calciatori/Bologna/theate-arthur.png",
+   "fantacalcioId": "5675"
   },
   {
    "nome": "Belghali",
@@ -871,7 +948,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "ma",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7220"
   },
   {
    "nome": "Diego Carlos",
@@ -879,7 +957,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "br",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "4137"
   },
   {
    "nome": "Hien",
@@ -895,7 +974,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Cagliari/mina-yerry.png"
+   "foto": "assets/calciatori/Cagliari/mina-yerry.png",
+   "fantacalcioId": "4210"
   },
   {
    "nome": "Valle",
@@ -903,7 +983,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Como/valle-gomez-alex.png"
+   "foto": "assets/calciatori/Como/valle-gomez-alex.png",
+   "fantacalcioId": "6867"
   },
   {
    "nome": "Dragusin",
@@ -911,7 +992,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "ro",
-   "foto": "assets/calciatori/Fiorentina/dragusin-radu.png"
+   "foto": "assets/calciatori/Fiorentina/dragusin-radu.png",
+   "fantacalcioId": "5365"
   },
   {
    "nome": "Jimenez A.",
@@ -919,7 +1001,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "es",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6531"
   },
   {
    "nome": "Oyono A.",
@@ -935,7 +1018,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "br",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "5877"
   },
   {
    "nome": "Tavares N.",
@@ -943,7 +1027,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "cv",
-   "foto": "assets/calciatori/Lazio/tavares-nuno.png"
+   "foto": "assets/calciatori/Lazio/tavares-nuno.png",
+   "fantacalcioId": "5620"
   },
   {
    "nome": "Gabbia",
@@ -951,7 +1036,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Milan/gabbia-matteo.png"
+   "foto": "assets/calciatori/Milan/gabbia-matteo.png",
+   "fantacalcioId": "4401"
   },
   {
    "nome": "Mangas",
@@ -959,7 +1045,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Monza/mangas-ricardo.png"
+   "foto": "assets/calciatori/Monza/mangas-ricardo.png",
+   "fantacalcioId": "7485"
   },
   {
    "nome": "Idzes",
@@ -967,7 +1054,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "id",
-   "foto": "assets/calciatori/Sassuolo/idzes-jay.png"
+   "foto": "assets/calciatori/Sassuolo/idzes-jay.png",
+   "fantacalcioId": "6672"
   },
   {
    "nome": "Doig",
@@ -975,7 +1063,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "gb-sct",
-   "foto": "assets/calciatori/Sassuolo/doig-josh.png"
+   "foto": "assets/calciatori/Sassuolo/doig-josh.png",
+   "fantacalcioId": "5851"
   },
   {
    "nome": "Coco",
@@ -983,7 +1072,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Torino/coco-saul.png"
+   "foto": "assets/calciatori/Torino/coco-saul.png",
+   "fantacalcioId": "6642"
   },
   {
    "nome": "Kolasinac",
@@ -991,7 +1081,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "ba",
-   "foto": "assets/calciatori/Atalanta/kolasinac-sead.png"
+   "foto": "assets/calciatori/Atalanta/kolasinac-sead.png",
+   "fantacalcioId": "2640"
   },
   {
    "nome": "Holm",
@@ -999,7 +1090,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "se",
-   "foto": "assets/calciatori/Bologna/holm-emil.png"
+   "foto": "assets/calciatori/Bologna/holm-emil.png",
+   "fantacalcioId": "5678"
   },
   {
    "nome": "Zortea",
@@ -1007,7 +1099,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Bologna/zortea-nadir.png"
+   "foto": "assets/calciatori/Bologna/zortea-nadir.png",
+   "fantacalcioId": "4433"
   },
   {
    "nome": "Kofler",
@@ -1031,7 +1124,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "jp",
-   "foto": "assets/calciatori/Como/kaiki.png"
+   "foto": "assets/calciatori/Como/kaiki.png",
+   "fantacalcioId": "7414"
   },
   {
    "nome": "Calvani",
@@ -1039,7 +1133,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/calvani-gabriele.png"
+   "foto": "assets/calciatori/Frosinone/calvani-gabriele.png",
+   "fantacalcioId": "7467"
   },
   {
    "nome": "Monterisi",
@@ -1047,7 +1142,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/monterisi-ilario.png"
+   "foto": "assets/calciatori/Frosinone/monterisi-ilario.png",
+   "fantacalcioId": "4952"
   },
   {
    "nome": "Marcandalli",
@@ -1055,7 +1151,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Genoa/marcandalli-alessandro.png"
+   "foto": "assets/calciatori/Genoa/marcandalli-alessandro.png",
+   "fantacalcioId": "6660"
   },
   {
    "nome": "Pavard",
@@ -1063,7 +1160,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Inter/pavard-benjamin.png"
+   "foto": "assets/calciatori/Inter/pavard-benjamin.png",
+   "fantacalcioId": "4177"
   },
   {
    "nome": "Pedraza",
@@ -1079,7 +1177,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "me",
-   "foto": "assets/calciatori/Lazio/marusic-adam.png"
+   "foto": "assets/calciatori/Lazio/marusic-adam.png",
+   "fantacalcioId": "2188"
   },
   {
    "nome": "Tomori",
@@ -1103,7 +1202,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Atalanta/kristensen-thomas.png"
+   "foto": "assets/calciatori/Atalanta/kristensen-thomas.png",
+   "fantacalcioId": "6485"
   },
   {
    "nome": "Obrador",
@@ -1111,7 +1211,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Sassuolo/obrador-rafael.png"
+   "foto": "assets/calciatori/Sassuolo/obrador-rafael.png",
+   "fantacalcioId": "7329"
   },
   {
    "nome": "Fortini",
@@ -1127,7 +1228,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Sassuolo/leysen-fedde.png"
+   "foto": "assets/calciatori/Sassuolo/leysen-fedde.png",
+   "fantacalcioId": "7564"
   },
   {
    "nome": "Badiashile",
@@ -1143,7 +1245,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Lazio/sutalo-josip.png"
+   "foto": "assets/calciatori/Lazio/sutalo-josip.png",
+   "fantacalcioId": "7580"
   },
   {
    "nome": "Balerdi",
@@ -1151,7 +1254,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Roma/balerdi-leonardo.png"
+   "foto": "assets/calciatori/Roma/balerdi-leonardo.png",
+   "fantacalcioId": "4705"
   },
   {
    "nome": "Caleta-Car",
@@ -1175,7 +1279,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/bellanova-raoul.png"
+   "foto": "assets/calciatori/Atalanta/bellanova-raoul.png",
+   "fantacalcioId": "4887"
   },
   {
    "nome": "Bernasconi",
@@ -1183,7 +1288,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/bernasconi-lorenzo.png"
+   "foto": "assets/calciatori/Atalanta/bernasconi-lorenzo.png",
+   "fantacalcioId": "7219"
   },
   {
    "nome": "Heggem",
@@ -1191,7 +1297,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "no",
-   "foto": "assets/calciatori/Bologna/heggem-torbjorn.png"
+   "foto": "assets/calciatori/Bologna/heggem-torbjorn.png",
+   "fantacalcioId": "7212"
   },
   {
    "nome": "Rodriguez Ju.",
@@ -1199,7 +1306,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Cagliari/rodriguez-juan.png"
+   "foto": "assets/calciatori/Cagliari/rodriguez-juan.png",
+   "fantacalcioId": "7268"
   },
   {
    "nome": "Kempf",
@@ -1215,7 +1323,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "es",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7294"
   },
   {
    "nome": "Viery",
@@ -1239,7 +1348,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Juventus/kelly-lloyd.png"
+   "foto": "assets/calciatori/Juventus/kelly-lloyd.png",
+   "fantacalcioId": "6766"
   },
   {
    "nome": "Gaspar K.",
@@ -1247,7 +1357,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "at",
-   "foto": "assets/calciatori/Lecce/gaspar-kialonga.png"
+   "foto": "assets/calciatori/Lecce/gaspar-kialonga.png",
+   "fantacalcioId": "6632"
   },
   {
    "nome": "Veiga D.",
@@ -1263,7 +1374,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lecce/gallo-antonino.png"
+   "foto": "assets/calciatori/Lecce/gallo-antonino.png",
+   "fantacalcioId": "4502"
   },
   {
    "nome": "De Winter",
@@ -1271,7 +1383,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Milan/de-winter-koni.png"
+   "foto": "assets/calciatori/Milan/de-winter-koni.png",
+   "fantacalcioId": "5739"
   },
   {
    "nome": "Birindelli",
@@ -1279,7 +1392,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Monza/birindelli-samuele.png"
+   "foto": "assets/calciatori/Monza/birindelli-samuele.png",
+   "fantacalcioId": "5838"
   },
   {
    "nome": "Beukema",
@@ -1295,7 +1409,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/ghilardi-daniele.png"
+   "foto": "assets/calciatori/Roma/ghilardi-daniele.png",
+   "fantacalcioId": "6631"
   },
   {
    "nome": "Comert",
@@ -1311,7 +1426,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "de",
-   "foto": "assets/calciatori/Venezia/bella-kotchap-armel.png"
+   "foto": "assets/calciatori/Venezia/bella-kotchap-armel.png",
+   "fantacalcioId": "7253"
   },
   {
    "nome": "Correia T.",
@@ -1327,7 +1443,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Venezia/hainaut-antoine.png"
+   "foto": "assets/calciatori/Venezia/hainaut-antoine.png",
+   "fantacalcioId": "6821"
   },
   {
    "nome": "Haps",
@@ -1335,7 +1452,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "ma",
-   "foto": "assets/calciatori/Venezia/haps-ridgeciano.png"
+   "foto": "assets/calciatori/Venezia/haps-ridgeciano.png",
+   "fantacalcioId": "5695"
   },
   {
    "nome": "Patterson",
@@ -1359,7 +1477,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "ci",
-   "foto": "assets/calciatori/Atalanta/kossounou-odilon.png"
+   "foto": "assets/calciatori/Atalanta/kossounou-odilon.png",
+   "fantacalcioId": "5578"
   },
   {
    "nome": "Vitik",
@@ -1399,7 +1518,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Lazio/provstgaard-oliver.png"
+   "foto": "assets/calciatori/Lazio/provstgaard-oliver.png",
+   "fantacalcioId": "7012"
   },
   {
    "nome": "Floriani Mussolini",
@@ -1407,7 +1527,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7131"
   },
   {
    "nome": "Siebert",
@@ -1431,7 +1552,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Monza/kouadio-eddy.png"
+   "foto": "assets/calciatori/Monza/kouadio-eddy.png",
+   "fantacalcioId": "7238"
   },
   {
    "nome": "Carboni A.",
@@ -1455,7 +1577,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Parma/troilo-mariano.png"
+   "foto": "assets/calciatori/Parma/troilo-mariano.png",
+   "fantacalcioId": "7235"
   },
   {
    "nome": "Valenti",
@@ -1487,7 +1610,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "cd",
-   "foto": "assets/calciatori/Udinese/kabasele-christian.png"
+   "foto": "assets/calciatori/Udinese/kabasele-christian.png",
+   "fantacalcioId": "4263"
   },
   {
    "nome": "Bertola",
@@ -1527,7 +1651,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Sassuolo/cinquegrano-simone.png"
+   "foto": "assets/calciatori/Sassuolo/cinquegrano-simone.png",
+   "fantacalcioId": "7573"
   },
   {
    "nome": "Juan Jesus",
@@ -1543,7 +1668,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "nl",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6047"
   },
   {
    "nome": "Helland",
@@ -1583,7 +1709,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "ec",
-   "foto": "assets/calciatori/Milan/estupinan-pervis.png"
+   "foto": "assets/calciatori/Milan/estupinan-pervis.png",
+   "fantacalcioId": "5273"
   },
   {
    "nome": "Walukiewicz",
@@ -1599,7 +1726,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "ie",
-   "foto": "assets/calciatori/Udinese/abankwah-james.png"
+   "foto": "assets/calciatori/Udinese/abankwah-james.png",
+   "fantacalcioId": "6021"
   },
   {
    "nome": "Ebosse",
@@ -1615,7 +1743,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Udinese/zanoli-alessandro.png"
+   "foto": "assets/calciatori/Udinese/zanoli-alessandro.png",
+   "fantacalcioId": "5527"
   },
   {
    "nome": "Arizala",
@@ -1655,7 +1784,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/favasuli-costantino.png"
+   "foto": "assets/calciatori/Napoli/favasuli-costantino.png",
+   "fantacalcioId": "7563"
   },
   {
    "nome": "Lulli",
@@ -1663,7 +1793,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/lulli-emanuele.png"
+   "foto": "assets/calciatori/Roma/lulli-emanuele.png",
+   "fantacalcioId": "7599"
   },
   {
    "nome": "Tchato",
@@ -1839,7 +1970,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "pl",
-   "foto": "assets/calciatori/Genoa/puczka-david.png"
+   "foto": "assets/calciatori/Genoa/puczka-david.png",
+   "fantacalcioId": "7413"
   },
   {
    "nome": "Rugani",
@@ -2031,7 +2163,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Como/paz-martinez-nicolas.png"
+   "foto": "assets/calciatori/Como/paz-martinez-nicolas.png",
+   "fantacalcioId": "6875"
   },
   {
    "nome": "Calhanoglu",
@@ -2039,7 +2172,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "tr",
-   "foto": "assets/calciatori/Inter/calhanoglu-hakan.png"
+   "foto": "assets/calciatori/Inter/calhanoglu-hakan.png",
+   "fantacalcioId": "2194"
   },
   {
    "nome": "McTominay",
@@ -2047,7 +2181,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "gb-sct",
-   "foto": "assets/calciatori/Napoli/mctominay-scott.png"
+   "foto": "assets/calciatori/Napoli/mctominay-scott.png",
+   "fantacalcioId": "4777"
   },
   {
    "nome": "Orsolini",
@@ -2055,7 +2190,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Bologna/orsolini-riccardo.png"
+   "foto": "assets/calciatori/Bologna/orsolini-riccardo.png",
+   "fantacalcioId": "2167"
   },
   {
    "nome": "Pulisic",
@@ -2063,7 +2199,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Milan/pulisic-christian.png"
+   "foto": "assets/calciatori/Milan/pulisic-christian.png",
+   "fantacalcioId": "2423"
   },
   {
    "nome": "Rabiot",
@@ -2071,7 +2208,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Milan/rabiot-adrien.png"
+   "foto": "assets/calciatori/Milan/rabiot-adrien.png",
+   "fantacalcioId": "2379"
   },
   {
    "nome": "Baturina",
@@ -2079,7 +2217,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Como/baturina-martin.png"
+   "foto": "assets/calciatori/Como/baturina-martin.png",
+   "fantacalcioId": "7126"
   },
   {
    "nome": "Mora",
@@ -2087,7 +2226,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Roma/mora-rodrigo.png"
+   "foto": "assets/calciatori/Roma/mora-rodrigo.png",
+   "fantacalcioId": "7556"
   },
   {
    "nome": "Da Cunha",
@@ -2095,7 +2235,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Como/da-cunha-lucas.png"
+   "foto": "assets/calciatori/Como/da-cunha-lucas.png",
+   "fantacalcioId": "5559"
   },
   {
    "nome": "Barella",
@@ -2103,7 +2244,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/barella-nicolo.png"
+   "foto": "assets/calciatori/Inter/barella-nicolo.png",
+   "fantacalcioId": "1870"
   },
   {
    "nome": "De Bruyne",
@@ -2111,7 +2253,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Napoli/de-bruyne-kevin.png"
+   "foto": "assets/calciatori/Napoli/de-bruyne-kevin.png",
+   "fantacalcioId": "2517"
   },
   {
    "nome": "Zaniolo",
@@ -2119,7 +2262,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Udinese/zaniolo-nicolo.png"
+   "foto": "assets/calciatori/Udinese/zaniolo-nicolo.png",
+   "fantacalcioId": "2766"
   },
   {
    "nome": "McKennie",
@@ -2127,7 +2271,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Juventus/mckennie-weston.png"
+   "foto": "assets/calciatori/Juventus/mckennie-weston.png",
+   "fantacalcioId": "4973"
   },
   {
    "nome": "Zaccagni",
@@ -2135,7 +2280,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lazio/zaccagni-mattia.png"
+   "foto": "assets/calciatori/Lazio/zaccagni-mattia.png",
+   "fantacalcioId": "632"
   },
   {
    "nome": "Atta",
@@ -2143,7 +2289,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "gh",
-   "foto": "assets/calciatori/Fiorentina/atta-arthur.png"
+   "foto": "assets/calciatori/Fiorentina/atta-arthur.png",
+   "fantacalcioId": "6908"
   },
   {
    "nome": "Ederson D.S.",
@@ -2151,7 +2298,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Atalanta/ederson-silva.png"
+   "foto": "assets/calciatori/Atalanta/ederson-silva.png",
+   "fantacalcioId": "5792"
   },
   {
    "nome": "Samardzic",
@@ -2159,7 +2307,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Atalanta/samardzic-lazar.png"
+   "foto": "assets/calciatori/Atalanta/samardzic-lazar.png",
+   "fantacalcioId": "5119"
   },
   {
    "nome": "Gudmundsson A.",
@@ -2167,7 +2316,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "is",
-   "foto": "assets/calciatori/Fiorentina/gudmundsson-albert.png"
+   "foto": "assets/calciatori/Fiorentina/gudmundsson-albert.png",
+   "fantacalcioId": "5800"
   },
   {
    "nome": "Conceicao",
@@ -2175,7 +2325,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "pt",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6884"
   },
   {
    "nome": "Taylor K.",
@@ -2183,7 +2334,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "jm",
-   "foto": "assets/calciatori/Lazio/taylor-kenneth.png"
+   "foto": "assets/calciatori/Lazio/taylor-kenneth.png",
+   "fantacalcioId": "7314"
   },
   {
    "nome": "Vlasic",
@@ -2191,7 +2343,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Torino/vlasic-nikola.png"
+   "foto": "assets/calciatori/Torino/vlasic-nikola.png",
+   "fantacalcioId": "5687"
   },
   {
    "nome": "Gonzalez N.",
@@ -2199,7 +2352,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Juventus/gonzalez-nicolas-ivan.png"
+   "foto": "assets/calciatori/Juventus/gonzalez-nicolas-ivan.png",
+   "fantacalcioId": "4179"
   },
   {
    "nome": "Zielinski",
@@ -2207,7 +2361,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "pl",
-   "foto": "assets/calciatori/Inter/zielinski-piotr.png"
+   "foto": "assets/calciatori/Inter/zielinski-piotr.png",
+   "fantacalcioId": "152"
   },
   {
    "nome": "Modric",
@@ -2215,7 +2370,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Milan/modric-luka.png"
+   "foto": "assets/calciatori/Milan/modric-luka.png",
+   "fantacalcioId": "2606"
   },
   {
    "nome": "Ekkelenkamp",
@@ -2223,7 +2379,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Udinese/ekkelenkamp-jurgen.png"
+   "foto": "assets/calciatori/Udinese/ekkelenkamp-jurgen.png",
+   "fantacalcioId": "6684"
   },
   {
    "nome": "Jones C.",
@@ -2231,7 +2388,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Inter/jones-curtis.png"
+   "foto": "assets/calciatori/Inter/jones-curtis.png",
+   "fantacalcioId": "5172"
   },
   {
    "nome": "Kessiè",
@@ -2239,7 +2397,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "ci",
-   "foto": "assets/calciatori/Atalanta/kessie-franck.png"
+   "foto": "assets/calciatori/Atalanta/kessie-franck.png",
+   "fantacalcioId": "1850"
   },
   {
    "nome": "Goncalves P.",
@@ -2247,7 +2406,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "pt",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7625"
   },
   {
    "nome": "Perrone",
@@ -2255,7 +2415,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Como/perrone-maximo.png"
+   "foto": "assets/calciatori/Como/perrone-maximo.png",
+   "fantacalcioId": "6151"
   },
   {
    "nome": "Rodriguez Je.",
@@ -2263,7 +2424,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Como/rodriguez-jesus.png"
+   "foto": "assets/calciatori/Como/rodriguez-jesus.png",
+   "fantacalcioId": "7129"
   },
   {
    "nome": "Baldanzi",
@@ -2271,7 +2433,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Genoa/baldanzi-tommaso.png"
+   "foto": "assets/calciatori/Genoa/baldanzi-tommaso.png",
+   "fantacalcioId": "5823"
   },
   {
    "nome": "Frattesi",
@@ -2279,7 +2442,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lazio/frattesi-davide.png"
+   "foto": "assets/calciatori/Lazio/frattesi-davide.png",
+   "fantacalcioId": "2848"
   },
   {
    "nome": "Alajbegovic",
@@ -2287,7 +2451,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "at",
-   "foto": "assets/calciatori/Juventus/alajbegovic-kerim.png"
+   "foto": "assets/calciatori/Juventus/alajbegovic-kerim.png",
+   "fantacalcioId": "7436"
   },
   {
    "nome": "Saelemaekers",
@@ -2295,7 +2460,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Milan/saelemaekers-alexis.png"
+   "foto": "assets/calciatori/Milan/saelemaekers-alexis.png",
+   "fantacalcioId": "4892"
   },
   {
    "nome": "Mastantuono",
@@ -2303,7 +2469,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Fiorentina/mastantuono-franco.png"
+   "foto": "assets/calciatori/Fiorentina/mastantuono-franco.png",
+   "fantacalcioId": "7078"
   },
   {
    "nome": "Moreira",
@@ -2311,7 +2478,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "pt",
-   "foto": "assets/calciatori/Milan/moreira-diego.png"
+   "foto": "assets/calciatori/Milan/moreira-diego.png",
+   "fantacalcioId": "6372"
   },
   {
    "nome": "Bernardeschi",
@@ -2319,7 +2487,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Bologna/bernardeschi-federico.png"
+   "foto": "assets/calciatori/Bologna/bernardeschi-federico.png",
+   "fantacalcioId": "184"
   },
   {
    "nome": "Rowe",
@@ -2327,7 +2496,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Bologna/rowe-jon.png"
+   "foto": "assets/calciatori/Bologna/rowe-jon.png",
+   "fantacalcioId": "6844"
   },
   {
    "nome": "Mandragora",
@@ -2335,7 +2505,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Fiorentina/mandragora-rolando.png"
+   "foto": "assets/calciatori/Fiorentina/mandragora-rolando.png",
+   "fantacalcioId": "1933"
   },
   {
    "nome": "Zambo Anguissa",
@@ -2343,7 +2514,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "cm",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "4220"
   },
   {
    "nome": "Politano",
@@ -2351,7 +2523,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/politano-matteo.png"
+   "foto": "assets/calciatori/Napoli/politano-matteo.png",
+   "fantacalcioId": "536"
   },
   {
    "nome": "Konè M.",
@@ -2359,7 +2532,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/kone-kouadio.png"
+   "foto": "assets/calciatori/Roma/kone-kouadio.png",
+   "fantacalcioId": "5589"
   },
   {
    "nome": "Thorstvedt",
@@ -2367,7 +2541,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "no",
-   "foto": "assets/calciatori/Sassuolo/thorstvedt-kristian.png"
+   "foto": "assets/calciatori/Sassuolo/thorstvedt-kristian.png",
+   "fantacalcioId": "5844"
   },
   {
    "nome": "Diouf",
@@ -2375,7 +2550,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "sn",
-   "foto": "assets/calciatori/Inter/diouf-andy.png"
+   "foto": "assets/calciatori/Inter/diouf-andy.png",
+   "fantacalcioId": "6274"
   },
   {
    "nome": "Sucic P.",
@@ -2383,7 +2559,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Inter/sucic-petar.png"
+   "foto": "assets/calciatori/Inter/sucic-petar.png",
+   "fantacalcioId": "7070"
   },
   {
    "nome": "Locatelli",
@@ -2391,7 +2568,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Juventus/locatelli-manuel.png"
+   "foto": "assets/calciatori/Juventus/locatelli-manuel.png",
+   "fantacalcioId": "827"
   },
   {
    "nome": "Thuram K.",
@@ -2407,7 +2585,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lazio/cancellieri-matteo.png"
+   "foto": "assets/calciatori/Lazio/cancellieri-matteo.png",
+   "fantacalcioId": "5500"
   },
   {
    "nome": "Isaksen",
@@ -2415,7 +2594,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Lazio/isaksen-gustav.png"
+   "foto": "assets/calciatori/Lazio/isaksen-gustav.png",
+   "fantacalcioId": "6398"
   },
   {
    "nome": "Colpani",
@@ -2423,7 +2603,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Monza/colpani-andrea.png"
+   "foto": "assets/calciatori/Monza/colpani-andrea.png",
+   "fantacalcioId": "5878"
   },
   {
    "nome": "Vergara",
@@ -2431,7 +2612,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Napoli/vergara-antonio.png"
+   "foto": "assets/calciatori/Napoli/vergara-antonio.png",
+   "fantacalcioId": "7223"
   },
   {
    "nome": "Cristante",
@@ -2439,7 +2621,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/cristante-bryan.png"
+   "foto": "assets/calciatori/Roma/cristante-bryan.png",
+   "fantacalcioId": "779"
   },
   {
    "nome": "Volpato",
@@ -2447,7 +2630,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "au",
-   "foto": "assets/calciatori/Sassuolo/volpato-cristian.png"
+   "foto": "assets/calciatori/Sassuolo/volpato-cristian.png",
+   "fantacalcioId": "5735"
   },
   {
    "nome": "Casadei",
@@ -2455,7 +2639,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Torino/casadei-cesare.png"
+   "foto": "assets/calciatori/Torino/casadei-cesare.png",
+   "fantacalcioId": "5888"
   },
   {
    "nome": "Pellegrini Lo.",
@@ -2471,7 +2656,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "hr",
-   "foto": "assets/calciatori/Atalanta/pasalic-mario.png"
+   "foto": "assets/calciatori/Atalanta/pasalic-mario.png",
+   "fantacalcioId": "2077"
   },
   {
    "nome": "Ferguson",
@@ -2479,7 +2665,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "gb-sct",
-   "foto": "assets/calciatori/Bologna/ferguson-lewis.png"
+   "foto": "assets/calciatori/Bologna/ferguson-lewis.png",
+   "fantacalcioId": "5858"
   },
   {
    "nome": "Odgaard",
@@ -2487,7 +2674,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Bologna/odgaard-jens.png"
+   "foto": "assets/calciatori/Bologna/odgaard-jens.png",
+   "fantacalcioId": "2765"
   },
   {
    "nome": "Cambiaghi",
@@ -2495,7 +2683,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Bologna/cambiaghi-nicolo.png"
+   "foto": "assets/calciatori/Bologna/cambiaghi-nicolo.png",
+   "fantacalcioId": "4436"
   },
   {
    "nome": "Romano",
@@ -2503,7 +2692,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Cagliari/romano-alessandro.png"
+   "foto": "assets/calciatori/Cagliari/romano-alessandro.png",
+   "fantacalcioId": "7311"
   },
   {
    "nome": "Fazzini",
@@ -2511,7 +2701,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Cagliari/fazzini-jacopo.png"
+   "foto": "assets/calciatori/Cagliari/fazzini-jacopo.png",
+   "fantacalcioId": "6010"
   },
   {
    "nome": "Calò",
@@ -2519,7 +2710,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/calo-giacomo.png"
+   "foto": "assets/calciatori/Frosinone/calo-giacomo.png",
+   "fantacalcioId": "7472"
   },
   {
    "nome": "Chukwueze",
@@ -2527,7 +2719,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "ng",
-   "foto": "assets/calciatori/Milan/chukwueze-samuel.png"
+   "foto": "assets/calciatori/Milan/chukwueze-samuel.png",
+   "fantacalcioId": "4856"
   },
   {
    "nome": "Lobotka",
@@ -2535,7 +2728,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "sk",
-   "foto": "assets/calciatori/Napoli/lobotka-stanislav.png"
+   "foto": "assets/calciatori/Napoli/lobotka-stanislav.png",
+   "fantacalcioId": "4287"
   },
   {
    "nome": "Konè I.",
@@ -2551,7 +2745,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "se",
-   "foto": "assets/calciatori/Udinese/karlstrom-jesper.png"
+   "foto": "assets/calciatori/Udinese/karlstrom-jesper.png",
+   "fantacalcioId": "6680"
   },
   {
    "nome": "Schmid",
@@ -2559,7 +2754,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "ch",
-   "foto": "assets/calciatori/Frosinone/schmid-romano.png"
+   "foto": "assets/calciatori/Frosinone/schmid-romano.png",
+   "fantacalcioId": "7551"
   },
   {
    "nome": "Hutchinson",
@@ -2575,7 +2771,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "cd",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6833"
   },
   {
    "nome": "Gaetano",
@@ -2583,7 +2780,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/gaetano-gianluca.png"
+   "foto": "assets/calciatori/Atalanta/gaetano-gianluca.png",
+   "fantacalcioId": "4364"
   },
   {
    "nome": "Zalewski",
@@ -2599,7 +2797,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "ci",
-   "foto": "assets/calciatori/Cagliari/adopo-michel.png"
+   "foto": "assets/calciatori/Cagliari/adopo-michel.png",
+   "fantacalcioId": "4870"
   },
   {
    "nome": "Winks",
@@ -2615,7 +2814,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Como/caqueret-maxence.png"
+   "foto": "assets/calciatori/Como/caqueret-maxence.png",
+   "fantacalcioId": "5036"
   },
   {
    "nome": "Fagioli",
@@ -2623,7 +2823,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Fiorentina/fagioli-nicolo.png"
+   "foto": "assets/calciatori/Fiorentina/fagioli-nicolo.png",
+   "fantacalcioId": "4465"
   },
   {
    "nome": "Ndour",
@@ -2631,7 +2832,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "sn",
-   "foto": "assets/calciatori/Fiorentina/ndour-cher.png"
+   "foto": "assets/calciatori/Fiorentina/ndour-cher.png",
+   "fantacalcioId": "6294"
   },
   {
    "nome": "Frendrup",
@@ -2647,7 +2849,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Juventus/koopmeiners-teun.png"
+   "foto": "assets/calciatori/Juventus/koopmeiners-teun.png",
+   "fantacalcioId": "5685"
   },
   {
    "nome": "Rovella",
@@ -2663,7 +2866,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "ml",
-   "foto": "assets/calciatori/Lecce/coulibaly-lassana.png"
+   "foto": "assets/calciatori/Lecce/coulibaly-lassana.png",
+   "fantacalcioId": "5504"
   },
   {
    "nome": "Akinsanmiro",
@@ -2679,7 +2883,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Parma/bernabe-adrian.png"
+   "foto": "assets/calciatori/Parma/bernabe-adrian.png",
+   "fantacalcioId": "6666"
   },
   {
    "nome": "Pisilli",
@@ -2687,7 +2892,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Roma/pisilli-niccolo.png"
+   "foto": "assets/calciatori/Roma/pisilli-niccolo.png",
+   "fantacalcioId": "6190"
   },
   {
    "nome": "Adzic",
@@ -2695,7 +2901,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Sassuolo/adzic-vasilije.png"
+   "foto": "assets/calciatori/Sassuolo/adzic-vasilije.png",
+   "fantacalcioId": "6677"
   },
   {
    "nome": "Sow",
@@ -2703,7 +2910,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "ch",
-   "foto": "assets/calciatori/Genoa/sow-djibril.png"
+   "foto": "assets/calciatori/Genoa/sow-djibril.png",
+   "fantacalcioId": "5946"
   },
   {
    "nome": "Cissè A.",
@@ -2711,7 +2919,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "sn",
-   "foto": "assets/calciatori/Milan/cisse-alphadjo.png"
+   "foto": "assets/calciatori/Milan/cisse-alphadjo.png",
+   "fantacalcioId": "6618"
   },
   {
    "nome": "Elmas",
@@ -2727,7 +2936,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "pt",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7619"
   },
   {
    "nome": "Sarr P.",
@@ -2743,7 +2953,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "795"
   },
   {
    "nome": "Pobega",
@@ -2759,7 +2970,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Como/milla-luis.png"
+   "foto": "assets/calciatori/Como/milla-luis.png",
+   "fantacalcioId": "7412"
   },
   {
    "nome": "Liberali",
@@ -2767,7 +2979,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Como/liberali-mattia.png"
+   "foto": "assets/calciatori/Como/liberali-mattia.png",
+   "fantacalcioId": "6678"
   },
   {
    "nome": "Oulai",
@@ -2775,7 +2988,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "ci",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7464"
   },
   {
    "nome": "Zerbin",
@@ -2799,7 +3013,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "xk",
-   "foto": "assets/calciatori/Juventus/zhegrova-edon.png"
+   "foto": "assets/calciatori/Juventus/zhegrova-edon.png",
+   "fantacalcioId": "5761"
   },
   {
    "nome": "Pierotti",
@@ -2823,7 +3038,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Sassuolo/matic-nemanja.png"
+   "foto": "assets/calciatori/Sassuolo/matic-nemanja.png",
+   "fantacalcioId": "2528"
   },
   {
    "nome": "Bakola",
@@ -2831,7 +3047,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "cd",
-   "foto": "assets/calciatori/Sassuolo/bakola-darryl.png"
+   "foto": "assets/calciatori/Sassuolo/bakola-darryl.png",
+   "fantacalcioId": "7036"
   },
   {
    "nome": "Cacciamani",
@@ -2839,7 +3056,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Torino/cacciamani-alessio.png"
+   "foto": "assets/calciatori/Torino/cacciamani-alessio.png",
+   "fantacalcioId": "7060"
   },
   {
    "nome": "Fitz-Jim",
@@ -2879,7 +3097,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "au",
-   "foto": "assets/calciatori/Venezia/basic-toma.png"
+   "foto": "assets/calciatori/Venezia/basic-toma.png",
+   "fantacalcioId": "5674"
   },
   {
    "nome": "Busio",
@@ -2887,7 +3106,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Venezia/busio-gianluca.png"
+   "foto": "assets/calciatori/Venezia/busio-gianluca.png",
+   "fantacalcioId": "5507"
   },
   {
    "nome": "Braganca",
@@ -2959,7 +3179,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "gn",
-   "foto": "assets/calciatori/Parma/keita-mandela.png"
+   "foto": "assets/calciatori/Parma/keita-mandela.png",
+   "fantacalcioId": "6898"
   },
   {
    "nome": "Nicolussi Caviglia",
@@ -2983,7 +3204,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "cm",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6827"
   },
   {
    "nome": "Sohm",
@@ -3079,7 +3301,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "se",
-   "foto": "assets/calciatori/Genoa/traore-hamed.png"
+   "foto": "assets/calciatori/Genoa/traore-hamed.png",
+   "fantacalcioId": "2857"
   },
   {
    "nome": "Mkhitaryan",
@@ -3095,7 +3318,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Juventus/douglas-luiz.png"
+   "foto": "assets/calciatori/Juventus/douglas-luiz.png",
+   "fantacalcioId": "4911"
   },
   {
    "nome": "Dele-Bashiru",
@@ -3103,7 +3327,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "ng",
-   "foto": "assets/calciatori/Lazio/dele-bashiru-fisayo.png"
+   "foto": "assets/calciatori/Lazio/dele-bashiru-fisayo.png",
+   "fantacalcioId": "6629"
   },
   {
    "nome": "Ngom",
@@ -3135,7 +3360,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Milan/musah-yunus.png"
+   "foto": "assets/calciatori/Milan/musah-yunus.png",
+   "fantacalcioId": "5295"
   },
   {
    "nome": "Loftus-Cheek",
@@ -3143,7 +3369,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Milan/loftus-cheek-ruben.png"
+   "foto": "assets/calciatori/Milan/loftus-cheek-ruben.png",
+   "fantacalcioId": "4199"
   },
   {
    "nome": "Folorunsho",
@@ -3495,7 +3722,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "rs",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "5007"
   },
   {
    "nome": "Chakvetadze",
@@ -3567,7 +3795,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Roma/malen-donyell.png"
+   "foto": "assets/calciatori/Roma/malen-donyell.png",
+   "fantacalcioId": "5585"
   },
   {
    "nome": "Martinez L.",
@@ -3575,7 +3804,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Inter/martinez-lautaro.png"
+   "foto": "assets/calciatori/Inter/martinez-lautaro.png",
+   "fantacalcioId": "2764"
   },
   {
    "nome": "Hojlund",
@@ -3583,7 +3813,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "dk",
-   "foto": "assets/calciatori/Napoli/hojlund-rasmus.png"
+   "foto": "assets/calciatori/Napoli/hojlund-rasmus.png",
+   "fantacalcioId": "6052"
   },
   {
    "nome": "Thuram",
@@ -3591,7 +3822,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Inter/thuram-marcus.png"
+   "foto": "assets/calciatori/Inter/thuram-marcus.png",
+   "fantacalcioId": "4871"
   },
   {
    "nome": "Ramos G.",
@@ -3599,7 +3831,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Milan/ramos-goncalo.png"
+   "foto": "assets/calciatori/Milan/ramos-goncalo.png",
+   "fantacalcioId": "6397"
   },
   {
    "nome": "Kean",
@@ -3607,7 +3840,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Fiorentina/kean-moise.png"
+   "foto": "assets/calciatori/Fiorentina/kean-moise.png",
+   "fantacalcioId": "2097"
   },
   {
    "nome": "Kolo Muani",
@@ -3615,7 +3849,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Juventus/kolo-muani-randal.png"
+   "foto": "assets/calciatori/Juventus/kolo-muani-randal.png",
+   "fantacalcioId": "5951"
   },
   {
    "nome": "Woltemade",
@@ -3623,7 +3858,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "de",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6752"
   },
   {
    "nome": "Douvikas",
@@ -3631,7 +3867,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "gr",
-   "foto": "assets/calciatori/Como/douvikas-anastasios.png"
+   "foto": "assets/calciatori/Como/douvikas-anastasios.png",
+   "fantacalcioId": "7017"
   },
   {
    "nome": "Yildiz",
@@ -3639,7 +3876,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "tr",
-   "foto": "assets/calciatori/Juventus/yildiz-kenan.png"
+   "foto": "assets/calciatori/Juventus/yildiz-kenan.png",
+   "fantacalcioId": "6434"
   },
   {
    "nome": "Scamacca",
@@ -3647,7 +3885,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/scamacca-gianluca.png"
+   "foto": "assets/calciatori/Atalanta/scamacca-gianluca.png",
+   "fantacalcioId": "2137"
   },
   {
    "nome": "Berardi",
@@ -3655,7 +3894,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Sassuolo/berardi-domenico.png"
+   "foto": "assets/calciatori/Sassuolo/berardi-domenico.png",
+   "fantacalcioId": "531"
   },
   {
    "nome": "Davis K.",
@@ -3663,7 +3903,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "ca",
-   "foto": "assets/calciatori/Udinese/davis-keinan.png"
+   "foto": "assets/calciatori/Udinese/davis-keinan.png",
+   "fantacalcioId": "5637"
   },
   {
    "nome": "Krstovic",
@@ -3671,7 +3912,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "me",
-   "foto": "assets/calciatori/Atalanta/krstovic-nikola.png"
+   "foto": "assets/calciatori/Atalanta/krstovic-nikola.png",
+   "fantacalcioId": "6435"
   },
   {
    "nome": "De Ketelaere",
@@ -3679,7 +3921,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Atalanta/de-ketelaere-charles.png"
+   "foto": "assets/calciatori/Atalanta/de-ketelaere-charles.png",
+   "fantacalcioId": "5995"
   },
   {
    "nome": "Esposito F.P.",
@@ -3687,7 +3930,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/esposito-francesco.png"
+   "foto": "assets/calciatori/Inter/esposito-francesco.png",
+   "fantacalcioId": "7071"
   },
   {
    "nome": "Dovbyk",
@@ -3695,7 +3939,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "ua",
-   "foto": "assets/calciatori/Bologna/dovbyk-artem.png"
+   "foto": "assets/calciatori/Bologna/dovbyk-artem.png",
+   "fantacalcioId": "6675"
   },
   {
    "nome": "Dybala",
@@ -3703,7 +3948,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Roma/dybala-paulo.png"
+   "foto": "assets/calciatori/Roma/dybala-paulo.png",
+   "fantacalcioId": "309"
   },
   {
    "nome": "Soulè",
@@ -3711,7 +3957,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Roma/soule-matias.png"
+   "foto": "assets/calciatori/Roma/soule-matias.png",
+   "fantacalcioId": "5734"
   },
   {
    "nome": "Laurientè",
@@ -3719,7 +3966,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Sassuolo/lauriente-armand.png"
+   "foto": "assets/calciatori/Sassuolo/lauriente-armand.png",
+   "fantacalcioId": "6060"
   },
   {
    "nome": "Diao",
@@ -3727,7 +3975,8 @@
    "squadraReale": "Como",
    "squadraCodice": "COM",
    "nazionalitaCodice": "sn",
-   "foto": "assets/calciatori/Como/diao-assane.png"
+   "foto": "assets/calciatori/Como/diao-assane.png",
+   "fantacalcioId": "6967"
   },
   {
    "nome": "Santos A.",
@@ -3735,7 +3984,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "br",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7351"
   },
   {
    "nome": "Pellegrino M.",
@@ -3743,7 +3993,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Fiorentina/pellegrino-mateo.png"
+   "foto": "assets/calciatori/Fiorentina/pellegrino-mateo.png",
+   "fantacalcioId": "7023"
   },
   {
    "nome": "Castro S.",
@@ -3751,7 +4002,8 @@
    "squadraReale": "Roma",
    "squadraCodice": "ROM",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Roma/castro-santiago.png"
+   "foto": "assets/calciatori/Roma/castro-santiago.png",
+   "fantacalcioId": "6572"
   },
   {
    "nome": "Simeone",
@@ -3759,7 +4011,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Torino/simeone-giovanni.png"
+   "foto": "assets/calciatori/Torino/simeone-giovanni.png",
+   "fantacalcioId": "2061"
   },
   {
    "nome": "Beto",
@@ -3767,7 +4020,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "pt",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "5694"
   },
   {
    "nome": "Raspadori",
@@ -3775,7 +4029,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Atalanta/raspadori-giacomo.png"
+   "foto": "assets/calciatori/Atalanta/raspadori-giacomo.png",
+   "fantacalcioId": "4371"
   },
   {
    "nome": "Esposito Se.",
@@ -3783,7 +4038,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Sassuolo/esposito-sebastiano.png"
+   "foto": "assets/calciatori/Sassuolo/esposito-sebastiano.png",
+   "fantacalcioId": "4463"
   },
   {
    "nome": "Pinamonti",
@@ -3791,7 +4047,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Lazio/pinamonti-andrea.png"
+   "foto": "assets/calciatori/Lazio/pinamonti-andrea.png",
+   "fantacalcioId": "2038"
   },
   {
    "nome": "Adams C.",
@@ -3799,7 +4056,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Torino/adams-che.png"
+   "foto": "assets/calciatori/Torino/adams-che.png",
+   "fantacalcioId": "6646"
   },
   {
    "nome": "Kevin Carlos",
@@ -3807,7 +4065,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "es",
-   "foto": "assets/calciatori/Cagliari/kevin-carlos.png"
+   "foto": "assets/calciatori/Cagliari/kevin-carlos.png",
+   "fantacalcioId": "7547"
   },
   {
    "nome": "Raimondo",
@@ -3815,7 +4074,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Frosinone/raimondo-antonio.png"
+   "foto": "assets/calciatori/Frosinone/raimondo-antonio.png",
+   "fantacalcioId": "5436"
   },
   {
    "nome": "Colombo",
@@ -3823,7 +4083,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Genoa/colombo-lorenzo.png"
+   "foto": "assets/calciatori/Genoa/colombo-lorenzo.png",
+   "fantacalcioId": "4923"
   },
   {
    "nome": "Adams A.",
@@ -3831,7 +4092,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "us",
-   "foto": "assets/calciatori/Venezia/adams-akor.png"
+   "foto": "assets/calciatori/Venezia/adams-akor.png",
+   "fantacalcioId": "7484"
   },
   {
    "nome": "Tourè E.",
@@ -3839,7 +4101,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "gn",
-   "foto": "assets/calciatori/Parma/toure-el-bilal.png"
+   "foto": "assets/calciatori/Parma/toure-el-bilal.png",
+   "fantacalcioId": "6229"
   },
   {
    "nome": "Bowie",
@@ -3847,7 +4110,8 @@
    "squadraReale": "Sassuolo",
    "squadraCodice": "SAS",
    "nazionalitaCodice": "gb-sct",
-   "foto": "assets/calciatori/Sassuolo/bowie-kieron.png"
+   "foto": "assets/calciatori/Sassuolo/bowie-kieron.png",
+   "fantacalcioId": "7347"
   },
   {
    "nome": "Yeboah J.",
@@ -3855,7 +4119,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "gh",
-   "foto": "assets/calciatori/Venezia/yeboah-john.png"
+   "foto": "assets/calciatori/Venezia/yeboah-john.png",
+   "fantacalcioId": "6904"
   },
   {
    "nome": "Romero D.",
@@ -3863,7 +4128,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "ar",
-   "foto": "assets/calciatori/Parma/romero-jose.png"
+   "foto": "assets/calciatori/Parma/romero-jose.png",
+   "fantacalcioId": "7554"
   },
   {
    "nome": "Piccoli",
@@ -3871,7 +4137,8 @@
    "squadraReale": "Bologna",
    "squadraCodice": "BOL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Bologna/piccoli-roberto.png"
+   "foto": "assets/calciatori/Bologna/piccoli-roberto.png",
+   "fantacalcioId": "4359"
   },
   {
    "nome": "Ghedjemis",
@@ -3879,7 +4146,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Frosinone/ghedjemis-fares.png"
+   "foto": "assets/calciatori/Frosinone/ghedjemis-fares.png",
+   "fantacalcioId": "6530"
   },
   {
    "nome": "Cutrone",
@@ -3887,7 +4155,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Monza/cutrone-patrick.png"
+   "foto": "assets/calciatori/Monza/cutrone-patrick.png",
+   "fantacalcioId": "2155"
   },
   {
    "nome": "Osmajic",
@@ -3895,7 +4164,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "me",
-   "foto": "assets/calciatori/Genoa/osmajic-milutin.png"
+   "foto": "assets/calciatori/Genoa/osmajic-milutin.png",
+   "fantacalcioId": "7600"
   },
   {
    "nome": "Kvernadze",
@@ -3903,7 +4173,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "ge",
-   "foto": "assets/calciatori/Frosinone/kvernadze-giorgi.png"
+   "foto": "assets/calciatori/Frosinone/kvernadze-giorgi.png",
+   "fantacalcioId": "6204"
   },
   {
    "nome": "Geubbels",
@@ -3911,7 +4182,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Lecce/geubbels-willem.png"
+   "foto": "assets/calciatori/Lecce/geubbels-willem.png",
+   "fantacalcioId": "5029"
   },
   {
    "nome": "Bobcek",
@@ -3919,7 +4191,8 @@
    "squadraReale": "Frosinone",
    "squadraCodice": "FRO",
    "nazionalitaCodice": "sk",
-   "foto": "assets/calciatori/Frosinone/bobcek-tomas.png"
+   "foto": "assets/calciatori/Frosinone/bobcek-tomas.png",
+   "fantacalcioId": "7612"
   },
   {
    "nome": "Maldini",
@@ -3927,7 +4200,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Cagliari/maldini-daniel.png"
+   "foto": "assets/calciatori/Cagliari/maldini-daniel.png",
+   "fantacalcioId": "4896"
   },
   {
    "nome": "Vitinha O.",
@@ -3935,7 +4209,8 @@
    "squadraReale": "Genoa",
    "squadraCodice": "GEN",
    "nazionalitaCodice": "pt",
-   "foto": "assets/calciatori/Genoa/vitinha.png"
+   "foto": "assets/calciatori/Genoa/vitinha.png",
+   "fantacalcioId": "6164"
   },
   {
    "nome": "Bonny",
@@ -3943,7 +4218,8 @@
    "squadraReale": "Inter",
    "squadraCodice": "INT",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Inter/bonny-ange-yoan.png"
+   "foto": "assets/calciatori/Inter/bonny-ange-yoan.png",
+   "fantacalcioId": "6669"
   },
   {
    "nome": "Varela G.",
@@ -3951,7 +4227,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "uy",
-   "foto": "assets/calciatori/Monza/varela-gustavo.png"
+   "foto": "assets/calciatori/Monza/varela-gustavo.png",
+   "fantacalcioId": "7523"
   },
   {
    "nome": "Rrahmani Al.",
@@ -3959,7 +4236,8 @@
    "squadraReale": "Venezia",
    "squadraCodice": "VEN",
    "nazionalitaCodice": "xk",
-   "foto": "assets/calciatori/Venezia/rrahmani-albion.png"
+   "foto": "assets/calciatori/Venezia/rrahmani-albion.png",
+   "fantacalcioId": "7449"
   },
   {
    "nome": "Gnonto",
@@ -3967,7 +4245,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "it",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7623"
   },
   {
    "nome": "Boga",
@@ -3975,7 +4254,8 @@
    "squadraReale": "Juventus",
    "squadraCodice": "JUV",
    "nazionalitaCodice": "ci",
-   "foto": "assets/calciatori/Juventus/boga-jeremie.png"
+   "foto": "assets/calciatori/Juventus/boga-jeremie.png",
+   "fantacalcioId": "2832"
   },
   {
    "nome": "Noslin",
@@ -3983,7 +4263,8 @@
    "squadraReale": "Lazio",
    "squadraCodice": "LAZ",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Lazio/noslin-tijjani.png"
+   "foto": "assets/calciatori/Lazio/noslin-tijjani.png",
+   "fantacalcioId": "6556"
   },
   {
    "nome": "Stulic",
@@ -3991,7 +4272,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "rs",
-   "foto": "assets/calciatori/Lecce/stulic-nikola.png"
+   "foto": "assets/calciatori/Lecce/stulic-nikola.png",
+   "fantacalcioId": "7252"
   },
   {
    "nome": "Zapata D.",
@@ -3999,7 +4281,8 @@
    "squadraReale": "Torino",
    "squadraCodice": "TOR",
    "nazionalitaCodice": "co",
-   "foto": "assets/calciatori/Torino/zapata-duvan.png"
+   "foto": "assets/calciatori/Torino/zapata-duvan.png",
+   "fantacalcioId": "608"
   },
   {
    "nome": "Robinson J.",
@@ -4007,7 +4290,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "gb-eng",
-   "foto": "assets/calciatori/Monza/robinson-jay.png"
+   "foto": "assets/calciatori/Monza/robinson-jay.png",
+   "fantacalcioId": "7546"
   },
   {
    "nome": "Zeballos",
@@ -4015,7 +4299,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "ar",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7620"
   },
   {
    "nome": "Sulemana K.",
@@ -4023,7 +4308,8 @@
    "squadraReale": "Atalanta",
    "squadraCodice": "ATA",
    "nazionalitaCodice": "gh",
-   "foto": "assets/calciatori/Atalanta/sulemana-kamal-deen.png"
+   "foto": "assets/calciatori/Atalanta/sulemana-kamal-deen.png",
+   "fantacalcioId": "5918"
   },
   {
    "nome": "Mendy P.",
@@ -4031,7 +4317,8 @@
    "squadraReale": "Cagliari",
    "squadraCodice": "CAG",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Cagliari/mendy-paul.png"
+   "foto": "assets/calciatori/Cagliari/mendy-paul.png",
+   "fantacalcioId": "7374"
   },
   {
    "nome": "Mota",
@@ -4039,7 +4326,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "pt",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "5882"
   },
   {
    "nome": "Neres",
@@ -4047,7 +4335,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "br",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "6831"
   },
   {
    "nome": "Lontani",
@@ -4055,7 +4344,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Parma/lontani-simone.png"
+   "foto": "assets/calciatori/Parma/lontani-simone.png",
+   "fantacalcioId": "7561"
   },
   {
    "nome": "N'Dri",
@@ -4063,7 +4353,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "ci",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7001"
   },
   {
    "nome": "Camarda",
@@ -4071,7 +4362,8 @@
    "squadraReale": "Milan",
    "squadraCodice": "MIL",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Milan/camarda-francesco.png"
+   "foto": "assets/calciatori/Milan/camarda-francesco.png",
+   "fantacalcioId": "6519"
   },
   {
    "nome": "Frigan",
@@ -4095,7 +4387,8 @@
    "squadraReale": "Udinese",
    "squadraCodice": "UDI",
    "nazionalitaCodice": "sn",
-   "foto": "assets/calciatori/Udinese/gueye-idrissa.png"
+   "foto": "assets/calciatori/Udinese/gueye-idrissa.png",
+   "fantacalcioId": "7272"
   },
   {
    "nome": "Adorante",
@@ -4119,7 +4412,8 @@
    "squadraReale": "Lecce",
    "squadraCodice": "LEC",
    "nazionalitaCodice": "ma",
-   "foto": null
+   "foto": null,
+   "fantacalcioId": "7602"
   },
   {
    "nome": "Birligea",
@@ -4135,7 +4429,8 @@
    "squadraReale": "Monza",
    "squadraCodice": "MON",
    "nazionalitaCodice": "be",
-   "foto": "assets/calciatori/Monza/ngonge-cyril.png"
+   "foto": "assets/calciatori/Monza/ngonge-cyril.png",
+   "fantacalcioId": "6145"
   },
   {
    "nome": "Nzola",
@@ -4143,7 +4438,8 @@
    "squadraReale": "Fiorentina",
    "squadraCodice": "FIO",
    "nazionalitaCodice": "ao",
-   "foto": "assets/calciatori/Fiorentina/nzola-m-bala.png"
+   "foto": "assets/calciatori/Fiorentina/nzola-m-bala.png",
+   "fantacalcioId": "5336"
   },
   {
    "nome": "Havel",
@@ -4159,7 +4455,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "br",
-   "foto": "assets/calciatori/Napoli/giovane.png"
+   "foto": "assets/calciatori/Napoli/giovane.png",
+   "fantacalcioId": "7162"
   },
   {
    "nome": "Lang",
@@ -4167,7 +4464,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "nl",
-   "foto": "assets/calciatori/Napoli/lang-noa.png"
+   "foto": "assets/calciatori/Napoli/lang-noa.png",
+   "fantacalcioId": "7120"
   },
   {
    "nome": "Lucca",
@@ -4175,7 +4473,8 @@
    "squadraReale": "Napoli",
    "squadraCodice": "NAP",
    "nazionalitaCodice": "it",
-   "foto": "assets/calciatori/Napoli/lucca-lorenzo.png"
+   "foto": "assets/calciatori/Napoli/lucca-lorenzo.png",
+   "fantacalcioId": "6215"
   },
   {
    "nome": "Elphege",
@@ -4183,7 +4482,8 @@
    "squadraReale": "Parma",
    "squadraCodice": "PAR",
    "nazionalitaCodice": "fr",
-   "foto": "assets/calciatori/Parma/elphege-nesta.png"
+   "foto": "assets/calciatori/Parma/elphege-nesta.png",
+   "fantacalcioId": "7342"
   },
   {
    "nome": "Ekhator",

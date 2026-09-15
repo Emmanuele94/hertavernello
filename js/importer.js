@@ -3,7 +3,8 @@ const HV_ALIAS = {
   fantasquadra: ["fantasquadra", "squadra"],
   nome: ["calciatore", "giocatore", "nome"],
   ruolo: ["ruolo", "r", "rm"],
-  squadraReale: ["squadra_serie_a", "squadraseriea", "squadra serie a", "sq serie a", "club", "squadra reale"],
+  squadraReale: ["squadra_appartenenza", "squadra appartenenza", "squadra_serie_a", "squadraseriea", "squadra serie a", "sq serie a", "club", "squadra reale"],
+  fantacalcioId: ["fantacalcio_id", "fantacalcio id", "fantacalcioid", "id fantacalcio"],
   costo: ["prezzo", "costo", "pagato", "crediti"],
 };
 
@@ -78,6 +79,7 @@ async function hv_processaCSV(rows, headers) {
   const colRuolo = hv_trovaColonna(headers, HV_ALIAS.ruolo);
   const colSquadraReale = hv_trovaColonna(headers, HV_ALIAS.squadraReale);
   const colCosto = hv_trovaColonna(headers, HV_ALIAS.costo);
+  const colFantacalcioId = hv_trovaColonna(headers, HV_ALIAS.fantacalcioId);
 
   const avviso = document.getElementById("csv-avviso");
   if (!colFantasquadra || !colNome) {
@@ -107,8 +109,11 @@ async function hv_processaCSV(rows, headers) {
     const squadraReale = colSquadraReale ? (r[colSquadraReale] || "").trim() : "";
     const costoRaw = colCosto ? (r[colCosto] || "").trim() : "";
     const costo = costoRaw ? Number(costoRaw.replace(",", ".")) || costoRaw : "";
+    const fantacalcioId = colFantacalcioId ? String(r[colFantacalcioId] || "").trim() : "";
 
-    gruppi[chiave].push({ ruolo, nome, squadraReale, costo });
+    const giocatore = { ruolo, nome, squadraReale, costo };
+    if (fantacalcioId) giocatore.fantacalcioId = fantacalcioId;
+    gruppi[chiave].push(giocatore);
   });
 
   hv_gruppiRilevati = gruppi;

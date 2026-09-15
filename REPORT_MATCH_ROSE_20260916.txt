@@ -1,0 +1,24 @@
+REPORT MATCH ROSE — 16/09/2026
+
+Righe CSV analizzate: 300
+Fantacalcio_Id associati a data/giocatori.json: 300
+Foto/giocatori trovati ma con squadra DB precedente/diversa: 7
+Nomi con scrittura diversa associati tramite fallback: 0
+Giocatori realmente non trovati nel database: 0
+
+NOTA: con il database giocatori attuale tutti i 300 nomi del CSV risultano presenti. I casi problematici reali sono 7 trasferimenti/mismatch di squadra; grazie a Fantacalcio_Id la foto continua a essere trovata anche se il DB riporta ancora il vecchio club.
+
+=== FOTO PRESENTE / SQUADRA DB VECCHIA O DIVERSA ===
+- Tornqvist [ID 7301]: CSV=MON | DB=COM (Como) | foto=assets/calciatori/Como/tornqvist-noel.png
+- Rowe [ID 6844]: CSV=ATA | DB=BOL (Bologna) | foto=assets/calciatori/Bologna/rowe-jon.png
+- Nzola [ID 5336]: CSV=CAG | DB=FIO (Fiorentina) | foto=assets/calciatori/Fiorentina/nzola-m-bala.png
+- Sanchez Ro. [ID 6344]: CSV=COM | DB=FIO (Fiorentina) | foto=assets/calciatori/Fiorentina/sanchez-alejandro-jimenez.png
+- Mandragora [ID 1933]: CSV=TOR | DB=FIO (Fiorentina) | foto=assets/calciatori/Fiorentina/mandragora-rolando.png
+- Gudmundsson A. [ID 5800]: CSV=LAZ | DB=FIO (Fiorentina) | foto=assets/calciatori/Fiorentina/gudmundsson-albert.png
+- Kean [ID 2097]: CSV=COM | DB=FIO (Fiorentina) | foto=assets/calciatori/Fiorentina/kean-moise.png
+
+=== NOME SCRITTO DIVERSAMENTE ===
+- Nessuno
+
+=== REALMENTE ASSENTI DAL DATABASE ===
+- Nessuno

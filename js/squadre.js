@@ -128,7 +128,7 @@ function hv_distribuzioneNazioni(giocatori, squadreRef, giocatoriDb) {
   const conteggio = {};
   giocatori.forEach((g) => {
     const codiceSquadra = hv_trovaCodice(g.squadraReale, squadreRef);
-    const giocatoreDb = hv_trovaGiocatore(g.nome, codiceSquadra, giocatoriDb);
+    const giocatoreDb = hv_trovaGiocatore(g.nome, codiceSquadra, giocatoriDb, g.fantacalcioId);
     const naz = giocatoreDb ? giocatoreDb.nazionalitaCodice : null;
     if (!naz) return;
     conteggio[naz] = (conteggio[naz] || 0) + 1;
@@ -268,7 +268,7 @@ function hv_renderRoster(giocatori, squadreRef, giornataCorrente, partiteStagion
           : `<span>${codiceSafe}</span>`;
         const info = codice && partiteStagione ? hv_infoPartitaGiocatore(codice, giornataCorrente, partiteStagione) : null;
 
-        const giocatoreDb = giocatoriDb ? hv_trovaGiocatore(g.nome, codice, giocatoriDb) : null;
+        const giocatoreDb = giocatoriDb ? hv_trovaGiocatore(g.nome, codice, giocatoriDb, g.fantacalcioId) : null;
         const fotoHtml = giocatoreDb && giocatoreDb.foto
           ? `<img src="${hv_escapeHtml(giocatoreDb.foto)}" class="foto-giocatore-mini" alt="">`
           : `<span class="foto-giocatore-iniziali">${hv_escapeHtml(hv_inizialiGiocatore(g.nome))}</span>`;

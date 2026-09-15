@@ -32,38 +32,54 @@ function hv_basNomeDb(nomeDb) {
 
 // nomeQuery: sia formato "Cognome" (rose) sia "Nome Cognome" (API marcatori).
 // squadraCodice: codice a 3 lettere già usato nel sito (INT, JUV, ecc.).
-function hv_trovaGiocatore(nomeQuery, squadraCodice, db) {
-  if (!nomeQuery || !db) return null;
-  const candidati = squadraCodice ? db.filter((g) => g.squadraCodice === squadraCodice) : db;
+function hv_trovaGiocatore(nomeQuery, squadraCodice, db, fantacalcioId) {
+  if (!db) return null;
+
+  // L'ID Fantacalcio è stabile anche quando un calciatore cambia squadra o il
+  // nome viene scritto in modo leggermente diverso. Le rose nuove lo salvano
+  // direttamente dal CSV e data/giocatori.json lo usa come chiave primaria.
+  if (fantacalcioId !== undefined && fantacalcioId !== null && String(fantacalcioId).trim()) {
+    const id = String(fantacalcioId).trim();
+    const perId = db.find((g) => String(g.fantacalcioId || "").trim() === id);
+    if (perId) return perId;
+  }
+
+  if (!nomeQuery) return null;
   const normQuery = hv_normalizzaNomeGiocatore(nomeQuery);
   if (!normQuery) return null;
   const parole = normQuery.split(/\s+/);
   const ultimaParola = parole[parole.length - 1];
-  const paroleIniziali = parole.slice(0, -1); // es. "lautaro" da "lautaro martinez"
+  const paroleIniziali = parole.slice(0, -1);
 
-  // Tutti i candidati il cui cognome-base (senza il suffisso disambiguante,
-  // es. "Jo." in "Martinez Jo.") corrisponde alla query.
-  const corrispondenti = candidati.filter((g) => {
-    const normDb = hv_normalizzaNomeGiocatore(hv_basNomeDb(g.nome));
-    return normDb === normQuery || normDb === ultimaParola || normDb.startsWith(ultimaParola + " ") || ultimaParola.startsWith(normDb);
-  });
-
-  if (corrispondenti.length <= 1) return corrispondenti[0] || null;
-
-  // Più di un candidato con lo stesso cognome nella stessa squadra (es. due
-  // "Martinez" all'Inter): uso l'eventuale suffisso disambiguante nel db
-  // ("Jo." / "L.") confrontato col nome proprio della query ("Josep"/"Lautaro").
-  if (paroleIniziali.length > 0) {
-    const scelto = corrispondenti.find((g) => {
-      const parti = g.nome.split(" ");
-      const suffisso = parti.length > 1 ? parti[parti.length - 1].replace(/\.$/, "") : "";
-      if (!suffisso) return false;
-      const suffissoNorm = hv_normalizzaNomeGiocatore(suffisso);
-      return paroleIniziali.some((p) => p.startsWith(suffissoNorm) || suffissoNorm.startsWith(p));
+  const trovaNei = (candidati) => {
+    const corrispondenti = candidati.filter((g) => {
+      const normDb = hv_normalizzaNomeGiocatore(hv_basNomeDb(g.nome));
+      return normDb === normQuery || normDb === ultimaParola || normDb.startsWith(ultimaParola + " ") || ultimaParola.startsWith(normDb);
     });
-    if (scelto) return scelto;
+
+    if (corrispondenti.length <= 1) return corrispondenti[0] || null;
+
+    if (paroleIniziali.length > 0) {
+      const scelto = corrispondenti.find((g) => {
+        const parti = g.nome.split(" ");
+        const suffisso = parti.length > 1 ? parti[parti.length - 1].replace(/\.$/, "") : "";
+        if (!suffisso) return false;
+        const suffissoNorm = hv_normalizzaNomeGiocatore(suffisso);
+        return paroleIniziali.some((p) => p.startsWith(suffissoNorm) || suffissoNorm.startsWith(p));
+      });
+      if (scelto) return scelto;
+    }
+    return corrispondenti[0];
+  };
+
+  // Prima privilegiamo la squadra corrente. Se il database giocatori non è
+  // ancora stato aggiornato dopo un trasferimento, riproviamo globalmente: una
+  // foto valida non deve sparire soltanto perché nel DB è rimasta la vecchia squadra.
+  if (squadraCodice) {
+    const nellaSquadra = trovaNei(db.filter((g) => g.squadraCodice === squadraCodice));
+    if (nellaSquadra) return nellaSquadra;
   }
-  return corrispondenti[0];
+  return trovaNei(db);
 }
 
 // Iniziali per l'avatar segnaposto quando manca la foto (mai un'immagine rotta).
