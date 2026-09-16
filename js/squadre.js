@@ -47,30 +47,21 @@ function hv_nomeSquadraReale(codice, squadreRef) {
 
 function hv_soprannomeRosa(fette, squadreRef) {
   if (fette.length === 0) return null;
-  const top = fette[0];
-  const nome = (cod) => hv_nomeSquadraReale(cod, squadreRef);
+  const n = fette.length;
 
-  if (top.percentuale >= 50) {
-    return { titolo: `Il Fedelissimo del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da una squadra sola` };
+  if (n <= 10) {
+    return { titolo: "Il Monomarca", sotto: `Rosa concentrata su ${n} squadre reali` };
   }
-
-  for (const [a, b] of HV_DERBY) {
-    const fa = fette.find((f) => f.codice === a);
-    const fb = fette.find((f) => f.codice === b);
-    if (fa && fb && fa.percentuale + fb.percentuale >= 35) {
-      return { titolo: "Lo Sfascia-derby", sotto: `${nome(a)} + ${nome(b)} insieme fanno ${Math.round(fa.percentuale + fb.percentuale)}% della rosa` };
-    }
+  if (n <= 13) {
+    return { titolo: "Il Conservatore", sotto: `Giocatori pescati da ${n} squadre diverse` };
   }
-
-  if (fette.length >= 12) {
-    return { titolo: "Il Turista", sotto: `Giocatori pescati da ${fette.length} squadre diverse` };
+  if (n <= 16) {
+    return { titolo: "Lo Scout", sotto: `Giocatori pescati da ${n} squadre diverse` };
   }
-
-  if (top.percentuale >= 35) {
-    return { titolo: `Il Tifoso del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  if (n <= 18) {
+    return { titolo: "Il Turista", sotto: `Giocatori pescati da ${n} squadre diverse` };
   }
-
-  return { titolo: "Il Generalista", sotto: "Rosa equilibrata, senza preferenze evidenti" };
+  return { titolo: "Il Mercante Globale", sotto: `Giocatori pescati da ${n} squadre diverse` };
 }
 
 // Lista a due colonne (icona, nome, barra, percentuale) — sostituisce il
@@ -142,22 +133,21 @@ function hv_distribuzioneNazioni(giocatori, squadreRef, giocatoriDb) {
 
 function hv_soprannomeNazioni(fette, nazioni) {
   if (fette.length === 0) return null;
-  const top = fette[0];
-  const nome = (cod) => (nazioni ? nazioni[cod] || cod : cod);
+  const n = fette.length;
 
-  if (top.codice === "it" && top.percentuale >= 70) {
-    return { titolo: "Il Nazionalista", sotto: `${Math.round(top.percentuale)}% di italiani in rosa` };
+  if (n <= 7) {
+    return { titolo: "Il Km Zero", sotto: `Rosa costruita con ${n} nazionalità diverse` };
   }
-  if (top.percentuale >= 60) {
-    return { titolo: `L'Ambasciatore del ${nome(top.codice)}`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  if (n <= 10) {
+    return { titolo: "L'Osservatore Estero", sotto: `Giocatori da ${n} nazionalità diverse` };
   }
-  if (fette.length >= 10) {
-    return { titolo: "Il Cosmopolita", sotto: `Giocatori da ${fette.length} nazionalità diverse` };
+  if (n <= 13) {
+    return { titolo: "Il Talent Scout", sotto: `Giocatori da ${n} nazionalità diverse` };
   }
-  if (top.codice !== "it" && top.percentuale >= 30) {
-    return { titolo: `Lo Straniero (di cuore ${nome(top.codice)})`, sotto: `${Math.round(top.percentuale)}% della rosa da lì` };
+  if (n <= 15) {
+    return { titolo: "Il Cosmopolita", sotto: `Giocatori da ${n} nazionalità diverse` };
   }
-  return { titolo: "La Legione Straniera", sotto: "Rosa internazionale, senza una vera preferenza" };
+  return { titolo: "L'ONU del Fantacalcio", sotto: `Giocatori da ${n} nazionalità diverse` };
 }
 
 function hv_renderTortaNazioni(giocatori, squadreRef, giocatoriDb, nazioni) {
