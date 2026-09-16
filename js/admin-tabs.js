@@ -1,4 +1,4 @@
-/* Navigazione a schede dell'Admin: evita la pagina infinita e apre direttamente la sezione richiesta. */
+/* Navigazione a schede dell'Admin + collegamenti rapidi 1–11. */
 (() => {
   let initialized = false;
   const STORAGE_KEY = 'hv_admin_tab';
@@ -22,6 +22,10 @@
     return null;
   }
 
+  function pannelloDaElemento(el) {
+    return el?.closest?.('.admin-box') || null;
+  }
+
   function assegnaPannelli() {
     const wrap = document.querySelector('.admin-wrap');
     if (!wrap) return;
@@ -39,10 +43,16 @@
     if (hash === '#admin-mercato-panel' || hash === '#mercato') return 'mercato';
     if (hash === '#admin-giocatori-panel' || hash === '#giocatori') return 'rose';
     if (hash === '#pv-admin-icons') return 'contenuti';
+    if (hash) {
+      const target = document.querySelector(hash);
+      const panel = pannelloDaElemento(target);
+      const title = panel?.querySelector(':scope > h2, :scope > .feedback-admin-title-row h2')?.textContent;
+      return tabPerTitolo(title || '');
+    }
     return null;
   }
 
-  function mostraTab(id, salva = true) {
+  function mostraTab(id, salva = true, scroll = true) {
     assegnaPannelli();
     const valido = tabs.some((t) => t.id === id) ? id : 'generale';
     document.querySelectorAll('.admin-wrap > .admin-box[data-admin-tab]').forEach((panel) => {
@@ -54,8 +64,34 @@
       btn.setAttribute('aria-selected', attivo ? 'true' : 'false');
     });
     if (salva) localStorage.setItem(STORAGE_KEY, valido);
-    document.querySelector('.admin-wrap')?.scrollIntoView({ block: 'start' });
+    if (scroll) document.querySelector('#admin-tabs-nav')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.dispatchEvent(new CustomEvent('hv:admin-tab', { detail: { tab: valido } }));
+  }
+
+  function apriPannello(panel, aggiornaHash = true) {
+    if (!panel) return;
+    const h2 = panel.querySelector(':scope > h2, :scope > .feedback-admin-title-row h2');
+    const tab = tabPerTitolo(h2?.textContent || '');
+    if (!tab) return;
+    mostraTab(tab, true, false);
+    requestAnimationFrame(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (aggiornaHash && panel.id) history.replaceState(null, '', '#' + panel.id);
+    });
+  }
+
+  function collegaNavigazioneRapida() {
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('.pv-admin-nav a');
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      const panel = pannelloDaElemento(target) || target;
+      if (!panel?.classList?.contains('admin-box')) return;
+      event.preventDefault();
+      apriPannello(panel);
+    });
   }
 
   function init() {
@@ -75,19 +111,34 @@
       nav.appendChild(btn);
     });
     assegnaPannelli();
-    const iniziale = tabDaHash() || localStorage.getItem(STORAGE_KEY) || 'generale';
-    mostraTab(iniziale, !tabDaHash());
+    collegaNavigazioneRapida();
+    const hashTab = tabDaHash();
+    const iniziale = hashTab || localStorage.getItem(STORAGE_KEY) || 'generale';
+    mostraTab(iniziale, !hashTab, false);
+
+    if (location.hash) {
+      requestAnimationFrame(() => {
+        const target = document.querySelector(location.hash);
+        const panel = pannelloDaElemento(target) || target;
+        if (panel?.classList?.contains('admin-box')) apriPannello(panel, false);
+      });
+    }
 
     const observer = new MutationObserver(() => {
       assegnaPannelli();
       const attiva = document.querySelector('#admin-tabs-nav .admin-tab-btn.active')?.dataset.tab || iniziale;
-      mostraTab(attiva, false);
+      mostraTab(attiva, false, false);
     });
     observer.observe(document.querySelector('.admin-wrap'), { childList: true });
 
     window.addEventListener('hashchange', () => {
-      const tab = tabDaHash();
-      if (tab) mostraTab(tab, false);
+      const target = location.hash ? document.querySelector(location.hash) : null;
+      const panel = pannelloDaElemento(target) || target;
+      if (panel?.classList?.contains('admin-box')) apriPannello(panel, false);
+      else {
+        const tab = tabDaHash();
+        if (tab) mostraTab(tab, false);
+      }
     });
   }
 

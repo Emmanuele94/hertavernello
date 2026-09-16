@@ -404,3 +404,31 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
 .squadra-mercato-row>button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .squadra-mercato-detail{padding:0 10px 10px;font-size:12px;color:var(--text-muted);}
 @media(max-width:720px){.admin-tabs-nav{top:0;margin-left:-4px;margin-right:-4px;padding-left:4px;padding-right:4px}.mercato-grid{grid-template-columns:1fr}.mercato-swap{transform:rotate(90deg);margin:-4px 0}.mercato-riepilogo{grid-template-columns:1fr}.mercato-riepilogo-vs{transform:rotate(90deg)}.mercato-admin-history-row{grid-template-columns:1fr;gap:3px}.squadra-mercato-row>button{grid-template-columns:82px minmax(0,1fr);}.squadra-mercato-row>button strong:last-child{display:none;}}
+
+
+/* ===== Fix Home/Admin 2026-09-16 ===== */
+/* Le sezioni Home aperte devono crescere con il contenuto: niente sovrapposizioni oltre i vecchi 4000px. */
+.home-page .sezione-contenuto:not(.collassato){max-height:none!important;overflow:visible!important;opacity:1!important;}
+.home-page .incrocio-wrap{display:block;}
+.home-page .incrocio-toolbar{display:grid;grid-template-columns:auto minmax(220px,360px) minmax(0,1fr);align-items:center;gap:10px 14px;margin:0 0 14px;padding:12px 14px;border:1px solid var(--border-hairline);border-radius:13px;background:var(--bg-void);}
+.home-page .incrocio-toolbar label{font-size:12px;font-weight:900;color:var(--text-primary);}
+.home-page .incrocio-toolbar select{min-height:42px;width:100%;padding:8px 10px;border:1px solid var(--border-hairline);border-radius:10px;background:var(--bg-card-2);color:var(--text-primary);cursor:pointer;}
+.home-page .incrocio-toolbar-note{font-size:11.5px;color:var(--text-muted);}
+.home-page .incrocio-giornata-label{margin:10px 0 12px;}
+.home-page .incrocio-match-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;}
+.home-page .incrocio-match-collassabile{overflow:hidden;}
+.home-page .incrocio-toggle-match{position:relative;display:block;width:100%;padding:10px 42px 10px 12px;border:0;background:transparent;color:inherit;text-align:inherit;cursor:pointer;}
+.home-page .incrocio-toggle-match:hover{background:rgba(255,255,255,.025);}
+.home-page .incrocio-toggle-match:active{transform:none;}
+.home-page .incrocio-match-chevron{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--text-muted);transition:transform .2s ease;}
+.home-page .incrocio-toggle-match[aria-expanded="true"] .incrocio-match-chevron{transform:translateY(-50%) rotate(180deg);}
+.home-page .incrocio-match-dettagli[hidden]{display:none!important;}
+.home-page .incrocio-match-dettagli{border-top:1px solid var(--border-hairline);}
+.home-page .incrocio-testata.incrocio-toggle-match{padding-top:10px;padding-bottom:10px;}
+@media(max-width:900px){.home-page .incrocio-match-grid{grid-template-columns:minmax(0,1fr)}.home-page .incrocio-toolbar{grid-template-columns:1fr}.home-page .incrocio-toolbar-note{margin-top:-3px}}
+@media(max-width:420px){.home-page .incrocio-toggle-match{padding-right:34px}.home-page .incrocio-duello{gap:7px}.home-page .incrocio-team .logo-squadra-mini{width:28px;height:28px}.home-page .incrocio-team{font-size:12px}.home-page .incrocio-centro{min-width:60px}}
+
+/* Admin: tutti i controlli realmente interattivi comunicano il click col cursore. */
+.admin-wrap .pv-admin-nav a,.admin-wrap .admin-tabs-nav button,.admin-wrap button,.admin-wrap select,.admin-wrap summary,.admin-wrap [role="button"],.admin-wrap input[type="checkbox"],.admin-wrap input[type="radio"],.admin-wrap label[for]{cursor:pointer;}
+/* Lista calendario lunga ma contenuta nell'Admin. */
+#calendario-lista{max-height:550px;overflow-y:auto;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:6px;}

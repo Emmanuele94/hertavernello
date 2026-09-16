@@ -45,15 +45,17 @@ function hv_giocatoriRilevanti(squadraId, match, roseData, squadreRef) {
     .filter((g) => g.codice === match.casaCodice || g.codice === match.trasfertaCodice);
 }
 
-function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData) {
+function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, squadraFiltroId = "") {
   if (!match.matchday) return [];
-  const giornataCal = (calendarioData.giornate || []).find((g) => g.giornata === match.matchday);
+  const giornataCal = (calendarioData.giornate || []).find((g) => Number(g.giornata) === Number(match.matchday));
   if (!giornataCal) return [];
 
   const schede = [];
   giornataCal.incontri.forEach((coppia) => {
     if (coppia.length < 2) return;
     const [idA, idB] = coppia;
+    if (squadraFiltroId && idA !== squadraFiltroId && idB !== squadraFiltroId) return;
+
     const squadraA = config.squadre.find((s) => s.id === idA);
     const squadraB = config.squadre.find((s) => s.id === idB);
     if (!squadraA || !squadraB) return;
@@ -62,7 +64,7 @@ function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendari
     const giocatoriB = hv_giocatoriRilevanti(idB, match, roseData, squadreRef);
     if (giocatoriA.length === 0 && giocatoriB.length === 0) return;
 
-    schede.push({ nomeA: squadraA.nomeReale, nomeB: squadraB.nomeReale, giocatoriA, giocatoriB });
+    schede.push({ idA, idB, nomeA: squadraA.nomeReale, nomeB: squadraB.nomeReale, giocatoriA, giocatoriB });
   });
   return schede;
 }
@@ -74,8 +76,9 @@ function hv_giornoOrarioBreve(iso) {
   return HV_GIORNI_BREVI[d.getDay()] + " " + hv_orarioBreve(d.getTime());
 }
 
-function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggioPrecedente) {
-  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData);
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggioPrecedente, squadraFiltroId = "") {
+  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, squadraFiltroId);
+  if (squadraFiltroId && schede.length === 0) return null;
 
   const listaGiocatori = (giocatori) =>
     giocatori.length === 0
@@ -85,12 +88,10 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
   let corpo;
   if (schede.length === 0) {
     corpo = match.matchday
-      ? '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre</p>'
-      : '<p class="muted" style="font-size:12.5px; padding: 14px 16px;">Calendario di lega non disponibile per questa partita.</p>';
+      ? '<p class="muted" style="font-size:12.5px; padding:14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre</p>'
+      : '<p class="muted" style="font-size:12.5px; padding:14px 16px;">Calendario di lega non disponibile per questa partita.</p>';
   } else {
-    corpo = `<div class="sfide-lista">${schede
-      .map(
-        (s) => `
+    corpo = `<div class="sfide-lista">${schede.map((s) => `
       <div class="sfida-card">
         <div class="sfida-testata">
           <span class="sfida-team-name">${s.nomeA}</span>
@@ -101,30 +102,23 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
           <div class="sfida-lato">${listaGiocatori(s.giocatoriA)}</div>
           <div class="sfida-lato">${listaGiocatori(s.giocatoriB)}</div>
         </div>
-      </div>`
-      )
-      .join("")}</div>`;
+      </div>`).join("")}</div>`;
   }
 
-  // Stato: LIVE (lampeggiante) / FINALE (resta visibile, non lampeggia) / orario se deve ancora iniziare
   let etichettaStato;
   if (match.live) {
     etichettaStato = `<span class="incrocio-live">● LIVE${match.minuto ? " " + match.minuto + "'" : ""}</span>`;
   } else if (match.finita) {
-    etichettaStato = `<span class="incrocio-finale">● FINALE</span>`;
+    etichettaStato = '<span class="incrocio-finale">● FINALE</span>';
   } else {
     etichettaStato = `<span class="incrocio-orario">${hv_giornoOrarioBreve(match.data)}</span>`;
   }
 
-  // Punteggio: mostrato appena disponibile (dal calcio d'inizio in poi), sia live che a fine partita
   let punteggioHtml = "";
   if (match.golCasa != null && match.golTrasferta != null) {
     punteggioHtml = `<div class="incrocio-punteggio">${match.golCasa} - ${match.golTrasferta}</div>`;
   }
 
-  // "Ha segnato": confronto col punteggio dell'ultimo controllo per questa stessa
-  // partita. Sappiamo CHE è successo un gol, non chi l'ha fatto — il piano gratuito
-  // di football-data.org non include marcatori/cartellini (serve un add-on a pagamento).
   let golFlashHtml = "";
   if (match.live && punteggioPrecedente) {
     const golNotizie = [];
@@ -134,33 +128,42 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
     if (match.golTrasferta != null && punteggioPrecedente.golTrasferta != null && match.golTrasferta > punteggioPrecedente.golTrasferta) {
       golNotizie.push(`⚽ Ha segnato il ${match.trasfertaNome}!`);
     }
-    if (golNotizie.length > 0) {
-      golFlashHtml = `<div class="incrocio-gol-flash">${golNotizie.join(" · ")}</div>`;
-    }
+    if (golNotizie.length > 0) golFlashHtml = `<div class="incrocio-gol-flash">${golNotizie.join(" · ")}</div>`;
   }
 
-  const div = document.createElement("div");
-  div.className = "incrocio-match";
+  const div = document.createElement("article");
+  div.className = "incrocio-match incrocio-match-collassabile";
   div.innerHTML = `
-    <div class="incrocio-testata">
-      <div class="incrocio-duello">
-        <div class="incrocio-team incrocio-team-casa">
+    <button type="button" class="incrocio-testata incrocio-toggle-match" aria-expanded="false">
+      <span class="incrocio-duello">
+        <span class="incrocio-team incrocio-team-casa">
           <img src="assets/loghi/${match.casaCodice}.png" alt="${match.casaCodice}" class="logo-squadra-mini">
           <span class="incrocio-team-name">${match.casaNome}</span>
-        </div>
-        <div class="incrocio-centro">
+        </span>
+        <span class="incrocio-centro">
           ${punteggioHtml || '<span class="incrocio-vs-label">VS</span>'}
           ${etichettaStato}
-        </div>
-        <div class="incrocio-team incrocio-team-trasferta">
+        </span>
+        <span class="incrocio-team incrocio-team-trasferta">
           <span class="incrocio-team-name">${match.trasfertaNome}</span>
           <img src="assets/loghi/${match.trasfertaCodice}.png" alt="${match.trasfertaCodice}" class="logo-squadra-mini">
-        </div>
-      </div>
+        </span>
+      </span>
+      <span class="incrocio-match-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="incrocio-match-dettagli" hidden>
+      ${golFlashHtml}
+      ${corpo}
     </div>
-    ${golFlashHtml}
-    ${corpo}
   `;
+  const toggle = div.querySelector('.incrocio-toggle-match');
+  const dettagli = div.querySelector('.incrocio-match-dettagli');
+  toggle.addEventListener('click', () => {
+    const aperto = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!aperto));
+    dettagli.hidden = aperto;
+    div.classList.toggle('is-open', !aperto);
+  });
   return div;
 }
 
@@ -189,8 +192,6 @@ async function hv_renderIncrocio(config) {
       return;
     }
 
-    // La Home segue il calendario della LEGA. Prima dell'inizio della prima
-    // giornata fantasy mostra già l'anteprima della prima giornata configurata.
     const cachePrecedente = hv_cacheLeggiGrezzo("hv_cache_partite_lega_home_v2");
     const tuttePrecedenti = cachePrecedente?.v || [];
     const ttl = hv_prossimoTTLPartite(tuttePrecedenti, Date.now());
@@ -213,19 +214,50 @@ async function hv_renderIncrocio(config) {
     const punteggiPrecedenti = {};
     tuttePrecedenti.forEach((p) => { if (p?.id) punteggiPrecedenti[p.id] = { golCasa:p.golCasa, golTrasferta:p.golTrasferta }; });
 
-    wrap.innerHTML = "";
     if (!partite.length) {
       wrap.innerHTML = `<p class="empty-state">Nessuna partita di Serie A trovata per la giornata ${giornata}.</p>`;
       return;
     }
 
-    const anteprima = giornataRealeAttiva != null && giornata > giornataRealeAttiva;
-    wrap.insertAdjacentHTML("beforeend", `<p class="incrocio-giornata-label">Giornata ${giornata}${anteprima ? " · Anteprima" : ""}</p>`);
-    partite.forEach((match) => {
-      if (!match.casaCodice || !match.trasfertaCodice) return;
-      wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggiPrecedenti[match.id]));
-    });
-    if (scaduta) wrap.insertAdjacentHTML("beforeend", hv_avvisoDatiVecchi(true));
+    const anteprima = giornataRealeAttiva == null || giornata > giornataRealeAttiva;
+    const squadreOrdinate = [...(config.squadre || [])].sort((a,b) => (a.nomeFantasquadra || a.nomeReale).localeCompare(b.nomeFantasquadra || b.nomeReale, 'it'));
+
+    const renderVista = (squadraFiltroId = "") => {
+      wrap.innerHTML = '';
+      const toolbar = document.createElement('div');
+      toolbar.className = 'incrocio-toolbar';
+      toolbar.innerHTML = `
+        <label for="incrocio-filtro-squadra">Scegli la tua squadra</label>
+        <select id="incrocio-filtro-squadra" aria-label="Filtra Chi gioca contro chi per fantasquadra">
+          <option value="">Tutte le squadre</option>
+          ${squadreOrdinate.map((s) => `<option value="${s.id}"${s.id === squadraFiltroId ? ' selected' : ''}>${s.nomeFantasquadra || s.nomeReale}${s.nomeFantasquadra && s.nomeReale ? ` · ${s.nomeReale}` : ''}</option>`).join('')}
+        </select>
+        <span class="incrocio-toolbar-note">Apri una partita per vedere i giocatori coinvolti.</span>`;
+      wrap.appendChild(toolbar);
+
+      const label = document.createElement('p');
+      label.className = 'incrocio-giornata-label';
+      label.textContent = `Giornata ${giornata}${anteprima ? ' · Anteprima' : ''}`;
+      wrap.appendChild(label);
+
+      const grid = document.createElement('div');
+      grid.className = 'incrocio-match-grid';
+      let visibili = 0;
+      partite.forEach((match) => {
+        if (!match.casaCodice || !match.trasfertaCodice) return;
+        const card = hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggiPrecedenti[match.id], squadraFiltroId);
+        if (!card) return;
+        grid.appendChild(card);
+        visibili += 1;
+      });
+      if (visibili) wrap.appendChild(grid);
+      else wrap.insertAdjacentHTML('beforeend', '<p class="empty-state">Nessuna partita reale coinvolge giocatori di questo scontro fantasy nella giornata selezionata.</p>');
+      if (scaduta) wrap.insertAdjacentHTML("beforeend", hv_avvisoDatiVecchi(true));
+
+      wrap.querySelector('#incrocio-filtro-squadra')?.addEventListener('change', (e) => renderVista(e.target.value));
+    };
+
+    renderVista('');
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;
   }
