@@ -117,7 +117,7 @@ async function hv_ghDeleteFile(owner, repo, path, token, sha, message, branch = 
 }
 
 // Salva un oggetto JS come file JSON nel repository (crea o aggiorna).
-async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
+async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config, alSecondo) {
   const { githubOwner: owner, githubRepo: repo } = config.lega;
   const token = hv_getGithubToken();
   if (!token || !owner || !repo) {
@@ -125,7 +125,7 @@ async function hv_ghSalvaJSON(percorso, oggetto, messaggio, config) {
   }
   const esistente = await hv_ghGetFile(owner, repo, percorso, token);
   const contenuto = hv_utf8ToBase64(JSON.stringify(oggetto, null, 2));
-  await hv_ghPutFile(owner, repo, percorso, token, contenuto, messaggio, esistente ? esistente.sha : null);
+  await hv_ghPutFile(owner, repo, percorso, token, contenuto, messaggio, esistente ? esistente.sha : null, "main", alSecondo);
 }
 
 // Carica/aggiorna il logo personalizzato di una fantasquadra e aggiorna loghi-fantasquadre.json.

@@ -178,42 +178,53 @@ async function hv_renderIncrocio(config) {
   try {
     const [squadreRef, roseRes, calendarioRes] = await Promise.all([
       hv_caricaSquadreRef(),
-      fetch("data/rose.json"),
-      fetch("data/calendario.json"),
+      fetch("data/rose.json", { cache: "no-store" }),
+      fetch("data/calendario.json", { cache: "no-store" }),
     ]);
     const roseData = await roseRes.json();
     const calendarioData = await calendarioRes.json();
-
-    // Punteggi dell'ultimo controllo (per capire se nel frattempo qualcuno ha segnato)
-    // e finestra dinamica prima di ricontrollare l'API: spesso durante le partite,
-    // molto più raramente nei giorni senza Serie A in programma.
-    const cachePrecedente = hv_cacheLeggiGrezzo("hv_cache_partite");
-    const partitePrecedenti = cachePrecedente && cachePrecedente.v && cachePrecedente.v.partite ? cachePrecedente.v.partite : [];
-    const punteggiPrecedenti = {};
-    partitePrecedenti.forEach((p) => {
-      punteggiPrecedenti[p.id] = { golCasa: p.golCasa, golTrasferta: p.golTrasferta };
-    });
-
-    const ttlDinamico = hv_prossimoTTLPartite(partitePrecedenti, Date.now());
-    const { dati, scaduta } = await hv_cacheOFetch("hv_cache_partite", ttlDinamico, () => hv_getPartite(apiKey, squadreRef));
-    const { giornata, partite } = dati;
-
-    wrap.innerHTML = "";
-
-    if (!partite || partite.length === 0) {
-      wrap.innerHTML = '<p class="empty-state">Nessuna partita trovata nei prossimi giorni.</p>';
+    const giornateLega = (calendarioData.giornate || []).map((g) => Number(g.giornata)).filter(Number.isFinite).sort((a,b)=>a-b);
+    if (!giornateLega.length) {
+      wrap.innerHTML = '<p class="empty-state">Calendario di lega non ancora disponibile.</p>';
       return;
     }
 
-    if (giornata) {
-      wrap.insertAdjacentHTML("beforeend", `<p class="incrocio-giornata-label">Giornata ${giornata}</p>`);
+    // La Home segue il calendario della LEGA. Prima dell'inizio della prima
+    // giornata fantasy mostra già l'anteprima della prima giornata configurata.
+    const cachePrecedente = hv_cacheLeggiGrezzo("hv_cache_partite_lega_home_v2");
+    const tuttePrecedenti = cachePrecedente?.v || [];
+    const ttl = hv_prossimoTTLPartite(tuttePrecedenti, Date.now());
+    const { dati: tutte, scaduta } = await hv_cacheOFetch(
+      "hv_cache_partite_lega_home_v2",
+      ttl,
+      () => hv_getTutteLePartiteStagione(apiKey, squadreRef)
+    );
+
+    const giornataRealeAttiva = hv_calcolaGiornataAttiva(tutte, Date.now());
+    let giornata = giornateLega[0];
+    if (giornataRealeAttiva != null) {
+      if (giornateLega.includes(giornataRealeAttiva)) giornata = giornataRealeAttiva;
+      else {
+        const prossima = giornateLega.find((g) => g > giornataRealeAttiva);
+        giornata = prossima ?? [...giornateLega].reverse().find((g) => g < giornataRealeAttiva) ?? giornateLega[0];
+      }
+    }
+    const partite = tutte.filter((p) => Number(p.matchday) === Number(giornata)).sort((a,b)=>new Date(a.data)-new Date(b.data));
+    const punteggiPrecedenti = {};
+    tuttePrecedenti.forEach((p) => { if (p?.id) punteggiPrecedenti[p.id] = { golCasa:p.golCasa, golTrasferta:p.golTrasferta }; });
+
+    wrap.innerHTML = "";
+    if (!partite.length) {
+      wrap.innerHTML = `<p class="empty-state">Nessuna partita di Serie A trovata per la giornata ${giornata}.</p>`;
+      return;
     }
 
+    const anteprima = giornataRealeAttiva != null && giornata > giornataRealeAttiva;
+    wrap.insertAdjacentHTML("beforeend", `<p class="incrocio-giornata-label">Giornata ${giornata}${anteprima ? " · Anteprima" : ""}</p>`);
     partite.forEach((match) => {
       if (!match.casaCodice || !match.trasfertaCodice) return;
       wrap.appendChild(hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggiPrecedenti[match.id]));
     });
-
     if (scaduta) wrap.insertAdjacentHTML("beforeend", hv_avvisoDatiVecchi(true));
   } catch (err) {
     wrap.innerHTML = `<p class="empty-state">Non riesco a contattare l'API (${err.message}).</p>`;

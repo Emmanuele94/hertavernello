@@ -965,15 +965,67 @@ function hv_renderLogoUploadAdmin(squadraId, config, logoEsistente) {
   });
 }
 
+
+function hv_formattaDataMercato(iso) {
+  if (!iso) return "";
+  const parti = String(iso).split("-");
+  return parti.length === 3 ? `${parti[2]}/${parti[1]}/${parti[0]}` : iso;
+}
+
+function hv_renderStoricoMercato(squadraId, mercatoData, config) {
+  const host = document.getElementById("squadra-mercato-wrap");
+  if (!host) return;
+  const movimenti = (mercatoData?.movimenti || [])
+    .filter((m) => m.tipo === "scambio" && (m.squadraAId === squadraId || m.squadraBId === squadraId))
+    .sort((a,b) => String(b.data || "").localeCompare(String(a.data || "")));
+  if (!movimenti.length) { host.innerHTML = ""; return; }
+  const squadraNome = (id) => config.squadre.find((s) => s.id === id)?.nomeFantasquadra || id;
+  const rows = movimenti.map((m,idx) => {
+    const latoA = m.squadraAId === squadraId;
+    const ceduti = latoA ? (m.giocatoriA || []) : (m.giocatoriB || []);
+    const ricevuti = latoA ? (m.giocatoriB || []) : (m.giocatoriA || []);
+    const altra = latoA ? m.squadraBId : m.squadraAId;
+    const breve = `${ceduti.map((g)=>g.nome).join(", ")} ↔ ${ricevuti.map((g)=>g.nome).join(", ")}`;
+    return `<div class="squadra-mercato-row">
+      <button type="button" data-market-detail="${idx}" aria-expanded="false">
+        <strong>${hv_escapeHtml(hv_formattaDataMercato(m.data))}</strong>
+        <span>${hv_escapeHtml(breve)}</span>
+        <strong>${hv_escapeHtml(squadraNome(altra))}</strong>
+      </button>
+      <div class="squadra-mercato-detail hidden" data-market-panel="${idx}">
+        <p><strong>Ceduti:</strong> ${ceduti.map((g)=>hv_escapeHtml(`${g.nome} (${g.ruolo})`)).join(", ")}</p>
+        <p><strong>Ricevuti:</strong> ${ricevuti.map((g)=>hv_escapeHtml(`${g.nome} (${g.ruolo})`)).join(", ")}</p>
+        <p><strong>Con:</strong> ${hv_escapeHtml(squadraNome(altra))}</p>
+      </div>
+    </div>`;
+  }).join("");
+  host.innerHTML = `<div class="squadra-mercato-wrap">
+    <button type="button" class="squadra-mercato-title" aria-expanded="false"><span>🔄 Storico mercato</span><small>${movimenti.length} movimento${movimenti.length === 1 ? "" : "i"}</small></button>
+    <div class="squadra-mercato-list hidden">${rows}</div>
+  </div>`;
+  const title = host.querySelector(".squadra-mercato-title");
+  const list = host.querySelector(".squadra-mercato-list");
+  title.addEventListener("click", () => {
+    const open = list.classList.toggle("hidden") === false;
+    title.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  host.querySelectorAll("[data-market-detail]").forEach((btn) => btn.addEventListener("click", () => {
+    const panel = host.querySelector(`[data-market-panel="${btn.dataset.marketDetail}"]`);
+    const open = panel.classList.toggle("hidden") === false;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }));
+}
+
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes, loghiRes, risultatiRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
+  const [roseRes, pagelleRes, previsioniRes, loghiRes, risultatiRes, mercatoRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
     fetch("data/loghi-fantasquadre.json"),
     fetch("data/risultati.json"),
+    fetch("data/mercato.json"),
     hv_caricaSquadreRef(),
     hv_caricaGiocatoriDb(),
     hv_caricaNazioni(),
@@ -983,6 +1035,7 @@ async function hv_initSquadre(config) {
   const { previsioni } = await previsioniRes.json();
   const { loghi } = await loghiRes.json();
   const { risultati } = await risultatiRes.json();
+  const mercatoData = await mercatoRes.json();
   const classificaLega = risultati && risultati.length > 0 ? hv_calcolaClassificaLega(risultati, config.squadre) : [];
 
   let partiteStagione = [];
@@ -1028,6 +1081,7 @@ async function hv_initSquadre(config) {
     const posizioneLega = classificaLega.find((r) => r.squadra.id === squadra.id)?.posizione || null;
     hv_renderIntestazioneSquadra(squadra, logo, posizioneLega);
     hv_renderBadge(squadra.id, risultati, rose, giocatoriDb, config);
+    hv_renderStoricoMercato(squadra.id, mercatoData, config);
     hv_renderLogoUploadAdmin(squadra.id, config, logo);
     hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario, giocatoriDb, nazioni);
     hv_renderPagella(pagella);

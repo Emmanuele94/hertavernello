@@ -70,7 +70,7 @@
     .cfg-squadra-row input { margin-bottom: 0; }
     .cfg-squadra-row button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 8px 12px; border-radius: 6px; cursor: pointer; flex-shrink: 0; }
   </style>
-<link rel="stylesheet" href="css/restyling.css?v=20260914-mobile2">
+<link rel="stylesheet" href="css/restyling.css?v=20260916-adminmarket1">
 <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
 <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 <script defer src="js/admin-icone-home.js?v=20260914-mobile2"></script>
@@ -110,6 +110,8 @@
         la lettura dei file dentro <code>data/</code> e i pannelli qui sotto restano vuoti.
       </p>
     </div>
+
+    <div id="admin-tabs-nav" class="admin-tabs-nav" role="tablist" aria-label="Sezioni amministrazione"></div>
 
     <div class="admin-box">
       <h2>1. Impostazioni lega</h2>
@@ -184,6 +186,56 @@
         <textarea id="csv-output" readonly></textarea>
         <a id="csv-download" class="output-download hidden" download="rose.json">Scarica rose.json</a>
       </div>
+    </div>
+
+    <div class="admin-box" id="admin-giocatori-panel">
+      <h2>Gestione giocatori</h2>
+      <p class="desc">Cerca un giocatore, correggi squadra reale o nazionalità e associa una foto. Puoi preparare più modifiche e salvarle tutte insieme.</p>
+      <div class="admin-player-search-wrap">
+        <label class="campo-titolo" for="admin-player-search">Cerca giocatore</label>
+        <input type="search" id="admin-player-search" placeholder="Scrivi almeno 2 caratteri…" autocomplete="off">
+        <div id="admin-player-search-results" class="admin-player-search-results hidden"></div>
+      </div>
+      <div id="admin-player-editor" class="hidden admin-player-editor">
+        <div class="admin-player-editor-head">
+          <img id="admin-player-current-photo" alt="" class="admin-player-current-photo">
+          <div><strong id="admin-player-name"></strong><p id="admin-player-meta" class="muted"></p></div>
+        </div>
+        <div class="campo-riga">
+          <label>Squadra reale<select id="admin-player-team"></select></label>
+          <label>Nazionalità<input type="search" id="admin-player-nation" list="admin-player-nations" placeholder="Cerca nazione…"></label>
+        </div>
+        <datalist id="admin-player-nations"></datalist>
+        <label class="campo-titolo" for="admin-player-photo">Foto giocatore (opzionale)</label>
+        <input type="file" id="admin-player-photo" accept="image/png,image/jpeg,image/webp">
+        <button type="button" id="admin-player-add-queue" style="margin-top:12px;">Aggiungi alle modifiche</button>
+      </div>
+      <div id="admin-player-queue" class="admin-player-queue"></div>
+      <button type="button" id="admin-player-save-all" class="hidden" style="margin-top:14px;background:var(--giallo-neon);color:var(--bg-void);">Salva tutte le modifiche</button>
+      <p id="admin-player-status" class="muted" style="font-size:12px;margin-top:8px;"></p>
+    </div>
+
+    <div class="admin-box" id="admin-mercato-panel">
+      <h2>Mercato &amp; Scambi</h2>
+      <p class="desc">Registra gli scambi tra fantasquadre. La regola attuale richiede lo stesso numero di giocatori e gli stessi ruoli da entrambe le parti.</p>
+      <div class="campo-riga">
+        <label>Data scambio<input type="date" id="mercato-data"></label>
+      </div>
+      <div class="mercato-grid">
+        <div class="mercato-col">
+          <label class="campo-titolo">Fantasquadra A<select id="mercato-squadra-a"></select></label>
+          <div id="mercato-rosa-a" class="mercato-rosa"></div>
+        </div>
+        <div class="mercato-swap">⇄</div>
+        <div class="mercato-col">
+          <label class="campo-titolo">Fantasquadra B<select id="mercato-squadra-b"></select></label>
+          <div id="mercato-rosa-b" class="mercato-rosa"></div>
+        </div>
+      </div>
+      <div id="mercato-riepilogo" class="mercato-riepilogo"></div>
+      <button type="button" id="mercato-conferma" disabled>Conferma scambio</button>
+      <p id="mercato-stato" class="muted" style="font-size:12px;margin-top:8px;"></p>
+      <div id="mercato-storico-admin" class="mercato-storico-admin"></div>
     </div>
 
     <div class="admin-box">
@@ -376,15 +428,19 @@
 
   <script src="js/versione-check.js?v=20260914-mobile2"></script>
   <script src="js/auth.js?v=20260914-mobile2"></script>
-  <script src="js/github-api.js?v=20260914-mobile2"></script>
+  <script src="js/github-api.js?v=20260916-adminmarket1"></script>
+  <script src="js/giocatori.js?v=20260916-adminmarket1"></script>
+  <script src="js/admin-tabs.js?v=20260916-adminmarket1"></script>
   <script src="js/admin-feedback.js?v=20260915-crosshost1"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="js/admin-config.js?v=20260914-mobile2"></script>
   <script src="js/importer.js?v=20260916-roseid1"></script>
+  <script src="js/admin-giocatori.js?v=20260916-adminmarket1"></script>
+  <script src="js/admin-mercato.js?v=20260916-adminmarket1"></script>
   <script src="js/admin-pagelle.js?v=20260914-mobile2"></script>
   <script src="js/admin-previsioni.js?v=20260914-mobile2"></script>
-  <script src="js/api.js?v=20260914-mobile2"></script>
+  <script src="js/api.js?v=20260916-adminmarket1"></script>
   <script src="js/admin-calendario.js?v=20260916-badgecal1"></script>
   <script src="js/admin-calendario-excel.js?v=20260914-mobile2"></script>
   <script src="js/risultati-utils.js?v=20260914-mobile2"></script>
@@ -403,7 +459,10 @@
         document.getElementById("admin-negato").classList.remove("hidden");
         return;
       }
+      hv_initAdminTabs();
       hv_initConfigForm();
+      hv_initAdminGiocatori();
+      hv_initMercatoAdmin();
       hv_initPagelleForm();
       hv_initPrevisioniForm();
       hv_initCalendarioForm();

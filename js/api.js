@@ -142,9 +142,13 @@ async function hv_getPartiteConOrario(apiKey, squadreRef) {
 async function hv_getTutteLePartiteStagione(apiKey, squadreRef) {
   const data = await hv_fetchAPI("/competitions/SA/matches", apiKey);
   return data.matches.map((m) => ({
+    id: m.id,
     matchday: m.matchday,
     status: m.status,
+    live: m.status === "IN_PLAY" || m.status === "PAUSED",
+    finita: m.status === "FINISHED",
     data: m.utcDate,
+    minuto: m.minute ?? null,
     casaCodice: hv_trovaCodice(m.homeTeam.shortName || m.homeTeam.name, squadreRef),
     trasfertaCodice: hv_trovaCodice(m.awayTeam.shortName || m.awayTeam.name, squadreRef),
     casaNome: m.homeTeam.shortName || m.homeTeam.name,

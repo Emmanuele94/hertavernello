@@ -357,3 +357,50 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   .home-page .sfida-body{grid-template-columns:1fr 1fr}
   .home-page .sfida-lato:first-child{border-right:1px solid var(--border-hairline);border-bottom:0}
 }
+
+/* ===== Admin organizzato a schede + Mercato/Giocatori ===== */
+.admin-tabs-nav{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;margin:0 0 18px;scrollbar-width:thin;position:sticky;top:0;z-index:20;background:linear-gradient(var(--bg-main),var(--bg-main));}
+.admin-tab-btn{flex:0 0 auto;min-height:42px;padding:9px 14px;border:1px solid var(--border-hairline);border-radius:12px;background:var(--bg-card-2);color:var(--text-primary);font-weight:800;white-space:nowrap;}
+.admin-tab-btn.active{border-color:var(--giallo-neon);box-shadow:0 0 0 1px var(--giallo-neon) inset;}
+.admin-tab-hidden{display:none!important;}
+.admin-player-search-wrap{position:relative;max-width:620px;}
+.admin-player-search-results{position:absolute;z-index:30;left:0;right:0;top:100%;margin-top:5px;background:var(--bg-card-2);border:1px solid var(--border-hairline);border-radius:12px;overflow:hidden;box-shadow:0 18px 36px rgba(0,0,0,.35);}
+.admin-player-search-results button{display:flex;width:100%;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 12px;border:0;border-bottom:1px solid var(--border-hairline);border-radius:0;background:transparent;color:var(--text-primary);text-align:left;}
+.admin-player-search-results button:hover{background:rgba(255,255,255,.05);}
+.admin-player-search-results small{color:var(--text-muted);}
+.admin-player-editor{margin-top:16px;padding:14px;border:1px solid var(--border-hairline);border-radius:14px;background:var(--bg-void);}
+.admin-player-editor-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.admin-player-current-photo{width:64px;height:64px;object-fit:cover;border-radius:12px;background:var(--bg-card-2);}
+.admin-player-current-photo.is-empty{visibility:hidden;width:0;margin:0;}
+.admin-player-editor label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:800;color:var(--text-muted);}
+.admin-player-queue{margin-top:18px;}
+.admin-player-queue-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;margin:7px 0;border:1px solid var(--border-hairline);border-radius:11px;background:var(--bg-void);}
+.admin-player-queue-row div{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.admin-player-queue-row span{font-size:12px;color:var(--text-muted);overflow-wrap:anywhere;}
+.admin-player-queue-row button{width:36px;height:36px;padding:0;flex:0 0 auto;}
+.mercato-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:12px;align-items:start;margin-top:12px;}
+.mercato-col>label{display:flex;flex-direction:column;gap:6px;}
+.mercato-swap{align-self:center;text-align:center;font-size:26px;font-weight:900;color:var(--giallo-neon);}
+.mercato-rosa{margin-top:12px;display:grid;gap:10px;}
+.mercato-role-group{min-width:0;margin:0;padding:10px;border:1px solid var(--border-hairline);border-radius:12px;background:var(--bg-void);}
+.mercato-role-group legend{padding:0 5px;font-size:12px;font-weight:900;text-transform:uppercase;color:var(--giallo-neon);}
+.mercato-player-check{display:flex;align-items:center;gap:8px;padding:7px 5px;border-radius:8px;cursor:pointer;}
+.mercato-player-check:hover{background:rgba(255,255,255,.04);}
+.mercato-player-check input{width:18px;height:18px;flex:0 0 auto;accent-color:var(--giallo-neon);}
+.mercato-player-check span{display:flex;flex-direction:column;min-width:0;}
+.mercato-player-check small{color:var(--text-muted);font-size:11px;}
+.mercato-riepilogo{display:grid;grid-template-columns:1fr 38px 1fr;gap:10px;align-items:center;margin:16px 0;padding:12px;border:1px solid var(--border-hairline);border-radius:12px;background:var(--bg-void);}
+.mercato-riepilogo>div:not(.mercato-riepilogo-vs){display:flex;flex-direction:column;gap:4px;min-width:0;}
+.mercato-riepilogo span,.mercato-riepilogo small{font-size:12px;color:var(--text-muted);overflow-wrap:anywhere;}
+.mercato-riepilogo-vs{text-align:center;font-size:22px;color:var(--text-muted);}
+.mercato-riepilogo.is-valid{border-color:var(--verde-prato);}
+.mercato-admin-history-row{display:grid;grid-template-columns:100px minmax(0,1fr) 28px minmax(0,1fr);gap:8px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--border-hairline);font-size:12px;}
+.squadra-mercato-wrap{margin:14px 0 22px;border:1px solid var(--border-hairline);border-radius:14px;background:var(--bg-card-2);overflow:hidden;}
+.squadra-mercato-title{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 14px;border:0;background:transparent;color:var(--text-primary);font-weight:900;text-align:left;cursor:pointer;}
+.squadra-mercato-title small{font-weight:700;color:var(--text-muted);}
+.squadra-mercato-list{padding:0 12px 12px;display:grid;gap:7px;}
+.squadra-mercato-row{border:1px solid var(--border-hairline);border-radius:10px;background:var(--bg-void);overflow:hidden;}
+.squadra-mercato-row>button{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;padding:9px 10px;border:0;background:transparent;color:var(--text-primary);text-align:left;}
+.squadra-mercato-row>button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.squadra-mercato-detail{padding:0 10px 10px;font-size:12px;color:var(--text-muted);}
+@media(max-width:720px){.admin-tabs-nav{top:0;margin-left:-4px;margin-right:-4px;padding-left:4px;padding-right:4px}.mercato-grid{grid-template-columns:1fr}.mercato-swap{transform:rotate(90deg);margin:-4px 0}.mercato-riepilogo{grid-template-columns:1fr}.mercato-riepilogo-vs{transform:rotate(90deg)}.mercato-admin-history-row{grid-template-columns:1fr;gap:3px}.squadra-mercato-row>button{grid-template-columns:82px minmax(0,1fr);}.squadra-mercato-row>button strong:last-child{display:none;}}
