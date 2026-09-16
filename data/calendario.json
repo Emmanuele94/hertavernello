@@ -1,4 +1,34 @@
 {
-  "_leggimi": "Il calendario di lega (chi affronta chi ogni giornata nella VOSTRA lega, non le partite reali di Serie A). Si compila da admin.html, sezione 5. 'giornata' e' il numero di giornata (corrisponde alla giornata di Serie A). 'incontri' e' un elenco di coppie [squadraIdA, squadraIdB]; se un fantallenatore riposa quella giornata, la sua coppia ha solo un id (es. [\"sq-05\"]).",
-  "giornate": []
+  "_leggimi": "Generato da admin.html — sostituisci data/calendario.json",
+  "giornate": [
+    {
+      "giornata": 5,
+      "incontri": [
+        [
+          "sq-06",
+          "sq-05"
+        ],
+        [
+          "sq-08",
+          "sq-10"
+        ],
+        [
+          "sq-04",
+          "sq-01"
+        ],
+        [
+          "sq-03",
+          "sq-11"
+        ],
+        [
+          "sq-02",
+          "sq-09"
+        ],
+        [
+          "sq-12",
+          "sq-07"
+        ]
+      ]
+    }
+  ]
 }
