@@ -8,7 +8,8 @@
     "adminPasswordHash": "c5f36b5973ec982e5d5218765842d2eb886b5030a37fbcb9b01006987c0f775d",
     "footballDataApiKey": "242feb2d9a2945d6ba121175081f4e47",
     "githubOwner": "Emmanuele94",
-    "githubRepo": "hertavernello"
+    "githubRepo": "hertavernello",
+    "dataAstaRiparazione": ""
   },
   "squadre": [
     {
@@ -48,8 +49,8 @@
     },
     {
       "id": "sq-08",
-      "nomeReale": "RaffaeleDvinaccia",
-      "nomeFantasquadra": "Napoli 1011"
+      "nomeReale": "Raffaele",
+      "nomeFantasquadra": "BayerD.Monkey"
     },
     {
       "id": "sq-09",
