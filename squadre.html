@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
-<link rel="stylesheet" href="css/restyling.css?v=20260916-adminmarket1">
+<link rel="stylesheet" href="css/restyling.css?v=20260919-pagellashare1">
 <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
 <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 <script defer src="js/admin-icone-home.js?v=20260914-mobile2"></script>
@@ -77,6 +77,7 @@
         <div id="squadra-logo-wrap" class="squadra-logo-wrap"></div>
         <div class="squadra-intestazione-testo">
           <h2 id="squadra-nome-grande"></h2>
+          <a id="pagella-page-link" class="pagella-mini-badge" href="pagella.html">📝 Pagella</a>
           <div id="squadra-logo-upload-admin"></div>
         </div>
         <div id="squadra-logo-piccolo-posizione-wrap" class="squadra-logo-piccolo-posizione-wrap"></div>
@@ -99,16 +100,6 @@
         </div>
 
         <div class="squadre-sidebar">
-          <div class="squadra-block" style="margin: 0 0 26px;">
-            <h3 class="squadra-block-title sezione-toggle" data-target="pagella-blocco-contenuto">
-              <img src="assets/icone/icon-pagella.png" class="icona-titolo" alt="">Pagella
-              <span class="toggle-chevron">▾</span>
-            </h3>
-            <div id="pagella-blocco-contenuto" class="sezione-contenuto">
-              <div id="pagella-content"></div>
-            </div>
-          </div>
-
           <div class="squadra-block" style="margin: 0;">
             <h3 class="squadra-block-title sezione-toggle" data-target="previsione-blocco-contenuto">
               <img src="assets/icone/icon-predict.png" class="icona-titolo" alt="">Previsione Serie A
@@ -191,7 +182,7 @@
   <script src="js/giocatori.js?v=20260916-adminmarket1"></script>
   <script src="js/calcolo-derivati.js?v=20260914-mobile2"></script>
   <script src="js/github-api.js?v=20260914-mobile2"></script>
-  <script src="js/squadre.js?v=20260916-adminmarket1"></script>
+  <script src="js/squadre.js?v=20260919-pagellashare1"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

@@ -1019,9 +1019,8 @@ function hv_renderStoricoMercato(squadraId, mercatoData, config) {
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, pagelleRes, previsioniRes, loghiRes, risultatiRes, mercatoRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
+  const [roseRes, previsioniRes, loghiRes, risultatiRes, mercatoRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
     fetch("data/rose.json"),
-    fetch("data/pagelle.json"),
     fetch("data/previsioni.json"),
     fetch("data/loghi-fantasquadre.json"),
     fetch("data/risultati.json"),
@@ -1031,7 +1030,6 @@ async function hv_initSquadre(config) {
     hv_caricaNazioni(),
   ]);
   const { rose } = await roseRes.json();
-  const { pagelle } = await pagelleRes.json();
   const { previsioni } = await previsioniRes.json();
   const { loghi } = await loghiRes.json();
   const { risultati } = await risultatiRes.json();
@@ -1074,8 +1072,9 @@ async function hv_initSquadre(config) {
 
   function mostraSquadra(squadra) {
     squadraCorrente = squadra;
+    const pagellaLink = document.getElementById("pagella-page-link");
+    if (pagellaLink) pagellaLink.href = `pagella.html?squadra=${encodeURIComponent(squadra.id)}`;
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
-    const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
     const posizioneLega = classificaLega.find((r) => r.squadra.id === squadra.id)?.posizione || null;
@@ -1084,7 +1083,6 @@ async function hv_initSquadre(config) {
     hv_renderStoricoMercato(squadra.id, mercatoData, config);
     hv_renderLogoUploadAdmin(squadra.id, config, logo);
     hv_renderRoster(roster ? roster.giocatori : [], squadreRef, giornataCorrente, partiteConOrario, giocatoriDb, nazioni);
-    hv_renderPagella(pagella);
     hv_renderPrevisione(previsione);
     hv_renderUploadAdmin(squadra.id, config);
     hv_renderTortaSquadre(roster ? roster.giocatori : [], squadreRef);
@@ -1253,7 +1251,11 @@ async function hv_initSquadre(config) {
     if (!e.target.closest("#rosa-search-wrap")) chiudiRicerca();
   });
 
-  if (config.squadre.length > 0) selezionaSquadra(config.squadre[0]);
+  if (config.squadre.length > 0) {
+    const requestedId = new URLSearchParams(window.location.search).get("squadra");
+    const iniziale = config.squadre.find((s) => s.id === requestedId) || config.squadre[0];
+    selezionaSquadra(iniziale);
+  }
 }
 
 hv_checkGate().then((data) => {

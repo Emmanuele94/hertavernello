@@ -432,3 +432,93 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
 .admin-wrap .pv-admin-nav a,.admin-wrap .admin-tabs-nav button,.admin-wrap button,.admin-wrap select,.admin-wrap summary,.admin-wrap [role="button"],.admin-wrap input[type="checkbox"],.admin-wrap input[type="radio"],.admin-wrap label[for]{cursor:pointer;}
 /* Lista calendario lunga ma contenuta nell'Admin. */
 #calendario-lista{max-height:550px;overflow-y:auto;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:6px;}
+
+/* ===== Pagella dedicata + condivisione social 2026-09-19 ===== */
+.pagella-mini-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  width:max-content;
+  margin:-2px 0 2px;
+  padding:6px 11px;
+  border:1px solid rgba(183,255,92,.42);
+  border-radius:999px;
+  background:rgba(183,255,92,.08);
+  color:var(--verde-prato,#b7ff5c);
+  text-decoration:none;
+  font-size:12px;
+  line-height:1;
+  font-weight:800;
+  cursor:pointer;
+}
+.pagella-mini-badge:hover{background:rgba(183,255,92,.14);border-color:rgba(183,255,92,.72);color:var(--verde-prato,#b7ff5c)}
+
+.pagella-page .app{max-width:1280px}
+.pagella-main{width:min(100%,1120px);margin:0 auto;padding:20px 0 10px}
+.pagella-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 14px}
+.pagella-back-link{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border:1px solid var(--border-hairline);border-radius:11px;background:var(--bg-card);color:var(--text-primary);text-decoration:none;font-weight:700;font-size:12px}
+.pagella-back-link:hover{border-color:#b7ff5c;color:#b7ff5c}
+.pagella-topbar-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+.pagella-full-card{overflow:hidden;border:1px solid var(--border-hairline);border-radius:24px;background:linear-gradient(145deg,rgba(16,34,48,.96),rgba(8,14,21,.98));box-shadow:0 22px 70px rgba(0,0,0,.25)}
+.pagella-full-identita{display:grid;grid-template-columns:150px minmax(0,1fr) 190px;align-items:center;gap:24px;padding:28px;border-bottom:1px solid var(--border-hairline);background:radial-gradient(circle at 10% 0%,rgba(183,255,92,.1),transparent 36%)}
+.pagella-team-logo-wrap,.pagella-president-wrap{display:flex;align-items:center;justify-content:center;min-width:0}
+.pagella-team-logo,.pagella-team-logo-placeholder{width:138px;height:138px;border-radius:24px;border:1px solid var(--border-hairline);background:var(--bg-card-2);object-fit:contain;padding:8px}
+.pagella-team-logo-placeholder{display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:var(--text-muted)}
+.pagella-president-img,.pagella-president-placeholder{width:178px;height:178px;border-radius:24px;border:1px solid var(--border-hairline);background:var(--bg-card-2);object-fit:contain;padding:8px}
+.pagella-president-placeholder{display:flex;align-items:center;justify-content:center;font-size:46px}
+.pagella-full-heading{min-width:0}
+.pagella-full-heading h2{margin:8px 0 6px;font-size:clamp(34px,5vw,64px);line-height:1;letter-spacing:-.04em;color:var(--giallo-neon);overflow-wrap:anywhere}
+.pagella-manager-name{margin:0;color:var(--text-muted);font-size:15px;font-weight:600}
+.pagella-content-full{display:grid;grid-template-columns:180px minmax(0,1fr);gap:22px;padding:28px}
+.pagella-full-voto{min-height:180px;border:1px solid var(--border-hairline);border-radius:20px;background:var(--bg-card-2);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:18px;text-align:center}
+.pagella-full-voto-label{font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+.pagella-full-voto strong{font-size:72px;line-height:1;color:var(--verde-prato,#b7ff5c);font-family:var(--font-mono);margin:6px 0}
+.pagella-full-voto.medio strong{color:var(--giallo-neon)}
+.pagella-full-voto.bocciato strong{color:#ff7188}
+.pagella-full-badge{font-size:38px;line-height:1.1}
+.pagella-full-commento{margin:0;min-width:0;padding:24px 26px;border:1px solid var(--border-hairline);border-radius:20px;background:rgba(6,13,20,.72);font-size:clamp(16px,1.35vw,19px);line-height:1.8;color:var(--text-primary);white-space:pre-wrap;overflow-wrap:anywhere}
+.pagella-actions{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 0;padding:14px;border:1px solid var(--border-hairline);border-radius:16px;background:var(--bg-card)}
+.pagella-action-btn,.sfida-share-btn{min-height:42px;border:1px solid var(--border-hairline);border-radius:10px;background:var(--bg-card-2);color:var(--text-primary);font-weight:800;font-size:12px;padding:9px 13px;cursor:pointer}
+.pagella-action-btn:hover,.sfida-share-btn:hover{border-color:#b7ff5c;color:#b7ff5c;background:rgba(183,255,92,.06)}
+.pagella-action-btn:disabled,.sfida-share-btn:disabled{opacity:.55;cursor:wait}
+.pagella-action-status{min-height:24px;margin:8px 4px 0;color:#b7ff5c;font-size:12px}
+.pagella-action-status.is-error{color:#ff91a7}
+.hv-share-mobile{display:none!important}
+.hv-share-desktop{display:inline-flex!important;align-items:center;justify-content:center}
+
+.home-page .sfida-share-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:7px;padding:8px 10px;border-top:1px solid var(--border-hairline);background:rgba(255,255,255,.015)}
+.home-page .sfida-share-btn{min-height:34px;padding:6px 9px;font-size:10.5px}
+.home-page .sfida-share-status{min-height:0;margin:0;padding:0 10px;color:#b7ff5c;font-size:10.5px;line-height:1.4}
+.home-page .sfida-share-status:not(:empty){padding-top:5px;padding-bottom:8px}
+
+@media(max-width:760px){
+  .hv-share-mobile{display:inline-flex!important;align-items:center;justify-content:center}
+  .hv-share-desktop{display:none!important}
+  .pagella-main{padding-top:12px}
+  .pagella-topbar{align-items:stretch;flex-direction:column-reverse}
+  .pagella-topbar-label{padding-left:2px}
+  .pagella-full-identita{grid-template-columns:92px minmax(0,1fr);gap:15px;padding:18px}
+  .pagella-team-logo,.pagella-team-logo-placeholder{width:84px;height:84px;border-radius:17px}
+  .pagella-full-heading h2{font-size:clamp(28px,9vw,42px);margin-top:6px}
+  .pagella-manager-name{font-size:13px}
+  .pagella-president-wrap{grid-column:1 / -1;justify-content:flex-start}
+  .pagella-president-img,.pagella-president-placeholder{width:118px;height:118px;border-radius:18px}
+  .pagella-content-full{grid-template-columns:1fr;padding:16px;gap:12px}
+  .pagella-full-voto{min-height:112px;display:grid;grid-template-columns:auto auto auto;justify-content:start;gap:12px;text-align:left;padding:16px 18px}
+  .pagella-full-voto-label{align-self:center}
+  .pagella-full-voto strong{font-size:52px;margin:0;align-self:center}
+  .pagella-full-badge{font-size:34px;align-self:center}
+  .pagella-full-commento{padding:18px;font-size:16px;line-height:1.72}
+  .pagella-actions{display:grid;grid-template-columns:1fr;gap:8px;padding:10px}
+  .pagella-action-btn{width:100%;min-height:46px}
+  .home-page .sfida-share-actions{justify-content:stretch}
+  .home-page .sfida-share-btn{width:100%;min-height:38px}
+}
+
+@media(max-width:420px){
+  .pagella-full-identita{grid-template-columns:72px minmax(0,1fr);padding:14px;gap:12px}
+  .pagella-team-logo,.pagella-team-logo-placeholder{width:68px;height:68px;padding:5px}
+  .pagella-full-heading .pv-eyebrow{font-size:9px;letter-spacing:.12em}
+  .pagella-president-img,.pagella-president-placeholder{width:96px;height:96px}
+  .pagella-full-commento{padding:15px}
+}

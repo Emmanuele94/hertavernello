@@ -45,7 +45,7 @@ function hv_giocatoriRilevanti(squadraId, match, roseData, squadreRef) {
     .filter((g) => g.codice === match.casaCodice || g.codice === match.trasfertaCodice);
 }
 
-function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, squadraFiltroId = "") {
+function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre = [], squadraFiltroId = "") {
   if (!match.matchday) return [];
   const giornataCal = (calendarioData.giornate || []).find((g) => Number(g.giornata) === Number(match.matchday));
   if (!giornataCal) return [];
@@ -64,7 +64,17 @@ function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendari
     const giocatoriB = hv_giocatoriRilevanti(idB, match, roseData, squadreRef);
     if (giocatoriA.length === 0 && giocatoriB.length === 0) return;
 
-    schede.push({ idA, idB, nomeA: squadraA.nomeReale, nomeB: squadraB.nomeReale, giocatoriA, giocatoriB });
+    const logoA = (loghiFantasquadre || []).find((l) => l.squadraId === idA && l.immaginePiccola);
+    const logoB = (loghiFantasquadre || []).find((l) => l.squadraId === idB && l.immaginePiccola);
+    schede.push({
+      idA, idB,
+      nomeA: squadraA.nomeReale, nomeB: squadraB.nomeReale,
+      fantasquadraA: squadraA.nomeFantasquadra || squadraA.nomeReale,
+      fantasquadraB: squadraB.nomeFantasquadra || squadraB.nomeReale,
+      logoAUrl: logoA ? `assets/stemmi-piccoli/${logoA.immaginePiccola}` : "",
+      logoBUrl: logoB ? `assets/stemmi-piccoli/${logoB.immaginePiccola}` : "",
+      giocatoriA, giocatoriB
+    });
   });
   return schede;
 }
@@ -76,8 +86,8 @@ function hv_giornoOrarioBreve(iso) {
   return HV_GIORNI_BREVI[d.getDay()] + " " + hv_orarioBreve(d.getTime());
 }
 
-function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggioPrecedente, squadraFiltroId = "") {
-  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, squadraFiltroId);
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggioPrecedente, squadraFiltroId = "") {
+  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, squadraFiltroId);
   if (squadraFiltroId && schede.length === 0) return null;
 
   const listaGiocatori = (giocatori) =>
@@ -91,8 +101,8 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       ? '<p class="muted" style="font-size:12.5px; padding:14px 16px;">Nessuno scontro di fantalega coinvolge queste due squadre</p>'
       : '<p class="muted" style="font-size:12.5px; padding:14px 16px;">Calendario di lega non disponibile per questa partita.</p>';
   } else {
-    corpo = `<div class="sfide-lista">${schede.map((s) => `
-      <div class="sfida-card">
+    corpo = `<div class="sfide-lista">${schede.map((s, index) => `
+      <div class="sfida-card" data-sfida-share-index="${index}">
         <div class="sfida-testata">
           <span class="sfida-team-name">${s.nomeA}</span>
           <span class="sfida-vs">vs</span>
@@ -102,6 +112,12 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
           <div class="sfida-lato">${listaGiocatori(s.giocatoriA)}</div>
           <div class="sfida-lato">${listaGiocatori(s.giocatoriB)}</div>
         </div>
+        <div class="sfida-share-actions">
+          <button type="button" class="sfida-share-btn hv-share-mobile" data-share-action="share" data-share-index="${index}">📤 Condividi</button>
+          <button type="button" class="sfida-share-btn hv-share-desktop" data-share-action="copy" data-share-index="${index}">📋 Copia immagine</button>
+          <button type="button" class="sfida-share-btn hv-share-desktop" data-share-action="download" data-share-index="${index}">⬇ PNG</button>
+        </div>
+        <p class="sfida-share-status" data-share-status="${index}" aria-live="polite"></p>
       </div>`).join("")}</div>`;
   }
 
@@ -164,6 +180,64 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
     dettagli.hidden = aperto;
     div.classList.toggle('is-open', !aperto);
   });
+
+  const statoCondivisione = match.live
+    ? `LIVE${match.minuto ? ` ${match.minuto}'` : ""}${match.golCasa != null && match.golTrasferta != null ? ` · ${match.golCasa}-${match.golTrasferta}` : ""}`
+    : match.finita
+      ? `FINALE${match.golCasa != null && match.golTrasferta != null ? ` · ${match.golCasa}-${match.golTrasferta}` : ""}`
+      : hv_giornoOrarioBreve(match.data);
+
+  div.querySelectorAll('[data-share-action]').forEach((button) => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const btn = event.currentTarget;
+      const index = Number(btn.dataset.shareIndex);
+      const sfida = schede[index];
+      if (!sfida || !window.HVShareCards) return;
+      const status = div.querySelector(`[data-share-status="${index}"]`);
+      const original = btn.dataset.originalLabel || btn.textContent;
+      btn.dataset.originalLabel = original;
+      btn.disabled = true;
+      if (status) status.textContent = 'Creo l’immagine…';
+      try {
+        const canvas = await window.HVShareCards.renderSfida({
+          partitaReale: `${match.casaNome} vs ${match.trasfertaNome}`,
+          statoPartita: statoCondivisione,
+          fantasquadraA: sfida.fantasquadraA,
+          fantasquadraB: sfida.fantasquadraB,
+          nomeA: sfida.nomeA,
+          nomeB: sfida.nomeB,
+          logoAUrl: sfida.logoAUrl,
+          logoBUrl: sfida.logoBUrl,
+          giocatoriA: sfida.giocatoriA,
+          giocatoriB: sfida.giocatoriB,
+        });
+        const baseName = window.HVShareCards.safeFileName(`${sfida.fantasquadraA}-vs-${sfida.fantasquadraB}`);
+        if (btn.dataset.shareAction === 'share') {
+          const result = await window.HVShareCards.shareCanvas(canvas, {
+            filename: `${baseName}.png`,
+            title: `${sfida.fantasquadraA} vs ${sfida.fantasquadraB}`,
+            text: 'Chi gioca contro chi · Hertavernello',
+          });
+          if (status) status.textContent = result.mode === 'copy' ? 'Immagine copiata negli appunti.' : result.mode === 'download' ? 'PNG scaricato.' : '';
+        } else if (btn.dataset.shareAction === 'copy') {
+          await window.HVShareCards.copyCanvas(canvas);
+          btn.textContent = '✓ Copiata';
+          if (status) status.textContent = 'Immagine copiata: incollala direttamente su WhatsApp Web.';
+        } else {
+          await window.HVShareCards.downloadCanvas(canvas, `${baseName}.png`);
+          btn.textContent = '✓ PNG creato';
+          if (status) status.textContent = 'PNG pronto.';
+        }
+      } catch (err) {
+        if (err?.name !== 'AbortError' && status) status.textContent = `Condivisione non riuscita: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        if (btn.textContent !== original) setTimeout(() => { btn.textContent = original; }, 1700);
+      }
+    });
+  });
   return div;
 }
 
@@ -179,10 +253,11 @@ async function hv_renderIncrocio(config) {
   wrap.innerHTML = '<p class="empty-state">Carico le partite...</p>';
 
   try {
-    const [squadreRef, roseRes, calendarioRes] = await Promise.all([
+    const [squadreRef, roseRes, calendarioRes, loghiFantasquadre] = await Promise.all([
       hv_caricaSquadreRef(),
       fetch("data/rose.json", { cache: "no-store" }),
       fetch("data/calendario.json", { cache: "no-store" }),
+      hv_caricaLoghiFantasquadre(),
     ]);
     const roseData = await roseRes.json();
     const calendarioData = await calendarioRes.json();
@@ -245,7 +320,7 @@ async function hv_renderIncrocio(config) {
       let visibili = 0;
       partite.forEach((match) => {
         if (!match.casaCodice || !match.trasfertaCodice) return;
-        const card = hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, punteggiPrecedenti[match.id], squadraFiltroId);
+        const card = hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggiPrecedenti[match.id], squadraFiltroId);
         if (!card) return;
         grid.appendChild(card);
         visibili += 1;
