@@ -458,6 +458,47 @@ async function hv_renderBadge(squadraId, risultati, rose, giocatoriDb, config) {
     .join("");
 }
 
+function hv_renderPagellaPreview(squadra, pagella) {
+  const host = document.getElementById("squadra-pagella-preview");
+  if (!host) return;
+  const nome = squadra.nomeFantasquadra || squadra.nomeReale;
+  const link = `pagella.html?squadra=${encodeURIComponent(squadra.id)}`;
+  if (!pagella) {
+    host.innerHTML = `
+      <div class="squadra-pagella-preview-head">
+        <div class="squadra-pagella-preview-title">
+          <img src="assets/icone/icon-pagella.png" alt="">
+          <span>Pagella dell'asta</span>
+        </div>
+      </div>
+      <div class="squadra-pagella-preview-empty">
+        <strong>Pagella non ancora disponibile</strong>
+        <span>Quando verrà inserita dall'Admin, comparirà qui senza occupare tutta la pagina.</span>
+      </div>`;
+    return;
+  }
+
+  const stato = typeof hv_statoVoto === "function" ? hv_statoVoto(pagella.voto) : (Number(pagella.voto) >= 7 ? "promosso" : Number(pagella.voto) >= 5.5 ? "medio" : "bocciato");
+  const commento = String(pagella.commento || "").trim();
+  host.innerHTML = `
+    <div class="squadra-pagella-preview-head">
+      <div class="squadra-pagella-preview-title">
+        <img src="assets/icone/icon-pagella.png" alt="">
+        <span>Pagella dell'asta</span>
+      </div>
+      <span class="squadra-pagella-preview-team">${hv_escapeHtml(nome)}</span>
+    </div>
+    <div class="squadra-pagella-preview-voto ${stato}">
+      <span class="squadra-pagella-preview-medaglia">${hv_escapeHtml(pagella.badge || "🏅")}</span>
+      <div>
+        <span>Voto</span>
+        <strong>${hv_escapeHtml(pagella.voto ?? "—")}</strong>
+      </div>
+    </div>
+    <p class="squadra-pagella-preview-commento">${hv_escapeHtml(commento || "Pagella pronta da leggere.")}</p>
+    <a class="squadra-pagella-preview-link" href="${link}">Apri pagella completa <span aria-hidden="true">→</span></a>`;
+}
+
 function hv_renderIntestazioneSquadra(squadra, logo, posizioneLega) {
   document.getElementById("squadra-nome-grande").textContent = squadra.nomeFantasquadra || squadra.nomeReale;
 
@@ -1019,9 +1060,10 @@ function hv_renderStoricoMercato(squadraId, mercatoData, config) {
 async function hv_initSquadre(config) {
   document.getElementById("lega-nome").textContent = config.lega.nome;
 
-  const [roseRes, previsioniRes, loghiRes, risultatiRes, mercatoRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
+  const [roseRes, previsioniRes, pagelleRes, loghiRes, risultatiRes, mercatoRes, squadreRef, giocatoriDb, nazioni] = await Promise.all([
     fetch("data/rose.json"),
     fetch("data/previsioni.json"),
+    fetch("data/pagelle.json", { cache: "no-store" }),
     fetch("data/loghi-fantasquadre.json"),
     fetch("data/risultati.json"),
     fetch("data/mercato.json"),
@@ -1031,6 +1073,7 @@ async function hv_initSquadre(config) {
   ]);
   const { rose } = await roseRes.json();
   const { previsioni } = await previsioniRes.json();
+  const { pagelle } = await pagelleRes.json();
   const { loghi } = await loghiRes.json();
   const { risultati } = await risultatiRes.json();
   const mercatoData = await mercatoRes.json();
@@ -1076,9 +1119,11 @@ async function hv_initSquadre(config) {
     if (pagellaLink) pagellaLink.href = `pagella.html?squadra=${encodeURIComponent(squadra.id)}`;
     const roster = (rose || []).find((r) => r.squadraId === squadra.id);
     const previsione = (previsioni || []).find((p) => p.squadraId === squadra.id);
+    const pagella = (pagelle || []).find((p) => p.squadraId === squadra.id);
     const logo = (loghi || []).find((l) => l.squadraId === squadra.id);
     const posizioneLega = classificaLega.find((r) => r.squadra.id === squadra.id)?.posizione || null;
     hv_renderIntestazioneSquadra(squadra, logo, posizioneLega);
+    hv_renderPagellaPreview(squadra, pagella);
     hv_renderBadge(squadra.id, risultati, rose, giocatoriDb, config);
     hv_renderStoricoMercato(squadra.id, mercatoData, config);
     hv_renderLogoUploadAdmin(squadra.id, config, logo);

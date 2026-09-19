@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
-<link rel="stylesheet" href="css/restyling.css?v=20260919-pagellashare1">
+<link rel="stylesheet" href="css/restyling.css?v=20260919-pagelladesign2">
 <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
 <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 <script defer src="js/admin-icone-home.js?v=20260914-mobile2"></script>
@@ -73,14 +73,24 @@
 
       <div id="tabs" class="tabs"></div>
 
-      <div class="squadra-intestazione">
-        <div id="squadra-logo-wrap" class="squadra-logo-wrap"></div>
-        <div class="squadra-intestazione-testo">
-          <h2 id="squadra-nome-grande"></h2>
-          <a id="pagella-page-link" class="pagella-mini-badge" href="pagella.html">📝 Pagella</a>
-          <div id="squadra-logo-upload-admin"></div>
+      <div class="squadra-intestazione squadra-intestazione-editoriale">
+        <div class="squadra-hero-identita">
+          <div id="squadra-logo-wrap" class="squadra-logo-wrap squadra-presidente-wrap"></div>
+          <div class="squadra-intestazione-testo squadra-hero-testo">
+            <span class="squadra-hero-eyebrow">LA FANTASQUADRA DI</span>
+            <h2 id="squadra-nome-grande"></h2>
+            <a id="pagella-page-link" class="pagella-mini-badge" href="pagella.html">
+              <img src="assets/icone/icon-pagella.png" class="pagella-mini-badge-icon" alt="">
+              <span>Pagella</span>
+            </a>
+            <div id="squadra-logo-piccolo-posizione-wrap" class="squadra-logo-piccolo-posizione-wrap squadra-identita-compact"></div>
+            <div id="squadra-logo-upload-admin"></div>
+          </div>
         </div>
-        <div id="squadra-logo-piccolo-posizione-wrap" class="squadra-logo-piccolo-posizione-wrap"></div>
+
+        <aside id="squadra-pagella-preview" class="squadra-pagella-preview" aria-live="polite">
+          <div class="squadra-pagella-preview-empty">Carico la pagella…</div>
+        </aside>
       </div>
 
       <div id="squadra-badge-wrap" class="squadra-badge-wrap"></div>
@@ -182,7 +192,7 @@
   <script src="js/giocatori.js?v=20260916-adminmarket1"></script>
   <script src="js/calcolo-derivati.js?v=20260914-mobile2"></script>
   <script src="js/github-api.js?v=20260914-mobile2"></script>
-  <script src="js/squadre.js?v=20260919-pagellashare1"></script>
+  <script src="js/squadre.js?v=20260919-pagelladesign2"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

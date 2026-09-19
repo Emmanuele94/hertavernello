@@ -42,6 +42,144 @@
     return hvPagellaCanvasPromise;
   }
 
+  function hvStatoVoto(voto) {
+    const n = Number(voto);
+    if (n >= 7) return "promosso";
+    if (n >= 5.5) return "medio";
+    return "bocciato";
+  }
+
+  function hvRenderTeamTabs(squadre, attivaId) {
+    const host = document.getElementById("pagella-team-tabs");
+    if (!host) return;
+    host.innerHTML = "";
+    (squadre || []).forEach((squadra) => {
+      const a = document.createElement("a");
+      a.className = `pagella-team-tab${squadra.id === attivaId ? " active" : ""}`;
+      a.href = `pagella.html?squadra=${encodeURIComponent(squadra.id)}`;
+      a.textContent = squadra.nomeReale || squadra.nomeFantasquadra;
+      a.title = `Apri la pagella di ${squadra.nomeFantasquadra || squadra.nomeReale}`;
+      host.appendChild(a);
+    });
+    requestAnimationFrame(() => host.querySelector(".pagella-team-tab.active")?.scrollIntoView({ inline: "center", block: "nearest" }));
+  }
+
+  function hvSetImage(imgId, placeholderId, url) {
+    const img = document.getElementById(imgId);
+    const placeholder = document.getElementById(placeholderId);
+    if (!img || !placeholder) return;
+    if (url) {
+      img.src = url;
+      img.classList.remove("hidden");
+      placeholder.classList.add("hidden");
+    } else {
+      img.removeAttribute("src");
+      img.classList.add("hidden");
+      placeholder.classList.remove("hidden");
+    }
+  }
+
+  function hvRenderPagellaContent(pagella) {
+    const content = document.getElementById("pagella-content-full");
+    content.innerHTML = "";
+    if (!pagella) {
+      const p = document.createElement("p");
+      p.className = "empty-state pagella-empty-state";
+      p.textContent = "Pagella non ancora inserita per questa fantasquadra.";
+      content.appendChild(p);
+      document.getElementById("pagella-actions")?.classList.add("hidden");
+      return;
+    }
+
+    const stato = hvStatoVoto(pagella.voto);
+    const score = document.createElement("div");
+    score.className = `pagella-voto-top ${stato}`;
+    score.innerHTML = `
+      <div class="pagella-voto-top-badge" aria-hidden="true">${pagella.badge || "🏅"}</div>
+      <div class="pagella-voto-top-copy">
+        <span class="pagella-full-voto-label">Voto finale</span>
+        <strong>${pagella.voto ?? "—"}</strong>
+      </div>
+      <div class="pagella-voto-top-note">
+        <strong>Pagella dell'asta</strong>
+        <span>Il verdetto di Hertavernello, senza appello.</span>
+      </div>`;
+
+    const article = document.createElement("article");
+    article.className = "pagella-full-commento pagella-full-commento-v2";
+    article.textContent = pagella.commento || "";
+
+    content.append(score, article);
+    document.getElementById("pagella-actions")?.classList.remove("hidden");
+  }
+
+  function hvWireActions(squadra) {
+    document.getElementById("pagella-copy-text")?.addEventListener("click", async (event) => {
+      try {
+        await navigator.clipboard.writeText(hvPagellaText(hvPagellaShareData));
+        hvPagellaFeedbackButton(event.currentTarget, "✓ Testo copiato");
+        hvPagellaSetStatus("Pagella copiata negli appunti.");
+      } catch (err) {
+        hvPagellaSetStatus(`Non riesco a copiare il testo: ${err.message}`, true);
+      }
+    });
+
+    document.getElementById("pagella-copy-image")?.addEventListener("click", async (event) => {
+      const btn = event.currentTarget;
+      btn.disabled = true;
+      hvPagellaSetStatus("Creo l'immagine...");
+      try {
+        const canvas = await hvGetPagellaCanvas();
+        await window.HVShareCards.copyCanvas(canvas);
+        hvPagellaFeedbackButton(btn, "✓ Immagine copiata");
+        hvPagellaSetStatus("Immagine copiata: puoi incollarla direttamente su WhatsApp Web, Telegram o dove vuoi.");
+      } catch (err) {
+        hvPagellaSetStatus(`${err.message} Puoi usare “Scarica PNG”.`, true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById("pagella-download-image")?.addEventListener("click", async (event) => {
+      const btn = event.currentTarget;
+      btn.disabled = true;
+      hvPagellaSetStatus("Creo il PNG...");
+      try {
+        const canvas = await hvGetPagellaCanvas();
+        const name = window.HVShareCards.safeFileName(`pagella-${squadra.nomeFantasquadra || squadra.nomeReale}`);
+        await window.HVShareCards.downloadCanvas(canvas, `${name}.png`);
+        hvPagellaFeedbackButton(btn, "✓ PNG creato");
+        hvPagellaSetStatus("PNG pronto.");
+      } catch (err) {
+        hvPagellaSetStatus(err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById("pagella-share-image")?.addEventListener("click", async (event) => {
+      const btn = event.currentTarget;
+      btn.disabled = true;
+      hvPagellaSetStatus("Preparo la condivisione...");
+      try {
+        const canvas = await hvGetPagellaCanvas();
+        const name = window.HVShareCards.safeFileName(`pagella-${squadra.nomeFantasquadra || squadra.nomeReale}`);
+        const result = await window.HVShareCards.shareCanvas(canvas, {
+          filename: `${name}.png`,
+          title: `Pagella ${squadra.nomeFantasquadra || squadra.nomeReale}`,
+          text: "Pagella dell'asta · Hertavernello",
+        });
+        if (result.mode === "copy") hvPagellaSetStatus("Condivisione non disponibile: immagine copiata negli appunti.");
+        else if (result.mode === "download") hvPagellaSetStatus("Condivisione non disponibile: ho scaricato il PNG.");
+        else hvPagellaSetStatus("");
+      } catch (err) {
+        if (err?.name !== "AbortError") hvPagellaSetStatus(err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
   async function hvInitPagella(config) {
     document.getElementById("lega-nome").textContent = config.lega.nome;
     const params = new URLSearchParams(window.location.search);
@@ -53,6 +191,7 @@
       return;
     }
 
+    hvRenderTeamTabs(config.squadre || [], squadra.id);
     document.title = `Pagella ${squadra.nomeFantasquadra || squadra.nomeReale} — Hertavernello`;
     document.getElementById("pagella-back-link").href = `squadre.html?squadra=${encodeURIComponent(squadra.id)}`;
     document.getElementById("pagella-team-name").textContent = squadra.nomeFantasquadra || squadra.nomeReale;
@@ -71,108 +210,14 @@
 
       const logoSquadraUrl = logo.immaginePiccola ? `assets/stemmi-piccoli/${logo.immaginePiccola}` : "";
       const presidenteUrl = logo.immagine ? `assets/stemmi/${logo.immagine}` : "";
+      hvSetImage("pagella-team-logo", "pagella-team-logo-placeholder", logoSquadraUrl);
+      hvSetImage("pagella-president-img", "pagella-president-placeholder", presidenteUrl);
+      hvRenderPagellaContent(pagella);
 
-      const teamLogo = document.getElementById("pagella-team-logo");
-      const teamPlaceholder = document.getElementById("pagella-team-logo-placeholder");
-      if (logoSquadraUrl) {
-        teamLogo.src = logoSquadraUrl;
-        teamLogo.classList.remove("hidden");
-        teamPlaceholder.classList.add("hidden");
-      }
-
-      const presidentImg = document.getElementById("pagella-president-img");
-      const presidentPlaceholder = document.getElementById("pagella-president-placeholder");
-      if (presidenteUrl) {
-        presidentImg.src = presidenteUrl;
-        presidentImg.classList.remove("hidden");
-        presidentPlaceholder.classList.add("hidden");
-      }
-
-      const content = document.getElementById("pagella-content-full");
-      if (!pagella) {
-        content.innerHTML = '<p class="empty-state">Pagella non ancora inserita per questa fantasquadra.</p>';
-        return;
-      }
-
-      const stato = typeof hv_statoVoto === "function" ? hv_statoVoto(pagella.voto) : (pagella.voto >= 7 ? "promosso" : pagella.voto >= 5.5 ? "medio" : "bocciato");
-      content.innerHTML = `
-        <div class="pagella-full-voto ${stato}">
-          <span class="pagella-full-voto-label">Voto</span>
-          <strong>${pagella.voto ?? "—"}</strong>
-          ${pagella.badge ? `<span class="pagella-full-badge">${pagella.badge}</span>` : ""}
-        </div>
-        <article class="pagella-full-commento"></article>
-      `;
-      content.querySelector(".pagella-full-commento").textContent = pagella.commento || "";
-      document.getElementById("pagella-actions").classList.remove("hidden");
-
+      if (!pagella) return;
       hvPagellaShareData = { squadra, pagella, logoSquadraUrl, presidenteUrl };
       hvPagellaCanvasPromise = null;
-
-      document.getElementById("pagella-copy-text").addEventListener("click", async (event) => {
-        try {
-          await navigator.clipboard.writeText(hvPagellaText(hvPagellaShareData));
-          hvPagellaFeedbackButton(event.currentTarget, "✓ Testo copiato");
-          hvPagellaSetStatus("Pagella copiata negli appunti.");
-        } catch (err) {
-          hvPagellaSetStatus(`Non riesco a copiare il testo: ${err.message}`, true);
-        }
-      });
-
-      document.getElementById("pagella-copy-image").addEventListener("click", async (event) => {
-        const btn = event.currentTarget;
-        btn.disabled = true;
-        hvPagellaSetStatus("Creo l'immagine...");
-        try {
-          const canvas = await hvGetPagellaCanvas();
-          await window.HVShareCards.copyCanvas(canvas);
-          hvPagellaFeedbackButton(btn, "✓ Immagine copiata");
-          hvPagellaSetStatus("Immagine copiata: puoi incollarla direttamente su WhatsApp Web, Telegram o dove vuoi.");
-        } catch (err) {
-          hvPagellaSetStatus(`${err.message} Puoi usare “Scarica PNG”.`, true);
-        } finally {
-          btn.disabled = false;
-        }
-      });
-
-      document.getElementById("pagella-download-image").addEventListener("click", async (event) => {
-        const btn = event.currentTarget;
-        btn.disabled = true;
-        hvPagellaSetStatus("Creo il PNG...");
-        try {
-          const canvas = await hvGetPagellaCanvas();
-          const name = window.HVShareCards.safeFileName(`pagella-${squadra.nomeFantasquadra || squadra.nomeReale}`);
-          await window.HVShareCards.downloadCanvas(canvas, `${name}.png`);
-          hvPagellaFeedbackButton(btn, "✓ PNG creato");
-          hvPagellaSetStatus("PNG pronto.");
-        } catch (err) {
-          hvPagellaSetStatus(err.message, true);
-        } finally {
-          btn.disabled = false;
-        }
-      });
-
-      document.getElementById("pagella-share-image").addEventListener("click", async (event) => {
-        const btn = event.currentTarget;
-        btn.disabled = true;
-        hvPagellaSetStatus("Preparo la condivisione...");
-        try {
-          const canvas = await hvGetPagellaCanvas();
-          const name = window.HVShareCards.safeFileName(`pagella-${squadra.nomeFantasquadra || squadra.nomeReale}`);
-          const result = await window.HVShareCards.shareCanvas(canvas, {
-            filename: `${name}.png`,
-            title: `Pagella ${squadra.nomeFantasquadra || squadra.nomeReale}`,
-            text: "Pagella dell'asta · Hertavernello",
-          });
-          if (result.mode === "copy") hvPagellaSetStatus("Condivisione non disponibile: immagine copiata negli appunti.");
-          else if (result.mode === "download") hvPagellaSetStatus("Condivisione non disponibile: ho scaricato il PNG.");
-          else hvPagellaSetStatus("");
-        } catch (err) {
-          if (err?.name !== "AbortError") hvPagellaSetStatus(err.message, true);
-        } finally {
-          btn.disabled = false;
-        }
-      });
+      hvWireActions(squadra);
     } catch (err) {
       document.getElementById("pagella-content-full").innerHTML = `<p class="empty-state">${err.message}</p>`;
     }

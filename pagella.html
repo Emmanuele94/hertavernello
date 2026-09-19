@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
-  <link rel="stylesheet" href="css/restyling.css?v=20260919-pagellashare1">
+  <link rel="stylesheet" href="css/restyling.css?v=20260919-pagelladesign2">
   <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
   <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 </head>
@@ -49,40 +49,58 @@
     </header>
 
     <main class="pagella-main">
-      <div class="pagella-topbar">
-        <a id="pagella-back-link" class="pagella-back-link" href="squadre.html">← Torna alla squadra</a>
-        <span class="pagella-topbar-label">Pagella dell'asta</span>
-      </div>
+      <section class="pagella-switcher" aria-label="Seleziona fantallenatore">
+        <span class="pagella-switcher-label">Seleziona un fantallenatore</span>
+        <div id="pagella-team-tabs" class="pagella-team-tabs"></div>
+      </section>
 
-      <section id="pagella-full-card" class="pagella-full-card" aria-live="polite">
-        <div class="pagella-full-identita">
+      <section class="pagella-profile-header">
+        <div class="pagella-profile-visuals">
+          <div class="pagella-president-wrap">
+            <img id="pagella-president-img" class="pagella-president-img hidden" alt="Foto fantallenatore">
+            <div id="pagella-president-placeholder" class="pagella-president-placeholder">👤</div>
+          </div>
           <div class="pagella-team-logo-wrap">
             <img id="pagella-team-logo" class="pagella-team-logo hidden" alt="Stemma fantasquadra">
             <div id="pagella-team-logo-placeholder" class="pagella-team-logo-placeholder">HV</div>
           </div>
-          <div class="pagella-full-heading">
-            <span class="pv-eyebrow">HERTAVERNELLO · PAGELLA DELL'ASTA</span>
-            <h2 id="pagella-team-name">Pagella</h2>
-            <p id="pagella-manager-name" class="pagella-manager-name"></p>
+        </div>
+
+        <div class="pagella-full-heading">
+          <span class="pv-eyebrow">HERTAVERNELLO · PAGELLA DELL'ASTA</span>
+          <h2 id="pagella-team-name">Pagella</h2>
+          <p id="pagella-manager-name" class="pagella-manager-name"></p>
+          <span class="pagella-heading-badge">
+            <img src="assets/icone/icon-pagella.png" alt="">
+            Pagella
+          </span>
+        </div>
+
+        <a id="pagella-back-link" class="pagella-back-link" href="squadre.html">← Torna a Squadre</a>
+      </section>
+
+      <section id="pagella-full-card" class="pagella-full-card" aria-live="polite">
+        <div class="pagella-card-toolbar">
+          <div class="pagella-card-title">
+            <img src="assets/icone/icon-pagella.png" class="pagella-card-title-icon" alt="">
+            <div>
+              <span class="pagella-card-kicker">PAGELLA DELL'ASTA</span>
+              <strong>Voto e giudizio della tua asta</strong>
+            </div>
           </div>
-          <div class="pagella-president-wrap">
-            <img id="pagella-president-img" class="pagella-president-img hidden" alt="Fantallenatore">
-            <div id="pagella-president-placeholder" class="pagella-president-placeholder">👤</div>
+          <div id="pagella-actions" class="pagella-actions hidden" aria-label="Azioni pagella">
+            <button type="button" id="pagella-copy-text" class="pagella-action-btn">📋 Copia testo</button>
+            <button type="button" id="pagella-share-image" class="pagella-action-btn hv-share-mobile">📤 Condividi</button>
+            <button type="button" id="pagella-copy-image" class="pagella-action-btn hv-share-desktop">📋 Copia immagine</button>
+            <button type="button" id="pagella-download-image" class="pagella-action-btn hv-share-desktop">⬇ Scarica PNG</button>
           </div>
         </div>
 
         <div id="pagella-content-full" class="pagella-content-full">
           <p class="empty-state">Carico la pagella...</p>
         </div>
+        <p id="pagella-action-status" class="pagella-action-status" aria-live="polite"></p>
       </section>
-
-      <section id="pagella-actions" class="pagella-actions hidden" aria-label="Azioni pagella">
-        <button type="button" id="pagella-copy-text" class="pagella-action-btn">📋 Copia testo</button>
-        <button type="button" id="pagella-share-image" class="pagella-action-btn hv-share-mobile">📤 Condividi immagine</button>
-        <button type="button" id="pagella-copy-image" class="pagella-action-btn hv-share-desktop">📋 Copia immagine</button>
-        <button type="button" id="pagella-download-image" class="pagella-action-btn hv-share-desktop">⬇ Scarica PNG</button>
-      </section>
-      <p id="pagella-action-status" class="pagella-action-status" aria-live="polite"></p>
     </main>
 
     <footer class="site-footer">
@@ -106,7 +124,7 @@
   <script src="js/auth.js?v=20260914-mobile2"></script>
   <script src="js/regolamento-modal.js?v=20260914-mobile2"></script>
   <script src="js/share-cards.js?v=20260919-pagellashare1"></script>
-  <script src="js/pagella.js?v=20260919-pagellashare1"></script>
+  <script src="js/pagella.js?v=20260919-pagelladesign2"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
