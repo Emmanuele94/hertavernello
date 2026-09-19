@@ -37,15 +37,27 @@ function hv_countdown(dataAstaISO, elementId, etichetta) {
 }
 
 // ===== Incrocio: schede sfida per ogni scontro di fantalega coinvolto nella partita reale =====
-function hv_giocatoriRilevanti(squadraId, match, roseData, squadreRef) {
+function hv_giocatoriRilevanti(squadraId, match, roseData, squadreRef, giocatoriDb = []) {
   const entry = (roseData.rose || []).find((r) => r.squadraId === squadraId);
   if (!entry) return [];
   return (entry.giocatori || [])
-    .map((g) => ({ nome: g.nome, codice: hv_trovaCodice(g.squadraReale, squadreRef) }))
+    .map((g) => {
+      const codice = hv_trovaCodice(g.squadraReale, squadreRef);
+      const db = typeof hv_trovaGiocatore === "function"
+        ? hv_trovaGiocatore(g.nome, codice, giocatoriDb, g.fantacalcioId)
+        : null;
+      return {
+        nome: g.nome,
+        codice,
+        fotoUrl: db?.foto || "",
+        squadraReale: g.squadraReale || db?.squadraReale || "",
+        logoRealeUrl: codice ? `assets/loghi/${codice}.png` : "",
+      };
+    })
     .filter((g) => g.codice === match.casaCodice || g.codice === match.trasfertaCodice);
 }
 
-function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre = [], squadraFiltroId = "") {
+function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre = [], squadraFiltroId = "", giocatoriDb = []) {
   if (!match.matchday) return [];
   const giornataCal = (calendarioData.giornate || []).find((g) => Number(g.giornata) === Number(match.matchday));
   if (!giornataCal) return [];
@@ -60,8 +72,8 @@ function hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendari
     const squadraB = config.squadre.find((s) => s.id === idB);
     if (!squadraA || !squadraB) return;
 
-    const giocatoriA = hv_giocatoriRilevanti(idA, match, roseData, squadreRef);
-    const giocatoriB = hv_giocatoriRilevanti(idB, match, roseData, squadreRef);
+    const giocatoriA = hv_giocatoriRilevanti(idA, match, roseData, squadreRef, giocatoriDb);
+    const giocatoriB = hv_giocatoriRilevanti(idB, match, roseData, squadreRef, giocatoriDb);
     if (giocatoriA.length === 0 && giocatoriB.length === 0) return;
 
     const logoA = (loghiFantasquadre || []).find((l) => l.squadraId === idA && l.immaginePiccola);
@@ -86,8 +98,8 @@ function hv_giornoOrarioBreve(iso) {
   return HV_GIORNI_BREVI[d.getDay()] + " " + hv_orarioBreve(d.getTime());
 }
 
-function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggioPrecedente, squadraFiltroId = "") {
-  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, squadraFiltroId);
+function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggioPrecedente, squadraFiltroId = "", giocatoriDb = []) {
+  const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, squadraFiltroId, giocatoriDb);
   if (squadraFiltroId && schede.length === 0) return null;
 
   const listaGiocatori = (giocatori) =>
@@ -253,11 +265,12 @@ async function hv_renderIncrocio(config) {
   wrap.innerHTML = '<p class="empty-state">Carico le partite...</p>';
 
   try {
-    const [squadreRef, roseRes, calendarioRes, loghiFantasquadre] = await Promise.all([
+    const [squadreRef, roseRes, calendarioRes, loghiFantasquadre, giocatoriDb] = await Promise.all([
       hv_caricaSquadreRef(),
       fetch("data/rose.json", { cache: "no-store" }),
       fetch("data/calendario.json", { cache: "no-store" }),
       hv_caricaLoghiFantasquadre(),
+      typeof hv_caricaGiocatoriDb === "function" ? hv_caricaGiocatoriDb() : Promise.resolve([]),
     ]);
     const roseData = await roseRes.json();
     const calendarioData = await calendarioRes.json();
@@ -320,7 +333,7 @@ async function hv_renderIncrocio(config) {
       let visibili = 0;
       partite.forEach((match) => {
         if (!match.casaCodice || !match.trasfertaCodice) return;
-        const card = hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggiPrecedenti[match.id], squadraFiltroId);
+        const card = hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggiPrecedenti[match.id], squadraFiltroId, giocatoriDb);
         if (!card) return;
         grid.appendChild(card);
         visibili += 1;

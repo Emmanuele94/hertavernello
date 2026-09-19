@@ -251,13 +251,25 @@
 
   async function hvRenderSfida(data) {
     if (document.fonts && document.fonts.ready) await document.fonts.ready.catch(() => {});
-    const [logoA, logoB] = await Promise.all([
-      hvLoadImage(data.logoAUrl),
-      hvLoadImage(data.logoBUrl),
-    ]);
 
-    const maxPlayers = Math.max((data.giocatoriA || []).length, (data.giocatoriB || []).length, 1);
-    const height = Math.max(900, 650 + maxPlayers * 62);
+    const playersA = data.giocatoriA || [];
+    const playersB = data.giocatoriB || [];
+    const imageSources = [
+      data.logoAUrl, data.logoBUrl,
+      ...playersA.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
+      ...playersB.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
+    ];
+    const loaded = await Promise.all(imageSources.map(hvLoadImage));
+    const logoA = loaded[0];
+    const logoB = loaded[1];
+    let cursor = 2;
+    const assetsA = playersA.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
+    const assetsB = playersB.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
+
+    const maxPlayers = Math.max(playersA.length, playersB.length, 1);
+    const rowH = 92;
+    const listY = 610;
+    const height = Math.max(930, listY + 86 + maxPlayers * rowH + 70);
     const width = 1080;
     const canvas = document.createElement("canvas");
     canvas.width = width;
@@ -283,17 +295,15 @@
     ctx.font = "700 21px Inter, Arial, sans-serif";
     ctx.fillText(data.statoPartita || "", 540, 184);
 
-    hvDrawImageContain(ctx, logoA, 80, 265, 145, 145, 28, C.card2);
-    hvDrawImageContain(ctx, logoB, 855, 265, 145, 145, 28, C.card2);
+    hvDrawImageContain(ctx, logoA, 80, 255, 150, 150, 28, C.card2);
+    hvDrawImageContain(ctx, logoB, 850, 255, 150, 150, 28, C.card2);
 
     ctx.fillStyle = C.yellow;
     ctx.font = "800 36px Inter, Arial, sans-serif";
     ctx.textAlign = "left";
-    const aLines = hvWrapLines(ctx, data.fantasquadraA || data.nomeA || "Squadra A", 300).slice(0, 2);
-    hvDrawTextLines(ctx, aLines, 80, 455, 43);
+    hvDrawTextLines(ctx, hvWrapLines(ctx, data.fantasquadraA || data.nomeA || "Squadra A", 300).slice(0, 2), 80, 458, 43);
     ctx.textAlign = "right";
-    const bLines = hvWrapLines(ctx, data.fantasquadraB || data.nomeB || "Squadra B", 300).slice(0, 2);
-    hvDrawTextLines(ctx, bLines, 1000, 455, 43);
+    hvDrawTextLines(ctx, hvWrapLines(ctx, data.fantasquadraB || data.nomeB || "Squadra B", 300).slice(0, 2), 1000, 458, 43);
 
     ctx.fillStyle = C.muted;
     ctx.font = "600 21px Inter, Arial, sans-serif";
@@ -307,45 +317,46 @@
     ctx.font = "900 58px Inter, Arial, sans-serif";
     ctx.fillText("VS", 540, 385);
 
-    const listY = 600;
-    const listH = height - listY - 100;
+    const listH = height - listY - 55;
     hvFillRoundRect(ctx, 60, listY, 460, listH, 26, "rgba(8,16,25,.82)", C.line);
     hvFillRoundRect(ctx, 560, listY, 460, listH, 26, "rgba(8,16,25,.82)", C.line);
 
-    const drawPlayers = (players, x, y, w) => {
+    const drawPlayers = (players, assets, x, y, w) => {
       ctx.textAlign = "left";
-      if (!players || !players.length) {
+      if (!players.length) {
         ctx.fillStyle = C.muted;
-        ctx.font = "500 24px Inter, Arial, sans-serif";
-        ctx.fillText("Nessun giocatore qui", x, y);
+        ctx.font = "500 23px Inter, Arial, sans-serif";
+        ctx.fillText("Nessun giocatore qui", x, y + 20);
         return;
       }
-      players.forEach((p, idx) => {
-        const yy = y + idx * 62;
-        ctx.fillStyle = C.lime;
-        ctx.beginPath();
-        ctx.arc(x + 8, yy - 7, 5, 0, Math.PI * 2);
-        ctx.fill();
+      players.forEach((player, idx) => {
+        const yy = y + idx * rowH;
+        const media = assets[idx] || {};
+        hvDrawImageContain(ctx, media.photo, x, yy, 64, 64, 16, C.card2);
         ctx.fillStyle = C.text;
-        ctx.font = "700 25px Inter, Arial, sans-serif";
-        const code = p.codice ? ` · ${p.codice}` : "";
-        let label = `${p.nome}${code}`;
-        while (ctx.measureText(label).width > w - 40 && label.length > 12) label = `${label.slice(0, -4)}…`;
-        ctx.fillText(label, x + 27, yy);
+        ctx.font = "800 23px Inter, Arial, sans-serif";
+        let name = String(player.nome || "Giocatore");
+        while (ctx.measureText(name).width > w - 92 && name.length > 10) name = `${name.slice(0, -3)}…`;
+        ctx.fillText(name, x + 80, yy + 29);
+        ctx.fillStyle = C.muted;
+        ctx.font = "600 17px Inter, Arial, sans-serif";
+        const club = player.squadraReale || player.codice || "";
+        if (media.club) {
+          hvDrawImageContain(ctx, media.club, x + 80, yy + 38, 22, 22, 6, "rgba(255,255,255,.03)");
+          ctx.fillText(club, x + 110, yy + 55);
+        } else {
+          ctx.fillText(club, x + 80, yy + 54);
+        }
       });
     };
 
-    drawPlayers(data.giocatoriA || [], 92, listY + 58, 400);
-    drawPlayers(data.giocatoriB || [], 592, listY + 58, 400);
+    drawPlayers(playersA, assetsA, 86, listY + 38, 410);
+    drawPlayers(playersB, assetsB, 586, listY + 38, 410);
 
-    ctx.textAlign = "left";
-    ctx.fillStyle = C.muted;
-    ctx.font = "500 19px Inter, Arial, sans-serif";
-    ctx.fillText("Pronti allo sfottò?", 60, height - 48);
     ctx.textAlign = "right";
     ctx.fillStyle = C.lime;
     ctx.font = "800 19px Inter, Arial, sans-serif";
-    ctx.fillText("HERTAVERNELLO", 1020, height - 48);
+    ctx.fillText("HERTAVERNELLO", 1020, height - 24);
     ctx.textAlign = "left";
     return canvas;
   }
