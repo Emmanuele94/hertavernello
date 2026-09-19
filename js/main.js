@@ -215,6 +215,10 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       try {
         const canvas = await window.HVShareCards.renderSfida({
           partitaReale: `${match.casaNome} vs ${match.trasfertaNome}`,
+          casaNome: match.casaNome,
+          trasfertaNome: match.trasfertaNome,
+          logoCasaRealeUrl: match.casaCodice ? `assets/loghi/${match.casaCodice}.png` : "",
+          logoTrasfertaRealeUrl: match.trasfertaCodice ? `assets/loghi/${match.trasfertaCodice}.png` : "",
           statoPartita: statoCondivisione,
           fantasquadraA: sfida.fantasquadraA,
           fantasquadraB: sfida.fantasquadraB,

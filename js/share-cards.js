@@ -256,13 +256,16 @@
     const playersB = data.giocatoriB || [];
     const imageSources = [
       data.logoAUrl, data.logoBUrl,
+      data.logoCasaRealeUrl, data.logoTrasfertaRealeUrl,
       ...playersA.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
       ...playersB.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
     ];
     const loaded = await Promise.all(imageSources.map(hvLoadImage));
     const logoA = loaded[0];
     const logoB = loaded[1];
-    let cursor = 2;
+    const logoCasaReale = loaded[2];
+    const logoTrasfertaReale = loaded[3];
+    let cursor = 4;
     const assetsA = playersA.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
     const assetsB = playersB.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
 
@@ -287,12 +290,46 @@
     ctx.fillText("HERTAVERNELLO · CHI GIOCA CONTRO CHI", 60, 66);
 
     hvFillRoundRect(ctx, 60, 100, 960, 112, 24, C.card, C.line);
+
+    // Partita reale: logo + nome completo per entrambe le squadre.
+    const casaNome = String(data.casaNome || (data.partitaReale || "").split(/\s+vs\s+/i)[0] || "Casa");
+    const trasfertaNome = String(data.trasfertaNome || (data.partitaReale || "").split(/\s+vs\s+/i)[1] || "Trasferta");
+    let matchupFont = 29;
+    const logoSize = 38;
+    const logoGap = 10;
+    const innerGap = 24;
+    ctx.font = `800 ${matchupFont}px Inter, Arial, sans-serif`;
+    let casaW = ctx.measureText(casaNome).width;
+    let trasfertaW = ctx.measureText(trasfertaNome).width;
+    const vsW = ctx.measureText("VS").width;
+    let totalW = logoSize + logoGap + casaW + innerGap + vsW + innerGap + logoSize + logoGap + trasfertaW;
+    while (totalW > 860 && matchupFont > 22) {
+      matchupFont -= 1;
+      ctx.font = `800 ${matchupFont}px Inter, Arial, sans-serif`;
+      casaW = ctx.measureText(casaNome).width;
+      trasfertaW = ctx.measureText(trasfertaNome).width;
+      totalW = logoSize + logoGap + casaW + innerGap + vsW + innerGap + logoSize + logoGap + trasfertaW;
+    }
+    let mx = (width - totalW) / 2;
+    const logoY = 119;
+    hvDrawImageContain(ctx, logoCasaReale, mx, logoY, logoSize, logoSize, 9, "rgba(255,255,255,.035)");
+    mx += logoSize + logoGap;
+    ctx.textAlign = "left";
     ctx.fillStyle = C.text;
-    ctx.font = "800 34px Inter, Arial, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(data.partitaReale || "Partita Serie A", 540, 150);
+    ctx.font = `800 ${matchupFont}px Inter, Arial, sans-serif`;
+    ctx.fillText(casaNome, mx, 151);
+    mx += casaW + innerGap;
+    ctx.fillStyle = C.lime;
+    ctx.fillText("VS", mx, 151);
+    mx += vsW + innerGap;
+    hvDrawImageContain(ctx, logoTrasfertaReale, mx, logoY, logoSize, logoSize, 9, "rgba(255,255,255,.035)");
+    mx += logoSize + logoGap;
+    ctx.fillStyle = C.text;
+    ctx.fillText(trasfertaNome, mx, 151);
+
     ctx.fillStyle = C.muted;
     ctx.font = "700 21px Inter, Arial, sans-serif";
+    ctx.textAlign = "center";
     ctx.fillText(data.statoPartita || "", 540, 184);
 
     hvDrawImageContain(ctx, logoA, 80, 255, 150, 150, 28, C.card2);
@@ -338,9 +375,9 @@
         let name = String(player.nome || "Giocatore");
         while (ctx.measureText(name).width > w - 92 && name.length > 10) name = `${name.slice(0, -3)}…`;
         ctx.fillText(name, x + 80, yy + 29);
-        ctx.fillStyle = C.muted;
-        ctx.font = "600 17px Inter, Arial, sans-serif";
-        const club = player.squadraReale || player.codice || "";
+        ctx.fillStyle = C.text;
+        ctx.font = "700 17px Inter, Arial, sans-serif";
+        const club = player.codice || player.squadraReale || "";
         if (media.club) {
           hvDrawImageContain(ctx, media.club, x + 80, yy + 38, 22, 22, 6, "rgba(255,255,255,.03)");
           ctx.fillText(club, x + 110, yy + 55);

@@ -863,3 +863,46 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   .pagella-profile-header .pagella-president-img,.pagella-profile-header .pagella-president-placeholder,
   .pagella-profile-header .pagella-team-logo,.pagella-profile-header .pagella-team-logo-placeholder{height:auto!important}
 }
+
+
+/* ===== Pagella mobile: presidente sopra, stemma centrato sotto (2026-09-19) ===== */
+@media(max-width:760px){
+  .pagella-profile-visuals{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:14px!important;
+    width:100%!important;
+  }
+  .pagella-profile-header .pagella-president-wrap{
+    width:100%!important;
+    aspect-ratio:auto!important;
+    justify-content:center!important;
+    margin:0 auto!important;
+  }
+  .pagella-profile-header .pagella-president-img,.pagella-profile-header .pagella-president-placeholder{
+    width:100%!important;
+    max-width:560px!important;
+    height:auto!important;
+    aspect-ratio:1/1!important;
+    object-fit:cover!important;
+    border-radius:18px!important;
+    padding:6px!important;
+  }
+  .pagella-profile-header .pagella-team-logo-wrap{
+    width:58%!important;
+    max-width:270px!important;
+    aspect-ratio:1/1!important;
+    justify-content:center!important;
+    margin:0 auto!important;
+  }
+  .pagella-profile-header .pagella-team-logo,.pagella-profile-header .pagella-team-logo-placeholder{
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    aspect-ratio:1/1!important;
+    object-fit:contain!important;
+    border-radius:18px!important;
+    padding:6px!important;
+  }
+}
