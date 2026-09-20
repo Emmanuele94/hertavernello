@@ -58,6 +58,62 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558598",
+      "giornata": 5,
+      "casaCodice": "BOL",
+      "trasfertaCodice": "TOR",
+      "casaNome": "Bologna",
+      "trasfertaNome": "Torino",
+      "aggiornatoIl": "2026-09-20T22:20:34.175Z",
+      "eventi": [
+        {
+          "fantacalcioId": "184",
+          "nome": "Bernardeschi",
+          "squadraCodice": "BOL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": null,
+          "nome": "Braganca",
+          "squadraCodice": "TOR",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7220",
+          "nome": "Belghali",
+          "squadraCodice": "TOR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": null,
+          "nome": "Patterson",
+          "squadraCodice": "TOR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": null,
+          "nome": "Kulenovic",
+          "squadraCodice": "TOR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        }
+      ]
     }
   ]
 }
