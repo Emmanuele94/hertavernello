@@ -114,6 +114,116 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558593",
+      "giornata": 5,
+      "casaCodice": "ROM",
+      "trasfertaCodice": "INT",
+      "casaNome": "Roma",
+      "trasfertaNome": "Inter",
+      "aggiornatoIl": "2026-09-20T22:23:59.111Z",
+      "eventi": [
+        {
+          "fantacalcioId": "5589",
+          "nome": "Konè M.",
+          "squadraCodice": "ROM",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 2
+          }
+        },
+        {
+          "fantacalcioId": "4998",
+          "nome": "Molina N.",
+          "squadraCodice": "ROM",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "2296",
+          "nome": "Mancini",
+          "squadraCodice": "ROM",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6631",
+          "nome": "Ghilardi",
+          "squadraCodice": "ROM",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": null,
+          "nome": "Koulierakis",
+          "squadraCodice": "ROM",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4317",
+          "nome": "N'Dicka",
+          "squadraCodice": "ROM",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2764",
+          "nome": "Martinez L.",
+          "squadraCodice": "INT",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 2
+          }
+        },
+        {
+          "fantacalcioId": "4871",
+          "nome": "Thuram",
+          "squadraCodice": "INT",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "1870",
+          "nome": "Barella",
+          "squadraCodice": "INT",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4159",
+          "nome": "Akanji",
+          "squadraCodice": "INT",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2120",
+          "nome": "Bastoni",
+          "squadraCodice": "INT",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
     }
   ]
 }
