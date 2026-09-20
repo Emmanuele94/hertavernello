@@ -1,4 +1,36 @@
 {
   "_leggimi": "Eventi manuali delle partite reali di Serie A usati in Home: gol, assist, rigori, autogol e cartellini. Si modificano dalla Home quando sei loggato come Admin.",
-  "partite": []
+  "partite": [
+    {
+      "matchId": "558596",
+      "giornata": 5,
+      "casaCodice": "MON",
+      "trasfertaCodice": "SAS",
+      "casaNome": "Monza",
+      "trasfertaNome": "Sassuolo",
+      "aggiornatoIl": "2026-09-20T20:49:14.230Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7523",
+          "nome": "Varela G.",
+          "squadraCodice": "MON",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1,
+            "rigoriSegnati": 1,
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6677",
+          "nome": "Adzic",
+          "squadraCodice": "SAS",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        }
+      ]
+    }
+  ]
 }
