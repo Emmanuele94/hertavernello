@@ -13,6 +13,7 @@
   ];
 
   const ROLE_ORDER = { POR: 0, DIF: 1, CEN: 2, ATT: 3 };
+  const MIN_SEARCH_CHARS = 3;
 
   function normalize(value) {
     return String(value || "")
@@ -204,7 +205,7 @@
           <label>Cerca giocatore</label>
           <div class="hv-event-picker-input-wrap">
             <span aria-hidden="true">⌕</span>
-            <input type="search" class="hv-event-picker-input" autocomplete="off" placeholder="Scrivi un nome…" aria-label="Cerca un giocatore di ${escapeHtml(title)}">
+            <input type="search" class="hv-event-picker-input" autocomplete="off" placeholder="Scrivi almeno 3 lettere…" aria-label="Cerca un giocatore di ${escapeHtml(title)}">
             <span class="hv-event-picker-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="hv-event-picker-results" hidden>
@@ -232,17 +233,57 @@
     const input = picker.querySelector(".hv-event-picker-input");
     const results = picker.querySelector(".hv-event-picker-results");
     if (!input || !results) return;
+
     const query = normalize(input.value);
-    let visible = 0;
-    results.querySelectorAll(".hv-event-picker-option").forEach((option) => {
-      const selected = option.dataset.selected === "1";
-      const haystack = normalize(`${option.dataset.playerName || ""} ${option.dataset.playerRole || ""}`);
-      const show = !selected && (!query || haystack.includes(query));
-      option.hidden = !show;
-      if (show) visible += 1;
-    });
+    const options = Array.from(results.querySelectorAll(".hv-event-picker-option"));
     const empty = results.querySelector(".hv-event-picker-empty");
-    if (empty) empty.hidden = visible > 0;
+
+    // Come la ricerca della pagina Squadre: niente elenco infinito.
+    // I risultati compaiono appena vengono digitate almeno 3 lettere.
+    if (query.length < MIN_SEARCH_CHARS) {
+      options.forEach((option) => { option.hidden = true; });
+      if (empty) {
+        empty.textContent = `Scrivi almeno ${MIN_SEARCH_CHARS} lettere per cercare.`;
+        empty.hidden = false;
+      }
+      return;
+    }
+
+    const matches = [];
+    options.forEach((option) => {
+      if (option.dataset.selected === "1") {
+        option.hidden = true;
+        return;
+      }
+
+      const playerName = normalize(option.dataset.playerName || "");
+      const role = normalize(option.dataset.playerRole || "");
+      const tokens = playerName.split(/\s+/).filter(Boolean);
+      let rank = 99;
+
+      if (playerName.startsWith(query)) rank = 0;
+      else if (tokens.some((token) => token.startsWith(query))) rank = 1;
+      else if (playerName.includes(query)) rank = 2;
+      else if (role.includes(query)) rank = 3;
+
+      if (rank < 99) {
+        matches.push({ option, rank, name: playerName });
+      } else {
+        option.hidden = true;
+      }
+    });
+
+    matches
+      .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name, "it"))
+      .forEach(({ option }) => {
+        option.hidden = false;
+        results.insertBefore(option, empty || null);
+      });
+
+    if (empty) {
+      empty.textContent = matches.length ? "" : "Nessun giocatore corrispondente.";
+      empty.hidden = matches.length > 0;
+    }
   }
 
   function syncSelectedEmpty(teamEditor) {
@@ -490,9 +531,26 @@
 
     panel.addEventListener("keydown", (event) => {
       const input = event.target.closest(".hv-event-picker-input");
-      if (!input || event.key !== "Escape") return;
-      input.closest(".hv-event-picker")?.querySelector(".hv-event-picker-results")?.setAttribute("hidden", "");
-      input.blur();
+      if (!input) return;
+      const picker = input.closest(".hv-event-picker");
+      const results = picker?.querySelector(".hv-event-picker-results");
+
+      if (event.key === "Escape") {
+        results?.setAttribute("hidden", "");
+        input.blur();
+        return;
+      }
+
+      // Invio seleziona subito il primo risultato visibile: utile quando
+      // le prime 3 lettere identificano già un solo giocatore.
+      if (event.key === "Enter" && results && !results.hidden) {
+        const first = Array.from(results.querySelectorAll(".hv-event-picker-option"))
+          .find((option) => !option.hidden && option.dataset.selected !== "1");
+        if (first) {
+          event.preventDefault();
+          first.click();
+        }
+      }
     });
 
     panel.addEventListener("focusout", (event) => {

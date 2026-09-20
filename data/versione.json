@@ -1,5 +1,5 @@
 {
   "_leggimi": "`release` cambia a ogni pubblicazione e aggiorna CSS/JS senza logout. `v` cambia solo dal comando Admin 'Disconnetti tutti' e invalida le sessioni.",
   "v": "1789413219799",
-  "release": "20260920-eventi2"
+  "release": "20260920-eventi3"
 }
