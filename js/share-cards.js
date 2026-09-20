@@ -254,11 +254,22 @@
 
     const playersA = data.giocatoriA || [];
     const playersB = data.giocatoriB || [];
+    const eventDefs = window.HVMatchEvents?.defs || [
+      { key: "gol", icon: "golFatto_xs.png" },
+      { key: "assist", icon: "assist_xs.png" },
+      { key: "rigoriSegnati", icon: "rigoreSegnato_xs.png" },
+      { key: "autogol", icon: "autogol_xs.png" },
+      { key: "ammonizioni", icon: "ammonito_xs.png" },
+      { key: "espulsioni", icon: "espulso_xs.png" },
+      { key: "rigoriParati", icon: "rigoreParato_xs.png" },
+    ];
+    const iconBase = window.HVMatchEvents?.iconBase || "assets/icone-eventi/";
     const imageSources = [
       data.logoAUrl, data.logoBUrl,
       data.logoCasaRealeUrl, data.logoTrasfertaRealeUrl,
       ...playersA.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
       ...playersB.flatMap((p) => [p.fotoUrl, p.logoRealeUrl]),
+      ...eventDefs.map((def) => `${iconBase}${def.icon}`),
     ];
     const loaded = await Promise.all(imageSources.map(hvLoadImage));
     const logoA = loaded[0];
@@ -268,9 +279,11 @@
     let cursor = 4;
     const assetsA = playersA.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
     const assetsB = playersB.map(() => ({ photo: loaded[cursor++], club: loaded[cursor++] }));
+    const eventIcons = {};
+    eventDefs.forEach((def) => { eventIcons[def.key] = loaded[cursor++]; });
 
     const maxPlayers = Math.max(playersA.length, playersB.length, 1);
-    const rowH = 92;
+    const rowH = 104;
     const listY = 610;
     const height = Math.max(930, listY + 86 + maxPlayers * rowH + 70);
     const width = 1080;
@@ -384,6 +397,26 @@
         } else {
           ctx.fillText(club, x + 80, yy + 54);
         }
+
+        const events = player.eventi || {};
+        let ex = x + 80;
+        const ey = yy + 72;
+        eventDefs.forEach((def) => {
+          const count = Number(events[def.key]) || 0;
+          if (!count) return;
+          const icon = eventIcons[def.key];
+          if (icon) {
+            ctx.drawImage(icon, ex, ey, 22, 22);
+            ex += 27;
+          }
+          if (count > 1) {
+            ctx.fillStyle = C.text;
+            ctx.font = "800 15px Inter, Arial, sans-serif";
+            ctx.fillText(`×${count}`, ex, ey + 17);
+            ex += 26;
+          }
+          ex += 4;
+        });
       });
     };
 
