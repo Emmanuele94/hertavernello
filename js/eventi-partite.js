@@ -23,6 +23,21 @@
       .trim();
   }
 
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function playerKey(player) {
+    const fid = player?.fantacalcioId != null ? String(player.fantacalcioId) : "";
+    if (fid) return `id:${fid}`;
+    return `n:${normalize(player?.nome)}:${String(player?.squadraCodice || player?.codice || "").toUpperCase()}`;
+  }
+
   function matchKey(match) {
     if (match && match.id != null) return String(match.id);
     return `g${match?.matchday || "x"}-${match?.casaCodice || "casa"}-${match?.trasfertaCodice || "trasferta"}`;
@@ -142,11 +157,13 @@
   function playerEditorHtml(player, existing) {
     const events = cleanCounts(existing?.eventi || {});
     const photo = player.foto || "";
+    const key = playerKey(player);
     return `
-      <div class="hv-event-player" data-player-id="${String(player.fantacalcioId || "")}" data-player-name="${String(player.nome || "").replace(/"/g, "&quot;")}" data-player-team="${String(player.squadraCodice || "")}" data-player-role="${String(player.ruolo || "")}">
+      <div class="hv-event-player" data-player-key="${escapeHtml(key)}" data-player-id="${escapeHtml(String(player.fantacalcioId || ""))}" data-player-name="${escapeHtml(player.nome || "")}" data-player-team="${escapeHtml(String(player.squadraCodice || ""))}" data-player-role="${escapeHtml(String(player.ruolo || ""))}">
         <div class="hv-event-player-id">
-          ${photo ? `<img src="${photo}" alt="" class="hv-event-player-photo">` : `<span class="hv-event-player-photo hv-event-player-photo-placeholder">?</span>`}
-          <span><strong>${player.nome || "Giocatore"}</strong><small>${player.ruolo || ""}</small></span>
+          ${photo ? `<img src="${escapeHtml(photo)}" alt="" class="hv-event-player-photo">` : `<span class="hv-event-player-photo hv-event-player-photo-placeholder">?</span>`}
+          <span><strong>${escapeHtml(player.nome || "Giocatore")}</strong><small>${escapeHtml(player.ruolo || "")}</small></span>
+          <button type="button" class="hv-event-player-remove" aria-label="Rimuovi ${escapeHtml(player.nome || "giocatore")}" title="Rimuovi dalla selezione">✕</button>
         </div>
         <div class="hv-event-player-controls">
           ${EVENTI.map((def) => eventCounterHtml(def, events[def.key] || 0)).join("")}
@@ -154,15 +171,93 @@
       </div>`;
   }
 
-  function teamEditorHtml(title, codice, players, record) {
-    const saved = record?.eventi || [];
+  function playerOptionHtml(player, selected) {
+    const key = playerKey(player);
     return `
-      <section class="hv-event-team-editor">
-        <h4><img src="assets/loghi/${codice}.png" alt=""> ${title}</h4>
-        <div class="hv-event-team-players">
-          ${players.length ? players.map((p) => playerEditorHtml(p, playerRecord(record, p))).join("") : '<p class="empty-state">Nessun giocatore trovato nel database per questa squadra.</p>'}
+      <button type="button" class="hv-event-picker-option"
+        data-player-key="${escapeHtml(key)}"
+        data-player-id="${escapeHtml(String(player.fantacalcioId || ""))}"
+        data-player-name="${escapeHtml(player.nome || "")}"
+        data-player-team="${escapeHtml(String(player.squadraCodice || ""))}"
+        data-player-role="${escapeHtml(String(player.ruolo || ""))}"
+        data-player-photo="${escapeHtml(player.foto || "")}"
+        data-selected="${selected ? "1" : "0"}"${selected ? " hidden" : ""}>
+        ${player.foto ? `<img src="${escapeHtml(player.foto)}" alt="">` : `<span class="hv-event-picker-photo-placeholder">?</span>`}
+        <span><strong>${escapeHtml(player.nome || "Giocatore")}</strong><small>${escapeHtml(player.ruolo || "")}</small></span>
+      </button>`;
+  }
+
+  function teamEditorHtml(title, codice, players, record) {
+    const selectedKeys = new Set();
+    const selectedRows = [];
+    players.forEach((player) => {
+      const existing = playerRecord(record, player);
+      if (!existing || !hasAnyEvent(existing.eventi || {})) return;
+      selectedKeys.add(playerKey(player));
+      selectedRows.push(playerEditorHtml(player, existing));
+    });
+
+    return `
+      <section class="hv-event-team-editor" data-team-code="${escapeHtml(codice)}">
+        <h4><img src="assets/loghi/${escapeHtml(codice)}.png" alt=""> ${escapeHtml(title)}</h4>
+        <div class="hv-event-picker">
+          <label>Cerca giocatore</label>
+          <div class="hv-event-picker-input-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" class="hv-event-picker-input" autocomplete="off" placeholder="Scrivi un nome…" aria-label="Cerca un giocatore di ${escapeHtml(title)}">
+            <span class="hv-event-picker-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="hv-event-picker-results" hidden>
+            ${players.length ? players.map((p) => playerOptionHtml(p, selectedKeys.has(playerKey(p)))).join("") : '<p class="empty-state">Nessun giocatore trovato nel database.</p>'}
+            <p class="hv-event-picker-empty" hidden>Nessun giocatore corrispondente.</p>
+          </div>
+        </div>
+        <div class="hv-event-selected-list">
+          ${selectedRows.length ? selectedRows.join("") : '<p class="hv-event-selected-empty">Nessun giocatore selezionato.</p>'}
         </div>
       </section>`;
+  }
+
+  function optionToPlayer(option) {
+    return {
+      fantacalcioId: option.dataset.playerId || null,
+      nome: option.dataset.playerName || "",
+      squadraCodice: option.dataset.playerTeam || "",
+      ruolo: option.dataset.playerRole || "",
+      foto: option.dataset.playerPhoto || "",
+    };
+  }
+
+  function refreshPicker(picker) {
+    const input = picker.querySelector(".hv-event-picker-input");
+    const results = picker.querySelector(".hv-event-picker-results");
+    if (!input || !results) return;
+    const query = normalize(input.value);
+    let visible = 0;
+    results.querySelectorAll(".hv-event-picker-option").forEach((option) => {
+      const selected = option.dataset.selected === "1";
+      const haystack = normalize(`${option.dataset.playerName || ""} ${option.dataset.playerRole || ""}`);
+      const show = !selected && (!query || haystack.includes(query));
+      option.hidden = !show;
+      if (show) visible += 1;
+    });
+    const empty = results.querySelector(".hv-event-picker-empty");
+    if (empty) empty.hidden = visible > 0;
+  }
+
+  function syncSelectedEmpty(teamEditor) {
+    const list = teamEditor.querySelector(".hv-event-selected-list");
+    if (!list) return;
+    const hasRows = !!list.querySelector(".hv-event-player");
+    let empty = list.querySelector(".hv-event-selected-empty");
+    if (!hasRows && !empty) {
+      empty = document.createElement("p");
+      empty.className = "hv-event-selected-empty";
+      empty.textContent = "Nessun giocatore selezionato.";
+      list.appendChild(empty);
+    } else if (hasRows && empty) {
+      empty.remove();
+    }
   }
 
   function readPanelEvents(panel) {
@@ -221,6 +316,72 @@
     counter.classList.toggle("has-value", next > 0);
   }
 
+  function findDbPlayer(entry, giocatoriDb) {
+    const fid = entry?.fantacalcioId != null ? String(entry.fantacalcioId) : "";
+    if (fid) {
+      const found = (giocatoriDb || []).find((g) => String(g.fantacalcioId || "") === fid);
+      if (found) return found;
+    }
+    const nome = normalize(entry?.nome);
+    const codice = String(entry?.squadraCodice || "").toUpperCase();
+    return (giocatoriDb || []).find((g) => normalize(g.nome) === nome && (!codice || String(g.squadraCodice || "").toUpperCase() === codice))
+      || (giocatoriDb || []).find((g) => normalize(g.nome) === nome)
+      || null;
+  }
+
+  function findOwner(entry, roseData, config) {
+    const fid = entry?.fantacalcioId != null ? String(entry.fantacalcioId) : "";
+    const nome = normalize(entry?.nome);
+    let ownerId = "";
+    for (const rosa of (roseData?.rose || [])) {
+      const found = (rosa.giocatori || []).some((g) => {
+        const gid = g.fantacalcioId != null ? String(g.fantacalcioId) : "";
+        if (fid && gid && fid === gid) return true;
+        return normalize(g.nome) === nome;
+      });
+      if (found) { ownerId = rosa.squadraId; break; }
+    }
+    if (!ownerId) return "Svincolato";
+    const team = (config?.squadre || []).find((s) => s.id === ownerId);
+    return team?.nomeFantasquadra || team?.nomeReale || "Svincolato";
+  }
+
+  function summaryPlayerHtml(entry, roseData, config, giocatoriDb) {
+    const db = findDbPlayer(entry, giocatoriDb);
+    const photo = db?.foto || "";
+    const owner = findOwner(entry, roseData, config);
+    return `
+      <div class="hv-event-summary-player">
+        ${photo ? `<img class="hv-event-summary-photo" src="${escapeHtml(photo)}" alt="">` : `<span class="hv-event-summary-photo hv-event-player-photo-placeholder">?</span>`}
+        <div class="hv-event-summary-main">
+          <strong>${escapeHtml(entry.nome || "Giocatore")}</strong>
+          <span class="hv-event-summary-icons">${renderIcons(cleanCounts(entry.eventi || {}), "hv-evento-icon-summary")}</span>
+        </div>
+        <span class="hv-event-summary-owner">${escapeHtml(owner)}</span>
+      </div>`;
+  }
+
+  function renderMatchSummary(record, { match, roseData, config, giocatoriDb } = {}) {
+    const entries = (record?.eventi || []).filter((entry) => hasAnyEvent(entry.eventi || {}));
+    if (!entries.length || !match) return "";
+    const homeCode = String(match.casaCodice || "").toUpperCase();
+    const awayCode = String(match.trasfertaCodice || "").toUpperCase();
+    const group = (code) => entries.filter((e) => String(e.squadraCodice || "").toUpperCase() === code);
+    const teamBlock = (name, code, list) => `
+      <section class="hv-event-summary-team">
+        <h5><img src="assets/loghi/${escapeHtml(code)}.png" alt="">${escapeHtml(name)}</h5>
+        ${list.length ? list.map((entry) => summaryPlayerHtml(entry, roseData, config, giocatoriDb)).join("") : '<p class="hv-event-summary-empty">Nessun evento registrato.</p>'}
+      </section>`;
+    return `
+      <div class="hv-event-match-summary">
+        <div class="hv-event-match-summary-title"><span>Eventi partita</span><small>Fantallenatore proprietario aggiornato alla rosa attuale</small></div>
+        <div class="hv-event-match-summary-grid">
+          ${teamBlock(match.casaNome || homeCode, homeCode, group(homeCode))}
+          ${teamBlock(match.trasfertaNome || awayCode, awayCode, group(awayCode))}
+        </div>
+      </div>`;
+  }
+
   function buildAdminControl({ match, giocatoriDb, config, data, onSaved }) {
     if (window.hv_role !== "admin") return null;
     const record = getMatchRecord(data, match);
@@ -266,6 +427,40 @@
     wrapper.querySelector(".hv-match-events-close")?.addEventListener("click", () => setOpen(false));
 
     panel.addEventListener("click", (event) => {
+      const option = event.target.closest(".hv-event-picker-option");
+      if (option) {
+        const teamEditor = option.closest(".hv-event-team-editor");
+        const list = teamEditor?.querySelector(".hv-event-selected-list");
+        if (!teamEditor || !list) return;
+        const player = optionToPlayer(option);
+        list.insertAdjacentHTML("beforeend", playerEditorHtml(player, null));
+        option.dataset.selected = "1";
+        option.hidden = true;
+        const picker = option.closest(".hv-event-picker");
+        const input = picker?.querySelector(".hv-event-picker-input");
+        const results = picker?.querySelector(".hv-event-picker-results");
+        if (input) input.value = "";
+        if (results) results.hidden = true;
+        syncSelectedEmpty(teamEditor);
+        refreshPicker(picker);
+        input?.focus();
+        return;
+      }
+
+      const remove = event.target.closest(".hv-event-player-remove");
+      if (remove) {
+        const row = remove.closest(".hv-event-player");
+        const teamEditor = row?.closest(".hv-event-team-editor");
+        const key = row?.dataset.playerKey || "";
+        row?.remove();
+        const option = Array.from(teamEditor?.querySelectorAll(".hv-event-picker-option") || []).find((el) => el.dataset.playerKey === key);
+        if (option) option.dataset.selected = "0";
+        const picker = teamEditor?.querySelector(".hv-event-picker");
+        syncSelectedEmpty(teamEditor);
+        refreshPicker(picker);
+        return;
+      }
+
       const plus = event.target.closest(".hv-event-plus");
       const minus = event.target.closest(".hv-event-minus");
       const main = event.target.closest(".hv-event-admin-main");
@@ -273,6 +468,42 @@
       if (!counter) return;
       if (plus || main) updateCounter(counter, 1);
       else if (minus) updateCounter(counter, -1);
+    });
+
+    panel.addEventListener("focusin", (event) => {
+      const input = event.target.closest(".hv-event-picker-input");
+      if (!input) return;
+      const picker = input.closest(".hv-event-picker");
+      const results = picker?.querySelector(".hv-event-picker-results");
+      refreshPicker(picker);
+      if (results) results.hidden = false;
+    });
+
+    panel.addEventListener("input", (event) => {
+      const input = event.target.closest(".hv-event-picker-input");
+      if (!input) return;
+      const picker = input.closest(".hv-event-picker");
+      const results = picker?.querySelector(".hv-event-picker-results");
+      refreshPicker(picker);
+      if (results) results.hidden = false;
+    });
+
+    panel.addEventListener("keydown", (event) => {
+      const input = event.target.closest(".hv-event-picker-input");
+      if (!input || event.key !== "Escape") return;
+      input.closest(".hv-event-picker")?.querySelector(".hv-event-picker-results")?.setAttribute("hidden", "");
+      input.blur();
+    });
+
+    panel.addEventListener("focusout", (event) => {
+      const picker = event.target.closest(".hv-event-picker");
+      if (!picker) return;
+      setTimeout(() => {
+        if (!picker.contains(document.activeElement)) {
+          const results = picker.querySelector(".hv-event-picker-results");
+          if (results) results.hidden = true;
+        }
+      }, 0);
     });
 
     wrapper.querySelector(".hv-match-events-clear")?.addEventListener("click", () => {
@@ -348,6 +579,7 @@
     getMatchRecord,
     getPlayerEvents,
     renderIcons,
+    renderMatchSummary,
     buildAdminControl,
   };
 })();

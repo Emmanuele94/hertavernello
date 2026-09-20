@@ -106,6 +106,7 @@ function hv_giornoOrarioBreve(iso) {
 
 function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, punteggioPrecedente, squadraFiltroId = "", giocatoriDb = [], eventiData = null, onEventsSaved = null) {
   const eventiRecord = window.HVMatchEvents?.getMatchRecord(eventiData, match) || null;
+  const eventiSummaryHtml = window.HVMatchEvents?.renderMatchSummary(eventiRecord, { match, roseData, config, giocatoriDb }) || "";
   const schede = hv_costruisciSchedeSfida(match, roseData, config, squadreRef, calendarioData, loghiFantasquadre, squadraFiltroId, giocatoriDb, eventiRecord);
   if (squadraFiltroId && schede.length === 0) return null;
 
@@ -188,6 +189,7 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
     </button>
     <div class="incrocio-match-dettagli" hidden>
       ${golFlashHtml}
+      ${eventiSummaryHtml}
       ${corpo}
     </div>
   `;
