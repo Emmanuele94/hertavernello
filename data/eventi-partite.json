@@ -686,6 +686,75 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558597",
+      "giornata": 5,
+      "data": "2026-09-20T18:45:00Z",
+      "casaCodice": "MIL",
+      "trasfertaCodice": "LEC",
+      "casaNome": "Milan",
+      "trasfertaNome": "Lecce",
+      "golCasa": 3,
+      "golTrasferta": 0,
+      "stato": "FINALE",
+      "aggiornatoIl": "2026-09-21T08:07:38.703Z",
+      "eventi": [
+        {
+          "fantacalcioId": "2423",
+          "nome": "Pulisic",
+          "squadraCodice": "MIL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "2379",
+          "nome": "Rabiot",
+          "squadraCodice": "MIL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6372",
+          "nome": "Moreira",
+          "squadraCodice": "MIL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5022",
+          "nome": "Pavlovic",
+          "squadraCodice": "MIL",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6397",
+          "nome": "Ramos G.",
+          "squadraCodice": "MIL",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6990",
+          "nome": "Veiga D.",
+          "squadraCodice": "LEC",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
     }
   ]
 }
