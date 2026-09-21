@@ -401,6 +401,98 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558590",
+      "giornata": 5,
+      "casaCodice": "PAR",
+      "trasfertaCodice": "GEN",
+      "casaNome": "Parma",
+      "trasfertaNome": "Genoa",
+      "aggiornatoIl": "2026-09-21T07:46:07.642Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7615",
+          "nome": "Drobnic",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7554",
+          "nome": "Romero D.",
+          "squadraCodice": "PAR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6207",
+          "nome": "Almqvist",
+          "squadraCodice": "PAR",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6664",
+          "nome": "Delprato",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7235",
+          "nome": "Troilo",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6977",
+          "nome": "Otoa",
+          "squadraCodice": "GEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6660",
+          "nome": "Marcandalli",
+          "squadraCodice": "GEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7600",
+          "nome": "Osmajic",
+          "squadraCodice": "GEN",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6020",
+          "nome": "Ellertsson",
+          "squadraCodice": "GEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
     }
   ]
 }
