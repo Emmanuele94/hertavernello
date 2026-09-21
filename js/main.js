@@ -200,6 +200,7 @@ function hv_renderIncrocioMatch(match, roseData, config, squadreRef, calendarioD
       match,
       giocatoriDb,
       config,
+      roseData,
       data: eventiData,
       onSaved: onEventsSaved,
     });

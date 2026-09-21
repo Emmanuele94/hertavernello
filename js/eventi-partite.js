@@ -13,7 +13,6 @@
   ];
 
   const ROLE_ORDER = { POR: 0, DIF: 1, CEN: 2, ATT: 3 };
-  const MIN_SEARCH_CHARS = 3;
 
   function normalize(value) {
     return String(value || "")
@@ -172,7 +171,7 @@
       </div>`;
   }
 
-  function playerOptionHtml(player, selected) {
+  function playerOptionHtml(player, selected, owner) {
     const key = playerKey(player);
     return `
       <button type="button" class="hv-event-picker-option"
@@ -184,11 +183,14 @@
         data-player-photo="${escapeHtml(player.foto || "")}"
         data-selected="${selected ? "1" : "0"}"${selected ? " hidden" : ""}>
         ${player.foto ? `<img src="${escapeHtml(player.foto)}" alt="">` : `<span class="hv-event-picker-photo-placeholder">?</span>`}
-        <span><strong>${escapeHtml(player.nome || "Giocatore")}</strong><small>${escapeHtml(player.ruolo || "")}</small></span>
+        <span>
+          <strong>${escapeHtml(player.nome || "Giocatore")}</strong>
+          <small><span>${escapeHtml(player.ruolo || "")}</span><span aria-hidden="true">·</span><span class="hv-event-picker-owner">${escapeHtml(owner || "Svincolato")}</span></small>
+        </span>
       </button>`;
   }
 
-  function teamEditorHtml(title, codice, players, record) {
+  function teamEditorHtml(title, codice, players, record, roseData, config) {
     const selectedKeys = new Set();
     const selectedRows = [];
     players.forEach((player) => {
@@ -205,11 +207,11 @@
           <label>Cerca giocatore</label>
           <div class="hv-event-picker-input-wrap">
             <span aria-hidden="true">⌕</span>
-            <input type="search" class="hv-event-picker-input" autocomplete="off" placeholder="Scrivi almeno 3 lettere…" aria-label="Cerca un giocatore di ${escapeHtml(title)}">
+            <input type="search" class="hv-event-picker-input" autocomplete="off" placeholder="Cerca giocatore…" aria-label="Cerca un giocatore di ${escapeHtml(title)}">
             <span class="hv-event-picker-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="hv-event-picker-results" hidden>
-            ${players.length ? players.map((p) => playerOptionHtml(p, selectedKeys.has(playerKey(p)))).join("") : '<p class="empty-state">Nessun giocatore trovato nel database.</p>'}
+            ${players.length ? players.map((p) => playerOptionHtml(p, selectedKeys.has(playerKey(p)), findOwner(p, roseData, config))).join("") : '<p class="empty-state">Nessun giocatore trovato nel database.</p>'}
             <p class="hv-event-picker-empty" hidden>Nessun giocatore corrispondente.</p>
           </div>
         </div>
@@ -237,19 +239,8 @@
     const query = normalize(input.value);
     const options = Array.from(results.querySelectorAll(".hv-event-picker-option"));
     const empty = results.querySelector(".hv-event-picker-empty");
-
-    // Come la ricerca della pagina Squadre: niente elenco infinito.
-    // I risultati compaiono appena vengono digitate almeno 3 lettere.
-    if (query.length < MIN_SEARCH_CHARS) {
-      options.forEach((option) => { option.hidden = true; });
-      if (empty) {
-        empty.textContent = `Scrivi almeno ${MIN_SEARCH_CHARS} lettere per cercare.`;
-        empty.hidden = false;
-      }
-      return;
-    }
-
     const matches = [];
+
     options.forEach((option) => {
       if (option.dataset.selected === "1") {
         option.hidden = true;
@@ -258,19 +249,20 @@
 
       const playerName = normalize(option.dataset.playerName || "");
       const role = normalize(option.dataset.playerRole || "");
+      const owner = normalize(option.querySelector(".hv-event-picker-owner")?.textContent || "");
       const tokens = playerName.split(/\s+/).filter(Boolean);
       let rank = 99;
 
-      if (playerName.startsWith(query)) rank = 0;
+      // Se il campo è vuoto mostriamo subito tutta la rosa.
+      // Dalla prima lettera il filtro è live: nessun Invio necessario.
+      if (!query) rank = 4;
+      else if (playerName.startsWith(query)) rank = 0;
       else if (tokens.some((token) => token.startsWith(query))) rank = 1;
       else if (playerName.includes(query)) rank = 2;
-      else if (role.includes(query)) rank = 3;
+      else if (role.includes(query) || owner.includes(query)) rank = 3;
 
-      if (rank < 99) {
-        matches.push({ option, rank, name: playerName });
-      } else {
-        option.hidden = true;
-      }
+      if (rank < 99) matches.push({ option, rank, name: playerName });
+      else option.hidden = true;
     });
 
     matches
@@ -423,7 +415,7 @@
       </div>`;
   }
 
-  function buildAdminControl({ match, giocatoriDb, config, data, onSaved }) {
+  function buildAdminControl({ match, giocatoriDb, config, roseData, data, onSaved }) {
     if (window.hv_role !== "admin") return null;
     const record = getMatchRecord(data, match);
     const wrapper = document.createElement("div");
@@ -443,8 +435,8 @@
           ${EVENTI.map((def) => `<span><img src="${ICON_BASE}${def.icon}" alt="">${def.label}</span>`).join("")}
         </div>
         <div class="hv-match-events-teams">
-          ${teamEditorHtml(match.casaNome, match.casaCodice, teamPlayers(giocatoriDb, match.casaCodice), record)}
-          ${teamEditorHtml(match.trasfertaNome, match.trasfertaCodice, teamPlayers(giocatoriDb, match.trasfertaCodice), record)}
+          ${teamEditorHtml(match.casaNome, match.casaCodice, teamPlayers(giocatoriDb, match.casaCodice), record, roseData, config)}
+          ${teamEditorHtml(match.trasfertaNome, match.trasfertaCodice, teamPlayers(giocatoriDb, match.trasfertaCodice), record, roseData, config)}
         </div>
         <div class="hv-match-events-footer">
           <p class="hv-match-events-status" aria-live="polite"></p>
@@ -541,8 +533,8 @@
         return;
       }
 
-      // Invio seleziona subito il primo risultato visibile: utile quando
-      // le prime 3 lettere identificano già un solo giocatore.
+      // Invio resta una scorciatoia accessibile, ma non è necessario:
+      // i risultati sono cliccabili/tappabili appena compaiono.
       if (event.key === "Enter" && results && !results.hidden) {
         const first = Array.from(results.querySelectorAll(".hv-event-picker-option"))
           .find((option) => !option.hidden && option.dataset.selected !== "1");

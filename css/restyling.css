@@ -1231,18 +1231,18 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
 .hv-event-picker-input::placeholder{color:#71879a;}
 .hv-event-picker-chevron{font-size:11px;color:#7990a3;}
 .hv-event-picker-results{
-  position:absolute;
-  z-index:35;
-  left:10px;
-  right:10px;
-  top:calc(100% - 8px);
-  max-height:265px;
+  position:relative;
+  z-index:3;
+  margin-top:8px;
+  max-height:280px;
   overflow:auto;
+  overscroll-behavior:contain;
   padding:6px;
   border:1px solid #31516a;
   border-radius:11px;
   background:#07131d;
-  box-shadow:0 18px 42px rgba(0,0,0,.45);
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
+  scrollbar-width:thin;
 }
 .hv-event-picker-results[hidden]{display:none!important;}
 .hv-event-picker-option{
@@ -1277,9 +1277,10 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   color:#8093a4;
   font-weight:900;
 }
-.hv-event-picker-option>span:last-child{display:grid;min-width:0;}
+.hv-event-picker-option>span:last-child{display:grid;min-width:0;gap:2px;}
 .hv-event-picker-option strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.hv-event-picker-option small{font-size:9px;color:#8296a8;font-weight:900;}
+.hv-event-picker-option small{display:flex;align-items:center;gap:4px;min-width:0;font-size:9px;color:#8296a8;font-weight:900;}
+.hv-event-picker-owner{color:#b7ff5c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .hv-event-picker-empty,
 .hv-event-selected-empty{
   margin:8px;
@@ -1399,4 +1400,13 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   .hv-event-match-summary-title{align-items:flex-start;flex-direction:column;gap:2px;}
   .hv-event-match-summary-title small{text-align:left;}
   .hv-event-summary-owner{max-width:110px;}
+}
+
+@media (max-width: 640px){
+  .hv-event-picker-results{max-height:42vh;}
+  .hv-event-picker-option{min-height:50px;padding:7px 8px;}
+  .hv-event-picker-option img,
+  .hv-event-picker-photo-placeholder{width:36px;height:36px;flex-basis:36px;}
+  .hv-event-picker-option strong{font-size:13px;}
+  .hv-event-picker-option small{font-size:10px;}
 }
