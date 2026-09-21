@@ -224,6 +224,44 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558589",
+      "giornata": 5,
+      "casaCodice": "UDI",
+      "trasfertaCodice": "CAG",
+      "casaNome": "Udinese",
+      "trasfertaNome": "Cagliari",
+      "aggiornatoIl": "2026-09-21T00:17:23.819Z",
+      "eventi": [
+        {
+          "fantacalcioId": "2766",
+          "nome": "Zaniolo",
+          "squadraCodice": "UDI",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6680",
+          "nome": "Karlstrom",
+          "squadraCodice": "UDI",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4896",
+          "nome": "Maldini",
+          "squadraCodice": "CAG",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        }
+      ]
     }
   ]
 }
