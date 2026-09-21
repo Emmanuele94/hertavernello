@@ -70,7 +70,7 @@
     .cfg-squadra-row input { margin-bottom: 0; }
     .cfg-squadra-row button { background: transparent; border: 1px solid var(--wine); color: var(--wine-bright); padding: 8px 12px; border-radius: 6px; cursor: pointer; flex-shrink: 0; }
   </style>
-<link rel="stylesheet" href="css/restyling.css?v=20260916-homeadminfix1">
+<link rel="stylesheet" href="css/restyling.css?v=20260921-risultati1">
 <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
 <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 <script defer src="js/admin-icone-home.js?v=20260914-mobile2"></script>
@@ -317,13 +317,14 @@
     <div class="admin-box">
       <h2>6. Aggiorna risultati di giornata</h2>
       <p class="desc">
-        Da qui in poi classifica di lega, striscie e news si calcolano da sole — carica solo i 6 risultati di ogni
-        giornata, in uno dei 3 modi qui sotto. In tutti e 3 i casi arriverai alla stessa schermata di controllo
-        finale, dove puoi correggere a mano prima di salvare.
+        Carica i 6 scontri della giornata da screenshot, testo incollato o manualmente. La schermata finale mostra
+        sempre 6 schede e ti permette di correggere sia i <strong>fantapunti</strong> sia i <strong>gol fantasy</strong>.
+        Regola automatica: sotto 66 = 0 gol, 66 = 1 gol, poi +1 gol ogni 4 punti. Se il risultato importato
+        non coincide con il calcolo, viene mantenuto e segnalato prima del salvataggio.
       </p>
 
       <div class="campo-riga" style="max-width: 220px; margin-bottom: 14px;">
-        <input type="number" id="ris-giornata" min="1" placeholder="Giornata">
+        <input type="number" id="ris-giornata" min="1" placeholder="Giornata Serie A (es. 5)">
       </div>
 
       <div style="display: flex; gap: 8px; margin-bottom: 14px;">
@@ -334,22 +335,30 @@
 
       <div id="ris-metodo-screenshot" class="ris-metodo">
         <div id="ris-dropzone" class="ris-dropzone">
-          <p><strong>Incolla screenshot</strong> — Ctrl+V dopo Lightshot, o trascina/scegli un'immagine qui</p>
+          <p><strong>Incolla screenshot</strong> — Ctrl+V, trascina o scegli l'immagine dei 6 risultati. Verranno letti nomi, gol e fantapunti.</p>
         </div>
         <input type="file" id="ris-file-input" accept="image/png,image/jpeg,image/webp" class="hidden">
         <div id="ris-immagine-anteprima"></div>
       </div>
 
       <div id="ris-metodo-testo" class="ris-metodo hidden">
-        <p class="desc" style="margin: 0 0 8px;">Una riga per partita: "Nome fantasquadra" punteggio v "Nome fantasquadra" punteggio</p>
-        <textarea id="ris-textarea" rows="7" placeholder='"Herta Vernello" 78,5 v "Real Disagio" 71'></textarea>
-        <button type="button" id="ris-analizza-testo" style="margin-top: 8px;">Analizza</button>
+        <p class="desc" style="margin: 0 0 8px;">Incolla i blocchi come escono da Leghe Fantacalcio: squadra, risultato, fantapunti, avversaria. Le righe vuote tra gli scontri sono facoltative.</p>
+        <textarea id="ris-textarea" rows="13" placeholder="Genereal Madrid
+0-4
+63.5-81.5
+The Avengers
+
+BayerD.Monkey
+0-1
+62-67
+Fulmicotone"></textarea>
+        <button type="button" id="ris-analizza-testo" style="margin-top: 8px;">Crea le 6 schede</button>
       </div>
 
       <div id="ris-metodo-manuale" class="ris-metodo hidden">
-        <p class="desc" style="margin: 0 0 8px;">Accoppiamenti dal calendario di lega — inserisci solo i 12 punteggi.</p>
+        <p class="desc" style="margin: 0 0 8px;">Carico i 6 accoppiamenti direttamente dal calendario. Nelle schede potrai inserire o modificare punti e gol.</p>
         <div id="ris-manuale-righe"></div>
-        <button type="button" id="ris-manuale-genera" style="margin-top: 8px;">Genera anteprima</button>
+        <button type="button" id="ris-manuale-genera" style="margin-top: 8px;">Apri le 6 schede</button>
       </div>
 
       <div id="ris-ocr-stato" class="desc"></div>
@@ -358,8 +367,22 @@
       <div id="ris-anteprima-wrap" style="margin-top: 20px;"></div>
     </div>
 
+
+    <div class="admin-box" id="admin-eventi-archivio">
+      <h2>7. Archivio eventi Serie A</h2>
+      <p class="desc">
+        Qui restano disponibili per tutta la stagione gli eventi che salvi manualmente in <strong>Chi gioca contro chi</strong>,
+        anche quando quella giornata non è più visibile in Home. Puoi riaprire una partita e correggere marcatori, assist,
+        rigori e cartellini. Il file conserva anche uno snapshot del risultato reale: servirà in futuro per statistiche, news e What If senza dover richiamare l'API.
+      </p>
+      <button type="button" id="admin-eventi-archivio-refresh">↻ Aggiorna archivio</button>
+      <p id="admin-eventi-archivio-stato" class="muted" style="font-size:12px; margin:8px 0 12px;"></p>
+      <div id="admin-eventi-archivio-list"></div>
+      <div id="admin-eventi-archivio-editor"></div>
+    </div>
+
     <div class="admin-box">
-      <h2>7. Archivia la stagione (copia di sicurezza)</h2>
+      <h2>8. Archivia la stagione (copia di sicurezza)</h2>
       <p class="desc">
         Salva una copia di quello che c'è ORA in Squadre (rose + pagelle) dentro l'Archivio, senza toccare
         Squadre. Resta nascosta al pubblico finché la stagione è segnata "in corso" (la togli a fine
@@ -373,7 +396,7 @@
     </div>
 
     <div class="admin-box">
-      <h2>8. Disconnetti tutti</h2>
+      <h2>9. Disconnetti tutti</h2>
       <p class="desc">
         Fa uscire tutti quelli che hanno il sito aperto (te compreso) — utile se hai fatto un cambiamento
         importante e vuoi che tutti ripartano puliti. Non è istantaneo al secondo: chi ha una pagina già
@@ -384,7 +407,7 @@
     </div>
 
     <div class="admin-box">
-      <h2>9. Regolamento (PDF)</h2>
+      <h2>10. Regolamento (PDF)</h2>
       <p class="desc">
         Carica qui il PDF del regolamento: sostituisce quello attuale (se già ce n'è uno), e da quel momento
         il tasto "📄 Regolamento" su tutte le pagine mostra questa versione.
@@ -399,7 +422,7 @@
     <div class="admin-box feedback-admin-panel" id="bug-consigli">
       <div class="feedback-admin-title-row">
         <div>
-          <h2>10. Bug &amp; Consigli</h2>
+          <h2>11. Bug &amp; Consigli</h2>
           <p class="desc">Leggi le segnalazioni inviate dal sito, controlla gli screenshot, cambia lo stato e copia il testo già pronto per discuterne in ChatGPT.</p>
         </div>
         <span class="feedback-admin-inline-badge" id="feedback-admin-inline-badge" aria-hidden="true">💡</span>
@@ -430,7 +453,7 @@
   <script src="js/auth.js?v=20260914-mobile2"></script>
   <script src="js/github-api.js?v=20260916-adminmarket1"></script>
   <script src="js/giocatori.js?v=20260916-adminmarket1"></script>
-  <script src="js/admin-tabs.js?v=20260916-homeadminfix1"></script>
+  <script src="js/admin-tabs.js?v=20260921-risultati1"></script>
   <script src="js/admin-feedback.js?v=20260915-crosshost1"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -443,12 +466,14 @@
   <script src="js/api.js?v=20260916-adminmarket1"></script>
   <script src="js/admin-calendario.js?v=20260916-badgecal1"></script>
   <script src="js/admin-calendario-excel.js?v=20260914-mobile2"></script>
-  <script src="js/risultati-utils.js?v=20260914-mobile2"></script>
-  <script src="js/parser-risultati.js?v=20260914-mobile2"></script>
-  <script src="js/ocr-risultati.js?v=20260914-mobile2"></script>
-  <script src="js/calcolo-derivati.js?v=20260914-mobile2"></script>
-  <script src="js/motore-news.js?v=20260914-mobile2"></script>
-  <script src="js/admin-risultati.js?v=20260914-mobile2"></script>
+  <script src="js/risultati-utils.js?v=20260921-risultati1"></script>
+  <script src="js/parser-risultati.js?v=20260921-risultati1"></script>
+  <script src="js/ocr-risultati.js?v=20260921-risultati1"></script>
+  <script src="js/calcolo-derivati.js?v=20260921-risultati1"></script>
+  <script src="js/motore-news.js?v=20260921-risultati1"></script>
+  <script src="js/admin-risultati.js?v=20260921-risultati1"></script>
+  <script src="js/eventi-partite.js?v=20260921-risultati1"></script>
+  <script src="js/admin-eventi-partite.js?v=20260921-risultati1"></script>
   <script src="js/admin-archivia-stagione.js?v=20260914-mobile2"></script>
   <script src="js/admin-disconnetti-tutti.js?v=20260914-mobile2"></script>
   <script src="js/admin-regolamento.js?v=20260914-mobile2"></script>
@@ -467,6 +492,7 @@
       hv_initPrevisioniForm();
       hv_initCalendarioForm();
       hv_initRisultatiForm();
+      hv_initAdminEventiPartite();
       hv_initFeedbackAdmin();
     }
 

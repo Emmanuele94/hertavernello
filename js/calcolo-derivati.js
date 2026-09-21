@@ -1,8 +1,29 @@
 // ===== Tutto ciò che si può calcolare UNA VOLTA che i risultati di giornata
 // sono salvati — zero inserimento manuale aggiuntivo (Fase 20 del brief) =====
 
-// "risultati" = array flat di { matchday, homeTeamId, homeScore, awayTeamId, awayScore }
+// "risultati" salva fantapunti (homeScore/awayScore) e gol fantasy (homeGoals/awayGoals).
+// Per i vecchi record senza gol salvati, li ricaviamo con la regola 66 = 1 gol, poi +1 ogni 4 punti.
 // ordinato per giornata crescente prima dell'uso (lo ordiniamo qui per sicurezza).
+
+function hv_golDerivato(r, lato) {
+  const keyGoals = lato === "away" ? "awayGoals" : "homeGoals";
+  const keyScore = lato === "away" ? "awayScore" : "homeScore";
+  const rawGoals = r?.[keyGoals];
+  const g = Number(rawGoals);
+  if (rawGoals != null && rawGoals !== "" && Number.isFinite(g) && g >= 0) return g;
+  if (typeof hv_calcolaGolDaPunteggio === "function") return hv_calcolaGolDaPunteggio(r?.[keyScore]);
+  const rawScore = r?.[keyScore];
+  if (rawScore == null || rawScore === "") return null;
+  const score = Number(rawScore);
+  if (!Number.isFinite(score)) return null;
+  return score < 66 ? 0 : 1 + Math.floor((score - 66 + 1e-9) / 4);
+}
+
+function hv_esitoDerivato(r) {
+  const homeGoals = hv_golDerivato(r, "home");
+  const awayGoals = hv_golDerivato(r, "away");
+  return { homeGoals, awayGoals, winner: homeGoals > awayGoals ? "home" : awayGoals > homeGoals ? "away" : "draw" };
+}
 
 function hv_calcolaClassificaLega(risultati, squadre) {
   const tabella = {};
@@ -10,7 +31,7 @@ function hv_calcolaClassificaLega(risultati, squadre) {
     tabella[s.id] = {
       squadra: s,
       giocate: 0, vinte: 0, pareggiate: 0, perse: 0,
-      punti: 0, fpFatti: 0, fpSubiti: 0,
+      punti: 0, fpFatti: 0, fpSubiti: 0, golFatti: 0, golSubiti: 0,
       formaRecente: [], // ultime giornate, più recente per prima: "V" | "P" | "S"
     };
   });
@@ -23,13 +44,16 @@ function hv_calcolaClassificaLega(risultati, squadre) {
     if (!home || !away) return;
 
     home.giocate++; away.giocate++;
-    home.fpFatti += r.homeScore; home.fpSubiti += r.awayScore;
-    away.fpFatti += r.awayScore; away.fpSubiti += r.homeScore;
+    home.fpFatti += Number(r.homeScore) || 0; home.fpSubiti += Number(r.awayScore) || 0;
+    away.fpFatti += Number(r.awayScore) || 0; away.fpSubiti += Number(r.homeScore) || 0;
+    const esito = hv_esitoDerivato(r);
+    home.golFatti += esito.homeGoals || 0; home.golSubiti += esito.awayGoals || 0;
+    away.golFatti += esito.awayGoals || 0; away.golSubiti += esito.homeGoals || 0;
 
-    if (r.homeScore > r.awayScore) {
+    if (esito.winner === "home") {
       home.vinte++; home.punti += 3; home.formaRecente.unshift("V");
       away.perse++; away.formaRecente.unshift("S");
-    } else if (r.homeScore < r.awayScore) {
+    } else if (esito.winner === "away") {
       away.vinte++; away.punti += 3; away.formaRecente.unshift("V");
       home.perse++; home.formaRecente.unshift("S");
     } else {
@@ -92,10 +116,12 @@ function hv_testaATesta(risultati, teamIdA, teamIdB) {
   );
   let vittorieA = 0, vittorieB = 0, pareggi = 0;
   scontri.forEach((r) => {
-    const scoreA = r.homeTeamId === teamIdA ? r.homeScore : r.awayScore;
-    const scoreB = r.homeTeamId === teamIdA ? r.awayScore : r.homeScore;
-    if (scoreA > scoreB) vittorieA++;
-    else if (scoreB > scoreA) vittorieB++;
+    const homeGoals = hv_golDerivato(r, "home");
+    const awayGoals = hv_golDerivato(r, "away");
+    const golA = r.homeTeamId === teamIdA ? homeGoals : awayGoals;
+    const golB = r.homeTeamId === teamIdA ? awayGoals : homeGoals;
+    if (golA > golB) vittorieA++;
+    else if (golB > golA) vittorieB++;
     else pareggi++;
   });
   return { incontri: scontri.length, vittorieA, vittorieB, pareggi };
@@ -127,8 +153,9 @@ function hv_calcolaBadge(risultati, squadre) {
     risultati
       .filter((r) => r.matchday === g)
       .forEach((r) => {
-        const winnerId = r.homeScore > r.awayScore ? r.homeTeamId : r.awayScore > r.homeScore ? r.awayTeamId : null;
-        const loserId = r.homeScore > r.awayScore ? r.awayTeamId : r.awayScore > r.homeScore ? r.homeTeamId : null;
+        const esito = hv_esitoDerivato(r);
+        const winnerId = esito.winner === "home" ? r.homeTeamId : esito.winner === "away" ? r.awayTeamId : null;
+        const loserId = esito.winner === "home" ? r.awayTeamId : esito.winner === "away" ? r.homeTeamId : null;
         if (winnerId) {
           striscaCorrente[winnerId] = (striscaCorrente[winnerId] || 0) + 1;
           striscaMax[winnerId] = Math.max(striscaMax[winnerId] || 0, striscaCorrente[winnerId]);
@@ -144,11 +171,12 @@ function hv_calcolaBadge(risultati, squadre) {
     sconfitteMisura[s.id] = 0;
   });
   risultati.forEach((r) => {
-    const scarto = Math.abs(r.homeScore - r.awayScore);
-    if (r.homeScore > r.awayScore) {
+    const scarto = Math.abs((Number(r.homeScore) || 0) - (Number(r.awayScore) || 0));
+    const esito = hv_esitoDerivato(r);
+    if (esito.winner === "home") {
       if (scarto <= 1) vittorieMisura[r.homeTeamId]++;
       if (scarto <= 0.5) sconfitteMisura[r.awayTeamId]++;
-    } else if (r.awayScore > r.homeScore) {
+    } else if (esito.winner === "away") {
       if (scarto <= 1) vittorieMisura[r.awayTeamId]++;
       if (scarto <= 0.5) sconfitteMisura[r.homeTeamId]++;
     }
@@ -197,5 +225,5 @@ function hv_calcolaBadge(risultati, squadre) {
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { hv_calcolaClassificaLega, hv_strisciaAttiva, hv_calcolaRecord, hv_testaATesta, hv_calcolaBadge };
+  module.exports = { hv_golDerivato, hv_esitoDerivato, hv_calcolaClassificaLega, hv_strisciaAttiva, hv_calcolaRecord, hv_testaATesta, hv_calcolaBadge };
 }

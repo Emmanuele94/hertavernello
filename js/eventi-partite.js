@@ -45,7 +45,7 @@
 
   function emptyData() {
     return {
-      _leggimi: "Eventi manuali delle partite reali di Serie A usati in Home: gol, assist, rigori, autogol e cartellini. Si modificano dalla Home quando sei loggato come Admin.",
+      _leggimi: "Archivio stagionale degli eventi manuali delle partite reali di Serie A. Conserva risultato, squadre e giocatori/eventi per riuso futuro (statistiche, What If, news) e si modifica dalla Home o dall'Admin.",
       partite: [],
     };
   }
@@ -140,6 +140,38 @@
         if (ra !== rb) return ra - rb;
         return String(a.nome || "").localeCompare(String(b.nome || ""), "it");
       });
+  }
+
+  // Per l'archivio storico manteniamo editabili anche giocatori che nel frattempo
+  // hanno cambiato squadra o non sono più nel database corrente. Gli eventi salvati
+  // restano legati alla squadra reale che avevano in quella partita.
+  function teamPlayersWithHistory(giocatoriDb, codice, record) {
+    const code = String(codice || "").toUpperCase();
+    const base = teamPlayers(giocatoriDb, code).map((p) => ({ ...p }));
+    const keys = new Set(base.map(playerKey));
+    (record?.eventi || [])
+      .filter((e) => String(e.squadraCodice || "").toUpperCase() === code)
+      .forEach((entry) => {
+        let db = null;
+        const fid = entry?.fantacalcioId != null ? String(entry.fantacalcioId) : "";
+        if (fid) db = (giocatoriDb || []).find((g) => String(g.fantacalcioId || "") === fid) || null;
+        if (!db) db = (giocatoriDb || []).find((g) => normalize(g.nome) === normalize(entry.nome)) || null;
+        const storico = {
+          ...(db || {}),
+          fantacalcioId: entry.fantacalcioId || db?.fantacalcioId || null,
+          nome: entry.nome || db?.nome || "Giocatore",
+          ruolo: entry.ruolo || db?.ruolo || "",
+          squadraCodice: code,
+        };
+        const key = playerKey(storico);
+        if (!keys.has(key)) { base.push(storico); keys.add(key); }
+      });
+    return base.sort((a, b) => {
+      const ra = ROLE_ORDER[a.ruolo] ?? 99;
+      const rb = ROLE_ORDER[b.ruolo] ?? 99;
+      if (ra !== rb) return ra - rb;
+      return String(a.nome || "").localeCompare(String(b.nome || ""), "it");
+    });
   }
 
   function eventCounterHtml(def, count) {
@@ -415,11 +447,11 @@
       </div>`;
   }
 
-  function buildAdminControl({ match, giocatoriDb, config, roseData, data, onSaved }) {
+  function buildAdminControl({ match, giocatoriDb, config, roseData, data, onSaved, standalone = false, openInitially = false }) {
     if (window.hv_role !== "admin") return null;
     const record = getMatchRecord(data, match);
     const wrapper = document.createElement("div");
-    wrapper.className = "hv-match-events-admin";
+    wrapper.className = `hv-match-events-admin${standalone ? " hv-match-events-admin-standalone" : ""}`;
     wrapper.innerHTML = `
       <button type="button" class="hv-match-events-toggle">${record?.eventi?.length ? "✏️ Modifica eventi" : "⚽ Inserisci eventi"}</button>
       <div class="hv-match-events-panel" hidden>
@@ -435,8 +467,8 @@
           ${EVENTI.map((def) => `<span><img src="${ICON_BASE}${def.icon}" alt="">${def.label}</span>`).join("")}
         </div>
         <div class="hv-match-events-teams">
-          ${teamEditorHtml(match.casaNome, match.casaCodice, teamPlayers(giocatoriDb, match.casaCodice), record, roseData, config)}
-          ${teamEditorHtml(match.trasfertaNome, match.trasfertaCodice, teamPlayers(giocatoriDb, match.trasfertaCodice), record, roseData, config)}
+          ${teamEditorHtml(match.casaNome, match.casaCodice, teamPlayersWithHistory(giocatoriDb, match.casaCodice, record), record, roseData, config)}
+          ${teamEditorHtml(match.trasfertaNome, match.trasfertaCodice, teamPlayersWithHistory(giocatoriDb, match.trasfertaCodice, record), record, roseData, config)}
         </div>
         <div class="hv-match-events-footer">
           <p class="hv-match-events-status" aria-live="polite"></p>
@@ -458,6 +490,7 @@
 
     toggle.addEventListener("click", () => setOpen(panel.hidden));
     wrapper.querySelector(".hv-match-events-close")?.addEventListener("click", () => setOpen(false));
+    if (openInitially) setOpen(true);
 
     panel.addEventListener("click", (event) => {
       const option = event.target.closest(".hv-event-picker-option");
@@ -582,13 +615,19 @@
         const key = matchKey(match);
         const payload = data && Array.isArray(data.partite) ? data : emptyData();
         const existingIndex = payload.partite.findIndex((p) => String(p.matchId) === key);
+        const precedente = existingIndex >= 0 ? payload.partite[existingIndex] : null;
         const next = {
+          ...(precedente || {}),
           matchId: key,
-          giornata: Number(match.matchday) || null,
-          casaCodice: match.casaCodice || "",
-          trasfertaCodice: match.trasfertaCodice || "",
-          casaNome: match.casaNome || "",
-          trasfertaNome: match.trasfertaNome || "",
+          giornata: Number(match.matchday) || precedente?.giornata || null,
+          data: match.data || precedente?.data || null,
+          casaCodice: match.casaCodice || precedente?.casaCodice || "",
+          trasfertaCodice: match.trasfertaCodice || precedente?.trasfertaCodice || "",
+          casaNome: match.casaNome || precedente?.casaNome || "",
+          trasfertaNome: match.trasfertaNome || precedente?.trasfertaNome || "",
+          golCasa: match.golCasa != null ? Number(match.golCasa) : (precedente?.golCasa ?? null),
+          golTrasferta: match.golTrasferta != null ? Number(match.golTrasferta) : (precedente?.golTrasferta ?? null),
+          stato: match.live ? "LIVE" : match.finita ? "FINALE" : (precedente?.stato || "PROGRAMMATA"),
           aggiornatoIl: new Date().toISOString(),
           eventi,
         };

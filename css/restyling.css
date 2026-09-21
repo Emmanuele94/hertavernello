@@ -1410,3 +1410,243 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   .hv-event-picker-option strong{font-size:13px;}
   .hv-event-picker-option small{font-size:10px;}
 }
+
+/* ===== Admin risultati giornata 2026/27 ===== */
+.ris-manuale-ready {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 10px;
+  background: var(--bg-void);
+  font-size: 13px;
+}
+.ris-manuale-ready span { color: var(--text-muted); }
+.ris-screenshot-preview {
+  display: block;
+  width: min(100%, 520px);
+  max-height: 340px;
+  object-fit: contain;
+  margin-top: 12px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 10px;
+  background: #fff;
+}
+.ris-screenshot-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.ris-debug-btn { margin-top: 8px; }
+.ris-debug-pre {
+  white-space: pre-wrap;
+  font-size: 11.5px;
+  background: var(--bg-void);
+  padding: 10px;
+  border-radius: 6px;
+  max-height: 260px;
+  overflow: auto;
+}
+.ris-preview-shell {
+  border: 1px solid var(--border-hairline);
+  border-radius: 14px;
+  background: var(--bg-void);
+  padding: 16px;
+}
+.ris-preview-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.ris-preview-head .campo-titolo { margin-bottom: 3px; }
+.ris-preview-head .desc { margin: 0; }
+.ris-rule-chip {
+  flex-shrink: 0;
+  padding: 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--verde-prato) 38%, transparent);
+  border-radius: 999px;
+  color: var(--verde-prato);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.ris-match-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.ris-match-card {
+  min-width: 0;
+  border: 1px solid var(--border-hairline);
+  border-radius: 12px;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.ris-match-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--border-hairline);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.ris-confidence { font-size: 10px; text-transform: none; letter-spacing: 0; }
+.ris-confidence.ok { color: var(--verde-prato); }
+.ris-confidence.warn { color: var(--giallo-neon); }
+.ris-confidence.bad { color: var(--wine-bright); }
+.ris-match-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+.ris-team-result { min-width: 0; }
+.ris-team-result select {
+  width: 100%;
+  min-width: 0;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  border: 1px solid var(--border-hairline);
+  border-radius: 7px;
+  padding: 8px 9px;
+  font-size: 12.5px;
+}
+.ris-values-row {
+  display: grid;
+  grid-template-columns: minmax(58px, .72fr) minmax(72px, 1fr);
+  gap: 7px;
+  margin-top: 8px;
+}
+.ris-values-row label { min-width: 0; }
+.ris-values-row label > span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.admin-box .ris-values-row input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 8px 7px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.ris-goal-source {
+  display: block;
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.ris-vs-column {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  color: var(--giallo-neon);
+  font-family: var(--font-mono);
+}
+.ris-vs-column span { font-size: 18px; font-weight: 700; line-height: 1; }
+.ris-vs-column b { font-size: 9px; color: var(--text-muted); letter-spacing: .08em; }
+.ris-match-card-footer {
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.ris-card-warning {
+  min-height: 0;
+  margin: 0;
+  color: var(--giallo-neon);
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+.admin-box .ris-recalc-btn {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-hairline);
+  padding: 6px 8px;
+  font-size: 10.5px;
+}
+.ris-preview-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.admin-box #ris-salva-github { background: var(--giallo-neon); color: var(--bg-void); }
+.ris-save-status { font-size: 12px; margin: 8px 0 0; color: var(--text-muted); }
+
+/* ===== Archivio eventi Serie A in Admin ===== */
+#admin-eventi-archivio-list {
+  display: grid;
+  gap: 8px;
+  max-height: 560px;
+  overflow: auto;
+  padding-right: 3px;
+}
+.admin-eventi-archive-row {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 10px;
+  background: var(--bg-void);
+}
+.admin-eventi-archive-meta { display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--text-muted); }
+.admin-eventi-archive-meta > span { color: var(--giallo-neon); font-family: var(--font-mono); }
+.admin-eventi-archive-match {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+.admin-eventi-archive-match > strong { text-align: center; font-family: var(--font-mono); color: var(--text-primary); }
+.admin-eventi-team {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.admin-eventi-team-away { justify-content: flex-end; text-align: right; }
+.admin-eventi-team img { width: 25px; height: 25px; object-fit: contain; flex: 0 0 auto; }
+.admin-box .admin-eventi-edit { padding: 7px 10px; font-size: 11px; white-space: nowrap; }
+#admin-eventi-archivio-editor { margin-top: 16px; }
+.admin-eventi-editor-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 10px;
+  background: var(--bg-void);
+}
+.admin-box .admin-eventi-editor-title button { padding: 6px 9px; font-size: 11px; }
+.hv-match-events-admin-standalone { margin: 0; }
+.hv-match-events-admin-standalone > .hv-match-events-toggle { display: none !important; }
+.hv-match-events-admin-standalone > .hv-match-events-panel { margin-top: 0; }
+
+@media (max-width: 760px) {
+  .ris-preview-shell { padding: 12px; }
+  .ris-preview-head { flex-direction: column; }
+  .ris-rule-chip { white-space: normal; }
+  .ris-match-grid { grid-template-columns: 1fr; }
+  .ris-match-card-body { grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr); gap: 6px; padding: 10px; }
+  .ris-values-row { grid-template-columns: 1fr; }
+  .ris-team-result select { font-size: 12px; padding: 8px 5px; }
+  .admin-box .ris-values-row input { font-size: 16px; }
+  .ris-vs-column span { font-size: 16px; }
+  .admin-eventi-archive-row { grid-template-columns: 1fr; gap: 8px; }
+  .admin-eventi-archive-meta { flex-direction: row; justify-content: space-between; }
+  .admin-eventi-archive-match { grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); }
+  .admin-box .admin-eventi-edit { width: 100%; }
+}

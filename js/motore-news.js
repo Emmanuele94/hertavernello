@@ -32,9 +32,10 @@ function hv_generaNews(risultati, squadre, classifica) {
   risultati
     .filter((r) => r.matchday === ultimaGiornata)
     .forEach((r) => {
-      if (r.homeScore > r.awayScore && r.awayScore >= 80) {
+      const esito = typeof hv_esitoDerivato === "function" ? hv_esitoDerivato(r) : { winner: r.homeScore > r.awayScore ? "home" : r.awayScore > r.homeScore ? "away" : "draw" };
+      if (esito.winner === "home" && r.awayScore >= 80) {
         news.push(`😤 ${nome(r.awayTeamId)} perde nonostante ${r.awayScore} fantapunti.`);
-      } else if (r.awayScore > r.homeScore && r.homeScore >= 80) {
+      } else if (esito.winner === "away" && r.homeScore >= 80) {
         news.push(`😤 ${nome(r.homeTeamId)} perde nonostante ${r.homeScore} fantapunti.`);
       }
     });

@@ -1,12 +1,6 @@
-// ===== MOTORE UNICO DI IMPORTAZIONE — livello OCR (Metodo A) =====
-// Tesseract.js viene caricato SOLO quando l'utente apre il tab Screenshot e
-// incolla/trascina un'immagine — non appesantisce il resto del sito (Fase 7).
-// Libreria: tesseract.js v5, via CDN jsDelivr (https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js).
-// Peso reale: il file JS è ~500KB, ma scarica anche il modello linguistico
-// (~2-4MB per la lingua scelta) alla PRIMA esecuzione, poi lo mette in cache
-// nel browser (IndexedDB) — dalla seconda volta in poi è quasi istantaneo.
-
-let hv_tesseractCaricato = null; // Promise, per non caricare lo script due volte
+// OCR risultati — Tesseract viene caricato solo quando l'Admin lo richiede.
+// L'output non viene salvato automaticamente: passa sempre dalle 6 schede di controllo.
+let hv_tesseractCaricato = null;
 
 function hv_caricaTesseract() {
   if (hv_tesseractCaricato) return hv_tesseractCaricato;
@@ -21,33 +15,33 @@ function hv_caricaTesseract() {
   return hv_tesseractCaricato;
 }
 
-// Pre-processing semplice (Fase 8): scala di grigi + aumento contrasto.
-// Deliberatamente basilare — va raffinato dopo il 15 settembre con screenshot
-// reali di Leghe Fantacalcio (crop automatico dell'area utile, ecc.).
 function hv_preprocessaImmagine(img) {
   const canvas = document.createElement("canvas");
-  const scala = 2; // upscale: l'OCR legge meglio testo piccolo se ingrandito
-  canvas.width = img.width * scala;
-  canvas.height = img.height * scala;
-  const ctx = canvas.getContext("2d");
+  const maxWidth = 1700;
+  const scalaBase = Math.max(1.6, Math.min(2.6, maxWidth / Math.max(1, img.width)));
+  canvas.width = Math.round(img.width * scalaBase);
+  canvas.height = Math.round(img.height * scalaBase);
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
   ctx.imageSmoothingEnabled = true;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
   const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const d = frame.data;
-  const CONTRASTO = 35;
+  const CONTRASTO = 48;
   const fattore = (259 * (CONTRASTO + 255)) / (255 * (259 - CONTRASTO));
   for (let i = 0; i < d.length; i += 4) {
     const gray = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2];
-    const v = Math.min(255, Math.max(0, fattore * (gray - 128) + 128));
+    let v = Math.min(255, Math.max(0, fattore * (gray - 128) + 128));
+    // Lo screenshot Leghe ha sfondo chiarissimo: rendiamo il testo più netto senza
+    // distruggere le cifre sottili dei fantapunti.
+    if (v > 224) v = 255;
+    else if (v < 70) v = 0;
     d[i] = d[i + 1] = d[i + 2] = v;
   }
   ctx.putImageData(frame, 0, 0);
   return canvas;
 }
 
-// Esegue l'OCR vero e proprio su un'immagine (File/Blob/HTMLImageElement) e
-// restituisce il testo grezzo riconosciuto.
 async function hv_eseguiOCR(img, onProgress) {
   const Tesseract = await hv_caricaTesseract();
   const canvasPreprocessato = hv_preprocessaImmagine(img);
@@ -57,71 +51,39 @@ async function hv_eseguiOCR(img, onProgress) {
     },
   });
   try {
+    if (worker.setParameters) {
+      await worker.setParameters({
+        preserve_interword_spaces: "1",
+        tessedit_pageseg_mode: "6",
+      });
+    }
     const { data } = await worker.recognize(canvasPreprocessato);
-    return data.text;
+    return data.text || "";
   } finally {
     await worker.terminate();
   }
 }
 
-// ===== Testo grezzo OCR → coppie nome/punteggio → formato canonico =====
-// Stessa logica testata su due layout diversi (nome+punteggio sulla stessa
-// riga, o su righe separate) — gestisce entrambi senza assumere un layout
-// fisso, dato che non abbiamo ancora uno screenshot reale da Leghe Fantacalcio.
-function hv_estraiCoppieOCR(testoGrezzo, squadre) {
-  const righe = (testoGrezzo || "")
-    .split("\n")
-    .map((r) => r.trim())
-    .filter(Boolean);
 
-  const coppie = [];
-  let nomeInSospeso = null;
-  const regexNomePunteggio = /^(.+?)\s+(\d+(?:[.,]\d+)?)$/;
-  const regexSoloNumero = /^(\d+(?:[.,]\d+)?)$/;
-
-  righe.forEach((riga) => {
-    // Riga che corrisponde già per intero a una fantasquadra nota (anche con
-    // cifre nel nome, es. "Napoli 1011"): la tratto come nome, non la spezzo.
-    if (squadre && hv_trovaFantasquadra(riga, squadre).confidenza !== "nessuna") {
-      nomeInSospeso = riga;
-      return;
-    }
-    const soloNumero = riga.match(regexSoloNumero);
-    if (soloNumero) {
-      if (nomeInSospeso) {
-        coppie.push({ nome: nomeInSospeso, punteggio: hv_parseNumero(soloNumero[1]) });
-        nomeInSospeso = null;
-      }
-      return;
-    }
-    const nomePunteggio = riga.match(regexNomePunteggio);
-    if (nomePunteggio) {
-      coppie.push({ nome: nomePunteggio[1].trim(), punteggio: hv_parseNumero(nomePunteggio[2]) });
-      nomeInSospeso = null;
-      return;
-    }
-    nomeInSospeso = riga;
-  });
-  return coppie;
+function hv_estraiGiornataSerieA(testoGrezzo) {
+  const testo = String(testoGrezzo || "").replace(/\s+/g, " ");
+  const m = testo.match(/(\d{1,2})\s*[ªa°º]?\s*giornata\s+di\s+serie\s*a/i);
+  return m ? Number(m[1]) : null;
 }
 
-function hv_coppieInTestoCanonico(coppie) {
-  const righe = [];
-  for (let i = 0; i + 1 < coppie.length; i += 2) {
-    righe.push(
-      `"${coppie[i].nome}" ${String(coppie[i].punteggio).replace(".", ",")} v "${coppie[i + 1].nome}" ${String(coppie[i + 1].punteggio).replace(".", ",")}`
-    );
-  }
-  return righe.join("\n");
-}
-
-// Punto di ingresso usato dalla UI: da testo grezzo OCR al formato canonico,
-// pronto per essere passato a hv_parseTestoRisultati (lo STESSO parser usato
-// dal Metodo B) — è qui che i due metodi convergono, come richiesto.
-function hv_ocrATestoCanonico(testoGrezzo, squadre) {
-  return hv_coppieInTestoCanonico(hv_estraiCoppieOCR(testoGrezzo, squadre));
+// Pulizia leggera del testo OCR. Il parser successivo sa leggere sia la riga
+// "Squadra 0-4 Squadra" + "63.5-81.5", sia il blocco a quattro righe.
+function hv_ocrATestoCanonico(testoGrezzo) {
+  return String(testoGrezzo || "")
+    .replace(/[−–—]/g, "-")
+    .replace(/(\d),(\d)/g, "$1.$2")
+    .split(/\r?\n/)
+    .map((r) => r.replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .filter((r) => !/^\d+\s*[ªa°]?\s*giornata\b/i.test(r))
+    .join("\n");
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { hv_estraiCoppieOCR, hv_coppieInTestoCanonico, hv_ocrATestoCanonico };
+  module.exports = { hv_ocrATestoCanonico, hv_estraiGiornataSerieA };
 }
