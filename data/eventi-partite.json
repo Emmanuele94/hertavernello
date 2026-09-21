@@ -493,6 +493,80 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558592",
+      "giornata": 5,
+      "casaCodice": "FRO",
+      "trasfertaCodice": "COM",
+      "casaNome": "Frosinone",
+      "trasfertaNome": "Como 1907",
+      "aggiornatoIl": "2026-09-21T07:48:17.176Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7472",
+          "nome": "Calò",
+          "squadraCodice": "FRO",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7551",
+          "nome": "Schmid",
+          "squadraCodice": "FRO",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 2
+          }
+        },
+        {
+          "fantacalcioId": "6204",
+          "nome": "Kvernadze",
+          "squadraCodice": "FRO",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7469",
+          "nome": "Bracaglia",
+          "squadraCodice": "FRO",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5436",
+          "nome": "Raimondo",
+          "squadraCodice": "FRO",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6727",
+          "nome": "Couto",
+          "squadraCodice": "COM",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6967",
+          "nome": "Diao",
+          "squadraCodice": "COM",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
     }
   ]
 }
