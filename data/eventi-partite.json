@@ -288,13 +288,13 @@
       "trasfertaCodice": "LAZ",
       "casaNome": "Venezia FC",
       "trasfertaNome": "Lazio",
-      "aggiornatoIl": "2026-09-21T07:25:05.763Z",
+      "aggiornatoIl": "2026-09-21T07:49:22.408Z",
       "eventi": [
         {
-          "fantacalcioId": "6994",
-          "nome": "Perez K.",
+          "fantacalcioId": "4845",
+          "nome": "Correia T.",
           "squadraCodice": "VEN",
-          "ruolo": "CEN",
+          "ruolo": "DIF",
           "eventi": {
             "ammonizioni": 1
           }
@@ -309,10 +309,10 @@
           }
         },
         {
-          "fantacalcioId": "4845",
-          "nome": "Correia T.",
+          "fantacalcioId": "6994",
+          "nome": "Perez K.",
           "squadraCodice": "VEN",
-          "ruolo": "DIF",
+          "ruolo": "CEN",
           "eventi": {
             "ammonizioni": 1
           }
@@ -333,6 +333,24 @@
           "ruolo": "ATT",
           "eventi": {
             "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5620",
+          "nome": "Tavares N.",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6482",
+          "nome": "Mandas",
+          "squadraCodice": "LAZ",
+          "ruolo": "POR",
+          "eventi": {
+            "rigoriParati": 1
           }
         }
       ]
