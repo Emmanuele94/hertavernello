@@ -427,11 +427,11 @@
       "trasfertaCodice": "GEN",
       "casaNome": "Parma",
       "trasfertaNome": "Genoa",
-      "aggiornatoIl": "2026-09-21T07:46:07.642Z",
+      "aggiornatoIl": "2026-09-21T07:52:25.572Z",
       "eventi": [
         {
-          "fantacalcioId": "7615",
-          "nome": "Drobnic",
+          "fantacalcioId": "6664",
+          "nome": "Delprato",
           "squadraCodice": "PAR",
           "ruolo": "DIF",
           "eventi": {
@@ -439,26 +439,8 @@
           }
         },
         {
-          "fantacalcioId": "7554",
-          "nome": "Romero D.",
-          "squadraCodice": "PAR",
-          "ruolo": "ATT",
-          "eventi": {
-            "gol": 1
-          }
-        },
-        {
-          "fantacalcioId": "6207",
-          "nome": "Almqvist",
-          "squadraCodice": "PAR",
-          "ruolo": "CEN",
-          "eventi": {
-            "gol": 1
-          }
-        },
-        {
-          "fantacalcioId": "6664",
-          "nome": "Delprato",
+          "fantacalcioId": "7615",
+          "nome": "Drobnic",
           "squadraCodice": "PAR",
           "ruolo": "DIF",
           "eventi": {
@@ -475,6 +457,51 @@
           }
         },
         {
+          "fantacalcioId": "6207",
+          "nome": "Almqvist",
+          "squadraCodice": "PAR",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7554",
+          "nome": "Romero D.",
+          "squadraCodice": "PAR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6229",
+          "nome": "Tourè E.",
+          "squadraCodice": "PAR",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7342",
+          "nome": "Elphege",
+          "squadraCodice": "PAR",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6660",
+          "nome": "Marcandalli",
+          "squadraCodice": "GEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
           "fantacalcioId": "6977",
           "nome": "Otoa",
           "squadraCodice": "GEN",
@@ -484,10 +511,10 @@
           }
         },
         {
-          "fantacalcioId": "6660",
-          "nome": "Marcandalli",
+          "fantacalcioId": "6020",
+          "nome": "Ellertsson",
           "squadraCodice": "GEN",
-          "ruolo": "DIF",
+          "ruolo": "CEN",
           "eventi": {
             "ammonizioni": 1
           }
@@ -502,12 +529,12 @@
           }
         },
         {
-          "fantacalcioId": "6020",
-          "nome": "Ellertsson",
+          "fantacalcioId": "4923",
+          "nome": "Colombo",
           "squadraCodice": "GEN",
-          "ruolo": "CEN",
+          "ruolo": "ATT",
           "eventi": {
-            "ammonizioni": 1
+            "assist": 1
           }
         }
       ]
