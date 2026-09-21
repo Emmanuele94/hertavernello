@@ -1,4 +1,83 @@
 {
-  "_leggimi": "Risultati di giornata della lega, confermati da admin.html sezione Aggiorna risultati. Ogni voce: matchday (numero giornata), homeTeamId/awayTeamId (id fantasquadra), homeScore/awayScore (fantapunti), importMethod (screenshot/text/manual), savedAt (data ISO). Da qui si calcolano automaticamente classifica lega, strisce, record e news — non serve inserire nient'altro a mano.",
-  "risultati": []
+  "_leggimi": "Risultati della lega confermati da Admin. Ogni incontro salva fantapunti e gol fantasy. Regola automatica: sotto 66 = 0 gol, 66 = 1, poi +1 gol ogni 4 punti. I gol possono essere corretti manualmente e, se differiscono dal calcolo, il valore manuale viene rispettato.",
+  "risultati": [
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-06",
+      "homeScore": 63.5,
+      "homeGoals": 0,
+      "homeGoalsSource": "manuale",
+      "awayTeamId": "sq-05",
+      "awayScore": 81.5,
+      "awayGoals": 4,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    },
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-08",
+      "homeScore": 62,
+      "homeGoals": 0,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-10",
+      "awayScore": 67,
+      "awayGoals": 1,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    },
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-04",
+      "homeScore": 69,
+      "homeGoals": 1,
+      "homeGoalsSource": "manuale",
+      "awayTeamId": "sq-01",
+      "awayScore": 94,
+      "awayGoals": 8,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    },
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-03",
+      "homeScore": 64,
+      "homeGoals": 0,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-11",
+      "awayScore": 78,
+      "awayGoals": 4,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    },
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-02",
+      "homeScore": 70.5,
+      "homeGoals": 2,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-09",
+      "awayScore": 66.5,
+      "awayGoals": 1,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    },
+    {
+      "matchday": 5,
+      "homeTeamId": "sq-12",
+      "homeScore": 75.5,
+      "homeGoals": 3,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-07",
+      "awayScore": 67,
+      "awayGoals": 1,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-09-21T07:59:50.190Z"
+    }
+  ]
 }
