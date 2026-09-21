@@ -66,7 +66,7 @@
       "trasfertaCodice": "TOR",
       "casaNome": "Bologna",
       "trasfertaNome": "Torino",
-      "aggiornatoIl": "2026-09-20T22:20:34.175Z",
+      "aggiornatoIl": "2026-09-21T01:13:48.084Z",
       "eventi": [
         {
           "fantacalcioId": "184",
@@ -75,15 +75,6 @@
           "ruolo": "CEN",
           "eventi": {
             "gol": 1
-          }
-        },
-        {
-          "fantacalcioId": null,
-          "nome": "Braganca",
-          "squadraCodice": "TOR",
-          "ruolo": "CEN",
-          "eventi": {
-            "ammonizioni": 1
           }
         },
         {
@@ -96,7 +87,7 @@
           }
         },
         {
-          "fantacalcioId": null,
+          "fantacalcioId": "5751",
           "nome": "Patterson",
           "squadraCodice": "TOR",
           "ruolo": "DIF",
@@ -105,12 +96,30 @@
           }
         },
         {
-          "fantacalcioId": null,
+          "fantacalcioId": "7624",
+          "nome": "Braganca",
+          "squadraCodice": "TOR",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7349",
           "nome": "Kulenovic",
           "squadraCodice": "TOR",
           "ruolo": "ATT",
           "eventi": {
             "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "1933",
+          "nome": "Mandragora",
+          "squadraCodice": "TOR",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
           }
         }
       ]
