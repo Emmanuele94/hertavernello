@@ -8,10 +8,19 @@
       "trasfertaCodice": "SAS",
       "casaNome": "Monza",
       "trasfertaNome": "Sassuolo",
-      "aggiornatoIl": "2026-09-21T00:16:15.299Z",
+      "aggiornatoIl": "2026-09-21T07:20:36.598Z",
       "eventi": [
         {
-          "fantacalcioId": null,
+          "fantacalcioId": "5838",
+          "nome": "Birindelli",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6252",
           "nome": "Folorunsho",
           "squadraCodice": "MON",
           "ruolo": "CEN",
@@ -31,12 +40,12 @@
           }
         },
         {
-          "fantacalcioId": "5838",
-          "nome": "Birindelli",
+          "fantacalcioId": "7238",
+          "nome": "Kouadio",
           "squadraCodice": "MON",
           "ruolo": "DIF",
           "eventi": {
-            "assist": 1
+            "ammonizioni": 1
           }
         },
         {
@@ -49,7 +58,7 @@
           }
         },
         {
-          "fantacalcioId": null,
+          "fantacalcioId": "6246",
           "nome": "Lipani",
           "squadraCodice": "SAS",
           "ruolo": "CEN",
