@@ -280,6 +280,62 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558594",
+      "giornata": 5,
+      "casaCodice": "VEN",
+      "trasfertaCodice": "LAZ",
+      "casaNome": "Venezia FC",
+      "trasfertaNome": "Lazio",
+      "aggiornatoIl": "2026-09-21T07:25:05.763Z",
+      "eventi": [
+        {
+          "fantacalcioId": "6994",
+          "nome": "Perez K.",
+          "squadraCodice": "VEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "256",
+          "nome": "Juan Jesus",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4845",
+          "nome": "Correia T.",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "632",
+          "nome": "Zaccagni",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "rigoriSegnati": 1
+          }
+        },
+        {
+          "fantacalcioId": "6556",
+          "nome": "Noslin",
+          "squadraCodice": "LAZ",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        }
+      ]
     }
   ]
 }
