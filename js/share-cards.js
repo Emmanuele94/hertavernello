@@ -262,6 +262,7 @@
       { key: "ammonizioni", icon: "ammonito_xs.png" },
       { key: "espulsioni", icon: "espulso_xs.png" },
       { key: "rigoriParati", icon: "rigoreParato_xs.png" },
+      { key: "rigoriSbagliati", icon: "rigoreSbagliato_xs.png" },
     ];
     const iconBase = window.HVMatchEvents?.iconBase || "assets/icone-eventi/";
     const imageSources = [

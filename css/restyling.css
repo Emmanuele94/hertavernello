@@ -1245,6 +1245,8 @@ body.hv-modal-open{overflow:hidden}.hv-nav-emoji{font-size:16px;line-height:1;ma
   scrollbar-width:thin;
 }
 .hv-event-picker-results[hidden]{display:none!important;}
+.hv-event-picker-option[hidden],
+.hv-event-picker-option.is-filtered-out{display:none!important;}
 .hv-event-picker-option{
   width:100%;
   display:flex;

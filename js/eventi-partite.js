@@ -10,6 +10,7 @@
     { key: "ammonizioni", label: "Ammonizione", icon: "ammonito_xs.png" },
     { key: "espulsioni", label: "Espulsione", icon: "espulso_xs.png" },
     { key: "rigoriParati", label: "Rigore parato", icon: "rigoreParato_xs.png" },
+    { key: "rigoriSbagliati", label: "Rigore sbagliato", icon: "rigoreSbagliato_xs.png" },
   ];
 
   const ROLE_ORDER = { POR: 0, DIF: 1, CEN: 2, ATT: 3 };
@@ -274,33 +275,34 @@
     const matches = [];
 
     options.forEach((option) => {
-      if (option.dataset.selected === "1") {
+      const selected = option.dataset.selected === "1";
+      const playerName = normalize(option.dataset.playerName || "");
+      const tokens = playerName.split(/\s+/).filter(Boolean);
+
+      // Il filtro riguarda ESCLUSIVAMENTE il nome del calciatore.
+      // Con campo vuoto mostriamo tutta la rosa disponibile; appena viene
+      // digitato un carattere restano visibili solo i nomi che lo contengono.
+      const nameMatches = !query || playerName.includes(query);
+      if (selected || !nameMatches) {
         option.hidden = true;
+        option.classList.add("is-filtered-out");
+        option.setAttribute("aria-hidden", "true");
         return;
       }
 
-      const playerName = normalize(option.dataset.playerName || "");
-      const role = normalize(option.dataset.playerRole || "");
-      const owner = normalize(option.querySelector(".hv-event-picker-owner")?.textContent || "");
-      const tokens = playerName.split(/\s+/).filter(Boolean);
-      let rank = 99;
-
-      // Se il campo è vuoto mostriamo subito tutta la rosa.
-      // Dalla prima lettera il filtro è live: nessun Invio necessario.
-      if (!query) rank = 4;
-      else if (playerName.startsWith(query)) rank = 0;
-      else if (tokens.some((token) => token.startsWith(query))) rank = 1;
-      else if (playerName.includes(query)) rank = 2;
-      else if (role.includes(query) || owner.includes(query)) rank = 3;
-
-      if (rank < 99) matches.push({ option, rank, name: playerName });
-      else option.hidden = true;
+      let rank = 3;
+      if (query && playerName.startsWith(query)) rank = 0;
+      else if (query && tokens.some((token) => token.startsWith(query))) rank = 1;
+      else if (query) rank = 2;
+      matches.push({ option, rank, name: playerName });
     });
 
     matches
       .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name, "it"))
       .forEach(({ option }) => {
         option.hidden = false;
+        option.classList.remove("is-filtered-out");
+        option.removeAttribute("aria-hidden");
         results.insertBefore(option, empty || null);
       });
 
