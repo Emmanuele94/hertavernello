@@ -625,6 +625,67 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "558595",
+      "giornata": 5,
+      "data": "2026-09-20T16:00:00Z",
+      "casaCodice": "JUV",
+      "trasfertaCodice": "ATA",
+      "casaNome": "Juventus",
+      "trasfertaNome": "Atalanta",
+      "golCasa": 2,
+      "golTrasferta": 0,
+      "stato": "FINALE",
+      "aggiornatoIl": "2026-09-21T08:06:36.781Z",
+      "eventi": [
+        {
+          "fantacalcioId": "6884",
+          "nome": "Conceicao",
+          "squadraCodice": "JUV",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1,
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2788",
+          "nome": "Bremer",
+          "squadraCodice": "JUV",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5761",
+          "nome": "Zhegrova",
+          "squadraCodice": "JUV",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6485",
+          "nome": "Kristensen T.",
+          "squadraCodice": "ATA",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "1850",
+          "nome": "Kessiè",
+          "squadraCodice": "ATA",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
     }
   ]
 }
