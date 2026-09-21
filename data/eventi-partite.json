@@ -288,7 +288,7 @@
       "trasfertaCodice": "LAZ",
       "casaNome": "Venezia FC",
       "trasfertaNome": "Lazio",
-      "aggiornatoIl": "2026-09-21T07:49:22.408Z",
+      "aggiornatoIl": "2026-09-21T08:04:47.062Z",
       "eventi": [
         {
           "fantacalcioId": "4845",
@@ -318,6 +318,33 @@
           }
         },
         {
+          "fantacalcioId": "6904",
+          "nome": "Yeboah J.",
+          "squadraCodice": "VEN",
+          "ruolo": "ATT",
+          "eventi": {
+            "rigoriSbagliati": 1
+          }
+        },
+        {
+          "fantacalcioId": "6482",
+          "nome": "Mandas",
+          "squadraCodice": "LAZ",
+          "ruolo": "POR",
+          "eventi": {
+            "rigoriParati": 1
+          }
+        },
+        {
+          "fantacalcioId": "5620",
+          "nome": "Tavares N.",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
           "fantacalcioId": "632",
           "nome": "Zaccagni",
           "squadraCodice": "LAZ",
@@ -334,26 +361,12 @@
           "eventi": {
             "gol": 1
           }
-        },
-        {
-          "fantacalcioId": "5620",
-          "nome": "Tavares N.",
-          "squadraCodice": "LAZ",
-          "ruolo": "DIF",
-          "eventi": {
-            "assist": 1
-          }
-        },
-        {
-          "fantacalcioId": "6482",
-          "nome": "Mandas",
-          "squadraCodice": "LAZ",
-          "ruolo": "POR",
-          "eventi": {
-            "rigoriParati": 1
-          }
         }
-      ]
+      ],
+      "data": "2026-09-19T18:45:00Z",
+      "golCasa": 0,
+      "golTrasferta": 2,
+      "stato": "FINALE"
     },
     {
       "matchId": "558591",
