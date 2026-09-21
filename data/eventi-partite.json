@@ -8,8 +8,17 @@
       "trasfertaCodice": "SAS",
       "casaNome": "Monza",
       "trasfertaNome": "Sassuolo",
-      "aggiornatoIl": "2026-09-20T22:19:25.764Z",
+      "aggiornatoIl": "2026-09-21T00:16:15.299Z",
       "eventi": [
+        {
+          "fantacalcioId": null,
+          "nome": "Folorunsho",
+          "squadraCodice": "MON",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
         {
           "fantacalcioId": "7523",
           "nome": "Varela G.",
@@ -22,21 +31,12 @@
           }
         },
         {
-          "fantacalcioId": null,
-          "nome": "Folorunsho",
-          "squadraCodice": "MON",
-          "ruolo": "CEN",
-          "eventi": {
-            "ammonizioni": 1
-          }
-        },
-        {
           "fantacalcioId": "5838",
           "nome": "Birindelli",
           "squadraCodice": "MON",
           "ruolo": "DIF",
           "eventi": {
-            "ammonizioni": 1
+            "assist": 1
           }
         },
         {
