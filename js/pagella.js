@@ -4,6 +4,123 @@
   let hvPagellaShareData = null;
   let hvPagellaCanvasPromise = null;
 
+  const HV_PAGELLA_THEME_KEY = "hv_pagella_theme";
+  const HV_PAGELLA_FONT_KEY = "hv_pagella_font_scale";
+  const HV_PAGELLA_THEMES = new Set(["scura", "lettura", "chiara"]);
+  const HV_PAGELLA_FONT_STEPS = [0.9, 1, 1.1, 1.2, 1.3];
+
+  function hvPagellaStorageGet(key) {
+    try { return localStorage.getItem(key); } catch { return null; }
+  }
+
+  function hvPagellaStorageSet(key, value) {
+    try { localStorage.setItem(key, value); } catch {}
+  }
+
+  function hvApplyPagellaTheme(theme, persist = true) {
+    const next = HV_PAGELLA_THEMES.has(theme) ? theme : "lettura";
+    document.body.dataset.pagellaTheme = next;
+    document.querySelectorAll("[data-pagella-theme-choice]").forEach((button) => {
+      const active = button.dataset.pagellaThemeChoice === next;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) {
+      themeColor.setAttribute("content", next === "scura" ? "#080E15" : next === "chiara" ? "#F5F7FA" : "#F4F1E8");
+    }
+    if (persist) hvPagellaStorageSet(HV_PAGELLA_THEME_KEY, next);
+  }
+
+  function hvPagellaFontLabel(scale) {
+    if (scale <= 0.9) return "Compatta";
+    if (scale <= 1) return "Lettura comoda";
+    if (scale <= 1.1) return "Testo grande";
+    if (scale <= 1.2) return "Testo molto grande";
+    return "Massima leggibilità";
+  }
+
+  function hvApplyPagellaFont(scale, persist = true) {
+    const requested = Number(scale);
+    const nearest = HV_PAGELLA_FONT_STEPS.reduce((best, current) =>
+      Math.abs(current - requested) < Math.abs(best - requested) ? current : best, HV_PAGELLA_FONT_STEPS[1]);
+    document.body.style.setProperty("--pagella-font-scale", String(nearest));
+    document.body.dataset.pagellaFontScale = String(nearest);
+    const label = document.getElementById("pagella-font-label");
+    if (label) label.textContent = hvPagellaFontLabel(nearest);
+    const index = HV_PAGELLA_FONT_STEPS.indexOf(nearest);
+    const down = document.getElementById("pagella-font-down");
+    const up = document.getElementById("pagella-font-up");
+    if (down) down.disabled = index <= 0;
+    if (up) up.disabled = index >= HV_PAGELLA_FONT_STEPS.length - 1;
+    if (persist) hvPagellaStorageSet(HV_PAGELLA_FONT_KEY, String(nearest));
+  }
+
+  function hvInitPagellaReadingControls() {
+    const savedTheme = hvPagellaStorageGet(HV_PAGELLA_THEME_KEY);
+    hvApplyPagellaTheme(HV_PAGELLA_THEMES.has(savedTheme) ? savedTheme : "lettura", false);
+
+    const savedScale = Number(hvPagellaStorageGet(HV_PAGELLA_FONT_KEY));
+    hvApplyPagellaFont(Number.isFinite(savedScale) && savedScale > 0 ? savedScale : 1, false);
+
+    document.querySelectorAll("[data-pagella-theme-choice]").forEach((button) => {
+      button.addEventListener("click", () => hvApplyPagellaTheme(button.dataset.pagellaThemeChoice));
+    });
+
+    document.getElementById("pagella-font-down")?.addEventListener("click", () => {
+      const current = Number(document.body.dataset.pagellaFontScale || 1);
+      const index = HV_PAGELLA_FONT_STEPS.indexOf(current);
+      hvApplyPagellaFont(HV_PAGELLA_FONT_STEPS[Math.max(0, index - 1)]);
+    });
+
+    document.getElementById("pagella-font-up")?.addEventListener("click", () => {
+      const current = Number(document.body.dataset.pagellaFontScale || 1);
+      const index = HV_PAGELLA_FONT_STEPS.indexOf(current);
+      hvApplyPagellaFont(HV_PAGELLA_FONT_STEPS[Math.min(HV_PAGELLA_FONT_STEPS.length - 1, index + 1)]);
+    });
+  }
+
+  function hvPagellaVisualParagraphs(commento) {
+    const text = String(commento || "").replace(/\r\n?/g, "\n").trim();
+    if (!text) return [];
+
+    const explicit = text.split(/\n{2,}/).map((block) => block.replace(/\n+/g, " ").trim()).filter(Boolean);
+    if (explicit.length > 1) return explicit;
+
+    const lineBlocks = text.split(/\n+/).map((block) => block.trim()).filter(Boolean);
+    if (lineBlocks.length > 1) return lineBlocks;
+
+    if (text.length < 520) return [text];
+
+    let sentences = [];
+    try {
+      if (typeof Intl !== "undefined" && Intl.Segmenter) {
+        const segmenter = new Intl.Segmenter("it", { granularity: "sentence" });
+        sentences = Array.from(segmenter.segment(text), (part) => part.segment.trim()).filter(Boolean);
+      }
+    } catch {}
+    if (!sentences.length) {
+      sentences = text.match(/[^.!?]+[.!?]+(?:[”"']|$)|[^.!?]+$/g)?.map((part) => part.trim()).filter(Boolean) || [text];
+    }
+    if (sentences.length < 3) return [text];
+
+    const paragraphs = [];
+    let current = [];
+    let currentLength = 0;
+    sentences.forEach((sentence, idx) => {
+      current.push(sentence);
+      currentLength += sentence.length;
+      const remaining = sentences.length - idx - 1;
+      if ((currentLength >= 320 && current.length >= 2) || current.length >= 3 || remaining === 0) {
+        paragraphs.push(current.join(" "));
+        current = [];
+        currentLength = 0;
+      }
+    });
+    if (current.length) paragraphs.push(current.join(" "));
+    return paragraphs;
+  }
+
   function hvPagellaSetStatus(message, error = false) {
     const el = document.getElementById("pagella-action-status");
     if (!el) return;
@@ -107,7 +224,12 @@
 
     const article = document.createElement("article");
     article.className = "pagella-full-commento pagella-full-commento-v2";
-    article.textContent = pagella.commento || "";
+    const paragraphs = hvPagellaVisualParagraphs(pagella.commento);
+    paragraphs.forEach((text) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      article.appendChild(p);
+    });
 
     content.append(score, article);
     document.getElementById("pagella-actions")?.classList.remove("hidden");
@@ -222,6 +344,8 @@
       document.getElementById("pagella-content-full").innerHTML = `<p class="empty-state">${err.message}</p>`;
     }
   }
+
+  hvInitPagellaReadingControls();
 
   hv_checkGate().then((data) => {
     if (data) hvInitPagella(data);

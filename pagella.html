@@ -8,16 +8,16 @@
   <link rel="icon" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icone-app/icon-180.png">
-  <meta name="theme-color" content="#7A0E1F">
+  <meta name="theme-color" content="#F4F1E8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
-  <link rel="stylesheet" href="css/restyling.css?v=20260919-pagellafix4">
+  <link rel="stylesheet" href="css/restyling.css?v=20260922-pagellalettura1">
   <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
   <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
 </head>
-<body class="pagella-page">
+<body class="pagella-page" data-pagella-theme="lettura">
   <div id="gate" class="gate">
     <img src="assets/logo.png" class="gate-logo" alt="Hertavernello">
     <h1>Hertavernello</h1>
@@ -50,13 +50,18 @@
 
     <main class="pagella-main">
       <section class="pagella-switcher" aria-label="Seleziona fantallenatore">
-        <span class="pagella-switcher-label">Seleziona un fantallenatore</span>
+        <div class="pagella-switcher-head">
+          <span class="pagella-switcher-label">Seleziona un fantallenatore</span>
+          <div class="pagella-theme-controls" aria-label="Tema di lettura">
+            <span class="pagella-control-label">Tema:</span>
+            <div class="pagella-theme-group" role="group" aria-label="Scegli il tema della pagella">
+              <button type="button" class="pagella-theme-btn" data-pagella-theme-choice="scura" aria-pressed="false">Scura</button>
+              <button type="button" class="pagella-theme-btn active" data-pagella-theme-choice="lettura" aria-pressed="true">Lettura</button>
+              <button type="button" class="pagella-theme-btn" data-pagella-theme-choice="chiara" aria-pressed="false">Chiara</button>
+            </div>
+          </div>
+        </div>
         <div id="pagella-team-tabs" class="pagella-team-tabs"></div>
-      </section>
-
-      <section class="pagella-disclaimer" aria-label="Disclaimer pagelle">
-        <strong>😄 Disclaimer goliardico</strong>
-        <p>Queste pagelle nascono esclusivamente per scherzare tra amici. Voti, giudizi e sfottò non rappresentano il pensiero personale di chi li scrive e non vogliono in alcun modo risultare offensivi. Il voto riguarda soltanto l’asta, le scelte di mercato e la rosa vista a 360°: l’unico obiettivo è farsi quattro risate insieme.</p>
       </section>
 
       <section class="pagella-profile-header">
@@ -75,13 +80,14 @@
           <span class="pv-eyebrow">HERTAVERNELLO · PAGELLA DELL'ASTA</span>
           <h2 id="pagella-team-name">Pagella</h2>
           <p id="pagella-manager-name" class="pagella-manager-name"></p>
-          <span class="pagella-heading-badge">
-            <img src="assets/icone/icon-pagella.png" alt="">
-            Pagella
-          </span>
         </div>
 
         <a id="pagella-back-link" class="pagella-back-link" href="squadre.html">← Torna a Squadre</a>
+      </section>
+
+      <section class="pagella-disclaimer" aria-label="Disclaimer pagelle">
+        <strong>⚠️ Pagella in chiave goliardica</strong>
+        <p>Giudizi ironici, satirici e pensati per farsi una risata tra amici. Nessun commento è personale: il voto riguarda esclusivamente l’asta, le scelte di mercato e la rosa vista a 360°.</p>
       </section>
 
       <section id="pagella-full-card" class="pagella-full-card" aria-live="polite">
@@ -93,11 +99,18 @@
               <strong>Voto e giudizio della tua asta</strong>
             </div>
           </div>
-          <div id="pagella-actions" class="pagella-actions hidden" aria-label="Azioni pagella">
-            <button type="button" id="pagella-copy-text" class="pagella-action-btn">📋 Copia testo</button>
-            <button type="button" id="pagella-share-image" class="pagella-action-btn hv-share-mobile">📤 Condividi</button>
-            <button type="button" id="pagella-copy-image" class="pagella-action-btn hv-share-desktop">📋 Copia immagine</button>
-            <button type="button" id="pagella-download-image" class="pagella-action-btn hv-share-desktop">⬇ Scarica PNG</button>
+          <div class="pagella-toolbar-right">
+            <div class="pagella-font-controls" aria-label="Dimensione testo pagella">
+              <button type="button" id="pagella-font-down" class="pagella-font-btn" aria-label="Riduci dimensione testo">A−</button>
+              <span id="pagella-font-label" class="pagella-font-label">Lettura comoda</span>
+              <button type="button" id="pagella-font-up" class="pagella-font-btn" aria-label="Aumenta dimensione testo">A+</button>
+            </div>
+            <div id="pagella-actions" class="pagella-actions hidden" aria-label="Azioni pagella">
+              <button type="button" id="pagella-copy-text" class="pagella-action-btn">📋 Copia testo</button>
+              <button type="button" id="pagella-share-image" class="pagella-action-btn hv-share-mobile">📤 Condividi</button>
+              <button type="button" id="pagella-copy-image" class="pagella-action-btn hv-share-desktop">📋 Copia immagine</button>
+              <button type="button" id="pagella-download-image" class="pagella-action-btn hv-share-desktop">⬇ Scarica PNG</button>
+            </div>
           </div>
         </div>
 
@@ -128,8 +141,8 @@
   <script src="js/versione-check.js?v=20260914-mobile2"></script>
   <script src="js/auth.js?v=20260914-mobile2"></script>
   <script src="js/regolamento-modal.js?v=20260914-mobile2"></script>
-  <script src="js/share-cards.js?v=20260919-pagellafix4"></script>
-  <script src="js/pagella.js?v=20260919-pagellafix4"></script>
+  <script src="js/share-cards.js?v=20260921-eventi5"></script>
+  <script src="js/pagella.js?v=20260922-pagellalettura1"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
