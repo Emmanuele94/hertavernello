@@ -30,7 +30,7 @@
     {
       "id": "scambio_1791975680094_9ihn4",
       "tipo": "scambio",
-      "data": "2026-10-01",
+      "data": "2026-10-08",
       "squadraAId": "sq-11",
       "squadraBId": "sq-02",
       "giocatoriA": [
@@ -79,7 +79,9 @@
           "fantacalcioId": "1850"
         }
       ],
-      "creatoIl": "2026-10-14T11:01:20.094Z"
+      "creatoIl": "2026-10-14T11:01:20.094Z",
+      "aggiornatoIl": "2026-10-14T11:45:58.530Z"
     }
-  ]
+  ],
+  "annullati": []
 }
