@@ -26,6 +26,60 @@
         }
       ],
       "creatoIl": "2026-10-14T10:59:21.962Z"
+    },
+    {
+      "id": "scambio_1791975680094_9ihn4",
+      "tipo": "scambio",
+      "data": "2026-10-01",
+      "squadraAId": "sq-11",
+      "squadraBId": "sq-02",
+      "giocatoriA": [
+        {
+          "ruolo": "POR",
+          "nome": "Provedel",
+          "squadraReale": "INT",
+          "costo": 23,
+          "fantacalcioId": "2814"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Vojvoda",
+          "squadraReale": "UDI",
+          "costo": 8,
+          "fantacalcioId": "4994"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Rowe",
+          "squadraReale": "ATA",
+          "costo": 30,
+          "fantacalcioId": "6844"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "POR",
+          "nome": "Caprile",
+          "squadraReale": "CAG",
+          "costo": 20,
+          "fantacalcioId": "4360"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Pavard",
+          "squadraReale": "INT",
+          "costo": 2,
+          "fantacalcioId": "4177"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Kessiè",
+          "squadraReale": "ATA",
+          "costo": 13,
+          "fantacalcioId": "1850"
+        }
+      ],
+      "creatoIl": "2026-10-14T11:01:20.094Z"
     }
   ]
 }
