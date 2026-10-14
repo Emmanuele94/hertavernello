@@ -1,4 +1,31 @@
 {
   "_leggimi": "Storico mercato Hertavernello. Si aggiorna dalla scheda Admin Mercato & Scambi. rose.json contiene la rosa corrente; questo file conserva la cronologia degli scambi.",
-  "movimenti": []
+  "movimenti": [
+    {
+      "id": "scambio_1791975561962_5v6cc",
+      "tipo": "scambio",
+      "data": "2026-10-01",
+      "squadraAId": "sq-05",
+      "squadraBId": "sq-02",
+      "giocatoriA": [
+        {
+          "ruolo": "ATT",
+          "nome": "Fatah",
+          "squadraReale": "LEC",
+          "costo": 7,
+          "fantacalcioId": "7602"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "ATT",
+          "nome": "Elphege",
+          "squadraReale": "PAR",
+          "costo": 4,
+          "fantacalcioId": "7342"
+        }
+      ],
+      "creatoIl": "2026-10-14T10:59:21.962Z"
+    }
+  ]
 }
