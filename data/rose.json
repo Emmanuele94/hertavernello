@@ -13,13 +13,6 @@
         },
         {
           "ruolo": "POR",
-          "nome": "Provedel",
-          "squadraReale": "INT",
-          "costo": 23,
-          "fantacalcioId": "2814"
-        },
-        {
-          "ruolo": "POR",
           "nome": "Tornqvist",
           "squadraReale": "MON",
           "costo": 11,
@@ -59,13 +52,6 @@
           "squadraReale": "GEN",
           "costo": 18,
           "fantacalcioId": "5750"
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Vojvoda",
-          "squadraReale": "UDI",
-          "costo": 8,
-          "fantacalcioId": "4994"
         },
         {
           "ruolo": "DIF",
@@ -131,13 +117,6 @@
           "fantacalcioId": "5888"
         },
         {
-          "ruolo": "CEN",
-          "nome": "Rowe",
-          "squadraReale": "ATA",
-          "costo": 30,
-          "fantacalcioId": "6844"
-        },
-        {
           "ruolo": "ATT",
           "nome": "Robinson J.",
           "squadraReale": "MON",
@@ -178,12 +157,7 @@
           "squadraReale": "VEN",
           "costo": 28,
           "fantacalcioId": "7484"
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-02",
-      "giocatori": [
+        },
         {
           "ruolo": "POR",
           "nome": "Caprile",
@@ -191,6 +165,25 @@
           "costo": 20,
           "fantacalcioId": "4360"
         },
+        {
+          "ruolo": "DIF",
+          "nome": "Pavard",
+          "squadraReale": "INT",
+          "costo": 2,
+          "fantacalcioId": "4177"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Kessiè",
+          "squadraReale": "ATA",
+          "costo": 13,
+          "fantacalcioId": "1850"
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-02",
+      "giocatori": [
         {
           "ruolo": "POR",
           "nome": "Muric",
@@ -235,13 +228,6 @@
         },
         {
           "ruolo": "DIF",
-          "nome": "Pavard",
-          "squadraReale": "INT",
-          "costo": 2,
-          "fantacalcioId": "4177"
-        },
-        {
-          "ruolo": "DIF",
           "nome": "Rodriguez Ju.",
           "squadraReale": "CAG",
           "costo": 1,
@@ -274,13 +260,6 @@
           "squadraReale": "JUV",
           "costo": 39,
           "fantacalcioId": "6884"
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Kessiè",
-          "squadraReale": "ATA",
-          "costo": 13,
-          "fantacalcioId": "1850"
         },
         {
           "ruolo": "CEN",
@@ -358,6 +337,27 @@
           "squadraReale": "LEC",
           "costo": 7,
           "fantacalcioId": "7602"
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Provedel",
+          "squadraReale": "INT",
+          "costo": 23,
+          "fantacalcioId": "2814"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Vojvoda",
+          "squadraReale": "UDI",
+          "costo": 8,
+          "fantacalcioId": "4994"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Rowe",
+          "squadraReale": "ATA",
+          "costo": 30,
+          "fantacalcioId": "6844"
         }
       ]
     },
