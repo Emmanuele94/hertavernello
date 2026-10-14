@@ -595,20 +595,6 @@
         },
         {
           "ruolo": "DIF",
-          "nome": "Abankwah",
-          "squadraReale": "UDI",
-          "costo": 1,
-          "fantacalcioId": "6021"
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Tavares N.",
-          "squadraReale": "LAZ",
-          "costo": 22,
-          "fantacalcioId": "5620"
-        },
-        {
-          "ruolo": "DIF",
           "nome": "Kaiki",
           "squadraReale": "COM",
           "costo": 3,
@@ -623,13 +609,6 @@
         },
         {
           "ruolo": "CEN",
-          "nome": "Calò",
-          "squadraReale": "FRO",
-          "costo": 13,
-          "fantacalcioId": "7472"
-        },
-        {
-          "ruolo": "CEN",
           "nome": "Ekkelenkamp",
           "squadraReale": "UDI",
           "costo": 33,
@@ -641,13 +620,6 @@
           "squadraReale": "LAZ",
           "costo": 47,
           "fantacalcioId": "632"
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Cancellieri",
-          "squadraReale": "LAZ",
-          "costo": 8,
-          "fantacalcioId": "5500"
         },
         {
           "ruolo": "CEN",
@@ -700,13 +672,6 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Stulic",
-          "squadraReale": "LEC",
-          "costo": 1,
-          "fantacalcioId": "7252"
-        },
-        {
-          "ruolo": "ATT",
           "nome": "Zapata D.",
           "squadraReale": "TOR",
           "costo": 19,
@@ -718,6 +683,41 @@
           "squadraReale": "PAR",
           "costo": 4,
           "fantacalcioId": "7342"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Belghali",
+          "squadraReale": "TOR",
+          "costo": 9,
+          "fantacalcioId": "7220"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bracaglia",
+          "squadraReale": "FRO",
+          "costo": 4,
+          "fantacalcioId": "7469"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Vlasic",
+          "squadraReale": "TOR",
+          "costo": 36,
+          "fantacalcioId": "5687"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zambo Anguissa",
+          "squadraReale": "NAP",
+          "costo": 12,
+          "fantacalcioId": "4220"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Kevin Carlos",
+          "squadraReale": "CAG",
+          "costo": 6,
+          "fantacalcioId": "7547"
         }
       ]
     },
@@ -761,20 +761,6 @@
         },
         {
           "ruolo": "DIF",
-          "nome": "Belghali",
-          "squadraReale": "TOR",
-          "costo": 9,
-          "fantacalcioId": "7220"
-        },
-        {
-          "ruolo": "DIF",
-          "nome": "Bracaglia",
-          "squadraReale": "FRO",
-          "costo": 4,
-          "fantacalcioId": "7469"
-        },
-        {
-          "ruolo": "DIF",
           "nome": "Balerdi",
           "squadraReale": "ROM",
           "costo": 4,
@@ -810,13 +796,6 @@
         },
         {
           "ruolo": "CEN",
-          "nome": "Vlasic",
-          "squadraReale": "TOR",
-          "costo": 36,
-          "fantacalcioId": "5687"
-        },
-        {
-          "ruolo": "CEN",
           "nome": "Barella",
           "squadraReale": "INT",
           "costo": 36,
@@ -842,13 +821,6 @@
           "squadraReale": "ATA",
           "costo": 18,
           "fantacalcioId": "5792"
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Zambo Anguissa",
-          "squadraReale": "NAP",
-          "costo": 12,
-          "fantacalcioId": "4220"
         },
         {
           "ruolo": "CEN",
@@ -893,11 +865,39 @@
           "fantacalcioId": "2155"
         },
         {
+          "ruolo": "DIF",
+          "nome": "Abankwah",
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "6021"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Tavares N.",
+          "squadraReale": "LAZ",
+          "costo": 22,
+          "fantacalcioId": "5620"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Calò",
+          "squadraReale": "FRO",
+          "costo": 13,
+          "fantacalcioId": "7472"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Cancellieri",
+          "squadraReale": "LAZ",
+          "costo": 8,
+          "fantacalcioId": "5500"
+        },
+        {
           "ruolo": "ATT",
-          "nome": "Kevin Carlos",
-          "squadraReale": "CAG",
-          "costo": 6,
-          "fantacalcioId": "7547"
+          "nome": "Stulic",
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "7252"
         }
       ]
     },
@@ -1099,13 +1099,6 @@
           "fantacalcioId": "6415"
         },
         {
-          "ruolo": "POR",
-          "nome": "Di Gennaro",
-          "squadraReale": "INT",
-          "costo": 1,
-          "fantacalcioId": "1926"
-        },
-        {
           "ruolo": "DIF",
           "nome": "Molina N.",
           "squadraReale": "ROM",
@@ -1160,13 +1153,6 @@
           "squadraReale": "BOL",
           "costo": 1,
           "fantacalcioId": "4433"
-        },
-        {
-          "ruolo": "CEN",
-          "nome": "Saelemaekers",
-          "squadraReale": "MIL",
-          "costo": 10,
-          "fantacalcioId": "4892"
         },
         {
           "ruolo": "CEN",
@@ -1233,13 +1219,6 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Bowie",
-          "squadraReale": "SAS",
-          "costo": 9,
-          "fantacalcioId": "7347"
-        },
-        {
-          "ruolo": "ATT",
           "nome": "Davis K.",
           "squadraReale": "UDI",
           "costo": 80,
@@ -1258,12 +1237,7 @@
           "squadraReale": "NAP",
           "costo": 15,
           "fantacalcioId": "6831"
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-10",
-      "giocatori": [
+        },
         {
           "ruolo": "POR",
           "nome": "Skorupski",
@@ -1271,6 +1245,25 @@
           "costo": 20,
           "fantacalcioId": "133"
         },
+        {
+          "ruolo": "ATT",
+          "nome": "Gueye",
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "7272"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Saelemaekers",
+          "squadraReale": "MIL",
+          "costo": 10,
+          "fantacalcioId": "4892"
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-10",
+      "giocatori": [
         {
           "ruolo": "POR",
           "nome": "Maignan",
@@ -1371,13 +1364,6 @@
         },
         {
           "ruolo": "CEN",
-          "nome": "Karlstrom",
-          "squadraReale": "UDI",
-          "costo": 2,
-          "fantacalcioId": "6680"
-        },
-        {
-          "ruolo": "CEN",
           "nome": "De Bruyne",
           "squadraReale": "NAP",
           "costo": 38,
@@ -1433,11 +1419,25 @@
           "fantacalcioId": "7623"
         },
         {
-          "ruolo": "ATT",
-          "nome": "Gueye",
-          "squadraReale": "UDI",
+          "ruolo": "POR",
+          "nome": "Di Gennaro",
+          "squadraReale": "INT",
           "costo": 1,
-          "fantacalcioId": "7272"
+          "fantacalcioId": "1926"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Bowie",
+          "squadraReale": "SAS",
+          "costo": 9,
+          "fantacalcioId": "7347"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
         }
       ]
     },
