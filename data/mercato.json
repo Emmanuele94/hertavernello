@@ -81,6 +81,177 @@
       ],
       "creatoIl": "2026-10-14T11:01:20.094Z",
       "aggiornatoIl": "2026-10-14T11:45:58.530Z"
+    },
+    {
+      "id": "scambio_1791978590605_rrjnv",
+      "bozzaId": "bozza_1791978590605_rrjnv",
+      "tipo": "scambio",
+      "data": "2026-10-09",
+      "squadraAId": "sq-09",
+      "squadraBId": "sq-05",
+      "giocatoriA": [
+        {
+          "ruolo": "DIF",
+          "nome": "Belghali",
+          "squadraReale": "TOR",
+          "costo": 9,
+          "fantacalcioId": "7220"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Bracaglia",
+          "squadraReale": "FRO",
+          "costo": 4,
+          "fantacalcioId": "7469"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Vlasic",
+          "squadraReale": "TOR",
+          "costo": 36,
+          "fantacalcioId": "5687"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zambo Anguissa",
+          "squadraReale": "NAP",
+          "costo": 12,
+          "fantacalcioId": "4220"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Kevin Carlos",
+          "squadraReale": "CAG",
+          "costo": 6,
+          "fantacalcioId": "7547"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "DIF",
+          "nome": "Abankwah",
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "6021"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Tavares N.",
+          "squadraReale": "LAZ",
+          "costo": 22,
+          "fantacalcioId": "5620"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Calò",
+          "squadraReale": "FRO",
+          "costo": 13,
+          "fantacalcioId": "7472"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Cancellieri",
+          "squadraReale": "LAZ",
+          "costo": 8,
+          "fantacalcioId": "5500"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Stulic",
+          "squadraReale": "LEC",
+          "costo": 1,
+          "fantacalcioId": "7252"
+        }
+      ],
+      "creatoIl": "2026-10-14T11:49:50.605Z",
+      "aggiornatoIl": "2026-10-14T11:49:50.605Z",
+      "applicatoIl": "2026-10-14T11:51:17.041Z"
+    },
+    {
+      "id": "scambio_1791978640325_lknd5",
+      "bozzaId": "bozza_1791978640325_lknd5",
+      "tipo": "scambio",
+      "data": "2026-10-10",
+      "squadraAId": "sq-10",
+      "squadraBId": "sq-04",
+      "giocatoriA": [
+        {
+          "ruolo": "POR",
+          "nome": "Skorupski",
+          "squadraReale": "BOL",
+          "costo": 20,
+          "fantacalcioId": "133"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Gueye",
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "7272"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "POR",
+          "nome": "Di Gennaro",
+          "squadraReale": "INT",
+          "costo": 1,
+          "fantacalcioId": "1926"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Saelemaekers",
+          "squadraReale": "MIL",
+          "costo": 10,
+          "fantacalcioId": "4892"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Bowie",
+          "squadraReale": "SAS",
+          "costo": 9,
+          "fantacalcioId": "7347"
+        }
+      ],
+      "creatoIl": "2026-10-14T11:50:40.325Z",
+      "aggiornatoIl": "2026-10-14T11:50:40.325Z",
+      "applicatoIl": "2026-10-14T11:51:17.041Z"
+    },
+    {
+      "id": "scambio_1791978665592_mf34e",
+      "bozzaId": "bozza_1791978665592_mf34e",
+      "tipo": "scambio",
+      "data": "2026-10-10",
+      "squadraAId": "sq-10",
+      "squadraBId": "sq-04",
+      "giocatoriA": [
+        {
+          "ruolo": "CEN",
+          "nome": "Saelemaekers",
+          "squadraReale": "MIL",
+          "costo": 10,
+          "fantacalcioId": "4892"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
+        }
+      ],
+      "creatoIl": "2026-10-14T11:51:05.592Z",
+      "aggiornatoIl": "2026-10-14T11:51:05.592Z",
+      "applicatoIl": "2026-10-14T11:51:17.041Z"
     }
   ],
   "annullati": []
