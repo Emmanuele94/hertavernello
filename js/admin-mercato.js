@@ -6,6 +6,7 @@
   let mercatoData = null;
   let bozze = [];
   let editingDraftId = null;
+  let editingConfirmedId = null;
   let formRoseData = null;
   let formBaseErrors = [];
 
@@ -136,6 +137,108 @@
     return { ok:true, giocatoriA:actualA.map((g) => ({...g})), giocatoriB:actualB.map((g) => ({...g})) };
   }
 
+  function movimentiConfermati(source = mercatoData) {
+    return (source?.movimenti || []).filter((m) => m && (m.tipo || 'scambio') === 'scambio');
+  }
+
+  function descriviMovimento(m) {
+    const a = (m?.giocatoriA || []).map((g) => g.nome).join(', ') || '—';
+    const b = (m?.giocatoriB || []).map((g) => g.nome).join(', ') || '—';
+    return `${formatoData(m?.data)} — ${nomeTeam(m?.squadraAId)} (${a}) ⇄ ${nomeTeam(m?.squadraBId)} (${b})`;
+  }
+
+  function derivaRosePrimaDelMercato() {
+    const virtual = clone(roseData || { rose:[] });
+    const movimenti = movimentiConfermati();
+    for (let i = movimenti.length - 1; i >= 0; i--) {
+      const m = movimenti[i];
+      const inverso = {
+        squadraAId:m.squadraAId,
+        squadraBId:m.squadraBId,
+        giocatoriA:(m.giocatoriB || []).map((g) => ({...g})),
+        giocatoriB:(m.giocatoriA || []).map((g) => ({...g})),
+      };
+      const result = applicaBozzaSuRose(virtual, inverso);
+      if (!result.ok) {
+        return {
+          ok:false,
+          error:`Non riesco a ricostruire le rose precedenti allo scambio “${descriviMovimento(m)}”. ${result.error} Prima di modificare lo storico verifica che rose.json e mercato.json siano allineati.`,
+          movement:m,
+          index:i,
+        };
+      }
+    }
+    return { ok:true, data:virtual };
+  }
+
+  function ricalcolaMovimenti(movimenti) {
+    const base = derivaRosePrimaDelMercato();
+    if (!base.ok) return base;
+    const virtual = clone(base.data);
+    const states = [];
+    for (let i = 0; i < movimenti.length; i++) {
+      const m = movimenti[i];
+      const result = applicaBozzaSuRose(virtual, m);
+      if (!result.ok) {
+        return {
+          ok:false,
+          error:`Lo scambio successivo #${i + 1} (${descriviMovimento(m)}) non è più applicabile: ${result.error}`,
+          movement:m,
+          index:i,
+          data:virtual,
+          states,
+        };
+      }
+      states.push({ movement:m, result });
+    }
+    return { ok:true, data:virtual, states };
+  }
+
+  function rosePrimaDiMovimento(id) {
+    const movimenti = movimentiConfermati();
+    const index = movimenti.findIndex((m) => m.id === id);
+    if (index < 0) return { ok:false, error:'Scambio confermato non trovato.' };
+    const base = derivaRosePrimaDelMercato();
+    if (!base.ok) return base;
+    const virtual = clone(base.data);
+    for (let i = 0; i < index; i++) {
+      const result = applicaBozzaSuRose(virtual, movimenti[i]);
+      if (!result.ok) {
+        return {
+          ok:false,
+          error:`Non riesco a ricostruire le rose prima dello scambio da modificare. Lo scambio precedente #${i + 1} (${descriviMovimento(movimenti[i])}) non è applicabile: ${result.error}`,
+        };
+      }
+    }
+    return { ok:true, data:virtual, index, movement:movimenti[index] };
+  }
+
+  async function salvaMercatoERose(nuovoMercato, nuoveRose, messaggioMercato, messaggioRose) {
+    const stato = document.getElementById('mercato-stato');
+    const mercatoPrecedente = clone(mercatoData || {_leggimi:'Storico mercato Hertavernello',movimenti:[]});
+    let mercatoSalvato = false;
+    try {
+      stato.textContent = 'Salvo lo storico mercato aggiornato…';
+      await hv_ghSalvaJSON('data/mercato.json', nuovoMercato, messaggioMercato, config, (sec) => {
+        stato.textContent = `Attendo il turno GitHub per lo storico mercato: ${sec}s…`;
+      });
+      mercatoSalvato = true;
+      stato.textContent = 'Storico salvato. Ora ricalcolo e salvo le rose…';
+      await hv_ghSalvaJSON('data/rose.json', nuoveRose, messaggioRose, config, (sec) => {
+        stato.textContent = `Storico salvato. Attendo il turno GitHub per le rose: ${sec}s…`;
+      });
+    } catch (err) {
+      if (mercatoSalvato) {
+        try {
+          await hv_ghSalvaJSON('data/mercato.json', mercatoPrecedente, 'Ripristina storico mercato dopo errore aggiornamento rose', config);
+        } catch {}
+      }
+      throw err;
+    }
+    mercatoData = nuovoMercato;
+    roseData = nuoveRose;
+  }
+
   function validaSequenza(limit = bozze.length) {
     const virtual = clone(roseData || { rose:[] });
     const states = new Map();
@@ -162,6 +265,12 @@
   }
 
   function aggiornaFormBase() {
+    if (editingConfirmedId) {
+      const result = rosePrimaDiMovimento(editingConfirmedId);
+      formRoseData = result.ok ? result.data : clone(roseData || {rose:[]});
+      formBaseErrors = result.ok ? [] : [result.error];
+      return;
+    }
     if (editingDraftId) {
       const index = bozze.findIndex((b) => b.id === editingDraftId);
       const result = validaSequenza(index < 0 ? bozze.length : index);
@@ -233,7 +342,7 @@
     wrap.classList.toggle('is-valid', valido);
     const btn = document.getElementById('mercato-conferma');
     btn.disabled = !valido;
-    btn.textContent = editingDraftId ? 'Aggiorna bozza' : 'Aggiungi alla lista';
+    btn.textContent = editingConfirmedId ? 'Aggiorna scambio confermato' : (editingDraftId ? 'Aggiorna bozza' : 'Aggiungi alla lista');
     if (!baseOk) {
       const stato = document.getElementById('mercato-stato');
       stato.style.color = 'var(--wine-bright)';
@@ -270,6 +379,7 @@
   function resetForm({ keepDate = true } = {}) {
     const dataCorrente = document.getElementById('mercato-data')?.value || oggiLocale();
     editingDraftId = null;
+    editingConfirmedId = null;
     aggiornaFormBase();
     const a = document.getElementById('mercato-squadra-a');
     const b = document.getElementById('mercato-squadra-b');
@@ -284,9 +394,166 @@
     aggiornaRiepilogo();
   }
 
-  function aggiungiOAggiornaBozza() {
+  function movimentoConfermatoFromForm(existing) {
+    const temp = draftFromForm({
+      id: existing?.bozzaId || existing?.id || `storico_${Date.now()}`,
+      creatoIl: existing?.creatoIl,
+    });
+    return {
+      ...existing,
+      tipo:'scambio',
+      data:temp.data,
+      squadraAId:temp.squadraAId,
+      squadraBId:temp.squadraBId,
+      giocatoriA:temp.giocatoriA,
+      giocatoriB:temp.giocatoriB,
+      aggiornatoIl:new Date().toISOString(),
+    };
+  }
+
+  async function aggiornaScambioConfermatoDaForm() {
+    const stato = document.getElementById('mercato-stato');
+    const btn = document.getElementById('mercato-conferma');
+    const existing = (mercatoData?.movimenti || []).find((m) => m.id === editingConfirmedId);
+    if (!existing) throw new Error('Lo scambio confermato da modificare non esiste più nello storico.');
+    if (formBaseErrors.length) throw new Error(formBaseErrors[0]);
+
+    const aggiornato = movimentoConfermatoFromForm(existing);
+    const nuovoMercato = clone(mercatoData || {_leggimi:'Storico mercato Hertavernello',movimenti:[]});
+    const idx = (nuovoMercato.movimenti || []).findIndex((m) => m.id === existing.id);
+    if (idx < 0) throw new Error('Non riesco a trovare lo scambio nello storico da aggiornare.');
+    nuovoMercato.movimenti[idx] = aggiornato;
+
+    const replay = ricalcolaMovimenti(movimentiConfermati(nuovoMercato));
+    if (!replay.ok) {
+      throw new Error(`Modifica bloccata per evitare rose incoerenti. ${replay.error}`);
+    }
+
+    const prima = descriviMovimento(existing);
+    const dopo = descriviMovimento(aggiornato);
+    if (!confirm(`Confermare la modifica dello scambio già applicato?\n\nPRIMA\n${prima}\n\nDOPO\n${dopo}\n\nLe rose verranno ricostruite e tutti gli scambi successivi saranno ricalcolati.`)) return;
+
+    btn.disabled = true;
+    stato.style.color = 'var(--text-muted)';
+    await salvaMercatoERose(
+      nuovoMercato,
+      replay.data,
+      `Modifica scambio mercato ${formatoData(aggiornato.data)}`,
+      'Ricalcola rose dopo modifica scambio mercato'
+    );
+
+    resetForm({ keepDate:true });
+    renderStorico();
+    renderBozze();
+    const draftCheck = validaSequenza();
+    stato.style.color = draftCheck.valid ? 'var(--verde-prato)' : 'var(--giallo-neon)';
+    stato.textContent = draftCheck.valid
+      ? 'Scambio confermato aggiornato ✓ — rose e scambi successivi sono stati ricalcolati.'
+      : 'Scambio aggiornato ✓. Attenzione: una o più bozze ora risultano incompatibili e vanno corrette prima di applicarle.';
+  }
+
+  function caricaScambioConfermatoInForm(id) {
+    const movimento = (mercatoData?.movimenti || []).find((m) => m.id === id);
+    if (!movimento) return;
+    editingDraftId = null;
+    editingConfirmedId = id;
+    aggiornaFormBase();
+    if (formBaseErrors.length) {
+      const stato = document.getElementById('mercato-stato');
+      stato.style.color = 'var(--wine-bright)';
+      stato.textContent = formBaseErrors[0];
+      editingConfirmedId = null;
+      aggiornaFormBase();
+      return;
+    }
+
+    const a = document.getElementById('mercato-squadra-a');
+    const b = document.getElementById('mercato-squadra-b');
+    a.innerHTML = opzioniSquadre(movimento.squadraBId);
+    a.value = movimento.squadraAId;
+    b.innerHTML = opzioniSquadre(movimento.squadraAId);
+    b.value = movimento.squadraBId;
+    document.getElementById('mercato-data').value = movimento.data || oggiLocale();
+    renderRosa('a');
+    renderRosa('b');
+
+    const keysA = new Set((movimento.giocatoriA || []).map(playerIdentity));
+    const keysB = new Set((movimento.giocatoriB || []).map(playerIdentity));
+    document.querySelectorAll('#mercato-rosa-a input[type="checkbox"]').forEach((el) => { el.checked = keysA.has(el.dataset.identity); });
+    document.querySelectorAll('#mercato-rosa-b input[type="checkbox"]').forEach((el) => { el.checked = keysB.has(el.dataset.identity); });
+    document.getElementById('mercato-annulla-modifica').hidden = false;
+    aggiornaRiepilogo();
+
+    const stato = document.getElementById('mercato-stato');
+    stato.style.color = 'var(--giallo-neon)';
+    stato.textContent = 'Stai modificando uno scambio già confermato. Al salvataggio le rose verranno ricostruite e gli scambi successivi ricalcolati automaticamente.';
+    document.getElementById('admin-mercato-panel')?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  async function eliminaScambioConfermato(id) {
+    const stato = document.getElementById('mercato-stato');
+    const movimento = (mercatoData?.movimenti || []).find((m) => m.id === id);
+    if (!movimento) return;
+
+    const nuovoMercato = clone(mercatoData || {_leggimi:'Storico mercato Hertavernello',movimenti:[]});
+    const idx = (nuovoMercato.movimenti || []).findIndex((m) => m.id === id);
+    if (idx < 0) return;
+    nuovoMercato.movimenti.splice(idx, 1);
+
+    const replay = ricalcolaMovimenti(movimentiConfermati(nuovoMercato));
+    if (!replay.ok) {
+      const msg = `Non posso eliminare questo scambio perché renderebbe incompatibile uno scambio successivo.\n\n${replay.error}\n\nModifica o elimina prima lo scambio indicato, poi riprova.`;
+      alert(msg);
+      stato.style.color = 'var(--wine-bright)';
+      stato.textContent = msg.replace(/\n+/g, ' ');
+      return;
+    }
+
+    if (!confirm(`Eliminare definitivamente questo scambio dalla cronologia pubblica?\n\n${descriviMovimento(movimento)}\n\nLe rose verranno riportate allo stato corretto come se questo scambio non fosse mai avvenuto, poi tutti gli scambi successivi verranno riapplicati. Una copia resterà nello storico Admin come “Annullato”.`)) return;
+
+    if (!Array.isArray(nuovoMercato.annullati)) nuovoMercato.annullati = [];
+    nuovoMercato.annullati.push({
+      ...clone(movimento),
+      stato:'annullato',
+      annullatoIl:new Date().toISOString(),
+      motivoAnnullamento:'Eliminato da Admin',
+    });
+
+    stato.style.color = 'var(--text-muted)';
+    try {
+      await salvaMercatoERose(
+        nuovoMercato,
+        replay.data,
+        `Annulla scambio mercato ${formatoData(movimento.data)}`,
+        'Ricalcola rose dopo annullamento scambio mercato'
+      );
+      resetForm({ keepDate:true });
+      renderStorico();
+      renderBozze();
+      const draftCheck = validaSequenza();
+      stato.style.color = draftCheck.valid ? 'var(--verde-prato)' : 'var(--giallo-neon)';
+      stato.textContent = draftCheck.valid
+        ? 'Scambio annullato ✓ — rimosso dalla cronologia pubblica e conservato nello storico Admin.'
+        : 'Scambio annullato ✓. Attenzione: una o più bozze sono diventate incompatibili e vanno corrette.';
+    } catch (err) {
+      stato.style.color = 'var(--wine-bright)';
+      stato.textContent = `Errore durante l’annullamento: ${err.message}`;
+    }
+  }
+
+  async function aggiungiOAggiornaBozza() {
     const stato = document.getElementById('mercato-stato');
     stato.style.color = 'var(--text-muted)';
+    if (editingConfirmedId) {
+      try {
+        await aggiornaScambioConfermatoDaForm();
+      } catch (err) {
+        stato.style.color = 'var(--wine-bright)';
+        stato.textContent = err.message;
+        aggiornaRiepilogo();
+      }
+      return;
+    }
     try {
       if (formBaseErrors.length) throw new Error('Correggi prima la bozza precedente segnalata come non valida.');
       const index = editingDraftId ? bozze.findIndex((b) => b.id === editingDraftId) : -1;
@@ -310,6 +577,7 @@
   function caricaBozzaInForm(id) {
     const draft = bozze.find((b) => b.id === id);
     if (!draft) return;
+    editingConfirmedId = null;
     editingDraftId = id;
     aggiornaFormBase();
     if (formBaseErrors.length) {
@@ -404,13 +672,57 @@
 
   function renderStorico() {
     const wrap = document.getElementById('mercato-storico-admin');
-    const mov = [...(mercatoData?.movimenti || [])].sort((a,b) => String(b.data).localeCompare(String(a.data)));
-    if (!mov.length) { wrap.innerHTML = '<p class="empty-state">Nessuno scambio registrato.</p>'; return; }
-    wrap.innerHTML = '<h3 style="margin-top:18px;">Storico scambi applicati</h3>' + mov.map((m) => {
-      const a = (m.giocatoriA || []).map((g)=>g.nome).join(', ');
-      const b = (m.giocatoriB || []).map((g)=>g.nome).join(', ');
-      return `<div class="mercato-admin-history-row"><strong>${formatoData(m.data)}</strong><span>${esc(nomeTeam(m.squadraAId))}: ${esc(a)}</span><span>⇄</span><span>${esc(nomeTeam(m.squadraBId))}: ${esc(b)}</span></div>`;
-    }).join('');
+    if (!wrap) return;
+    const mov = [...movimentiConfermati()];
+    const annullati = [...(mercatoData?.annullati || [])].sort((a,b) => String(b.annullatoIl || '').localeCompare(String(a.annullatoIl || '')));
+
+    const confermatiHtml = mov.length
+      ? mov.map((m, index) => {
+          const a = (m.giocatoriA || []).map((g)=>g.nome).join(', ');
+          const b = (m.giocatoriB || []).map((g)=>g.nome).join(', ');
+          return `<article class="mercato-confirmed-card" data-confirmed-id="${esc(m.id)}">
+            <div class="mercato-confirmed-main">
+              <div class="mercato-confirmed-meta"><span>#${index + 1}</span><strong>${esc(formatoData(m.data))}</strong><em>Confermato</em></div>
+              <div class="mercato-confirmed-exchange">
+                <div><strong>${esc(nomeTeam(m.squadraAId))}</strong><span>${esc(a)}</span></div>
+                <b>⇄</b>
+                <div><strong>${esc(nomeTeam(m.squadraBId))}</strong><span>${esc(b)}</span></div>
+              </div>
+            </div>
+            <div class="mercato-confirmed-actions">
+              <button type="button" class="mercato-confirmed-edit" data-id="${esc(m.id)}">✏️ Modifica</button>
+              <button type="button" class="mercato-confirmed-delete" data-id="${esc(m.id)}">🗑️ Elimina</button>
+            </div>
+          </article>`;
+        }).join('')
+      : '<p class="empty-state">Nessuno scambio confermato.</p>';
+
+    const annullatiHtml = annullati.length
+      ? `<details class="mercato-cancelled-wrap">
+          <summary>Storico annullati <span>${annullati.length}</span></summary>
+          <div class="mercato-cancelled-list">${annullati.map((m) => {
+            const a = (m.giocatoriA || []).map((g)=>g.nome).join(', ');
+            const b = (m.giocatoriB || []).map((g)=>g.nome).join(', ');
+            return `<div class="mercato-cancelled-row">
+              <div><strong>${esc(formatoData(m.data))}</strong><span class="mercato-cancelled-badge">Annullato</span></div>
+              <span>${esc(nomeTeam(m.squadraAId))}: ${esc(a)}</span>
+              <span>⇄ ${esc(nomeTeam(m.squadraBId))}: ${esc(b)}</span>
+              <small>Annullato il ${esc(m.annullatoIl ? new Date(m.annullatoIl).toLocaleString('it-IT') : '—')}</small>
+            </div>`;
+          }).join('')}</div>
+        </details>`
+      : '';
+
+    wrap.innerHTML = `
+      <div class="mercato-confirmed-head">
+        <div><h3>Scambi confermati</h3><p>Puoi modificare o annullare anche gli scambi già applicati. Le rose vengono ricostruite automaticamente e gli scambi successivi ricalcolati.</p></div>
+        <span>${mov.length}</span>
+      </div>
+      <div class="mercato-confirmed-list">${confermatiHtml}</div>
+      ${annullatiHtml}`;
+
+    wrap.querySelectorAll('.mercato-confirmed-edit').forEach((btn) => btn.addEventListener('click', () => caricaScambioConfermatoInForm(btn.dataset.id)));
+    wrap.querySelectorAll('.mercato-confirmed-delete').forEach((btn) => btn.addEventListener('click', () => eliminaScambioConfermato(btn.dataset.id)));
   }
 
   function apriRiepilogoFinale() {
@@ -577,7 +889,15 @@
       .mercato-final-dialog{position:relative;width:min(680px,100%);max-height:min(82vh,760px);overflow:auto;padding:20px;border:1px solid var(--border-hairline);border-radius:16px;background:var(--bg-card);box-shadow:0 24px 80px rgba(0,0,0,.45)}.mercato-final-dialog h3{margin:0 0 6px}.mercato-final-dialog>p{margin:0 0 14px;color:var(--text-muted);font-size:12px;line-height:1.5}
       .mercato-final-list{display:grid;gap:9px}.mercato-final-row{display:grid;gap:4px;padding:10px 12px;border:1px solid var(--border-hairline);border-radius:11px;background:var(--bg-void);font-size:12px}.mercato-final-row span{color:var(--text-muted)}
       .mercato-final-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:16px}.mercato-modal-open{overflow:hidden}
-      @media(max-width:720px){.mercato-bozze-head{flex-direction:column}.mercato-draft-exchange{grid-template-columns:1fr}.mercato-draft-exchange b{transform:rotate(90deg)}.mercato-draft-actions{justify-content:stretch}.mercato-draft-actions button{flex:1}.mercato-secondary-btn{margin-left:0!important;margin-top:8px}.mercato-final-actions button{width:100%;margin:0!important}}
+      .mercato-confirmed-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:22px 0 12px;padding-top:18px;border-top:1px solid var(--border-hairline)}
+      .mercato-confirmed-head h3{margin:0 0 4px;font-size:15px}.mercato-confirmed-head p{margin:0;color:var(--text-muted);font-size:12px;line-height:1.45;max-width:760px}.mercato-confirmed-head>span{flex:0 0 auto;padding:5px 9px;border:1px solid var(--border-hairline);border-radius:999px;color:var(--text-muted);font-size:11px;font-weight:800}
+      .mercato-confirmed-list{display:grid;gap:10px}.mercato-confirmed-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--border-hairline);border-radius:12px;background:var(--bg-card)}
+      .mercato-confirmed-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}.mercato-confirmed-meta span{font-family:var(--font-mono);font-size:10px;color:var(--text-muted)}.mercato-confirmed-meta em{font-style:normal;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:var(--verde-prato);padding:3px 6px;border:1px solid rgba(92,214,113,.35);border-radius:999px}
+      .mercato-confirmed-exchange{display:grid;grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr);gap:8px;align-items:center}.mercato-confirmed-exchange>div{display:flex;flex-direction:column;gap:3px;min-width:0}.mercato-confirmed-exchange span{font-size:12px;color:var(--text-muted);overflow-wrap:anywhere}.mercato-confirmed-exchange b{text-align:center;color:var(--giallo-neon)}
+      .mercato-confirmed-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.mercato-confirmed-actions button{padding:7px 10px!important;font-size:11px!important}.mercato-confirmed-delete{background:transparent!important;color:var(--wine-bright)!important;border:1px solid var(--wine)!important}
+      .mercato-cancelled-wrap{margin-top:14px;border:1px solid var(--border-hairline);border-radius:12px;background:var(--bg-void);overflow:hidden}.mercato-cancelled-wrap summary{cursor:pointer;list-style:none;padding:11px 12px;font-size:12px;font-weight:800;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center}.mercato-cancelled-wrap summary::-webkit-details-marker{display:none}.mercato-cancelled-wrap summary span{font-size:10px;padding:3px 7px;border:1px solid var(--border-hairline);border-radius:999px}
+      .mercato-cancelled-list{display:grid;gap:8px;padding:0 10px 10px}.mercato-cancelled-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px 12px;align-items:center;padding:9px 10px;border:1px solid var(--border-hairline);border-radius:10px;background:var(--bg-card);font-size:11px}.mercato-cancelled-row>div{display:flex;gap:7px;align-items:center}.mercato-cancelled-row small{grid-column:1/-1;color:var(--text-muted)}.mercato-cancelled-badge{font-size:9px;font-weight:900;text-transform:uppercase;color:var(--wine-bright);border:1px solid var(--wine);border-radius:999px;padding:2px 5px}
+      @media(max-width:720px){.mercato-bozze-head,.mercato-confirmed-head{flex-direction:column}.mercato-draft-exchange,.mercato-confirmed-exchange{grid-template-columns:1fr}.mercato-draft-exchange b,.mercato-confirmed-exchange b{transform:rotate(90deg)}.mercato-draft-actions,.mercato-confirmed-actions{justify-content:stretch}.mercato-draft-actions button,.mercato-confirmed-actions button{flex:1}.mercato-confirmed-card{grid-template-columns:1fr}.mercato-cancelled-row{grid-template-columns:1fr}.mercato-secondary-btn{margin-left:0!important;margin-top:8px}.mercato-final-actions button{width:100%;margin:0!important}}
     `;
     document.head.appendChild(style);
   }
@@ -593,6 +913,11 @@
       loadJSON('data/mercato.json', {_leggimi:'Storico mercato Hertavernello',movimenti:[]}),
     ]);
     if (!mercatoData.movimenti) mercatoData.movimenti = [];
+    mercatoData.movimenti.forEach((m, index) => {
+      if (!m.id) m.id = `scambio_legacy_${String(m.data || 'senza_data').replace(/[^0-9a-z_-]+/gi, '_')}_${index + 1}`;
+      if (!m.tipo) m.tipo = 'scambio';
+    });
+    if (!Array.isArray(mercatoData.annullati)) mercatoData.annullati = [];
     caricaBozzeLocali();
     injectUI();
     aggiornaFormBase();
@@ -620,10 +945,13 @@
 
     document.getElementById('mercato-conferma').addEventListener('click', aggiungiOAggiornaBozza);
     document.getElementById('mercato-annulla-modifica').addEventListener('click', () => {
+      const eraConfermato = Boolean(editingConfirmedId);
       resetForm({ keepDate:true });
       const stato = document.getElementById('mercato-stato');
       stato.style.color = 'var(--text-muted)';
-      stato.textContent = 'Modifica annullata. La bozza originale è rimasta invariata.';
+      stato.textContent = eraConfermato
+        ? 'Modifica annullata. Lo scambio confermato è rimasto invariato.'
+        : 'Modifica annullata. La bozza originale è rimasta invariata.';
     });
     document.getElementById('mercato-applica-tutti').addEventListener('click', apriRiepilogoFinale);
     document.getElementById('mercato-final-cancel').addEventListener('click', chiudiRiepilogoFinale);
