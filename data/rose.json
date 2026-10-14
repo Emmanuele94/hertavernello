@@ -354,10 +354,10 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Elphege",
-          "squadraReale": "PAR",
-          "costo": 4,
-          "fantacalcioId": "7342"
+          "nome": "Fatah",
+          "squadraReale": "LEC",
+          "costo": 7,
+          "fantacalcioId": "7602"
         }
       ]
     },
@@ -707,17 +707,17 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Fatah",
-          "squadraReale": "LEC",
-          "costo": 7,
-          "fantacalcioId": "7602"
-        },
-        {
-          "ruolo": "ATT",
           "nome": "Zapata D.",
           "squadraReale": "TOR",
           "costo": 19,
           "fantacalcioId": "608"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Elphege",
+          "squadraReale": "PAR",
+          "costo": 4,
+          "fantacalcioId": "7342"
         }
       ]
     },
