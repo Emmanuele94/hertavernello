@@ -4,7 +4,6 @@
 // "risultati" salva fantapunti (homeScore/awayScore) e gol fantasy (homeGoals/awayGoals).
 // Per i vecchi record senza gol salvati, li ricaviamo con la regola 66 = 1 gol, poi +1 ogni 4 punti.
 // ordinato per giornata crescente prima dell'uso (lo ordiniamo qui per sicurezza).
-
 function hv_golDerivato(r, lato) {
   const keyGoals = lato === "away" ? "awayGoals" : "homeGoals";
   const keyScore = lato === "away" ? "awayScore" : "homeScore";
@@ -18,13 +17,11 @@ function hv_golDerivato(r, lato) {
   if (!Number.isFinite(score)) return null;
   return score < 66 ? 0 : 1 + Math.floor((score - 66 + 1e-9) / 4);
 }
-
 function hv_esitoDerivato(r) {
   const homeGoals = hv_golDerivato(r, "home");
   const awayGoals = hv_golDerivato(r, "away");
   return { homeGoals, awayGoals, winner: homeGoals > awayGoals ? "home" : awayGoals > homeGoals ? "away" : "draw" };
 }
-
 function hv_calcolaClassificaLega(risultati, squadre) {
   const tabella = {};
   squadre.forEach((s) => {
@@ -37,19 +34,16 @@ function hv_calcolaClassificaLega(risultati, squadre) {
   });
 
   const ordinati = [...risultati].sort((a, b) => a.matchday - b.matchday);
-
   ordinati.forEach((r) => {
     const home = tabella[r.homeTeamId];
     const away = tabella[r.awayTeamId];
     if (!home || !away) return;
-
     home.giocate++; away.giocate++;
     home.fpFatti += Number(r.homeScore) || 0; home.fpSubiti += Number(r.awayScore) || 0;
     away.fpFatti += Number(r.awayScore) || 0; away.fpSubiti += Number(r.homeScore) || 0;
     const esito = hv_esitoDerivato(r);
     home.golFatti += esito.homeGoals || 0; home.golSubiti += esito.awayGoals || 0;
     away.golFatti += esito.awayGoals || 0; away.golSubiti += esito.homeGoals || 0;
-
     if (esito.winner === "home") {
       home.vinte++; home.punti += 3; home.formaRecente.unshift("V");
       away.perse++; away.formaRecente.unshift("S");
@@ -61,14 +55,25 @@ function hv_calcolaClassificaLega(risultati, squadre) {
       away.pareggiate++; away.punti += 1; away.formaRecente.unshift("P");
     }
   });
-
-  const classifica = Object.values(tabella).sort(
-    (a, b) => b.punti - a.punti || b.fpFatti - a.fpFatti - (b.fpSubiti - a.fpSubiti)
-  );
+  // Criteri classifica: 1) punti, 2) fantapunti totali, 3) gol fatti,
+  // 4) differenza reti. Il nome serve solo come ultimo spareggio stabile.
+  const classifica = Object.values(tabella).sort((a, b) => {
+    const differenzaRetiA = a.golFatti - a.golSubiti;
+    const differenzaRetiB = b.golFatti - b.golSubiti;
+    return (
+      b.punti - a.punti ||
+      b.fpFatti - a.fpFatti ||
+      b.golFatti - a.golFatti ||
+      differenzaRetiB - differenzaRetiA ||
+      (a.squadra.nomeFantasquadra || a.squadra.nomeReale || "").localeCompare(
+        b.squadra.nomeFantasquadra || b.squadra.nomeReale || "",
+        "it"
+      )
+    );
+  });
   classifica.forEach((r, i) => (r.posizione = i + 1));
   return classifica;
 }
-
 // Striscia attiva (vittorie o sconfitte consecutive) per una squadra, guardando
 // la forma recente già calcolata (più recente per prima).
 function hv_strisciaAttiva(formaRecente) {
@@ -82,13 +87,11 @@ function hv_strisciaAttiva(formaRecente) {
   }
   return { tipo, lunghezza };
 }
-
 // Record stagionali (Fase 20): miglior/peggior punteggio, migliore/peggior
 // giornata, striscia più lunga mai avuta da ciascuna squadra.
 function hv_calcolaRecord(risultati, squadre) {
   let migliorPunteggio = null, peggiorPunteggio = null;
   const perGiornata = {};
-
   risultati.forEach((r) => {
     [
       { teamId: r.homeTeamId, score: r.homeScore, matchday: r.matchday },
@@ -100,7 +103,6 @@ function hv_calcolaRecord(risultati, squadre) {
       perGiornata[v.matchday].push(v);
     });
   });
-
   const nome = (id) => (squadre.find((s) => s.id === id) || {}).nomeFantasquadra || id;
 
   return {
@@ -108,7 +110,6 @@ function hv_calcolaRecord(risultati, squadre) {
     peggiorPunteggio: peggiorPunteggio && { ...peggiorPunteggio, nome: nome(peggiorPunteggio.teamId) },
   };
 }
-
 // Testa a testa fra due fantasquadre
 function hv_testaATesta(risultati, teamIdA, teamIdB) {
   const scontri = risultati.filter(
@@ -126,12 +127,10 @@ function hv_testaATesta(risultati, teamIdA, teamIdB) {
   });
   return { incontri: scontri.length, vittorieA, vittorieB, pareggi };
 }
-
 // ===== Badge (Fase 2 del brief): tutti calcolati da data/risultati.json,
 // nessun inserimento manuale in più. Restituisce { squadraId: [badge, ...] }. =====
 function hv_calcolaBadge(risultati, squadre) {
   if (!risultati || risultati.length === 0) return {};
-
   const giornate = [...new Set(risultati.map((r) => r.matchday))].sort((a, b) => a - b);
   const contaComando = {};
   const contaUltimo = {};
@@ -143,13 +142,11 @@ function hv_calcolaBadge(risultati, squadre) {
     striscaMax[s.id] = 0;
     striscaCorrente[s.id] = 0;
   });
-
   giornate.forEach((g) => {
     const parziale = hv_calcolaClassificaLega(risultati.filter((r) => r.matchday <= g), squadre);
     if (parziale.length === 0) return;
     contaComando[parziale[0].squadra.id]++;
     contaUltimo[parziale[parziale.length - 1].squadra.id]++;
-
     risultati
       .filter((r) => r.matchday === g)
       .forEach((r) => {
@@ -163,7 +160,6 @@ function hv_calcolaBadge(risultati, squadre) {
         if (loserId) striscaCorrente[loserId] = 0;
       });
   });
-
   const vittorieMisura = {};
   const sconfitteMisura = {};
   squadre.forEach((s) => {
@@ -181,7 +177,6 @@ function hv_calcolaBadge(risultati, squadre) {
       if (scarto <= 0.5) sconfitteMisura[r.homeTeamId]++;
     }
   });
-
   const classificaFinale = hv_calcolaClassificaLega(risultati, squadre);
   const nomeSquadra = (id) => (squadre.find((s) => s.id === id) || {}).nomeFantasquadra || id;
 
@@ -191,27 +186,21 @@ function hv_calcolaBadge(risultati, squadre) {
     entries.sort((a, b) => b[1] - a[1]);
     return { squadraId: entries[0][0], valore: entries[0][1] };
   };
-
   const badge = [];
   const bComando = top(contaComando);
   if (bComando) badge.push({ icona: "👑", titolo: "Il Dominatore", descrizione: `${nomeSquadra(bComando.squadraId)} — ${bComando.valore} giornate al comando`, squadraId: bComando.squadraId });
 
   const bUltimo = top(contaUltimo);
   if (bUltimo) badge.push({ icona: "🔻", titolo: "La Maglia Nera", descrizione: `${nomeSquadra(bUltimo.squadraId)} — ${bUltimo.valore} giornate all'ultimo posto`, squadraId: bUltimo.squadraId });
-
   const bStriscia = top(striscaMax, 2);
   if (bStriscia) badge.push({ icona: "🔥", titolo: "La Corazzata", descrizione: `${nomeSquadra(bStriscia.squadraId)} — ${bStriscia.valore} vittorie di fila (record)`, squadraId: bStriscia.squadraId });
-
   const bVittorieMisura = top(vittorieMisura);
   if (bVittorieMisura) badge.push({ icona: "🎯", titolo: "Il Cecchino", descrizione: `${nomeSquadra(bVittorieMisura.squadraId)} — ${bVittorieMisura.valore} vittorie con un solo punto di scarto`, squadraId: bVittorieMisura.squadraId });
-
   const bSconfitteMisura = top(sconfitteMisura);
   if (bSconfitteMisura) badge.push({ icona: "💔", titolo: "Il Perseguitato", descrizione: `${nomeSquadra(bSconfitteMisura.squadraId)} — ${bSconfitteMisura.valore} sconfitte per mezzo punto o meno`, squadraId: bSconfitteMisura.squadraId });
-
   if (classificaFinale.length > 0) {
     const migliorDifesa = [...classificaFinale].sort((a, b) => a.fpSubiti - b.fpSubiti)[0];
     badge.push({ icona: "🛡️", titolo: "Miglior Difesa", descrizione: `${migliorDifesa.squadra.nomeFantasquadra} — ${migliorDifesa.fpSubiti.toFixed(1)} fantapunti subiti in totale`, squadraId: migliorDifesa.squadra.id });
-
     const migliorAttacco = [...classificaFinale].sort((a, b) => b.fpFatti - a.fpFatti)[0];
     badge.push({ icona: "⚡", titolo: "Miglior Attacco", descrizione: `${migliorAttacco.squadra.nomeFantasquadra} — ${migliorAttacco.fpFatti.toFixed(1)} fantapunti fatti in totale`, squadraId: migliorAttacco.squadra.id });
   }
@@ -223,7 +212,6 @@ function hv_calcolaBadge(risultati, squadre) {
   });
   return perSquadra;
 }
-
 if (typeof module !== "undefined") {
   module.exports = { hv_golDerivato, hv_esitoDerivato, hv_calcolaClassificaLega, hv_strisciaAttiva, hv_calcolaRecord, hv_testaATesta, hv_calcolaBadge };
 }
