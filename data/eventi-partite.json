@@ -755,6 +755,865 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "g6-TOR-UDI",
+      "giornata": 6,
+      "casaCodice": "TOR",
+      "trasfertaCodice": "UDI",
+      "casaNome": "Torino",
+      "trasfertaNome": "Udinese",
+      "golCasa": 2,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/torino-MZFZnvX4/udinese-rXw8YKDE/?mid=r9rkvmPc",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7624",
+          "nome": "Braganca",
+          "squadraCodice": "TOR",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6684",
+          "nome": "Ekkelenkamp",
+          "squadraCodice": "UDI",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7349",
+          "nome": "Kulenovic",
+          "squadraCodice": "TOR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5820",
+          "nome": "Bertola",
+          "squadraCodice": "UDI",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-ATA-VEN",
+      "giornata": 6,
+      "casaCodice": "ATA",
+      "trasfertaCodice": "VEN",
+      "casaNome": "Atalanta",
+      "trasfertaNome": "Venezia",
+      "golCasa": 3,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/atalanta-8C9JjMXu/venezia-MkPmVv50/?mid=GxLyDAQb",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "1850",
+          "nome": "Kessiè",
+          "squadraCodice": "ATA",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6435",
+          "nome": "Krstovic",
+          "squadraCodice": "ATA",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 2,
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "4479",
+          "nome": "Elmas",
+          "squadraCodice": "ATA",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1,
+            "espulsioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6890",
+          "nome": "Moreno M.",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6821",
+          "nome": "Hainaut",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6681",
+          "nome": "Sagrado",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "256",
+          "nome": "Juan Jesus",
+          "squadraCodice": "VEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-CAG-JUV",
+      "giornata": 6,
+      "casaCodice": "CAG",
+      "trasfertaCodice": "JUV",
+      "casaNome": "Cagliari",
+      "trasfertaNome": "Juventus",
+      "golCasa": 1,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/cagliari-SCGVmKHb/juventus-C06aJvIB/?mid=ljJqBleB",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "4973",
+          "nome": "McKennie",
+          "squadraCodice": "JUV",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4896",
+          "nome": "Maldini",
+          "squadraCodice": "CAG",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7374",
+          "nome": "Mendy P.",
+          "squadraCodice": "CAG",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7268",
+          "nome": "Rodriguez Ju.",
+          "squadraCodice": "CAG",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5951",
+          "nome": "Kolo Muani",
+          "squadraCodice": "JUV",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7436",
+          "nome": "Alajbegovic",
+          "squadraCodice": "JUV",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "1871",
+          "nome": "Deiola",
+          "squadraCodice": "CAG",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": [
+        {
+          "nome": "Spalletti L.",
+          "squadraCodice": "JUV",
+          "tipo": "staff",
+          "eventi": {
+            "espulsioni": 1
+          }
+        },
+        {
+          "nome": "Pisacane F.",
+          "squadraCodice": "CAG",
+          "tipo": "staff",
+          "eventi": {
+            "espulsioni": 1
+          }
+        }
+      ]
+    },
+    {
+      "matchId": "g6-SAS-MIL",
+      "giornata": 6,
+      "casaCodice": "SAS",
+      "trasfertaCodice": "MIL",
+      "casaNome": "Sassuolo",
+      "trasfertaNome": "Milan",
+      "golCasa": 1,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/ac-milan-8Sa8HInO/sassuolo-QDdvI0zl/?mid=G2j3GqXj",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "5273",
+          "nome": "Estupinan",
+          "squadraCodice": "MIL",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5739",
+          "nome": "De Winter",
+          "squadraCodice": "MIL",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2379",
+          "nome": "Rabiot",
+          "squadraCodice": "MIL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "2606",
+          "nome": "Modric",
+          "squadraCodice": "MIL",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "531",
+          "nome": "Berardi",
+          "squadraCodice": "SAS",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7154",
+          "nome": "Odenthal",
+          "squadraCodice": "SAS",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6397",
+          "nome": "Ramos G.",
+          "squadraCodice": "MIL",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5022",
+          "nome": "Pavlovic",
+          "squadraCodice": "MIL",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5844",
+          "nome": "Thorstvedt",
+          "squadraCodice": "SAS",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-LAZ-MON",
+      "giornata": 6,
+      "casaCodice": "LAZ",
+      "trasfertaCodice": "MON",
+      "casaNome": "Lazio",
+      "trasfertaNome": "Monza",
+      "golCasa": 3,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/lazio-URcSl02h/monza-4YSMlwj7/?mid=69bHPmA4",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "5620",
+          "nome": "Tavares N.",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6556",
+          "nome": "Noslin",
+          "squadraCodice": "LAZ",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 2
+          }
+        },
+        {
+          "fantacalcioId": "4925",
+          "nome": "Carboni A.",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6398",
+          "nome": "Isaksen",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6659",
+          "nome": "Lucchesi",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "espulsioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6320",
+          "nome": "Doekhi",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6537",
+          "nome": "Goglichidze",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5882",
+          "nome": "Mota",
+          "squadraCodice": "MON",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7012",
+          "nome": "Provstgaard",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6319",
+          "nome": "Leite",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2038",
+          "nome": "Pinamonti",
+          "squadraCodice": "LAZ",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "4817",
+          "nome": "Pedraza",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        }
+      ],
+      "eventiStaff": [
+        {
+          "nome": "Juric I.",
+          "squadraCodice": "MON",
+          "tipo": "staff",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ]
+    },
+    {
+      "matchId": "g6-LEC-BOL",
+      "giornata": 6,
+      "casaCodice": "LEC",
+      "trasfertaCodice": "BOL",
+      "casaNome": "Lecce",
+      "trasfertaNome": "Bologna",
+      "golCasa": 1,
+      "golTrasferta": 2,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/bologna-0M9xNN8N/lecce-G8lYsMgU/?mid=C61PNRvH",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "5007",
+          "nome": "Ilic",
+          "squadraCodice": "LEC",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2167",
+          "nome": "Orsolini",
+          "squadraCodice": "BOL",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "4436",
+          "nome": "Cambiaghi",
+          "squadraCodice": "BOL",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 2
+          }
+        },
+        {
+          "fantacalcioId": "7212",
+          "nome": "Heggem",
+          "squadraCodice": "BOL",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5457",
+          "nome": "Maleh",
+          "squadraCodice": "LEC",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7602",
+          "nome": "Fatah",
+          "squadraCodice": "LEC",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6990",
+          "nome": "Veiga D.",
+          "squadraCodice": "LEC",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7627",
+          "nome": "Enem",
+          "squadraCodice": "BOL",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6225",
+          "nome": "El Azzouzi O.",
+          "squadraCodice": "BOL",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-COM-ROM",
+      "giornata": 6,
+      "casaCodice": "COM",
+      "trasfertaCodice": "ROM",
+      "casaNome": "Como",
+      "trasfertaNome": "Roma",
+      "golCasa": 0,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/as-roma-zVqqL0ma/como-ttyLthOA/?mid=z7Hi9SPN",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "6967",
+          "nome": "Diao",
+          "squadraCodice": "COM",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "22",
+          "nome": "De Roon",
+          "squadraCodice": "ROM",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5585",
+          "nome": "Malen",
+          "squadraCodice": "ROM",
+          "ruolo": "ATT",
+          "eventi": {
+            "espulsioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5589",
+          "nome": "Konè M.",
+          "squadraCodice": "ROM",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5734",
+          "nome": "Soulè",
+          "squadraCodice": "ROM",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7126",
+          "nome": "Baturina",
+          "squadraCodice": "COM",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-NAP-FRO",
+      "giornata": 6,
+      "casaCodice": "NAP",
+      "trasfertaCodice": "FRO",
+      "casaNome": "Napoli",
+      "trasfertaNome": "Frosinone",
+      "golCasa": 3,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/frosinone-pfo9H1Wp/napoli-69Dxbc61/?mid=pKaXL59T",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "2517",
+          "nome": "De Bruyne",
+          "squadraCodice": "NAP",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1,
+            "rigoriSegnati": 1
+          }
+        },
+        {
+          "fantacalcioId": "7120",
+          "nome": "Lang",
+          "squadraCodice": "NAP",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "4409",
+          "nome": "Rrahmani",
+          "squadraCodice": "NAP",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4664",
+          "nome": "Badiashile",
+          "squadraCodice": "NAP",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7162",
+          "nome": "Giovane",
+          "squadraCodice": "NAP",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-INT-PAR",
+      "giornata": 6,
+      "casaCodice": "INT",
+      "trasfertaCodice": "PAR",
+      "casaNome": "Inter",
+      "trasfertaNome": "Parma",
+      "golCasa": 3,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/inter-Iw7eKK25/parma-6DxlaxHN/?mid=bqe9R9uh",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7070",
+          "nome": "Sucic P.",
+          "squadraCodice": "INT",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "2194",
+          "nome": "Calhanoglu",
+          "squadraCodice": "INT",
+          "ruolo": "CEN",
+          "eventi": {
+            "rigoriSegnati": 1
+          }
+        },
+        {
+          "fantacalcioId": "4871",
+          "nome": "Thuram",
+          "squadraCodice": "INT",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "2529",
+          "nome": "Mkhitaryan",
+          "squadraCodice": "INT",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g6-GEN-FIO",
+      "giornata": 6,
+      "casaCodice": "GEN",
+      "trasfertaCodice": "FIO",
+      "casaNome": "Genoa",
+      "trasfertaNome": "Fiorentina",
+      "golCasa": 2,
+      "golTrasferta": 1,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/fiorentina-Q3A3IbXH/genoa-d0PJxeie/?mid=6k8N36mo",
+      "aggiornatoIl": "2026-10-16T15:20:12.875Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7600",
+          "nome": "Osmajic",
+          "squadraCodice": "GEN",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1,
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6020",
+          "nome": "Ellertsson",
+          "squadraCodice": "GEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "4378",
+          "nome": "Ranieri L.",
+          "squadraCodice": "FIO",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "4970",
+          "nome": "Messias",
+          "squadraCodice": "GEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7410",
+          "nome": "Viery",
+          "squadraCodice": "FIO",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5514",
+          "nome": "Vasquez",
+          "squadraCodice": "GEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "autogol": 1,
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2857",
+          "nome": "Traorè Hj.",
+          "squadraCodice": "GEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6164",
+          "nome": "Vitinha O.",
+          "squadraCodice": "GEN",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "791",
+          "nome": "Sabelli",
+          "squadraCodice": "GEN",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
     }
   ]
 }
