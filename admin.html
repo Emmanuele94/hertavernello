@@ -368,6 +368,18 @@ Fulmicotone"></textarea>
     </div>
 
 
+    <div class="admin-box" id="hv-bulk-import-section">
+      <h2>Importazione eventi Serie A · Diretta.it</h2>
+      <p class="desc">Raccogli le partite con lo script Tampermonkey <strong>Diretta.it - Eventi per Hertavernello</strong>, poi premi <strong>Copia giornata</strong> e incolla qui il JSON. Controlla le associazioni dei giocatori prima di salvare; i dati esistenti non vengono sostituiti senza selezione esplicita.</p>
+      <label for="hv-bulk-giornata">Giornata di Serie A (usata se assente nel JSON)</label>
+      <input id="hv-bulk-giornata" type="number" min="1" max="38" placeholder="Es. 7" style="max-width:150px">
+      <textarea id="hv-bulk-input" rows="7" placeholder="Incolla qui il contenuto copiato da Tampermonkey" style="display:block;width:100%;max-width:100%;margin:10px 0"></textarea>
+      <button type="button" id="hv-bulk-parse">Analizza e verifica eventi</button>
+      <p id="hv-bulk-stato" class="desc" role="status"></p>
+      <div id="hv-bulk-anteprima"></div>
+      <button type="button" id="hv-bulk-save" style="margin-top:12px">Conferma e salva partite selezionate</button>
+    </div>
+
     <div class="admin-box" id="admin-eventi-archivio">
       <h2>7. Archivio eventi Serie A</h2>
       <p class="desc">
@@ -449,6 +461,14 @@ Fulmicotone"></textarea>
   </div>
   </div>
 
+  <style>
+    .hv-bulk-card{background:#102432;border:1px solid #4d6572;border-radius:12px;padding:14px;margin:12px 0;color:#eff8ff}
+    .hv-bulk-card h4{margin:0 0 7px;font-size:17px}
+    .hv-bulk-event-row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(180px,1fr);gap:10px;align-items:center;border-top:1px solid #345062;padding:8px 0}
+    .hv-bulk-event-row select{max-width:100%;padding:9px;background:#f4f7f8;color:#132331}
+    .hv-bulk-choice{display:block;margin:10px 0 0;color:#b7ff5c}
+    @media(max-width:650px){.hv-bulk-event-row{grid-template-columns:1fr;gap:4px}}
+  </style>
   <script src="js/versione-check.js?v=20260914-mobile2"></script>
   <script src="js/auth.js?v=20260914-mobile2"></script>
   <script src="js/github-api.js?v=20260916-adminmarket1"></script>
@@ -474,6 +494,7 @@ Fulmicotone"></textarea>
   <script src="js/admin-risultati.js?v=20260921-risultati1"></script>
   <script src="js/eventi-partite.js?v=20260921-eventi5"></script>
   <script src="js/admin-eventi-partite.js?v=20260921-risultati1"></script>
+  <script src="js/admin-importa-eventi.js?v=20261016-importeventi1"></script>
   <script src="js/admin-archivia-stagione.js?v=20260914-mobile2"></script>
   <script src="js/admin-disconnetti-tutti.js?v=20260914-mobile2"></script>
   <script src="js/admin-regolamento.js?v=20260914-mobile2"></script>
@@ -493,6 +514,7 @@ Fulmicotone"></textarea>
       hv_initCalendarioForm();
       hv_initRisultatiForm();
       hv_initAdminEventiPartite();
+      hv_initBulkEventi();
       hv_initFeedbackAdmin();
     }
 
