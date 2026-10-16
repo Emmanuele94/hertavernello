@@ -315,14 +315,16 @@ async function hv_renderIncrocio(config) {
     );
 
     const giornataRealeAttiva = hv_calcolaGiornataAttiva(tutte, Date.now());
-    let giornata = giornateLega[0];
-    if (giornataRealeAttiva != null) {
-      if (giornateLega.includes(giornataRealeAttiva)) giornata = giornataRealeAttiva;
-      else {
-        const prossima = giornateLega.find((g) => g > giornataRealeAttiva);
-        giornata = prossima ?? [...giornateLega].reverse().find((g) => g < giornataRealeAttiva) ?? giornateLega[0];
-      }
+    // La Home non deve ripiegare su giornate già concluse: quelle sono nell'Archivio.
+    if (giornataRealeAttiva == null) {
+      wrap.innerHTML = '<p class="empty-state">Impossibile determinare la giornata corrente della Serie A. Riprova quando il calendario sarà disponibile.</p>';
+      return;
     }
+    if (!giornateLega.includes(giornataRealeAttiva)) {
+      wrap.innerHTML = `<p class="empty-state">La giornata corrente (${giornataRealeAttiva}) non è ancora presente nel calendario della lega. Aggiungila da Admin; le giornate precedenti sono consultabili nell’Archivio.</p>`;
+      return;
+    }
+    const giornata = giornataRealeAttiva;
     const partite = tutte.filter((p) => Number(p.matchday) === Number(giornata)).sort((a,b)=>new Date(a.data)-new Date(b.data));
     const punteggiPrecedenti = {};
     tuttePrecedenti.forEach((p) => { if (p?.id) punteggiPrecedenti[p.id] = { golCasa:p.golCasa, golTrasferta:p.golTrasferta }; });

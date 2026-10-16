@@ -64,8 +64,19 @@
   }
 
   function getMatchRecord(data, match) {
+    const records = data?.partite || [];
     const key = matchKey(match);
-    return (data?.partite || []).find((p) => String(p.matchId) === key) || null;
+    // Le importazioni manuali possono avere un ID diverso da football-data.org.
+    // Identifichiamo la stessa partita anche tramite giornata e squadre reali.
+    const exact = records.find((p) => String(p.matchId) === key || String(p.fonteId || "") === key);
+    if (exact) return exact;
+    const day = Number(match?.matchday);
+    const home = String(match?.casaCodice || "").toUpperCase();
+    const away = String(match?.trasfertaCodice || "").toUpperCase();
+    if (!Number.isInteger(day) || !home || !away) return null;
+    return records.find((p) => Number(p.giornata) === day &&
+      String(p.casaCodice || "").toUpperCase() === home &&
+      String(p.trasfertaCodice || "").toUpperCase() === away) || null;
   }
 
   function playerRecord(record, player) {
