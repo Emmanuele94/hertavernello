@@ -6,7 +6,7 @@
   const defs = ['gol','assist','rigoriSegnati','autogol','ammonizioni','espulsioni','rigoriParati','rigoriSbagliati'];
   const labels = {gol:'Gol',assist:'Assist',rigoriSegnati:'Rigore segnato',autogol:'Autogol',ammonizioni:'Ammonizione',espulsioni:'Espulsione',rigoriParati:'Rigore parato',rigoriSbagliati:'Rigore sbagliato'};
   let payload=null, matches=[], db=[], teams=[], config=null, saved=null;
-  let initialized=false;
+  let initialized=false; let uid=0; const newId=()=>`ev-${++uid}`;
   function status(s){$('hv-bulk-stato').textContent=s;}
   function optionList(players, selected){return '<option value="">— Associa il giocatore —</option>'+players.map(p=>`<option value="${esc(p.fantacalcioId||'')}" ${String(p.fantacalcioId)===String(selected)?'selected':''}>${esc(p.nome)} (${esc(p.ruolo||'')})</option>`).join('');}
   function scoreOf(m,side){return Number(m?.[side])>=0?Number(m[side]):null;}
@@ -19,45 +19,92 @@
     hits=players.filter(p=>norm(p.nome).startsWith(wanted)||wanted.startsWith(norm(p.nome)));return hits.length===1?hits[0]:null;
   }
   function findExisting(m){return (saved?.partite||[]).find(r=>(m.id&&String(r.fonteId||r.matchId||'')===String(m.id)) || (String(r.casaCodice)===m.casaCodice&&String(r.trasfertaCodice)===m.trasfertaCodice&&Number(r.giornata)===Number(m.giornata)));}
-  function render(){const target=$('hv-bulk-anteprima'); if(!matches.length){target.innerHTML='';return;}
-    target.innerHTML=matches.map((m,i)=>{const existing=findExisting(m); const people=m.entries.map((e,j)=>{
-      const choices=db.filter(p=>p.squadraCodice===(e.side==='home'?m.casaCodice:m.trasfertaCodice));const selected=e.selectedId||playerMatch(e.nome,e.side==='home'?m.casaCodice:m.trasfertaCodice)?.fantacalcioId||'';
-      const iconText=defs.filter(k=>e.eventi?.[k]).map(k=>`${labels[k]} ×${e.eventi[k]}`).join(' · ');
-      return `<div class="hv-bulk-event-row"><span>${esc(e.nome)} <small>(${e.side==='home'?'Casa':'Trasferta'})</small><br><small>${esc(iconText)}</small></span><select data-match="${i}" data-person="${j}" class="hv-bulk-person">${optionList(choices,selected)}</select></div>`;
-    }).join('');const same=existing?'⚠️ Dati già presenti: il valore predefinito conserva lo storico.':'Nuova partita'; const warnings=Array.isArray(m.nonRiconosciuti)?m.nonRiconosciuti:[];
-    return `<article class="hv-bulk-card" data-match-index="${i}"><h4>${esc(m.casa)} ${m.golCasa??'–'}–${m.golTrasferta??'–'} ${esc(m.trasferta)}</h4><p class="muted">${esc(same)} · ${m.entries.length} calciatori con eventi</p>${!m.casaCodice||!m.trasfertaCodice?'<p style="color:#ffb86a">Squadra non riconosciuta: correggi i nomi nella sorgente prima di procedere.</p>':''}${people||'<p>Nessun evento rilevato in questa partita.</p>'}${warnings.length?`<details style="color:#ffc876"><summary>⚠ ${warnings.length} righe non riconosciute: verifica manuale richiesta</summary>${warnings.map(w=>`<p>${esc(w)}</p>`).join('')}</details><label class="hv-bulk-choice"><input type="checkbox" data-warnings="${i}"> Ho controllato le righe non riconosciute e completerò gli eventi mancanti manualmente</label>`:''}<label class="hv-bulk-choice"><input type="checkbox" data-import="${i}" ${!existing?'checked':''}> ${existing?'Sostituisci gli eventi salvati di questa partita (conferma esplicita)':'Importa questa partita'}</label></article>`;
-  }).join('');status(`${matches.length} partite lette. Associa gli eventuali giocatori non riconosciuti e controlla prima di salvare.`);
+  const number = x => Math.max(0,Math.min(20,Math.floor(Number(x)||0)));
+  function readEditor(){
+    document.querySelectorAll('.hv-bulk-card').forEach(card=>{
+      const i=Number(card.dataset.matchIndex),m=matches[i];if(!m)return;
+      m.casaCodice=card.querySelector('[data-field="casaCodice"]').value;
+      m.trasfertaCodice=card.querySelector('[data-field="trasfertaCodice"]').value;
+      m.giornata=number(card.querySelector('[data-field="giornata"]').value);
+      for(const key of ['golCasa','golTrasferta']){const el=card.querySelector(`[data-field="${key}"]`);m[key]=el.value===''?null:number(el.value);}
+      m.entries.forEach(e=>{
+        const row=card.querySelector(`[data-entry="${e.uid}"]`);if(!row)return;
+        e.side=row.querySelector('[data-p="side"]').value;
+        e.selectedId=row.querySelector('[data-p="player"]').value;
+        e.nome=row.querySelector('[data-p="name"]').value.trim();
+        e.eventi={};for(const k of defs){const v=number(row.querySelector(`[data-event="${k}"]`).value);if(v)e.eventi[k]=v;}
+      });
+      m.importSelected=card.querySelector('[data-import]').checked;
+      m.warningsConfirmed=!!card.querySelector('[data-warnings]')?.checked;
+    });
   }
-  function parseInput(){try {payload=JSON.parse($('hv-bulk-input').value.trim()); if(payload?.format!=='hertavernello-diretta-events-v1'||!Array.isArray(payload.partite))throw Error('Formato non riconosciuto. Usa il pulsante “Copia giornata” di Tampermonkey.');
-      if(payload.partite.length>50)throw Error('Massimo 50 partite per importazione.');
-      matches=payload.partite.map(m=>({ ...m, giornata:Number(m.giornata)||Number($('hv-bulk-giornata').value)||null,casaCodice:resolveTeam(m.casa),trasfertaCodice:resolveTeam(m.trasferta),golCasa:scoreOf(m,'golCasa'),golTrasferta:scoreOf(m,'golTrasferta'),entries:(m.eventi||[]).filter(e=>e?.nome&&['home','away'].includes(e.side)).map(e=>({ ...e, eventi:Object.fromEntries(defs.map(k=>[k,Math.max(0,Math.min(9,Number(e.eventi?.[k])||0))]).filter(([,v])=>v)) }))}));
-      if(!matches.length)throw Error('Nessuna partita presente.');render();
-    }catch(e){matches=[];$('hv-bulk-anteprima').innerHTML='';status('Errore importazione: '+e.message);}
+  function playerOptions(e,m){const code=e.side==='home'?m.casaCodice:m.trasfertaCodice;
+    const players=db.filter(p=>p.squadraCodice===code).sort((a,b)=>a.nome.localeCompare(b.nome,'it'));
+    const guess=e.selectedId||playerMatch(e.nome,code)?.fantacalcioId||'';
+    return `<option value="">— Cerca e seleziona —</option>`+players.map(p=>`<option value="${esc(p.fantacalcioId)}" ${String(p.fantacalcioId)===String(guess)?'selected':''}>${esc(p.nome)} · ${esc(p.ruolo)}</option>`).join('');
   }
-  async function saveAll(){const selected=[...document.querySelectorAll('.hv-bulk-card input[data-import]:checked')].map(x=>Number(x.dataset.import));if(!selected.length){status('Seleziona almeno una partita da importare.');return;}
-    const items=[];
-    for (const i of selected){const m=matches[i];if(m.nonRiconosciuti?.length&&!document.querySelector(`input[data-warnings="${i}"]`)?.checked){status(`Controlla prima le righe non riconosciute di ${m.casa} - ${m.trasferta}.`);return;}if(!m.casaCodice||!m.trasfertaCodice||m.casaCodice===m.trasfertaCodice){status(`Squadre non riconosciute per ${m.casa} - ${m.trasferta}.`);return;}
-      const perPlayer=new Map();for(let j=0;j<m.entries.length;j++){const e=m.entries[j];const select=document.querySelector(`.hv-bulk-person[data-match="${i}"][data-person="${j}"]`); const player=db.find(p=>String(p.fantacalcioId)===String(select?.value));if(!player){status(`Associa prima ${e.nome} (${m.casa} - ${m.trasferta}).`);return;}
-        const code=e.side==='home'?m.casaCodice:m.trasfertaCodice;if(player.squadraCodice!==code){status(`Squadra non coerente per ${e.nome}.`);return;}
-        const key=String(player.fantacalcioId);if(!perPlayer.has(key))perPlayer.set(key,{fantacalcioId:key,nome:player.nome,squadraCodice:code,ruolo:player.ruolo,eventi:{}});
-        for(const [k,v] of Object.entries(e.eventi||{}))if(defs.includes(k))perPlayer.get(key).eventi[k]=(perPlayer.get(key).eventi[k]||0)+v;
-      }
-      items.push({m,eventi:[...perPlayer.values()]});
+  function entryHtml(e,m,i){
+    return `<div class="hv-bulk-editrow" data-entry="${esc(e.uid)}">
+      <div class="hv-bulk-edithead"><input data-p="name" value="${esc(e.nome)}" aria-label="Nome originale o corretto" placeholder="Nome calciatore"><select data-p="side" aria-label="Squadra giocatore"><option value="home" ${e.side==='home'?'selected':''}>${esc(m.casa)} (casa)</option><option value="away" ${e.side==='away'?'selected':''}>${esc(m.trasferta)} (trasferta)</option></select><button type="button" data-delete="${esc(e.uid)}" class="hv-bulk-danger" aria-label="Elimina evento">✕</button></div>
+      <select data-p="player" aria-label="Abbina al database Hertavernello">${playerOptions(e,m)}</select>
+      <div class="hv-bulk-eventgrid">${defs.map(k=>`<label>${esc(labels[k])}<input data-event="${k}" type="number" min="0" max="20" step="1" value="${number(e.eventi?.[k])}"></label>`).join('')}</div>
+    </div>`;
+  }
+  function teamChoices(value){return '<option value="">— Squadra —</option>'+teams.map(t=>`<option value="${esc(t.codice)}" ${t.codice===value?'selected':''}>${esc(t.nome)}</option>`).join('');}
+  function render(){const target=$('hv-bulk-anteprima');if(!matches.length){target.innerHTML='';return;}
+    target.innerHTML=matches.map((m,i)=>{const existing=findExisting(m);const warnings=Array.isArray(m.nonRiconosciuti)?m.nonRiconosciuti:[];
+      return `<article class="hv-bulk-card" data-match-index="${i}"><details open><summary><strong>${esc(m.casa)} ${m.golCasa??'–'}–${m.golTrasferta??'–'} ${esc(m.trasferta)}</strong> · ${m.entries.length} calciatori ${existing?'· ⚠ storico già presente':''}</summary>
+       <div class="hv-bulk-gamefields"><label>Casa<select data-field="casaCodice">${teamChoices(m.casaCodice)}</select></label><label>Gol casa<input type="number" data-field="golCasa" min="0" max="30" value="${m.golCasa??''}"></label><label>Trasferta<select data-field="trasfertaCodice">${teamChoices(m.trasfertaCodice)}</select></label><label>Gol trasferta<input type="number" data-field="golTrasferta" min="0" max="30" value="${m.golTrasferta??''}"></label><label>Giornata<input type="number" data-field="giornata" min="1" max="38" value="${m.giornata||''}"></label></div>
+       <div class="hv-bulk-eventlist">${m.entries.map(e=>entryHtml(e,m,i)).join('')}</div>
+       <button type="button" data-add="${i}" class="hv-bulk-add">＋ Aggiungi calciatore/evento</button>
+       ${warnings.length?`<details><summary>⚠ ${warnings.length} avvisi da controllare</summary>${warnings.map(w=>`<p>${esc(w)}</p>`).join('')}</details><label class="hv-bulk-choice"><input type="checkbox" data-warnings ${m.warningsConfirmed?'checked':''}> Ho verificato gli avvisi e completato gli eventi</label>`:''}
+       <p class="hv-bulk-diagnostic" data-diagnostic="${i}"></p>
+       <label class="hv-bulk-choice"><input type="checkbox" data-import ${m.importSelected?'checked':''}> ${existing?'Sostituisci questa partita già salvata, dopo averla verificata':'Salva questa partita verificata'}</label></details></article>`;
+    }).join('');validateEditor(); status(`${matches.length} partite pronte: modifica liberamente eventi, calciatori, squadre e risultati prima di salvare.`);
+  }
+  function validateEditor(){document.querySelectorAll('.hv-bulk-card').forEach(card=>{
+    const i=Number(card.dataset.matchIndex),m=matches[i];if(!m)return;
+    const totals={home:0,away:0};m.entries.forEach(e=>{const src=e.side==='away'?'away':'home';const dst=src==='home'?'away':'home';totals[src]+=number(e.eventi.gol)+number(e.eventi.rigoriSegnati);totals[dst]+=number(e.eventi.autogol);});
+    const diag=card.querySelector('[data-diagnostic]');if(diag)diag.textContent=(m.golCasa!==null&&m.golTrasferta!==null&&(totals.home!==m.golCasa||totals.away!==m.golTrasferta))?`⚠ Risultato ${m.golCasa}-${m.golTrasferta}; reti dagli eventi ${totals.home}-${totals.away}. Verifica gol/autogol o correggi il risultato.`:`✓ Reti dagli eventi: ${totals.home}-${totals.away}`;
+  });}
+  function parseInput(){try{payload=JSON.parse($('hv-bulk-input').value.trim());if(payload?.format!=='hertavernello-diretta-events-v1'||!Array.isArray(payload.partite))throw Error('Formato non riconosciuto. Usa “Copia giornata” di Tampermonkey.');if(payload.partite.length>50)throw Error('Massimo 50 partite.');
+    matches=payload.partite.map(m=>({...m,giornata:Number(m.giornata)||Number($('hv-bulk-giornata').value)||null,casaCodice:resolveTeam(m.casa),trasfertaCodice:resolveTeam(m.trasferta),golCasa:scoreOf(m,'golCasa'),golTrasferta:scoreOf(m,'golTrasferta'),importSelected:!findExisting({id:m.id,casaCodice:resolveTeam(m.casa),trasfertaCodice:resolveTeam(m.trasferta),giornata:m.giornata}),warningsConfirmed:false,entries:(m.eventi||[]).filter(e=>e?.nome&&['home','away'].includes(e.side)).map(e=>({...e,uid:newId(),selectedId:'',eventi:Object.fromEntries(defs.map(k=>[k,number(e.eventi?.[k])]).filter(([,v])=>v))}))}));if(!matches.length)throw Error('Nessuna partita presente.');render();
+   }catch(e){matches=[];$('hv-bulk-anteprima').innerHTML='';status('Errore importazione: '+e.message);}}
+  function editorChange(ev){const card=ev.target.closest('.hv-bulk-card');if(!card)return;const i=Number(card.dataset.matchIndex),m=matches[i];if(!m)return;
+    if(ev.target.matches('[data-p="side"],[data-field="casaCodice"],[data-field="trasfertaCodice"]')){readEditor();render();return;}
+    if(ev.target.matches('[data-p="player"]')&&ev.target.value){const p=db.find(p=>String(p.fantacalcioId)===ev.target.value);if(p){const e=m.entries.find(x=>x.uid===ev.target.closest('[data-entry]').dataset.entry);if(e){e.nome=p.nome;e.selectedId=p.fantacalcioId;}readEditor();if(e){e.nome=p.nome;e.selectedId=p.fantacalcioId;}render();return;}}
+    readEditor();validateEditor();
+  }
+  function editorClick(ev){const add=ev.target.closest('[data-add]'),del=ev.target.closest('[data-delete]');if(!add&&!del)return;readEditor();
+    if(add){matches[Number(add.dataset.add)].entries.push({uid:newId(),nome:'',side:'home',eventi:{},selectedId:''});}
+    else{const card=del.closest('.hv-bulk-card'),m=matches[Number(card.dataset.matchIndex)];m.entries=m.entries.filter(e=>e.uid!==del.dataset.delete);}
+    render();
+  }
+  async function saveAll(){readEditor();const selected=matches.filter(m=>m.importSelected);if(!selected.length){status('Seleziona almeno una partita.');return;}
+    const items=[];for(const m of selected){if(m.nonRiconosciuti?.length&&!m.warningsConfirmed){status(`Verifica gli avvisi di ${m.casa} - ${m.trasferta}.`);return;}
+      if(!m.casaCodice||!m.trasfertaCodice||m.casaCodice===m.trasfertaCodice){status(`Squadre non valide per ${m.casa} - ${m.trasferta}.`);return;}
+      if(!Number.isInteger(m.giornata)||m.giornata<1||m.giornata>38){status(`Indica la giornata per ${m.casa} - ${m.trasferta}.`);return;}
+      const perPlayer=new Map();for(const e of m.entries){if(!Object.values(e.eventi).some(v=>v>0))continue;
+        const code=e.side==='home'?m.casaCodice:m.trasfertaCodice;const p=db.find(p=>String(p.fantacalcioId)===String(e.selectedId));
+        if(!p){status(`Associa il calciatore «${e.nome}» nella partita ${m.casa}-${m.trasferta}.`);return;}
+        if(p.squadraCodice!==code){status(`Squadra non coerente per ${p.nome}.`);return;}
+        const key=String(p.fantacalcioId),entry=perPlayer.get(key)||{fantacalcioId:key,nome:p.nome,squadraCodice:code,ruolo:p.ruolo,eventi:{}};
+        for(const [k,v] of Object.entries(e.eventi))if(defs.includes(k)&&v)entry.eventi[k]=(entry.eventi[k]||0)+v;perPlayer.set(key,entry);
+      }items.push({m,eventi:[...perPlayer.values()]});
     }
-    if(!confirm(`Confermi l'importazione di ${items.length} partite? Le partite selezionate già presenti saranno SOSTITUITE; le altre rimarranno intatte.`))return;
+    const duplicate=new Set();for(const {m} of items){const key=`${m.giornata}:${m.casaCodice}:${m.trasfertaCodice}`;if(duplicate.has(key)){status('Partita duplicata nel batch: '+key);return;}duplicate.add(key);}
+    if(!confirm(`Confermare ${items.length} partite verificate? Gli incontri già archiviati selezionati saranno sostituiti. I dati non selezionati rimarranno invariati.`))return;
     const btn=$('hv-bulk-save');btn.disabled=true;try{const latest=await window.HVMatchEvents.load();const next=structuredClone(latest);let replacements=0;
       for(const {m,eventi} of items){const original=(next.partite||[]).findIndex(r=>String(r.casaCodice)===m.casaCodice&&String(r.trasfertaCodice)===m.trasfertaCodice&&Number(r.giornata)===Number(m.giornata));
-        if(!m.giornata){throw Error(`Indica la giornata Serie A per ${m.casa} - ${m.trasferta}.`);}
-        const prev=original>=0?next.partite[original]:{};
-        const record={...prev,matchId:prev.matchId||`g${m.giornata}-${m.casaCodice}-${m.trasfertaCodice}`,giornata:m.giornata,casaCodice:m.casaCodice,trasfertaCodice:m.trasfertaCodice,casaNome:teams.find(t=>t.codice===m.casaCodice)?.nome||m.casa,trasfertaNome:teams.find(t=>t.codice===m.trasfertaCodice)?.nome||m.trasferta,golCasa:m.golCasa,golTrasferta:m.golTrasferta,data:m.data||prev.data||null,stato:'FINALE',fonte:'Diretta.it (Tampermonkey, verificato Admin)',fonteUrl:m.url||'',aggiornatoIl:new Date().toISOString(),eventi};
+        const prev=original>=0?next.partite[original]:{};const record={...prev,matchId:prev.matchId||`g${m.giornata}-${m.casaCodice}-${m.trasfertaCodice}`,giornata:m.giornata,casaCodice:m.casaCodice,trasfertaCodice:m.trasfertaCodice,casaNome:teams.find(t=>t.codice===m.casaCodice)?.nome||m.casa,trasfertaNome:teams.find(t=>t.codice===m.trasfertaCodice)?.nome||m.trasferta,golCasa:m.golCasa,golTrasferta:m.golTrasferta,data:m.data||prev.data||null,stato:'FINALE',fonte:'Diretta.it (Tampermonkey, rivisto Admin)',fonteUrl:m.url||'',aggiornatoIl:new Date().toISOString(),eventi};
         if(original>=0){next.partite[original]=record;replacements++;}else next.partite.push(record);
       }
-      status('Salvataggio su GitHub in corso…');if(typeof hv_ghSalvaJSON!=='function')throw Error('Modulo GitHub non disponibile.');await hv_ghSalvaJSON('data/eventi-partite.json',next,`Importa eventi Serie A: ${items.length} partite`,config);
-      saved=next;status(`Salvati ${items.length} incontri (${replacements} sostituiti). Archivio aggiornato.`);render();window.hv_initAdminEventiPartite && $('admin-eventi-archivio-refresh')?.click();
+      status('Salvataggio su GitHub in corso…');if(typeof hv_ghSalvaJSON!=='function')throw Error('Modulo GitHub non disponibile.');await hv_ghSalvaJSON('data/eventi-partite.json',next,`Revisione eventi Serie A: ${items.length} partite`,config);
+      saved=next;matches.forEach(m=>m.importSelected=false);render();status(`Salvate ${items.length} partite (${replacements} sostituite). Archivio aggiornato.`);$('admin-eventi-archivio-refresh')?.click();
     }catch(e){status('Salvataggio non completato: '+e.message);}finally{btn.disabled=false;}
   }
   async function init(){if(initialized||window.hv_role!=='admin'||!$('hv-bulk-input'))return; initialized=true;try{const [players,teamRes,confRes,old]=await Promise.all([fetch('data/giocatori.json',{cache:'no-store'}).then(r=>r.json()),fetch('data/squadre-serie-a.json',{cache:'no-store'}).then(r=>r.json()),fetch('data/config.json',{cache:'no-store'}).then(r=>r.json()),window.HVMatchEvents.load()]);db=players.giocatori||players;teams=teamRes.squadre||[];config=confRes;saved=old;status('Incolla il JSON copiato da Tampermonkey.');}catch(e){status('Errore caricamento database: '+e.message);return;}
-    $('hv-bulk-parse').addEventListener('click',parseInput);$('hv-bulk-save').addEventListener('click',saveAll);
+    $('hv-bulk-parse').addEventListener('click',parseInput);$('hv-bulk-save').addEventListener('click',saveAll);$('hv-bulk-anteprima').addEventListener('change',editorChange);$('hv-bulk-anteprima').addEventListener('input',editorChange);$('hv-bulk-anteprima').addEventListener('click',editorClick);
   }
   window.hv_initBulkEventi=init;
 })();
