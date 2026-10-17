@@ -1614,6 +1614,78 @@
         }
       ],
       "eventiStaff": []
+    },
+    {
+      "matchId": "g7-FRO-SAS",
+      "giornata": 7,
+      "casaCodice": "FRO",
+      "trasfertaCodice": "SAS",
+      "casaNome": "Frosinone",
+      "trasfertaNome": "Sassuolo",
+      "golCasa": 4,
+      "golTrasferta": 2,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/frosinone-pfo9H1Wp/sassuolo-QDdvI0zl/?mid=fmMyId8e",
+      "aggiornatoIl": "2026-10-17T07:39:26.631Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7472",
+          "nome": "Calò",
+          "squadraCodice": "FRO",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "531",
+          "nome": "Berardi",
+          "squadraCodice": "SAS",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7036",
+          "nome": "Bakola",
+          "squadraCodice": "SAS",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "5436",
+          "nome": "Raimondo",
+          "squadraCodice": "FRO",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 3
+          }
+        },
+        {
+          "fantacalcioId": "5844",
+          "nome": "Thorstvedt",
+          "squadraCodice": "SAS",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "7347",
+          "nome": "Bowie",
+          "squadraCodice": "SAS",
+          "ruolo": "ATT",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
     }
   ]
 }
