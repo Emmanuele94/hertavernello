@@ -581,11 +581,11 @@ async function hv_renderTopScorers(config) {
   wrap.innerHTML = `
     <table class="tabella-marcatori">
       <colgroup>
-        <col class="col-pos"><col class="col-sq"><col><col class="col-naz"><col class="col-gol"><col class="col-ass">
+        <col class="col-pos"><col><col class="col-naz"><col class="col-gol"><col class="col-ass">
       </colgroup>
       <thead>
         <tr>
-          <th>Pos</th><th>Fantacalcio</th><th class="col-nome-th">Nome</th><th>Naz</th><th>Gol</th><th>Ass</th>
+          <th>Pos</th><th class="col-nome-th">Giocatore / Squadre</th><th>Naz</th><th>Gol</th><th>Ass</th>
         </tr>
       </thead>
       <tbody>
@@ -593,7 +593,8 @@ async function hv_renderTopScorers(config) {
           .map((m, i) => {
             const g = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb);
             const appartenenza = hv_squadraFantacalcioMarcatore(m, g, roseData.rose || [], config.squadre || []);
-            const squadraVisualizzata = appartenenza || `${m.squadraCodice || "Squadra non nota"} - Svincolato`;
+            const squadraReale = m.squadraNome || m.squadraCodice || "Squadra non nota";
+            const squadraVisualizzata = `${appartenenza || "Svincolato"} - ${squadraReale}`;
             const squadraSafe = squadraVisualizzata.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
             const fotoHtml = g && g.foto
               ? `<img src="${g.foto}" class="foto-giocatore-mini" alt="">`
@@ -609,11 +610,13 @@ async function hv_renderTopScorers(config) {
             return `
           <tr>
             <td class="col-pos">${i + 1}°</td>
-            <td class="col-sq" style="font-size:11px;min-width:100px;max-width:150px;white-space:normal;overflow-wrap:anywhere" title="${squadraSafe}">${squadraSafe}</td>
             <td>
               <div class="cella-nome-marcatore">
                 ${fotoHtml}
-                <span class="nome-marcatore" title="${m.nome}">${m.nome}</span>
+                <span style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:3px;line-height:1.35">
+                  <span class="nome-marcatore" style="display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650" title="${m.nome}">${m.nome}</span>
+                  <span style="font-size:10.5px;color:var(--text-muted);font-weight:400;white-space:normal;overflow-wrap:break-word" title="${squadraSafe}">${squadraSafe}</span>
+                </span>
               </div>
             </td>
             <td class="col-naz">${bandieraHtml}</td>
