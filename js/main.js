@@ -591,7 +591,15 @@ async function hv_renderTopScorers(config) {
       <tbody>
         ${marcatori
           .map((m, i) => {
-            const g = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb);
+            const g = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb)
+              || giocatoriDb.find((candidato) => {
+                // Es. "Kevin De Bruyne" (API) -> "De Bruyne" (database rose).
+                // Match su cognome composto completo e squadra, non su una sola parola.
+                const nomeApi = hv_normalizzaNomeGiocatore(m.nome).replace(/\s+/g, " ").trim();
+                const nomeDb = hv_normalizzaNomeGiocatore(hv_basNomeDb(candidato.nome)).replace(/\s+/g, " ").trim();
+                return nomeDb.includes(" ") && nomeApi.endsWith(" " + nomeDb)
+                  && (!m.squadraCodice || candidato.squadraCodice === m.squadraCodice);
+              });
             const appartenenza = hv_squadraFantacalcioMarcatore(m, g, roseData.rose || [], config.squadre || []);
             const squadraReale = m.squadraNome || m.squadraCodice || "Squadra non nota";
             const squadraVisualizzata = `${appartenenza || "Svincolato"} - ${squadraReale}`;
