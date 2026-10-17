@@ -523,6 +523,26 @@ async function hv_renderClassificaSerieA(config) {
   `;
 }
 
+// Associa i marcatori alle rose della lega: ID stabile quando presente,
+// altrimenti cognome e squadra reale per ridurre gli omonimi.
+function hv_squadraFantacalcioMarcatore(m, g, rose, squadre) {
+  const nomeNorm = (s) => hv_normalizzaNomeGiocatore(s || "");
+  const id = g && g.fantacalcioId ? String(g.fantacalcioId).trim() : "";
+  const nomeDb = g ? nomeNorm(hv_basNomeDb(g.nome)) : "";
+  const cognomeApi = nomeNorm((m.nome || "").split(/\s+/).pop());
+  const codiceReale = (m.squadraCodice || "").toUpperCase();
+  for (const rosa of rose) {
+    const trovato = (rosa.giocatori || []).some((p) => {
+      if (id && p.fantacalcioId && String(p.fantacalcioId).trim() === id) return true;
+      const nomeRosa = nomeNorm(hv_basNomeDb(p.nome || ""));
+      const stessoNome = nomeDb ? nomeRosa === nomeDb : nomeRosa === cognomeApi;
+      return stessoNome && (!codiceReale || (p.squadraReale || "").toUpperCase() === codiceReale);
+    });
+    if (trovato) return squadre.find((s) => s.id === rosa.squadraId)?.nomeFantasquadra || null;
+  }
+  return null;
+}
+
 // ===== Top marcatori =====
 async function hv_renderTopScorers(config) {
   const wrap = document.getElementById("marcatori-wrap");
@@ -553,7 +573,10 @@ async function hv_renderTopScorers(config) {
     return;
   }
 
-  const [giocatoriDb, nazioni] = await Promise.all([hv_caricaGiocatoriDb(), hv_caricaNazioni()]);
+  const [giocatoriDb, nazioni, roseData] = await Promise.all([
+    hv_caricaGiocatoriDb(), hv_caricaNazioni(),
+    fetch("data/rose.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : { rose: [] }).catch(() => ({ rose: [] }))
+  ]);
 
   wrap.innerHTML = `
     <table class="tabella-marcatori">
@@ -562,13 +585,16 @@ async function hv_renderTopScorers(config) {
       </colgroup>
       <thead>
         <tr>
-          <th>Pos</th><th>Sq</th><th class="col-nome-th">Nome</th><th>Naz</th><th>Gol</th><th>Ass</th>
+          <th>Pos</th><th>Fantacalcio</th><th class="col-nome-th">Nome</th><th>Naz</th><th>Gol</th><th>Ass</th>
         </tr>
       </thead>
       <tbody>
         ${marcatori
           .map((m, i) => {
             const g = hv_trovaGiocatore(m.nome, m.squadraCodice, giocatoriDb);
+            const appartenenza = hv_squadraFantacalcioMarcatore(m, g, roseData.rose || [], config.squadre || []);
+            const squadraVisualizzata = appartenenza || `${m.squadraCodice || "Squadra non nota"} - Svincolato`;
+            const squadraSafe = squadraVisualizzata.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
             const fotoHtml = g && g.foto
               ? `<img src="${g.foto}" class="foto-giocatore-mini" alt="">`
               : `<span class="foto-giocatore-iniziali">${hv_inizialiGiocatore(m.nome)}</span>`;
@@ -583,7 +609,7 @@ async function hv_renderTopScorers(config) {
             return `
           <tr>
             <td class="col-pos">${i + 1}°</td>
-            <td class="col-sq">${m.squadraCodice ? `<img src="assets/loghi/${m.squadraCodice}.png" class="logo-squadra-mini" alt="" title="${m.squadraCodice}">` : ""}</td>
+            <td class="col-sq" style="font-size:11px;min-width:100px;max-width:150px;white-space:normal;overflow-wrap:anywhere" title="${squadraSafe}">${squadraSafe}</td>
             <td>
               <div class="cella-nome-marcatore">
                 ${fotoHtml}
