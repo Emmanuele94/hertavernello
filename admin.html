@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#7A0E1F">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
+  <link rel="stylesheet" href="css/style.css?v=20261017-coppa1">
   <style>
     .admin-wrap { max-width: 820px; margin: 0 auto; padding: 30px 20px 80px; }
     .admin-box { background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: 12px; padding: 22px; margin-bottom: 28px; }
@@ -459,6 +459,14 @@ Fulmicotone"></textarea>
       </div>
     </div>
   </div>
+
+    <div class="admin-box" id="admin-coppa-panel" data-admin-tab="coppa">
+      <h2>🏆 Winter Kebab Cup — Calendario e risultati</h2>
+      <p class="desc">Calendario importato dall'Excel. Inserisci o correggi risultati e punti fantacalcio: salva per aggiornare <code>data/coppa.json</code> su GitHub. I risultati non ancora disputati devono rimanere vuoti.</p>
+      <div id="admin-coppa-status" class="desc"></div>
+      <div id="admin-coppa-editor"></div>
+      <button id="admin-coppa-salva" type="button">Salva risultati Coppa su GitHub</button>
+    </div>
   </div>
 
   <style>
@@ -476,7 +484,8 @@ Fulmicotone"></textarea>
   <script src="js/auth.js?v=20260914-mobile2"></script>
   <script src="js/github-api.js?v=20260916-adminmarket1"></script>
   <script src="js/giocatori.js?v=20260916-adminmarket1"></script>
-  <script src="js/admin-tabs.js?v=20260921-risultati1"></script>
+  <script src="js/admin-coppa.js?v=20261017-coppa1"></script>
+  <script src="js/admin-tabs.js?v=20261017-coppa1"></script>
   <script src="js/admin-feedback.js?v=20260915-crosshost1"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -509,6 +518,7 @@ Fulmicotone"></textarea>
         return;
       }
       hv_initAdminTabs();
+      hv_initAdminCoppa();
       hv_initConfigForm();
       hv_initAdminGiocatori();
       hv_initMercatoAdmin();

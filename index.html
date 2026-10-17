@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260914-mobile2">
+  <link rel="stylesheet" href="css/style.css?v=20261017-coppa1">
 <link rel="stylesheet" href="css/restyling.css?v=20260921-eventi5">
 <script defer src="js/restyling-ui.js?v=20260914-mobile2"></script>
 <script defer src="js/site-tools.js?v=20260915-crosshost1"></script>
@@ -72,6 +72,7 @@
       <div id="highlights-settimana-wrap" class="sezione-contenuto"></div>
     </section>
 
+    <div class="hv-cup-grid">
     <section class="section">
       <h2 class="sezione-toggle" data-target="classifica-lega-wrap">
         <img src="assets/icone/icon-classificaDellaLega.png" class="icona-titolo" alt="">Classifica della lega
@@ -79,6 +80,12 @@
       </h2>
       <div id="classifica-lega-wrap" class="sezione-contenuto"></div>
     </section>
+
+      <section class="section" id="winter-kebab-cup-home">
+        <h2 class="sezione-toggle" data-target="coppa-wrap">🏆 Classifica Winter Kebab Cup <span class="toggle-chevron">▾</span></h2>
+        <div id="coppa-wrap" class="sezione-contenuto"><p class="hv-cup-muted">Caricamento Coppa…</p></div>
+      </section>
+    </div>
 
     <div class="home-3col">
       <section class="section section-3col">
@@ -136,6 +143,7 @@
   <script src="js/calcolo-derivati.js?v=20260921-risultati1"></script>
   <script src="js/motore-news.js?v=20260921-risultati1"></script>
   <script src="js/share-cards.js?v=20260921-eventi5"></script>
+  <script src="js/coppa.js?v=20261017-coppa1"></script>
   <script src="js/main.js?v=20261017-marcatori-layout2"></script>
   <script>
     if ("serviceWorker" in navigator) {

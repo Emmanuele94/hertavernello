@@ -7,12 +7,14 @@
     { id: 'rose', label: '👥 Rose & Giocatori' },
     { id: 'mercato', label: '🔄 Mercato & Scambi' },
     { id: 'calendario', label: '📅 Calendario & Risultati' },
+    { id: 'coppa', label: '🏆 Coppa' },
     { id: 'contenuti', label: '📊 Contenuti' },
     { id: 'feedback', label: '💡 Bug & Consigli' },
   ];
 
   function tabPerTitolo(titolo) {
     const t = (titolo || '').toLowerCase();
+    if (t.includes('winter kebab cup')) return 'coppa';
     if (t.includes('impostazioni lega') || t.includes('disconnetti tutti') || t.includes('regolamento')) return 'generale';
     if (t.includes('importa rose') || t.includes('gestione giocatori')) return 'rose';
     if (t.includes('mercato') || t.includes('scambi')) return 'mercato';
@@ -38,6 +40,7 @@
     if (hash === '#bug-consigli') return 'feedback';
     if (hash === '#admin-mercato-panel' || hash === '#mercato') return 'mercato';
     if (hash === '#admin-giocatori-panel' || hash === '#giocatori') return 'rose';
+    if (hash === '#coppa') return 'coppa';
     if (hash === '#pv-admin-icons') return 'contenuti';
     return null;
   }
