@@ -2310,6 +2310,66 @@
         }
       ],
       "eventiStaff": []
+    },
+    {
+      "matchId": "558575",
+      "giornata": 7,
+      "data": "2026-10-17T13:00:00Z",
+      "casaCodice": "VEN",
+      "trasfertaCodice": "NAP",
+      "casaNome": "Venezia FC",
+      "trasfertaNome": "Napoli",
+      "golCasa": 1,
+      "golTrasferta": 0,
+      "stato": "FINALE",
+      "aggiornatoIl": "2026-10-19T13:05:43.636Z",
+      "eventi": [
+        {
+          "fantacalcioId": "5674",
+          "nome": "Basic",
+          "squadraCodice": "VEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6994",
+          "nome": "Perez K.",
+          "squadraCodice": "VEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5319",
+          "nome": "Sohm",
+          "squadraCodice": "VEN",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7484",
+          "nome": "Adams A.",
+          "squadraCodice": "VEN",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "2517",
+          "nome": "De Bruyne",
+          "squadraCodice": "NAP",
+          "ruolo": "CEN",
+          "eventi": {
+            "rigoriSbagliati": 1
+          }
+        }
+      ]
     }
   ]
 }
