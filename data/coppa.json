@@ -37,7 +37,7 @@
       "golCasa": 2,
       "golTrasferta": 1,
       "puntiCasa": 71.5,
-      "puntiTrasferta": 68.0,
+      "puntiTrasferta": 68,
       "giocata": true
     },
     {
@@ -62,7 +62,7 @@
       "trasferta": "Fulmicotone",
       "golCasa": 0,
       "golTrasferta": 3,
-      "puntiCasa": 0.0,
+      "puntiCasa": 0,
       "puntiTrasferta": 74.5,
       "giocata": true
     },
@@ -86,11 +86,11 @@
       "girone": "A",
       "casa": "ADP10",
       "trasferta": "BayerD.Monkey",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 3,
+      "golTrasferta": 0,
+      "puntiCasa": 76,
+      "puntiTrasferta": 63.5,
+      "giocata": true
     },
     {
       "id": "coppa-g2-B",
@@ -99,11 +99,11 @@
       "girone": "B",
       "casa": "The Avengers",
       "trasferta": "Fc4Mori",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 3,
+      "golTrasferta": 2,
+      "puntiCasa": 75.5,
+      "puntiTrasferta": 70,
+      "giocata": true
     },
     {
       "id": "coppa-g2-C",
@@ -112,11 +112,11 @@
       "girone": "C",
       "casa": "Fulmicotone",
       "trasferta": "Pabliti FC",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 2,
+      "golTrasferta": 2,
+      "puntiCasa": 73.5,
+      "puntiTrasferta": 70,
+      "giocata": true
     },
     {
       "id": "coppa-g2-D",
@@ -125,11 +125,11 @@
       "girone": "D",
       "casa": "Zodiac FC",
       "trasferta": "Genereal Madrid",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 0,
+      "golTrasferta": 3,
+      "puntiCasa": 64.5,
+      "puntiTrasferta": 75.5,
+      "giocata": true
     },
     {
       "id": "coppa-g3-A",
