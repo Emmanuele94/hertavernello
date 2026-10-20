@@ -2379,6 +2379,187 @@
           }
         }
       ]
+    },
+    {
+      "matchId": "g7-MON-CAG",
+      "giornata": 7,
+      "casaCodice": "MON",
+      "trasfertaCodice": "CAG",
+      "casaNome": "Monza",
+      "trasfertaNome": "Cagliari",
+      "golCasa": 4,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/cagliari-SCGVmKHb/monza-4YSMlwj7/?mid=2X1yMQQQ",
+      "aggiornatoIl": "2026-10-20T07:19:15.079Z",
+      "eventi": [
+        {
+          "fantacalcioId": "7238",
+          "nome": "Kouadio",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5882",
+          "nome": "Mota",
+          "squadraCodice": "MON",
+          "ruolo": "ATT",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7523",
+          "nome": "Varela G.",
+          "squadraCodice": "MON",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 2,
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7574",
+          "nome": "Foe Ondoa",
+          "squadraCodice": "MON",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7546",
+          "nome": "Robinson J.",
+          "squadraCodice": "MON",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "4260",
+          "nome": "Winks",
+          "squadraCodice": "CAG",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5838",
+          "nome": "Birindelli",
+          "squadraCodice": "MON",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6815",
+          "nome": "Fadera",
+          "squadraCodice": "CAG",
+          "ruolo": "CEN",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g7-PAR-TOR",
+      "giornata": 7,
+      "casaCodice": "PAR",
+      "trasfertaCodice": "TOR",
+      "casaNome": "Parma",
+      "trasfertaNome": "Torino",
+      "golCasa": 0,
+      "golTrasferta": 3,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/parma-6DxlaxHN/torino-MZFZnvX4/?mid=b3m7G4ll",
+      "aggiornatoIl": "2026-10-20T07:19:15.079Z",
+      "eventi": [
+        {
+          "fantacalcioId": "2061",
+          "nome": "Simeone",
+          "squadraCodice": "TOR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 2
+          }
+        },
+        {
+          "fantacalcioId": "7220",
+          "nome": "Belghali",
+          "squadraCodice": "TOR",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 2
+          }
+        },
+        {
+          "fantacalcioId": "6646",
+          "nome": "Adams C.",
+          "squadraCodice": "TOR",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "4137",
+          "nome": "Diego Carlos",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "5010",
+          "nome": "Ismajli",
+          "squadraCodice": "TOR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7255",
+          "nome": "Britschgi",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "6495",
+          "nome": "Comuzzo",
+          "squadraCodice": "TOR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7235",
+          "nome": "Troilo",
+          "squadraCodice": "PAR",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        }
+      ],
+      "eventiStaff": []
     }
   ]
 }
