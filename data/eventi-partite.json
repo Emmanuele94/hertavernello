@@ -2322,7 +2322,7 @@
       "golCasa": 1,
       "golTrasferta": 0,
       "stato": "FINALE",
-      "aggiornatoIl": "2026-10-19T13:05:43.636Z",
+      "aggiornatoIl": "2026-10-20T07:15:29.742Z",
       "eventi": [
         {
           "fantacalcioId": "5674",
@@ -2358,6 +2358,15 @@
           "ruolo": "ATT",
           "eventi": {
             "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6248",
+          "nome": "Stankovic F.",
+          "squadraCodice": "VEN",
+          "ruolo": "POR",
+          "eventi": {
+            "rigoriParati": 1
           }
         },
         {
