@@ -190,11 +190,11 @@
       "girone": "A",
       "casa": "BayerD.Monkey",
       "trasferta": "RealMigrazione",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 1,
+      "golTrasferta": 3,
+      "puntiCasa": 68.5,
+      "puntiTrasferta": 75,
+      "giocata": true
     },
     {
       "id": "coppa-g4-B",
@@ -203,11 +203,11 @@
       "girone": "B",
       "casa": "Napoles95",
       "trasferta": "Fc4Mori",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 3,
+      "golTrasferta": 2,
+      "puntiCasa": 74,
+      "puntiTrasferta": 71.5,
+      "giocata": true
     },
     {
       "id": "coppa-g4-C",
@@ -216,11 +216,11 @@
       "girone": "C",
       "casa": "Pabliti FC",
       "trasferta": "Forest",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 2,
+      "golTrasferta": 0,
+      "puntiCasa": 70,
+      "puntiTrasferta": 63.5,
+      "giocata": true
     },
     {
       "id": "coppa-g4-D",
@@ -229,11 +229,11 @@
       "girone": "D",
       "casa": "THURAMINATOR",
       "trasferta": "Zodiac FC",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 0,
+      "golTrasferta": 4,
+      "puntiCasa": 62.5,
+      "puntiTrasferta": 78.5,
+      "giocata": true
     },
     {
       "id": "coppa-g5-A",
