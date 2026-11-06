@@ -390,6 +390,84 @@
       "awayGoalsSource": "calcolato",
       "importMethod": "manual",
       "savedAt": "2026-11-06T17:48:25.902Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-11",
+      "homeScore": 71.5,
+      "homeGoals": 2,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-02",
+      "awayScore": 70,
+      "awayGoals": 2,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-06",
+      "homeScore": 81,
+      "homeGoals": 74,
+      "homeGoalsSource": "manuale",
+      "awayTeamId": "sq-04",
+      "awayScore": 63.5,
+      "awayGoals": 0,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-08",
+      "homeScore": 68.5,
+      "homeGoals": 1,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-12",
+      "awayScore": 75,
+      "awayGoals": 3,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-09",
+      "homeScore": 62.5,
+      "homeGoals": 0,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-07",
+      "awayScore": 74,
+      "awayGoals": 3,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-10",
+      "homeScore": 75,
+      "homeGoals": 3,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-01",
+      "awayScore": 78.5,
+      "awayGoals": 4,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
+    },
+    {
+      "matchday": 10,
+      "homeTeamId": "sq-05",
+      "homeScore": 68.5,
+      "homeGoals": 1,
+      "homeGoalsSource": "calcolato",
+      "awayTeamId": "sq-03",
+      "awayScore": 72,
+      "awayGoals": 2,
+      "awayGoalsSource": "calcolato",
+      "importMethod": "manual",
+      "savedAt": "2026-11-06T17:49:59.447Z"
     }
   ]
 }
