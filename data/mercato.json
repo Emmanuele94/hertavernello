@@ -281,6 +281,77 @@
       "creatoIl": "2026-11-13T09:54:20.745Z",
       "aggiornatoIl": "2026-11-13T09:54:20.745Z",
       "applicatoIl": "2026-11-13T09:54:50.773Z"
+    },
+    {
+      "id": "scambio_1794593472439_akkcx",
+      "bozzaId": "bozza_1794593472439_akkcx",
+      "tipo": "scambio",
+      "data": "2026-11-13",
+      "squadraAId": "sq-12",
+      "squadraBId": "sq-03",
+      "giocatoriA": [
+        {
+          "ruolo": "POR",
+          "nome": "Corvi",
+          "squadraReale": "PAR",
+          "costo": 10,
+          "fantacalcioId": "6662"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Atta",
+          "squadraReale": "FIO",
+          "costo": 34,
+          "fantacalcioId": "6908"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Hojlund",
+          "squadraReale": "NAP",
+          "costo": 92,
+          "fantacalcioId": "6052"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Lucca",
+          "squadraReale": "NAP",
+          "costo": 21,
+          "fantacalcioId": "6215"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "POR",
+          "nome": "Milinkovic-Savic V.",
+          "squadraReale": "NAP",
+          "costo": 17,
+          "fantacalcioId": "2170"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Njie",
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "6827"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Raimondo",
+          "squadraReale": "FRO",
+          "costo": 41,
+          "fantacalcioId": "5436"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Dybala",
+          "squadraReale": "ROM",
+          "costo": 71,
+          "fantacalcioId": "309"
+        }
+      ],
+      "creatoIl": "2026-11-13T18:11:12.439Z",
+      "aggiornatoIl": "2026-11-13T18:11:12.439Z",
+      "applicatoIl": "2026-11-13T18:11:20.856Z"
     }
   ],
   "annullati": []
