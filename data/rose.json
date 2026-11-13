@@ -110,13 +110,6 @@
           "fantacalcioId": "7619"
         },
         {
-          "ruolo": "CEN",
-          "nome": "Casadei",
-          "squadraReale": "TOR",
-          "costo": 5,
-          "fantacalcioId": "5888"
-        },
-        {
           "ruolo": "ATT",
           "nome": "Robinson J.",
           "squadraReale": "MON",
@@ -178,6 +171,13 @@
           "squadraReale": "ATA",
           "costo": 13,
           "fantacalcioId": "1850"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
         }
       ]
     },
@@ -1434,10 +1434,10 @@
         },
         {
           "ruolo": "CEN",
-          "nome": "Karlstrom",
-          "squadraReale": "UDI",
-          "costo": 2,
-          "fantacalcioId": "6680"
+          "nome": "Casadei",
+          "squadraReale": "TOR",
+          "costo": 5,
+          "fantacalcioId": "5888"
         }
       ]
     },
