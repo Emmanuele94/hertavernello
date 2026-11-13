@@ -252,6 +252,35 @@
       "creatoIl": "2026-10-14T11:51:05.592Z",
       "aggiornatoIl": "2026-10-14T11:51:05.592Z",
       "applicatoIl": "2026-10-14T11:51:17.041Z"
+    },
+    {
+      "id": "scambio_1794563660745_hz1gh",
+      "bozzaId": "bozza_1794563660745_hz1gh",
+      "tipo": "scambio",
+      "data": "2026-11-09",
+      "squadraAId": "sq-10",
+      "squadraBId": "sq-11",
+      "giocatoriA": [
+        {
+          "ruolo": "CEN",
+          "nome": "Karlstrom",
+          "squadraReale": "UDI",
+          "costo": 2,
+          "fantacalcioId": "6680"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "CEN",
+          "nome": "Casadei",
+          "squadraReale": "TOR",
+          "costo": 5,
+          "fantacalcioId": "5888"
+        }
+      ],
+      "creatoIl": "2026-11-13T09:54:20.745Z",
+      "aggiornatoIl": "2026-11-13T09:54:20.745Z",
+      "applicatoIl": "2026-11-13T09:54:50.773Z"
     }
   ],
   "annullati": []
