@@ -1446,13 +1446,6 @@
       "giocatori": [
         {
           "ruolo": "POR",
-          "nome": "Corvi",
-          "squadraReale": "PAR",
-          "costo": 10,
-          "fantacalcioId": "6662"
-        },
-        {
-          "ruolo": "POR",
           "nome": "Perri",
           "squadraReale": "TOR",
           "costo": 21,
@@ -1551,13 +1544,6 @@
         },
         {
           "ruolo": "CEN",
-          "nome": "Atta",
-          "squadraReale": "FIO",
-          "costo": 34,
-          "fantacalcioId": "6908"
-        },
-        {
-          "ruolo": "CEN",
           "nome": "Politano",
           "squadraReale": "NAP",
           "costo": 4,
@@ -1600,30 +1586,11 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Hojlund",
-          "squadraReale": "NAP",
-          "costo": 92,
-          "fantacalcioId": "6052"
-        },
-        {
-          "ruolo": "ATT",
           "nome": "Raspadori",
           "squadraReale": "ATA",
           "costo": 31,
           "fantacalcioId": "4371"
         },
-        {
-          "ruolo": "ATT",
-          "nome": "Lucca",
-          "squadraReale": "NAP",
-          "costo": 21,
-          "fantacalcioId": "6215"
-        }
-      ]
-    },
-    {
-      "squadraId": "sq-03",
-      "giocatori": [
         {
           "ruolo": "POR",
           "nome": "Milinkovic-Savic V.",
@@ -1631,6 +1598,32 @@
           "costo": 17,
           "fantacalcioId": "2170"
         },
+        {
+          "ruolo": "CEN",
+          "nome": "Njie",
+          "squadraReale": "FIO",
+          "costo": 1,
+          "fantacalcioId": "6827"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Raimondo",
+          "squadraReale": "FRO",
+          "costo": 41,
+          "fantacalcioId": "5436"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Dybala",
+          "squadraReale": "ROM",
+          "costo": 71,
+          "fantacalcioId": "309"
+        }
+      ]
+    },
+    {
+      "squadraId": "sq-03",
+      "giocatori": [
         {
           "ruolo": "POR",
           "nome": "Carnesecchi",
@@ -1751,25 +1744,11 @@
           "fantacalcioId": "5172"
         },
         {
-          "ruolo": "CEN",
-          "nome": "Njie",
-          "squadraReale": "FIO",
-          "costo": 1,
-          "fantacalcioId": "6827"
-        },
-        {
           "ruolo": "ATT",
           "nome": "Woltemade",
           "squadraReale": "JUV",
           "costo": 20,
           "fantacalcioId": "6752"
-        },
-        {
-          "ruolo": "ATT",
-          "nome": "Raimondo",
-          "squadraReale": "FRO",
-          "costo": 41,
-          "fantacalcioId": "5436"
         },
         {
           "ruolo": "ATT",
@@ -1787,17 +1766,38 @@
         },
         {
           "ruolo": "ATT",
-          "nome": "Dybala",
-          "squadraReale": "ROM",
-          "costo": 71,
-          "fantacalcioId": "309"
-        },
-        {
-          "ruolo": "ATT",
           "nome": "Boga",
           "squadraReale": "JUV",
           "costo": 10,
           "fantacalcioId": "2832"
+        },
+        {
+          "ruolo": "POR",
+          "nome": "Corvi",
+          "squadraReale": "PAR",
+          "costo": 10,
+          "fantacalcioId": "6662"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Atta",
+          "squadraReale": "FIO",
+          "costo": 34,
+          "fantacalcioId": "6908"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Hojlund",
+          "squadraReale": "NAP",
+          "costo": 92,
+          "fantacalcioId": "6052"
+        },
+        {
+          "ruolo": "ATT",
+          "nome": "Lucca",
+          "squadraReale": "NAP",
+          "costo": 21,
+          "fantacalcioId": "6215"
         }
       ]
     },
