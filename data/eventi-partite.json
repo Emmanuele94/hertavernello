@@ -6067,6 +6067,141 @@
         }
       ],
       "eventiStaff": []
+    },
+    {
+      "matchId": "g12-COM-CAG",
+      "giornata": 12,
+      "casaCodice": "COM",
+      "trasfertaCodice": "CAG",
+      "casaNome": "Como",
+      "trasfertaNome": "Cagliari",
+      "golCasa": 2,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/cagliari-SCGVmKHb/como-ttyLthOA/?mid=WSisyiXN",
+      "aggiornatoIl": "2026-11-21T16:03:47.839Z",
+      "eventi": [
+        {
+          "fantacalcioId": "6869",
+          "nome": "Ramon",
+          "squadraCodice": "COM",
+          "ruolo": "DIF",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "6727",
+          "nome": "Couto",
+          "squadraCodice": "COM",
+          "ruolo": "DIF",
+          "eventi": {
+            "assist": 2
+          }
+        },
+        {
+          "fantacalcioId": "5559",
+          "nome": "Da Cunha",
+          "squadraCodice": "COM",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        }
+      ],
+      "eventiStaff": []
+    },
+    {
+      "matchId": "g12-LAZ-LEC",
+      "giornata": 12,
+      "casaCodice": "LAZ",
+      "trasfertaCodice": "LEC",
+      "casaNome": "Lazio",
+      "trasfertaNome": "Lecce",
+      "golCasa": 3,
+      "golTrasferta": 0,
+      "data": null,
+      "stato": "FINALE",
+      "fonte": "Diretta.it (Tampermonkey, rivisto Admin)",
+      "fonteUrl": "https://www.diretta.it/partita/calcio/lazio-URcSl02h/lecce-G8lYsMgU/?mid=dYHdwsEi",
+      "aggiornatoIl": "2026-11-21T16:03:47.839Z",
+      "eventi": [
+        {
+          "fantacalcioId": "6556",
+          "nome": "Noslin",
+          "squadraCodice": "LAZ",
+          "ruolo": "ATT",
+          "eventi": {
+            "gol": 2
+          }
+        },
+        {
+          "fantacalcioId": "6398",
+          "nome": "Isaksen",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "7240",
+          "nome": "Siebert",
+          "squadraCodice": "LEC",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "7314",
+          "nome": "Taylor K.",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        },
+        {
+          "fantacalcioId": "6990",
+          "nome": "Veiga D.",
+          "squadraCodice": "LEC",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2728",
+          "nome": "Pellegrini Lu.",
+          "squadraCodice": "LAZ",
+          "ruolo": "DIF",
+          "eventi": {
+            "ammonizioni": 1
+          }
+        },
+        {
+          "fantacalcioId": "2848",
+          "nome": "Frattesi",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "gol": 1
+          }
+        },
+        {
+          "fantacalcioId": "5500",
+          "nome": "Cancellieri",
+          "squadraCodice": "LAZ",
+          "ruolo": "CEN",
+          "eventi": {
+            "assist": 1
+          }
+        }
+      ],
+      "eventiStaff": []
     }
   ]
 }
