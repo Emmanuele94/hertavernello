@@ -294,11 +294,11 @@
       "girone": "A",
       "casa": "ADP10",
       "trasferta": "RealMigrazione",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 2,
+      "golTrasferta": 3,
+      "puntiCasa": 72.5,
+      "puntiTrasferta": 77.5,
+      "giocata": true
     },
     {
       "id": "coppa-g6-B",
@@ -307,11 +307,11 @@
       "girone": "B",
       "casa": "The Avengers",
       "trasferta": "Napoles95",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 6,
+      "golTrasferta": 4,
+      "puntiCasa": 87.5,
+      "puntiTrasferta": 79,
+      "giocata": true
     },
     {
       "id": "coppa-g6-C",
@@ -320,11 +320,11 @@
       "girone": "C",
       "casa": "Fulmicotone",
       "trasferta": "Forest",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 0,
+      "golTrasferta": 0,
+      "puntiCasa": 64.5,
+      "puntiTrasferta": 62.5,
+      "giocata": true
     },
     {
       "id": "coppa-g6-D",
@@ -333,11 +333,11 @@
       "girone": "D",
       "casa": "THURAMINATOR",
       "trasferta": "Genereal Madrid",
-      "golCasa": null,
-      "golTrasferta": null,
-      "puntiCasa": null,
-      "puntiTrasferta": null,
-      "giocata": false
+      "golCasa": 0,
+      "golTrasferta": 2,
+      "puntiCasa": 56,
+      "puntiTrasferta": 70.5,
+      "giocata": true
     }
   ],
   "faseFinale": {
