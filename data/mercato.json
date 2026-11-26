@@ -352,6 +352,120 @@
       "creatoIl": "2026-11-13T18:11:12.439Z",
       "aggiornatoIl": "2026-11-13T18:11:12.439Z",
       "applicatoIl": "2026-11-13T18:11:20.856Z"
+    },
+    {
+      "id": "scambio_1795680802038_zbg78",
+      "bozzaId": "bozza_1795680802038_zbg78",
+      "tipo": "scambio",
+      "data": "2026-11-14",
+      "squadraAId": "sq-04",
+      "squadraBId": "sq-05",
+      "giocatoriA": [
+        {
+          "ruolo": "DIF",
+          "nome": "Molina N.",
+          "squadraReale": "ROM",
+          "costo": 28,
+          "fantacalcioId": "4998"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Zortea",
+          "squadraReale": "BOL",
+          "costo": 1,
+          "fantacalcioId": "4433"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Mbangula",
+          "squadraReale": "BOL",
+          "costo": 5,
+          "fantacalcioId": "6833"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "McKennie",
+          "squadraReale": "JUV",
+          "costo": 28,
+          "fantacalcioId": "4973"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "DIF",
+          "nome": "Heggem",
+          "squadraReale": "BOL",
+          "costo": 1,
+          "fantacalcioId": "7212"
+        },
+        {
+          "ruolo": "DIF",
+          "nome": "Belghali",
+          "squadraReale": "TOR",
+          "costo": 9,
+          "fantacalcioId": "7220"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zaccagni",
+          "squadraReale": "LAZ",
+          "costo": 47,
+          "fantacalcioId": "632"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Zambo Anguissa",
+          "squadraReale": "NAP",
+          "costo": 12,
+          "fantacalcioId": "4220"
+        }
+      ],
+      "creatoIl": "2026-11-26T08:13:22.038Z",
+      "aggiornatoIl": "2026-11-26T08:13:22.038Z",
+      "applicatoIl": "2026-11-26T08:14:21.327Z"
+    },
+    {
+      "id": "scambio_1795680840021_bmpez",
+      "bozzaId": "bozza_1795680840021_bmpez",
+      "tipo": "scambio",
+      "data": "2026-11-15",
+      "squadraAId": "sq-09",
+      "squadraBId": "sq-10",
+      "giocatoriA": [
+        {
+          "ruolo": "DIF",
+          "nome": "Abankwah",
+          "squadraReale": "UDI",
+          "costo": 1,
+          "fantacalcioId": "6021"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Romano",
+          "squadraReale": "CAG",
+          "costo": 5,
+          "fantacalcioId": "7311"
+        }
+      ],
+      "giocatoriB": [
+        {
+          "ruolo": "DIF",
+          "nome": "Ghilardi",
+          "squadraReale": "ROM",
+          "costo": 1,
+          "fantacalcioId": "6631"
+        },
+        {
+          "ruolo": "CEN",
+          "nome": "Fagioli",
+          "squadraReale": "FIO",
+          "costo": 9,
+          "fantacalcioId": "4465"
+        }
+      ],
+      "creatoIl": "2026-11-26T08:14:00.021Z",
+      "aggiornatoIl": "2026-11-26T08:14:00.021Z",
+      "applicatoIl": "2026-11-26T08:14:21.327Z"
     }
   ],
   "annullati": []
